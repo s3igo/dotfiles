@@ -18,7 +18,7 @@
         "editor.insertSpaces": false
     },
     "explorer.confirmDelete": false,
-    "editor.fontFamily": "HackGenNerd, Fira Code",
+    "editor.fontFamily": "'HackGenNerd', 'Hiragino Kaku Gothic ProN', 'Fira Code'",
     "code-runner.runInTerminal": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
