@@ -6,3 +6,9 @@ link:
 
 brew:
 	sh ./bin/brew.sh
+
+zsh:
+	sh ./bin/plugin.sh
+
+lang:
+	sh .bin/lang_z.sh
