@@ -10,8 +10,8 @@ tool:
 	brew bundle --file $(BREW_DIR)/tool.rb
 	git config --global ghq.root '~/src'
 
-mac_light:
-	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/mac_light.rb
+base:
+	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/base.rb
 
 lang:
 	sh ./bin/anyenv.sh
