@@ -22,3 +22,6 @@ ln -fnsv "$DOT_DIR/others/settings.json" "$HOME/Library/Application Support/Code
 
 # global-gitignore
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
+
+[ "$SHELL" = '/bin/zsh' ] && source ~/.zshrc
+[ "$SHELL" = '/bin/bash' ] && source ~/.bashrc
