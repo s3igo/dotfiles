@@ -1,6 +1,6 @@
 # editor
 alias c='code'
-alias dot='code ~/.dotfiles'
+alias dot='cd ~/.dotfiles && code .'
 alias e='emacs'
 alias nv='nvim'
 alias v='vim'
