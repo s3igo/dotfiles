@@ -5,4 +5,3 @@ SHELL_DIR=~/.dotfiles/shell/lib
 
 # prompt
 export PS1='\w\n\$ '
-
