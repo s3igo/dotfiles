@@ -79,9 +79,6 @@
     "files.exclude": {
         "~$**": true
     },
-    "files.associations": {
-        "ignore": "ignore"
-    },
     "workbench.editor.enablePreview": false,
     "editor.stickyTabStops": true,
     "explorer.autoReveal": false,

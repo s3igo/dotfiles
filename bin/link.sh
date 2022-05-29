@@ -8,4 +8,4 @@ DOT_DIR=~/.dotfiles
 
 ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 ln -fnsv "$DOT_DIR/others/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-ln -fnsv "$DOT_DIR/others/ignore" "$HOME/.config/git/ignore"
+ln -fnsv "$DOT_DIR/others/gitignore_global" "$HOME/.config/git/ignore"
