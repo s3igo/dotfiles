@@ -8,3 +8,6 @@ which brew > /dev/null 2>&1 || /bin/bash -c "$(curl -fsSL https://raw.githubuser
 
 # brew update
 which brew > /dev/null 2>&1 && brew update
+
+# install git
+which git > /dev/null 2>&1 || brew install git
