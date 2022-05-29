@@ -1,10 +1,9 @@
 {
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
     "[go]": {
         "editor.insertSpaces": false
-        // "workbench.colorCustomizations": {
-        //     "titleBar.activeBackground": "#375eab",
-        //     "titleBar.activeForeground": "#fff"
-        // }
     },
     "[makefile]": {
         "editor.insertSpaces": false
@@ -48,17 +47,6 @@
         }
     ],
     "workbench.startupEditor": "none",
-    "arduino.ignoreBoards": [],
-    "arduino.path": "/Applications/Arduino.app",
-    "arduino.commandPath": "Contents/MacOS/Arduino",
-    "arduino.logLevel": "verbose",
-    "arduino.enableUSBDetection": true,
-    "arduino.disableTestingOpen": false,
-    "arduino.skipHeaderProvider": false,
-    "arduino.additionalUrls": [
-        "https://dl.espressif.com/dl/package_esp32_index.json"
-    ],
-    "arduino.defaultBaudRate": 9600,
     "C_Cpp.intelliSenseEngine": "Tag Parser",
     "editor.wordWrapColumn": 100,
     "editor.tabCompletion": "on",
@@ -105,9 +93,6 @@
     "files.trimTrailingWhitespace": true,
     "editor.wrappingIndent": "indent",
     "editor.detectIndentation": false,
-    "[css]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
-    },
     "emmet.includeLanguages": {
         "typescript": "typescriptreact"
     },
