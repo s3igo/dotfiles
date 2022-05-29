@@ -4,8 +4,8 @@ install:
 link:
 	sh ./bin/link.sh
 
-brew:
-	sh ./bin/brew.sh
+tool:
+	sh ./bin/tool.sh
 
 
 lang:
