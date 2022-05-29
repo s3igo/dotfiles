@@ -1,3 +1,3 @@
-" relative path from ~/.vim to ~/.dotfiles/.vim/vim/ANY_FILE
+" relative path from ~/.vim to ~/.dotfiles/.vim/lib/ANY_FILE
 
 runtime! ../.dotfiles/vim/lib/*.vim
