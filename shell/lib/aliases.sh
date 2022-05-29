@@ -39,6 +39,18 @@ alias w='which'
 
 
 if [ "$SHELL" = '/bin/zsh' ]; then
+	# anyframe
+	alias cc='anyframe-widget-cdr && code .'
+	alias cd/='l
+		| anyframe-selector-auto \
+		| anyframe-action-execute cd --'
+	alias cd.='ls -a \
+		| tail -n +3 \
+		| anyframe-selector-auto \
+		| anyframe-action-execute cd --'
+	alias cdr=anyframe-widget-cdr
+	alias pk=anyframe-widget-kill
+
 	# global
 	## shell
 	alias -g D='`ls | anyframe-selector-auto`'
@@ -55,16 +67,4 @@ if [ "$SHELL" = '/bin/zsh' ]; then
 		| tail -n +2 \
 		| anyframe-selector-auto \
 		| cut -d " " -f 1`'
-
-	# anyframe
-	alias cc='anyframe-widget-cdr && code .'
-	alias cd/='l
-		| anyframe-selector-auto \
-		| anyframe-action-execute cd --'
-	alias cd.='ls -a \
-		| tail -n +3 \
-		| anyframe-selector-auto \
-		| anyframe-action-execute cd --'
-	alias cdr=anyframe-widget-cdr
-	alias pk=anyframe-widget-kill
 fi
