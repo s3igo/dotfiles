@@ -1,0 +1,373 @@
+[
+	// extension
+	{
+		"key": "ctrl+cmd+enter",
+		"command": "code-runner.run"
+	},
+	{
+		"description": "render docx",
+		"key": "ctrl+i",
+		"command": "r.runCommandWithEditorPath",
+		"when": "editorTextFocus",
+		"args": "rmarkdown::render(\"$$\", output_dir = \"~/Desktop\", clean = TRUE)"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quickOpenView"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "emacs-mcx.setMarkCommand",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "-emacs-mcx.newLine",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "-editor.action.joinLines",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "findThenJump.initiate",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	// kill line
+	{
+		"key": "ctrl+k .",
+		"command": "-extension.clipToHtml",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+k ,",
+		"command": "-extension.saveToHtml",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+k t",
+		"command": "-extension.insertToc",
+		"when": "editorTextFocus"
+	},
+	// quick and simple
+	{
+		"key": "cmd+k ,",
+		"command": "extension.saveToHtml",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "cmd+k t",
+		"command": "extension.insertToc",
+		"when": "editorTextFocus"
+	},
+
+	// explorer
+	{
+		"key": "cmd+n",
+		"command": "explorer.newFile"
+	},
+	{
+		"key": "shift+cmd+n",
+		"command": "-workbench.action.newWindow"
+	},
+	{
+		"key": "shift+cmd+n",
+		"command": "explorer.newFolder"
+	},
+
+	// editor
+	{
+		"key": "ctrl+]",
+		"command": "editor.action.smartSelect.expand",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+[",
+		"command": "editor.action.smartSelect.shrink",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+cmd+p",
+		"command": "editor.action.moveLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+cmd+n",
+		"command": "editor.action.moveLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+shift+p",
+		"command": "editor.action.copyLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+shift+n",
+		"command": "editor.action.copyLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+m",
+		"command": "editor.action.joinLines",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+
+	// terminal
+	{
+		"key": "ctrl+'",
+		"command": "terminal.focus"
+	},
+	{
+		"key": "ctrl+'",
+		"command": "workbench.action.focusFirstEditorGroup",
+		"when": "terminalFocus"
+	},
+	// selection
+	{
+		"key": "cmd+l",
+		"command": "expandLineSelection",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+shift+f",
+		"command": "cursorRightSelect",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+shift+b",
+		"command": "cursorLeftSelect",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+shift+alt+f",
+		"command": "cursorWordEndRightSelect",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+shift+alt+b",
+		"command": "cursorWordLeftSelect",
+		"when": "textInputFocus"
+	},
+
+	// workbench
+    {
+		"key": "ctrl+.",
+		"command": "workbench.action.focusFirstEditorGroup"
+	},
+	{
+		"key": "alt+e",
+		"command": "workbench.action.nextEditor"
+	},
+	{
+		"key": "alt+a",
+		"command": "workbench.action.previousEditor"
+	},
+	{
+		"key": "ctrl+alt+a",
+		"command": "workbench.action.moveEditorLeftInGroup"
+	},
+	{
+		"key": "ctrl+alt+e",
+		"command": "workbench.action.moveEditorRightInGroup"
+	},
+	{
+		"key": "ctrl+cmd+e",
+		"command": "workbench.action.moveEditorToNextGroup"
+	},
+	{
+		"key": "ctrl+cmd+a",
+		"command": "workbench.action.moveEditorToPreviousGroup"
+	},
+	// サイドバーのgitボタンクリックの動作
+	{
+		"key": "shift+cmd+g",
+		"command": "workbench.view.scm"
+	},
+	// spaceでエディターにdiffを開きつつカーソルは残したまま
+	{
+		"key": "ctrl+enter",
+		"command": "list.selectAndPreserveFocus",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+	// ctrl + a: stage
+	{
+		"key": "ctrl+s",
+		"command": "git.stage",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+	// shift + c でコミットメッセージの入力へ
+	{
+		"key": "ctrl+m",
+		"command": "git.commitStaged",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+	// shift + p でプッシュ
+	{
+		"key": "ctrl+y",
+		"command": "git.push",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+	// cmd + u でステージングを戻す
+	{
+		"key": "ctrl+u",
+		"command": "git.unstage",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+	// shift + a: stageAll
+	{
+		"key": "ctrl+a",
+		"command": "git.stageAll",
+		"when": "sideBarFocus && activeViewlet == 'workbench.view.scm'"
+	},
+
+	// scroll
+	{
+		"key": "alt+n",
+		"command": "scrollLineDown",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "alt+p",
+		"command": "scrollLineUp",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+alt+n",
+		"command": "-code-runner.run"
+	},
+	{
+		"key": "ctrl+alt+n",
+		"command": "scrollPageDown",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+alt+p",
+		"command": "scrollPageUp",
+		"when": "textInputFocus"
+	},
+	{
+		"key": "ctrl+alt+;",
+		"command": "comment-divider.makeSubHeader",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+x",
+		"command": "-comment-divider.makeSubHeader",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+cmd+;",
+		"command": "comment-divider.insertSolidLine",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "alt+y",
+		"command": "-comment-divider.insertSolidLine",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "shift+alt+;",
+		"command": "comment-divider.makeMainHeader",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "shift+alt+x",
+		"command": "-comment-divider.makeMainHeader",
+		"when": "editorTextFocus"
+	},
+	// others
+    {
+        "key": "alt+l",
+        "command": "-emacs-mcx.transformToLowercase",
+        "when": "editorTextFocus && !config.emacs-mcx.useMetaPrefixMacCmd && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+l",
+        "command": "select-indentation.expand-selection",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+t",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+cmd+b",
+        "command": "-emacs-mcx.paredit.backwardSexp",
+        "when": "config.emacs-mcx.useMetaPrefixMacCmd && editorTextFocus"
+    },
+    {
+        "key": "ctrl+cmd+b",
+        "command": "workbench.action.tasks.build"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.tasks.test"
+    },
+    {
+        "key": "alt+e",
+        "command": "workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+a",
+        "command": "workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+n",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "alt+p",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
+    },
+    {
+        "key": "cmd+\\",
+        "command": "workbench.action.terminal.split",
+        "when": "terminalFocus && terminalProcessSupported || terminalFocus && terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "alt+l",
+        "command": "emacs-mcx.recenterTopBottom",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+n",
+        "command": "emacs-mcx.forwardParagraph",
+        "when": "editorTextFocus && !config.emacs-mcx.useMetaPrefixMacCmd && !suggestWidgetVisible"
+    },
+    {
+        "key": "alt+p",
+        "command": "emacs-mcx.backwardParagraph",
+        "when": "editorTextFocus && !config.emacs-mcx.useMetaPrefixMacCmd && !suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+alt+f",
+        "command": "cursorWordPartRight",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+b",
+        "command": "cursorWordPartLeft",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+f",
+        "command": "cursorWordPartRightSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+b",
+        "command": "cursorWordPartLeftSelect",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+cmd+g",
+        "command": "git-graph.view"
+    }
+]

@@ -1,0 +1,115 @@
+{
+    "[go]": {
+        "editor.insertSpaces": false
+        // "workbench.colorCustomizations": {
+        //     "titleBar.activeBackground": "#375eab",
+        //     "titleBar.activeForeground": "#fff"
+        // }
+    },
+    "[makefile]": {
+        "editor.insertSpaces": false
+    },
+    "[json]": {
+        "editor.detectIndentation": true
+    },
+    "[jsonc]": {
+        "editor.detectIndentation": true
+    },
+    "[shellscript]": {
+        "editor.insertSpaces": false
+    },
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "HackGenNerd, Fira Code",
+    "code-runner.runInTerminal": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.colorTheme": "Night Owl",
+    "editor.linkedEditing": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "htmltagwrap.tag": "div",
+    "gitlens.defaultDateFormat": "YYYY/MM/DD, HH:MM",
+    "gitlens.defaultDateShortFormat": "YYYY/MM/DD",
+    "gitlens.defaultTimeFormat": "HH:MM",
+    "gitlens.hovers.currentLine.over": "line",
+    "explorer.confirmDragAndDrop": false,
+    "html-css-class-completion.enableEmmetSupport": true,
+    "editor.guides.bracketPairs": true,
+    "editor.bracketPairColorization.enabled": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.variables": {
+        "lang": "ja"
+    },
+    "liveServer.settings.donotShowInfoMsg": true,
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/css"
+        }
+    ],
+    "workbench.startupEditor": "none",
+    "arduino.ignoreBoards": [],
+    "arduino.path": "/Applications/Arduino.app",
+    "arduino.commandPath": "Contents/MacOS/Arduino",
+    "arduino.logLevel": "verbose",
+    "arduino.enableUSBDetection": true,
+    "arduino.disableTestingOpen": false,
+    "arduino.skipHeaderProvider": false,
+    "arduino.additionalUrls": [
+        "https://dl.espressif.com/dl/package_esp32_index.json"
+    ],
+    "arduino.defaultBaudRate": 9600,
+    "C_Cpp.intelliSenseEngine": "Tag Parser",
+    "editor.wordWrapColumn": 100,
+    "editor.tabCompletion": "on",
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.ignoreSelection": true,
+    "lldb.launch.expressions": "native",
+    "emmet.triggerExpansionOnTab": true,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
+    "code-eol.toggleWithWhiteSpace": true,
+    "code-eol.newlineCharacter": "↓",
+    "code-eol.returnCharacter": "←",
+    "code-eol.crlfCharacter": "↵",
+    "files.autoSave": "afterDelay",
+    "editor.fontLigatures": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "editor.cursorSmoothCaretAnimation": true,
+    "cSpell.ignoreRegExpList": [
+        "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
+    ],
+    "cSpell.userWords": [
+        "autofetch",
+        "Fira",
+        "Qiita",
+        "vsintellicode"
+    ],
+    "files.exclude": {
+        "~$**": true
+    },
+    "files.associations": {
+        "ignore": "ignore"
+    },
+    "workbench.editor.enablePreview": false,
+    "editor.stickyTabStops": true,
+    "explorer.autoReveal": false,
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "debug.console.fontSize": 14,
+    "window.zoomLevel": 2,
+    "files.trimTrailingWhitespace": true,
+    "editor.wrappingIndent": "indent",
+    "editor.detectIndentation": false,
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "emmet.includeLanguages": {
+        "typescript": "typescriptreact"
+    },
+    "gitlens.hovers.currentLine.details": false
+}
