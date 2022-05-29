@@ -1,7 +1,7 @@
 BREW_DIR := ~/.dotfiles/brew
 
-install:
-	sh ./bin/install.sh
+init:
+	sh ./bin/init.sh
 
 link:
 	sh ./bin/link.sh
@@ -15,3 +15,4 @@ base:
 
 lang:
 	sh ./bin/anyenv.sh
+
