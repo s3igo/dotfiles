@@ -24,3 +24,6 @@ mac:
 
 max:
 	tool base full lang
+
+update:
+	git pull origin main
