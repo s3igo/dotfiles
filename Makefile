@@ -30,3 +30,9 @@ mac:
 
 mac_lang:
 	init link tool base lang
+
+full:
+	init link tool base full
+
+full_lang:
+	init link tool base full lang
