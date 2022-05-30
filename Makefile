@@ -13,11 +13,14 @@ tool:
 base:
 	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/base.rb
 
+full:
+	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/full.rb
+
 lang:
 	sh ./bin/anyenv.sh
 
 mac:
 	tool base lang
 
-full:
+max:
 	tool base full lang
