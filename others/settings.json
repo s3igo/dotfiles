@@ -1,11 +1,9 @@
 {
+    /* language */
     "[css]": {
-        "editor.defaultFormatter": "vscode.css-language-features"
+        ".defaultFormatter": "vscode.css-language-features"
     },
     "[go]": {
-        "editor.insertSpaces": false
-    },
-    "[makefile]": {
         "editor.insertSpaces": false
     },
     "[json]": {
@@ -14,84 +12,108 @@
     "[jsonc]": {
         "editor.detectIndentation": true
     },
+    "[makefile]": {
+        "editor.insertSpaces": false
+    },
     "[shellscript]": {
         "editor.insertSpaces": false
     },
-    "explorer.confirmDelete": false,
+
+    /* general */
+    // editor
     "editor.fontFamily": "'HackGenNerd', 'Hiragino Kaku Gothic ProN', 'Fira Code'",
-    "code-runner.runInTerminal": true,
+    "editor.fontLigatures": true,
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "workbench.colorTheme": "Night Owl",
     "editor.linkedEditing": true,
+    "editor.guides.bracketPairs": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.wordWrapColumn": 100,
+    "editor.tabCompletion": "on",
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.stickyTabStops": true,
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 14,
+    "editor.wrappingIndent": "indent",
+    "editor.detectIndentation": false,
+
+    // explorer
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.autoReveal": false,
+
+    // workbench
+    "workbench.colorTheme": "Night Owl",
     "workbench.iconTheme": "material-icon-theme",
-    "htmltagwrap.tag": "div",
+    "workbench.startupEditor": "none",
+    "workbench.editor.enablePreview": false,
+
+    // git
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+
+    // emmet
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.variables": {
+        "lang": "ja"
+    },
+    "emmet.includeLanguages": {
+        "typescript": "typescriptreact"
+    },
+
+    // files
+    "files.autoSave": "afterDelay",
+    "files.exclude": {
+        "~$**": true
+    },
+    "files.trimTrailingWhitespace": true,
+
+
+    // others
+    "terminal.integrated.fontSize": 14,
+    "debug.console.fontSize": 14,
+    "window.zoomLevel": 2,
+
+
+    /* extension */
+    // code-runner
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.ignoreSelection": true,
+
+    // gitlens
     "gitlens.defaultDateFormat": "YYYY/MM/DD, HH:MM",
     "gitlens.defaultDateShortFormat": "YYYY/MM/DD",
     "gitlens.defaultTimeFormat": "HH:MM",
     "gitlens.hovers.currentLine.over": "line",
-    "explorer.confirmDragAndDrop": false,
-    "html-css-class-completion.enableEmmetSupport": true,
-    "editor.guides.bracketPairs": true,
-    "editor.bracketPairColorization.enabled": true,
-    "emmet.showSuggestionsAsSnippets": true,
-    "emmet.variables": {
-        "lang": "ja"
-    },
-    "liveServer.settings.donotShowInfoMsg": true,
-    "liveSassCompile.settings.formats": [
-        {
-            "format": "expanded",
-            "extensionName": ".css",
-            "savePath": "/css"
-        }
-    ],
-    "workbench.startupEditor": "none",
-    "C_Cpp.intelliSenseEngine": "Tag Parser",
-    "editor.wordWrapColumn": 100,
-    "editor.tabCompletion": "on",
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.saveFileBeforeRun": true,
-    "code-runner.ignoreSelection": true,
-    "lldb.launch.expressions": "native",
-    "emmet.triggerExpansionOnTab": true,
-    "editor.renderControlCharacters": true,
-    "editor.renderWhitespace": "all",
-    "code-eol.toggleWithWhiteSpace": true,
-    "code-eol.newlineCharacter": "↓",
-    "code-eol.returnCharacter": "←",
-    "code-eol.crlfCharacter": "↵",
-    "files.autoSave": "afterDelay",
-    "editor.fontLigatures": true,
-    "git.confirmSync": false,
-    "git.autofetch": true,
-    "git.enableSmartCommit": true,
-    "editor.cursorSmoothCaretAnimation": true,
+    "gitlens.hovers.currentLine.details": false,
+
+    // cSpell
     "cSpell.ignoreRegExpList": [
         "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
     ],
     "cSpell.userWords": [
         "autofetch",
+        "donot",
         "Fira",
+        "Hiragino",
+        "Kaku",
         "Qiita",
+        "tabnine",
         "vsintellicode"
     ],
-    "files.exclude": {
-        "~$**": true
-    },
-    "workbench.editor.enablePreview": false,
-    "editor.stickyTabStops": true,
-    "explorer.autoReveal": false,
-    "editor.minimap.enabled": false,
-    "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 14,
-    "debug.console.fontSize": 14,
-    "window.zoomLevel": 2,
-    "files.trimTrailingWhitespace": true,
-    "editor.wrappingIndent": "indent",
-    "editor.detectIndentation": false,
-    "emmet.includeLanguages": {
-        "typescript": "typescriptreact"
-    },
-    "gitlens.hovers.currentLine.details": false
+
+    // code-eol
+    "code-eol.toggleWithWhiteSpace": true,
+    "code-eol.newlineCharacter": "↓",
+    "code-eol.returnCharacter": "←",
+    "code-eol.crlfCharacter": "↵",
+
+    // others
+    "liveServer.settings.donotShowInfoMsg": true,
+    "tabnine.experimentalAutoImports": true
 }
