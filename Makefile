@@ -10,20 +10,20 @@ tool:
 	brew bundle --file $(BREW_DIR)/tool.rb
 	git config --global ghq.root '~/src'
 
+lang:
+	sh ./bin/anyenv.sh
+
+update:
+	git pull origin main
+
 base:
 	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/base.rb
 
 full:
 	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/full.rb
 
-lang:
-	sh ./bin/anyenv.sh
-
 mac:
 	tool base lang
 
 max:
 	tool base full lang
-
-update:
-	git pull origin main
