@@ -16,23 +16,8 @@ base:
 lang:
 	sh ./bin/anyenv.sh
 
-min:
-	init link
-
-cli:
-	init link tool
-
-cli_lang:
-	init link tool lang
-
 mac:
-	init link tool base
-
-mac_lang:
-	init link tool base lang
+	tool base lang
 
 full:
-	init link tool base full
-
-full_lang:
-	init link tool base full lang
+	tool base full lang
