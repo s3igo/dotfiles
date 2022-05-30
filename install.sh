@@ -51,3 +51,5 @@ ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 [ "$SHELL" = '/bin/bash' ] && source ~/.bashrc
 
 # ---------------------------------------------------------------------------- #
+
+cd ~/.dotfiles
