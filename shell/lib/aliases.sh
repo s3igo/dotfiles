@@ -41,7 +41,7 @@ alias w='which'
 if [ "$SHELL" = '/bin/zsh' ]; then
 	# anyframe
 	alias cc='anyframe-widget-cdr && code .'
-	alias cd/='l
+	alias cd/='ls \
 		| anyframe-selector-auto \
 		| anyframe-action-execute cd --'
 	alias cd.='ls -a \
