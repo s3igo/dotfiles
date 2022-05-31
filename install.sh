@@ -41,9 +41,6 @@ DOT_DIR=~/.dotfiles
 # vim
 ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 
-# vscode-settings
-ln -fnsv "$DOT_DIR/others/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
-
 # global-gitignore
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 
