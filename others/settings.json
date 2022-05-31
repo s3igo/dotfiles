@@ -84,7 +84,9 @@
         "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
     ],
     "cSpell.userWords": [
+        "anyenv",
         "autofetch",
+        "devcontainer",
         "donot",
         "dotfiles",
         "Fira",
