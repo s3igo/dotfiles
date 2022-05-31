@@ -5,10 +5,12 @@
 
 *ご利用は自己責任で!!*
 
+多分バグまみれです...
 
 ## インストール
 
 このリポジトリを自分のGitHubアカウントでフォークしてから
+
 ```shell
 $ git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
 
@@ -53,7 +55,10 @@ $ make max
 - 実は`$ make update`は`$ git pull origin main`してるだけなので, 直接cloneせずにForkしてからお使いください
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
 - 一応自分用にclone, init, linkまでワンライナーでできるようにしてある
+
     ```shell
     $ bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
     ```
+
     リモートにpushしない場合や, 自分で新しいリモート設定する場合はこれ使ってもらっても全然構いません
+- `$ make lang`でインストールされるのがanyenvだけだけど, ローカル環境が汚れるのがあんまり好きじゃないため, anyenvが使えない言語についてはぼちぼちdevcontainerに移行しようと思ってるので現状含めてない。gccぐらいはbrewで入れといてもいいかもとは思ってる
