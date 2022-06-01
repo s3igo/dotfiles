@@ -18,6 +18,7 @@ DOT_DIR=~/.dotfiles
 ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 
 # global-gitignore
+mkdir -p ~/.config/git
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 
 [ "$SHELL" = '/bin/zsh' ] && source ~/.zshrc
