@@ -1,4 +1,6 @@
 .DS_Store
 .Rhistory
+.dccache
+.env
 node_modules
 ~$*
