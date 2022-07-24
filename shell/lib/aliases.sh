@@ -1,5 +1,5 @@
 # editor
-alias c='code'
+alias c='code -g'
 alias dot='cd ~/.dotfiles && code .'
 alias e='emacs'
 alias nv='nvim'
@@ -10,7 +10,6 @@ alias b='brew'
 
 # docker
 alias d='docker'
-alias dc='docker-compose'
 alias dp='docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 
 # git
@@ -31,7 +30,6 @@ alias ls='ls --color=auto'
 alias mk='mkdir'
 alias mv='mv -i'
 alias relogin='exec $SHELL -l'
-alias sl='ls --color=auto' # in case of typo
 alias to='touch'
 alias w='which'
 [ "$SHELL" = '/bin/zsh' ] && alias sz='source ~/.zshrc'
@@ -53,6 +51,7 @@ if [ "$SHELL" = '/bin/zsh' ]; then
 
 	# global
 	## shell
+	alias -g i='install'
 	alias -g D='`ls | anyframe-selector-auto`'
 	alias -g Da='`ls -a \
 		| tail -n +3 \
