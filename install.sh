@@ -51,3 +51,5 @@ ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 # ---------------------------------------------------------------------------- #
 
 cd ~/.dotfiles
+
+source ~/.zshrc
