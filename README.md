@@ -27,8 +27,8 @@ $ make link
 # CLIツールをインストール
 $ make tool
 
-# 言語環境(anyenv)をインストール
-$ make lang
+# nodenvをインストール
+$ make node
 
 # 最低限のGUIアプリをインストール(macのみ可能)
 $ make base
@@ -43,10 +43,10 @@ $ make full
 # dotfilesをアップデート
 $ make update
 
-# make tool, make lang, make baseを一括で実行できるやつ(macのみ可能)
+# make tool, make node, make baseを一括で実行できるやつ(macのみ可能)
 $ make mac
 
-# make tool, make lang, make base, make fullを一括で実行できるやつ(macのみ可能)
+# make tool, make node, make base, make fullを一括で実行できるやつ(macのみ可能)
 $ make max
 ```
 
@@ -61,4 +61,3 @@ $ make max
     ```
 
     リモートにpushしない場合や, 自分で新しいリモート設定する場合はこれ使ってもらっても全然構いません
-- `$ make lang`でインストールされるのがanyenvだけだけど, ローカル環境が汚れるのがあんまり好きじゃないため, anyenvが使えない言語についてはぼちぼちdevcontainerに移行しようと思ってるので現状含めてない。gccぐらいはbrewで入れといてもいいかもとは思ってる

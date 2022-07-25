@@ -28,7 +28,7 @@ full:
 	endif
 
 mac:
-	tool base lang
+	tool base node
 
 max:
-	tool base full lang
+	tool base full node
