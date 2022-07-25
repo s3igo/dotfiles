@@ -31,8 +31,8 @@ alias mv='mv -i'
 alias relogin='exec $SHELL -l'
 alias to='touch'
 alias wh='which'
-[ "$SHELL" = '/bin/zsh' ] && alias sz='source ~/.zshrc'
-[ "$SHELL" = '/bin/bash' ] && alias sb='source ~/.bashrc'
+[ "$SHELL" = '/bin/zsh' ] && alias restart='source ~/.zshrc'
+[ "$SHELL" = '/bin/bash' ] && alias restart='source ~/.bashrc'
 
 
 if [ "$SHELL" = '/bin/zsh' ]; then
