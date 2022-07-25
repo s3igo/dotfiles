@@ -12,7 +12,7 @@ tool:
 	git config --global ghq.root '~/src'
 
 node:
-	sh ./bin/nodeenv.sh
+	sh ./bin/nodenv.sh
 
 update:
 	git pull origin main
