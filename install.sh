@@ -51,3 +51,9 @@ ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 # ---------------------------------------------------------------------------- #
 
 cd ~/.dotfiles
+
+# TODO
+# homebrewのpathを追加するコマンドを実行しなければならない
+# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/xxx/.zprofile <- これ,zshrcでいい気がする
+# eval "$(/opt/homebrew/bin/brew shellenv)"
+# あとgit config --global user.nameとuser.emailも.envから呼んで設定できるといいかも
