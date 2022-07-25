@@ -28,6 +28,7 @@ $ make link
 $ make tool
 
 # nodenvをインストール
+$ mv .env.example .env # グローバルに導入したいnodeのバージョンに応じて.envの内容を変更
 $ make node
 
 # 最低限のGUIアプリをインストール(macのみ可能)
