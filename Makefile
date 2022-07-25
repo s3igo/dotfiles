@@ -1,4 +1,5 @@
 BREW_DIR := ~/.dotfiles/brew
+NODE_VERSION := 18.6.0
 
 init:
 	sh ./bin/init.sh
@@ -10,8 +11,8 @@ tool:
 	brew bundle --file $(BREW_DIR)/tool.rb
 	git config --global ghq.root '~/src'
 
-lang:
-	sh ./bin/anyenv.sh
+node:
+	sh ./bin/nodeenv.sh
 
 update:
 	git pull origin main
