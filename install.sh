@@ -48,14 +48,11 @@ ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 mkdir -p ~/.config/git
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 
-[ "$SHELL" = '/bin/zsh' ] && source ~/.zshrc
-[ "$SHELL" = '/bin/bash' ] && source ~/.bashrc
+# relogin shell
+exec $SHELL -l
 
 # ---------------------------------------------------------------------------- #
 
-cd ~/.dotfiles
-
-source ~/.zshrc
 # TODO
 # git config --global user.nameとuser.emailも.envから呼んで設定できるといいかも
 # install.shをファイル分割しても正しく動作するかどうか確認
