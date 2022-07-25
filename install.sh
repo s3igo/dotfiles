@@ -57,7 +57,5 @@ cd ~/.dotfiles
 
 source ~/.zshrc
 # TODO
-# homebrewのpathを追加するコマンドを実行しなければならない
-# echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/xxx/.zprofile <- これ,zshrcでいい気がする
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-# あとgit config --global user.nameとuser.emailも.envから呼んで設定できるといいかも
+# git config --global user.nameとuser.emailも.envから呼んで設定できるといいかも
+# install.shをファイル分割しても正しく動作するかどうか確認
