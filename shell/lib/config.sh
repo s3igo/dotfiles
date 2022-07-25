@@ -7,7 +7,9 @@ HISTSIZE=100000
 SAVEHIST=1000000
 
 # homebrew
-[ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+which brew > /dev/null 2>&1 \
+	&& [ "$(uname -m)" = 'arm64' ] \
+	&& eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # nodenv
 which nodenv > /dev/null 2>&1 \
