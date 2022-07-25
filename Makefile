@@ -17,10 +17,14 @@ update:
 	git pull origin main
 
 base:
-	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/base.rb
+	ifeq ($(shell uname), Darwin)
+		brew bundle --file $(BREW_DIR)/base.rb
+	endif
 
 full:
-	[ "$(uname)" = 'Darwin' ] && brew bundle --file $(BREW_DIR)/full.rb
+	ifeq ($(shell uname), Darwin)
+		brew bundle --file $(BREW_DIR)/full.rb
+	endif
 
 mac:
 	tool base lang
