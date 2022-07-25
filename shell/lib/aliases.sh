@@ -10,7 +10,6 @@ alias b='brew'
 
 # docker
 alias d='docker'
-alias dp='docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 
 # git
 alias g='git'
@@ -31,7 +30,7 @@ alias mk='mkdir'
 alias mv='mv -i'
 alias relogin='exec $SHELL -l'
 alias to='touch'
-alias w='which'
+alias wh='which'
 [ "$SHELL" = '/bin/zsh' ] && alias sz='source ~/.zshrc'
 [ "$SHELL" = '/bin/bash' ] && alias sb='source ~/.bashrc'
 
