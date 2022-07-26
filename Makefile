@@ -25,7 +25,7 @@ full:
 	endif
 
 mac:
-	tool base node
+	node base
 
 max:
-	tool base full node
+	node base full

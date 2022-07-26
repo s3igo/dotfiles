@@ -64,6 +64,12 @@ brewとgitのインストールとバージョンアップ
 make init
 ```
 
+CLIツールをインストール
+
+```shell
+make tool
+```
+
 各シンボリックリンクを適切な場所に貼る
 
 ```shell
@@ -75,9 +81,6 @@ make link
 以下オプション
 
 ```shell
-# CLIツールをインストール
-$ make tool
-
 # nodenvをインストール
 $ make node
 
@@ -101,4 +104,4 @@ $ make max
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
-- TL;DRのワンライナーはinit.shを実行, dotfilesをクローン, .env.exampleを.envに名前変更, link.shを実行の4つが実行される
+- TL;DRのワンライナーはmake initを実行, dotfilesをクローン, .env.exampleを.envに名前変更, make toolを実行, make linkを実行の5つが実行される
