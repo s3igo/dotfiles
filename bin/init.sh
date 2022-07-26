@@ -20,11 +20,12 @@ which git > /dev/null 2>&1 || brew install git
 # install make
 which make > /dev/null 2>&1 || brew install make
 
-# change shell to zsh
-[ "$SHELL" != '/bin/zsh' ] && if which zsh > /dev/null 2>&1; then
-	chsh -s `which zsh`
-else
-	brew install zsh
-	which zsh >> /etc/shells
+if [ "$SHELL" != '/bin/zsh' ]; then
+	# install zsh
+	which zsh > /dev/null 2>&1 \
+		|| brew install zsh \
+		&& which zsh >> /etc/shells
+
+	# change shell to zsh
 	chsh -s `which zsh`
 fi
