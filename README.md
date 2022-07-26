@@ -101,4 +101,4 @@ $ make max
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
-- TL;DRのワンライナーはinit.shを実行, dotfilesをクローン, link.shを実行の3つが実行される
+- TL;DRのワンライナーはinit.shを実行, dotfilesをクローン, .env.exampleを.envに名前変更, link.shを実行の4つが実行される
