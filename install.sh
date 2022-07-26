@@ -3,7 +3,7 @@
 
 # # ---------------------------------- init.sh --------------------------------- #
 
-source ./bin/init.sh
+bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/init.sh)"
 # # install Xcode-CLI
 # [ "$(uname)" = 'Darwin' ] \
 # 	&& which xcode-select > /dev/null 2>&1 \
@@ -28,7 +28,7 @@ git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
 
 # # ---------------------------------- link.sh --------------------------------- #
 
-source ./bin/link.sh
+bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/link.sh)"
 # DOT_DIR=~/.dotfiles
 
 # # shell
