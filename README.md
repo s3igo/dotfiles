@@ -5,30 +5,80 @@
 
 *ご利用は自己責任で!!*
 
-多分バグまみれです...
+## 対応環境
 
-## インストール
+- mac
+- Linux
+- WSL2(Linux)
 
-このリポジトリを自分のGitHubアカウントでフォークしてから
+## 導入方法
+
+このディレクトリをカスタマイズしてgitで管理したい場合、手動で導入(gitがある場合)をおすすめします
+
+### TL;DR
 
 ```shell
-$ git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
+bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
+```
 
-$ cd ~/.dotfiles
+これをターミナルにコピペしてエンター押すだけ。
 
-# brewとgitのインストールとバージョンアップ
-$ make init
+### 手動で導入
 
-# 各シンボリックリンクを適切な場所に貼る
-$ make link
+#### 1. ダウンロード
 
-# ---------------------------------- 以下オプション --------------------------------- #
+- gitがない場合
 
+    このリポジトリをzipでダウンロード -> 解凍 -> 解凍したディレクトリ(おそらく`dotfiles-main`という名前)を`.dotfiles`という名前に変更してホームディレクトリに配置
+- gitがある場合
+
+    このリポジトリを自分のGitHubアカウントでフォークしてからクローン(\<username\>に自分のGitHubのユーザ名を当てはめる)
+
+    ```shell
+    git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
+    ```
+
+#### 2. インストール
+
+dotfilesに移動
+
+```shell
+cd ~/.dotfiles
+```
+
+`.env.example`を`.env`に名前を変更
+
+```shell
+mv .env.example .env
+```
+
+`.env`をよしなに編集して設定を変更
+
+```shell
+vi .env # お好きな方法で.envを編集
+```
+
+brewとgitのインストールとバージョンアップ
+
+```shell
+make init
+```
+
+各シンボリックリンクを適切な場所に貼る
+
+```shell
+make link
+```
+
+<hr>
+
+以下オプション
+
+```shell
 # CLIツールをインストール
 $ make tool
 
 # nodenvをインストール
-$ mv .env.example .env # グローバルに導入したいnodeのバージョンに応じて.envの内容を変更
 $ make node
 
 # 最低限のGUIアプリをインストール(macのみ可能)
@@ -55,10 +105,4 @@ $ make max
 
 - 実は`$ make update`は`$ git pull origin main`してるだけなので, 直接cloneせずにForkしてからお使いください
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
-- 一応自分用にclone, init, linkまでワンライナーでできるようにしてある
-
-    ```shell
-    $ bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
-    ```
-
-    リモートにpushしない場合や, 自分で新しいリモート設定する場合はこれ使ってもらっても全然構いません
+- TL;DRのワンライナーはinit.shを実行, dotfilesをクローン, link.shを実行の3つが実行される
