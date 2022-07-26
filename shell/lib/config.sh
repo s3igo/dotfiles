@@ -10,8 +10,3 @@ SAVEHIST=1000000
 which brew > /dev/null 2>&1 \
 	&& [ "$(uname -m)" = 'arm64' ] \
 	&& eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# nodenv
-which nodenv > /dev/null 2>&1 \
-	&& eval "$(nodenv init -)" \
-	&& export PATH="$PATH:$HOME/.nodenv/bin"

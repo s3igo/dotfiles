@@ -17,6 +17,9 @@ DOT_DIR=~/.dotfiles
 # vim
 ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 
+# asdf
+ln -fnsv "$DOT_DIR/others/.tool-versions" "$HOME/.tool-versions"
+
 # global-gitignore
 mkdir -p ~/.config/git
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"

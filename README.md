@@ -46,18 +46,6 @@ dotfilesに移動
 cd ~/.dotfiles
 ```
 
-`.env.example`を`.env`に名前を変更
-
-```shell
-mv .env.example .env
-```
-
-`.env`をよしなに編集して設定を変更
-
-```shell
-vi .env # お好きな方法で.envを編集
-```
-
 brewとgitのインストールとバージョンアップ
 
 ```shell
@@ -79,8 +67,8 @@ make link
 以下オプション
 
 ```shell
-# nodenvをインストール
-$ make node
+# ~/.tool-versionsに記載の言語・CLIツールをインストール
+$ make lang
 
 # 最低限のGUIアプリをインストール(macのみ可能)
 $ make base
@@ -102,4 +90,4 @@ $ make max
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
-- TL;DRのワンライナーはmake initを実行, dotfilesをクローン, .env.exampleを.envに名前変更, make toolを実行, make linkを実行の5つが実行される
+- TL;DRのワンライナーはmake initを実行, dotfilesをクローン, make toolを実行, make linkを実行の4つが実行される

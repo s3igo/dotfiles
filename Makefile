@@ -1,5 +1,4 @@
 BREW_DIR := ~/.dotfiles/brew
-NODE_VERSION := 18.6.0
 
 init:
 	sh ./bin/init.sh
@@ -11,8 +10,8 @@ tool:
 	brew bundle --file $(BREW_DIR)/tool.rb
 	git config --global ghq.root '~/src'
 
-node:
-	sh ./bin/nodenv.sh
+lang:
+	which asdf > /dev/null 2>&1 && asdf install
 
 base:
 	ifeq ($(shell uname), Darwin)
@@ -25,7 +24,7 @@ full:
 	endif
 
 mac:
-	node base
+	lang base
 
 max:
-	node base full
+	lang base full
