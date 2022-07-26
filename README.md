@@ -91,9 +91,6 @@ $ make full
 ## その他コマンド
 
 ```shell
-# dotfilesをアップデート
-$ make update
-
 # make tool, make node, make baseを一括で実行できるやつ(macのみ可能)
 $ make mac
 
@@ -103,6 +100,5 @@ $ make max
 
 ## 補足
 
-- 実は`$ make update`は`$ git pull origin main`してるだけなので, 直接cloneせずにForkしてからお使いください
 - フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
 - TL;DRのワンライナーはinit.shを実行, dotfilesをクローン, link.shを実行の3つが実行される

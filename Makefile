@@ -14,9 +14,6 @@ tool:
 node:
 	sh ./bin/nodenv.sh
 
-update:
-	git pull origin main
-
 base:
 	ifeq ($(shell uname), Darwin)
 		brew bundle --file $(BREW_DIR)/base.rb
