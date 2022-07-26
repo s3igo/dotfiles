@@ -16,3 +16,6 @@ which brew > /dev/null 2>&1 && brew update
 
 # install git
 which git > /dev/null 2>&1 || brew install git
+
+# install make
+which make > /dev/null 2>&1 || brew install make
