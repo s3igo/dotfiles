@@ -76,8 +76,6 @@ make tool
 make link
 ```
 
-<hr>
-
 以下オプション
 
 ```shell
