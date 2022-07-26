@@ -7,7 +7,7 @@ bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/init.sh)"
 git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
 
 # change filename .env.example to .env
-mv ~/.dotfiles/.env.example ~/.dotfiles/.env
+mv -v ~/.dotfiles/.env.example ~/.dotfiles/.env
 
 # make tool
 make -C ~/.dotfiles tool
