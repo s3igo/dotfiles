@@ -85,6 +85,15 @@ $ make mac
 
 # make tool, make node, make base, make fullを一括で実行できるやつ(macのみ可能)
 $ make max
+
+# zinitとプラグインのアップデート
+$ zinit-update
+
+# zinit.shに書かれていないプラグインの削除
+$ zinit delete --clean
+
+# asdfのプラグインのアップデート
+$ asdf plugin-update --all
 ```
 
 ## 補足
