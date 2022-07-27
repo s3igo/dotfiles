@@ -3,12 +3,12 @@
 DOT_DIR=~/.dotfiles
 
 # shell
-[ "$SHELL" = '/bin/zsh' ] \
+echo "$SHELL" | grep 'zsh' > /dev/null 2>&1 \
 	&& ln -fnsv "$DOT_DIR/shell/.zshrc" "$HOME/.zshrc" \
 	&& [ -f "$HOME/.bashrc" -a -f "$HOME/.bash_profile" ] \
 	&& rm -f "$HOME/.bashrc" "$HOME/.bash_profile"
 
-[ "$SHELL" = '/bin/bash' ] \
+echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
 	&& ln -fnsv "$DOT_DIR/shell/.bashrc" "$HOME/.bashrc" \
 	&& ln -fnsv "$DOT_DIR/shell/.bash_profile" "$HOME/.bash_profile" \
 	&& [ -f "$HOME/.zshrc" ] \
