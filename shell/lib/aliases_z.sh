@@ -1,3 +1,5 @@
+# shell
+alias restart='source ~/.zshrc'
 # anyframe
 alias cc='anyframe-widget-cdr && code .'
 alias cd/='ls \
