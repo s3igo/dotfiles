@@ -18,7 +18,7 @@
 ### TL;DR
 
 ```shell
-bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
+bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/install.sh)"
 ```
 
 これをターミナルにコピペしてエンター押すだけ。
