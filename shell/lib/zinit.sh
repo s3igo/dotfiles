@@ -44,7 +44,12 @@ zinit light zsh-users/zsh-completions
 
 ## syntax-highlight
 zinit ice wait'!0'
-zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-syntax-highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main line brackets cursor)
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold' # alias
+ZSH_HIGHLIGHT_STYLES[path]='fg=yellow,bold' # exist path
+ZSH_HIGHLIGHT_STYLES[root]='bg=red' # root
 
 ## open on GitHub
 zinit ice wait'!0'
