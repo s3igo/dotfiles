@@ -87,7 +87,7 @@ $ make mac
 $ make max
 
 # zinitとプラグインのアップデート
-$ zinit-update
+$ zinit update
 
 # zinit.shに書かれていないプラグインの削除
 $ zinit delete --clean
