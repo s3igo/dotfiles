@@ -11,7 +11,11 @@ tool:
 	git config --global ghq.root '~/src'
 
 lang:
-	which asdf > /dev/null 2>&1 && asdf install
+	which asdf > /dev/null 2>&1 \
+		&& asdf plugin-add nodejs \
+		&& asdf install \
+		&& corepack enable yarn \
+		&& asdf reshim nodejs
 
 base:
 	ifeq ($(shell uname), Darwin)
