@@ -11,6 +11,9 @@ alias b='brew'
 # docker
 alias d='docker'
 
+# exa
+alias exa='exa -a --icons'
+
 # git
 alias g='git'
 alias ga='git commit --amend --no-edit'
