@@ -23,7 +23,7 @@ zdharma-continuum/zinit-annex-rust
 
 
 # plugin
-# auto complete
+## auto complete
 zinit light marlonrichert/zsh-autocomplete
 
 ## theme
@@ -66,19 +66,15 @@ zinit light zpm-zsh/undollar
 ## anyframe
 zinit ice wait'!0'
 zinit light mollifier/anyframe
-
 ### cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zle -N anyframe-widget-cdr
-
 ### command history
 zle -N anyframe-widget-execute-history
 bindkey '^R' anyframe-widget-execute-history
-
 ### process kill
 zle -N anyframe-widget-kill
-
 ### ghq
 zle -N anyframe-widget-cd-ghq-repository
 bindkey '^G' anyframe-widget-cd-ghq-repository
