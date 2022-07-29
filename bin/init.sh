@@ -11,8 +11,10 @@ which brew > /dev/null 2>&1 \
 	&& [ "$(uname -m)" = 'arm64' ] \
 	&& eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# brew update
-which brew > /dev/null 2>&1 && brew update
+# brew update & upgrade
+which brew > /dev/null 2>&1 \
+	&& brew update \
+	&& brew upgrade
 
 # install git
 which git > /dev/null 2>&1 || brew install git
