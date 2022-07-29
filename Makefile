@@ -1,7 +1,7 @@
 BREW_DIR := ~/.dotfiles/brew
 
 init:
-	sh ./bin/init.sh
+	. ./bin/init.sh
 
 link:
 	sh ./bin/link.sh
