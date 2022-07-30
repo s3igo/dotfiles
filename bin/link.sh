@@ -17,6 +17,17 @@ echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
 # vim
 ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 
+# vscode
+[ "$(uname)" = 'Darwin' ] \
+	&& mkdir -p "$HOME/Library/Application Support/Code/User/keybindings.json" \
+	&& ln -fnsv "$DOT_DIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json" \
+	&& ln -fnsv "$DOT_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
+[ "$(uname)" = 'Linux' ] \
+	&& mkdir -p "$HOME/.config/Code/User/settings.json" \
+	&& ln -fnsv "$DOT_DIR/vscode/keybindings.json" "$HOME/.config/Code/User/settings.json" \
+	&& ln -fnsv "$DOT_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
+
 # asdf
 ln -fnsv "$DOT_DIR/others/.tool-versions" "$HOME/.tool-versions"
 
