@@ -7,4 +7,4 @@ SHELL_DIR=~/.dotfiles/shell/lib
 alias restart='source ~/.bashrc'
 
 # prompt
-export PS1='\w\n\$ '
+export PS1='\n\w\n\$ '
