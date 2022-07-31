@@ -156,6 +156,16 @@
     },
     /* -------------------------------- workbench ------------------------------- */
     {
+        "key": "shift+cmd+g",
+        "command": "-editor.action.previousMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+cmd+g",
+        "command": "workbench.view.scm",
+        "when": "workbench.scm.active"
+    },
+    {
         "key": "ctrl+alt+,",
         "command": "workbench.action.moveEditorLeftInGroup"
     },
