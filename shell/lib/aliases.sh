@@ -33,12 +33,10 @@ alias ....='cd ../../..'
 alias la='ls -hla --color=auto'
 alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
-## find
-alias f='find'
-alias fn='find . -name'
 ## others
 alias mk='mkdir'
 alias to='touch'
 alias wh='which'
+alias fn='() { find "$1" -name "$2" }'
 [ `uname` = 'Darwin' ] && alias op='open'
 alias relogin='exec $SHELL -l'
