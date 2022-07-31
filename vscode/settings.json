@@ -104,5 +104,5 @@
     "debug.console.fontSize": 14,
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.macOptionIsMeta": true,
-    "window.zoomLevel": 2
+    "window.zoomLevel": 1
 }
