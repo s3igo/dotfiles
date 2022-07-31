@@ -1,9 +1,6 @@
 {
     /* -------------------------------- language -------------------------------- */
-    "[go]": {
-        "editor.insertSpaces": false
-    },
-    "[makefile]": {
+    "[go][makefile]": {
         "editor.insertSpaces": false
     },
     "[markdown]": {
