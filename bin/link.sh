@@ -19,12 +19,12 @@ ln -fnsv "$DOT_DIR/vim/.vimrc" "$HOME/.vimrc"
 
 # vscode
 [ "$(uname)" = 'Darwin' ] \
-	&& mkdir -p "$HOME/Library/Application Support/Code/User/keybindings.json" \
+	&& mkdir -p "$HOME/Library/Application Support/Code/User" \
 	&& ln -fnsv "$DOT_DIR/vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json" \
 	&& ln -fnsv "$DOT_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
 [ "$(uname)" = 'Linux' ] \
-	&& mkdir -p "$HOME/.config/Code/User/settings.json" \
+	&& mkdir -p "$HOME/.config/Code/User" \
 	&& ln -fnsv "$DOT_DIR/vscode/keybindings.json" "$HOME/.config/Code/User/settings.json" \
 	&& ln -fnsv "$DOT_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
 
