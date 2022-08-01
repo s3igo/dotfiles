@@ -22,7 +22,6 @@ alias gpm='git push origin main'
 alias gph='git push origin HEAD'
 
 # shell
-
 ## to avoid making mistakes
 alias cp='cp -i'
 alias mv='mv -i'
