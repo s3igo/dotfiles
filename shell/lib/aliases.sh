@@ -39,7 +39,6 @@ alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
 
 ## others
-alias f='find'
 alias mk='mkdir'
 alias to='touch'
 alias wh='which'
