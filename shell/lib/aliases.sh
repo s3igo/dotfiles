@@ -18,7 +18,8 @@ alias exa='exa -a --icons'
 alias g='git'
 alias ga='git commit --amend --no-edit'
 alias gi="git init && git commit --allow-empty -m 'initial commit'"
-alias gp='git push origin main'
+alias gpm='git push origin main'
+alias gph='git push origin HEAD'
 
 # shell
 ## to avoid making mistakes
