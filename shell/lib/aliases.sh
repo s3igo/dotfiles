@@ -22,18 +22,22 @@ alias gpm='git push origin main'
 alias gph='git push origin HEAD'
 
 # shell
+
 ## to avoid making mistakes
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+
 ## cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
 ## ls
 alias la='ls -hla --color=auto'
 alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
+
 ## others
 alias f='find'
 alias mk='mkdir'
