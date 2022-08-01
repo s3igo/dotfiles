@@ -35,5 +35,8 @@ ln -fnsv "$DOT_DIR/others/.tool-versions" "$HOME/.tool-versions"
 mkdir -p ~/.config/git
 ln -fnsv "$DOT_DIR/others/.gitignore_global" "$HOME/.config/git/ignore"
 
+# gitconfig
+ln -fnsv "$DOT_DIR/others/.gitconfig" "$HOME/.gitconfig"
+
 # relogin shell
 exec $SHELL -l

@@ -1,0 +1,10 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = s3igo
+	email = 85787242+s3igo@users.noreply.github.com
+[ghq]
+	root = ~/develop/src

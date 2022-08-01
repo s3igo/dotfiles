@@ -8,7 +8,6 @@ link:
 
 tool:
 	brew bundle --file $(BREW_DIR)/tool.rb
-	git config --global ghq.root '~/develop/src'
 
 lang:
 	which asdf > /dev/null 2>&1 \
