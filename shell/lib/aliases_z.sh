@@ -3,13 +3,6 @@ alias restart='source ~/.zshrc'
 
 # anyframe
 alias cc='anyframe-widget-cdr && code .'
-alias cd/='ls \
-	| anyframe-selector-auto \
-	| anyframe-action-execute cd --'
-alias cd.='ls -a \
-	| tail -n +3 \
-	| anyframe-selector-auto \
-	| anyframe-action-execute cd --'
 alias cdr=anyframe-widget-cdr
 alias pk=anyframe-widget-kill
 
