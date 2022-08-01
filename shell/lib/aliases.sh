@@ -16,8 +16,8 @@ alias exa='exa -a --icons'
 
 # git
 alias g='git'
-alias ga='git commit --amend --no-edit'
-alias gi="git init && git commit --allow-empty -m 'initial commit'"
+alias gca='git commit --amend --no-edit'
+alias ginit="git init && git commit --allow-empty -m 'initial commit'"
 alias gplr='git pull --rebase'
 alias gpsh='git push origin HEAD'
 alias gpsm='git push origin main'
