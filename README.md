@@ -102,5 +102,5 @@ $ asdf plugin-update --all
 
 ## 補足
 
-- フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerdとFiraCode)
+- フォントを`brew install --cask`を使って落としてきている都合上, `$ make base`を実行しない or 実行できない環境の場合, 手動で落とす必要がある(HackGenNerd)
 - TL;DRのワンライナーはmake initを実行, dotfilesをクローン, make toolを実行, make linkを実行の4つが実行される
