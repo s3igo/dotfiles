@@ -20,6 +20,7 @@ alias ga='git commit --amend --no-edit'
 alias gi="git init && git commit --allow-empty -m 'initial commit'"
 alias gpm='git push origin main'
 alias gph='git push origin HEAD'
+alias gplr='git pull --rebase'
 
 # shell
 ## to avoid making mistakes
