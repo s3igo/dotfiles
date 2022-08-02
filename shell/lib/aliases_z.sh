@@ -2,7 +2,6 @@
 alias restart='source ~/.zshrc'
 
 # anyframe
-alias cc='anyframe-widget-cdr && code .'
 alias cdr=anyframe-widget-cdr
 alias pk=anyframe-widget-kill
 
