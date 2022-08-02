@@ -37,7 +37,7 @@
     "codic.case": "camelCase",
     /* --------------------------------- general -------------------------------- */
     // dotfiles
-    "dotfiles.installCommand": "~/.dotfiles/bin/install_devcontainer.sh",
+    "dotfiles.installCommand": "~/.dotfiles/bin/devcontainer.sh",
     "dotfiles.repository": "https://github.com/s3igo/dotfiles",
     "dotfiles.targetPath": "~/.dotfiles",
     // editor
