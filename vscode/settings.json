@@ -32,6 +32,12 @@
     "gitlens.defaultTimeFormat": "HH:MM",
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.currentLine.details": false,
+    // markdownlint
+    "markdownlint.config": {
+        "ul-indent": { "indent": 4 }
+    },
+    // テキスト校正くん
+    "japanese-proofreading.textlint.大かっこ［］": false,
     // others
     "carbon.theme": "night-owl",
     "codic.case": "camelCase",
