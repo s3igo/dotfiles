@@ -49,10 +49,10 @@ shell:
     - "tmux a -t 0 || tmux -u"
 
 window:
+  opacity: 0.8
   padding:
     x: 8
     y: 8
-  opacity: 0.8
 
 key_bindings:
   - { key: Q, mods: Control, chars: "\x11" } # tmux prefix
