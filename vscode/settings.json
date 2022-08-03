@@ -97,6 +97,8 @@
     "workbench.editor.enablePreview": false,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
+    "workbench.tree.indent": 12,
+    "workbench.tree.renderIndentGuides": "always",
     /* --------------------------------- others --------------------------------- */
     "debug.console.fontSize": 14,
     "terminal.integrated.fontSize": 14,
