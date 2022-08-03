@@ -8,6 +8,16 @@
 ## 注意
 
 - デフォルトでは私（s3igo）のgitconfigが含まれているため、適宜`./others/.gitconfig`を書き換えてご使用ください
+- このリポジトリをインストールすると、以下のファイルを書き換えます。書き換えられて困る場合は、安全な場所に退避させておいてください。
+    - `~/.bash_profile`
+    - `~/.bashrc`
+    - `~/.zshrc`
+    - `~/.virc`
+    - `~/.tool-versions`
+    - `~/.gitconfig`
+    - `~/.config/git/ignore`
+    - `~/.config/alacritty/alacritty.yml`
+    - vscodeの`settings.json, keybindings.json`の実体ファイル[^1]
 
 ## 対応環境
 
@@ -104,3 +114,5 @@ $ asdf plugin-update --all
 
 - フォントを`brew install --cask`を使って落としてきている都合上、`$ make base`を実行しないor実行できない環境の場合、手動で落とす必要がある（HackGenNerd）
 - TL;DRのワンライナーはmake initを実行、dotfilesをクローン、make toolを実行、make linkを実行の4つが実行される
+
+[^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある
