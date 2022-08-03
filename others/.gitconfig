@@ -8,3 +8,5 @@
 	email = 85787242+s3igo@users.noreply.github.com
 [ghq]
 	root = ~/develop/src
+[core]
+	editor = code --wait
