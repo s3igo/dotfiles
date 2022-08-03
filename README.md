@@ -12,7 +12,7 @@
     - `~/.bash_profile`
     - `~/.bashrc`
     - `~/.zshrc`
-    - `~/.virc`
+    - `~/.vimrc`
     - `~/.tool-versions`
     - `~/.gitconfig`
     - `~/.config/git/ignore`
