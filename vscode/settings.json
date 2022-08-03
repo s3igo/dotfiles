@@ -103,5 +103,6 @@
     "debug.console.fontSize": 14,
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.macOptionIsMeta": true,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
+    "redhat.telemetry.enabled": false
 }
