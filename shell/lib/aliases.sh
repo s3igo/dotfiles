@@ -44,3 +44,9 @@ alias to='touch'
 alias wh='which'
 alias follow='cd $_'
 alias relogin='exec $SHELL -l'
+
+# mac specific commands
+if [ "`uname`" = 'Darwin' ]; then
+    alias attempt='exec `pbpaste`'
+    alias ql='qlmanage -p "$1" >& /dev/null'
+fi
