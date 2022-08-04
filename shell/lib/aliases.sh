@@ -1,6 +1,5 @@
 # editor
 alias c='code -g'
-alias dot='cd ~/.dotfiles && code .'
 alias e='emacs'
 alias nv='nvim'
 alias v='vim'
@@ -38,15 +37,13 @@ alias la='ls -hla --color=auto'
 alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
 
-## others
-alias mk='mkdir'
-alias to='touch'
-alias wh='which'
-alias follow='cd $_'
-alias relogin='exec $SHELL -l'
+# others
+alias _cd='cd $_'
+alias _dot='cd ~/.dotfiles'
+alias _login='exec $SHELL -l'
 
 # mac specific commands
 if [ "$(uname)" = 'Darwin' ]; then
-    alias attempt='exec `pbpaste`'
-    alias ql='qlmanage -p "$1" >& /dev/null'
+    alias _do='exec `pbpaste`'
+    alias _ql='qlmanage -p "$1" >& /dev/null'
 fi

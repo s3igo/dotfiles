@@ -1,9 +1,8 @@
 # shell
-alias restart='source ~/.zshrc'
+alias _start='source ~/.zshrc'
 
 # anyframe
-alias cdr=anyframe-widget-cdr
-alias pk=anyframe-widget-kill
+alias _cdr=anyframe-widget-cdr
 
 # global
 ## shell
