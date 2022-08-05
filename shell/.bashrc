@@ -4,7 +4,7 @@ SHELL_DIR=~/.dotfiles/shell/lib
 . $SHELL_DIR/aliases.sh
 
 # alias
-alias restart='source ~/.bashrc'
+alias _start='source ~/.bashrc'
 
 # prompt
 export PS1='\n\w\n\$ '

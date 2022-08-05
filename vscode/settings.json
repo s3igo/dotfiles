@@ -35,6 +35,7 @@
     // others
     "carbon.theme": "night-owl",
     "codic.case": "camelCase",
+    "japanese-proofreading.textlint.外来語カタカナ表記": false,
     "japanese-proofreading.textlint.大かっこ［］": false,
     "markdownlint.config": {
         "ul-indent": {
