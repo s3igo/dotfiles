@@ -1,4 +1,4 @@
-BREW_DIR := ~/.dotfiles/brew
+PKG_DIR := ~/.dotfiles/pkg
 
 init:
 	. ./bin/init.sh
@@ -7,7 +7,7 @@ link:
 	sh ./bin/link.sh
 
 tool:
-	brew bundle --file $(BREW_DIR)/tool.rb
+	brew bundle --file $(PKG_DIR)/tool.rb
 
 lang:
 	which asdf > /dev/null 2>&1 \
@@ -18,12 +18,16 @@ lang:
 
 base:
 	ifeq ($(shell uname), Darwin)
-		brew bundle --file $(BREW_DIR)/base.rb
+		brew bundle --file $(PKG_DIR)/base.rb
 	endif
 
 full:
 	ifeq ($(shell uname), Darwin)
-		brew bundle --file $(BREW_DIR)/full.rb
+		brew bundle --file $(PKG_DIR)/full.rb
+		which mas > /dev/null 2>&1 || brew install mas
+		cat $(PKG_DIR)/appstore.txt \
+			| cut -d ' ' -f 1 \
+			| xargs -I % mas install %
 	endif
 
 mac:
