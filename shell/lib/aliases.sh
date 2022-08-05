@@ -17,6 +17,7 @@ alias exa='exa -a --icons'
 alias g='git'
 alias gca='git commit --amend --no-edit'
 alias ginit="git init && git commit --allow-empty -m 'initial commit'"
+alias glog='git log --oneline'
 alias gplr='git pull --rebase'
 alias gpsh='git push origin HEAD'
 alias gpsm='git push origin main'
@@ -40,6 +41,7 @@ alias ls='ls --color=auto'
 # others
 alias _cd='cd $_'
 alias _dot='cd ~/.dotfiles'
+alias _latest='ls -rt | tail -n 1'
 alias _login='exec $SHELL -l'
 
 # mac specific commands
