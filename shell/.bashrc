@@ -10,10 +10,8 @@ alias _start='source ~/.bashrc'
 export LS_COLORS='di=34:ex=31:fi=37:ln=35'
 
 # prompt
-export PROMPT_COMMAND=__prompt-command
-
 function __prompt-command() {
-    local EXIT_STATUS=$?
+    local EXIT_STATUS="$?"
 
     local RED='\[\e[0;31m\]'
     local BLUE='\[\e[0;34m\]'
@@ -33,3 +31,5 @@ function __prompt-command() {
 
     PS1="\n${BLUE}\w${WHITE}${BRANCH}\n${STATUS}${CHAR}${WHITE} "
 }
+
+export PROMPT_COMMAND=__prompt-command
