@@ -11,9 +11,9 @@ function parse-git-branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
 }
 
-local BLUE="\[\e[1;34m\]"
-local PURPLE="\[\e[1;35m\]"
-local GRAY="n\[\e[1;37m\]"
-local WHITE="\[\e[00m\]"
+BLUE="\[\e[1;34m\]"
+PURPLE="\[\e[1;35m\]"
+GRAY="n\[\e[1;37m\]"
+WHITE="\[\e[00m\]"
 
-export PS1="\n\w${BLUE} \$(parce-git-branch)${GRAY}\n\$${PURPLE} "
+export PS1="\n${BLUE}\w ${GRAY}\$(parce-git-branch)\n${PURPLE}\$${WHITE} "
