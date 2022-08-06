@@ -33,7 +33,7 @@ function __update_history() {
 
     fc -W
     if [[ ${EXIT_STATUS} != 0 ]]; then
-        ed -s ~/.zsh_history <<EOF >/dev/null
+        ed -s ~/.config/zsh/.zsh_history <<EOF >/dev/null
 d
 w
 q
