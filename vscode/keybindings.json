@@ -2,7 +2,7 @@
     /* -------------------------------- extension ------------------------------- */
     // Center Editor Window
     {
-        "key": "alt+l",
+        "key": "ctrl+alt+l",
         "command": "center-editor-window.center",
         "when": "editorTextFocus || findWidgetVisible"
     },
@@ -34,12 +34,7 @@
     },
     // select-indentation
     {
-        "key": "ctrl+l",
-        "command": "-center-editor-window.center",
-        "when": "editorTextFocus || findWidgetVisible"
-    },
-    {
-        "key": "ctrl+l",
+        "key": "alt+l",
         "command": "select-indentation.expand-selection"
     },
     // Sort lines
