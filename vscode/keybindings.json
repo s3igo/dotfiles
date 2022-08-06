@@ -21,23 +21,6 @@
         "key": "ctrl+y",
         "command": "cSpell.addWordToDictionary"
     },
-    // Faster paragraph
-    {
-        "key": "alt+p",
-        "command": "faster-para-word-movement.paraUp"
-    },
-    {
-        "key": "alt+n",
-        "command": "faster-para-word-movement.paraDown"
-    },
-    {
-        "key": "ctrl+shift+alt+n",
-        "command": "faster-para-word-movement.paraDownSelect"
-    },
-    {
-        "key": "ctrl+shift+alt+p",
-        "command": "faster-para-word-movement.paraUpSelect"
-    },
     // jumpy
     {
         "key": "ctrl+;",
@@ -163,6 +146,42 @@
     {
         "key": "ctrl+a",
         "command": "cursorHome",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+p",
+        "command": "cursorMove",
+        "args": {
+            "to": "prevBlankLine",
+            "select": false
+        },
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "cursorMove",
+        "args": {
+            "to": "nextBlankLine",
+            "select": false
+        },
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+shift+p",
+        "command": "cursorMove",
+        "args": {
+            "to": "prevBlankLine",
+            "select": true
+        },
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+alt+shift+n",
+        "command": "cursorMove",
+        "args": {
+            "to": "nextBlankLine",
+            "select": true
+        },
         "when": "textInputFocus"
     },
     /* -------------------------------- workbench ------------------------------- */
