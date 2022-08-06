@@ -1,5 +1,11 @@
 [
     /* -------------------------------- extension ------------------------------- */
+    // Center Editor Window
+    {
+        "key": "alt+l",
+        "command": "center-editor-window.center",
+        "when": "editorTextFocus || findWidgetVisible"
+    },
     // code-runner
     {
         "key": "ctrl+cmd+enter",
@@ -17,11 +23,11 @@
     },
     // Faster paragraph
     {
-        "key": "ctrl+alt+p",
+        "key": "alt+p",
         "command": "faster-para-word-movement.paraUp"
     },
     {
-        "key": "ctrl+alt+n",
+        "key": "alt+n",
         "command": "faster-para-word-movement.paraDown"
     },
     {
@@ -45,7 +51,12 @@
     },
     // select-indentation
     {
-        "key": "alt+l",
+        "key": "ctrl+l",
+        "command": "-center-editor-window.center",
+        "when": "editorTextFocus || findWidgetVisible"
+    },
+    {
+        "key": "ctrl+l",
         "command": "select-indentation.expand-selection"
     },
     // Sort lines
