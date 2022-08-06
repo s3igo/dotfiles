@@ -27,3 +27,18 @@ function zshaddhistory() {
         && ${CMD} != 'rip'
     ]]
 }
+
+function __update_history() {
+    local EXIT_STATUS="$?"
+
+    fc -W
+    if [[ ${EXIT_STATUS} != 0 ]]; then
+        ed -s ~/.zsh_history <<EOF >/dev/null
+d
+w
+q
+EOF
+    fi
+}
+
+precmd_functions+=(__update_history)
