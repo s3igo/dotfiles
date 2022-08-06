@@ -104,6 +104,7 @@
     "workbench.colorTheme": "Night Owl",
     "workbench.editor.enablePreview": false,
     "workbench.iconTheme": "material-icon-theme",
+    "workbench.layoutControl.enabled": false,
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "always",
