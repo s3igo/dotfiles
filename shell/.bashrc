@@ -13,7 +13,7 @@ function parse-git-branch {
 
 BLUE="\[\e[1;34m\]"
 PURPLE="\[\e[1;35m\]"
-GRAY="n\[\e[1;37m\]"
+GRAY="\[\e[1;37m\]"
 WHITE="\[\e[00m\]"
 
-export PS1="\n${BLUE}\w${GRAY}\$(parse-git-branch)${PURPLE}\$${WHITE} "
+export PS1="\n${BLUE}\w${GRAY} \$(parse-git-branch)\n${PURPLE}\$${WHITE} "
