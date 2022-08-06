@@ -41,13 +41,6 @@ font:
     family: "HackGenNerd Console"
     style: Bold
 
-shell:
-  program: /bin/zsh
-  args:
-    - -l
-    - -c
-    - "tmux a -t 0 || tmux -u"
-
 window:
   opacity: 0.8
   padding:
