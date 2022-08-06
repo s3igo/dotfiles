@@ -11,7 +11,8 @@
 - このリポジトリをインストールすると、以下のファイルを書き換えます。書き換えられて困る場合は、安全な場所に退避させておいてください。
     - `~/.bash_profile`
     - `~/.bashrc`
-    - `~/.zshrc`
+    - `~/.zshenv`
+    - `~/.config/zsh/.zshrc`
     - `~/.vimrc`
     - `~/.tool-versions`
     - `~/.gitconfig`
