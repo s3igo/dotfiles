@@ -16,4 +16,4 @@ PURPLE="\[\e[1;35m\]"
 GRAY="\[\e[1;37m\]"
 WHITE="\[\e[00m\]"
 
-export PS1="\n${BLUE}\w${GRAY}\$(parse-git-branch)\n${PURPLE}\$${WHITE} "
+export PS1="\n${BLUE}\w${GRAY}\$(parse-git-branch)\n${PURPLE}\\$${WHITE} "
