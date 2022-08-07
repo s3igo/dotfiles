@@ -1,5 +1,5 @@
 # history
-export HISTFILE="$HOME/.config/zsh/history"
+export HISTFILE="$HOME/.local/state/zsh_history"
 
 # auto correct
 setopt CORRECT_ALL
@@ -29,7 +29,7 @@ function __update_history() {
 
     fc -W
     if [[ ${EXIT_STATUS} != 0 ]]; then
-        ed -s ~/.config/zsh/.zsh_history <<EOF >/dev/null
+        ed -s "$HISTFILE" <<EOF >/dev/null
 d
 w
 q
