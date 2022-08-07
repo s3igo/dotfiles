@@ -32,7 +32,7 @@ ln -fnsv "$BASE_DIR/.tool-versions" "$HOME/.tool-versions"
 
 # alacritty
 mkdir -p ~/.config/alacritty
-ln -fnsv "$BASE_DIR/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+ln -fnsv "$BASE_DIR/.config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
 # global-gitignore
 mkdir -p ~/.config/git
