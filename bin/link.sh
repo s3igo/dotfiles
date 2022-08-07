@@ -34,12 +34,10 @@ ln -fnsv "$BASE_DIR/.tool-versions" "$HOME/.tool-versions"
 mkdir -p ~/.config/alacritty
 ln -fnsv "$BASE_DIR/.config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
-# global-gitignore
+# git
 mkdir -p ~/.config/git
 ln -fnsv "$BASE_DIR/.config/git/ignore" "$HOME/.config/git/ignore"
-
-# gitconfig
-ln -fnsv "$BASE_DIR/.gitconfig" "$HOME/.gitconfig"
+ln -fnsv "$BASE_DIR/.config/git/config" "$HOME/.config/git/config"
 
 # relogin shell
 exec $SHELL -l
