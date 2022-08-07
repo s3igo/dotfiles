@@ -1,5 +1,7 @@
 PKG_DIR := ~/.dotfiles/lib/pkg
 
+.PHONY: link
+
 init:
 	. ./bin/init.sh
 
