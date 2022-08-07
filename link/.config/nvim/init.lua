@@ -6,16 +6,21 @@ local o = vim.opt
 vim.env.LANG = 'en_US.UTF-8'
 o.encoding = 'utf-8'
 o.fileencoding = 'utf-8'
+o.clipboard:append({unnamedeplus = true})
+o.mouse = 'a'
 
 -- appearence
 o.number = true
 o.ambiwidth = 'double'
 o.emoji = true
 o.cmdheight = 1
-o.fileformats = { unix, dos, mac }
+o.fileformats = "unix,dos,mac"
 o.list = true
-o.listchars = { space = '･', tab = '>-', trail = '*', eol = '¬', extends = '»' }
+o.listchars = { space = '･', tab = '>-', trail = '*', eol = '¬', extends = '»' , nbsp = '+' }
 o.visualbell = true
+o.showmatch = true
+o.matchtime = 1
+o.showtabline = 2
 
 -- tab
 o.tabstop = 4
