@@ -38,8 +38,11 @@ alias ls='ls --color=auto'
 alias _cd='cd $_'
 alias _login='exec $SHELL -l'
 
-# mac specific commands
+# mac
 if [ "$(uname)" = 'Darwin' ]; then
+    alias _app='open -a "$(ls /Applications \
+        | sed "s/\.app$//" \
+        | anyframe-selector-auto)"'
     alias _do='eval "$(pbpaste)"'
     alias _ql='qlmanage -p "$1" >& /dev/null'
 fi
