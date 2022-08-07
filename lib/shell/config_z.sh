@@ -17,8 +17,7 @@ function zshaddhistory() {
     local LINE=${1%%$'\n'}
     local CMD=${LINE%% *}
 
-    [[ ${#LINE} -ge 5
-        && ${CMD} != (l[sal])
+    [[ ${CMD} != (l[sal])
         && ${CMD} != 'cd'
         && ${CMD} != 'rip'
     ]]
