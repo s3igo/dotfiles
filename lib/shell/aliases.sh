@@ -1,8 +1,8 @@
-# VSCode
-alias c='code -g'
-
 # homebrew
 alias b='brew'
+
+# VSCode
+alias c='code -g'
 
 # docker
 alias d='docker'
