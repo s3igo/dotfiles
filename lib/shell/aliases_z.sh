@@ -1,8 +1,5 @@
 # shell
-alias _start='source ~/.zshrc'
-
-# anyframe
-alias _cdr=anyframe-widget-cdr
+alias _start='source ~/.config/zsh/.zshrc'
 
 # global
 ## shell
