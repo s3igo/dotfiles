@@ -1,8 +1,6 @@
 require('plugins')
 
 local o = vim.opt
-local l = vim.opt_local
-local g = vim.opt_global
 
 -- config
 vim.env.LANG = 'en_US.UTF-8'
