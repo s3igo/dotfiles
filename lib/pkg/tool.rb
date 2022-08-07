@@ -1,6 +1,7 @@
 brew "bat"
 brew "emacs"
 brew "exa"
+brew "fd"
 brew "fzf"
 brew "ghq"
 brew "neovim"
