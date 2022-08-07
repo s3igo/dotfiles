@@ -1,9 +1,5 @@
-SHELL_DIR=~/.dotfiles/shell/lib
-
-source $SHELL_DIR/zinit.sh
-source $SHELL_DIR/config.sh
-source $SHELL_DIR/aliases.sh
-source $SHELL_DIR/aliases_z.sh
+# history
+export HISTFILE="$HOME/.local/state/zsh_history"
 
 # auto correct
 setopt CORRECT_ALL
@@ -33,7 +29,7 @@ function __update_history() {
 
     fc -W
     if [[ ${EXIT_STATUS} != 0 ]]; then
-        ed -s ~/.config/zsh/.zsh_history <<EOF >/dev/null
+        ed -s "$HISTFILE" <<EOF >/dev/null
 d
 w
 q

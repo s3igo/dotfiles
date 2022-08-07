@@ -1,8 +1,3 @@
-SHELL_DIR=~/.dotfiles/shell/lib
-
-source $SHELL_DIR/config.sh
-source $SHELL_DIR/aliases.sh
-
 # alias
 alias _start='source ~/.bashrc'
 
