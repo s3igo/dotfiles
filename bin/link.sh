@@ -39,5 +39,9 @@ mkdir -p ~/.config/git
 ln -fnsv "$BASE_DIR/.config/git/ignore" "$HOME/.config/git/ignore"
 ln -fnsv "$BASE_DIR/.config/git/config" "$HOME/.config/git/config"
 
+# tmux
+mkdir -p ~/.config/tmux
+ln -fnsv "$BASE_DIR/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+
 # relogin shell
 exec $SHELL -l
