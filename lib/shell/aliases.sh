@@ -40,5 +40,6 @@ alias _login='exec $SHELL -l'
 
 # mac specific commands
 if [ "$(uname)" = 'Darwin' ]; then
+    alias _do='eval "$(pbpaste)"'
     alias _ql='qlmanage -p "$1" >& /dev/null'
 fi
