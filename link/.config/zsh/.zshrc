@@ -1,4 +1,4 @@
-SHELL_DIR=~/.dotfiles/shell/lib
+SHELL_DIR=~/.dotfiles/lib/shell
 
 source $SHELL_DIR/zinit.sh
 source $SHELL_DIR/config.sh
