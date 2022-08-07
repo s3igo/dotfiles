@@ -3,31 +3,31 @@ require('plugins')
 local o = vim.opt
 
 -- config
-vim.env.LANG = 'en_US.UTF-8'
+o.clipboard:append({unnamedeplus = true})
 o.encoding = 'utf-8'
 o.fileencoding = 'utf-8'
-o.clipboard:append({unnamedeplus = true})
 o.mouse = 'a'
+vim.env.LANG = 'en_US.UTF-8'
 
 -- appearence
-o.number = true
 o.ambiwidth = 'double'
-o.emoji = true
 o.cmdheight = 1
+o.emoji = true
 o.fileformats = "unix,dos,mac"
 o.list = true
 o.listchars = { space = '･', tab = '>-', trail = '*', eol = '¬', extends = '»' , nbsp = '+' }
-o.visualbell = true
-o.showmatch = true
 o.matchtime = 1
+o.number = true
+o.showmatch = true
 o.showtabline = 2
+o.visualbell = true
 
 -- tab
-o.tabstop = 4
-o.softtabstop = 4
-o.shiftwidth = 4
 o.expandtab = true
+o.shiftwidth = 4
 o.smarttab = true
+o.softtabstop = 4
+o.tabstop = 4
 
 -- keybind
 vim.g.mapleader = " "
