@@ -1,2 +1,2 @@
 *.lock.json
-settings.json
+.vscode/settings.json
