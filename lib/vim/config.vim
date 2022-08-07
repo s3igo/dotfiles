@@ -7,9 +7,10 @@ endif
 "" to UTF-8
 set fenc=utf-8
 
-"" not to make backup & swap file
+"" not to make backup & swap & viminfo file
 set nobackup
 set noswapfile
+set viminfo=
 
 "" enable mouse(wheel) control
 set mouse=a

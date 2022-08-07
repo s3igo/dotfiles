@@ -5,5 +5,7 @@ export LANG=ja_JP.UTF-8
 HISTSIZE=10000
 SAVEHIST=10000
 
+export LESSHISTFILE=-
+
 # homebrew
 [ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
