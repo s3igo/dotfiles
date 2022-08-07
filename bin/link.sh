@@ -1,6 +1,5 @@
 #!/bin/sh
 
-DOT_DIR=~/.dotfiles
 BASE_DIR=~/.dotfiles/link
 
 # shell
