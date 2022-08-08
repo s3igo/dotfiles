@@ -43,5 +43,9 @@ ln -fnsv "$BASE_DIR/.config/git/config" "$HOME/.config/git/config"
 mkdir -p ~/.config/tmux
 ln -fnsv "$BASE_DIR/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 
+# npm
+mkdir -p ~/.config/npm
+ln -fnsv "$BASE_DIR/.config/npm/npmrc" "$HOME/.config/npm/npmrc"
+
 # relogin shell
 exec $SHELL -l

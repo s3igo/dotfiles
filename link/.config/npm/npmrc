@@ -1,0 +1,2 @@
+cache=~/.cache/npm
+# cache="$HOME/.cache/npm"だと不具合
