@@ -111,6 +111,7 @@
     /* --------------------------------- others --------------------------------- */
     "debug.console.fontSize": 14,
     "diffEditor.ignoreTrimWhitespace": false,
+    "search.smartCase": true,
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.macOptionIsMeta": true,
     "window.zoomLevel": 1
