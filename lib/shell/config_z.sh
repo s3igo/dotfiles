@@ -2,7 +2,7 @@
 export HISTFILE="$HOME/.local/state/zsh_history"
 
 # auto correct
-setopt CORRECT_ALL
+setopt CORRECT
 
 # beep
 unsetopt BEEP
