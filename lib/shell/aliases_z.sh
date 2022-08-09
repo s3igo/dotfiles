@@ -16,6 +16,6 @@ alias -g _dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
 # mac
 if [ "$(uname)" = 'Darwin' ]; then
     alias _app='open -a "$(ls /Applications | sed "s/\.app$//" | anyframe-selector-auto)"'
-    alias -g _select='| anyframe-selector-auto | anyframe-action-execute'
     alias -g _pick='| anyframe-selector-auto | pbcopy'
+    alias -g _select='| anyframe-selector-auto | anyframe-action-execute'
 fi
