@@ -14,9 +14,9 @@ tool:
 lang:
 	which asdf > /dev/null 2>&1 \
 		&& asdf plugin-add nodejs \
+		&& asdf plugin-add python \
+		&& asdf plugin-add yarn \
 		&& asdf install \
-		&& corepack enable yarn \
-		&& asdf reshim nodejs
 
 base:
 ifeq ($(shell uname), Darwin)
