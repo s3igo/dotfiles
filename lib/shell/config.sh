@@ -9,3 +9,6 @@ export LESSHISTFILE=-
 
 # homebrew
 [ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# terminal
+export TERMINFO="$HOME/.local/share/terminfo"
