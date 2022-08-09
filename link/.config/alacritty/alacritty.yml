@@ -43,9 +43,6 @@ font:
     family: "HackGenNerd Console"
     style: Bold
 
-env:
-  TERM: xterm-256color
-
 window:
   opacity: 0.8
 
