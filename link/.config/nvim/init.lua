@@ -2,6 +2,10 @@ require('plugins')
 
 local o = vim.opt
 
+-- appearance
+o.termguicolors = true
+vim.cmd('colorscheme night-owl')
+
 -- config
 o.clipboard:append({ unnamedeplus = true })
 o.mouse = 'a'
@@ -25,6 +29,7 @@ o.showtabline = 2
 --- render
 o.number = true
 o.list = true
+o.cursorline = true
 o.listchars = {
     space = '･',
     tab = '>-',
@@ -33,11 +38,23 @@ o.listchars = {
     precedes = '«',
     nbsp = '+'
 }
+
 --- highlight
-vim.cmd [[ highlight NonText ctermfg=59 ctermbg=None guifg=None guibg=NONE ]]
-vim.cmd [[ highlight SpecialKey ctermfg=59 ctermbg=None guifg=None guibg=NONE ]]
+vim.highlight.create( 'NonText', {
+    ctermfg = 8,
+    ctermbg = None,
+    guifg = None,
+    guibg = NONE
+})
+vim.highlight.create( 'SpecialKey', {
+    ctermfg = 8,
+    ctermbg = None,
+    guifg = None,
+    guibg = NONE
+})
 o.showmatch = true
 o.matchtime = 1
+
 --- tab
 o.expandtab = true
 o.shiftwidth = 4
@@ -56,5 +73,5 @@ o.wrapscan = true
 -- autocmd
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
     pattern = 'plugins.lua',
-    command = 'PackerCompile',
+    command = 'PackerCompile'
 })

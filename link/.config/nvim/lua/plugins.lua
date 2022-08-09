@@ -1,8 +1,13 @@
 vim.cmd [[ packadd packer.nvim ]]
 
 require('packer').startup(function(use)
-    use("wbthomason/packer.nvim")
-    use("nvim-telescope/telescope.nvim")
+    use('wbthomason/packer.nvim')
+    use('nvim-telescope/telescope.nvim')
+    use('nvim-treesitter/nvim-treesitter')
+    use {
+        'haishanh/night-owl.vim',
+        opt = true
+    }
 
     -- filer
     -- Unless you are still migrating, remove the deprecated commands from v1.x
