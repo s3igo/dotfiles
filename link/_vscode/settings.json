@@ -50,6 +50,7 @@
     "dotfiles.targetPath": "~/.dotfiles",
     // editor
     "editor.acceptSuggestionOnEnter": "off",
+    "editor.accessibilitySupport": "off",
     "editor.autoIndent": "advanced",
     "editor.bracketPairColorization.enabled": true,
     "editor.fontFamily": "HackGenNerd, Menlo, Monaco, 'Courier New', monospace",
