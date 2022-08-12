@@ -12,12 +12,15 @@
     - `~/.bash_profile`
     - `~/.bashrc`
     - `~/.zshenv`
-    - `~/.config/zsh/.zshrc`
     - `~/.vimrc`
     - `~/.tool-versions`
-    - `~/.gitconfig`
+    - `~/.config/zsh/.zshrc`
+    - `~/.config/zsh/.zshenv`
+    - `~/.config/git/config`
     - `~/.config/git/ignore`
     - `~/.config/alacritty/alacritty.yml`
+    - `~/.config/npm/npmrc`
+    - `~/.config/tmux/tmux.conf`
     - vscodeの`settings.json, keybindings.json`の実体ファイル[^1]
 
 ## 対応環境
