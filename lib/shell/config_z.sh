@@ -7,6 +7,13 @@ setopt CORRECT
 # beep
 unsetopt BEEP
 
+# bindkey
+function __open-app() {
+    open -a "$(ls /Applications | sed 's/\.app$//' | anyframe-selector-auto)"
+}
+zle -N __open-app
+bindkey 'å' __open-app
+
 # history
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
