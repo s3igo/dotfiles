@@ -3,8 +3,9 @@ alias _start='source ~/.config/zsh/.zshrc'
 
 # global
 ## shell
+alias -g _head='cut -d " " -f 1'
 alias -g _i='install'
-alias -g _opt='| anyframe-selector-auto | anyframe-action-execute'
+alias -g _opt=anyframe-selector-auto
 
 ## docker
 alias -g _dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
