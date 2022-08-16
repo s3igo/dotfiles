@@ -6,7 +6,7 @@ init:
 	. ./bin/init.sh
 
 link:
-	sh ./bin/link.sh
+	bash ./bin/link.sh
 
 tool:
 	brew bundle --file $(PKG_DIR)/tool.rb
