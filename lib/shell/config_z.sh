@@ -7,15 +7,6 @@ setopt CORRECT
 # beep
 unsetopt BEEP
 
-# bindkey
-if [ "$(uname)" = 'Darwin' ]; then
-    function __open-app() {
-        open -a "$(ls /Applications | sed 's/\.app$//' | anyframe-selector-auto)"
-    }
-    zle -N __open-app
-    bindkey 'å' __open-app
-fi
-
 # history
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
