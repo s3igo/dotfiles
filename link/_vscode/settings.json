@@ -26,6 +26,15 @@
     "code-eol.newlineCharacter": "↓",
     "code-eol.returnCharacter": "←",
     "code-eol.toggleWithWhiteSpace": true,
+    // code-runner
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    },
+    "code-runner.ignoreSelection": true,
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
     // gitlens
     "gitlens.defaultDateFormat": "YYYY/MM/DD, HH:MM",
     "gitlens.defaultDateShortFormat": "YYYY/MM/DD",
