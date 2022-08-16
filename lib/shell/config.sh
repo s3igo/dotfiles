@@ -9,7 +9,8 @@ SAVEHIST=10000
 export LESSHISTFILE=-
 
 # homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+[ "$(uname)" = 'Darwin' ] && [ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ "$(uname)" = 'Linux' ] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
 
 # terminal
 export TERMINFO="$HOME/.local/share/terminfo"
