@@ -25,6 +25,9 @@ function gplPR() {
 alias gpsh='git push origin HEAD'
 alias gpsm='git push origin main'
 
+#tmux
+alias t='tmux'
+
 # shell
 ## -i
 alias cp='cp -i'
