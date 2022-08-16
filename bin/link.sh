@@ -2,7 +2,11 @@
 
 BASE_DIR="$HOME/.dotfiles/link"
 
+# `uname`によって分岐
 function vscode() {
+    local DIRNAME="$(dirname "$FILE")"
+    local MATCH="${DIRNAME##"$(dirname "$DIRNAME")/"}"
+
     [[ "$MATCH" == '_vscode' ]] || return 1
 
     if [[ "$(uname)" == 'Darwin' ]]; then
@@ -16,15 +20,22 @@ function vscode() {
     return 0
 }
 
+# `$SHELL`によって分岐
+function shell() {
+    [[ "$FILE" =~ ^\.bash.* ]] \
+        && echo "$SHELL" | grep 'zsh' > /dev/null 2>&1 \
+        && return 0
+    [[ "$FILE" =~ ^\.zsh.* ]] \
+        && echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
+        && return 0
+
+    return 1
+}
+
 while read -r FILE; do
-    DIRNAME="$(dirname "$FILE")"
-    # ディレクトリ名を抽出
-    MATCH="${DIRNAME##"$(dirname "$DIRNAME")/"}"
-
-    # vscodeは`uname`によって分岐
     vscode && continue
+    shell && continue
 
-    # ./linkを$HOMEに置換
     DEST="$HOME${FILE##"$BASE_DIR"}"
 
     mkdir -p "$(dirname "$DEST")"
