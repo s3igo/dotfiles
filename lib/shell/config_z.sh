@@ -1,6 +1,3 @@
-# history
-export HISTFILE="$HOME/.local/state/zsh_history"
-
 # auto correct
 setopt CORRECT
 
