@@ -102,6 +102,20 @@
         "command": "editor.action.marker.prevInFiles",
         "when": "editorFocus"
     },
+    {
+        "key": "ctrl+alt+cmd+n",
+        "command": "-welcome.showNewFileEntries"
+    },
+    {
+        "key": "ctrl+alt+cmd+n",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+cmd+p",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
     /* --------------------------------- cursor --------------------------------- */
     {
         "key": "ctrl+shift+f",
