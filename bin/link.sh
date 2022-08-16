@@ -1,51 +1,35 @@
-#!/bin/sh
+#!/bin/bash
 
-BASE_DIR=~/.dotfiles/link
+BASE_DIR="$HOME/.dotfiles/link"
 
-# shell
-echo "$SHELL" | grep 'zsh' > /dev/null 2>&1 \
-    && ln -fnsv "$BASE_DIR/.zshenv" "$HOME/.zshenv" \
-    && mkdir -p "$HOME/.config/zsh" \
-    && ln -fnsv "$BASE_DIR/.config/zsh/.zshenv" "$HOME/.config/zsh/.zshenv" \
-    && ln -fnsv "$BASE_DIR/.config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc" \
+function vscode() {
+    [[ "$MATCH" == '_vscode' ]] || return 1
 
-echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
-    && ln -fnsv "$BASE_DIR/.bashrc" "$HOME/.bashrc" \
-    && ln -fnsv "$BASE_DIR/.bash_profile" "$HOME/.bash_profile"
+    if [[ "$(uname)" == 'Darwin' ]]; then
+        mkdir -p "$HOME/Library/Application Support/Code/User"
+        ln -fnsv "$FILE" "$HOME/Library/Application Support/Code/User/$(basename "$FILE")"
+    else
+        mkdir -p "$HOME/.config/Code/User"
+        ln -fnsv "$FILE" "$HOME/.config/Code/User/$(basename "$FILE")"
+    fi
 
-# vim
-ln -fnsv "$BASE_DIR/.vimrc" "$HOME/.vimrc"
+    return 0
+}
 
-# vscode
-[ "$(uname)" = 'Darwin' ] \
-    && mkdir -p "$HOME/Library/Application Support/Code/User" \
-    && ln -fnsv "$BASE_DIR/_vscode/keybindings.json" "$HOME/Library/Application Support/Code/User/keybindings.json" \
-    && ln -fnsv "$BASE_DIR/_vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+while read -r FILE; do
+    DIRNAME="$(dirname "$FILE")"
+    # ディレクトリ名を抽出
+    MATCH="${DIRNAME##"$(dirname "$DIRNAME")/"}"
 
-[ "$(uname)" = 'Linux' ] \
-    && mkdir -p "$HOME/.config/Code/User" \
-    && ln -fnsv "$BASE_DIR/_vscode/keybindings.json" "$HOME/.config/Code/User/settings.json" \
-    && ln -fnsv "$BASE_DIR/_vscode/settings.json" "$HOME/.config/Code/User/settings.json"
+    # vscodeは`uname`によって分岐
+    vscode && continue
 
-# asdf
-ln -fnsv "$BASE_DIR/.tool-versions" "$HOME/.tool-versions"
+    # ./linkを$HOMEに置換
+    DEST="$HOME${FILE##"$BASE_DIR"}"
 
-# alacritty
-mkdir -p ~/.config/alacritty
-ln -fnsv "$BASE_DIR/.config/alacritty/alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
-
-# git
-mkdir -p ~/.config/git
-ln -fnsv "$BASE_DIR/.config/git/ignore" "$HOME/.config/git/ignore"
-ln -fnsv "$BASE_DIR/.config/git/config" "$HOME/.config/git/config"
-
-# tmux
-mkdir -p ~/.config/tmux
-ln -fnsv "$BASE_DIR/.config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
-
-# npm
-mkdir -p ~/.config/npm
-ln -fnsv "$BASE_DIR/.config/npm/npmrc" "$HOME/.config/npm/npmrc"
+    mkdir -p "$(dirname "$DEST")"
+    ln -fnsv "$FILE" "$DEST"
+done < <(find $BASE_DIR -mindepth 1 -type f)
 
 # relogin shell
 exec $SHELL -l
