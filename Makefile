@@ -13,10 +13,8 @@ tool:
 
 lang:
 	which asdf > /dev/null 2>&1 \
-		&& asdf plugin-add nodejs \
-		&& asdf plugin-add python \
-		&& asdf plugin-add yarn \
-		&& asdf install \
+		&& cat $(PKG_DIR)/asdf.txt \
+		| xargs -I % asdf plugin-add %
 
 base:
 ifeq ($(shell uname), Darwin)
