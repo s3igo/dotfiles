@@ -1,6 +1,8 @@
+tap "homebrew/cask-fonts"
 cask "1password"
 cask "alacritty"
 cask "docker"
 cask "font-hackgen-nerd"
 cask "google-chrome"
 cask "visual-studio-code"
+cask "wezterm"
