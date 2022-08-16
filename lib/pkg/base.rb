@@ -1,4 +1,3 @@
-tap "homebrew/cask-fonts"
 cask "1password"
 cask "alacritty"
 cask "docker"
