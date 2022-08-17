@@ -14,7 +14,9 @@ tool:
 lang:
 	which asdf > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/asdf.txt \
-		| xargs -I % asdf plugin-add %
+		| xargs -I % asdf plugin-add % \
+		&& asdf install
+
 
 base:
 ifeq ($(shell uname), Darwin)
