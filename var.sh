@@ -1,8 +1,8 @@
 DOT_DIR="$HOME/.dotfiles"
 
 LINK_DIR="$DOT_DIR/link"
-SHELL_DIR="$DOT_DIR/lib/shell"
-PKG_DIR="$DOT_DIR/lib/pkg"
+SHELL_DIR="$DOT_DIR/shell"
+PKG_DIR="$DOT_DIR/pkg"
 
 XDG_CONFIG_HOME="$HOME/.config"
 XDG_CACHE_HOME="$HOME/.cache"
