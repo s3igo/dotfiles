@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR="$HOME/.dotfiles/link"
+source ~/.dotfiles/var.sh
 
 # `uname`によって分岐
 function vscode() {
@@ -36,11 +36,11 @@ while read -r FILE; do
     vscode && continue
     shell && continue
 
-    DEST="$HOME${FILE##"$BASE_DIR"}"
+    DEST="$HOME${FILE##"$LINK_DIR"}"
 
     mkdir -p "$(dirname "$DEST")"
     ln -fnsv "$FILE" "$DEST"
-done < <(find $BASE_DIR -mindepth 1 -type f)
+done < <(find $LINK_DIR -mindepth 1 -type f)
 
 # relogin shell
 exec $SHELL -l

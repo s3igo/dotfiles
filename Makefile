@@ -1,4 +1,4 @@
-PKG_DIR := ~/.dotfiles/lib/pkg
+include ~/.dotfiles/var.sh
 
 .PHONY: link
 
