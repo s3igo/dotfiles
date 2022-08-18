@@ -1,7 +1,7 @@
 alias b='brew'
 alias c='code'
 alias d='docker'
-alias e='exa'
+alias e='exa --icons --git'
 alias f='fzf'
 alias g='git'
 alias t='tmux'
