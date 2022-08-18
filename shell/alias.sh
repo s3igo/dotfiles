@@ -10,10 +10,6 @@ alias d='docker'
 # exa
 alias exa='exa -a --icons'
 
-# gcc
-alias gcc='gcc-12'
-alias g++='g++-12'
-
 # git
 alias g='git'
 
