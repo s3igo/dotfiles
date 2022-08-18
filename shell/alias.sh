@@ -1,33 +1,22 @@
-# homebrew
 alias b='brew'
-
-# VSCode
-alias c='code -g'
-
-# docker
+alias c='code'
 alias d='docker'
-
-# exa
-alias exa='exa -a --icons'
-
-# git
+alias e='exa'
+alias f='fzf'
 alias g='git'
-
-#tmux
 alias t='tmux'
 
-# shell
-## -i
+# -i
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-## cd
+# cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-## ls
+# ls
 alias la='ls -hla --color=auto'
 alias ll='ls -hl --color=auto'
 alias ls='ls --color=auto'
