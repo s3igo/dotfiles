@@ -21,11 +21,6 @@
         "dccache",
         "Menlo"
     ],
-    // code-eol
-    "code-eol.crlfCharacter": "↵",
-    "code-eol.newlineCharacter": "↓",
-    "code-eol.returnCharacter": "←",
-    "code-eol.toggleWithWhiteSpace": true,
     // code-runner
     "code-runner.clearPreviousOutput": true,
     "code-runner.executorMap": {
