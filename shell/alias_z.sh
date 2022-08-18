@@ -13,6 +13,12 @@ alias -g @dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Stat
 alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
     | tail -n +2 | fzf | cut -d " " -f 1`'
 
+# mac
+if [ "$(uname)" = 'Darwin' ]; then
+    ## global
+    alias -g @pick='| fzf | pbcopy'
+fi
+
 # keybind
 ## cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -27,15 +33,3 @@ bindkey '^R' anyframe-widget-execute-history
 ## ghq
 zle -N anyframe-widget-cd-ghq-repository
 bindkey '^G' anyframe-widget-cd-ghq-repository
-
-# mac
-if [ "$(uname)" = 'Darwin' ]; then
-    ## global
-    alias -g _pick='| fzf | pbcopy'
-    ## keybind
-    function __open-app() {
-        open -a "$(ls /Applications | sed 's/\.app$//' | fzf)"
-    }
-    zle -N __open-app
-    bindkey 'å' __open-app
-fi
