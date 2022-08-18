@@ -16,14 +16,6 @@ alias g++='g++-12'
 
 # git
 alias g='git'
-alias gca='git commit --amend --no-edit'
-alias ginit="git init && git commit --allow-empty -m 'initial commit'"
-alias gplr='git pull --rebase'
-function gplPR() {
-    git fetch origin "pull/$1/head:PR-$1"
-}
-alias gpsh='git push origin HEAD'
-alias gpsm='git push origin main'
 
 #tmux
 alias t='tmux'

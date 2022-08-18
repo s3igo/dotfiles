@@ -1,3 +1,13 @@
+[alias]
+	cm = commit
+	ps = push
+	pl = pull
+	oH = origin HEAD
+	om = origin main
+	append = commit --amend --no-edit
+	sync = pull --rebase
+	initialize = "!git init && git commit --allow-empty -m 'initial commit'"
+	PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
