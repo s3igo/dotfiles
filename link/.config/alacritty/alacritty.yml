@@ -36,11 +36,11 @@ font:
   use_thin_strokes: true
 
   normal:
-    family: "HackGenNerd Console"
+    family: "HackGen Console NF"
     style: Regular
 
   bold:
-    family: "HackGenNerd Console"
+    family: "HackGen Console NF"
     style: Bold
 
 # VSCodeでの`$TERM`の値と合わせるため

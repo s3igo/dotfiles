@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm';
 
 return {
-    font = wezterm.font('HackGenNerd Console'),
+    font = wezterm.font('UDEV Gothic NFLG'),
     font_size = 18,
     colors = {
         compose_cursor = 'orange'

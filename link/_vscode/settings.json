@@ -62,11 +62,12 @@
     "editor.accessibilitySupport": "off",
     "editor.autoIndent": "advanced",
     "editor.bracketPairColorization.enabled": true,
-    "editor.fontFamily": "HackGenNerd, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "UDEV Gothic NFLG, HackGen Console NFJ, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontLigatures": true,
-    "editor.fontSize": 14,
+    "editor.fontSize": 15,
     "editor.guides.bracketPairs": true,
     "editor.inlineSuggest.enabled": true,
+    "editor.letterSpacing": 1.2,
     "editor.linkedEditing": true,
     "editor.minimap.enabled": false,
     "editor.renderControlCharacters": true,
@@ -110,6 +111,10 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "git.mergeEditor": true,
+    // terminal
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.letterSpacing": 2,
+    "terminal.integrated.macOptionIsMeta": true,
     // workbench
     "workbench.colorTheme": "Night Owl",
     "workbench.editor.enablePreview": false,
@@ -120,10 +125,8 @@
     "workbench.tree.renderIndentGuides": "always",
     /* --------------------------------- others --------------------------------- */
     "audioCues.lineHasInlineSuggestion": "off",
-    "debug.console.fontSize": 14,
+    "debug.console.fontSize": 15,
     "diffEditor.ignoreTrimWhitespace": false,
     "search.smartCase": true,
-    "terminal.integrated.fontSize": 14,
-    "terminal.integrated.macOptionIsMeta": true,
     "window.zoomLevel": 1
 }
