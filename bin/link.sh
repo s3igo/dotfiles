@@ -3,7 +3,7 @@
 source ~/.dotfiles/var.sh
 
 # `uname`によって分岐
-function vscode() {
+function vscode {
     local DIRNAME="$(dirname "$FILE")"
     local MATCH="${DIRNAME##"$(dirname "$DIRNAME")/"}"
 
@@ -21,7 +21,7 @@ function vscode() {
 }
 
 # `$SHELL`によって分岐
-function shell() {
+function shell {
     [[ "$FILE" =~ ^\.bash.* ]] \
         && echo "$SHELL" | grep 'zsh' > /dev/null 2>&1 \
         && return 0

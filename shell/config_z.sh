@@ -10,7 +10,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 
-function zshaddhistory() {
+function zshaddhistory {
     local LINE=${1%%$'\n'}
     local CMD=${LINE%% *}
 
@@ -20,7 +20,7 @@ function zshaddhistory() {
     ]]
 }
 
-function __update_history() {
+function __update_history {
     local EXIT_STATUS="$?"
 
     fc -W
