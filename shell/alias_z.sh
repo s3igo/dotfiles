@@ -16,6 +16,7 @@ alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
 # mac
 if [ "$(uname)" = 'Darwin' ]; then
     ## global
+    alias -g @copy='| pbcopy'
     alias -g @pick='| fzf | pbcopy'
 fi
 
