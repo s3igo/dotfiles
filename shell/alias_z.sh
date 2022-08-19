@@ -3,6 +3,7 @@ alias _start='source ~/.config/zsh/.zshrc'
 
 # global
 ## shell
+alias -g @f='| fzf'
 alias -g @g='| grep'
 alias -g @head='| cut -d " " -f 1'
 alias -g @i='install'

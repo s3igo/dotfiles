@@ -4,7 +4,6 @@ alias d='docker'
 alias e='exa --icons --git'
 alias ea='exa -la --icons --git'
 alias el='exa -l --icons --git'
-alias f='fzf'
 alias g='git'
 alias t='tmux'
 
