@@ -5,9 +5,8 @@ source ~/.dotfiles/var.sh
 # `uname`によって分岐
 function vscode {
     local DIRNAME="$(dirname "$FILE")"
-    local MATCH="${DIRNAME##"$(dirname "$DIRNAME")/"}"
 
-    [[ "$MATCH" == '_vscode' ]] || return 1
+    [[ "$(basename "$DIRNAME")" == '_vscode' ]] || return 1
 
     if [[ "$(uname)" == 'Darwin' ]]; then
         mkdir -p "$HOME/Library/Application Support/Code/User"
@@ -32,6 +31,7 @@ function shell {
     return 1
 }
 
+# make file-based symlink
 while read -r FILE; do
     vscode && continue
     shell && continue
