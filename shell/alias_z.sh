@@ -1,6 +1,3 @@
-# shell
-alias _start='source ~/.config/zsh/.zshrc'
-
 # global
 ## shell
 alias -g @f='| fzf'
@@ -14,9 +11,8 @@ alias -g @dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Stat
 alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
     | tail -n +2 | fzf | cut -d " " -f 1`'
 
-# mac
+## mac
 if [ "$(uname)" = 'Darwin' ]; then
-    ## global
     alias -g @copy='| pbcopy'
     alias -g @pick='| fzf | pbcopy'
 fi

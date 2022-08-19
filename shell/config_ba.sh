@@ -1,6 +1,3 @@
-# alias
-alias _start='source ~/.bashrc'
-
 # color
 export LS_COLORS='di=34:ex=31:fi=37:ln=35'
 
