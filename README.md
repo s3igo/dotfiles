@@ -49,11 +49,11 @@ bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/install.sh)
 
 - gitがない場合
 
-    このリポジトリをzipでダウンロード -> 解凍 -> 解凍したディレクトリ（おそらく`dotfiles-main`という名前）を`.dotfiles`という名前に変更してホームディレクトリに配置
+    このリポジトリをzipでダウンロード -> 解凍 -> `.dotfiles`という名前に変更してホームディレクトリに配置
 
 - gitがある場合
 
-    このリポジトリを自分のGitHubアカウントでフォークしてからクローン（\<username\>に自分のGitHubのユーザ名を当てはめる）
+    このリポジトリを自分のGitHubアカウントでフォークしてからクローン
 
     ```shell
     git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
