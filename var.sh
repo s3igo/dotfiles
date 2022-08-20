@@ -1,6 +1,6 @@
 DOT_DIR="$HOME/.dotfiles"
 
-LINK_DIR="$DOT_DIR/link"
+LINK_DIR="$DOT_DIR/home"
 SHELL_DIR="$DOT_DIR/shell"
 PKG_DIR="$DOT_DIR/pkg"
 
