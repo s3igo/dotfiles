@@ -129,22 +129,22 @@
     },
     {
         "key": "ctrl+alt+f",
-        "command": "cursorWordPartRight",
+        "command": "cursorWordEndRight",
         "when": "textInputFocus"
     },
     {
         "key": "ctrl+alt+b",
-        "command": "cursorWordPartLeft",
+        "command": "cursorWordEndLeft",
         "when": "textInputFocus"
     },
     {
         "key": "ctrl+shift+alt+f",
-        "command": "cursorWordPartRightSelect",
+        "command": "cursorWordEndRightSelect",
         "when": "textInputFocus"
     },
     {
         "key": "ctrl+shift+alt+b",
-        "command": "cursorWordPartLeftSelect",
+        "command": "cursorWordEndLeftSelect",
         "when": "textInputFocus"
     },
     {
