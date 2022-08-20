@@ -234,16 +234,20 @@
         "command": "workbench.action.tasks.test"
     },
     {
+        "key": "ctrl+'",
+        "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
         "key": "ctrl+,",
         "command": "workbench.action.focusFirstEditorGroup"
     },
     {
-        "key": "ctrl+'",
-        "command": "workbench.action.toggleMaximizedPanel"
+        "key": "ctrl+.",
+        "command": "workbench.action.focusSecondEditorGroup"
     },
     /* --------------------------------- others --------------------------------- */
     {
-        "key": "ctrl+.",
+        "key": "ctrl+/",
         "command": "terminal.focus"
     },
     {
