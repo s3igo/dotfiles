@@ -32,6 +32,9 @@ ifeq ($(shell uname), Darwin)
 		| xargs -I % mas install %
 endif
 
+update:
+	bash ./bin/update.sh
+
 mac:
 	lang base
 
