@@ -6,7 +6,7 @@ source ~/.dotfiles/var.sh
 function vscode {
     local DIRNAME="$(dirname "$FILE")"
 
-    [[ "$(basename "$DIRNAME")" == '_vscode' ]] || return 1
+    [[ "$(basename "$DIRNAME")" != '_vscode' ]] && return 1
 
     if [[ "$(uname)" == 'Darwin' ]]; then
         mkdir -p "$HOME/Library/Application Support/Code/User"
