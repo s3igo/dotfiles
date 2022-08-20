@@ -21,12 +21,9 @@ function vscode {
 
 # `$SHELL`によって分岐
 function shell {
-    [[ "$FILE" =~ ^\.bash.* ]] \
-        && echo "$SHELL" | grep 'zsh' > /dev/null 2>&1 \
-        && return 0
-    [[ "$FILE" =~ ^\.zsh.* ]] \
-        && echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
-        && return 0
+    [[ "$FILE" =~ ^\.bash.* ]] && [[ "$SHELL" == *zsh ]] && return 0
+
+    [[ "$FILE" =~ ^\.zsh.* ]] && [[ "$SHELL" == *bash ]] && return 0
 
     return 1
 }

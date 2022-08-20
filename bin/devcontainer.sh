@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "$SHELL" | grep 'bash' > /dev/null 2>&1 \
+[[ "$SHELL" == *bash ]] \
     && ln -fnsv ~/.dotfiles/link/.bashrc ~/.bashrc \
     && ln -fnsv ~/.dotfiles/link/.bash_profile ~/.bash_profile
 
