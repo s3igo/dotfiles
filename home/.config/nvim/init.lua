@@ -16,9 +16,12 @@ o.clipboard:append({ unnamedeplus = true })
 o.mouse = 'a'
 o.visualbell = true
 o.emoji = true
+o.backup = false
+o.shell = 'zsh'
 
 -- language
 vim.env.LANG = 'en_US.UTF-8'
+vim.scriptencoding = 'utf-8'
 o.encoding = 'utf-8'
 o.fileencoding = 'utf-8'
 o.ambiwidth = 'double'
@@ -29,6 +32,7 @@ o.fileformats = "unix,dos,mac"
 -- workbench
 o.cmdheight = 1
 o.showtabline = 2
+o.showcmd = true
 
 -- editor
 --- render
@@ -43,6 +47,8 @@ o.listchars = {
     precedes = '«',
     nbsp = '+'
 }
+o.laststatus = 2
+o.scrolloff = 5
 
 --- highlight
 vim.highlight.create( 'NonText', {
@@ -57,6 +63,7 @@ vim.highlight.create( 'SpecialKey', {
     guifg = None,
     guibg = NONE
 })
+o.hlsearch = true
 o.showmatch = true
 o.matchtime = 1
 
@@ -64,8 +71,12 @@ o.matchtime = 1
 o.expandtab = true
 o.shiftwidth = 4
 o.smarttab = true
+o.smartindent = true
 o.softtabstop = 4
 o.tabstop = 4
+
+--- others
+o.relativenumber = true
 
 -- keybind
 vim.g.mapleader = ' '
