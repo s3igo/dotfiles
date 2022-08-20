@@ -7,7 +7,7 @@
 
 ## 注意
 
-- デフォルトでは私（s3igo）のgitconfigが含まれているため、適宜`./others/.gitconfig`を書き換えてご使用ください
+- デフォルトでは私（s3igo）のgitconfigが含まれているため、適宜`./link/.config/git/config`を書き換えてご使用ください
 - このリポジトリをインストールすると、以下のファイルを書き換えます。書き換えられて困る場合は、安全な場所に退避させておいてください。
     - `~/.bash_profile`
     - `~/.bashrc`
@@ -19,13 +19,15 @@
     - `~/.config/git/config`
     - `~/.config/git/ignore`
     - `~/.config/alacritty/alacritty.yml`
+    - `~/.config/wezterm/wezterm.lua`
     - `~/.config/npm/npmrc`
     - `~/.config/tmux/tmux.conf`
     - vscodeの`settings.json, keybindings.json`の実体ファイル[^1]
 
 ## 対応環境
 
-- mac
+- mac(X86_64)
+- mac(arm64)
 - Linux
 - WSL2(Linux)
 
@@ -48,6 +50,7 @@ bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/install.sh)
 - gitがない場合
 
     このリポジトリをzipでダウンロード -> 解凍 -> 解凍したディレクトリ（おそらく`dotfiles-main`という名前）を`.dotfiles`という名前に変更してホームディレクトリに配置
+
 - gitがある場合
 
     このリポジトリを自分のGitHubアカウントでフォークしてからクローン（\<username\>に自分のGitHubのユーザ名を当てはめる）
@@ -98,20 +101,14 @@ $ make full
 ## その他コマンド
 
 ```shell
-# make tool, make node, make baseを一括で実行できるやつ（macのみ可能）
+# make lang, make baseを一括で実行できるやつ（macのみ可能）
 $ make mac
 
-# make tool, make node, make base, make fullを一括で実行できるやつ（macのみ可能）
+# make lang, make base, make fullを一括で実行できるやつ（macのみ可能）
 $ make max
 
-# zinitとプラグインのアップデート
-$ zinit update
-
-# zinit.shに書かれていないプラグインの削除
-$ zinit delete --clean
-
-# asdfのプラグインのアップデート
-$ asdf plugin-update --all
+# 各種パッケージ/プラグインマネージャのアップデート
+$ make update
 ```
 
 ## 補足
