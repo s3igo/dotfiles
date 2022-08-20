@@ -105,7 +105,6 @@
     "git.autofetch": true,
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
-    "git.mergeEditor": true,
     // terminal
     "terminal.integrated.fontSize": 14,
     "terminal.integrated.letterSpacing": 2,
