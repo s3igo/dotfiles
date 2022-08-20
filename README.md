@@ -113,7 +113,7 @@ $ make update
 
 ## 補足
 
-- フォントを`brew install --cask`を使って落としてきている都合上、`$ make base`を実行しないor実行できない環境の場合、手動で落とす必要がある（HackGenNerd）
-- TL;DRのワンライナーはmake initを実行、dotfilesをクローン、make toolを実行、make linkを実行の4つが実行される
+- フォントを`brew install --cask`を使って落としてきている都合上、Linuxの場合、手動で入手する必要があるかも（udev-gothic-nf）
+- TL;DRのワンライナーはmake initを実行、dotfilesをクローン、make toolを実行、make linkを実行の4つが実行される（`./bin/install.sh`を参照）
 
 [^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある
