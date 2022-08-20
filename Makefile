@@ -1,7 +1,5 @@
 include ~/.dotfiles/var.sh
 
-.PHONY: link
-
 init:
 	. ./bin/init.sh
 
