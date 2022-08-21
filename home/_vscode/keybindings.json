@@ -93,16 +93,6 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+m",
-        "command": "editor.action.marker.nextInFiles",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+u",
-        "command": "editor.action.marker.prevInFiles",
-        "when": "editorFocus"
-    },
-    {
         "key": "ctrl+alt+cmd+n",
         "command": "-welcome.showNewFileEntries"
     },
@@ -115,6 +105,68 @@
         "key": "ctrl+alt+cmd+p",
         "command": "editor.action.insertCursorAbove",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+k cmd+p",
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k p",
+        "command": "-workbench.action.files.copyPathOfActiveFile"
+    },
+    {
+        "key": "cmd+k p",
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+c",
+        "command": "-editor.action.addCommentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "cmd+k cmd+c",
+        "command": "workbench.action.editor.nextChange",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k c",
+        "command": "-workbench.files.action.compareWithClipboard"
+    },
+    {
+        "key": "cmd+k c",
+        "command": "workbench.action.editor.previousChange",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+d",
+        "command": "-editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "cmd+k cmd+d",
+        "command": "editor.action.dirtydiff.next",
+        "when": "editorTextFocus && !textCompareEditorActive"
+    },
+    {
+        "key": "cmd+k cmd+d",
+        "command": "editor.action.diffReview.next",
+        "when": "isInDiffEditor"
+    },
+    {
+        "key": "cmd+k d",
+        "command": "-workbench.files.action.compareWithSaved"
+    },
+    {
+        "key": "cmd+k d",
+        "command": "editor.action.dirtydiff.previous",
+        "when": "editorTextFocus && !textCompareEditorActive"
+    },
+    {
+        "key": "cmd+k d",
+        "command": "editor.action.diffReview.prev",
+        "when": "isInDiffEditor"
     },
     /* --------------------------------- cursor --------------------------------- */
     {
@@ -245,7 +297,30 @@
         "key": "ctrl+.",
         "command": "workbench.action.focusSecondEditorGroup"
     },
+    // to avoid `Revert Selected Ranges`
+    {
+        "key": "cmd+k cmd+r",
+        "command": "-workbench.action.keybindingsReference"
+    },
+    {
+        "key": "cmd+k r",
+        "command": "-workbench.action.files.revealActiveFileInWindows"
+    },
+    {
+        "key": "cmd+k r",
+        "command": "workbench.action.keybindingsReference"
+    },
     /* --------------------------------- others --------------------------------- */
+    {
+        "key": "ctrl+m",
+        "command": "scrollPageDown",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "scrollPageUp",
+        "when": "textInputFocus"
+    },
     {
         "key": "ctrl+/",
         "command": "terminal.focus"
@@ -260,4 +335,15 @@
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenView"
     }
+    // TODO: コマンドでgit addしたい
+    // {
+    //     "key": "ctrl+enter",
+    //     "command": "list.toggleSelection",
+    //     "when": "listFocus && !inputFocus"
+    // },
+    // {
+    //     "key": "shift+space",
+    //     "command": "openReferenceToSide",
+    //     "when": "listFocus && referenceSearchVisible && !inputFocus && !treeElementCanCollapse && !treeElementCanExpand"
+    // },
 ]
