@@ -1,4 +1,5 @@
 require('plugins')
+require('keymaps')
 
 local o = vim.opt
 
@@ -10,6 +11,8 @@ vim.cmd('highlight NonText ctermbg=NONE guibg=NONE')
 vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
 vim.cmd('highlight Folded ctermbg=NONE guibg=NONE')
 vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
+o.background = 'dark'
+o.pumblend = 10
 
 -- config
 o.clipboard:append({ unnamedeplus = true })
@@ -63,17 +66,19 @@ vim.highlight.create( 'SpecialKey', {
     guifg = None,
     guibg = NONE
 })
-o.hlsearch = true
 o.showmatch = true
 o.matchtime = 1
 
---- tab
+--- indent
 o.expandtab = true
 o.shiftwidth = 4
 o.smarttab = true
+o.autoindent = true
 o.smartindent = true
 o.softtabstop = 4
 o.tabstop = 4
+o.wrap = true
+o.breakindent = true
 
 --- others
 o.relativenumber = true
@@ -82,9 +87,10 @@ o.relativenumber = true
 vim.g.mapleader = ' '
 
 -- search
+o.hlsearch = true
 o.ignorecase = true
 o.smartcase = true
-o.wrapscan = true
+-- o.wrapscan = true デフォでtrueになってるっぽい
 
 -- autocmd
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
