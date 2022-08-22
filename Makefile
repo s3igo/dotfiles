@@ -28,7 +28,7 @@ endif
 full:
 ifeq ($(shell uname), Darwin)
 	brew bundle --file $(PKG_DIR)/full.rb
-	which mas > /dev/null 2>&1 || brew install mas
+	type mas > /dev/null 2>&1 || brew install mas
 	cat $(PKG_DIR)/app.txt \
 		| cut -d ' ' -f 1 \
 		| xargs -I % mas install %

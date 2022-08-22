@@ -3,14 +3,14 @@
 source ~/.dotfiles/var.sh
 
 # brew
-which brew > /dev/null 2>&1 \
+type brew > /dev/null 2>&1 \
     && echo "\n--- update homebrew ---" \
     && brew update \
     && brew upgrade \
     && brew cleanup
 
 # mas-cli
-which mas > /dev/null 2>&1 \
+type mas > /dev/null 2>&1 \
     && echo "\n--- update mas-cli ---" \
     && mas upgrade
 
