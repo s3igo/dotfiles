@@ -1,8 +1,10 @@
+source ~/.dotfiles/var.sh
+
 # lang
 export LANG=ja_JP.UTF-8
 
 # history
-export HISTFILE="$HOME/.local/state/history"
+export HISTFILE="$XDG_STATE_HOME/history"
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -13,4 +15,4 @@ export LESSHISTFILE=-
 [ "$(uname)" = 'Linux' ] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
 
 # terminal
-export TERMINFO="$HOME/.local/share/terminfo"
+export TERMINFO="$XDG_DATA_HOME/terminfo"
