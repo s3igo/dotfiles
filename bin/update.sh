@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/zsh
+
+source ~/.dotfiles/var.sh
 
 # brew
 which brew > /dev/null 2>&1 \
@@ -12,14 +14,13 @@ which mas > /dev/null 2>&1 \
     && echo '--- update mas-cli ---' \
     && mas upgrade
 
-# TODO: 謎に`--- update zinit ---`が実行されない
 # zinit
-which zinit > /dev/null 2>&1 \
+source "$SHELL_DIR/zinit.sh"
+type zinit > /dev/null 2>&1 \
     && echo '--- update zinit ---' \
-    && zinit update --all \
-    && echo 'y' | zinit delete --clean
+    && zinit update --all
 
 # asdf
-which asdf > /dev/null 2>&1 \
+type asdf > /dev/null 2>&1 \
     && echo '--- update asdf ---' \
     && asdf plugin-update --all

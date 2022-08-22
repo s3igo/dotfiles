@@ -31,7 +31,7 @@ ifeq ($(shell uname), Darwin)
 endif
 
 update:
-	bash ./bin/update.sh
+	bash -c './bin/update.sh'
 
 mac:
 	lang base
