@@ -14,7 +14,7 @@ if [ "$(uname)" = 'Linux' ]; then
     else
         sudo yum -y update
         sudo yum -y upgrade
-        sudo yum -y groupinstall "Development Tools"
+        sudo yum -y groupinstall 'Development Tools'
     fi
 fi
 
@@ -23,17 +23,15 @@ fi
 [ "$(uname)" = 'Darwin' ] && [ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ "$(uname)" = 'Linux' ] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
 
-brew update && brew upgrade
-
 # install git & make
 type git > /dev/null 2>&1 || brew install git
 type make > /dev/null 2>&1 || brew install make
 
-if [ "$SHELL" != '/bin/zsh' ]; then
+if [ "$SHELL" != *zsh ]; then
     # install zsh
     type zsh > /dev/null 2>&1 \
         || brew install zsh \
-        && type zsh >> /etc/shells
+        && which zsh >> /etc/shells
 
     # change shell to zsh
     chsh -s `which zsh`
