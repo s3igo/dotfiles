@@ -88,8 +88,11 @@ make link
 以下オプション
 
 ```shell
-# ~/.tool-versionsに記載の言語・CLIツールをインストール
+# `~/.tool-versions`に記載の言語・CLIツールをインストール
 $ make lang
+
+# vscodeに拡張機能をインストール
+$ make code
 
 # 最低限のGUIアプリをインストール（macのみ可能）
 $ make base

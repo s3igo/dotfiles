@@ -10,11 +10,15 @@ tool:
 	brew bundle --file $(PKG_DIR)/tool.rb
 
 lang:
-	which asdf > /dev/null 2>&1 \
+	type asdf > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/asdf.txt \
 		| xargs -I % asdf plugin-add % \
 		&& asdf install
 
+code:
+	type code > /dev/null 2>&1 \
+		&& cat $(PKG_DIR)/code.txt \
+		| xargs -I % code --install-extension %
 
 base:
 ifeq ($(shell uname), Darwin)
