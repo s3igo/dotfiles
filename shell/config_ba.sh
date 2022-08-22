@@ -19,7 +19,7 @@ function __prompt-command {
 
     # character
     local CHAR='\$'
-    [ "$UID" = 0 ] && CHAR='#'
+    [[ "$UID" == 0 ]] && CHAR='#'
 
     PS1="\n${BLUE}\w${WHITE}${BRANCH}\n${STATUS}${CHAR}${WHITE} "
 }

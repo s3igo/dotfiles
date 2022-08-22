@@ -12,7 +12,7 @@ alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
     | tail -n +2 | fzf | cut -d " " -f 1`'
 
 ## mac
-if [ "$(uname)" = 'Darwin' ]; then
+if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
 fi
 

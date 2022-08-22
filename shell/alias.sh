@@ -27,7 +27,7 @@ alias _cd='cd $_'
 alias _login='exec $SHELL -l'
 
 # mac
-if [ "$(uname)" = 'Darwin' ]; then
+if [[ "$(uname)" == 'Darwin' ]]; then
     alias _a='open -a "$(ls /Applications | sed "s/\.app$//" | fzf)"'
     alias _do='eval "$(pbpaste)"'
     alias _ql='qlmanage -p "$1" >& /dev/null'
