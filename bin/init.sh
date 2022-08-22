@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # install dependencies
-[ "$(uname)" = 'Darwin' ] \
+[[ "$(uname)" == 'Darwin' ]] \
     && type xcode-select > /dev/null 2>&1 \
     || xcode-select --install
-if [ "$(uname)" = 'Linux' ]; then
+if [[ "$(uname)" == 'Linux' ]]; then
     type apt 2>&1 /dev/null
-    if [ $? -eq 0 ]; then
+    if [[ $? == 0 ]]; then
         sudo apt -y update
         sudo apt -y upgrade
         sudo apt -y autoremove
@@ -19,15 +19,15 @@ if [ "$(uname)" = 'Linux' ]; then
 fi
 
 # install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-[ "$(uname)" = 'Darwin' ] && [ "$(uname -m)" = 'arm64' ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[ "$(uname)" = 'Linux' ] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+[[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[[ "$(uname)" == 'Linux' ]] && eval "$($HOME/.linuxbrew/bin/brew shellenv)"
 
 # install git & make
 type git > /dev/null 2>&1 || brew install git
 type make > /dev/null 2>&1 || brew install make
 
-if [ "$SHELL" != *zsh ]; then
+if [[ "$SHELL" != *zsh ]]; then
     # install zsh
     type zsh > /dev/null 2>&1 \
         || brew install zsh \
