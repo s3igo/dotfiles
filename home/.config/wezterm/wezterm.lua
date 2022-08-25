@@ -3,6 +3,7 @@ local wezterm = require 'wezterm';
 local scheme = wezterm.color.get_builtin_schemes()['NightOwl (Gogh)']
 local brightYellow = scheme.brights[4]
 
+-- change `NightOwl` default colors
 scheme.compose_cursor = brightYellow
 scheme.cursor_fg = scheme.background
 
@@ -23,6 +24,8 @@ return {
     -- keybind
     disable_default_key_bindings = true,
     keys = {
+        { key = 'c', mods = 'CMD', action = wezterm.action.Copy },
+        { key = 'v', mods = 'CMD', action = wezterm.action.Paste },
         { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentTab { confirm = false }, },
         { key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
     },
