@@ -19,3 +19,5 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 
 # python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
+export IPYTHONDIR="$XDG_DATA_HOME/jupyter"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
