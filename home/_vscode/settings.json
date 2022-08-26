@@ -24,8 +24,8 @@
     // code-runner
     "code-runner.clearPreviousOutput": true,
     "code-runner.executorMap": {
-        "c": "cd $dir && gcc -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && g++ -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+        "c": "cd $dir && gcc-12 -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++-12 -O2 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
     },
     "code-runner.ignoreSelection": true,
     "code-runner.runInTerminal": true,
