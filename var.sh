@@ -1,16 +1,16 @@
-DOT_DIR="$HOME/.dotfiles"
+declare DOT_DIR="$HOME/.dotfiles"
 
-LINK_DIR="$DOT_DIR/home"
-SHELL_DIR="$DOT_DIR/shell"
+declare LINK_DIR="$DOT_DIR/home"
+declare SHELL_DIR="$DOT_DIR/shell"
 
 PKG_DIR=~/.dotfiles/pkg # for makefile
 
-XDG_CONFIG_HOME="$HOME/.config"
-XDG_CACHE_HOME="$HOME/.cache"
+declare XDG_CONFIG_HOME="$HOME/.config"
+declare XDG_CACHE_HOME="$HOME/.cache"
 
-LOCAL_DIR="$HOME/.local"
+declare LOCAL_DIR="$HOME/.local"
 
-XDG_DATA_HOME="$LOCAL_DIR/share"
-XDG_STATE_HOME="$LOCAL_DIR/state"
-XDG_RUNTIME_DIR="$LOCAL_DIR/runtime"
+declare XDG_DATA_HOME="$LOCAL_DIR/share"
+declare XDG_STATE_HOME="$LOCAL_DIR/state"
+declare XDG_RUNTIME_DIR="$LOCAL_DIR/runtime"
 

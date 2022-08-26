@@ -33,11 +33,11 @@ while read -r FILE; do
     vscode && continue
     shell && continue
 
-    DEST="$HOME${FILE##"$LINK_DIR"}"
+    declare DEST="$HOME${FILE##"$LINK_DIR"}"
 
     mkdir -p "$(dirname "$DEST")"
     ln -fnsv "$FILE" "$DEST"
-done < <(find $LINK_DIR -mindepth 1 -type f)
+done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
 # relogin shell
 exec $SHELL -l

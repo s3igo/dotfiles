@@ -1,5 +1,5 @@
 # color
-export LS_COLORS='di=34:ex=31:fi=37:ln=35'
+declare -x LS_COLORS='di=34:ex=31:fi=37:ln=35'
 
 # prompt
 function __prompt-command {
@@ -24,4 +24,4 @@ function __prompt-command {
     PS1="\n${BLUE}\w${WHITE}${BRANCH}\n${STATUS}${CHAR}${WHITE} "
 }
 
-export PROMPT_COMMAND=__prompt-command
+declare -x PROMPT_COMMAND=__prompt-command
