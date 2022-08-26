@@ -22,7 +22,7 @@ zinit light zsh-users/zsh-completions
 zinit ice wait'!0'
 zinit light zsh-users/zsh-syntax-highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main line brackets cursor)
-typeset -A ZSH_HIGHLIGHT_STYLES
+declare -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold' # alias
 ZSH_HIGHLIGHT_STYLES[path]='fg=yellow,bold' # exist path
 ZSH_HIGHLIGHT_STYLES[root]='bg=red' # root
