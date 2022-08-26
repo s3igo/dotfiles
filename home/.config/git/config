@@ -17,4 +17,4 @@
 	name = s3igo
 	email = 85787242+s3igo@users.noreply.github.com
 [ghq]
-	root = ~/develop/src
+	root = ~/src
