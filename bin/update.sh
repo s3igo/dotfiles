@@ -15,7 +15,7 @@ type mas > /dev/null 2>&1 \
     && mas upgrade
 
 # zinit
-source "$SHELL_DIR/zinit.sh"
+source "${SHELL_DIR}/zinit.sh"
 type zinit > /dev/null 2>&1 \
     && echo "\n--- update zinit ---" \
     && zinit update --all
