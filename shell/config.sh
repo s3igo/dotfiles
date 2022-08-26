@@ -4,7 +4,7 @@ source ~/.dotfiles/var.sh
 export LANG=ja_JP.UTF-8
 
 # history
-export HISTFILE="$XDG_STATE_HOME/history"
+export HISTFILE="$XDG_STATE_HOME/shell_history"
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -16,3 +16,6 @@ export LESSHISTFILE=-
 
 # terminal
 export TERMINFO="$XDG_DATA_HOME/terminfo"
+
+# python
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
