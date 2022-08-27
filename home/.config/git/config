@@ -6,7 +6,8 @@
 	om = origin main
 	append = commit --amend --no-edit
 	sync = pull --rebase
-	initialize = "!git init && git commit --allow-empty -m 'initial commit'"
+	init-empty = "!git init && git commit --allow-empty -m 'initial commit'"
+	init-exist = "!git init && git add . && git commit -m 'first commit'"
 	PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
 [filter "lfs"]
 	clean = git-lfs clean -- %f
