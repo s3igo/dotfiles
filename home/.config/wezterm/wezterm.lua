@@ -29,4 +29,13 @@ return {
         { key = 'w', mods = 'CMD', action = wezterm.action.CloseCurrentTab { confirm = false }, },
         { key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
     },
+
+    -- mousebind
+    mouse_bindings = {
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'CMD',
+      action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+  },
 }
