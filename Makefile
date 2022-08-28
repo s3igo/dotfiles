@@ -6,8 +6,19 @@ init:
 link:
 	bash ./bin/link.sh
 
-tool:
-	brew bundle --file $(PKG_DIR)/tool.rb
+brew:
+	type brew > /dev/null 2>&1 \
+		&& cat $(PKG_DIR)/brew.txt | xargs brew install
+
+# TODO: caskとmasの処理まとめてもいいかも
+# appstoreへログインする処理とOSの確認の実装が必要
+cask:
+	type brew > /dev/null 2>&1 \
+		&& cat $(PKG_DIR)/cask.txt | xargs brew install --cask
+
+mas:
+	type mas > /dev/null 2>&1 \
+		&& cat $(PKG_DIR)/mas.txt | xargs mas install
 
 lang:
 	type asdf > /dev/null 2>&1 \
@@ -18,18 +29,12 @@ code:
 	type code > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/code.txt | xargs code --install-extension
 
-
-base:
-ifeq ($(shell uname), Darwin)
-	brew bundle --file $(PKG_DIR)/base.rb
-endif
-
-full:
-ifeq ($(shell uname), Darwin)
-	brew bundle --file $(PKG_DIR)/full.rb
-	type mas > /dev/null 2>&1 || brew install mas
-	cat $(PKG_DIR)/app.txt | cut -d ' ' -f 1 | xargs mas install
-endif
+dump:
+	type brew > /dev/null 2>&1 \
+		&& brew leaves > $(PKG_DIR)/brew.txt \
+		&& brew list --cask > $(PKG_DIR)/cask.txt
+	type mas > /dev/null 2>&1 \
+		&& mas list > $(PKG_DIR)/mas.txt
 
 update:
 	bash -c './bin/update.sh'
