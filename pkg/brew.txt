@@ -1,0 +1,17 @@
+bat
+emacs
+exa
+fd
+fswatch
+fzf
+gcc
+ghq
+git
+gotop
+make
+mas
+neovim
+nkf
+tmux
+translate-shell
+tree

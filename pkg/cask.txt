@@ -1,0 +1,17 @@
+1password
+1password-cli
+alacritty
+discord
+docker
+figma
+firefox
+font-udev-gothic-nf
+google-chrome
+karabiner-elements
+keyboard-cleaner
+logseq
+qmk-toolbox
+raycast
+slack
+visual-studio-code
+wezterm
