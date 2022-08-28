@@ -11,12 +11,13 @@ tool:
 
 lang:
 	type asdf > /dev/null 2>&1 \
-		&& cat $(PKG_DIR)/asdf.txt | xargs -I {} asdf plugin-add {} \
+		&& cat $(PKG_DIR)/asdf.txt | xargs asdf plugin-add \
 		&& asdf install
 
 code:
 	type code > /dev/null 2>&1 \
-		&& cat $(PKG_DIR)/code.txt | xargs -I {} code --install-extension {}
+		&& cat $(PKG_DIR)/code.txt | xargs code --install-extension
+
 
 base:
 ifeq ($(shell uname), Darwin)
@@ -27,7 +28,7 @@ full:
 ifeq ($(shell uname), Darwin)
 	brew bundle --file $(PKG_DIR)/full.rb
 	type mas > /dev/null 2>&1 || brew install mas
-	cat $(PKG_DIR)/app.txt | cut -d ' ' -f 1 | xargs -I {} mas install {}
+	cat $(PKG_DIR)/app.txt | cut -d ' ' -f 1 | xargs mas install
 endif
 
 update:
