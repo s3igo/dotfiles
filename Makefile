@@ -43,3 +43,9 @@ dump:
 		&& asdf plugin-list > $(PKG_DIR)/asdf.txt
 	type code > /dev/null 2>&1 \
 		&& code --list-extensions > $(PKG_DIR)/code.txt
+
+CLI:
+	brew asdf
+
+GUI:
+	cask mas
