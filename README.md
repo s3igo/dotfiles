@@ -104,12 +104,6 @@ $ make full
 ## その他コマンド
 
 ```shell
-# make lang, make baseを一括で実行できるやつ（macのみ可能）
-$ make mac
-
-# make lang, make base, make fullを一括で実行できるやつ（macのみ可能）
-$ make max
-
 # 各種パッケージ/プラグインマネージャのアップデート
 $ make update
 ```

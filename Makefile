@@ -33,9 +33,3 @@ endif
 
 update:
 	bash -c './bin/update.sh'
-
-mac:
-	lang base
-
-max:
-	lang base full
