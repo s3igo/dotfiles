@@ -18,16 +18,17 @@ asdf:
 		&& cat $(PKG_DIR)/asdf.txt | xargs asdf plugin-add \
 		&& asdf install
 
-# TODO: caskとmasの処理まとめてもいいかも
-# appstoreへログインする処理とOSの確認の実装が必要
 cask:
+ifeq ($(shell uname),Darwin)
 	type brew > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/cask.txt | xargs brew install --cask
+endif
 
 mas:
+ifeq ($(shell uname),Darwin)
 	type mas > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/mas.txt | xargs mas install
-
+endif
 
 code:
 	type code > /dev/null 2>&1 \
