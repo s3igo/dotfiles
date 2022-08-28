@@ -6,6 +6,9 @@ init:
 link:
 	bash ./bin/link.sh
 
+update:
+	bash -c './bin/update.sh'
+
 brew:
 	type brew > /dev/null 2>&1 \
 		&& cat $(PKG_DIR)/brew.txt | xargs brew install
@@ -36,5 +39,3 @@ dump:
 	type mas > /dev/null 2>&1 \
 		&& mas list > $(PKG_DIR)/mas.txt
 
-update:
-	bash -c './bin/update.sh'
