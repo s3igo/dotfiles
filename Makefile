@@ -38,4 +38,7 @@ dump:
 		&& brew list --cask > $(PKG_DIR)/cask.txt
 	type mas > /dev/null 2>&1 \
 		&& mas list > $(PKG_DIR)/mas.txt
-
+	type asdf > /dev/null 2>&1 \
+		&& asdf plugin-list > $(PKG_DIR)/asdf.txt
+	type code > /dev/null 2>&1 \
+		&& code --list-extensions > $(PKG_DIR)/code.txt
