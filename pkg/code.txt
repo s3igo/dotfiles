@@ -12,7 +12,6 @@ cssho.vscode-svgviewer
 DavidAnson.vscode-markdownlint
 dbankier.vscode-quick-select
 donjayamanne.githistory
-dqisme.sync-scroll
 eamodio.gitlens
 EditorConfig.EditorConfig
 ericadamski.carbon-now-sh
