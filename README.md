@@ -76,7 +76,7 @@ make init
 CLIツールをインストール
 
 ```shell
-make tool
+make CLI
 ```
 
 各シンボリックリンクを適切な場所に貼る
@@ -87,18 +87,16 @@ make link
 
 以下オプション
 
+GUIツールをインストール
+
 ```shell
-# `~/.tool-versions`に記載の言語・CLIツールをインストール
-$ make lang
+make GUI
+```
 
-# vscodeに拡張機能をインストール
-$ make code
+VSCodeに拡張機能をインストール
 
-# 最低限のGUIアプリをインストール（macのみ可能）
-$ make base
-
-# 追加のGUIアプリをインストール（macのみ可能）
-$ make full
+```shell
+make code
 ```
 
 ## その他コマンド
@@ -106,11 +104,27 @@ $ make full
 ```shell
 # 各種パッケージ/プラグインマネージャのアップデート
 $ make update
+
+# 現環境を`~/.dotfiles/pkg/*`に反映
+$ make dump
+
+# `~/.dotfiles/pkg/brew.txt`をインストール
+$ make brew
+
+# `~/.tool-versions`をインストール
+$ make asdf
+
+# `~/.dotfiles/pkg/cask.txt`をインストール（macのみ可能）
+$ make cask
+
+# `~/.dotfiles/pkg/mas.txt`をインストール（macのみ可能）
+$ make mas
 ```
 
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上、Linuxの場合、手動で入手する必要があるかも（udev-gothic-nf）
-- TL;DRのワンライナーはmake initを実行、dotfilesをクローン、make toolを実行、make linkを実行の4つが実行される（`./bin/install.sh`を参照）
+- TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make CLI`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
+- `make CLI`は`make brew`と`make asdf`を一括実行し、make GUIは`make cask`と`make mas`を一括実行する
 
 [^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある
