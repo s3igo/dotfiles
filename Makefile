@@ -10,6 +10,7 @@ update:
 	bash -c './bin/update.sh'
 
 brew:
+	cat $(PKG_DIR)/tap.txt | xargs brew tap
 	cat $(PKG_DIR)/brew.txt | xargs brew install
 
 asdf:
@@ -29,6 +30,7 @@ code:
 	cat $(PKG_DIR)/code.txt | xargs code --install-extension
 
 dump:
+	brew tap > $(PKG_DIR)/tap.txt
 	brew leaves > $(PKG_DIR)/brew.txt
 	brew list --cask > $(PKG_DIR)/cask.txt
 	mas list > $(PKG_DIR)/mas.txt
