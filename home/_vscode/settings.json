@@ -41,6 +41,7 @@
     "codic.case": "camelCase",
     "japanese-proofreading.textlint.外来語カタカナ表記": false,
     "japanese-proofreading.textlint.大かっこ［］": false,
+    "liveServer.settings.donotShowInfoMsg": true,
     "markdownlint.config": {
         "ul-indent": {
             "indent": 4

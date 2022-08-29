@@ -37,6 +37,17 @@
         "command": "extension.jumpy-exit",
         "when": "editorTextFocus && jumpy.isJumpyMode"
     },
+    // Live Server
+    {
+        "key": "cmd+l cmd+o",
+        "command": "-extension.liveServer.goOnline",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+k cmd+h",
+        "command": "extension.liveServer.goOffline",
+        "when": "editorTextFocus"
+    },
     // select-indentation
     {
         "key": "alt+l",
@@ -334,6 +345,11 @@
     {
         "key": "ctrl+q",
         "command": "-workbench.action.quickOpenView"
+    },
+    {
+        "key": "cmd+l cmd+c",
+        "command": "-extension.liveServer.goOffline",
+        "when": "editorTextFocus"
     }
     // TODO: コマンドでgit addしたい
     // {
