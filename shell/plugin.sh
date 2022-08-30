@@ -5,11 +5,6 @@ zinit light marlonrichert/zsh-autocomplete
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
-# asdf
-zinit ice wait'!0'
-zinit light asdf-vm/asdf
-declare -x ASDF_DATA_DIR="${HOME}/.local/share/asdf"
-
 # autosuggestion
 zinit ice wait'!0'
 zinit light zsh-users/zsh-autosuggestions
