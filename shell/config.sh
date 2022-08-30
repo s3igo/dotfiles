@@ -15,7 +15,7 @@ declare -x LESSHISTFILE=-
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
 # terminal
-declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
+# declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 
 # python
 declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
