@@ -10,15 +10,15 @@ update:
 	bash -c './bin/update.sh'
 
 brew:
-	cat $(PKG_DIR)/tap.txt | xargs brew tap
-	cat $(PKG_DIR)/brew.txt | xargs brew install
+	cat $(PKG_DIR)/brew/tap.txt | xargs brew tap
+	cat $(PKG_DIR)/brew/brew.txt | xargs brew install
 
 asdf:
 	cat $(PKG_DIR)/asdf.txt | xargs -I {} asdf plugin-add {} || true && asdf install
 
 cask:
 ifeq ($(shell uname),Darwin)
-	cat $(PKG_DIR)/cask.txt | xargs brew install --cask
+	cat $(PKG_DIR)/brew/cask.txt | xargs brew install --cask
 endif
 
 mas:
