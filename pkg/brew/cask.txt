@@ -11,6 +11,9 @@ google-chrome
 karabiner-elements
 keyboard-cleaner
 logseq
+microsoft-excel
+microsoft-powerpoint
+microsoft-word
 qmk-toolbox
 raycast
 slack
