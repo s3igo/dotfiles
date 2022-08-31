@@ -10,6 +10,9 @@ declare SAVEHIST=10000
 
 declare -x LESSHISTFILE=-
 
+# prohibit to overwrite
+set -o noclobber
+
 # homebrew
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
