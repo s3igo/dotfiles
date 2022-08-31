@@ -1,6 +1,9 @@
 # color
 declare -x LS_COLORS='di=34:ex=31:fi=37:ln=35'
 
+# history
+declare -x HISTFILE="${XDG_STATE_HOME}/bash_history"
+
 # prompt
 function __prompt-command {
     local EXIT_STATUS="$?"

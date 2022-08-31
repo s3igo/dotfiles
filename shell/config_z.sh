@@ -5,6 +5,7 @@ setopt CORRECT
 unsetopt BEEP
 
 # history
+declare -x HISTFILE="${XDG_STATE_HOME}/zsh_history"
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
