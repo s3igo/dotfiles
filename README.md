@@ -73,10 +73,10 @@ brewとgitのインストールとバージョンアップ
 make init
 ```
 
-CLIツールをインストール
+言語のランタイムとCLIツールをインストール
 
 ```shell
-make CLI
+make brew
 ```
 
 各シンボリックリンクを適切な場所に貼る
@@ -111,9 +111,6 @@ $ make dump
 # `~/.dotfiles/pkg/brew.txt`をインストール
 $ make brew
 
-# `~/.tool-versions`をインストール
-$ make asdf
-
 # `~/.dotfiles/pkg/cask.txt`をインストール（macのみ可能）
 $ make cask
 
@@ -124,7 +121,7 @@ $ make mas
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上、Linuxの場合、手動で入手する必要があるかも（udev-gothic-nf）
-- TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make CLI`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
-- `make CLI`は`make brew`と`make asdf`を一括実行し、make GUIは`make cask`と`make mas`を一括実行する
+- TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make brew`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
+- make GUIは`make cask`と`make mas`を一括実行する
 
 [^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある

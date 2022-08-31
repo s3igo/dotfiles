@@ -7,7 +7,7 @@ eval "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/init.sh)"
 git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
 
 # make tool
-make -C ~/.dotfiles CLI
+make -C ~/.dotfiles brew
 
 # ./bin/link.sh
 eval "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/bin/link.sh)"
