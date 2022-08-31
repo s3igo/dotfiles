@@ -2,8 +2,6 @@
 	cm = commit
 	ps = push
 	pl = pull
-	oH = origin HEAD
-	om = origin main
 	append = commit --amend --no-edit
 	sync = pull --rebase
 	init-empty = "!git init && git commit --allow-empty -m 'initial commit'"
