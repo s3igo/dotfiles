@@ -36,3 +36,6 @@ if [[ "$SHELL" != *zsh ]]; then
     # change shell to zsh
     chsh -s `which zsh`
 fi
+
+# init zsh
+echo 'export ZDOTDIR="${HOME}/.config/zsh"' | sudo tee -a /etc/zshenv
