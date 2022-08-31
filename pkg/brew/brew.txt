@@ -12,6 +12,9 @@ make
 mas
 neovim
 nkf
+node@16
+python@3.10
 tmux
 translate-shell
 tree
+xdg-ninja
