@@ -17,10 +17,10 @@ set -o noclobber
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
-# terminal
-# declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
-
 # python
 declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
 declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
 declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
+
+# npm
+declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
