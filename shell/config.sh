@@ -14,6 +14,9 @@ set -o noclobber
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
+# asdf
+source /usr/local/opt/asdf/libexec/asdf.sh
+
 # terminfo
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"

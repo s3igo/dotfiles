@@ -64,7 +64,7 @@ make init
 言語のランタイムとCLIツールをインストール
 
 ```shell
-make brew
+make cli
 ```
 
 各シンボリックリンクを適切な場所に貼る
@@ -95,21 +95,11 @@ $ make update
 
 # 現環境を`~/.dotfiles/pkg/*`に反映
 $ make dump
-
-# `~/.dotfiles/pkg/brew.txt`をインストール
-$ make brew
-
-# `~/.dotfiles/pkg/cask.txt`をインストール（macのみ可能）
-$ make cask
-
-# `~/.dotfiles/pkg/mas.txt`をインストール（macのみ可能）
-$ make mas
 ```
 
 ## 補足
 
 - フォントを`brew install --cask`を使って落としてきている都合上、Linuxの場合、手動で入手する必要があるかも（udev-gothic-nf）
-- TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make brew`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
-- make guiは`make cask`と`make mas`を一括実行する
+- TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make cli`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
 
 [^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある

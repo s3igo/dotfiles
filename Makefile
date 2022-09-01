@@ -9,17 +9,15 @@ link:
 update:
 	bash -c './bin/update.sh'
 
-brew:
+cli:
 	cat $(PKG_DIR)/brew/tap.txt | xargs -I {} brew tap {}
 	cat $(PKG_DIR)/brew/brew.txt | xargs brew install
+	cat $(PKG_DIR)/asdf.txt | xargs -I {} asdf plugin-add {}
+	cat $(PKG_DIR)/asdf.txt | xargs -I {} asdf install {} latest
 
-cask:
+gui:
 ifeq ($(shell uname),Darwin)
 	cat $(PKG_DIR)/brew/cask.txt | xargs brew install --cask
-endif
-
-mas:
-ifeq ($(shell uname),Darwin)
 	cat $(PKG_DIR)/mas.txt | cut -d " " -f 1 | xargs mas install
 endif
 
@@ -30,9 +28,6 @@ dump:
 	brew tap > $(PKG_DIR)/brew/tap.txt
 	brew leaves > $(PKG_DIR)/brew/brew.txt
 	brew list --cask > $(PKG_DIR)/brew/cask.txt
+	asdf plugin-list > $(PKG_DIR)/asdf.txt
 	mas list > $(PKG_DIR)/mas.txt
 	code --list-extensions > $(PKG_DIR)/code.txt
-
-gui:
-	make cask
-	make mas

@@ -19,3 +19,8 @@ source "${SHELL_DIR}/zinit.sh"
 type zinit > /dev/null 2>&1 \
     && echo "\n--- update zinit ---" \
     && zinit update --all
+
+# asdf
+type asdf > /dev/null 2>&1 \
+    && echo "\n--- update asdf ---" \
+    && asdf plugin-update --all
