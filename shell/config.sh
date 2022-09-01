@@ -28,7 +28,6 @@ declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
 declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 
 # node
-declare PATH="/usr/local/opt/node@16/bin:${PATH}"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 declare -x NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 
