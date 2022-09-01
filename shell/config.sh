@@ -14,6 +14,10 @@ set -o noclobber
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
+# terminfo
+declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
+declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+
 # python
 declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
 declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
@@ -22,9 +26,7 @@ declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 # node
 declare PATH="/usr/local/opt/node@16/bin:${PATH}"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-
-# docker
-# declare -x DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+declare -x NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
