@@ -10,7 +10,7 @@ update:
 	bash -c './bin/update.sh'
 
 brew:
-	cat $(PKG_DIR)/brew/tap.txt | xargs brew tap
+	cat $(PKG_DIR)/brew/tap.txt | xargs -I {} brew tap {}
 	cat $(PKG_DIR)/brew/brew.txt | xargs brew install
 
 cask:
@@ -20,11 +20,11 @@ endif
 
 mas:
 ifeq ($(shell uname),Darwin)
-	cat $(PKG_DIR)/mas.txt | xargs mas install
+	cat $(PKG_DIR)/mas.txt | cut -d " " -f 1 | xargs mas install
 endif
 
 code:
-	cat $(PKG_DIR)/code.txt | xargs code --install-extension
+	cat $(PKG_DIR)/code.txt | xargs -I {} code --install-extension {}
 
 dump:
 	brew tap > $(PKG_DIR)/tap.txt
@@ -33,5 +33,6 @@ dump:
 	mas list > $(PKG_DIR)/mas.txt
 	code --list-extensions > $(PKG_DIR)/code.txt
 
-GUI:
-	cask mas
+gui:
+	make cask
+	make mas
