@@ -11,6 +11,7 @@ google-chrome
 karabiner-elements
 keyboard-cleaner
 logseq
+microsoft-auto-update
 microsoft-excel
 microsoft-powerpoint
 microsoft-word

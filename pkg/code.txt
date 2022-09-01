@@ -8,7 +8,6 @@ bierner.markdown-mermaid
 bierner.markdown-preview-github-styles
 bierner.markdown-yaml-preamble
 christian-kohler.path-intellisense
-cssho.vscode-svgviewer
 DavidAnson.vscode-markdownlint
 dbankier.vscode-quick-select
 donjayamanne.githistory
