@@ -27,9 +27,9 @@ code:
 	cat $(PKG_DIR)/code.txt | xargs -I {} code --install-extension {}
 
 dump:
-	brew tap > $(PKG_DIR)/tap.txt
-	brew leaves > $(PKG_DIR)/brew.txt
-	brew list --cask > $(PKG_DIR)/cask.txt
+	brew tap > $(PKG_DIR)/brew/tap.txt
+	brew leaves > $(PKG_DIR)/brew/brew.txt
+	brew list --cask > $(PKG_DIR)/brew/cask.txt
 	mas list > $(PKG_DIR)/mas.txt
 	code --list-extensions > $(PKG_DIR)/code.txt
 
