@@ -7,22 +7,10 @@
 
 ## 注意
 
-- デフォルトでは私（s3igo）のgitconfigが含まれているため、適宜`./link/.config/git/config`を書き換えてご使用ください
-- このリポジトリをインストールすると、以下のファイルを書き換えます。書き換えられて困る場合は、安全な場所に退避させておいてください。
-    - `~/.bash_profile`
-    - `~/.bashrc`
-    - `~/.zshenv`
-    - `~/.vimrc`
-    - `~/.tool-versions`
-    - `~/.config/zsh/.zshrc`
-    - `~/.config/zsh/.zshenv`
-    - `~/.config/git/config`
-    - `~/.config/git/ignore`
-    - `~/.config/alacritty/alacritty.yml`
-    - `~/.config/wezterm/wezterm.lua`
-    - `~/.config/npm/npmrc`
-    - `~/.config/tmux/tmux.conf`
-    - vscodeの`settings.json, keybindings.json`の実体ファイル[^1]
+- デフォルトでは私（s3igo）のgitconfigが含まれているため、適宜`./home/.config/git/config`を書き換えてご使用ください
+- このリポジトリをインストールすると、`./home`以下のファイルが、インストール先の`$HOME`以下のファイルを上書きします。
+    書き換えられて困るファイルが存在する場合は、安全な場所に退避させておいてください。
+    - ./home/_vscode以下の`settings.json, keybindings.json`は、これらの実体ファイル[^1]を指します
 
 ## 対応環境
 
@@ -90,10 +78,10 @@ make link
 GUIツールをインストール
 
 ```shell
-make GUI
+make gui
 ```
 
-VSCodeに拡張機能をインストール
+VS Codeに拡張機能をインストール
 
 ```shell
 make code
@@ -122,6 +110,6 @@ $ make mas
 
 - フォントを`brew install --cask`を使って落としてきている都合上、Linuxの場合、手動で入手する必要があるかも（udev-gothic-nf）
 - TL;DRのワンライナーは`make init`を実行、dotfilesをクローン、`make brew`を実行、`make link`を実行の4つが実行される（`./bin/install.sh`を参照）
-- make GUIは`make cask`と`make mas`を一括実行する
+- make guiは`make cask`と`make mas`を一括実行する
 
 [^1]: 実体ファイルのパスは、Macの場合`~/Library/Application\ Support/Code/User/`、Linuxの場合`~/.config/Code/User/`にある
