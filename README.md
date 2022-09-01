@@ -75,10 +75,10 @@ make link
 
 以下オプション（macのみ可能）
 
-GUIツールをインストール
+アプリをインストール
 
 ```shell
-make gui
+make app
 ```
 
 VS Codeに拡張機能をインストール
