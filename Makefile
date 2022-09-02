@@ -15,8 +15,9 @@ update:
 cli:
 	cat $(CLI_PKG)/tap.txt | xargs -I {} brew tap {}
 	cat $(CLI_PKG)/brew.txt | xargs brew install
-	cat $(CLI_PKG)/asdf.txt | xargs -I {} asdf plugin-add {}
+	cat $(CLI_PKG)/asdf.txt | xargs -I {} asdf plugin-add {} || true
 	cat $(CLI_PKG)/asdf.txt | xargs -I {} asdf install {} latest
+	asdf reshim
 
 app:
 ifeq ($(shell uname),Darwin)
