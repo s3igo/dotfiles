@@ -74,7 +74,9 @@
         100,
         120
     ],
+    "editor.stickyScroll.enabled": true,
     "editor.stickyTabStops": true,
+    "editor.suggest.matchOnWordStartOnly": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "on",
     "editor.wordWrap": "bounded",
@@ -123,5 +125,5 @@
     "debug.console.fontSize": 15,
     "diffEditor.ignoreTrimWhitespace": false,
     "search.smartCase": true,
-    "window.zoomLevel": 1
+    "window.zoomLevel": 1,
 }

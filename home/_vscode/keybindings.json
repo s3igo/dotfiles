@@ -179,6 +179,11 @@
         "command": "editor.action.diffReview.prev",
         "when": "isInDiffEditor"
     },
+    {
+        "key": "ctrl+alt+[",
+        "command": "editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    },
     /* --------------------------------- cursor --------------------------------- */
     {
         "key": "ctrl+shift+f",
@@ -350,7 +355,7 @@
         "key": "cmd+l cmd+c",
         "command": "-extension.liveServer.goOffline",
         "when": "editorTextFocus"
-    }
+    },
     // TODO: コマンドでgit addしたい
     // {
     //     "key": "ctrl+enter",
