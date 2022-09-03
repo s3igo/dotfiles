@@ -39,3 +39,7 @@ fi
 
 # init zsh
 echo 'export ZDOTDIR="${HOME}/.config/zsh"' | sudo tee -a /etc/zshenv
+
+# make default xdg directories
+mkdir -p ~/{.config,.cache}
+mkdir -p ~/.local/{share,state}
