@@ -16,6 +16,7 @@ set -o noclobber
 
 # asdf
 source /usr/local/opt/asdf/libexec/asdf.sh
+declare -x ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 declare -x ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
 
 # terminfo
