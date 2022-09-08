@@ -95,6 +95,9 @@ $ make update
 
 # 現環境を`~/.dotfiles/pkg/*`に反映
 $ make dump
+
+# make updateとmake dumpをまとめて実行
+$ make sync
 ```
 
 ## 補足

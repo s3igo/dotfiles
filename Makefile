@@ -35,3 +35,7 @@ dump:
 	brew list --cask > $(APP_PKG)/cask.txt
 	mas list | cut -d '(' -f 1 > $(APP_PKG)/mas.txt
 	code --list-extensions > $(PKG_DIR)/code.txt
+
+sync:
+	make update
+	make dump
