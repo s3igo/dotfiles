@@ -10,7 +10,7 @@ set fenc=utf-8
 "" not to make backup & swap & viminfo file
 set nobackup
 set noswapfile
-set viminfo=
+set viminfo+=n$XDG_STATE_HOME/viminfo
 
 "" enable mouse(wheel) control
 set mouse=a
