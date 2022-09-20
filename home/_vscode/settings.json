@@ -9,18 +9,18 @@
     "[yaml]": {
         "editor.tabSize": 2
     },
+    "[csv]": {
+        "editor.wordWrap": "off"
+    },
+    "[json][jsonc][javascript][typescript][javascriptreact][typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "javascript.updateImportsOnFileMove.enabled": "always",
     /* -------------------------------- extension ------------------------------- */
     // cSpell
     "cSpell.allowCompoundWords": true,
-    "cSpell.ignoreRegExpList": [
-        "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
-    ],
-    "cSpell.userWords": [
-        "codic",
-        "dccache",
-        "Menlo"
-    ],
+    "cSpell.ignoreRegExpList": ["[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"],
+    "cSpell.userWords": ["codic", "dccache", "donot", "esbenp", "Menlo", "NFLG", "UDEV"],
     // code-runner
     "code-runner.clearPreviousOutput": true,
     "code-runner.executorMap": {
@@ -36,9 +36,14 @@
     "gitlens.defaultTimeFormat": "HH:MM",
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.currentLine.details": false,
+    // prettier
+    "prettier.printWidth": 100,
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
     // others
     "carbon.theme": "night-owl",
     "codic.case": "camelCase",
+    "htmltagwrap.tag": "div",
     "japanese-proofreading.textlint.外来語カタカナ表記": false,
     "japanese-proofreading.textlint.大かっこ［］": false,
     "liveServer.settings.donotShowInfoMsg": true,
@@ -48,6 +53,7 @@
         }
     },
     "redhat.telemetry.enabled": false,
+    "tailwindCSS.emmetCompletions": true,
     /* --------------------------------- general -------------------------------- */
     // dotfiles
     "dotfiles.installCommand": "~/.dotfiles/bin/devcontainer.sh",
@@ -69,11 +75,7 @@
     "editor.renderControlCharacters": true,
     "editor.renderLineHighlight": "all",
     "editor.renderWhitespace": "all",
-    "editor.rulers": [
-        80,
-        100,
-        120
-    ],
+    "editor.rulers": [80, 100, 120],
     "editor.stickyScroll.enabled": true,
     "editor.stickyTabStops": true,
     "editor.suggest.matchOnWordStartOnly": false,
@@ -120,10 +122,11 @@
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "always",
+    "workbench.settings.useSplitJSON": true,
     /* --------------------------------- others --------------------------------- */
     "audioCues.lineHasInlineSuggestion": "off",
     "debug.console.fontSize": 15,
     "diffEditor.ignoreTrimWhitespace": false,
     "search.smartCase": true,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 1
 }
