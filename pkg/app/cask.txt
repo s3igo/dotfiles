@@ -2,6 +2,7 @@
 1password-cli
 alacritty
 appcleaner
+cloudflare-warp
 discord
 docker
 figma
@@ -11,11 +12,15 @@ google-chrome
 karabiner-elements
 keyboard-cleaner
 logseq
+mactracker
+microsoft-auto-update
 microsoft-excel
 microsoft-powerpoint
 microsoft-word
+obsidian
 qmk-toolbox
 raycast
 slack
 visual-studio-code
 wezterm
+zoom

@@ -3,7 +3,6 @@ alias c='code'
 alias d='docker'
 alias e='exa --icons --git'
 alias ea='exa -la --icons --git'
-alias el='exa -l --icons --git'
 alias g='git'
 alias t='tmux'
 
@@ -17,18 +16,12 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-# ls
-alias la='ls -hla --color=auto'
-alias ll='ls -hl --color=auto'
-alias ls='ls --color=auto'
-
 # others
-alias _cd='cd $_'
+alias dir='cd $_'
 alias _login='exec $SHELL -l'
 
 # mac
 if [[ "$(uname)" == 'Darwin' ]]; then
-    alias _a='open -a "$(command ls /Applications | sed "s/\.app$//" | fzf)"'
-    alias _do='eval "$(pbpaste)"'
-    alias _ql='qlmanage -p "$1" >& /dev/null'
+    alias pst='eval "$(pbpaste)"'
+    alias ql='qlmanage -p "$1" >& /dev/null'
 fi

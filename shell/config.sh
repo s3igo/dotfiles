@@ -14,16 +14,23 @@ set -o noclobber
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
+# asdf
+source /usr/local/opt/asdf/libexec/asdf.sh
+declare -x ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
+declare -x ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
+
+# terminfo
+declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
+declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+
 # python
-declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/startup.py"
+declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
 declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 
-# npm
+# node
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-
-# docker
-# declare -x DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+declare -x NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"

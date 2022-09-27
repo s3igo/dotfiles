@@ -2,7 +2,6 @@
 ## shell
 alias -g @f='| fzf'
 alias -g @g='| grep'
-alias -g @head='| cut -d " " -f 1'
 alias -g @i='install'
 
 ## docker
@@ -14,7 +13,6 @@ alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
-    alias -g @icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
 fi
 
 # keybind

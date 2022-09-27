@@ -5,8 +5,7 @@
     && type xcode-select > /dev/null 2>&1 \
     || xcode-select --install
 if [[ "$(uname)" == 'Linux' ]]; then
-    type apt 2>&1 /dev/null
-    if [[ $? == 0 ]]; then
+    if type apt > /dev/null 2>&1; then
         sudo apt -y update
         sudo apt -y upgrade
         sudo apt -y autoremove
@@ -39,3 +38,7 @@ fi
 
 # init zsh
 echo 'export ZDOTDIR="${HOME}/.config/zsh"' | sudo tee -a /etc/zshenv
+
+# make default xdg directories
+mkdir -p ~/{.config,.cache}
+mkdir -p ~/.local/{share,state}

@@ -1,3 +1,4 @@
+asdf
 bat
 emacs
 exa
@@ -8,12 +9,12 @@ gcc
 ghq
 git
 gotop
+macos-trash
 make
 mas
+neofetch
 neovim
 nkf
-node@16
-python@3.10
 tmux
 translate-shell
 tree
