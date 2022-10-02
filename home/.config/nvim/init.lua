@@ -1,5 +1,5 @@
 require('plugins')
-require('keymaps')
+-- require('keymaps')
 
 local o = vim.opt
 
@@ -58,13 +58,13 @@ vim.highlight.create( 'NonText', {
     ctermfg = 8,
     ctermbg = None,
     guifg = None,
-    guibg = NONE
+    guibg = None,
 })
 vim.highlight.create( 'SpecialKey', {
     ctermfg = 8,
     ctermbg = None,
     guifg = None,
-    guibg = NONE
+    guibg = None,
 })
 o.showmatch = true
 o.matchtime = 1
