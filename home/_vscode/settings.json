@@ -16,6 +16,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "Lua.telemetry.enable": false,
     /* -------------------------------- extension ------------------------------- */
     // cSpell
     "cSpell.allowCompoundWords": true,

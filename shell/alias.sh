@@ -1,10 +1,8 @@
 alias b='brew'
 alias c='code'
 alias d='docker'
-alias e='exa --icons --git'
-alias ea='exa -la --icons --git'
 alias g='git'
-alias t='tmux'
+alias ra='ranger'
 
 # -i
 alias cp='cp -i'
@@ -15,6 +13,10 @@ alias rm='rm -i'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+# ls
+alias ls='exa --icons --git'
+alias la='exa -la --icons --git'
 
 # others
 alias dir='cd $_'

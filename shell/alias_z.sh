@@ -13,6 +13,7 @@ alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
+    alias -g @pst='"$(pbpaste)"'
 fi
 
 # keybind
