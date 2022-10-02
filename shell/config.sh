@@ -34,3 +34,6 @@ declare -x NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
+
+# editor
+declare -x EDITOR='nvim'

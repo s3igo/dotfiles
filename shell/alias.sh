@@ -2,6 +2,7 @@ alias b='brew'
 alias c='code'
 alias d='docker'
 alias g='git'
+alias nv='nvim'
 alias ra='ranger'
 
 # -i
@@ -27,3 +28,6 @@ if [[ "$(uname)" == 'Darwin' ]]; then
     alias pst='eval "$(pbpaste)"'
     alias ql='qlmanage -p "$1" >& /dev/null'
 fi
+
+# kitty
+[[ "$TERM" == 'xterm-kitty' ]] && alias ssh='kitty +kitten ssh'
