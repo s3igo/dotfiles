@@ -310,14 +310,6 @@
         "key": "ctrl+'",
         "command": "workbench.action.toggleMaximizedPanel"
     },
-    {
-        "key": "ctrl+,",
-        "command": "workbench.action.focusFirstEditorGroup"
-    },
-    {
-        "key": "ctrl+.",
-        "command": "workbench.action.focusSecondEditorGroup"
-    },
     // to avoid `Revert Selected Ranges`
     {
         "key": "cmd+k cmd+r",
@@ -343,7 +335,7 @@
         "when": "textInputFocus"
     },
     {
-        "key": "ctrl+/",
+        "key": "ctrl+.",
         "command": "terminal.focus"
     },
     {
