@@ -25,3 +25,16 @@ o.softtabstop = -1
 o.tabstop = 4
 o.wrap = true
 o.breakindent = true
+
+-- config
+o.clipboard:append({ unnamedeplus = true })
+o.mouse = 'a'
+o.visualbell = true
+o.emoji = true
+o.backup = false
+o.shell = 'zsh'
+
+-- search
+o.hlsearch = true
+o.ignorecase = true
+o.smartcase = true
