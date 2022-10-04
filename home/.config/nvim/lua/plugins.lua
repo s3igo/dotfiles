@@ -1,6 +1,7 @@
 -- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
 if fn.empty(fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP = fn.system({
         "git",
@@ -23,26 +24,26 @@ vim.cmd([[
 ]])
 
 require('packer').startup(function(use)
-    use('wbthomason/packer.nvim')
+    use({ 'wbthomason/packer.nvim' })
+    use({ 'vim-jp/vimdoc-ja' })
     -- use('nvim-telescope/telescope.nvim')
-    -- use('nvim-treesitter/nvim-treesitter')
-    use {
-        'haishanh/night-owl.vim',
-        opt = true
-    }
-
-    -- filer
-    -- Unless you are still migrating, remove the deprecated commands from v1.x
-    -- vim.g.neo_tree_remove_legacy_commands = 1
-
-    -- use {
-    --     "nvim-neo-tree/neo-tree.nvim",
-    --     branch = "v2.x",
-    --     requires = {
-    --         "nvim-lua/plenary.nvim",
-    --         "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-    --         "MunifTanjim/nui.nvim",
-    --     }
-    -- }
-
+    use({ 'bluz71/vim-nightfly-guicolors' })
+    use({ 'lewis6991/gitsigns.nvim' })
+    use({ 'lukas-reineke/indent-blankline.nvim' })
+    use({ 'nvim-lualine/lualine.nvim' })
+    use({ 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        requires = {
+            'windwp/nvim-ts-autotag',
+            'p00f/nvim-ts-rainbow',
+        },
+    })
+    use({
+        'norcalli/nvim-colorizer.lua',
+        config = function() require('colorizer').setup() end
+    })
+    use({
+        'windwp/nvim-autopairs',
+        config = function() require('nvim-autopairs').setup() end
+    })
 end)
