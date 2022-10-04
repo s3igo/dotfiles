@@ -38,6 +38,7 @@ require('packer').startup(function(use)
         run = ':TSUpdate',
         requires = {
             'windwp/nvim-ts-autotag',
+            'nvim-treesitter/nvim-treesitter-context',
             'p00f/nvim-ts-rainbow',
         },
     })
@@ -48,5 +49,14 @@ require('packer').startup(function(use)
     use({
         'windwp/nvim-autopairs',
         config = function() require('nvim-autopairs').setup() end
+    })
+    use({
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require('bufferline').setup() end
+    })
+    use({
+        'kylechui/nvim-surround',
+        config = function() require('nvim-surround').setup() end
     })
 end)
