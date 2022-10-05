@@ -24,17 +24,17 @@ o.laststatus = 2
 o.scrolloff = 5
 o.signcolumn = 'yes'
 
-vim.highlight.create( 'NonText', {
+vim.api.nvim_set_hl(0, 'NonText', {
     ctermfg = 8,
     ctermbg = None,
     guifg = None,
-    guibg = None,
+    guibg = None
 })
-vim.highlight.create( 'SpecialKey', {
+vim.api.nvim_set_hl(0, 'SpacialKey', {
     ctermfg = 8,
     ctermbg = None,
     guifg = None,
-    guibg = None,
+    guibg = None
 })
 o.showmatch = true
 o.matchtime = 1
