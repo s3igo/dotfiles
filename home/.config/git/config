@@ -1,5 +1,5 @@
 [alias]
-	cm = commit
+	cm = commit -m
 	ps = push
 	pl = pull
 	st = status
