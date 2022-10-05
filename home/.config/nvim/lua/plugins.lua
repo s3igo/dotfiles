@@ -27,6 +27,7 @@ require('packer').startup(function(use)
     use({ 'wbthomason/packer.nvim' })
     use({ 'vim-jp/vimdoc-ja' })
     -- use('nvim-telescope/telescope.nvim')
+    use({ 'github/copilot.vim' })
     use({
         'bluz71/vim-nightfly-guicolors',
         config = 'vim.cmd([[colorscheme nightfly]])'
@@ -34,6 +35,7 @@ require('packer').startup(function(use)
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'lukas-reineke/indent-blankline.nvim' })
     use({ 'nvim-lualine/lualine.nvim' })
+    use({ 'b3nj5m1n/kommentary' })
     use({ 'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         requires = {
