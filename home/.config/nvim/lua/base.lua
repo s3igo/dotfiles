@@ -9,9 +9,10 @@ o.ambiwidth = 'double'
 
 -- files
 o.fileformats = 'unix,dos,mac'
+o.wildmenu = true
 
 -- workbench
-o.cmdheight = 1
+o.cmdheight = 0
 o.showtabline = 2
 o.showcmd = true
 
