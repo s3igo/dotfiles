@@ -20,7 +20,9 @@ alias ls='exa --icons --git'
 alias la='exa -la --icons --git'
 
 # others
-alias dir='cd $_'
+alias cdf='cd $_'
+alias dir='cd "$(fd -t d -E .git -E node_modules | fzf)"'
+alias dir-a='cd "$(fd -HI -t d -E .git -E node_modules | fzf)"'
 alias _login='exec $SHELL -l'
 
 # mac
