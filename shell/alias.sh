@@ -33,3 +33,9 @@ fi
 
 # kitty
 [[ "$TERM" == 'xterm-kitty' ]] && alias ssh='kitty +kitten ssh'
+
+# functions
+function latest() {
+    local arg=${1:-$PWD}
+    command ls -rt "$arg" | tail -n 1
+}
