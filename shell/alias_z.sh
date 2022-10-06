@@ -18,11 +18,13 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 fi
 
 # keybind
+bindkey '^U' backward-kill-line
+
 ## cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zle -N anyframe-widget-cdr
-bindkey '^W' anyframe-widget-cdr
+bindkey '^S' anyframe-widget-cdr
 
 ## command history
 zle -N anyframe-widget-execute-history
