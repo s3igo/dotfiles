@@ -3,6 +3,7 @@
 alias -g @f='| fzf'
 alias -g @g='| grep'
 alias -g @i='install'
+alias -g @latest='"$(command ls -rt "$PWD" | tail -n 1)"'
 
 ## docker
 alias -g @dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
@@ -14,7 +15,6 @@ alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
     alias -g @pst='"$(pbpaste)"'
-    alias -g @latest='"$(command ls -rt "$PWD" | tail -n 1)"'
 fi
 
 # keybind
