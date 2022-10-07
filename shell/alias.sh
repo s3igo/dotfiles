@@ -35,7 +35,13 @@ fi
 # functions
 function latest() {
     local arg=${1:-$PWD}
-    command ls -rt "$arg" | tail -n 1
+    getopts 'l' opt
+    if [[ "$opt" == 'l' ]]; then
+        command ls -rtl "$arg" | tail -n 1
+    else
+        command ls -rt "$arg" | tail -n 1
+    # command ls -rt "$arg" | tail -n 1
+    fi
 }
 
 function dir() {
