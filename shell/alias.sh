@@ -21,8 +21,6 @@ alias la='exa -la --icons --git'
 
 # others
 alias cdf='cd $_'
-alias dir='cd "$(fd -t d | fzf)"'
-alias dir-a='cd "$(fd -HI -t d -E .git -E node_modules | fzf)"'
 alias _login='exec $SHELL -l'
 
 # mac
@@ -38,4 +36,13 @@ fi
 function latest() {
     local arg=${1:-$PWD}
     command ls -rt "$arg" | tail -n 1
+}
+
+function dir() {
+    getopts 'a' opt
+    if [[ "$opt" == 'a' ]]; then
+        cd "$(fd -HI -t d -E .git -E node_modules | fzf)"
+    else
+        cd "$(fd -t d | fzf)"
+    fi
 }
