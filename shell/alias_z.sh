@@ -3,7 +3,8 @@
 alias -g @f='| fzf'
 alias -g @g='| grep'
 alias -g @i='install'
-alias -g @latest='"$(command ls -rt "$PWD" | tail -n 1)"'
+alias -g @latest='"$(_latest)"'
+alias -g @latest-a='latest -a'
 
 ## docker
 alias -g @dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
