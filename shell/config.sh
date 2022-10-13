@@ -15,9 +15,10 @@ set -o noclobber
 [[ "$(uname)" == 'Linux' ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 
 # asdf
-source /usr/local/opt/asdf/libexec/asdf.sh
 declare -x ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 declare -x ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
+# source /usr/local/opt/asdf/libexec/asdf.sh
+source "$(brew --prefix asdf)/libexec/asdf.sh"
 
 # terminfo
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
