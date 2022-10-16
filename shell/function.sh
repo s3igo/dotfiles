@@ -1,9 +1,9 @@
 # utility functions
-function _init-option-flags() { 
+function _init-option-flags() {
     for char in {{a..z},{A..Z}}
     do
         eval OPT_FLAG_${char}=0;
-    done 
+    done
 }
 
 function _parse-options() {
@@ -12,10 +12,10 @@ function _parse-options() {
     object="$1"
     shift
     while getopts "$object" OPT
-    do 
+    do
         eval OPT_FLAG_${OPT}=1
         eval HAS_OPT_FLAG=1
-    done 
+    done
 }
 
 functon gcc-exec() {
@@ -30,7 +30,7 @@ function _latest() {
     _init-option-flags
     _parse-options "al" "$@"
     [[ $HAS_OPT_FLAG == 1 ]] && shift
-    
+
     declare arg=${1:-$PWD}
     declare options='-rt'
     declare number=1
@@ -50,8 +50,17 @@ function latest() {
     fi
 }
 
-function pdf-append() {
-    declare base="$1"
-    shift
-    pdftk "$base" "$@" cat output "$base" 
+function pdf-ocr-embed() {
+    declare object="$1"
+    declare output="$2"
+
+    mkdir -p ./.tmp/{png,pdf}
+
+    pdftoppm -png -r 300 -scale-to 3840 "$object" './.tmp/png/page'
+    command ls ./.tmp/png \
+        | sed 's/\.png$//' \
+        | xargs -P4 -I{} tesseract ./.tmp/png/{}.png ./.tmp/pdf/{} -l eng+jpn+equ pdf
+    pdfunite ./.tmp/pdf/*.pdf "$output"
+
+    command rm -rf ./.tmp
 }
