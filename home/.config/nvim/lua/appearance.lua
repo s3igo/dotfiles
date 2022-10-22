@@ -23,6 +23,7 @@ o.listchars = {
 o.laststatus = 2
 o.scrolloff = 5
 o.signcolumn = 'yes'
+o.colorcolumn = '80,100,120'
 
 vim.api.nvim_set_hl(0, 'NonText', {
     ctermfg = 8,
