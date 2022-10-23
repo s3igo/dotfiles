@@ -2,6 +2,7 @@ alias b='brew'
 alias c='code'
 alias d='docker'
 alias g='git'
+alias l='lazygit'
 alias nv='nvim'
 alias ra='ranger'
 
