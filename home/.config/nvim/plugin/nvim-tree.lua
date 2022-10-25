@@ -9,4 +9,4 @@ nvim_tree.setup({
     -- hijack_netrw = true,
 })
 
-map.set('n', '<leader>b', ':NvimTreeToggle<cr>')
+map.set('n', '<leader>b', ':NvimTreeToggle<CR>')
