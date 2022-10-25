@@ -6,7 +6,20 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 nvim_tree.setup({
-    -- hijack_netrw = true,
+    view = {
+        mappings = {
+            list = {
+                { key = 's', action = '' },
+                { key = 'so', action = 'system_open' },
+            }
+        }
+    },
+    filters = {
+        custom = {
+            '.git',
+            '.cache',
+        }
+    }
 })
 
 map.set('n', '<leader>b', ':NvimTreeToggle<CR>')
