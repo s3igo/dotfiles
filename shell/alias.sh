@@ -2,7 +2,7 @@ alias b='brew'
 alias c='code'
 alias d='docker'
 alias g='git'
-alias l='lazygit'
+alias lg='lazygit'
 alias nv='nvim'
 alias ra='ranger'
 
@@ -19,6 +19,7 @@ alias ....='cd ../../..'
 # ls
 alias ls='exa --icons --git'
 alias la='exa -la --icons --git'
+alias al='la' # in case of typo
 
 # others
 alias cdf='cd $_'
