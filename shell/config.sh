@@ -38,3 +38,4 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
 declare -x EDITOR='nvim'
+declare -x VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
