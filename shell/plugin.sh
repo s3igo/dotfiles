@@ -28,7 +28,7 @@ zinit light paulirish/git-open
 
 # auto input closure/quote
 zinit ice wait'!0'
-zinit light momo-lab/zsh-smartinput
+zinit light hlissner/zsh-autopair
 
 # remove doller from the beginning of line
 zinit ice wait'!0'
