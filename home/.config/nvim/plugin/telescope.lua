@@ -2,7 +2,6 @@ local status, telescope = pcall(require, 'telescope')
 if (not status) then return end
 
 local builtin = require('telescope.builtin')
-local map = vim.keymap
 
 telescope.setup {
     defaults = {
@@ -18,11 +17,28 @@ telescope.setup {
     }
 }
 
+local map = vim.keymap
 
-map.set('n', '<leader>f', function()
+map.set('n', '<C-p>', function()
     builtin.find_files({
-        no_ignore = false,
         hidden = true,
+        no_ignore = true,
     })
 end)
+map.set('n', '<leader>g', function()
+    builtin.live_grep()
+end)
+map.set('n', '<leader>b', function()
+    builtin.buffers()
+end)
+map.set('n', '<leader>h', function()
+    builtin.help_tags()
+end)
+map.set('n', '<leader>ch', function()
+    builtin.command_history()
+end)
 
+telescope.load_extension('frecency')
+map.set('n', '<leader>fr', function()
+    telescope.extensions.frecency.frecency()
+end)
