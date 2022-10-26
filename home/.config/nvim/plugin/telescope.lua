@@ -14,14 +14,10 @@ telescope.setup {
             override_generic_sorter = true,
             override_file_sorter = true,
             case_mode = "smart_case",
-        },
-        file_browser = {
-            hijack_netrw = true,
-        },
+        }
     }
 }
 
--- telescope.load_extension('file_browser')
 
 map.set('n', '<leader>f', function()
     builtin.find_files({
@@ -30,8 +26,3 @@ map.set('n', '<leader>f', function()
     })
 end)
 
---[[ map.set('n', 'sf', function()
-    telescope.extensions.file_browser.file_browser({
-        hidden = true,
-    })
-end) ]]
