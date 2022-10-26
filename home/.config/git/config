@@ -18,3 +18,11 @@
 	email = 85787242+s3igo@users.noreply.github.com
 [ghq]
 	root = ~/src
+[core]
+    editor = nvim
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = true
