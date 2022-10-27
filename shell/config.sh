@@ -17,7 +17,6 @@ set -o noclobber
 # asdf
 declare -x ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}/asdf/asdfrc"
 declare -x ASDF_DATA_DIR="${XDG_DATA_HOME}/asdf"
-# source /usr/local/opt/asdf/libexec/asdf.sh
 source "$(brew --prefix asdf)/libexec/asdf.sh"
 
 # terminfo
@@ -38,3 +37,4 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
 declare -x EDITOR='nvim'
+bindkey -e # explicit use emacs keybind
