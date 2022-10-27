@@ -22,7 +22,7 @@ alias la='exa -la --icons --git'
 alias al='la' # in case of typo
 
 # others
-alias vim='vim -u ${XDG_CONFIG_HOME}/vim/vimrc'
+alias vim='vim -S ${XDG_CONFIG_HOME}/vim/vimrc'
 alias cdf='cd $_'
 alias _login='exec $SHELL -l'
 
