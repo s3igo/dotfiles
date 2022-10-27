@@ -17,6 +17,7 @@ logseq
 mactracker
 microsoft-auto-update
 microsoft-excel
+microsoft-outlook
 microsoft-powerpoint
 microsoft-word
 obsidian

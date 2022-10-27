@@ -4,3 +4,4 @@ homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/core
 homebrew/services
+jesseduffield/lazygit

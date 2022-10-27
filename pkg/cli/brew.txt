@@ -8,13 +8,17 @@ fzf
 gcc
 ghq
 git
+git-delta
 gotop
+hexyl
+jesseduffield/lazygit/lazygit
 macos-trash
 make
 mas
 neofetch
 neovim
 nkf
+ocrmypdf
 pdftk-java
 poppler
 ranger

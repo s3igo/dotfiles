@@ -10,6 +10,7 @@ bierner.markdown-yaml-preamble
 bradgashler.htmltagwrap
 bradlc.vscode-tailwindcss
 christian-kohler.path-intellisense
+cschlosser.doxdocgen
 DavidAnson.vscode-markdownlint
 dbankier.vscode-quick-select
 donjayamanne.githistory
@@ -28,6 +29,7 @@ idleberg.applescript
 jeff-hykin.code-eol
 kaiwood.center-editor-window
 kisstkondoros.vscode-gutter-preview
+llvm-vs-code-extensions.vscode-clangd
 mattn.Lisp
 mhutchie.git-graph
 milovidov.escape-quotes
@@ -59,6 +61,7 @@ Tyriar.sort-lines
 usernamehw.remove-empty-lines
 viablelab.bracket-padder
 vincaslt.highlight-matching-tag
+vscodevim.vim
 wayou.vscode-todo-highlight
 wmaurer.change-case
 wmaurer.vscode-jumpy
