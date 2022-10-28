@@ -28,7 +28,7 @@ o.wrap = true
 o.breakindent = true
 
 -- config
-o.clipboard:append({ unnamedeplus = true })
+o.clipboard = 'unnamedplus'
 o.mouse = 'a'
 o.visualbell = true
 o.emoji = true
