@@ -39,3 +39,6 @@ o.shell = 'zsh'
 o.hlsearch = true
 o.ignorecase = true
 o.smartcase = true
+
+-- insert
+o.textwidth = 120
