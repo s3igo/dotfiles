@@ -1,0 +1,56 @@
+# Night Owl theme
+colors:
+  primary:
+    background: "#011627"
+    foreground: "#d6deeb"
+
+  cursor:
+    text: "#011627"
+    cursor: "#d6deeb"
+
+  selection:
+    background: "#1b90dd"
+
+  normal:
+    black: "#011627"
+    red: "#ef5350"
+    green: "#22da6e"
+    yellow: "#c5e478"
+    blue: "#82aaff"
+    magenta: "#c792ea"
+    cyan: "#21c7a8"
+    white: "#ffffff"
+
+  bright:
+    black: "#575656"
+    red: "#ef5350"
+    green: "#22da6e"
+    yellow: "#ffeb95"
+    blue: "#82aaff"
+    magenta: "#c792ea"
+    cyan: "#7fdbca"
+    white: "#ffffff"
+
+font:
+  size: 16
+
+  normal:
+    family: "UDEV Gothic NFLG"
+    style: Regular
+
+  bold:
+    family: "UDEV Gothic NFLG"
+    style: Bold
+
+window:
+  opacity: 0.75
+
+  padding:
+    x: 10
+    y: 10
+
+live_config_reload: true
+
+key_bindings:
+  - { key: Q, mods: Control, chars: "\x11" } # tmux prefix
+  - { key: "LBracket", mods: Control, chars: "\x1b" } # esc

@@ -11,15 +11,14 @@ return {
     -- appearance
     color_schemes = { ['NightOwl (Gogh)'] = scheme, },
     color_scheme = 'NightOwl (Gogh)',
-    window_background_opacity = 0.7,
+    window_background_opacity = 0.75,
 
     -- config
     hide_tab_bar_if_only_one_tab = true,
 
     -- font
     font = wezterm.font('UDEV Gothic NFLG'),
-    font_size = 18,
-    cell_width = 1.05,
+    font_size = 16,
 
     -- keybind
     disable_default_key_bindings = true,
@@ -30,12 +29,14 @@ return {
         { key = 'q', mods = 'CMD', action = wezterm.action.QuitApplication },
     },
 
+    window_close_confirmation = 'NeverPrompt',
+
     -- mousebind
     mouse_bindings = {
     {
-      event = { Up = { streak = 1, button = 'Left' } },
-      mods = 'CMD',
-      action = wezterm.action.OpenLinkAtMouseCursor,
+        event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'CMD',
+        action = wezterm.action.OpenLinkAtMouseCursor,
     },
   },
 }
