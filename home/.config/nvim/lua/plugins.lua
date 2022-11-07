@@ -27,7 +27,6 @@ require('packer').startup(function(use)
     use({ 'wbthomason/packer.nvim' })
     use({ 'vim-jp/vimdoc-ja' })
     use({ 'nekowasabi/nvimdoc-ja' })
-    use({ 'kentarosasaki/vim-emacs-bindings' })
     use({ 'github/copilot.vim' })
     use({ 'cappyzawa/trim.nvim',
         config = function() require('trim').setup({
@@ -37,14 +36,17 @@ require('packer').startup(function(use)
             },
         }) end
     })
-    use({
-        'bluz71/vim-nightfly-guicolors',
-        config = 'vim.cmd([[colorscheme nightfly]])'
-    })
+    use({ 'bluz71/vim-nightfly-guicolors' })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'lukas-reineke/indent-blankline.nvim' })
     use({ 'nvim-lualine/lualine.nvim' })
-    use({ 'b3nj5m1n/kommentary' })
+    use({
+        'b3nj5m1n/kommentary',
+        config = function()
+            require('kommentary.config').configure_language("default", {
+            prefer_single_line_comments = true,
+        }) end
+    })
     use({
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -68,7 +70,6 @@ require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = 'nvim-lua/plenary.nvim'
     })
-    use({ 'nvim-telescope/telescope-file-browser.nvim' })
     use({
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end
@@ -86,12 +87,6 @@ require('packer').startup(function(use)
         'kylechui/nvim-surround',
         config = function() require('nvim-surround').setup() end
     })
-    use({
-        'lukas-reineke/virt-column.nvim',
-        config = function() require('virt-column').setup({
-            -- char = '|',
-        }) end
-    })
     use({ 'nvim-tree/nvim-tree.lua' })
 
     -- LSP
@@ -104,5 +99,33 @@ require('packer').startup(function(use)
     use({ 'hrsh7th/cmp-nvim-lsp' })
     use({ 'hrsh7th/cmp-buffer' })
     use({ 'hrsh7th/cmp-path' })
+    use({ 'hrsh7th/cmp-cmdline' })
+    use({ 'hrsh7th/vim-vsnip' })
+    use({ 'hrsh7th/cmp-vsnip'})
     use({ 'onsails/lspkind-nvim' })
+    use({
+        'phaazon/hop.nvim',
+        config = function()
+            require('hop').setup()
+            vim.keymap.set('n', 'ss', '<cmd>HopWord<cr>')
+        end
+    })
+    use({
+        'j-hui/fidget.nvim',
+        config = function() require('fidget').setup() end
+    })
+    use({
+        'folke/trouble.nvim',
+        config = function()
+            require('trouble').setup()
+            vim.keymap.set('n', 'sm', '<cmd>TroubleToggle<cr>')
+        end
+    })
+    use({ 'glepnir/lspsaga.nvim' })
+    --[[ use({
+        'ray-x/lsp_signature.nvim',
+        config = function() require('lsp_signature').setup({
+            toggle_key = '<M-j>'
+        }) end
+    }) ]]
 end)
