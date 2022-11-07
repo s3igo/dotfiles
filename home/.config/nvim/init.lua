@@ -1,5 +1,5 @@
 require('base')
-require('appearance')
 require('keymaps')
 require('autocmd')
 require('plugins')
+require('appearance')
