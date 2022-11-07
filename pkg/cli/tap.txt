@@ -5,3 +5,4 @@ homebrew/cask-fonts
 homebrew/core
 homebrew/services
 jesseduffield/lazygit
+knqyf263/pet

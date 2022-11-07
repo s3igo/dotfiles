@@ -19,6 +19,7 @@ microsoft-auto-update
 microsoft-excel
 microsoft-outlook
 microsoft-powerpoint
+microsoft-teams
 microsoft-word
 obsidian
 qmk-toolbox
