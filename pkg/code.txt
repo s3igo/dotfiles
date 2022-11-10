@@ -32,6 +32,7 @@ kisstkondoros.vscode-gutter-preview
 llvm-vs-code-extensions.vscode-clangd
 mattn.Lisp
 mhutchie.git-graph
+mickael-menu.zk-vscode
 milovidov.escape-quotes
 ms-azuretools.vscode-docker
 ms-python.isort

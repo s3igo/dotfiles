@@ -13,16 +13,12 @@ google-chrome
 karabiner-elements
 keyboard-cleaner
 kitty
-logseq
-mactracker
 microsoft-auto-update
 microsoft-excel
 microsoft-outlook
 microsoft-powerpoint
 microsoft-teams
 microsoft-word
-obsidian
-qmk-toolbox
 raycast
 slack
 visual-studio-code
