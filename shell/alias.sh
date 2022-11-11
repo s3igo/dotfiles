@@ -5,6 +5,7 @@ alias g='git'
 alias lg='lazygit'
 alias nv='nvim'
 alias ra='ranger'
+alias tm='tmux'
 
 # -i
 alias cp='cp -i'
