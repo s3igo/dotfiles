@@ -7,8 +7,10 @@ map.set('n', 's', '<nop>')
 map.set('n', 't', '<nop>')
 
 -- buffer
-map.set('n', 'sn', '<cmd>bn<cr>')
-map.set('n', 'sp', '<cmd>bp<cr>')
+map.set('n', '<C-w>n', '<cmd>bn<cr>')
+map.set('n', '<C-w><C-n>', '<cmd>bn<cr>')
+map.set('n', '<C-w>p', '<cmd>bp<cr>')
+map.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
 
 --misc
 map.set('n', 'Y', 'y$')

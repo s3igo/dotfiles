@@ -19,22 +19,22 @@ telescope.setup {
 
 local map = vim.keymap
 
-map.set('n', '<C-p>', function()
+map.set('n', 'sp', function()
     builtin.find_files({
         hidden = true,
         no_ignore = true,
     })
 end)
-map.set('n', '<C-n>', function()
+map.set('n', 'sn', function()
     builtin.live_grep()
 end)
 map.set('n', '<tab>', function()
     builtin.buffers()
 end)
-map.set('n', '<C-h>', function()
+map.set('n', 'sh', function()
     builtin.help_tags()
 end)
-map.set('n', '<CR>', function()
+map.set('n', 'sc', function()
     builtin.command_history()
 end)
 

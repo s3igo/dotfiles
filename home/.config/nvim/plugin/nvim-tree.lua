@@ -16,10 +16,10 @@ nvim_tree.setup({
     },
     filters = {
         custom = {
-            '\\.git',
-            '.cache',
+            '\\.git$',
+            '.cache$',
         }
     }
 })
 
-map.set('n', '<leader>b', ':NvimTreeToggle<CR>')
+map.set('n', 'sb', ':NvimTreeToggle<CR>')
