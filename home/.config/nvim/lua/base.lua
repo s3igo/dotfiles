@@ -41,4 +41,9 @@ o.ignorecase = true
 o.smartcase = true
 
 -- insert
-o.textwidth = 120
+-- o.textwidth = 120
+-- vim.cmd('autocmd! bufwritepost $MYVIMRC source %')
+vim.api.nvim_create_autocmd('BufWritePost', {
+    pattern = (vim.env.HOME .. "/.config/nvim/**/*"),
+    command = 'source $MYVIMRC'}
+)

@@ -26,7 +26,6 @@ vim.cmd([[
 require('packer').startup(function(use)
     use({ 'wbthomason/packer.nvim' })
     use({ 'vim-jp/vimdoc-ja' })
-    use({ 'nekowasabi/nvimdoc-ja' })
     use({ 'github/copilot.vim' })
     use({ 'cappyzawa/trim.nvim',
         config = function() require('trim').setup({
@@ -81,7 +80,15 @@ require('packer').startup(function(use)
     use({
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('bufferline').setup() end
+        config = function() require('bufferline').setup({
+            options =  {
+                numbers = 'ordinal',
+                buffer_close_icon = '',
+                close_icon = '',
+                diagnostics = 'nvim_lsp',
+                separator_style = { '', '' }
+            }
+        }) end
     })
     use({
         'kylechui/nvim-surround',
@@ -105,10 +112,7 @@ require('packer').startup(function(use)
     use({ 'onsails/lspkind-nvim' })
     use({
         'phaazon/hop.nvim',
-        config = function()
-            require('hop').setup()
-            vim.keymap.set('n', 'ss', '<cmd>HopWord<cr>')
-        end
+        config = function() require('hop').setup() vim.keymap.set('n', 'ss', '<cmd>HopWord<cr>') end
     })
     use({
         'j-hui/fidget.nvim',
@@ -122,6 +126,39 @@ require('packer').startup(function(use)
         end
     })
     use({ 'glepnir/lspsaga.nvim' })
+    use({
+        'akinsho/toggleterm.nvim',
+        config = function() require('toggleterm').setup({
+            -- size = 20,
+        })
+        vim.keymap.set('n', 'sj', '<cmd>ToggleTerm<cr>')
+        end
+    })
+    use({
+        'kevinhwang91/nvim-hlslens',
+        config = function()
+            require('hlslens').setup()
+
+            local kopts = {noremap = true, silent = true}
+
+            vim.api.nvim_set_keymap('n', 'n',
+                [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+                kopts)
+            vim.api.nvim_set_keymap('n', 'N',
+                [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+                kopts)
+            vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+            vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+            vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+            vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+            vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+        end
+    })
+    use {
+        "tversteeg/registers.nvim",
+        config = function() require("registers").setup() end,
+    }
     --[[ use({
         'ray-x/lsp_signature.nvim',
         config = function() require('lsp_signature').setup({

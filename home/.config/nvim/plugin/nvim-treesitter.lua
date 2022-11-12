@@ -10,7 +10,8 @@ nvimTreesitter.setup {
         enable = true,
         disable = {},
     },
-    ensure_installed = 'all',
+    -- ensure_installed = 'all',
+    auto_install = true,
     autotag = {
         enable = true,
     },
