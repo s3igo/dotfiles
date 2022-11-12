@@ -50,17 +50,35 @@ function latest() {
     fi
 }
 
-function pdf-ocr-embed() {
+# function ocr() {
+#     declare filename="$1"
+#     declare output="${filename%.*}_ocr.pdf"
+#     nohup ocrmypdf --clean -l eng+jpn+equ "$filename" "$output" > /dev/null 2>&1 &
+# }
+
+
+function pdf-compress() {
     declare object="$1"
     declare output="$2"
 
-    mkdir -p ./.tmp/{png,pdf}
+    gs -sDEVICE=pdfwrite \
+        -dCompatibilityLevel=1.4 \
+        -dPDFSETTINGS=/default \
+        -dEmbedAllFonts=true \
+        -dSubsetFonts=true \
+        -dcompressFonts=false \
+        -dPrinted=false \
+        -dNOPAUSE -dQUIET -dBATCH \
+        -sOutputFile="$output" "$object"
+}
 
-    pdftoppm -png -r 300 -scale-to 3840 "$object" './.tmp/png/page'
-    command ls ./.tmp/png \
-        | sed 's/\.png$//' \
-        | xargs -P4 -I{} tesseract ./.tmp/png/{}.png ./.tmp/pdf/{} -l eng+jpn+equ pdf
-    pdfunite ./.tmp/pdf/*.pdf "$output"
+function pdf-to-a4() {
+    declare filename="$1"
+    declare output="${filename%.*}_aligned.pdf"
 
-    command rm -rf ./.tmp
+    nohup gs -sDEVICE=pdfwrite \
+        -dNOPAUSE -dQUIET -dBATCH \
+        -dPDFFitPage \
+        -sPAPERSIZE=a4 \
+        -sOutputFile="$output" "$filename" > /dev/null 2>&1 &
 }
