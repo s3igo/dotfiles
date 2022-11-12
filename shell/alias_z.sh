@@ -32,5 +32,10 @@ zle -N anyframe-widget-execute-history
 bindkey '^R' anyframe-widget-execute-history
 
 ## ghq
-zle -N anyframe-widget-cd-ghq-repository
-bindkey '^G' anyframe-widget-cd-ghq-repository
+function __ghq-fzf {
+    anyframe-source-ghq-repository \
+        | fzf --preview "command exa --tree --git-ignore -I 'node_modules|.git' {}" \
+        | anyframe-action-execute cd --
+}
+zle -N __ghq-fzf
+bindkey '^G' __ghq-fzf
