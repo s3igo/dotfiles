@@ -1,16 +1,14 @@
 # global
 ## shell
-alias -g @f='| fzf'
-alias -g @g='| grep'
 alias -g @i='install'
 alias -g @latest='"$(_latest)"'
 alias -g @latest-a='latest -a'
 
 ## docker
-alias -g @dp='`docker ps --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
-    | tail -n +2 | fzf | cut -d " " -f 1`'
-alias -g @dp-a='`docker ps -a --format "table {{.ID}} {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" \
-    | tail -n +2 | fzf | cut -d " " -f 1`'
+alias -g @d_ps='"$(docker ps | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED STATUS PORTS NAMES && echo $ID)"'
+alias -g @d_ps-a='"$(docker ps -a | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED STATUS PORTS NAMES && echo $ID)"'
+alias -g @d_images='"$(docker images | tail -n +2 | fzf | read REPOSITORY TAG IMAGEID CREATED SIZE && echo $IMAGEID)"'
+
 
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
@@ -20,6 +18,7 @@ fi
 
 # keybind
 bindkey '^U' backward-kill-line
+bindkey '^J' menu-select
 
 ## cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
