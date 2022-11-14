@@ -1,0 +1,14 @@
+{
+    "template": {
+        "prefix": "init",
+        "body": [
+            "#include <stdio.h>",
+            "",
+            "int main(void) {",
+            "    $0",
+            "",
+            "    return 0;",
+            "}"
+        ]
+    }
+}

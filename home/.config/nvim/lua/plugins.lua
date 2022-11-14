@@ -107,7 +107,10 @@ require('packer').startup(function(use)
     use({ 'hrsh7th/cmp-buffer' })
     use({ 'hrsh7th/cmp-path' })
     use({ 'hrsh7th/cmp-cmdline' })
-    use({ 'hrsh7th/vim-vsnip' })
+    use({
+        'hrsh7th/vim-vsnip',
+        config = function () vim.g.vsnip_snippet_dir = '~/.dotfiles/vsnip' end
+    })
     use({ 'hrsh7th/cmp-vsnip'})
     use({ 'onsails/lspkind-nvim' })
     use({
@@ -159,6 +162,7 @@ require('packer').startup(function(use)
         "tversteeg/registers.nvim",
         config = function() require("registers").setup() end,
     }
+    -- use({ 'L3MON4D3/LuaSnip' })
     --[[ use({
         'ray-x/lsp_signature.nvim',
         config = function() require('lsp_signature').setup({
