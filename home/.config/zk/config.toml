@@ -12,4 +12,4 @@ edit-last = "zk edit --limit 1 --sort modified- $@"
 journal = 'zk new --no-input "${ZK_NOTEBOOK_DIR}/journal"'
 
 # [tool]
-# fzf-preview = "bat -p --color always {-1}"
+fzf-preview = "bat -p --color always {-1}"

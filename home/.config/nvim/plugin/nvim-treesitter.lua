@@ -20,6 +20,9 @@ nvimTreesitter.setup {
         extended_mode = true,
         max_file_lines = 1000,
     },
+    endwise = {
+        enable = true,
+    },
 }
 
 local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
