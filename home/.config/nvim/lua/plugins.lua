@@ -35,7 +35,10 @@ require('packer').startup(function(use)
             },
         }) end
     })
-    use({ 'bluz71/vim-nightfly-guicolors' })
+    use({
+        'bluz71/vim-nightfly-guicolors' ,
+        config = function() vim.cmd('colorscheme nightfly') end
+    })
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'lukas-reineke/indent-blankline.nvim' })
     use({ 'nvim-lualine/lualine.nvim' })
