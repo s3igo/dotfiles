@@ -1,19 +1,16 @@
-asdf
 bat
 dhall-json
-doxygen
 emacs
 exa
 fd
 fswatch
-gcc
 ghq
 git
 git-delta
 gotop
-graphviz
 hexyl
 imagemagick
+itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
 macos-trash
@@ -22,6 +19,7 @@ mas
 neofetch
 neovim
 nkf
+node@16
 ocrmypdf
 pdftk-java
 poppler
@@ -33,4 +31,5 @@ tmux
 translate-shell
 tree
 xdg-ninja
+zellij
 zk

@@ -4,5 +4,6 @@ homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/core
 homebrew/services
+itchyny/tap
 jesseduffield/lazygit
 knqyf263/pet
