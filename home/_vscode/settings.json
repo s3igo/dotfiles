@@ -123,7 +123,6 @@
     "workbench.startupEditor": "none",
     "workbench.tree.indent": 12,
     "workbench.tree.renderIndentGuides": "always",
-    "workbench.settings.useSplitJSON": true,
     /* --------------------------------- others --------------------------------- */
     "audioCues.lineHasInlineSuggestion": "off",
     "debug.console.fontSize": 16,
