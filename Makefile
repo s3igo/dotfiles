@@ -3,6 +3,9 @@ include ~/.dotfiles/var.sh
 CLI_PKG := $(PKG_DIR)/cli
 APP_PKG := $(PKG_DIR)/app
 
+MAC_PKG := $(PKG_DIR)/mac
+LINUX_PKG := $(PKG_DIR)/linux
+
 init:
 	. ./bin/init.sh
 
@@ -10,31 +13,52 @@ link:
 	bash ./bin/link.sh
 
 update:
-	bash -c './bin/update.sh'
-
-cli:
-	cat $(CLI_PKG)/tap.txt | xargs -I {} brew tap {}
-	cat $(CLI_PKG)/brew.txt | xargs brew install
-	cat $(CLI_PKG)/asdf.txt | xargs -I {} asdf plugin-add {} || true
-	cat $(CLI_PKG)/asdf.txt | xargs -I {} asdf install {} latest
-	asdf reshim
-
-app:
 ifeq ($(shell uname),Darwin)
-	cat $(APP_PKG)/cask.txt | xargs brew install --cask
-	cat $(APP_PKG)/mas.txt | cut -d " " -f 1 | xargs mas install
+	type brew > /dev/null 2>&1 \
+		&& echo "Updating Homebrew..." \
+		&& brew update \
+		&& brew upgrade \
+		&& brew cleanup \
+		&& brew doctor
+	type mas > /dev/null 2>&1 \
+		&& echo "Updating Mac App Store apps..." \
+		&& mas upgrade 
+	type zinit > /dev/null 2>&1 \
+		&& echo "updating zinit..." \
+		&& zinit update --all
+else ifeq ($(shell uname),Linux)
+	type apt > /dev/null 2>&1 \
+		&& echo "Updating apt..." \
+		&& sudo apt update \
+		&& sudo apt upgrade -y
 endif
 
-code:
-	cat $(PKG_DIR)/code.txt | xargs -I {} code --install-extension {}
+cli:
+ifeq ($(shell uname),Darwin)
+	cat $(MAC_PKG)/tap.txt | xargs -I {} brew tap {}
+	cat $(MAC_PKG)/brew.txt | xargs brew install
+else ifeq ($(shell uname),Linux)
+	type apt > /dev/null 2>&1 && cat $(LINUX_PKG)/apt.txt | xargs sudo apt install -y
+endif
+
+gui:
+ifeq ($(shell uname),Darwin)
+	cat $(MAC_PKG)/cask.txt | xargs brew install --cask
+	cat $(MAC_PKG)/mas.txt | cut -d " " -f 1 | xargs mas install
+endif
 
 dump:
-	brew tap > $(CLI_PKG)/tap.txt
-	brew leaves > $(CLI_PKG)/brew.txt
-	asdf plugin-list > $(CLI_PKG)/asdf.txt
-	brew list --cask > $(APP_PKG)/cask.txt
-	mas list | cut -d '(' -f 1 | sed -e 's/ *$$//' > $(APP_PKG)/mas.txt
-	code --list-extensions > $(PKG_DIR)/code.txt
+ifeq ($(shell uname),Darwin)
+	type brew > /dev/null 2>&1 \
+		&& brew tap > $(MAC_PKG)/tap.txt \
+		&& brew leaves > $(MAC_PKG)/brew.txt \
+		&& brew list --cask > $(MAC_PKG)/cask.txt
+	type mas > /dev/null 2>&1 \
+		mas list | cut -d '(' -f 1 | sed -e 's/ *$$//' > $(MAC_PKG)/mas.txt
+else ifeq ($(shell uname),Linux)
+	type apt > /dev/null 2>&1 && apt list --installed | cut -d '/' -f 1 > $(LINUX_PKG)/apt.txt
+endif
+
 
 sync:
 	make update
