@@ -1,8 +1,5 @@
 include ~/.dotfiles/var.sh
 
-CLI_PKG := $(PKG_DIR)/cli
-APP_PKG := $(PKG_DIR)/app
-
 MAC_PKG := $(PKG_DIR)/mac
 LINUX_PKG := $(PKG_DIR)/linux
 
@@ -44,6 +41,7 @@ endif
 gui:
 ifeq ($(shell uname),Darwin)
 	cat $(MAC_PKG)/cask.txt | xargs brew install --cask
+	type mas > /dev/null 2>&1 || brew install mas
 	cat $(MAC_PKG)/mas.txt | cut -d " " -f 1 | xargs mas install
 endif
 
@@ -51,7 +49,7 @@ dump:
 ifeq ($(shell uname),Darwin)
 	type brew > /dev/null 2>&1 \
 		&& brew tap > $(MAC_PKG)/tap.txt \
-		&& brew leaves > $(MAC_PKG)/brew.txt \
+		&& brew leaves | sed '/mas/d' > $(MAC_PKG)/brew.txt \
 		&& brew list --cask > $(MAC_PKG)/cask.txt
 	type mas > /dev/null 2>&1 \
 		mas list | cut -d '(' -f 1 | sed -e 's/ *$$//' > $(MAC_PKG)/mas.txt
