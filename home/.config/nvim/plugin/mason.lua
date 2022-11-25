@@ -61,7 +61,8 @@ cmp.setup({
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-l>'] = cmp.mapping.complete(),
         -- ['<cr>'] = cmp.mapping.close(),
-        ['<cr>'] = cmp.mapping.confirm({ select = true })
+        ['<cr>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-e>'] = cmp.mapping.abort(),
     }),
     sources = {
         -- { name = 'copilot', priority = 10 },
