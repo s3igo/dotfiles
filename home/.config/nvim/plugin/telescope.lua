@@ -3,11 +3,9 @@ if (not status) then return end
 
 local builtin = require('telescope.builtin')
 
-telescope.load_extension({
-    'fzf',
-    'frecency',
-    'ghq',
-})
+telescope.load_extension('fzf')
+telescope.load_extension('frecency')
+telescope.load_extension('ghq')
 
 telescope.setup {
     defaults = {
