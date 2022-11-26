@@ -3,6 +3,12 @@ if (not status) then return end
 
 local builtin = require('telescope.builtin')
 
+telescope.load_extension({
+    'fzf',
+    'frecency',
+    'ghq',
+})
+
 telescope.setup {
     defaults = {
         file_ignore_patterns = { '%.git', 'node_modules' },
@@ -38,7 +44,9 @@ map.set('n', 'sc', function()
     builtin.command_history()
 end)
 
-telescope.load_extension('frecency')
 map.set('n', '<C-s>', function()
     telescope.extensions.frecency.frecency()
+end)
+map.set('n', '<C-g>', function()
+    telescope.extensions.ghq.ghq()
 end)

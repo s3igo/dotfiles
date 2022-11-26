@@ -25,16 +25,10 @@ vim.cmd([[
 
 require('packer').startup(function(use)
     use({ 'wbthomason/packer.nvim' })
+    use({ 'nvim-lua/plenary.nvim' })
     use({ 'vim-jp/vimdoc-ja' })
     use({ 'github/copilot.vim' })
-    use({ 'cappyzawa/trim.nvim',
-        config = function() require('trim').setup({
-            disable = {"markdown"},
-            patterns = {
-              [[%s/\s\+$//e]],
-            },
-        }) end
-    })
+    use({ 'cappyzawa/trim.nvim' })
     use({
         'bluz71/vim-nightfly-guicolors' ,
         config = function() vim.cmd('colorscheme nightfly') end
@@ -42,35 +36,27 @@ require('packer').startup(function(use)
     use({ 'lewis6991/gitsigns.nvim' })
     use({ 'lukas-reineke/indent-blankline.nvim' })
     use({ 'nvim-lualine/lualine.nvim' })
-    use({
-        'b3nj5m1n/kommentary',
-        config = function()
-            require('kommentary.config').configure_language("default", {
-            prefer_single_line_comments = true,
-        }) end
-    })
+    use({ 'b3nj5m1n/kommentary' })
     use({
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         requires = {
             'windwp/nvim-ts-autotag',
             'nvim-treesitter/nvim-treesitter-context',
-            'p00f/nvim-ts-rainbow',
+            -- 'p00f/nvim-ts-rainbow',
         },
     })
     use({
         'nvim-telescope/telescope-frecency.nvim',
         requires = 'kkharji/sqlite.lua',
-        config = function() require('telescope').load_extension('frecency') end
     })
     use({
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
-        config = function() require('telescope').load_extension('fzf') end
     })
     use({
         'nvim-telescope/telescope.nvim',
-        requires = 'nvim-lua/plenary.nvim'
+        requires = 'nvim-telescope/telescope-ghq.nvim'
     })
     use({
         'norcalli/nvim-colorizer.lua',
