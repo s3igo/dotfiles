@@ -26,6 +26,7 @@ vim.cmd([[
 require('packer').startup(function(use)
     use({ 'wbthomason/packer.nvim' })
     use({ 'nvim-lua/plenary.nvim' })
+    use({ 'kyazdani42/nvim-web-devicons' })
     use({ 'vim-jp/vimdoc-ja' })
     use({ 'github/copilot.vim' })
     use({ 'cappyzawa/trim.nvim' })
@@ -66,19 +67,7 @@ require('packer').startup(function(use)
         'windwp/nvim-autopairs',
         config = function() require('nvim-autopairs').setup() end
     })
-    use({
-        'akinsho/bufferline.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('bufferline').setup({
-            options =  {
-                numbers = 'ordinal',
-                buffer_close_icon = '',
-                close_icon = '',
-                diagnostics = 'nvim_lsp',
-                separator_style = { '', '' }
-            }
-        }) end
-    })
+    use({ 'akinsho/bufferline.nvim' })
     use({
         'kylechui/nvim-surround',
         config = function() require('nvim-surround').setup() end
