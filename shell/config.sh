@@ -12,14 +12,14 @@ set -o noclobber
 
 # homebrew
 [[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-declare -x PATH="$PATH:/usr/local/sbin"
+declare -x PATH="${PATH}:/usr/local/sbin"
 
 # terminfo
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
 # node for copilot
-export PATH="${PATH}:/usr/local/opt/node@16/bin"
+declare -x PATH="${PATH}:/usr/local/opt/node@16/bin"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
