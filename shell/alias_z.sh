@@ -17,6 +17,8 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 fi
 
 # keybind
+bindkey -e # explicit use emacs keybind
+
 bindkey '^U' backward-kill-line
 bindkey '^J' menu-select
 

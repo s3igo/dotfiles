@@ -26,7 +26,6 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
 declare -x EDITOR='nvim'
-bindkey -e # explicit use emacs keybind
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
