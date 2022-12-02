@@ -33,9 +33,6 @@ if [[ "$(uname)" == 'Darwin' ]]; then
     alias ql='qlmanage -p "$1" >& /dev/null'
 fi
 
-# kitty
-[[ "$TERM" == 'xterm-kitty' ]] && alias ssh='kitty +kitten ssh'
-
 # functions
 function latest() {
     declare arg=${1:-$PWD}
