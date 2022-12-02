@@ -24,8 +24,6 @@ declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
 declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 
 # node
-declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-declare -x NODE_REPL_HISTORY="${XDG_STATE_HOME}/node_repl_history"
 export PATH="$PATH:/usr/local/opt/node@16/bin"
 
 # lesshist
