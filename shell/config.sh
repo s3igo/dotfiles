@@ -18,12 +18,7 @@ declare -x PATH="$PATH:/usr/local/sbin"
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
-# python
-declare -x PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
-declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
-declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
-
-# node
+# node for copilot
 export PATH="${PATH}:/usr/local/opt/node@16/bin"
 
 # lesshist
