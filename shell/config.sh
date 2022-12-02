@@ -24,7 +24,7 @@ declare -x IPYTHONDIR="${XDG_DATA_HOME}/jupyter"
 declare -x JUPYTER_CONFIG_DIR="${XDG_CONFIG_HOME}/jupyter"
 
 # node
-export PATH="$PATH:/usr/local/opt/node@16/bin"
+export PATH="${PATH}:/usr/local/opt/node@16/bin"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
