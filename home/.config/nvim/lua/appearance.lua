@@ -32,3 +32,5 @@ o.colorcolumn = '80,100,120'
 o.showmatch = true
 o.matchtime = 1
 o.relativenumber = true
+
+o.title = true
