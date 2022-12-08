@@ -20,10 +20,6 @@ else
     exit 1
 fi
 
-# init zsh 
-# NOTE: mutable operation
-[[ "$SHELL" == *zsh ]] && echo 'export ZDOTDIR="${HOME}/.config/zsh"' | sudo tee -a /etc/zshenv
-
 # default xdg-based directories
 mkdir -p ~/{.config,.cache}
 mkdir -p ~/.local/{share,state}
