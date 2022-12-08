@@ -120,6 +120,10 @@ require('packer').startup(function(use)
         "tversteeg/registers.nvim",
         config = function() require("registers").setup() end,
     }
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
     -- use({ 'L3MON4D3/LuaSnip' })
     --[[ use({
         'ray-x/lsp_signature.nvim',
