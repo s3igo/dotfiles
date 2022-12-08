@@ -15,7 +15,6 @@ jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
 macos-trash
 make
-mas
 neofetch
 neovim
 nkf
