@@ -19,7 +19,7 @@ ifeq ($(shell uname),Darwin)
 		&& brew doctor
 	type mas > /dev/null 2>&1 \
 		&& echo "Updating Mac App Store apps..." \
-		&& mas upgrade 
+		&& mas upgrade
 	type zinit > /dev/null 2>&1 \
 		&& echo "updating zinit..." \
 		&& zinit update --all
@@ -52,7 +52,7 @@ ifeq ($(shell uname),Darwin)
 		&& brew leaves | sed '/mas/d' > $(MAC_PKG)/brew.txt \
 		&& brew list --cask > $(MAC_PKG)/cask.txt
 	type mas > /dev/null 2>&1 \
-		mas list | cut -d '(' -f 1 | sed -e 's/ *$$//' > $(MAC_PKG)/mas.txt
+		&& mas list | cut -d '(' -f 1 | sed -e 's/ *$$//' > $(MAC_PKG)/mas.txt
 else ifeq ($(shell uname),Linux)
 	type apt > /dev/null 2>&1 && apt list --installed | cut -d '/' -f 1 > $(LINUX_PKG)/apt.txt
 endif
