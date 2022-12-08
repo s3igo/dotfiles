@@ -1,7 +1,4 @@
-source ~/.dotfiles/var.sh
-
-export XDG_CONFIG_HOME
-export XDG_CACHE_HOME
-export XDG_DATA_HOME
-export XDG_STATE_HOME
-export XDG_RUNTIME_DIR
+declare -x XDG_CONFIG_HOME="${HOME}/.config"
+declare -x XDG_CACHE_HOME="${HOME}/.cache"
+declare -x XDG_DATA_HOME="${HOME}/.local/share"
+declare -x XDG_STATE_HOME="${HOME}/.local/state"

@@ -1,5 +1,4 @@
-include ~/.dotfiles/var.sh
-
+PKG_DIR := ~/.dotfiles/pkg
 MAC_PKG := $(PKG_DIR)/mac
 LINUX_PKG := $(PKG_DIR)/linux
 

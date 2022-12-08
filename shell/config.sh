@@ -1,5 +1,3 @@
-source ~/.dotfiles/var.sh
-
 # lang
 declare -x LANG=ja_JP.UTF-8
 

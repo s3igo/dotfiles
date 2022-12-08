@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ~/.dotfiles/var.sh
+declare LINK_DIR="${HOME}/.dotfiles/home"
 
 # `uname`によって分岐
 function vscode {
