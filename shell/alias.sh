@@ -5,7 +5,6 @@ alias g='git'
 alias lg='lazygit'
 alias nv='nvim'
 alias ra='ranger'
-alias tm='tmux'
 
 # -i
 alias cp='cp -i'
@@ -23,13 +22,11 @@ alias la='exa -la --icons --git'
 alias al='la' # in case of typo
 
 # others
-alias vim='vim -S ${XDG_CONFIG_HOME}/vim/vimrc'
 alias cdf='cd $_'
-alias _login='exec $SHELL -l'
+alias restart='exec $SHELL -l'
 
 # mac
 if [[ "$(uname)" == 'Darwin' ]]; then
-    alias pst='eval "$(pbpaste)"'
     alias ql='qlmanage -p "$1" >& /dev/null'
 fi
 
