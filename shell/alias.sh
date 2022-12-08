@@ -17,8 +17,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # ls
-alias ls='exa --icons --git'
-alias la='exa -la --icons --git'
+alias ls='exa --icons --git 2>/dev/null || command ls'
+alias la='exa -la --icons --git 2>/dev/null || command ls -la'
 alias al='la' # in case of typo
 
 # others
