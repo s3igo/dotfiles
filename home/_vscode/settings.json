@@ -57,7 +57,7 @@
     "tailwindCSS.emmetCompletions": true,
     /* --------------------------------- general -------------------------------- */
     // dotfiles
-    "dotfiles.installCommand": "~/.dotfiles/bin/devcontainer.sh",
+    "dotfiles.installCommand": "~/.dotfiles/bin/link.sh",
     "dotfiles.repository": "https://github.com/s3igo/dotfiles",
     "dotfiles.targetPath": "~/.dotfiles",
     // editor
