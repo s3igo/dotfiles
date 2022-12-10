@@ -27,3 +27,36 @@ declare -x EDITOR='nvim'
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
+
+# alias
+alias b='brew'
+alias c='code'
+alias d='docker'
+alias g='git'
+alias lg='lazygit'
+alias nv='nvim'
+alias ra='ranger'
+
+## -i
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+## cd
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+## ls
+alias ls='exa --icons --git 2>/dev/null || command ls'
+alias la='exa -la --icons --git 2>/dev/null || command ls -la'
+alias al='la' # in case of typo
+
+## others
+alias cdf='cd $_'
+alias restart='exec $SHELL -l'
+
+## mac
+if [[ "$(uname)" == 'Darwin' ]]; then
+    alias ql='qlmanage -p "$1" >& /dev/null'
+fi
