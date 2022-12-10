@@ -10,9 +10,15 @@ function shell {
     return 1
 }
 
+function ssh {
+    declare DIR_NAME="$(dirname "$FILE")"
+    [[ "$(basename "$DIR_NAME")" == '.ssh' ]] && [[ "$(uname)" != 'Darwin' ]] && return 0
+}
+
 # make file-based symlink
 while read -r FILE; do
     shell && continue
+    ssh && continue
 
     declare DEST="${HOME}${FILE##"$LINK_DIR"}"
 
