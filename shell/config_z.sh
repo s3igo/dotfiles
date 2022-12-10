@@ -36,6 +36,12 @@ EOF
 
 precmd_functions+=(__update_history)
 
+function __export_date {
+    declare -x DATE="$(date +%Y-%m-%d)"
+}
+
+precmd_functions+=(__export_date)
+
 # alias
 ## shell
 alias -g @i='install'
