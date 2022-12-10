@@ -2,8 +2,8 @@
 declare -x LANG=ja_JP.UTF-8
 
 # history
-declare HISTSIZE=10000
-declare SAVEHIST=10000
+declare -x HISTSIZE=10000
+declare -x SAVEHIST=10000
 
 # prohibit to overwrite
 set -o noclobber
@@ -24,6 +24,9 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
 declare -x EDITOR='nvim'
+
+# ranger
+[[ -n "$RANGER_LEVEL" ]] && PS1="[ ranger ] ${PS1}"
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
