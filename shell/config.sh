@@ -26,7 +26,7 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 declare -x EDITOR='nvim'
 
 # ranger
-[[ -n "$RANGER_LEVEL" ]] && PS1="[ ranger ] ${PS1}"
+[[ -n "$RANGER_LEVEL" ]] && PS1="ranger ${PS1}"
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
@@ -51,8 +51,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 ## ls
-alias ls='exa --icons --git 2>/dev/null || command ls'
-alias la='exa -la --icons --git 2>/dev/null || command ls -la'
+alias ls='exa --icons --git 2> /dev/null || command ls'
+alias la='exa -la --icons --git 2> /dev/null || command ls -la'
 alias al='la' # in case of typo
 
 ## others
