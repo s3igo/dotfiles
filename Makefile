@@ -56,6 +56,9 @@ else ifeq ($(shell uname),Linux)
 	type apt > /dev/null 2>&1 && apt list --installed | cut -d '/' -f 1 > $(LINUX_PKG)/apt.txt
 endif
 
+install:
+	make init
+	make link
 
 sync:
 	make update
