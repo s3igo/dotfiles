@@ -58,9 +58,9 @@ else ifeq ($(shell uname),Linux)
 endif
 
 install:
-	make init
-	make link
+	@make init
+	@make link
 
 sync:
-	make update
-	make dump
+	@make update
+	@make dump
