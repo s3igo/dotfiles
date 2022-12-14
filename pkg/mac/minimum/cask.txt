@@ -1,0 +1,9 @@
+1password
+1password-cli
+alacritty
+docker
+font-udev-gothic-nf
+google-chrome
+karabiner-elements
+raycast
+visual-studio-code
