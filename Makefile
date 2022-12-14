@@ -18,7 +18,7 @@ ifeq ($(shell uname),Darwin)
 		&& brew doctor
 	type mas > /dev/null 2>&1 \
 		&& echo "Updating Mac App Store apps..." \
-		&& mas upgrade
+		&& mas upgrade 2> /dev/null
 	type zinit > /dev/null 2>&1 \
 		&& echo "updating zinit..." \
 		&& zinit update --all

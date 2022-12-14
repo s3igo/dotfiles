@@ -52,7 +52,7 @@ $ make update
 # reflects current environment in `./pkg/*`
 $ make dump
 
-# run `make update`& `make dump`
+# run `make update` & `make dump`
 $ make sync
 ```
 
