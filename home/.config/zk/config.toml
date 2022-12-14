@@ -1,8 +1,8 @@
 [note]
-filename = "{{date now '%Y%m%d%H%M%S'}}"
+filename = "{{format-date now '%Y%m%d%H%M%S'}}"
 
 [group.journal.note]
-filename = "{{date now '%Y-%m-%d'}}"
+filename = "{{format-date now '%Y-%m-%d'}}"
 
 [filter]
 journal = "--sort created journal"
