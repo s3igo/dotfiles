@@ -12,6 +12,7 @@ function __prompt-command {
     local BLUE='\[\e[0;34m\]'
     local PURPLE='\[\e[0;35m\]'
     local WHITE='\[\e[0;37m\]'
+    local GRAY='\[\e[1;30m\]'
 
     # branch
     local BRANCH=`git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'`
@@ -24,7 +25,7 @@ function __prompt-command {
     local CHAR='\$'
     [[ "$UID" == 0 ]] && CHAR='#'
 
-    PS1="\n${BLUE}\w${WHITE}${BRANCH}\n${STATUS}${CHAR}${WHITE} "
+    PS1="\n${BLUE}\w${GRAY}${BRANCH}\n${STATUS}${CHAR}${WHITE} "
 }
 
 declare -x PROMPT_COMMAND=__prompt-command
