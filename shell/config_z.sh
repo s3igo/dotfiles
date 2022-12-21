@@ -1,41 +1,19 @@
 # auto correct
-setopt CORRECT
+setopt correct
 
 # beep
-unsetopt BEEP
+unsetopt beep
 
 # history
 declare -x HISTFILE="${XDG_STATE_HOME}/zsh_history"
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt inc_append_history
 
-function zshaddhistory {
-    local LINE=${1%%$'\n'}
-    local CMD=${LINE%% *}
-
-    [[ ${CMD} != (l[sal])
-        && ${CMD} != 'cd'
-        && ${CMD} != 'rip'
-    ]]
-}
-
-function __update_history {
-    local EXIT_STATUS="$?"
-
-    fc -W
-    if [[ ${EXIT_STATUS} != 0 ]]; then
-        ed -s "$HISTFILE" <<EOF >/dev/null
-d
-w
-q
-EOF
-    fi
-}
-
-precmd_functions+=(__update_history)
-
+# custom variables
 function __export_date {
     declare -x DATE="$(date +%Y-%m-%d)"
 }
