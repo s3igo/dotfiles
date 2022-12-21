@@ -35,6 +35,12 @@ declare -x EDITOR='nvim'
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
 
+# direnv
+if type direnv > /dev/null 2>&1; then
+    [[ $SHELL == *zsh ]] && eval "$(direnv hook zsh)"
+    [[ $SHELL == *bash ]] && eval "$(direnv hook bash)"
+fi
+
 # alias
 alias b='brew'
 alias c='code'

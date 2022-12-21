@@ -1,6 +1,6 @@
 .DS_Store
-.Rhistory
 .dccache
 .env
+.envrc
 node_modules
 ~$*
