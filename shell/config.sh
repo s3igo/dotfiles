@@ -9,7 +9,11 @@ declare -x SAVEHIST=10000
 set -o noclobber
 
 # homebrew
-[[ "$(uname)" == 'Darwin' ]] && [[ "$(uname -m)" == 'arm64' ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+type brew > /dev/null 2>&1 \
+    && [[ "$(uname)" == 'Darwin' ]] \
+    && [[ "$(uname -m)" == 'arm64' ]] \
+    && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 declare -x PATH="${PATH}:/usr/local/sbin"
 
 # terminfo
