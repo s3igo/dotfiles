@@ -7,3 +7,7 @@ require('bufferline').setup({
         separator_style = { '', '' }
     }
 })
+
+-- bufferline
+vim.keymap.set('n', 's.', '<cmd>BufferLineMoveNext<cr>')
+vim.keymap.set('n', 's,', '<cmd>BufferLineMovePrev<cr>')

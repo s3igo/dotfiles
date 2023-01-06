@@ -23,3 +23,4 @@ nvim_tree.setup({
 })
 
 map.set('n', 'sb', ':NvimTreeToggle<CR>')
+vim.cmd('highlight NvimTreeNormal ctermbg=NONE guibg=NONE')
