@@ -73,3 +73,13 @@ alias restart='exec $SHELL -l'
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias ql='qlmanage -p "$1" >& /dev/null'
 fi
+
+# function
+function timestamp {
+    [[ $# == 0 ]] && date '+%Y%m%d%H%M%S' && return 0
+    [[ $# > 1 ]] && echo 'error: too many arguments' && return 1
+
+    declare extention="${1##*.}"
+    declare now="$(date +%Y%m%d%H%M%S)"
+    command mv "$1" "${now}.${extention}"
+}
