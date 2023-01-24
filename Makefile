@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 PKG_DIR := ~/.dotfiles/pkg
 MAC_PKG := $(PKG_DIR)/mac
 # MAC_PKG := $(PKG_DIR)/mac/minimum
