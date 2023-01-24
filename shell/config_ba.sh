@@ -29,3 +29,6 @@ function __prompt-command {
 }
 
 declare -x PROMPT_COMMAND=__prompt-command
+
+# GitHub CLI
+type gh > /dev/null 2>&1 && eval "$(gh completion -s bash)"
