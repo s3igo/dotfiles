@@ -124,6 +124,7 @@ require('packer').startup(function(use)
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
     })
+    use({ 'mickael-menu/zk-nvim' })
     -- use({ 'L3MON4D3/LuaSnip' })
     --[[ use({
         'ray-x/lsp_signature.nvim',
