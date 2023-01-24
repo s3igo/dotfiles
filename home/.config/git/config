@@ -9,6 +9,8 @@
 	init-exist = "!git init && git add . && git commit -m 'first commit'"
     create = "!f() { gh repo create \"$1\" --private && ghq get -p \"$1\"; }; f"
 	PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
