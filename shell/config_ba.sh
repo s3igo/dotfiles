@@ -30,5 +30,8 @@ function __prompt-command {
 
 declare -x PROMPT_COMMAND=__prompt-command
 
+# direnv
+type direnv > /dev/null 2>&1 && eval "$(direnv hook bash)"
+
 # GitHub CLI
 type gh > /dev/null 2>&1 && eval "$(gh completion -s bash)"

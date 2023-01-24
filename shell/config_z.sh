@@ -20,6 +20,9 @@ function __export_date {
 
 precmd_functions+=(__export_date)
 
+# direnv
+type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
+
 # GitHub CLI
 type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 
