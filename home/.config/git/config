@@ -1,7 +1,5 @@
 [alias]
 	cm = commit -m
-	ps = push
-	pl = pull
 	st = status
 	append = commit --amend --no-edit
 	sync = pull --rebase
