@@ -32,6 +32,9 @@ declare -x EDITOR='nvim'
 # ranger
 [[ -n "$RANGER_LEVEL" ]] && PS1="ranger ${PS1}"
 
+# ssh
+declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
 
