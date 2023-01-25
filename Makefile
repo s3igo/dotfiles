@@ -5,12 +5,15 @@ MAC_PKG := $(PKG_DIR)/mac
 # MAC_PKG := $(PKG_DIR)/mac/minimum
 LINUX_PKG := $(PKG_DIR)/linux
 
+.PHONY: init
 init:
 	. ./bin/init.sh
 
+.PHONY: link
 link:
 	bash ./bin/link.sh
 
+.PHONY: update
 update:
 ifeq ($(shell uname),Darwin)
 	type brew > /dev/null 2>&1 \
@@ -33,6 +36,7 @@ else ifeq ($(shell uname),Linux)
 		&& sudo apt upgrade -y
 endif
 
+.PHONY: cli
 cli:
 ifeq ($(shell uname),Darwin)
 	cat $(MAC_PKG)/tap.txt | xargs -I {} brew tap {}
@@ -41,6 +45,7 @@ else ifeq ($(shell uname),Linux)
 	type apt > /dev/null 2>&1 && cat $(LINUX_PKG)/apt.txt | xargs sudo apt install -y
 endif
 
+.PHONY: gui
 gui:
 ifeq ($(shell uname),Darwin)
 	cat $(MAC_PKG)/cask.txt | xargs brew install --cask
@@ -48,6 +53,7 @@ ifeq ($(shell uname),Darwin)
 	cat $(MAC_PKG)/mas.txt | cut -d " " -f 1 | xargs mas install
 endif
 
+.PHONY: dump
 dump:
 ifeq ($(shell uname),Darwin)
 	type brew > /dev/null 2>&1 \
@@ -60,10 +66,12 @@ else ifeq ($(shell uname),Linux)
 	type apt > /dev/null 2>&1 && apt list --installed | cut -d '/' -f 1 > $(LINUX_PKG)/apt.txt
 endif
 
+.PHONY: install
 install:
 	@make init
 	@make link
 
+.PHONY: sync
 sync:
 	@make update
 	@make dump
