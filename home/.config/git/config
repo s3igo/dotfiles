@@ -27,3 +27,7 @@
 [delta]
     navigate = true
     side-by-side = true
+[push]
+	default = current
+[pull]
+	ff = only
