@@ -1,0 +1,8 @@
+set drawbox
+set icons
+
+map T $trash $fx
+map <enter> &$OPENER $f
+map C $open -a "Google Chrome" $f
+
+cmd open $qlmanage -p $f >& /dev/null
