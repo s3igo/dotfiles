@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-PKG_DIR := ~/.dotfiles/pkg
+PKG_DIR := ~/.dotfiles/packages
 MAC_PKG := $(PKG_DIR)/mac
 # MAC_PKG := $(PKG_DIR)/mac/minimum
 LINUX_PKG := $(PKG_DIR)/linux
