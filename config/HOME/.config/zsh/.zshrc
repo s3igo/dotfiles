@@ -1,4 +1,4 @@
-declare SHELL_DIR="${HOME}/.config/zsh/src"
+declare SHELL_DIR="${HOME}/.dotfiles/config/shell"
 
 source "${SHELL_DIR}/zinit.sh"
 source "${SHELL_DIR}/plugin.sh"
