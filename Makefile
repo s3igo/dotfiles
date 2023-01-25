@@ -22,9 +22,10 @@ ifeq ($(shell uname),Darwin)
 	type mas > /dev/null 2>&1 \
 		&& echo "Updating Mac App Store apps..." \
 		&& mas upgrade 2> /dev/null
-	type zinit > /dev/null 2>&1 \
+	type zsh > /dev/null 2>&1 \
+		&& [ -f ~/.config/zsh/.zshrc ] \
 		&& echo "updating zinit..." \
-		&& zinit update --all
+		&& zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
 else ifeq ($(shell uname),Linux)
 	type apt > /dev/null 2>&1 \
 		&& echo "Updating apt..." \
