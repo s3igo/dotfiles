@@ -20,8 +20,9 @@ declare -x PATH="${PATH}:/usr/local/sbin"
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
-# node for copilot
+# node
 declare -x PATH="${PATH}:/usr/local/opt/node@16/bin"
+declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
