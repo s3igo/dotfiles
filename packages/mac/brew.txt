@@ -11,7 +11,6 @@ git
 git-delta
 gotop
 hexyl
-imagemagick
 itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
