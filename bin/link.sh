@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare LINK_DIR="${HOME}/.dotfiles/home"
+declare LINK_DIR="${HOME}/.dotfiles/config/HOME"
 
 function shell {
     [[ "$(basename "$FILE")" == .bash* ]] && [[ "$SHELL" == *zsh ]] && return 0

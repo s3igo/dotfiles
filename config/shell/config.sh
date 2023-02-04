@@ -20,8 +20,9 @@ declare -x PATH="${PATH}:/usr/local/sbin"
 declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
-# node for copilot
+# node
 declare -x PATH="${PATH}:/usr/local/opt/node@16/bin"
+declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
@@ -29,17 +30,11 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 # editor
 declare -x EDITOR='nvim'
 
-# ranger
-[[ -n "$RANGER_LEVEL" ]] && PS1="ranger ${PS1}"
+# ssh
+declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
-
-# direnv
-if type direnv > /dev/null 2>&1; then
-    [[ $SHELL == *zsh ]] && eval "$(direnv hook zsh)"
-    [[ $SHELL == *bash ]] && eval "$(direnv hook bash)"
-fi
 
 # alias
 alias b='brew'
@@ -48,7 +43,6 @@ alias d='docker'
 alias g='git'
 alias lg='lazygit'
 alias nv='nvim'
-alias ra='ranger'
 
 ## -i
 alias cp='cp -i'

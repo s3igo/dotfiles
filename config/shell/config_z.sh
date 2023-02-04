@@ -20,6 +20,12 @@ function __export_date {
 
 precmd_functions+=(__export_date)
 
+# direnv
+type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
+
+# GitHub CLI
+type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
+
 # alias
 ## shell
 alias -g @i='install'
@@ -30,7 +36,6 @@ alias -g @d_ps='"$(docker ps | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED 
 alias -g @d_ps-a='"$(docker ps -a | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED STATUS PORTS NAMES && echo $ID)"'
 alias -g @d_images='"$(docker images | tail -n +2 | fzf | read REPOSITORY TAG IMAGEID CREATED SIZE && echo $IMAGEID)"'
 
-
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
@@ -39,7 +44,6 @@ fi
 
 # keybind
 bindkey -e # explicit use emacs keybind
-
 bindkey '^U' backward-kill-line
 bindkey '^J' menu-select
 
