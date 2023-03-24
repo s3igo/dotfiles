@@ -1,33 +1,36 @@
 [alias]
-	cm = commit -m
-	st = status
-	append = commit --amend --no-edit
-	sync = pull --rebase
-	init-empty = "!git init && git commit --allow-empty -m 'initial commit'"
-	init-exist = "!git init && git add . && git commit -m 'first commit'"
+    cm = commit -m
+    st = status
+    append = commit --amend --no-edit
+    sync = pull --rebase
+    init-empty = "!git init && git commit --allow-empty -m 'initial commit'"
+    init-exist = "!git init && git add . && git commit -m 'first commit'"
     create = "!f() { gh repo create \"$1\" --private && ghq get -p \"$1\"; }; f"
-	PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
+    PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [user]
-	name = s3igo
-	email = 85787242+s3igo@users.noreply.github.com
+    name = s3igo
+    email = 85787242+s3igo@users.noreply.github.com
 [ghq]
-	root = ~/src
+    root = ~/src
 [core]
     editor = nvim
     pager = delta
+    precomposeunicode = true
 [interactive]
     diffFilter = delta --color-only
 [delta]
     navigate = true
     side-by-side = true
 [push]
-	default = current
+    default = current
 [pull]
-	ff = only
+    ff = only
