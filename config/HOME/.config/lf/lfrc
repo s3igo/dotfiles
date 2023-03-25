@@ -3,6 +3,8 @@ set icons
 
 # override default open command
 cmd open $qlmanage -p $f >& /dev/null
+map <enter> &$OPENER $f
+map C $open -a "Google Chrome" $f
 map D ${{
     if [ -z "$fs" ]; then
         trash "$f"
@@ -10,5 +12,3 @@ map D ${{
         trash $fs
     fi
 }}
-map <enter> &$OPENER $f
-map C $open -a "Google Chrome" $f
