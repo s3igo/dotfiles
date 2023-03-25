@@ -1,8 +1,14 @@
 set drawbox
 set icons
 
-map T $trash $fx
+# override default open command
+cmd open $qlmanage -p $f >& /dev/null
 map <enter> &$OPENER $f
 map C $open -a "Google Chrome" $f
-
-cmd open $qlmanage -p $f >& /dev/null
+map D ${{
+    if [ -z "$fs" ]; then
+        trash "$f"
+    else
+        trash $fs
+    fi
+}}
