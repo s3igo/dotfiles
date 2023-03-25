@@ -56,4 +56,16 @@ $ make dump
 $ make sync
 ```
 
+## Commands
+
+### tmux
+
+- `<C-q>r`: reload config
+- `<C-q><C-s>`: save tmux environment
+- `<C-q><C-r>`: restore tmux environment
+- `<C-q>I`: install plugins
+- `<C-q>U`: update plugins
+- `<C-q><M-u>`: uninstall plugins
+- `$ tmux list-keys`: list key bindings
+
 [^1]: If you want to customize and manage it with git, I recommend manually install.
