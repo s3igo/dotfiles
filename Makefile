@@ -45,10 +45,9 @@ endif
 endif
 ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
 	@# tmux is installed
-	tmux run-shell $(TPM_PATH)/bin/install_plugins
-	tmux run-shell "$(TPM_PATH)/bin/update_plugins all"
+	tmux run "$(TPM_PATH)/bin/update_plugins all"
 	# also run this command to remove unloaded plugins:
-	# `$ tmux run-shell "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/clean_plugins"`
+	# `$ tmux run "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/clean_plugins"`
 	# or `<C-q><M-u>` in tmux
 endif
 
