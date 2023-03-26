@@ -87,10 +87,10 @@ endif
 
 .PHONY: install
 install:
-	@make init
-	@make link
+	@$(MAKE) init
+	@$(MAKE) link
 
 .PHONY: sync
 sync:
-	@make update
-	@make dump
+	@$(MAKE) update
+	@$(MAKE) dump
