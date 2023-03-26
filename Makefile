@@ -5,6 +5,8 @@ MAC_PKG := $(PKG_DIR)/mac
 # MAC_PKG := $(PKG_DIR)/mac/minimum
 LINUX_PKG := $(PKG_DIR)/linux
 
+TPM_PATH := $${XDG_DATA_HOME}/tmux/plugins/tpm
+
 .PHONY: init
 init:
 	. ./bin/init.sh
@@ -31,6 +33,7 @@ ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
 ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
 	@# uname == Darwin && zsh is installed && .zshrc exists
 	zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
+	# also run this command to remove unloaded plugins: `$ zinit delete --clean`
 endif
 endif
 else ifeq ($(shell uname),Linux)
@@ -39,6 +42,14 @@ ifeq ($(shell type apt > /dev/null 2>&1 && echo $$?),0)
 	sudo apt update
 	sudo apt upgrade -y
 endif
+endif
+ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
+	@# tmux is installed
+	tmux run-shell $(TPM_PATH)/bin/install_plugins
+	tmux run-shell "$(TPM_PATH)/bin/update_plugins all"
+	# also run this command to remove unloaded plugins:
+	# `$ tmux run-shell "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/clean_plugins"`
+	# or `<C-q><M-u>` in tmux
 endif
 
 .PHONY: cli
