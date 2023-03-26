@@ -29,18 +29,18 @@ ifeq ($(shell type mas > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Darwin && mas is installed
 	-mas upgrade
 endif
-ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
-ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
-	@# uname == Darwin && zsh is installed && .zshrc exists
-	zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
-	# also run this command to remove unloaded plugins: `$ zinit delete --clean`
-endif
-endif
 else ifeq ($(shell uname),Linux)
 ifeq ($(shell type apt > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Linux && apt is installed
 	sudo apt update
 	sudo apt upgrade -y
+endif
+endif
+ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
+ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
+	@# zsh is installed && .zshrc exists
+	zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
+	# also run this command to remove unloaded plugins: `$ zinit delete --clean`
 endif
 endif
 ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
