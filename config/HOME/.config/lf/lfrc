@@ -6,6 +6,7 @@ cmd open $qlmanage -p $f >& /dev/null
 map <enter> &$OPENER $f
 map C $open -a "Google Chrome" $f
 map D ${{
+    # スペースを含むファイルと複数のファイルを区別するため`$fx`変数を使わない
     if [ -z "$fs" ]; then
         trash "$f"
     else
