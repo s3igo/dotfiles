@@ -112,7 +112,15 @@ require('packer').startup(function(use)
     use({'kyazdani42/nvim-web-devicons'})
     use({'vim-jp/vimdoc-ja'})
     use({'github/copilot.vim'})
-    use({'cappyzawa/trim.nvim'})
+    use({
+        'cappyzawa/trim.nvim',
+        config = function()
+            require('trim').setup({
+                disable = {"markdown"},
+                patterns = {[[%s/\s\+$//e]]}
+            })
+        end
+    })
     use({
         'bluz71/vim-nightfly-guicolors',
         config = function()
@@ -190,13 +198,129 @@ require('packer').startup(function(use)
             })
         end
     })
-    use({'lukas-reineke/indent-blankline.nvim'})
-    use({'nvim-lualine/lualine.nvim'})
-    use({'b3nj5m1n/kommentary'})
+    use({
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            require('indent_blankline').setup({
+                char = '|',
+                show_end_of_line = true,
+                show_trailing_blankline_indent = false
+                -- tree-sitterが必要
+                -- show_current_context = true,
+                -- show_current_context_start = true,
+            })
+        end
+    })
+    use({
+        'nvim-lualine/lualine.nvim',
+        config = function()
+            require('lualine').setup({
+                options = {
+                    icons_enabled = false,
+                    theme = 'auto',
+                    component_separators = {
+                        left = '',
+                        right = ''
+                    },
+                    section_separators = {
+                        left = '',
+                        right = ''
+                    },
+                    disabled_filetypes = {
+                        statusline = {},
+                        winbar = {}
+                    },
+                    ignore_focus = {},
+                    always_divide_middle = true,
+                    globalstatus = false,
+                    refresh = {
+                        statusline = 1000,
+                        tabline = 1000,
+                        winbar = 1000
+                    }
+                },
+                sections = {
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff', 'diagnostics'},
+                    lualine_c = {'filename'},
+                    lualine_z = {'encoding', {
+                        'fileformat',
+                        fmt = function(str)
+                            local formats = {
+                                unix = 'LF',
+                                dos = 'CRLF',
+                                mac = 'CR'
+                            }
+                            return formats[str]
+                        end
+                    }, 'filetype'},
+                    lualine_y = {{
+                        'bo:expandtab',
+                        fmt = function(str)
+                            if str == 'true' then
+                                return 'spaces:'
+                            else
+                                return 'tab size:'
+                            end
+                        end
+                    }, 'bo:tabstop'},
+                    lualine_x = {'location'}
+                },
+                inactive_sections = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = {'filename'},
+                    lualine_x = {'location'},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                tabline = {},
+                winbar = {},
+                inactive_winbar = {},
+                extensions = {}
+            })
+        end
+    })
+    use({
+        'b3nj5m1n/kommentary',
+        config = function()
+            require('kommentary.config').configure_language("default", {
+                prefer_single_line_comments = true
+            })
+        end
+    })
     use({
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-        requires = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context'}
+        requires = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context'},
+        config = function()
+            require('nvim-treesitter.configs').setup({
+                highlight = {
+                    enable = true,
+                    disable = {}
+                },
+                indent = {
+                    enable = true,
+                    disable = {}
+                },
+                -- ensure_installed = 'all',
+                auto_install = true,
+                autotag = {
+                    enable = true
+                },
+                rainbow = {
+                    enable = true,
+                    extended_mode = false,
+                    max_file_lines = 1000
+                },
+                endwise = {
+                    enable = true
+                }
+            })
+
+            local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+            parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
+        end
     })
     use({
         'nvim-telescope/telescope-frecency.nvim',
@@ -208,7 +332,60 @@ require('packer').startup(function(use)
     })
     use({
         'nvim-telescope/telescope.nvim',
-        requires = 'nvim-telescope/telescope-ghq.nvim'
+        requires = 'nvim-telescope/telescope-ghq.nvim',
+        config = function()
+            local status, telescope = pcall(require, 'telescope')
+            if (not status) then
+                return
+            end
+
+            local builtin = require('telescope.builtin')
+
+            telescope.load_extension('fzf')
+            telescope.load_extension('frecency')
+            telescope.load_extension('ghq')
+
+            telescope.setup {
+                defaults = {
+                    file_ignore_patterns = {'%.git', 'node_modules'}
+                },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case"
+                    }
+                }
+            }
+
+            local map = vim.keymap
+
+            map.set('n', 'sp', function()
+                builtin.find_files({
+                    hidden = true,
+                    no_ignore = true
+                })
+            end)
+            map.set('n', 'sn', function()
+                builtin.live_grep()
+            end)
+            map.set('n', '<tab>', function()
+                builtin.buffers()
+            end)
+            map.set('n', 'sh', function()
+                builtin.help_tags()
+            end)
+            map.set('n', 'sc', function()
+                builtin.command_history()
+            end)
+
+            map.set('n', '<C-s>', function()
+                telescope.extensions.frecency.frecency()
+            end)
+            map.set('n', '<C-g>', '<cmd>Telescope ghq list<cr>')
+
+        end
     })
     use({
         'norcalli/nvim-colorizer.lua',
@@ -242,10 +419,34 @@ require('packer').startup(function(use)
             require('nvim-surround').setup()
         end
     })
-    use({'nvim-tree/nvim-tree.lua'})
+    use({
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+            vim.keymap.set('n', 'sb', ':NvimTreeToggle<CR>')
+            vim.cmd('highlight NvimTreeNormal ctermbg=NONE guibg=NONE')
+            require('nvim-tree').setup({
+                view = {
+                    mappings = {
+                        list = {{
+                            key = 's',
+                            action = ''
+                        }, {
+                            key = 'so',
+                            action = 'system_open'
+                        }}
+                    }
+                },
+                filters = {
+                    custom = {'\\.git$', '.cache$'}
+                }
+            })
+        end
+    })
 
     -- completion
-    use({'kevinhwang91/nvim-hlslens'})
+    -- use({'kevinhwang91/nvim-hlslens'})
     use {
         "tversteeg/registers.nvim",
         config = function()
