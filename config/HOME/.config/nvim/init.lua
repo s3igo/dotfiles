@@ -110,17 +110,7 @@ require('packer').startup(function(use)
     use({'wbthomason/packer.nvim'})
     use({'nvim-lua/plenary.nvim'})
     use({'kyazdani42/nvim-web-devicons'})
-    use({'vim-jp/vimdoc-ja'})
     use({'github/copilot.vim'})
-    use({
-        'cappyzawa/trim.nvim',
-        config = function()
-            require('trim').setup({
-                disable = {"markdown"},
-                patterns = {[[%s/\s\+$//e]]}
-            })
-        end
-    })
     use({
         'bluz71/vim-nightfly-guicolors',
         config = function()

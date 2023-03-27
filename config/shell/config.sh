@@ -28,8 +28,7 @@ declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
-# declare -x EDITOR='nvim'
-declare -x EDITOR='vim'
+declare -x EDITOR='nvim'
 
 # ssh
 declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
