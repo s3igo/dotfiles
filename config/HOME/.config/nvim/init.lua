@@ -40,13 +40,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- insert
--- o.textwidth = 120
--- vim.cmd('autocmd! bufwritepost $MYVIMRC source %')
-vim.api.nvim_create_autocmd('BufWritePost', {
-    pattern = (vim.env.HOME .. "/.config/nvim/**/*"),
-    command = 'source $MYVIMRC'}
-)
-
+-- vim.opt.textwidth = 120
 
 -- --------------------------------- keymaps -------------------------------- --
 vim.g.mapleader = ' '
@@ -79,7 +73,7 @@ vim.keymap.set('c', '<C-h>', '<BS>')
 
 -- --------------------------------- autocmd -------------------------------- --
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-    pattern = 'plugins.lua',
+    pattern = 'init.lua',
     command = 'PackerCompile'
 })
 vim.cmd([[
@@ -135,7 +129,6 @@ require('packer').startup(function(use)
         requires = {
             'windwp/nvim-ts-autotag',
             'nvim-treesitter/nvim-treesitter-context',
-            -- 'p00f/nvim-ts-rainbow',
         },
     })
     use({
@@ -165,48 +158,8 @@ require('packer').startup(function(use)
     })
     use({ 'nvim-tree/nvim-tree.lua' })
 
-    -- LSP
-    use({ 'neovim/nvim-lspconfig' })
-    use({ 'williamboman/mason.nvim' })
-    use({ 'williamboman/mason-lspconfig.nvim' })
-
     -- completion
-    use({ 'hrsh7th/nvim-cmp' })
-    use({ 'hrsh7th/cmp-nvim-lsp' })
-    use({ 'hrsh7th/cmp-buffer' })
-    use({ 'hrsh7th/cmp-path' })
-    use({ 'hrsh7th/cmp-cmdline' })
-    use({
-        'hrsh7th/vim-vsnip',
-        config = function () vim.g.vsnip_snippet_dir = '~/.dotfiles/vsnip' end
-    })
-    use({ 'hrsh7th/cmp-vsnip'})
-    use({ 'onsails/lspkind-nvim' })
-    use({
-        'phaazon/hop.nvim',
-        config = function() require('hop').setup() vim.keymap.set('n', 'ss', '<cmd>HopWord<cr>') end
-    })
-    use({
-        'j-hui/fidget.nvim',
-        config = function() require('fidget').setup() end
-    })
-    use({
-        'folke/trouble.nvim',
-        config = function()
-            require('trouble').setup()
-            vim.keymap.set('n', 'sm', '<cmd>TroubleToggle<cr>')
-        end
-    })
-    use({ 'glepnir/lspsaga.nvim' })
-    use({
-        'akinsho/toggleterm.nvim',
-        config = function() require('toggleterm').setup({
-            -- size = 20,
-        })
-        vim.keymap.set('n', 'sj', '<cmd>ToggleTerm<cr>')
-        end
-    })
-    -- use({ 'kevinhwang91/nvim-hlslens' })
+    use({ 'kevinhwang91/nvim-hlslens' })
     use {
         "tversteeg/registers.nvim",
         config = function() require("registers").setup() end,
@@ -216,22 +169,10 @@ require('packer').startup(function(use)
         run = function() vim.fn["mkdp#util#install"]() end,
     })
     use({ 'mickael-menu/zk-nvim' })
-    -- use({ 'L3MON4D3/LuaSnip' })
-    --[[ use({
-        'ray-x/lsp_signature.nvim',
-        config = function() require('lsp_signature').setup({
-            toggle_key = '<M-j>'
-        }) end
-    }) ]]
 end)
 
 -- ------------------------------- appearance ------------------------------- --
 vim.opt.termguicolors = true
--- vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
--- vim.cmd('highlight NonText ctermbg=NONE guibg=NONE')
--- vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
--- vim.cmd('highlight Folded ctermbg=NONE guibg=NONE')
--- vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
 vim.cmd('autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE')
 vim.cmd('autocmd colorscheme * highlight NonText     ctermbg=NONE guibg=NONE')
 vim.cmd('autocmd colorscheme * highlight Folded      ctermbg=NONE guibg=NONE')
@@ -260,4 +201,3 @@ vim.opt.matchtime = 1
 vim.opt.relativenumber = true
 
 vim.opt.title = true
-
