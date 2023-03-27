@@ -1,46 +1,43 @@
--- require('base')
-
-local o = vim.opt
-
+-- ---------------------------------- base ---------------------------------- --
 -- language
 vim.env.LANG = 'en_US.UTF-8'
 vim.scriptencoding = 'utf-8'
-o.encoding = 'utf-8'
-o.fileencoding = 'utf-8'
-o.ambiwidth = 'double'
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
+vim.opt.ambiwidth = 'double'
 
 -- files
-o.fileformats = 'unix,dos,mac'
-o.wildmenu = true
+vim.opt.fileformats = 'unix,dos,mac'
+vim.opt.wildmenu = true
 
 -- workbench
-o.cmdheight = 0
-o.showtabline = 2
-o.showcmd = true
+vim.opt.cmdheight = 0
+vim.opt.showtabline = 2
+vim.opt.showcmd = true
 
 --- indent
-o.expandtab = true
-o.shiftwidth = 0
-o.smarttab = true
-o.autoindent = true
-o.smartindent = true
-o.softtabstop = -1
-o.tabstop = 4
-o.wrap = true
-o.breakindent = true
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 0
+vim.opt.smarttab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.softtabstop = -1
+vim.opt.tabstop = 4
+vim.opt.wrap = true
+vim.opt.breakindent = true
 
 -- config
-o.clipboard = 'unnamedplus'
-o.mouse = 'a'
-o.visualbell = true
-o.emoji = true
-o.backup = false
-o.shell = 'zsh'
+vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a'
+vim.opt.visualbell = true
+vim.opt.emoji = true
+vim.opt.backup = false
+vim.opt.shell = 'zsh'
 
 -- search
-o.hlsearch = true
-o.ignorecase = true
-o.smartcase = true
+vim.opt.hlsearch = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 -- insert
 -- o.textwidth = 120
@@ -51,48 +48,40 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 )
 
 
--- require('keymaps')
-
-local map = vim.keymap
-
+-- --------------------------------- keymaps -------------------------------- --
 vim.g.mapleader = ' '
 
 -- disable
-map.set('n', 's', '<nop>')
-map.set('n', 't', '<nop>')
+vim.keymap.set('n', 's', '<nop>')
+vim.keymap.set('n', 't', '<nop>')
 
 -- buffer
-map.set('n', '<C-w>n', '<cmd>bn<cr>')
-map.set('n', '<C-w><C-n>', '<cmd>bn<cr>')
-map.set('n', '<C-w>p', '<cmd>bp<cr>')
-map.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
+vim.keymap.set('n', '<C-w>n', '<cmd>bn<cr>')
+vim.keymap.set('n', '<C-w><C-n>', '<cmd>bn<cr>')
+vim.keymap.set('n', '<C-w>p', '<cmd>bp<cr>')
+vim.keymap.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
 
 --misc
-map.set('n', 'Y', 'y$')
-map.set('n', 'sd', '"_d')
-map.set('i', '<C-s>', '<C-d>')
+vim.keymap.set('n', 'Y', 'y$')
+vim.keymap.set('n', 'sd', '"_d')
+vim.keymap.set('i', '<C-s>', '<C-d>')
 
 -- emacs like keybindings
-map.set({ 'c', 'i' }, '<C-a>', '<Home>')
-map.set({ 'c', 'i' }, '<C-e>', '<End>')
-map.set({ 'c', 'i' }, '<C-b>', '<Left>')
-map.set({ 'c', 'i' }, '<C-f>', '<Right>')
-map.set({ 'c', 'i' }, '<C-d>', '<Del>')
-map.set('i', '<C-p>', '<Up>')
-map.set('i', '<C-n>', '<Down>')
-map.set('i', '<C-k>', '<Esc>lDa')
-map.set('c', '<C-h>', '<BS>')
+vim.keymap.set({ 'c', 'i' }, '<C-a>', '<Home>')
+vim.keymap.set({ 'c', 'i' }, '<C-e>', '<End>')
+vim.keymap.set({ 'c', 'i' }, '<C-b>', '<Left>')
+vim.keymap.set({ 'c', 'i' }, '<C-f>', '<Right>')
+vim.keymap.set({ 'c', 'i' }, '<C-d>', '<Del>')
+vim.keymap.set('i', '<C-p>', '<Up>')
+vim.keymap.set('i', '<C-n>', '<Down>')
+vim.keymap.set('i', '<C-k>', '<Esc>lDa')
+vim.keymap.set('c', '<C-h>', '<BS>')
 
--- require('autocmd')
-
+-- --------------------------------- autocmd -------------------------------- --
 vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
     pattern = 'plugins.lua',
     command = 'PackerCompile'
 })
--- vim.api.nvim_create_autocmd({ 'BufWritePost' }), {
--- pattern = $MYVIMRC,
---    command = 'source %'
--- })
 vim.cmd([[
     augroup packer_user_config
         autocmd!
@@ -100,14 +89,12 @@ vim.cmd([[
     augroup end
 ]])
 
--- require('plugins')
-
+-- --------------------------------- plugins -------------------------------- --
 -- Automatically install packer
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system({
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = vim.fn.system({
         "git",
         "clone",
         "--depth",
@@ -238,11 +225,8 @@ require('packer').startup(function(use)
     }) ]]
 end)
 
--- require('appearance')
-
-local o = vim.opt
-
-o.termguicolors = true
+-- ------------------------------- appearance ------------------------------- --
+vim.opt.termguicolors = true
 -- vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
 -- vim.cmd('highlight NonText ctermbg=NONE guibg=NONE')
 -- vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
@@ -253,12 +237,12 @@ vim.cmd('autocmd colorscheme * highlight NonText     ctermbg=NONE guibg=NONE')
 vim.cmd('autocmd colorscheme * highlight Folded      ctermbg=NONE guibg=NONE')
 vim.cmd('autocmd colorscheme * highlight EndOfBuffer ctermbg=NONE guibg=NONE')
 
-o.pumblend = 10
+vim.opt.pumblend = 10
 
-o.number = true
-o.list = true
-o.cursorline = true
-o.listchars = {
+vim.opt.number = true
+vim.opt.list = true
+vim.opt.cursorline = true
+vim.opt.listchars = {
     space = '･',
     tab = '>-',
     eol = '¬',
@@ -266,14 +250,14 @@ o.listchars = {
     precedes = '«',
     nbsp = '+'
 }
-o.laststatus = 2
-o.scrolloff = 5
-o.signcolumn = 'yes'
-o.colorcolumn = '80,100,120'
+vim.opt.laststatus = 2
+vim.opt.scrolloff = 5
+vim.opt.signcolumn = 'yes'
+vim.opt.colorcolumn = '80,100,120'
 
-o.showmatch = true
-o.matchtime = 1
-o.relativenumber = true
+vim.opt.showmatch = true
+vim.opt.matchtime = 1
+vim.opt.relativenumber = true
 
-o.title = true
+vim.opt.title = true
 
