@@ -29,6 +29,7 @@ type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 # alias
 ## shell
 alias -g @i='install'
+alias -g @u='uninstall'
 alias -g @latest='"$(command ls -rt $1 | tail -n 1)"'
 
 ## docker
@@ -45,7 +46,6 @@ fi
 # keybind
 bindkey -e # explicit use emacs keybind
 bindkey '^U' backward-kill-line
-bindkey '^J' menu-select
 
 ## cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook

@@ -1,3 +1,4 @@
+act
 bat
 dhall-json
 direnv
@@ -11,6 +12,7 @@ git
 git-delta
 gotop
 hexyl
+idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
@@ -21,10 +23,10 @@ neofetch
 neovim
 nkf
 nnn
-node@16
-ocrmypdf
+pastel
 pdftk-java
 poppler
+procs
 rename
 ripgrep
 silicon
@@ -32,6 +34,7 @@ tesseract-lang
 tmux
 translate-shell
 tree
+volta
 xdg-ninja
 zellij
 zk
