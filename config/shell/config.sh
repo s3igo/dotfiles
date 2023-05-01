@@ -55,13 +55,18 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 ## ls
-alias ls='exa --icons --git 2> /dev/null || command ls'
-alias la='exa -la --icons --git 2> /dev/null || command ls -la'
+function ls {
+    exa --icons --git 2> /dev/null $@ || command ls $@
+}
+function la {
+    exa -la --icons --git 2> /dev/null $@ || command ls -la $@
+}
 alias al='la' # in case of typo
 
 ## others
 alias cdf='cd $_'
 alias restart='exec $SHELL -l'
+alias mkdri='mkdir' # in case of typo
 
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
