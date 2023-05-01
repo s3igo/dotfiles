@@ -46,7 +46,6 @@ fi
 # keybind
 bindkey -e # explicit use emacs keybind
 bindkey '^U' backward-kill-line
-bindkey '^J' menu-select
 
 ## cdr
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
