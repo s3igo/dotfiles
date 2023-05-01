@@ -21,7 +21,8 @@ declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
 
 # node
-declare -x PATH="${PATH}:/usr/local/opt/node@16/bin"
+declare -x VOLTA_HOME="${XDG_DATA_HOME}/volta"
+declare -x PATH="${PATH}:${VOLTA_HOME}/bin"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # lesshist
