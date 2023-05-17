@@ -37,6 +37,9 @@ declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1passw
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
 
+# helix
+declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
+
 # alias
 alias b='brew'
 alias c='code'
