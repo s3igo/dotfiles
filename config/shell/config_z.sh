@@ -30,6 +30,7 @@ type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 ## shell
 alias -g @i='install'
 alias -g @u='uninstall'
+alias -g @s='search'
 alias -g @latest='"$(command ls -rt $1 | tail -n 1)"'
 
 ## docker
