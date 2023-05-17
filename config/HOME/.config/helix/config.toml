@@ -1,0 +1,67 @@
+theme = "kanagawa_transparent"
+
+[editor]
+true-color = true
+undercurl = true
+rulers = [80, 100, 120]
+cursorline = true
+cursorcolumn = true
+line-number = "relative"
+shell = ["zsh", "-c"]
+auto-save = true
+bufferline = "always"
+color-modes = true
+text-width = 120
+
+[editor.statusline]
+left = ["mode", "spacer", "spacer", "version-control", "spinner", "file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+
+[editor.statusline.mode]
+normal = "NORMAL"
+insert = "INSERT"
+select = "SELECT"
+
+
+[editor.lsp]
+# display-message = "enable"
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+
+[editor.whitespace]
+render = "all"
+
+[editor.whitespace.characters]
+space = "･"
+nbsp = "+"
+newline = "¬"
+tab = ">"
+tabpad = "-"
+
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = true
+wrap-indicator = "≈"
+
+[keys.insert]
+"C-p" = "move_line_up"
+"C-n" = "move_line_down"
+"C-b" = "move_char_left"
+"C-f" = "move_char_right"
+"C-a" = "goto_line_start"
+"C-e" = "goto_line_end_newline"
+
+[keys.normal]
+X = "extend_line_above"
+
+[keys.normal.space]
+w = ":write"

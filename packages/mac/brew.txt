@@ -10,7 +10,10 @@ gh
 ghq
 git
 git-delta
+git-lfs
+go
 gotop
+helix
 hexyl
 idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
@@ -35,6 +38,7 @@ tmux
 translate-shell
 tree
 volta
+wvanlint/twf/twf
 xdg-ninja
 zellij
 zk
