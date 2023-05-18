@@ -30,5 +30,3 @@ name = "dockerfile"
 file-types = ["Dockerfile", "dockerfile"]
 indent = { tab-width = 2, unit = "  " }
 comment-token = "#"
-language-server = { command = "docker", args = ["run", "--rm", "-it", "rcjsuen/docker-langserver", "--stdio"] }
-auto-format = true
