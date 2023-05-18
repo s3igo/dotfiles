@@ -1,4 +1,34 @@
 [[language]]
 name = "c"
-indent = { tab-width = 4, unit = " " }
+file-types = ["c", "h"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
 # config =
+
+[[language]]
+name = "yaml"
+file-types = ["yml", "yaml"]
+indent = { tab-width = 2, unit = "  " }
+config = { yaml = { format = { enable =  true } } }
+
+[[language]]
+name = "rust"
+scope = "source.rust"
+injection-regex = "rust"
+file-types = ["rs"]
+roots = ["Cargo.toml", "Cargo.lock"]
+# auto-format = true
+comment-token = "//"
+language-server = { command = "rust-analyzer" }
+indent = { tab-width = 4, unit = "    " }
+
+[language.config.check]
+command = "clippy"
+
+[[language]]
+name = "dockerfile"
+file-types = ["Dockerfile", "dockerfile"]
+indent = { tab-width = 2, unit = "  " }
+comment-token = "#"
+language-server = { command = "docker", args = ["run", "--rm", "-it", "rcjsuen/docker-langserver", "--stdio"] }
+auto-format = true

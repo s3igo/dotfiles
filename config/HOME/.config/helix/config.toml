@@ -61,7 +61,11 @@ wrap-indicator = "≈"
 "C-e" = "goto_line_end_newline"
 
 [keys.normal]
-X = "extend_line_above"
+"X" = "extend_line_above"
+";" = "flip_selections"
+"C-;" = "collapse_selection"
+"C-k" = ["goto_line_start", "kill_to_line_end", "delete_selection_noyank"]
 
 [keys.normal.space]
-w = ":write"
+"w" = ":write"
+"q" = ":buffer-close"

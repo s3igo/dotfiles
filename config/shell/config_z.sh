@@ -52,7 +52,7 @@ bindkey '^U' backward-kill-line
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 zle -N anyframe-widget-cdr
-bindkey '^S' anyframe-widget-cdr
+bindkey '^J' anyframe-widget-cdr
 
 ## command history
 zle -N anyframe-widget-execute-history
