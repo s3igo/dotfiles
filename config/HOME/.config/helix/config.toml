@@ -62,9 +62,10 @@ wrap-indicator = "≈"
 
 [keys.normal]
 "X" = "extend_line_above"
-";" = "flip_selections"
+";" = "repeat_last_motion"
 "C-;" = "collapse_selection"
 "C-k" = ["goto_line_start", "kill_to_line_end", "delete_selection_noyank"]
+# "C-r" = ":reload"
 
 [keys.normal.space]
 "w" = ":write"
