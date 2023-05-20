@@ -32,7 +32,8 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 declare -x EDITOR='nvim'
 
 # ssh
-declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+[[ "$(uname)" == 'Darwin' ]] \
+    && declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
