@@ -26,6 +26,7 @@ neofetch
 neovim
 nkf
 nnn
+pam-reattach
 pastel
 pdftk-java
 poppler
@@ -40,5 +41,6 @@ tree
 volta
 wvanlint/twf/twf
 xdg-ninja
+yaml-language-server
 zellij
 zk
