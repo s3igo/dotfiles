@@ -7,6 +7,8 @@
     init-exist = "!git init && git add . && git commit -m 'first commit'"
     create = "!f() { gh repo create \"$1\" --private && ghq get -p \"$1\"; }; f"
     PR = "!f() { git fetch origin \"pull/$1/head:PR-$1\"; }; f"
+    backup = "!f() { ghq list > _ghq.txt && dbxcli put _ghq.txt src/ghq.txt && rm -f _ghq.txt; }; f"
+    restore = "!f() { dbxcli get src/ghq.txt && cat ghq.txt | ghq get --parallel && rm -f ghq.txt; }; f"
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 [url "git@github.com:"]
