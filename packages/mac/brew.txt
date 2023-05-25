@@ -11,7 +11,6 @@ ghq
 git
 git-delta
 git-lfs
-go
 gotop
 helix
 hexyl
@@ -25,8 +24,8 @@ make
 neofetch
 neovim
 nkf
-nnn
 pam-reattach
+pango
 pastel
 pdftk-java
 poppler
@@ -34,12 +33,9 @@ procs
 rename
 ripgrep
 silicon
-tesseract-lang
 tmux
-translate-shell
 tree
 volta
-wvanlint/twf/twf
 xdg-ninja
 yaml-language-server
 zellij

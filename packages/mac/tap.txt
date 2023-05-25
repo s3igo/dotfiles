@@ -6,4 +6,3 @@ idleberg/dbxcli
 itchyny/tap
 jesseduffield/lazygit
 knqyf263/pet
-wvanlint/twf
