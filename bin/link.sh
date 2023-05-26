@@ -25,6 +25,3 @@ while read -r FILE; do
     mkdir -p "$(dirname "$DEST")"
     ln -fnsv "$FILE" "$DEST"
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
-
-# relogin shell
-exec $SHELL -l
