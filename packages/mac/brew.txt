@@ -1,11 +1,9 @@
 act
 bat
-dhall-json
 direnv
 emacs
 exa
 fd
-fswatch
 gh
 ghq
 git
@@ -28,7 +26,6 @@ pam-reattach
 pango
 pastel
 pdftk-java
-poppler
 procs
 rename
 ripgrep
@@ -37,6 +34,4 @@ tmux
 tree
 volta
 xdg-ninja
-yaml-language-server
 zellij
-zk
