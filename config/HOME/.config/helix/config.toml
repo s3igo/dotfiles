@@ -14,7 +14,7 @@ color-modes = true
 text-width = 120
 
 [editor.statusline]
-left = ["mode", "spacer", "spacer", "version-control", "spinner", "file-name"]
+left = ["mode", "spinner", "spacer", "version-control", "file-name"]
 right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
 
 [editor.statusline.mode]
