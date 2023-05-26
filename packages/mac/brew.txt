@@ -21,9 +21,7 @@ macos-trash
 make
 neofetch
 neovim
-nkf
 pam-reattach
-pango
 pastel
 pdftk-java
 procs
