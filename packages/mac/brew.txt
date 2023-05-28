@@ -1,7 +1,6 @@
 act
 bat
 direnv
-emacs
 exa
 fd
 gh
@@ -18,7 +17,6 @@ jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
 lf
 macos-trash
-make
 neofetch
 neovim
 pam-reattach

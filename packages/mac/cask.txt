@@ -2,10 +2,8 @@
 1password-cli
 adobe-creative-cloud
 alacritty
-aquaskk
 arc
 arduino-ide
-cloudflare-warp
 discord
 docker
 dropbox
