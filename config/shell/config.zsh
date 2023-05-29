@@ -66,3 +66,10 @@ function __ghq-fzf {
 }
 zle -N __ghq-fzf
 bindkey '^G' __ghq-fzf
+
+# syntax highlight
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main line brackets cursor)
+declare -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold' # alias
+ZSH_HIGHLIGHT_STYLES[path]='fg=yellow,bold' # exist path
+ZSH_HIGHLIGHT_STYLES[root]='bg=red' # root

@@ -1,0 +1,40 @@
+shell = "zsh"
+apply = ["defer"]
+
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+apply = ["source"]
+
+[templates]
+defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks | get: \"post\" | nl }}"
+
+[plugins.compinit]
+inline = "autoload -Uz compinit && compinit"
+
+[plugins.pure]
+github = "sindresorhus/pure"
+use = ["async.zsh", "pure.zsh"]
+apply = ["source"]
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+[plugins.zsh-autopair]
+github = "hlissner/zsh-autopair"
+
+[plugins.undollar]
+github = "zpm-zsh/undollar"
+
+[plugins.anyframe]
+github = "mollifier/anyframe"
+
+[plugins.local]
+local = "~/.dotfiles/config/shell"
+use = ["*.zsh", "*.sh"]
+apply = ["source"]

@@ -38,9 +38,10 @@ endif
 endif
 ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
 ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
-	@# zsh is installed && .zshrc exists
-	zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
-	# also run this command to remove unloaded plugins: `$ zinit delete --clean`
+ifeq ($(shell type sheldon > /dev/null 2>&1 && echo $$?),0)
+	@# zsh is installed && .zshrc exists && sheldon is installed
+	zsh -c "source ~/.config/zsh/.zshrc && sheldon lock --update"
+endif
 endif
 endif
 ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)

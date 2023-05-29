@@ -25,6 +25,7 @@ pdftk-java
 procs
 rename
 ripgrep
+sheldon
 silicon
 tmux
 tree

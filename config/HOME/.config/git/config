@@ -11,8 +11,6 @@
     restore = "!f() { dbxcli get src/ghq.txt && cat ghq.txt | ghq get --parallel && rm -f ghq.txt; }; f"
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-[url "git@github.com:"]
-    insteadOf = https://github.com/
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
