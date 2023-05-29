@@ -35,6 +35,6 @@ github = "zpm-zsh/undollar"
 github = "mollifier/anyframe"
 
 [plugins.local]
-local = "~/.dotfiles/config/shell"
+local = "~/.dotfiles/config/common/shell"
 use = ["*.zsh", "*.sh"]
 apply = ["source"]
