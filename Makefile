@@ -40,7 +40,7 @@ ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
 ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
 ifeq ($(shell type sheldon > /dev/null 2>&1 && echo $$?),0)
 	@# zsh is installed && .zshrc exists && sheldon is installed
-	zsh -c "source ~/.config/zsh/.zshrc && sheldon lock --update"
+	sheldon lock --update
 endif
 endif
 endif
