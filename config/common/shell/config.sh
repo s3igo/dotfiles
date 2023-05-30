@@ -61,10 +61,13 @@ alias ....='cd ../../..'
 
 ## ls
 function ls {
-    exa --icons --git 2> /dev/null $@ || command ls $@
+    exa --icons --git $@ 2> /dev/null || command ls $@
+}
+function lt {
+    exa -T --icons $@ 2> /dev/null || command tree $@
 }
 function la {
-    exa -la --icons --git 2> /dev/null $@ || command ls -la $@
+    exa -la --icons --git $@ 2> /dev/null || command ls -la $@
 }
 alias al='la' # in case of typo
 
