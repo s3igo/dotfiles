@@ -11,6 +11,7 @@ firefox
 font-udev-gothic-nf
 fujitsu-scansnap-home
 google-chrome
+hammerspoon
 karabiner-elements
 keyboard-cleaner
 logseq
