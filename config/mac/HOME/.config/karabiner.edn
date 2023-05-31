@@ -1,0 +1,83 @@
+{
+    :profiles {
+        :goku {
+            :default true
+            :sim 50
+            :delay 500
+            :alone 1000
+            :held 500
+        }
+    }
+    :applications {
+        :terminal [
+            "^org\\.alacritty$"
+            "^com\\.apple\\.Terminal$"
+        ]
+        :vscode [
+            "^com\\.microsoft\\.VSCode$"
+            "^com\\.microsoft\\.VSCodeInsiders$"
+        ]
+    }
+
+    :main [
+        {
+            :des "space -> shift (if not alone)"
+            :rules [
+                [:##spacebar :left_shift nil {:alone :spacebar}]
+            ]
+        }
+        {
+            :des "left/right_cmd -> eisuu/kana"
+            :rules [
+                [:##left_command :left_command nil {:alone :japanese_eisuu :params {:held 100}}]
+                [:##right_command :right_command nil {:alone :japanese_kana :params {:held 100}}]
+            ]
+        }
+        {
+            :des "ctrl+[ -> esc"
+            :rules [
+                [:!Topen_bracket :escape :!terminal]
+            ]
+        }
+        {
+            :des "ctrl+h -> backspace"
+            :rules [
+                [:!Th :delete_or_backspace [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "ctrl+m -> return"
+            :rules [
+                [:!Tm :return_or_enter [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "ctrl+u -> cmd+delete"
+            :rules [
+                [:!Tu :!Qdelete_or_backspace [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "ctrl+w -> option+delete"
+            :rules [
+                [:!Tw :!Odelete_or_backspace [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "ctrl+f/b/p/n -> arrows"
+            :rules [
+                [:!Tf :right_arrow [:!terminal :!vscode]]
+                [:!Tb :left_arrow [:!terminal :!vscode]]
+                [:!Tp :up_arrow [:!terminal :!vscode]]
+                [:!Tn :down_arrow [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "option+f/b -> option+right/left"
+            :rules [
+                [:!Ef :!Eright_arrow [:!terminal :!vscode]]
+                [:!Eb :!Eleft_arrow [:!terminal :!vscode]]
+            ]
+        }
+    ]
+}
