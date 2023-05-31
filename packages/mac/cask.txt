@@ -4,6 +4,7 @@ adobe-creative-cloud
 alacritty
 arc
 arduino-ide
+cmd-eikana
 discord
 docker
 dropbox
@@ -11,8 +12,6 @@ firefox
 font-udev-gothic-nf
 fujitsu-scansnap-home
 google-chrome
-hammerspoon
-karabiner-elements
 keyboard-cleaner
 logseq
 microsoft-auto-update
