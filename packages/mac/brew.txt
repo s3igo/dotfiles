@@ -31,4 +31,5 @@ tmux
 tree
 volta
 xdg-ninja
+yqrashawn/goku/goku
 zellij
