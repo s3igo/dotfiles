@@ -23,7 +23,7 @@
         {
             :des "space -> shift (if not alone)"
             :rules [
-                [:##spacebar :left_shift nil {:alone :spacebar}]
+                [:##spacebar :left_shift nil {:alone :spacebar :held :spacebar}]
             ]
         }
         {
