@@ -29,8 +29,8 @@
         {
             :des "left/right_cmd -> eisuu/kana"
             :rules [
-                [:##left_command :left_command nil {:alone :japanese_eisuu :params {:held 100}}]
-                [:##right_command :right_command nil {:alone :japanese_kana :params {:held 100}}]
+                [:##left_command :left_command nil {:alone :japanese_eisuu}]
+                [:##right_command :right_command nil {:alone :japanese_kana}]
             ]
         }
         {
