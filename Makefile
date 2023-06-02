@@ -1,11 +1,24 @@
 SHELL := /bin/bash
 
 PKG_DIR := ~/.dotfiles/packages
-MAC_PKG := $(PKG_DIR)/mac
-# MAC_PKG := $(PKG_DIR)/mac/minimum
+MAC_PKG = $(PKG_DIR)/mac/$(PROFILE)
 LINUX_PKG := $(PKG_DIR)/linux
 
 TPM_PATH := $${XDG_DATA_HOME}/tmux/plugins/tpm
+
+include .env.example
+-include .env
+
+.PHONY: profile
+profile:
+ifeq ("$(wildcard $(HOME)/.dotfiles/.env)","")
+ifeq ($(shell uname),Darwin)
+	@# `.env` does not exist && uname == Darwin
+	$(eval PROFILES = $(notdir $(wildcard $(PKG_DIR)/mac/*)))
+	$(eval HOSTNAME = $(shell hostname -s))
+	$(if $(filter $(HOSTNAME),$(PROFILES)),$(eval PROFILE = $(HOSTNAME)))
+endif
+endif
 
 .PHONY: init
 init:
@@ -53,7 +66,7 @@ ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
 endif
 
 .PHONY: cli
-cli:
+cli: profile
 ifeq ($(shell uname),Darwin)
 	@# uname == Darwin
 	cat $(MAC_PKG)/tap.txt | xargs -I {} brew tap {}
@@ -66,7 +79,7 @@ endif
 endif
 
 .PHONY: gui
-gui:
+gui: profile
 ifeq ($(shell uname),Darwin)
 	@# uname == Darwin
 	cat $(MAC_PKG)/cask.txt | xargs brew install --cask
@@ -77,7 +90,7 @@ endif
 endif
 
 .PHONY: dump
-dump:
+dump: profile
 ifeq ($(shell uname),Darwin)
 ifeq ($(shell type brew > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Darwin && brew is installed
