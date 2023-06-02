@@ -3,7 +3,7 @@ SHELL := /bin/bash
 include .env.example
 -include .env
 
-PKG_DIR := ~/.dotfiles/packages
+PKG_DIR := $(HOME)/.dotfiles/packages
 MAC_PKG = $(PKG_DIR)/mac/$(PROFILE)
 LINUX_PKG := $(PKG_DIR)/linux
 
