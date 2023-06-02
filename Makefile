@@ -7,6 +7,20 @@ LINUX_PKG := $(PKG_DIR)/linux
 
 TPM_PATH := $${XDG_DATA_HOME}/tmux/plugins/tpm
 
+include .env.example
+-include .env
+
+.PHONY: profile
+profile:
+ifeq ("$(wildcard $(HOME)/.dotfiles/.env)","")
+ifeq ($(shell uname),Darwin)
+	@# `.env` does not exist && uname == Darwin
+	$(eval PROFILES = $(notdir $(wildcard $(PKG_DIR)/mac/*)))
+	$(eval HOSTNAME = $(shell hostname -s))
+	$(if $(filter $(HOSTNAME),$(PROFILES)),$(eval PROFILE = $(HOSTNAME)))
+endif
+endif
+
 .PHONY: init
 init:
 	. ./bin/init.sh
