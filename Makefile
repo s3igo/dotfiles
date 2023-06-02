@@ -1,13 +1,11 @@
 SHELL := /bin/bash
 
+include .env.example
+-include .env
+
 PKG_DIR := ~/.dotfiles/packages
 MAC_PKG = $(PKG_DIR)/mac/$(PROFILE)
 LINUX_PKG := $(PKG_DIR)/linux
-
-TPM_PATH := $${XDG_DATA_HOME}/tmux/plugins/tpm
-
-include .env.example
--include .env
 
 .PHONY: profile
 profile:
@@ -59,7 +57,7 @@ endif
 endif
 ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
 	@# tmux is installed
-	tmux run "$(TPM_PATH)/bin/update_plugins all"
+	tmux run "$${XDG_DATA_HOME}/tmux/plugins/tpm/bin/update_plugins all"
 	# also run this command to remove unloaded plugins:
 	# `$ tmux run "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/clean_plugins"`
 	# or `<C-q><M-u>` in tmux
