@@ -36,6 +36,7 @@ hidden = false
 
 [editor.indent-guides]
 render = true
+character = "|"
 
 [editor.whitespace]
 render = "all"

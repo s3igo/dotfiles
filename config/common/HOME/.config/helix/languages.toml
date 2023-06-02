@@ -29,3 +29,7 @@ name = "dockerfile"
 file-types = ["Dockerfile", "dockerfile"]
 indent = { tab-width = 2, unit = "  " }
 comment-token = "#"
+
+[[language]]
+name = "lua"
+indent = { tab-width = 4, unit = "    " }
