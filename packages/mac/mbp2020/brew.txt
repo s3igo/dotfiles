@@ -17,6 +17,7 @@ jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
 lf
 macos-trash
+mas
 neofetch
 neovim
 pam-reattach

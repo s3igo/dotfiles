@@ -95,7 +95,7 @@ ifeq ($(shell uname),Darwin)
 ifeq ($(shell type brew > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Darwin && brew is installed
 	brew tap > $(MAC_PKG)/tap.txt
-	brew leaves | sed '/mas/d' > $(MAC_PKG)/brew.txt
+	brew leaves > $(MAC_PKG)/brew.txt
 	brew list --cask > $(MAC_PKG)/cask.txt
 endif
 ifeq ($(shell type mas > /dev/null 2>&1 && echo $$?),0)
