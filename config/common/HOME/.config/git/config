@@ -24,7 +24,6 @@
 [core]
     editor = nvim
     pager = delta
-    precomposeunicode = true
 [interactive]
     diffFilter = delta --color-only
 [delta]
