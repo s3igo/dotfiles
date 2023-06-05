@@ -8,17 +8,9 @@ declare -x SAVEHIST=10000
 # prohibit to overwrite
 set -o noclobber
 
+# TODO: check if this is necessary
 # homebrew
-type brew > /dev/null 2>&1 \
-    && [[ "$(uname)" == 'Darwin' ]] \
-    && [[ "$(uname -m)" == 'arm64' ]] \
-    && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-declare -x PATH="${PATH}:/usr/local/sbin"
-
-# terminfo
-declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
-declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+[[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
 # node
 declare -x VOLTA_HOME="${XDG_DATA_HOME}/volta"
