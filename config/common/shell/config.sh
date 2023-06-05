@@ -23,10 +23,6 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 # editor
 declare -x EDITOR='nvim'
 
-# ssh
-[[ "$(uname)" == 'Darwin' ]] \
-    && declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
 
@@ -68,11 +64,6 @@ alias cdf='cd $_'
 alias restart='exec $SHELL -l'
 alias mkdri='mkdir' # in case of typo
 
-## mac
-if [[ "$(uname)" == 'Darwin' ]]; then
-    alias ql='qlmanage -p "$1" >& /dev/null'
-fi
-
 # function
 function timestamp {
     [[ $# == 0 ]] && date '+%Y%m%d%H%M%S' && return 0
@@ -83,7 +74,19 @@ function timestamp {
     command mv "$1" "${now}.${extention}"
 }
 
-function rosetta {
-    [[ $# == 0 ]] && arch -x86_64 zsh && return 0
-    arch -x86_64 zsh -c "$*"
-}
+# mac
+if [[ "$(uname)" == 'Darwin' ]]; then
+    ## ssh
+    declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+    ## alias
+    alias ql='qlmanage -p "$1" >& /dev/null'
+
+    ## function
+    if [[ "$(uname -m)" == 'arm64' ]]; then
+        function rosetta {
+            [[ $# == 0 ]] && arch -x86_64 zsh && return 0
+            arch -x86_64 zsh -c "$*"
+        }
+    fi
+fi
