@@ -8,17 +8,9 @@ declare -x SAVEHIST=10000
 # prohibit to overwrite
 set -o noclobber
 
+# TODO: check if this is necessary
 # homebrew
-type brew > /dev/null 2>&1 \
-    && [[ "$(uname)" == 'Darwin' ]] \
-    && [[ "$(uname -m)" == 'arm64' ]] \
-    && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-declare -x PATH="${PATH}:/usr/local/sbin"
-
-# terminfo
-declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
-declare -x TERMINFO_DIRS="${XDG_DATA_HOME}/terminfo:/usr/share/terminfo"
+[[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
 # node
 declare -x VOLTA_HOME="${XDG_DATA_HOME}/volta"
@@ -30,10 +22,6 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
 declare -x EDITOR='nvim'
-
-# ssh
-[[ "$(uname)" == 'Darwin' ]] \
-    && declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
@@ -61,13 +49,13 @@ alias ....='cd ../../..'
 
 ## ls
 function ls {
-    exa --icons --git $@ 2> /dev/null || command ls $@
+    exa --icons --git "$@" 2> /dev/null || command ls "$@"
 }
 function lt {
-    exa -T --icons $@ 2> /dev/null || command tree $@
+    exa -T --icons "$@" 2> /dev/null || command tree "$@"
 }
 function la {
-    exa -la --icons --git $@ 2> /dev/null || command ls -la $@
+    exa -la --icons --git "$@" 2> /dev/null || command ls -la "$@"
 }
 alias al='la' # in case of typo
 
@@ -75,11 +63,6 @@ alias al='la' # in case of typo
 alias cdf='cd $_'
 alias restart='exec $SHELL -l'
 alias mkdri='mkdir' # in case of typo
-
-## mac
-if [[ "$(uname)" == 'Darwin' ]]; then
-    alias ql='qlmanage -p "$1" >& /dev/null'
-fi
 
 # function
 function timestamp {
@@ -90,3 +73,20 @@ function timestamp {
     declare now="$(date +%Y%m%d%H%M%S)"
     command mv "$1" "${now}.${extention}"
 }
+
+# mac
+if [[ "$(uname)" == 'Darwin' ]]; then
+    ## ssh
+    declare -x SSH_AUTH_SOCK="${HOME}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+    ## alias
+    alias ql='qlmanage -p "$1" >& /dev/null'
+
+    ## function
+    if [[ "$(uname -m)" == 'arm64' ]]; then
+        function rosetta {
+            [[ $# == 0 ]] && arch -x86_64 zsh && return 0
+            arch -x86_64 zsh -c "$*"
+        }
+    fi
+fi

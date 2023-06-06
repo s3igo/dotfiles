@@ -20,7 +20,6 @@ while read -r FILE; do
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
 # if macOS
-
 function karabiner {
     [[ "$(basename "$FILE")" == karabiner.json ]] \
         && echo -n 'cp: ' \
