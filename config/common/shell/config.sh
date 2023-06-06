@@ -8,7 +8,6 @@ declare -x SAVEHIST=10000
 # prohibit to overwrite
 set -o noclobber
 
-# TODO: check if this is necessary
 # homebrew
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 

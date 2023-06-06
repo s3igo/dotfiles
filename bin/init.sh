@@ -7,5 +7,5 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 fi
 
 # xdg-based directories
-mkdir -p ~/{.config,.cache}
-mkdir -p ~/.local/{share,state}
+mkdir -vp ~/{.config,.cache}
+mkdir -vp ~/.local/{share,state}
