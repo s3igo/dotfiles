@@ -112,6 +112,11 @@ install:
 	@$(MAKE) init
 	@$(MAKE) link
 
+.PHONY: tools
+tools:
+	@$(MAKE) cli
+	@$(MAKE) gui
+
 .PHONY: sync
 sync:
 	@$(MAKE) update
