@@ -19,6 +19,13 @@
 [user]
     name = s3igo
     email = 85787242+s3igo@users.noreply.github.com
+    signingkey = op://Personal/sign/public key
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+    gpgsign = true
 [ghq]
     root = ~/src
 [core]
