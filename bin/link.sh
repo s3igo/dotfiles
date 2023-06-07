@@ -7,11 +7,25 @@ function shell {
     return 1
 }
 
+function inject-op {
+    declare FILENAME="$(basename "$FILE")"
+    declare DIRNAME="$(dirname "$FILE")"
+    declare NAME="${FILENAME%.*}"
+    declare EXT="${FILENAME##*.}"
+    declare TARGET="${HOME}${DIRNAME##"$LINK_DIR"}/${NAME}"
+    [[ "$EXT" == 'op' ]] \
+        && echo -n 'op inject: ' \
+        && op inject -f -i "$FILE" -o "$TARGET" \
+        && echo " -> ${FILE}" \
+        && return 0
+}
+
 # make file-based symlink
 echo '--- common config ---'
 declare LINK_DIR="${HOME}/.dotfiles/config/common/HOME"
 while read -r FILE; do
     shell && continue
+    inject-op && continue
 
     declare DEST="${HOME}${FILE##"$LINK_DIR"}"
 
@@ -31,6 +45,8 @@ echo -e '\n--- MacOS specific config ---'
 if [[ "$(uname)" == 'Darwin' ]]; then
     declare LINK_DIR="${HOME}/.dotfiles/config/mac/HOME"
     while read -r FILE; do
+        inject-op && continue
+
         declare DEST="${HOME}${FILE##"$LINK_DIR"}"
 
         mkdir -p "$(dirname "$DEST")"
