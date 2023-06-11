@@ -73,6 +73,19 @@ function timestamp {
     command mv "$1" "${now}.${extention}"
 }
 
+function tmux-backup {
+    declare TARGET_DIR="${XDG_STATE_HOME}/tmux/resurrect"
+    command ls "$TARGET_DIR" | sed '/last/d' | xargs -I{} dbxcli put "${TARGET_DIR}/{}" "src/tmux-resurrect/{}"
+}
+
+function tmux-restore {
+    declare TARGET_DIR="${XDG_STATE_HOME}/tmux/resurrect"
+    declare REMOTE_DIR="src/tmux-resurrect"
+    command mkdir -p "$TARGET_DIR"
+    dbxcli ls "$REMOTE_DIR" | xargs -I{} basename {} | xargs -I{} dbxcli get "${REMOTE_DIR}/{}" "${TARGET_DIR}/{}"
+    ln -fnsv "$(command ls "$TARGET_DIR" | tail -n 1)" "${TARGET_DIR}/last"
+}
+
 # mac
 if [[ "$(uname)" == 'Darwin' ]]; then
     ## ssh
