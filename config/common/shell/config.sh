@@ -81,7 +81,7 @@ function tmux-backup {
 function tmux-restore {
     declare TARGET_DIR="${XDG_STATE_HOME}/tmux/resurrect"
     declare REMOTE_DIR="src/tmux-resurrect"
-    command mkdir -p "$TARGET_DIR"
+    mkdir -p "$TARGET_DIR"
     dbxcli ls "$REMOTE_DIR" | xargs -I{} basename {} | xargs -I{} dbxcli get "${REMOTE_DIR}/{}" "${TARGET_DIR}/{}"
     ln -fnsv "$(command ls "$TARGET_DIR" | tail -n 1)" "${TARGET_DIR}/last"
 }
