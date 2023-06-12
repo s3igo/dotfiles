@@ -12,8 +12,9 @@ set -o noclobber
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
 # node
-declare -x VOLTA_HOME="${XDG_DATA_HOME}/volta"
-declare -x PATH="${PATH}:${VOLTA_HOME}/bin"
+# declare -x VOLTA_HOME="${XDG_DATA_HOME}/volta"
+# declare -x PATH="${PATH}:${VOLTA_HOME}/bin"
+type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
 # lesshist

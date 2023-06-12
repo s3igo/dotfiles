@@ -3,6 +3,7 @@ bat
 direnv
 exa
 fd
+fnm
 gh
 ghq
 git
@@ -30,7 +31,6 @@ sheldon
 silicon
 tmux
 tree
-volta
 xdg-ninja
 yqrashawn/goku/goku
 zellij
