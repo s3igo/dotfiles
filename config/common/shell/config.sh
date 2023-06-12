@@ -44,6 +44,8 @@ alias rm='rm -i'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 
 ## ls
 function ls {
