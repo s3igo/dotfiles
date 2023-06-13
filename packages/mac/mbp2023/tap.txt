@@ -1,6 +1,5 @@
 beeftornado/rmtree
 candid82/brew
-homebrew/cask-drivers
 homebrew/cask-fonts
 homebrew/services
 idleberg/dbxcli
