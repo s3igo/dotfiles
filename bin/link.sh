@@ -12,7 +12,8 @@ function inject-op {
     declare DIRNAME="$(dirname "$FILE")"
     declare NAME="${FILENAME%.*}"
     declare EXT="${FILENAME##*.}"
-    declare TARGET="${HOME}${DIRNAME##"$LINK_DIR"}/${NAME}"
+    declare TARGET="$(dirname "$DEST")/${NAME}"
+
     [[ "$EXT" == 'op' ]] \
         && echo -n 'op inject: ' \
         && op inject -f -i "$FILE" -o "$TARGET" \
@@ -24,12 +25,12 @@ function inject-op {
 echo '--- common config ---'
 declare LINK_DIR="${HOME}/.dotfiles/config/common/HOME"
 while read -r FILE; do
+    declare DEST="${HOME}${FILE##"$LINK_DIR"}"
+    mkdir -p "$(dirname "$DEST")"
+
     shell && continue
     inject-op && continue
 
-    declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-
-    mkdir -p "$(dirname "$DEST")"
     ln -fnsv "$FILE" "$DEST"
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
@@ -45,12 +46,12 @@ echo -e '\n--- MacOS specific config ---'
 if [[ "$(uname)" == 'Darwin' ]]; then
     declare LINK_DIR="${HOME}/.dotfiles/config/mac/HOME"
     while read -r FILE; do
-        inject-op && continue
-
         declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-
         mkdir -p "$(dirname "$DEST")"
+
+        inject-op && continue
         karabiner && continue
+
         ln -fnsv "$FILE" "$DEST"
     done < <(find "$LINK_DIR" -mindepth 1 -type f)
     type goku > /dev/null 2>&1 && goku
