@@ -21,9 +21,6 @@ declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 # editor
 declare -x EDITOR='nvim'
 
-# zk
-declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"
-
 # helix
 declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 
