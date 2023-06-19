@@ -17,6 +17,9 @@
 
 ## Installation[^1]
 
+[^1]: If you want to customize and manage it with git, I recommend manually install.
+
+
 ```shell
 bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
 ```
@@ -67,4 +70,7 @@ $ make sync
 - `<C-q><M-u>`: uninstall plugins
 - `$ tmux list-keys`: list key bindings
 
-[^1]: If you want to customize and manage it with git, I recommend manually install.
+
+## License
+
+MIT
