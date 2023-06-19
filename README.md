@@ -21,7 +21,7 @@
 
 
 ```shell
-bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
+curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh | bash
 ```
 
 or manually
