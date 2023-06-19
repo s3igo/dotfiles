@@ -66,23 +66,32 @@ $ make sync
 
 
 ```shell
-# install CLI tools based on `./pkg/*`
-$ make cli
+# run `bin/init.sh`
+$ make init
 
-# install GUI apps based on `./pkg/*`
-$ make gui
-
+# run `bin/link.sh`
 # re-create symbolic links
 $ make link
 
-# update each package/plugin manager and its packages/plugins
+# install CLI tools based on `package` directory
+$ make cli
+
+# install apps with GUI based on `package` directory
+$ make gui
+
+# update every package/plugin manager and its packages/plugins
 $ make update
 
-# reflects current environment in `./pkg/*`
+# reflects the current state of packages/plugins in the `package` directory
 $ make dump
 
-# run `make update` & `make dump`
-$ make sync
+```
+
+### Internal command
+
+```shell
+# set current profile to `PROFILE` variable
+$ make profile
 ```
 
 ## MEMO: Commands
