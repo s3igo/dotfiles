@@ -11,7 +11,7 @@ By default it contains my configuration for [git](config/mac/HOME/.config/git/co
 - zsh(Optional)  
 Required to use the [configured zsh plugin](config/common/HOME/.config/sheldon/plugins.toml)
 - curl(Optional)  
-Required to perform a [Quick install](#quick-install) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
+Required to perform a [Quick install](#quick-installation) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
 - GNU make(Optional)  
 Required to run the [`make` commands](#usage) described below.
 
@@ -21,15 +21,15 @@ Required to run the [`make` commands](#usage) described below.
 > During installation, files in the `config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
 
 > **Note**
-> If you want to customize and manage it with git, I recommend manually install.
+> [Manual installation](#manual-installation) is recommended if you want to customize and manage using git.
 
-### Quick install
+### Quick installation
 
 ```shell
 curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh | bash
 ```
 
-### manually install
+### Manual installation
 
 ```shell
 # after forked this repository
