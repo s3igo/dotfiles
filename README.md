@@ -2,11 +2,11 @@
 
 ## Attention
 
-- By default, it contains my (s3igo's) config, so please rewrite accordingly.
+- By default, it contains my (s3igo's) config, so please rewrite it accordingly.
     - git: `./home/.config/git/config`
     - ssh: `./home/.ssh/config` (using ssh agent by 1password)
-- When you install it, files under `./home` will overwrite files under your home directory.
-  If there are files that you do not want to be overwritten, please stash them in a safe place.
+- During installation, files in the `./home` directory will overwrite files in your home directory.
+  Please keep files in a safe place if you do not want them to be overwritten.
 
 ## Dependencies
 
