@@ -5,7 +5,6 @@
 - By default, it contains my (s3igo's) config, so please rewrite accordingly.
     - git: `./home/.config/git/config`
     - ssh: `./home/.ssh/config` (using ssh agent by 1password)
-    - zk: `declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"` in `./shell/config.sh` 
 - When you install it, files under `./home` will overwrite files under your home directory.
   If there are files that you do not want to be overwritten, please stash them in a safe place.
 
