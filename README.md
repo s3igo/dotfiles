@@ -2,18 +2,18 @@
 
 This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is intended to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
 
-By default it contains my (s3igo's) configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
+By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
 
+## Requirements
 
-> **Note**
-> The `@` symbol indicates the project root directory
-
-## Dependencies
-
-- bash/zsh
-- curl
+- bash
 - git
-- make (GNU make)
+- zsh(Optional)  
+Required to use the [configured zsh plugin](config/common/HOME/.config/sheldon/plugins.toml)
+- curl(Optional)  
+Required to perform a [Quick install](#quick-install) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
+- GNU make(Optional)  
+Required to run the [`make` commands](#usage) described below.
 
 ## Installation[^1]
 
