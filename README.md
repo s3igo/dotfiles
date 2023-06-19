@@ -48,6 +48,23 @@ $ make install
 
 ## Usage
 
+### Major commands
+
+
+```shell
+# run `make init` and `make link`
+$ make install
+
+# run `make cli` and `make gui`
+$ make tools
+
+# run `make update` and `make dump`
+$ make sync
+
+```
+### Minor commands
+
+
 ```shell
 # install CLI tools based on `./pkg/*`
 $ make cli
@@ -68,7 +85,7 @@ $ make dump
 $ make sync
 ```
 
-## Commands
+## MEMO: Commands
 
 ### tmux
 
