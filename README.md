@@ -15,19 +15,21 @@ Required to perform a [Quick install](#quick-install) or to install [Homebrew âŽ
 - GNU make(Optional)  
 Required to run the [`make` commands](#usage) described below.
 
-## Installation[^1]
+## Installation
 
 > **Warning**
-> During installation, files in the `@/config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
+> During installation, files in the `config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
 
-[^1]: If you want to customize and manage it with git, I recommend manually install.
+> **Note**
+> If you want to customize and manage it with git, I recommend manually install.
 
+### Quick install
 
 ```shell
 curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh | bash
 ```
 
-or manually
+### manually install
 
 ```shell
 # after forked this repository
