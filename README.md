@@ -1,12 +1,12 @@
 # dotfiles
 
-## Attention
+This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is intended to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
 
-- By default, it contains my (s3igo's) config, so please rewrite it accordingly.
-    - git: `./home/.config/git/config`
-    - ssh: `./home/.ssh/config` (using ssh agent by 1password)
-- During installation, files in the `./home` directory will overwrite files in your home directory.
-  Please keep files in a safe place if you do not want them to be overwritten.
+By default it contains my (s3igo's) configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
+
+
+> **Note**
+> The `@` symbol indicates the project root directory
 
 ## Dependencies
 
@@ -16,6 +16,9 @@
 - make (GNU make)
 
 ## Installation[^1]
+
+> **Warning**
+> During installation, files in the `@/config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
 
 [^1]: If you want to customize and manage it with git, I recommend manually install.
 
