@@ -1,11 +1,13 @@
 # dotfiles
 
-This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is intended to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
+This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is designed to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
 
 > **Note**
 > By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
 
 ## Requirements
+
+Intended for installation on Mac or Linux.
 
 - bash
 - git
@@ -17,6 +19,8 @@ Required to perform a [Quick install](#quick-installation) or to install [Homebr
 Required to run the [`make` commands](#usage) described below.
 
 ## Installation
+
+Follow the [Quick install](#quick-installation) or [Manual install](#manual-installation) instructions.
 
 > **Warning**
 > During installation, files in the `config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
