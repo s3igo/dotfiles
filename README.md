@@ -2,7 +2,8 @@
 
 This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is intended to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
 
-By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
+> **Note**
+> By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
 
 ## Requirements
 
@@ -32,7 +33,7 @@ curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh | bash
 ### Manual installation
 
 ```shell
-# after forked this repository
+# after forking this repository
 # 1. download
 $ git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
 
