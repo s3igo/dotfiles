@@ -31,7 +31,7 @@ Follow the [Quick install](#quick-installation) or [Manual install](#manual-inst
 ### Quick installation
 
 ```shell
-curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh | bash
+curl -L sh.s3igo.me | bash
 ```
 
 ### Manual installation
