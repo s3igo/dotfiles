@@ -5,7 +5,6 @@ alacritty
 arc
 arduino-ide
 discord
-docker
 dropbox
 firefox
 font-udev-gothic-nf
@@ -14,6 +13,7 @@ karabiner-elements
 keyboard-cleaner
 logseq
 obsidian
+orbstack
 raycast
 slack
 visual-studio-code
