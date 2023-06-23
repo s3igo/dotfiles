@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # set Homebrew
 if [[ "$(uname)" == 'Darwin' ]]; then

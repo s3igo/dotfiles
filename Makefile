@@ -1,4 +1,4 @@
-SHELL := /bin/bash
+SHELL := /usr/bin/env bash
 
 include .env.example
 -include .env
@@ -20,11 +20,11 @@ endif
 
 .PHONY: init
 init:
-	. ./bin/init.sh
+	source ./scripts/init.sh
 
 .PHONY: link
 link:
-	bash ./bin/link.sh
+	bash ./scripts/link.sh
 
 .PHONY: update
 update:
