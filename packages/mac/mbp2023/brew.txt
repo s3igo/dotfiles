@@ -16,6 +16,7 @@ idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 knqyf263/pet/pet
+lazydocker
 lf
 macos-trash
 mas
