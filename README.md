@@ -12,7 +12,7 @@ Intended for installation on Mac or Linux.
 - bash
 - git
 - zsh(Optional)  
-Required to use the [configured zsh plugin](config/common/HOME/.config/sheldon/plugins.toml)
+Required to use [configured zsh plugins](config/common/HOME/.config/sheldon/plugins.toml)
 - curl(Optional)  
 Required to perform a [Quick install](#quick-installation) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
 - GNU make(Optional)  
@@ -66,10 +66,10 @@ $ make sync
 
 
 ```shell
-# run `bin/init.sh`
+# run `scripts/init.sh`
 $ make init
 
-# run `bin/link.sh`
+# run `scripts/link.sh`
 # re-create symbolic links
 $ make link
 
