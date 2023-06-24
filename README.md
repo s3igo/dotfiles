@@ -1,31 +1,43 @@
 # dotfiles
 
-## Attention
+This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is designed to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
 
-- By default, it contains my (s3igo's) config, so please rewrite accordingly.
-    - git: `./home/.config/git/config`
-    - ssh: `./home/.ssh/config` (using ssh agent by 1password)
-    - zk: `declare -x ZK_NOTEBOOK_DIR="${HOME}/src/github.com/s3igo/notes"` in `./shell/config.sh` 
-- When you install it, files under `./home` will overwrite files under your home directory.
-  If there are files that you do not want to be overwritten, please stash them in a safe place.
+> **Note**
+> By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
 
-## Dependencies
+## Requirements
 
-- bash/zsh
-- curl
+Intended for installation on Mac or Linux.
+
+- bash
 - git
-- make (GNU make)
+- zsh(Optional)  
+Required to use [configured zsh plugins](config/common/HOME/.config/sheldon/plugins.toml)
+- curl(Optional)  
+Required to perform a [Quick install](#quick-installation) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
+- GNU make(Optional)  
+Required to run the [`make` commands](#usage) described below.
 
-## Installation[^1]
+## Installation
+
+Follow the [Quick install](#quick-installation) or [Manual install](#manual-installation) instructions.
+
+> **Warning**
+> During installation, files in the `config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
+
+> **Note**
+> [Manual installation](#manual-installation) is recommended if you want to customize and manage using git.
+
+### Quick installation
 
 ```shell
-bash -c "$(curl -L raw.githubusercontent.com/s3igo/dotfiles/main/install.sh)"
+curl -L sh.s3igo.me | bash
 ```
 
-or manually
+### Manual installation
 
 ```shell
-# after forked this repository
+# after forking this repository
 # 1. download
 $ git clone https://github.com/<username>/dotfiles.git ~/.dotfiles
 
@@ -36,27 +48,53 @@ $ make install
 
 ## Usage
 
+### Major commands
+
+
 ```shell
-# install CLI tools based on `./pkg/*`
-$ make cli
+# run `make init` and `make link`
+$ make install
 
-# install GUI apps based on `./pkg/*`
-$ make gui
+# run `make cli` and `make gui`
+$ make tools
 
+# run `make update` and `make dump`
+$ make sync
+
+```
+### Minor commands
+
+
+```shell
+# run `scripts/init.sh`
+$ make init
+
+# run `scripts/link.sh`
 # re-create symbolic links
 $ make link
 
-# update each package/plugin manager and its packages/plugins
+# install CLI tools based on `package` directory
+$ make cli
+
+# install apps with GUI based on `package` directory
+$ make gui
+
+# update every package/plugin manager and its packages/plugins
 $ make update
 
-# reflects current environment in `./pkg/*`
+# reflects the current state of packages/plugins in the `package` directory
 $ make dump
 
-# run `make update` & `make dump`
-$ make sync
 ```
 
-## Commands
+### Internal command
+
+```shell
+# set current profile to `PROFILE` variable
+$ make profile
+```
+
+## MEMO: Commands
 
 ### tmux
 
@@ -68,4 +106,7 @@ $ make sync
 - `<C-q><M-u>`: uninstall plugins
 - `$ tmux list-keys`: list key bindings
 
-[^1]: If you want to customize and manage it with git, I recommend manually install.
+
+## License
+
+MIT

@@ -1,19 +1,30 @@
-SHELL := /bin/bash
+SHELL := /usr/bin/env bash
 
-PKG_DIR := ~/.dotfiles/packages
-MAC_PKG := $(PKG_DIR)/mac
-# MAC_PKG := $(PKG_DIR)/mac/minimum
+include .env.example
+-include .env
+
+PKG_DIR := $(HOME)/.dotfiles/packages
+MAC_PKG = $(PKG_DIR)/mac/$(PROFILE)
 LINUX_PKG := $(PKG_DIR)/linux
 
-TPM_PATH := $${XDG_DATA_HOME}/tmux/plugins/tpm
+.PHONY: profile
+profile:
+ifeq ("$(wildcard $(HOME)/.dotfiles/.env)","")
+ifeq ($(shell uname),Darwin)
+	@# `.env` does not exist && uname == Darwin
+	$(eval PROFILES = $(notdir $(wildcard $(PKG_DIR)/mac/*)))
+	$(eval HOSTNAME = $(shell hostname -s))
+	$(if $(filter $(HOSTNAME),$(PROFILES)),$(eval PROFILE = $(HOSTNAME)))
+endif
+endif
 
 .PHONY: init
 init:
-	. ./bin/init.sh
+	source ./scripts/init.sh
 
 .PHONY: link
 link:
-	bash ./bin/link.sh
+	bash ./scripts/link.sh
 
 .PHONY: update
 update:
@@ -38,21 +49,22 @@ endif
 endif
 ifeq ($(shell type zsh > /dev/null 2>&1 && echo $$?),0)
 ifneq ("$(wildcard $(HOME)/.config/zsh/.zshrc)","")
-	@# zsh is installed && .zshrc exists
-	zsh -c "source ~/.config/zsh/.zshrc && zinit update --all"
-	# also run this command to remove unloaded plugins: `$ zinit delete --clean`
+ifeq ($(shell type sheldon > /dev/null 2>&1 && echo $$?),0)
+	@# zsh is installed && .zshrc exists && sheldon is installed
+	sheldon lock --update
+endif
 endif
 endif
 ifeq ($(shell type tmux > /dev/null 2>&1 && echo $$?),0)
 	@# tmux is installed
-	tmux run "$(TPM_PATH)/bin/update_plugins all"
+	tmux run "$${XDG_DATA_HOME}/tmux/plugins/tpm/bin/update_plugins all"
 	# also run this command to remove unloaded plugins:
 	# `$ tmux run "${XDG_DATA_HOME}/tmux/plugins/tpm/bin/clean_plugins"`
 	# or `<C-q><M-u>` in tmux
 endif
 
 .PHONY: cli
-cli:
+cli: profile
 ifeq ($(shell uname),Darwin)
 	@# uname == Darwin
 	cat $(MAC_PKG)/tap.txt | xargs -I {} brew tap {}
@@ -65,7 +77,7 @@ endif
 endif
 
 .PHONY: gui
-gui:
+gui: profile
 ifeq ($(shell uname),Darwin)
 	@# uname == Darwin
 	cat $(MAC_PKG)/cask.txt | xargs brew install --cask
@@ -76,12 +88,12 @@ endif
 endif
 
 .PHONY: dump
-dump:
+dump: profile
 ifeq ($(shell uname),Darwin)
 ifeq ($(shell type brew > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Darwin && brew is installed
 	brew tap > $(MAC_PKG)/tap.txt
-	brew leaves | sed '/mas/d' > $(MAC_PKG)/brew.txt
+	brew leaves > $(MAC_PKG)/brew.txt
 	brew list --cask > $(MAC_PKG)/cask.txt
 endif
 ifeq ($(shell type mas > /dev/null 2>&1 && echo $$?),0)
@@ -99,6 +111,11 @@ endif
 install:
 	@$(MAKE) init
 	@$(MAKE) link
+
+.PHONY: tools
+tools:
+	@$(MAKE) cli
+	@$(MAKE) gui
 
 .PHONY: sync
 sync:
