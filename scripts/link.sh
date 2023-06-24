@@ -42,8 +42,8 @@ function karabiner {
         && return 0
 }
 
-echo -e '\n--- MacOS specific config ---'
 if [[ "$(uname)" == 'Darwin' ]]; then
+    echo -e '\n--- MacOS specific config ---'
     declare LINK_DIR="${HOME}/.dotfiles/config/mac/HOME"
     while read -r FILE; do
         declare DEST="${HOME}${FILE##"$LINK_DIR"}"
