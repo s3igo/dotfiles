@@ -12,4 +12,4 @@ eval "$(curl -fsSL raw.githubusercontent.com/s3igo/dotfiles/main/scripts/link.sh
 # restart shell
 exec $SHELL -l
 
-return 0
+exit 0
