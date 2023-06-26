@@ -109,4 +109,4 @@ $ make profile
 
 ## License
 
-MIT
+[MIT](LICENSE)
