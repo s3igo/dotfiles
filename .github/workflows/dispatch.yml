@@ -1,0 +1,23 @@
+name: Dispatch update event
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Dispatch
+    strategy:
+      matrix:
+        repo:
+          - s3igo/docker-gcc
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: ${{ matrix.repo }}
+          event-type: dotfiles-update
+
