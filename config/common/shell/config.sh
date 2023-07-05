@@ -15,6 +15,10 @@ set -o noclobber
 type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 
+# rust
+declare -x CARGO_HOME="${XDG_DATA_HOME}/cargo"
+type rustup-init > /dev/null 2>&1 && source "${CARGO_HOME}/env"
+
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 

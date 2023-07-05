@@ -28,6 +28,7 @@ pdftk-java
 procs
 rename
 ripgrep
+rustup-init
 sheldon
 silicon
 tmux
