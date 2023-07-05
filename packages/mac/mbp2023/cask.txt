@@ -1,6 +1,5 @@
 1password
 1password-cli
-adobe-creative-cloud
 alacritty
 arc
 arduino-ide
