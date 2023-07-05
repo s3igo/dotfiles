@@ -31,6 +31,7 @@
     root = ~/src
 [core]
     editor = nvim
+    ignorecase = false
     pager = delta
 [interactive]
     diffFilter = delta --color-only
