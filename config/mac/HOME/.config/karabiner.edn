@@ -79,5 +79,16 @@
                 [:!Eb :!Eleft_arrow [:!terminal :!vscode]]
             ]
         }
+        {
+            :des "tab layer"
+            :rules [
+                [:tab ["tab-mode" 1] nil {:afterup ["tab-mode" 0] :alone :tab}] ;; enter/escape tab mode
+                [:f :!Eright_arrow ["tab-mode" 1]] ;; tab+f -> option+right
+                [:b :!Eleft_arrow ["tab-mode" 1]] ;; tab+b -> option+left
+                [:p :!Eup_arrow ["tab-mode" 1]] ;; tab+p -> option+up
+                [:n :!Edown_arrow ["tab-mode" 1]] ;; tab+n -> option+down
+                [:d :!EFdelete_or_backspace ["tab-mode" 1]] ;; tab+d -> fn+option+delete
+            ]
+        }
     ]
 }
