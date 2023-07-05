@@ -73,13 +73,6 @@
             ]
         }
         {
-            :des "option+f/b -> option+right/left"
-            :rules [
-                [:!Ef :!Eright_arrow [:!terminal :!vscode]]
-                [:!Eb :!Eleft_arrow [:!terminal :!vscode]]
-            ]
-        }
-        {
             :des "tab layer"
             :rules [
                 [:tab ["tab-mode" 1] nil {:afterup ["tab-mode" 0] :alone :tab}] ;; enter/escape tab mode
