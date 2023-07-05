@@ -12,10 +12,11 @@ set -o noclobber
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
 # node
-type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 
 # rust
+declare -x RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 declare -x CARGO_HOME="${XDG_DATA_HOME}/cargo"
 type rustup-init > /dev/null 2>&1 && source "${CARGO_HOME}/env"
 
