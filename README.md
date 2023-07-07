@@ -94,6 +94,29 @@ $ make dump
 $ make profile
 ```
 
+## Features
+
+### Profile
+
+Multiple profiles are supported.
+This feature is currently only supported on Macs and allows for environment differences
+from machine to machine by creating a directory with the same name as the profile in `packages/mac`.
+
+The profile can be modified by placing an `.env` file in the project root,
+and its behavior follows the flowchart below.
+
+
+```mermaid
+flowchart TB
+    A([Start]) --> B[`.env` exists]
+    B -->|Yes| C[Profile is set in `.env`]
+    B -->|No| D[There is a profile that matches `$ hostname -s`]
+    C -->|Yes| E([Use the profile set in `.env`])
+    C -->|No| F([Use the profile set in `.env.example`])
+    D -->|Yes| G([Use the profile that matches `$ hostname -s`])
+    D -->|No| F
+```
+
 ## MEMO: Commands
 
 ### tmux
