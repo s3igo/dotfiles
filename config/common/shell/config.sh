@@ -11,6 +11,9 @@ set -o noclobber
 # homebrew
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
+# docker
+declare -x DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
 # node
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
