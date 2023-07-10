@@ -30,7 +30,7 @@
 [ghq]
     root = ~/src
 [core]
-    editor = nvim
+    editor = hx
     ignorecase = false
     pager = delta
 [interactive]
