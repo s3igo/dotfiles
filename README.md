@@ -5,6 +5,17 @@ This repository contains shell configurations, a list of tools and applications 
 > **Note**
 > By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
 
+## Design philosophy
+
+This repository is organized according to the following principles.
+
+- **Simple**  
+    This keeps the code base of the script small and provides an effective management with a simple functionality. This also helps to reduce maintenance costs.
+- **Portable**  
+    The configuration is portable and can be used on any machine. In particular, the focus is on ease of use inside a Docker container.
+- **Small**  
+    To minimize dependencies, only carefully selected packages are used.
+
 ## Requirements
 
 Intended for installation on Mac or Linux.
