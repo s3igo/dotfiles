@@ -3,6 +3,7 @@
 alacritty
 arc
 arduino-ide
+cloudflare-warp
 discord
 dropbox
 firefox
