@@ -105,6 +105,24 @@ $ make dump
 $ make profile
 ```
 
+## Directory structure
+
+```shell
+$ tree -ad -L 2 -I '.git'
+.
+├── .github
+│   └── workflows # GitHub Actions
+├── config
+│   ├── common    # OS agnostic configs
+│   └── mac       # MacOS specific configs
+├── packages
+│   └── mac       # MacOS specific packages
+├── scripts       # Scripts required to manage dotfiles
+└── snippets      # Snippets for use in different editors
+
+10 directories
+```
+
 ## Features
 
 ### Profile
