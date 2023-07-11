@@ -25,7 +25,7 @@ Intended for installation on Mac or Linux.
 - zsh(Optional)  
 Required to use [configured zsh plugins](config/common/HOME/.config/sheldon/plugins.toml)
 - curl(Optional)  
-Required to perform a [Quick install](#quick-installation) or to install [Homebrew ⎋](https://brew.sh/) on a Mac.
+Required to perform a [Quick install](#quick-installation) or to install [Homebrew ↗](https://brew.sh/) on a Mac.
 - GNU make(Optional)  
 Required to run the [`make` commands](#usage) described below.
 
