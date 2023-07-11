@@ -3,6 +3,7 @@
     st = status
     edit = commit --amend -m
     append = commit --amend --no-edit
+    push-force = push --force-wth-lease --force-if-includes
     sync = pull --rebase
     init-empty = "!git init && git commit --allow-empty -m 'initial commit'"
     init-exist = "!git init && git add . && git commit -m 'first commit'"
