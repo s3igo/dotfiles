@@ -57,7 +57,7 @@ shell:
   args:
     - -l
     - -c
-    - 'tmux attach || tmux attach -t 0 || tmux'
+    - "zellij attach --index 0 --create"
 
 key_bindings:
   - { key: A, mods: Alt, chars: "\x1ba" }
