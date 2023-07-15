@@ -1,0 +1,26 @@
+// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+
+keybinds {
+    normal {
+        unbind "Ctrl g" // Locked
+        unbind "Ctrl p" // Pane
+        unbind "Ctrl n" // Resize
+        unbind "Ctrl h" // Move
+        unbind "Ctrl s" // Search
+        unbind "Ctrl o" // Session
+        unbind "Ctrl t" // Tab
+    }
+    tmux {
+        unbind "Ctrl b"
+        bind "Ctrl q" { Write 2; SwitchToMode "Normal"; }
+        unbind "\""
+        bind "s" { NewPane "Down"; SwitchToMode "Normal"; }
+        unbind "%"
+        bind "v" { NewPane "Right"; SwitchToMode "Normal"; }
+    }
+    shared_except "tmux" "locked" {
+        bind "Ctrl q" { SwitchToMode "Tmux"; }
+    }
+}
+
+pane_frames false
