@@ -11,10 +11,8 @@ defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source 
 [plugins.compinit]
 inline = "autoload -Uz compinit && compinit"
 
-[plugins.pure]
-github = "sindresorhus/pure"
-use = ["async.zsh", "pure.zsh"]
-apply = ["source"]
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
 
 [plugins.zsh-syntax-highlighting]
 github = "zsh-users/zsh-syntax-highlighting"
