@@ -9,12 +9,14 @@ ghq
 git
 git-delta
 git-lfs
+glow
 gotop
 helix
 hexyl
 idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
+jq
 knqyf263/pet/pet
 lazydocker
 lf
@@ -35,6 +37,5 @@ starship
 tig
 tmux
 tree
-xdg-ninja
 yqrashawn/goku/goku
 zellij
