@@ -8,6 +8,10 @@ declare -x SAVEHIST=10000
 # prohibit to overwrite
 set -o noclobber
 
+# terminfo
+declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
+declare -x TERMINFO_DIRS="${TERMINFO}:/usr/share/terminfo"
+
 # homebrew
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
 
