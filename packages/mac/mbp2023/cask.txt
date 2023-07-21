@@ -10,7 +10,6 @@ firefox
 font-udev-gothic-nf
 google-chrome
 karabiner-elements
-keyboard-cleaner
 logseq
 mochi-diffusion
 obsidian
