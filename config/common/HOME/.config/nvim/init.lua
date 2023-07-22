@@ -57,7 +57,7 @@ vim.keymap.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
 
 -- misc
 vim.keymap.set('n', 'Y', 'y$')
-vim.keymap.set('n', 'sd', '"_d')
+-- vim.keymap.set('n', 'sd', '"_d')
 vim.keymap.set('i', '<C-s>', '<C-d>')
 
 -- emacs like keybindings
@@ -72,8 +72,12 @@ vim.keymap.set('i', '<C-k>', '<Esc>lDa')
 vim.keymap.set('c', '<C-h>', '<BS>')
 
 -- bufferline
-vim.keymap.set('n', 's.', '<cmd>BufferLineMoveNext<cr>')
-vim.keymap.set('n', 's,', '<cmd>BufferLineMovePrev<cr>')
+-- vim.keymap.set('n', 's.', '<cmd>BufferLineMoveNext<cr>')
+-- vim.keymap.set('n', 's,', '<cmd>BufferLineMovePrev<cr>')
+
+-- cursor
+vim.keymap.set('n', '<leader>k', '10k')
+vim.keymap.set('n', '<leader>j', '10j')
 
 -- ------------------------------- appearance ------------------------------- --
 vim.opt.termguicolors = true
