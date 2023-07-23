@@ -49,20 +49,29 @@ bindkey -e # explicit use emacs keybind
 bindkey '^U' backward-kill-line
 
 ## cdr
+function __cdr-fzf {
+    declare BUFFER="cd "$(cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf)""
+    zle accept-line
+}
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
-zle -N anyframe-widget-cdr
-bindkey '^J' anyframe-widget-cdr
+zle -N __cdr-fzf
+bindkey '^J' __cdr-fzf
 
 ## command history
-zle -N anyframe-widget-execute-history
-bindkey '^R' anyframe-widget-execute-history
+function __history-fzf {
+    declare BUFFER="$(history -n | uniq | fzf)"
+    zle accept-line
+}
+zle -N __history-fzf
+bindkey '^R' __history-fzf
 
 ## ghq
 function __ghq-fzf {
-    anyframe-source-ghq-repository \
-        | fzf --preview "command exa --tree --git-ignore -I 'node_modules|.git' {}" \
-        | anyframe-action-execute cd --
+    declare ROOT="$(ghq root)"
+    declare BUFFER="cd "${ROOT}/$(ghq list \
+        | fzf --preview "command exa --tree --git-ignore -I 'node_modules|.git' ${ROOT}/{}")""
+    zle accept-line
 }
 zle -N __ghq-fzf
 bindkey '^G' __ghq-fzf

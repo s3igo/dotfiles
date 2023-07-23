@@ -29,9 +29,6 @@ github = "hlissner/zsh-autopair"
 [plugins.undollar]
 github = "zpm-zsh/undollar"
 
-[plugins.anyframe]
-github = "mollifier/anyframe"
-
 [plugins.ni]
 github = "azu/ni.zsh"
 
