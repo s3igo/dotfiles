@@ -1,0 +1,24 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$all\
+$line_break\
+$custom\
+$character
+"""
+
+[character]
+success_symbol = "[❯](bold blue)"
+
+[memory_usage]
+disabled = false
+threshold = -1
+format = '$symbol[${ram} \[${ram_pct}\]]($style)'
+
+[git_metrics]
+disabled = false
+
+[custom.arch]
+command = 'uname -m'
+when = true
+style = "bold blue"
