@@ -31,7 +31,7 @@ type rustup-init > /dev/null 2>&1 && source "${CARGO_HOME}/env"
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
-declare -x EDITOR='nvim'
+declare -x EDITOR='hx'
 
 # helix
 declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"

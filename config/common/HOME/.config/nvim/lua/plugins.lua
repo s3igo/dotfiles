@@ -1,12 +1,18 @@
+local onlyVscode = function()
+    return vim.g.vscode == nil
+end
+
 return {{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,
+    cond = onlyVscode,
     priority = 1000,
     config = function()
         vim.cmd('colorscheme nightfly')
     end
 }, { -- filer
     'nvim-tree/nvim-tree.lua',
+    cond = onlyVscode,
     config = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
@@ -31,6 +37,7 @@ return {{ -- colorscheme
     end
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',
+    cond = onlyVscode,
     config = function()
         require('gitsigns').setup({
             signs = {
@@ -101,6 +108,7 @@ return {{ -- colorscheme
     end
 }, { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
+    cond = onlyVscode,
     config = function()
         require('indent_blankline').setup({
             char = '|',
@@ -113,6 +121,7 @@ return {{ -- colorscheme
     end
 }, { -- status bar
     'nvim-lualine/lualine.nvim',
+    cond = onlyVscode,
     config = function()
         require('lualine').setup({
             options = {
@@ -182,12 +191,14 @@ return {{ -- colorscheme
     end
 }, { -- scrollbar
     'petertriho/nvim-scrollbar',
+    cond = onlyVscode,
     config = function()
         require('scrollbar').setup()
         require('scrollbar.handlers.gitsigns').setup()
     end
 }, { -- tab bar
     'akinsho/bufferline.nvim',
+    cond = onlyVscode,
     config = function()
         require('bufferline').setup({
             options = {
