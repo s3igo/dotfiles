@@ -17,4 +17,5 @@ orbstack
 raycast
 slack
 visual-studio-code
+zed
 zoom
