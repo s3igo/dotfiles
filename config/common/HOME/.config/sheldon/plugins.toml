@@ -29,9 +29,6 @@ github = "hlissner/zsh-autopair"
 [plugins.undollar]
 github = "zpm-zsh/undollar"
 
-[plugins.ni]
-github = "azu/ni.zsh"
-
 [plugins.local]
 local = "~/.dotfiles/config/common/shell"
 use = ["*.zsh", "*.sh"]
