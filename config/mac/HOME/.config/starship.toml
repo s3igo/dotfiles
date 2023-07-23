@@ -13,13 +13,13 @@ success_symbol = "[❯](bold blue)"
 [git_branch]
 symbol = "󰘬 "
 
+[git_metrics]
+disabled = false
+
 [memory_usage]
 disabled = false
 threshold = -1
 format = '$symbol[${ram} \[${ram_pct}\] ]($style)'
-
-[git_metrics]
-disabled = false
 
 [custom.arch]
 command = 'uname -m'
