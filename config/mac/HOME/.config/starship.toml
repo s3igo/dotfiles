@@ -10,10 +10,13 @@ $character
 [character]
 success_symbol = "[❯](bold blue)"
 
+[git_branch]
+symbol = "󰘬 "
+
 [memory_usage]
 disabled = false
 threshold = -1
-format = '$symbol[${ram} \[${ram_pct}\]]($style)'
+format = '$symbol[${ram} \[${ram_pct}\] ]($style)'
 
 [git_metrics]
 disabled = false
