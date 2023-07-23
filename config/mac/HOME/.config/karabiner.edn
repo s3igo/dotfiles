@@ -54,7 +54,7 @@
         {
             :des "ctrl+u -> cmd+delete"
             :rules [
-                [:!Tu :!Qdelete_or_backspace [:!terminal]]
+                [:!Tu :!Qdelete_or_backspace [:!terminal :!vscode]]
             ]
         }
         {

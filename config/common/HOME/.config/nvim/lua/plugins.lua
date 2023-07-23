@@ -1,18 +1,18 @@
-local onlyVscode = function()
+local isNotVscode = function()
     return vim.g.vscode == nil
 end
 
 return {{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,
-    cond = onlyVscode,
+    -- cond = isNotVscode,
     priority = 1000,
     config = function()
         vim.cmd('colorscheme nightfly')
     end
 }, { -- filer
     'nvim-tree/nvim-tree.lua',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
@@ -37,7 +37,7 @@ return {{ -- colorscheme
     end
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         require('gitsigns').setup({
             signs = {
@@ -108,7 +108,7 @@ return {{ -- colorscheme
     end
 }, { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         require('indent_blankline').setup({
             char = '|',
@@ -121,7 +121,7 @@ return {{ -- colorscheme
     end
 }, { -- status bar
     'nvim-lualine/lualine.nvim',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         require('lualine').setup({
             options = {
@@ -191,14 +191,14 @@ return {{ -- colorscheme
     end
 }, { -- scrollbar
     'petertriho/nvim-scrollbar',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         require('scrollbar').setup()
         require('scrollbar.handlers.gitsigns').setup()
     end
 }, { -- tab bar
     'akinsho/bufferline.nvim',
-    cond = onlyVscode,
+    cond = isNotVscode,
     config = function()
         require('bufferline').setup({
             options = {
@@ -220,47 +220,83 @@ return {{ -- colorscheme
     config = function()
         require("nvim-surround").setup()
     end
+}, { -- tree sitter
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    event = {"BufReadPost", "BufNewFile"},
+    dependencies = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context',
+                    "nvim-treesitter/nvim-treesitter-textobjects", 'RRethy/nvim-treesitter-textsubjects',
+                    'RRethy/nvim-treesitter-endwise'},
+    cmd = {"TSUpdateSync"},
+    config = function()
+        require('nvim-treesitter.configs').setup({
+            highlight = {
+                enable = true
+            },
+            indent = {
+                enable = true
+            },
+            ensure_installed = 'all',
+            autotag = {
+                enable = true
+            },
+            textsubjects = {
+                enable = true,
+                prev_selection = ',',
+                keymaps = {
+                    ['.'] = 'textsubjects-smart',
+                    [';'] = 'textsubjects-container-outer',
+                    ['i;'] = 'textsubjects-container-inner'
+                }
+            },
+            endwise = {
+                enable = true
+            }
+        })
+        local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+        parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
+    end
+}, {
+    "folke/flash.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {{
+        "s",
+        mode = {"n", "x", "o"},
+        function()
+            require("flash").jump()
+        end,
+        desc = "Flash"
+    }, {
+        "S",
+        mode = {"n", "o", "x"},
+        function()
+            require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter"
+    }, {
+        "r",
+        mode = "o",
+        function()
+            require("flash").remote()
+        end,
+        desc = "Remote Flash"
+    }, {
+        "R",
+        mode = {"o", "x"},
+        function()
+            require("flash").treesitter_search()
+        end,
+        desc = "Treesitter Search"
+    }, {
+        "<c-s>",
+        mode = {"c"},
+        function()
+            require("flash").toggle()
+        end,
+        desc = "Toggle Flash Search"
+    }}
 }}
--- }, {
---     "folke/flash.nvim",
---     event = "VeryLazy",
---     ---@type Flash.Config
---     opts = {},
---     -- stylua: ignore
---     keys = {{
---         "s",
---         mode = {"n", "x", "o"},
---         function()
---             require("flash").jump()
---         end,
---         desc = "Flash"
---     }, {
---         "S",
---         mode = {"n", "o", "x"},
---         function()
---             require("flash").treesitter()
---         end,
---         desc = "Flash Treesitter"
---     }, {
---         "r",
---         mode = "o",
---         function()
---             require("flash").remote()
---         end,
---         desc = "Remote Flash"
---     }, {
---         "R",
---         mode = {"o", "x"},
---         function()
---             require("flash").treesitter_search()
---         end,
---         desc = "Treesitter Search"
---     }, {
---         "<c-s>",
---         mode = {"c"},
---         function()
---             require("flash").toggle()
---         end,
---         desc = "Toggle Flash Search"
---     }}
--- }}
