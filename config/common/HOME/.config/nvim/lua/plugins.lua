@@ -5,7 +5,6 @@ end
 return {{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,
-    -- cond = isNotVscode,
     priority = 1000,
     config = function()
         vim.cmd('colorscheme nightfly')
@@ -210,8 +209,14 @@ return {{ -- colorscheme
             }
         })
     end
+}, {
+    'hrsh7th/nvim-insx',
+    config = function()
+        require('insx.preset.standard').setup()
+    end
 }, { -- auto pairs
     'windwp/nvim-autopairs',
+    enabled = false,
     event = "InsertEnter",
     opts = {}
 }, { -- surround selection

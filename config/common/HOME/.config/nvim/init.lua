@@ -70,12 +70,12 @@ vim.keymap.set('i', '<C-s>', '<C-d>')
 -- vim.keymap.set('n', '<leader>k', '10k')
 -- vim.keymap.set('n', '<leader>j', '10j')
 --
+vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
 if vim.g.vscode == nil then
     vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
     vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
     vim.keymap.set({'c', 'i'}, '<C-b>', '<Left>')
     vim.keymap.set({'c', 'i'}, '<C-f>', '<Right>')
-    vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
     vim.keymap.set('i', '<C-p>', '<Up>')
     vim.keymap.set('i', '<C-n>', '<Down>')
     vim.keymap.set('i', '<C-k>', '<Esc>lDa')
