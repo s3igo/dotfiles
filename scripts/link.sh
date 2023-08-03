@@ -9,14 +9,11 @@ function shell {
 
 function inject-op {
     declare FILENAME="$(basename "$FILE")"
-    declare DIRNAME="$(dirname "$FILE")"
-    declare NAME="${FILENAME%.*}"
-    declare EXT="${FILENAME##*.}"
-    declare TARGET="$(dirname "$DEST")/${NAME}"
+    declare TARGET="$(basename "${FILE%/*}")/${FILENAME}"
 
-    [[ "$EXT" == 'op' ]] \
+    [[ "$TARGET" == 'git/config' ]] \
         && echo -n 'op inject: ' \
-        && op inject -f -i "$FILE" -o "$TARGET" \
+        && op inject -f -i "$FILE" -o "$DEST" \
         && echo " -> ${FILE}" \
         && return 0
 }
