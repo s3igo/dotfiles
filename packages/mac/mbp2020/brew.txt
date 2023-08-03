@@ -28,6 +28,7 @@ rename
 ripgrep
 sheldon
 silicon
+starship
 tmux
 tree
 volta
