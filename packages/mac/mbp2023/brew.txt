@@ -1,5 +1,6 @@
 act
 bat
+bottom
 direnv
 exa
 fd
@@ -10,7 +11,6 @@ git
 git-delta
 git-lfs
 glow
-gotop
 helix
 hexyl
 idleberg/dbxcli/dbxcli
