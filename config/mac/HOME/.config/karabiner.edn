@@ -40,25 +40,19 @@
             ]
         }
         {
-            :des "ctrl+h -> backspace"
+            :des "ctrl+h -> delete"
             :rules [
                 [:!Th :delete_or_backspace [:!terminal :!vscode]]
             ]
         }
         {
-            :des "ctrl+m -> return"
-            :rules [
-                [:!Tm :return_or_enter [:!terminal :!vscode]]
-            ]
-        }
-        {
             :des "ctrl+u -> cmd+delete"
             :rules [
-                [:!Tu :!Qdelete_or_backspace [:!terminal :!vscode]]
+                [:!Tu :!Cdelete_or_backspace [:!terminal]]
             ]
         }
         {
-            :des "ctrl+w -> option+delete"
+            :des "ctrl+w -> opt+delete"
             :rules [
                 [:!Tw :!Odelete_or_backspace [:!terminal]]
             ]
@@ -73,14 +67,29 @@
             ]
         }
         {
-            :des "tab layer"
+            :des "right_opt+f/b -> opt+right/left"
+            :rules [
+                [:!Ef :!Eright_arrow [:!terminal :!vscode]]
+                [:!Eb :!Eleft_arrow [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "right_opt+d -> fn+opt+delete (kill-word in emacs)"
+            :rules [
+                [:!Ed :!EFdelete_or_backspace [:!terminal :!vscode]]
+            ]
+        }
+        {
+            :des "tab layer (originals of overwritten key bindings)"
             :rules [
                 [:tab ["tab-mode" 1] nil {:afterup ["tab-mode" 0] :alone :tab}] ;; enter/escape tab mode
-                [:f :!Eright_arrow ["tab-mode" 1]] ;; tab+f -> option+right
-                [:b :!Eleft_arrow ["tab-mode" 1]] ;; tab+b -> option+left
-                [:p :!Eup_arrow ["tab-mode" 1]] ;; tab+p -> option+up
-                [:n :!Edown_arrow ["tab-mode" 1]] ;; tab+n -> option+down
-                [:d :!EFdelete_or_backspace ["tab-mode" 1]] ;; tab+d -> fn+option+delete
+                [:h :!Th ["tab-mode" 1]] ;; tab+h -> ctrl+h
+                [:u :!Tu ["tab-mode" 1]] ;; tab+u -> ctrl+u
+                [:w :!Tw ["tab-mode" 1]] ;; tab+w -> ctrl+w
+                [:f :!Tf ["tab-mode" 1]] ;; tab+f -> ctrl+f
+                [:b :!Tb ["tab-mode" 1]] ;; tab+b -> ctrl+b
+                [:p :!Tp ["tab-mode" 1]] ;; tab+p -> ctrl+p
+                [:n :!Tn ["tab-mode" 1]] ;; tab+n -> ctrl+n
             ]
         }
     ]
