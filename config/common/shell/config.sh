@@ -38,7 +38,7 @@ declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 
 # alias
 alias b='brew'
-alias c='code'
+alias c='cargo'
 alias d='docker'
 alias g='git'
 alias lzd='lazydocker'
