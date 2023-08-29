@@ -27,6 +27,9 @@ declare -x RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 declare -x CARGO_HOME="${XDG_DATA_HOME}/cargo"
 type rustup-init > /dev/null 2>&1 && source "${CARGO_HOME}/env"
 
+# broot
+type broot > /dev/null 2>&1 && source "${XDG_CONFIG_HOME}/broot/launcher/bash/br"
+
 # lesshist
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 

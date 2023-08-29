@@ -1,6 +1,7 @@
 act
 bat
 bottom
+broot
 direnv
 exa
 fd
