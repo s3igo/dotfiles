@@ -29,7 +29,7 @@
 [commit]
     gpgsign = true
 [ghq]
-    root = ~/src
+    root = ~/git
 [core]
     editor = hx
     ignorecase = false
