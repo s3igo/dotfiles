@@ -3,7 +3,7 @@ bat
 bottom
 broot
 direnv
-exa
+eza
 fd
 fnm
 gh
