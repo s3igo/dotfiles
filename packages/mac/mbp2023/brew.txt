@@ -2,6 +2,7 @@ act
 bat
 bottom
 broot
+daipeihust/tap/im-select
 direnv
 eza
 fd
