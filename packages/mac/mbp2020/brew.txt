@@ -22,7 +22,6 @@ neofetch
 neovim
 pam-reattach
 pastel
-pdftk-java
 procs
 rename
 ripgrep
