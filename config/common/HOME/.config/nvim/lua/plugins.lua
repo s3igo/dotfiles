@@ -1,7 +1,3 @@
-local isNotVscode = function()
-    return vim.g.vscode == nil
-end
-
 return {{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,

@@ -71,26 +71,22 @@ vim.keymap.set('i', '<C-s>', '<C-d>')
 -- vim.keymap.set('n', '<leader>j', '10j')
 --
 vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
-if vim.g.vscode == nil then
-    vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
-    vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
-    vim.keymap.set({'c', 'i'}, '<C-b>', '<Left>')
-    vim.keymap.set({'c', 'i'}, '<C-f>', '<Right>')
-    vim.keymap.set('i', '<C-p>', '<Up>')
-    vim.keymap.set('i', '<C-n>', '<Down>')
-    vim.keymap.set('i', '<C-k>', '<Esc>lDa')
-    vim.keymap.set('c', '<C-h>', '<BS>')
-end
+vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
+vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
+vim.keymap.set({'c', 'i'}, '<C-b>', '<Left>')
+vim.keymap.set({'c', 'i'}, '<C-f>', '<Right>')
+vim.keymap.set('i', '<C-p>', '<Up>')
+vim.keymap.set('i', '<C-n>', '<Down>')
+vim.keymap.set('i', '<C-k>', '<Esc>lDa')
+vim.keymap.set('c', '<C-h>', '<BS>')
 
 
 -- ------------------------------- appearance ------------------------------- --
-if vim.g.vscode == nil then
-    vim.opt.termguicolors = true
-    vim.cmd('autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE')
-    vim.cmd('autocmd colorscheme * highlight NonText     ctermbg=NONE guibg=NONE')
-    vim.cmd('autocmd colorscheme * highlight Folded      ctermbg=NONE guibg=NONE')
-    vim.cmd('autocmd colorscheme * highlight EndOfBuffer ctermbg=NONE guibg=NONE')
-end
+vim.opt.termguicolors = true
+vim.cmd('autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE')
+vim.cmd('autocmd colorscheme * highlight NonText     ctermbg=NONE guibg=NONE')
+vim.cmd('autocmd colorscheme * highlight Folded      ctermbg=NONE guibg=NONE')
+vim.cmd('autocmd colorscheme * highlight EndOfBuffer ctermbg=NONE guibg=NONE')
 
 
 vim.opt.pumblend = 10
