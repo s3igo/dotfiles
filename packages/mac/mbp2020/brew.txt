@@ -1,7 +1,7 @@
 act
 bat
 direnv
-exa
+eza
 fd
 gh
 ghq
