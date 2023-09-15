@@ -13,9 +13,10 @@
             "^org\\.alacritty$"
             "^com\\.apple\\.Terminal$"
         ]
-        :vscode [
+        :editor [
             "^com\\.microsoft\\.VSCode$"
             "^com\\.microsoft\\.VSCodeInsiders$"
+            "^dev\\.zed\\.Zed$"
         ]
     }
 
@@ -42,13 +43,13 @@
         {
             :des "ctrl+h -> delete"
             :rules [
-                [:!Th :delete_or_backspace [:!terminal :!vscode]]
+                [:!Th :delete_or_backspace [:!terminal :!editor]]
             ]
         }
         {
             :des "ctrl+u -> cmd+delete"
             :rules [
-                [:!Tu :!Cdelete_or_backspace [:!terminal :!vscode]]
+                [:!Tu :!Cdelete_or_backspace [:!terminal :!editor]]
             ]
         }
         {
@@ -60,23 +61,23 @@
         {
             :des "ctrl+f/b/p/n -> arrows"
             :rules [
-                [:!Tf :right_arrow [:!terminal :!vscode]]
-                [:!Tb :left_arrow [:!terminal :!vscode]]
-                [:!Tp :up_arrow [:!terminal :!vscode]]
-                [:!Tn :down_arrow [:!terminal :!vscode]]
+                [:!Tf :right_arrow [:!terminal :!editor]]
+                [:!Tb :left_arrow [:!terminal :!editor]]
+                [:!Tp :up_arrow [:!terminal :!editor]]
+                [:!Tn :down_arrow [:!terminal :!editor]]
             ]
         }
         {
             :des "right_opt+f/b -> opt+right/left"
             :rules [
-                [:!Ef :!Eright_arrow [:!terminal :!vscode]]
-                [:!Eb :!Eleft_arrow [:!terminal :!vscode]]
+                [:!Ef :!Eright_arrow [:!terminal :!editor]]
+                [:!Eb :!Eleft_arrow [:!terminal :!editor]]
             ]
         }
         {
             :des "right_opt+d -> fn+opt+delete (kill-word in emacs)"
             :rules [
-                [:!Ed :!EFdelete_or_backspace [:!terminal :!vscode]]
+                [:!Ed :!EFdelete_or_backspace [:!terminal :!editor]]
             ]
         }
         {
