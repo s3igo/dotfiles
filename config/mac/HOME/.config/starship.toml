@@ -8,10 +8,10 @@ $character
 """
 
 [character]
-success_symbol = "[❯](bold blue)"
+success_symbol = '[❯](bold blue)'
 
 [git_branch]
-symbol = "󰘬 "
+symbol = '󰘬 '
 
 [git_metrics]
 disabled = false
@@ -24,4 +24,4 @@ format = '$symbol[${ram} \[${ram_pct}\] ]($style)'
 [custom.arch]
 command = 'uname -m'
 when = true
-style = "bold blue"
+style = 'bold blue'
