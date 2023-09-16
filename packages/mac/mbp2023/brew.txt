@@ -12,6 +12,7 @@ ghq
 git
 git-delta
 git-lfs
+gitui
 glow
 helix
 hexyl
