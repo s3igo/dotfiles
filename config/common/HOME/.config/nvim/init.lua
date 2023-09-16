@@ -97,12 +97,6 @@ vim.keymap.set('n', 'sc', '"_c')
 
 -- ------------------------------- appearance ------------------------------- --
 vim.opt.termguicolors = true
-vim.cmd('autocmd colorscheme * highlight Normal      ctermbg=NONE guibg=NONE')
-vim.cmd('autocmd colorscheme * highlight NonText     ctermbg=NONE guibg=NONE')
-vim.cmd('autocmd colorscheme * highlight Folded      ctermbg=NONE guibg=NONE')
-vim.cmd('autocmd colorscheme * highlight EndOfBuffer ctermbg=NONE guibg=NONE')
-
-
 vim.opt.pumblend = 10
 
 vim.opt.number = true

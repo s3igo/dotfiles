@@ -3,6 +3,15 @@ return {{ -- colorscheme
     lazy = false,
     priority = 1000,
     config = function()
+        vim.api.nvim_create_autocmd('ColorScheme', {
+            pattern = '*',
+            callback = function()
+                vim.cmd('highlight Normal      ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight NonText     ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight Folded      ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
+            end
+        })
         vim.cmd('colorscheme nightfly')
     end
 }, { -- filer
