@@ -27,7 +27,7 @@ vim.opt.wrap = true
 vim.opt.breakindent = true
 
 -- config
-vim.opt.clipboard = 'unnamedplus'
+-- vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
 vim.opt.visualbell = true
 vim.opt.emoji = true
@@ -57,10 +57,7 @@ vim.keymap.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
 
 -- misc
 vim.keymap.set('n', 'Y', 'y$')
--- vim.keymap.set('n', 'sd', '"_d')
 vim.keymap.set('i', '<C-s>', '<C-d>')
-
--- emacs like keybindings
 
 -- bufferline
 -- vim.keymap.set('n', 's.', '<cmd>BufferLineMoveNext<cr>')
@@ -70,6 +67,8 @@ vim.keymap.set('i', '<C-s>', '<C-d>')
 -- vim.keymap.set('n', '<leader>k', '10k')
 -- vim.keymap.set('n', '<leader>j', '10j')
 --
+
+-- emacs like keybindings
 vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
 vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
 vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
@@ -79,6 +78,21 @@ vim.keymap.set('i', '<C-p>', '<Up>')
 vim.keymap.set('i', '<C-n>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Esc>lDa')
 vim.keymap.set('c', '<C-h>', '<BS>')
+
+-- helix like keybindings
+vim.keymap.set('n', 'gl', '$')
+vim.keymap.set('n', 'gh', '^')
+
+-- register
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>d', '"+d')
+vim.keymap.set('n', '<leader>x', '"+x')
+vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>0', '"0p')
+vim.keymap.set('n', 'sd', '"_d')
+vim.keymap.set('n', 'sx', '"_x')
+vim.keymap.set('n', 'sc', '"_c')
+
 
 
 -- ------------------------------- appearance ------------------------------- --
