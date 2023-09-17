@@ -33,6 +33,21 @@ return {{ -- colorscheme
         config = true
     }, 'hrsh7th/cmp-nvim-lsp'},
     config = true
+}, {
+    'jose-elias-alvarez/null-ls.nvim',
+    event = {'BufReadPre', 'BufNewFile'},
+    dependencies = {'mason.nvim'},
+    opts = function()
+        local null_ls = require('null-ls')
+        return {
+            root_dir = require('null-ls.utils').root_pattern('.git', '.neoconf.json')
+        }
+    end
+}, {
+    'williamboman/mason.nvim',
+    cmd = {'Mason'},
+    build = ':MasonUpdate',
+    config = true
 }, -- --------------------------------- Coding --------------------------------- --
 { -- completion
     'hrsh7th/nvim-cmp',
