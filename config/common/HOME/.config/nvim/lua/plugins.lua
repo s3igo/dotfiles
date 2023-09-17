@@ -6,13 +6,15 @@ return {{ -- colorscheme
         vim.g.nightflyTransparent = true
         vim.cmd('colorscheme nightfly')
     end
-}, -- --------------------------------- Coding --------------------------------- --
+}, -- ------------------------------- Common deps ------------------------------ --
+-- {},
+-- --------------------------------- Coding --------------------------------- --
 { -- autopair
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     config = true
 }, { -- surround selection
-    "kylechui/nvim-surround",
+    'kylechui/nvim-surround',
     event = "VeryLazy",
     config = true
 }, { -- comment
@@ -20,8 +22,8 @@ return {{ -- colorscheme
     config = true,
     lazy = false
 }, -- ------------------------------- Completion ------------------------------- --
-{
-    "zbirenbaum/copilot.lua",
+{ -- copilot
+    'zbirenbaum/copilot.lua',
     event = "InsertEnter",
     cmd = "Copilot",
     build = ":Copilot auth",
@@ -39,7 +41,7 @@ return {{ -- colorscheme
     dependencies = {'nvim-tree/nvim-web-devicons'},
     opts = {
         filters = {
-            custom = {'\\.git$', '.cache$'}
+            custom = {'.git'}
         }
     },
     config = function(_, opts)
@@ -48,6 +50,21 @@ return {{ -- colorscheme
         vim.keymap.set('n', '<leader>j', '<cmd>NvimTreeToggle<cr>')
         require('nvim-tree').setup(opts)
     end
+}, {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {'nvim-lua/plenary.nvim'},
+    cmd = 'Telescope',
+    keys = {{'<leader>f', '<cmd>Telescope find_files<cr>'}},
+    opts = {
+        defaults = {
+            file_ignore_patterns = {'.git', 'node_modules'}
+        },
+        pickers = {
+            find_files = {
+                hidden = true
+            }
+        }
+    }
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',
     event = {"BufReadPre", "BufNewFile"},
