@@ -17,25 +17,24 @@ return {{ -- colorscheme
     'nvim-lua/plenary.nvim',
     lazy = true
 }, -- ----------------------------------- LSP ---------------------------------- --
--- {
---     'neovim/nvim-lspconfig',
---     event = {"BufReadPre", "BufNewFile"},
---     dependencies = {{
---         "folke/neoconf.nvim",
---         cmd = "Neoconf",
---         config = false,
---         dependencies = {"nvim-lspconfig"}
---     }, {
---         "folke/neodev.nvim",
---         config = true
---     }, "mason.nvim", "williamboman/mason-lspconfig.nvim", {
---         "hrsh7th/cmp-nvim-lsp",
---         cond = function()
---             return require("lazyvim.util").has("nvim-cmp")
---         end
---     }}
--- },
--- --------------------------------- Coding --------------------------------- --
+{
+    'neovim/nvim-lspconfig',
+    event = {'BufReadPre', 'BufNewFile'},
+    dependencies = {{
+        'folke/neoconf.nvim',
+        cmd = 'Neoconf',
+        config = false,
+        dependencies = {'nvim-lspconfig'}
+    }, {
+        'folke/neodev.nvim',
+        config = true
+    }, 'mason.nvim', 'williamboman/mason-lspconfig.nvim', {
+        'hrsh7th/cmp-nvim-lsp',
+        cond = function()
+            return require('lazyvim.util').has('nvim-cmp')
+        end
+    }}
+}, -- --------------------------------- Coding --------------------------------- --
 { -- completion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -187,28 +186,28 @@ return {{ -- colorscheme
 }, -- { -- FIXME: Invalid sign text
 --     'folke/todo-comments.nvim',
 --     cmd = {'TodoTrouble', 'TodoTelescope'},
---     event = {"BufReadPost", "BufNewFile"},
+--     event = {'BufReadPost', 'BufNewFile'},
 --     config = true,
 --     keys = {{
---         "]t",
+--         ']t',
 --         function()
---             require("todo-comments").jump_next()
+--             require('todo-comments').jump_next()
 --         end,
---         desc = "Next todo comment"
+--         desc = 'Next todo comment'
 --     }, {
---         "[t",
+--         '[t',
 --         function()
---             require("todo-comments").jump_prev()
+--             require('todo-comments').jump_prev()
 --         end,
---         desc = "Previous todo comment"
+--         desc = 'Previous todo comment'
 --     }, {
---         "<leader>j",
---         "<cmd>TodoTrouble<cr>",
---         desc = "Todo (Trouble)"
+--         '<leader>j',
+--         '<cmd>TodoTrouble<cr>',
+--         desc = 'Todo (Trouble)'
 --     }, {
---         "st",
---         "<cmd>TodoTelescope<cr>",
---         desc = "Todo"
+--         'st',
+--         '<cmd>TodoTelescope<cr>',
+--         desc = 'Todo'
 --     }}
 -- },
 -- -------------------------------------------------------------------------- --
