@@ -6,10 +6,13 @@ return {{ -- colorscheme
         vim.api.nvim_create_autocmd('ColorScheme', {
             pattern = '*',
             callback = function()
-                vim.cmd('highlight Normal      ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight NonText     ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight Folded      ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight NonText ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight Folded ctermbg=NONE guibg=NONE')
                 vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
+                vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
+                -- vim.cmd('highlight clear LineNr')
             end
         })
         vim.cmd('colorscheme nightfly')
@@ -197,17 +200,24 @@ return {{ -- colorscheme
     end
 }, { -- tab bar
     'akinsho/bufferline.nvim',
-    config = function()
-        require('bufferline').setup({
-            options = {
-                numbers = 'ordinal',
-                buffer_close_icon = '',
-                close_icon = '',
-                diagnostics = 'nvim_lsp',
-                separator_style = {'', ''}
-            }
-        })
-    end
+    event = 'VeryLazy',
+    opts = {
+        options = {
+            numbers = 'ordinal',
+            buffer_close_icon = '',
+            close_icon = '',
+            diagnostics = 'nvim_lsp',
+            separator_style = {'', ''},
+            -- offsets = {
+            --     {
+            --         filetype = 'NvimTree',
+            --         text = 'File Explorer',
+            --         highlight = 'Directory',
+            --         text_align = 'left',
+            --     }
+            -- }
+        }
+    }
 }, {
     'hrsh7th/nvim-insx',
     config = function()
