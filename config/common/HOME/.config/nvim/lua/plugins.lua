@@ -8,29 +8,64 @@ return {{ -- colorscheme
     end
 }, -- ---------------------------------- Util ---------------------------------- --
 { -- benchmark
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
     config = function()
         vim.g.startuptime_tries = 10
     end
 }, { -- utility functions
     'nvim-lua/plenary.nvim',
     lazy = true
+}, -- ----------------------------------- LSP ---------------------------------- --
+-- {
+--     'neovim/nvim-lspconfig',
+--     event = {"BufReadPre", "BufNewFile"},
+--     dependencies = {{
+--         "folke/neoconf.nvim",
+--         cmd = "Neoconf",
+--         config = false,
+--         dependencies = {"nvim-lspconfig"}
+--     }, {
+--         "folke/neodev.nvim",
+--         config = true
+--     }, "mason.nvim", "williamboman/mason-lspconfig.nvim", {
+--         "hrsh7th/cmp-nvim-lsp",
+--         cond = function()
+--             return require("lazyvim.util").has("nvim-cmp")
+--         end
+--     }}
+-- },
+-- ------------------------------- Completion ------------------------------- --
+{ -- copilot
+    'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    cmd = 'Copilot',
+    build = ':Copilot auth',
+    opts = {
+        filetypes = {
+            markdown = true,
+            help = true
+        }
+    }
+}, {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'}
 }, -- --------------------------------- Coding --------------------------------- --
 { -- autopair
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     config = true
 }, { -- surround selection
     'kylechui/nvim-surround',
-    event = "VeryLazy",
+    event = 'VeryLazy',
     config = true
 }, { -- comment
     'numToStr/Comment.nvim',
     config = true,
     lazy = false
 }, { -- subword motion
-    "chrisgrieser/nvim-spider",
+    'chrisgrieser/nvim-spider',
     lazy = true,
     config = function()
         vim.keymap.set({'n', 'o', 'x'}, 'sw', "<cmd>lua require('spider').motion('w')<cr>", {
@@ -46,18 +81,6 @@ return {{ -- colorscheme
             desc = 'Spider-ge'
         })
     end
-}, -- ------------------------------- Completion ------------------------------- --
-{ -- copilot
-    'zbirenbaum/copilot.lua',
-    event = "InsertEnter",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    opts = {
-        filetypes = {
-            markdown = true,
-            help = true
-        }
-    }
 }, -- --------------------------------- Editor --------------------------------- --
 { -- filer
     'nvim-tree/nvim-tree.lua',
@@ -95,7 +118,7 @@ return {{ -- colorscheme
     }
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',
-    event = {"BufReadPre", "BufNewFile"},
+    event = {'BufReadPre', 'BufNewFile'},
     opts = {
         signs = {
             add = {
@@ -120,25 +143,25 @@ return {{ -- colorscheme
     }
 }, { -- scrollbar
     'petertriho/nvim-scrollbar',
-    event = {"BufReadPre", "BufNewFile"},
+    event = {'BufReadPre', 'BufNewFile'},
     config = function()
-        require("scrollbar").setup()
-        require("scrollbar.handlers.gitsigns").setup()
+        require('scrollbar').setup()
+        require('scrollbar.handlers.gitsigns').setup()
     end
 }, { -- buffer remove
-    "echasnovski/mini.bufremove",
+    'echasnovski/mini.bufremove',
     keys = {{
-        "<leader>bd",
+        '<leader>bd',
         function()
-            require("mini.bufremove").delete(0, false)
+            require('mini.bufremove').delete(0, false)
         end,
-        desc = "Delete Buffer"
+        desc = 'Delete Buffer'
     }, {
-        "<leader>bD",
+        '<leader>bD',
         function()
-            require("mini.bufremove").delete(0, true)
+            require('mini.bufremove').delete(0, true)
         end,
-        desc = "Force Delete Buffer"
+        desc = 'Force Delete Buffer'
     }}
 }, -- { -- FIXME: Invalid sign text
 --     'folke/todo-comments.nvim',
@@ -272,11 +295,11 @@ return {{ -- colorscheme
 }, { -- tree sitter
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    event = {"BufReadPost", "BufNewFile"},
+    event = {'BufReadPost', 'BufNewFile'},
     dependencies = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context',
-                    "nvim-treesitter/nvim-treesitter-textobjects", 'RRethy/nvim-treesitter-textsubjects',
+                    'nvim-treesitter/nvim-treesitter-textobjects', 'RRethy/nvim-treesitter-textsubjects',
                     'RRethy/nvim-treesitter-endwise'},
-    cmd = {"TSUpdateSync"},
+    cmd = {'TSUpdateSync'},
     config = function()
         require('nvim-treesitter.configs').setup({
             highlight = {
