@@ -1,18 +1,4 @@
-return { -- --------------------------------- Coding --------------------------------- --
-{
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    config = true
-}, { -- surround selection
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-    config = true
-}, { -- comment
-    'numToStr/Comment.nvim',
-    config = true,
-    lazy = false
-}, -- ------------------------------- appearance ------------------------------- --
-{ -- colorscheme
+return {{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,
     priority = 1000,
@@ -30,7 +16,21 @@ return { -- --------------------------------- Coding ---------------------------
         })
         vim.cmd('colorscheme nightfly')
     end
-}, { -- filer
+}, -- --------------------------------- Coding --------------------------------- --
+{ -- autopair
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+}, { -- surround selection
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = true
+}, { -- comment
+    'numToStr/Comment.nvim',
+    config = true,
+    lazy = false
+}, -- --------------------------------- Editor --------------------------------- --
+{ -- filer
     'nvim-tree/nvim-tree.lua',
     config = function()
         vim.g.loaded_netrw = 1
