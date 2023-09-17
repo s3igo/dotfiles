@@ -7,8 +7,10 @@ return {{ -- colorscheme
         vim.cmd('colorscheme nightfly')
     end
 }, -- ------------------------------- Common deps ------------------------------ --
--- {},
--- --------------------------------- Coding --------------------------------- --
+{
+    'nvim-lua/plenary.nvim',
+    lazy = true
+}, -- --------------------------------- Coding --------------------------------- --
 { -- autopair
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -69,7 +71,6 @@ return {{ -- colorscheme
     end
 }, {
     'nvim-telescope/telescope.nvim',
-    dependencies = {'nvim-lua/plenary.nvim'},
     cmd = 'Telescope',
     keys = {{
         '<leader>f',
@@ -133,7 +134,35 @@ return {{ -- colorscheme
         end,
         desc = "Force Delete Buffer"
     }}
-}, -- -------------------------------------------------------------------------- --
+},
+-- { -- FIXME: Invalid sign text
+--     'folke/todo-comments.nvim',
+--     cmd = {'TodoTrouble', 'TodoTelescope'},
+--     event = {"BufReadPost", "BufNewFile"},
+--     config = true,
+--     keys = {{
+--         "]t",
+--         function()
+--             require("todo-comments").jump_next()
+--         end,
+--         desc = "Next todo comment"
+--     }, {
+--         "[t",
+--         function()
+--             require("todo-comments").jump_prev()
+--         end,
+--         desc = "Previous todo comment"
+--     }, {
+--         "<leader>j",
+--         "<cmd>TodoTrouble<cr>",
+--         desc = "Todo (Trouble)"
+--     }, {
+--         "st",
+--         "<cmd>TodoTelescope<cr>",
+--         desc = "Todo"
+--     }}
+-- },
+ -- -------------------------------------------------------------------------- --
 { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
     config = function()
