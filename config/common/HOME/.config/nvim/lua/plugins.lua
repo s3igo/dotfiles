@@ -21,6 +21,23 @@ return {{ -- colorscheme
     'numToStr/Comment.nvim',
     config = true,
     lazy = false
+}, { -- subword motion
+    "chrisgrieser/nvim-spider",
+    lazy = true,
+    config = function()
+        vim.keymap.set({'n', 'o', 'x'}, 'sw', "<cmd>lua require('spider').motion('w')<cr>", {
+            desc = 'Spider-w'
+        })
+        vim.keymap.set({'n', 'o', 'x'}, 'se', "<cmd>lua require('spider').motion('e')<cr>", {
+            desc = 'Spider-e'
+        })
+        vim.keymap.set({'n', 'o', 'x'}, 'sb', "<cmd>lua require('spider').motion('b')<cr>", {
+            desc = 'Spider-b'
+        })
+        vim.keymap.set({'n', 'o', 'x'}, 'sge', "<cmd>lua require('spider').motion('ge')<cr>", {
+            desc = 'Spider-ge'
+        })
+    end
 }, -- ------------------------------- Completion ------------------------------- --
 { -- copilot
     'zbirenbaum/copilot.lua',
@@ -54,7 +71,11 @@ return {{ -- colorscheme
     'nvim-telescope/telescope.nvim',
     dependencies = {'nvim-lua/plenary.nvim'},
     cmd = 'Telescope',
-    keys = {{'<leader>f', '<cmd>Telescope find_files<cr>', desc = 'Find Files'}},
+    keys = {{
+        '<leader>f',
+        '<cmd>Telescope find_files<cr>',
+        desc = 'Find Files'
+    }},
     opts = {
         defaults = {
             file_ignore_patterns = {'.git', 'node_modules'}
