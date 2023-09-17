@@ -3,17 +3,7 @@ return {{ -- colorscheme
     lazy = false,
     priority = 1000,
     config = function()
-        vim.api.nvim_create_autocmd('ColorScheme', {
-            pattern = '*',
-            callback = function()
-                vim.cmd('highlight Normal ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight NonText ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight Folded ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
-                vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
-            end
-        })
+        vim.g.nightflyTransparent = true
         vim.cmd('colorscheme nightfly')
     end
 }, -- --------------------------------- Coding --------------------------------- --
@@ -44,27 +34,19 @@ return {{ -- colorscheme
 }, -- --------------------------------- Editor --------------------------------- --
 { -- filer
     'nvim-tree/nvim-tree.lua',
-    config = function()
+    version = '*',
+    lazy = false,
+    dependencies = {'nvim-tree/nvim-web-devicons'},
+    opts = {
+        filters = {
+            custom = {'\\.git$', '.cache$'}
+        }
+    },
+    config = function(_, opts)
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
-        vim.keymap.set('n', 'sb', ':NvimTreeToggle<CR>')
-        vim.cmd('highlight NvimTreeNormal ctermbg=NONE guibg=NONE')
-        require('nvim-tree').setup({
-            -- view = {
-            --     mappings = {
-            --         list = {{
-            --             key = 's',
-            --             action = ''
-            --         }, {
-            --             key = 'so',
-            --             action = 'system_open'
-            --         }}
-            --     }
-            -- },
-            filters = {
-                custom = {'\\.git$', '.cache$'}
-            }
-        })
+        vim.keymap.set('n', '<leader>j', '<cmd>NvimTreeToggle<cr>')
+        require('nvim-tree').setup(opts)
     end
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',

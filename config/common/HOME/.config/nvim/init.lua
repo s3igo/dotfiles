@@ -84,21 +84,18 @@ vim.keymap.set('n', 'gl', '$')
 vim.keymap.set('n', 'gh', '^')
 
 -- register
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>d', '"+d')
-vim.keymap.set('n', '<leader>x', '"+x')
-vim.keymap.set('n', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>0', '"0p')
-vim.keymap.set('n', 'sd', '"_d')
-vim.keymap.set('n', 'sx', '"_x')
-vim.keymap.set('n', 'sc', '"_c')
-
-
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
+vim.keymap.set({'n', 'v'}, '<leader>d', '"+d')
+vim.keymap.set({'n', 'v'}, '<leader>x', '"+x')
+vim.keymap.set({'n', 'v'}, '<leader>p', '"+p')
+vim.keymap.set({'n', 'v'}, '<leader>0', '"0p')
+vim.keymap.set({'n', 'v'}, 'sd', '"_d')
+vim.keymap.set({'n', 'v'}, 'sx', '"_x')
+vim.keymap.set({'n', 'v'}, 'sc', '"_c')
 
 -- ------------------------------- appearance ------------------------------- --
 vim.opt.termguicolors = true
 vim.opt.pumblend = 10
-
 vim.opt.number = true
 vim.opt.list = true
 vim.opt.cursorline = true
