@@ -1,4 +1,18 @@
-return {{ -- colorscheme
+return { -- --------------------------------- Coding --------------------------------- --
+{
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    config = true
+}, { -- surround selection
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = true
+}, { -- comment
+    'numToStr/Comment.nvim',
+    config = true,
+    lazy = false
+}, -- ------------------------------- appearance ------------------------------- --
+{ -- colorscheme
     'bluz71/vim-nightfly-guicolors',
     lazy = false,
     priority = 1000,
@@ -12,7 +26,6 @@ return {{ -- colorscheme
                 vim.cmd('highlight EndOfBuffer ctermbg=NONE guibg=NONE')
                 vim.cmd('highlight SignColumn ctermbg=NONE guibg=NONE')
                 vim.cmd('highlight LineNr ctermbg=NONE guibg=NONE')
-                -- vim.cmd('highlight clear LineNr')
             end
         })
         vim.cmd('colorscheme nightfly')
@@ -25,17 +38,17 @@ return {{ -- colorscheme
         vim.keymap.set('n', 'sb', ':NvimTreeToggle<CR>')
         vim.cmd('highlight NvimTreeNormal ctermbg=NONE guibg=NONE')
         require('nvim-tree').setup({
-            view = {
-                mappings = {
-                    list = {{
-                        key = 's',
-                        action = ''
-                    }, {
-                        key = 'so',
-                        action = 'system_open'
-                    }}
-                }
-            },
+            -- view = {
+            --     mappings = {
+            --         list = {{
+            --             key = 's',
+            --             action = ''
+            --         }, {
+            --             key = 'so',
+            --             action = 'system_open'
+            --         }}
+            --     }
+            -- },
             filters = {
                 custom = {'\\.git$', '.cache$'}
             }
@@ -207,7 +220,7 @@ return {{ -- colorscheme
             buffer_close_icon = '',
             close_icon = '',
             diagnostics = 'nvim_lsp',
-            separator_style = {'', ''},
+            separator_style = {'', ''}
             -- offsets = {
             --     {
             --         filetype = 'NvimTree',
@@ -222,17 +235,6 @@ return {{ -- colorscheme
     'hrsh7th/nvim-insx',
     config = function()
         require('insx.preset.standard').setup()
-    end
-}, { -- auto pairs
-    'windwp/nvim-autopairs',
-    enabled = false,
-    event = "InsertEnter",
-    opts = {}
-}, { -- surround selection
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-    config = function()
-        require("nvim-surround").setup()
     end
 }, { -- tree sitter
     'nvim-treesitter/nvim-treesitter',
@@ -270,47 +272,4 @@ return {{ -- colorscheme
         local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
         parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
     end
-}, {
-    "folke/flash.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {{
-        "s",
-        mode = {"n", "x", "o"},
-        function()
-            require("flash").jump()
-        end,
-        desc = "Flash"
-    }, {
-        "S",
-        mode = {"n", "o", "x"},
-        function()
-            require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter"
-    }, {
-        "r",
-        mode = "o",
-        function()
-            require("flash").remote()
-        end,
-        desc = "Remote Flash"
-    }, {
-        "R",
-        mode = {"o", "x"},
-        function()
-            require("flash").treesitter_search()
-        end,
-        desc = "Treesitter Search"
-    }, {
-        "<c-s>",
-        mode = {"c"},
-        function()
-            require("flash").toggle()
-        end,
-        desc = "Toggle Flash Search"
-    }}
 }}
