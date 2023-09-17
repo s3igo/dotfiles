@@ -35,8 +35,34 @@ return {{ -- colorscheme
 --         end
 --     }}
 -- },
--- ------------------------------- Completion ------------------------------- --
-{ -- copilot
+-- --------------------------------- Coding --------------------------------- --
+{ -- completion
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'},
+    opts = function()
+        local cmp = require('cmp')
+        return {
+            mapping = cmp.mapping.preset.insert({
+                ['<C-n>'] = cmp.mapping.select_next_item({
+                    behavior = cmp.SelectBehavior.Select
+                }),
+                ['<C-p>'] = cmp.mapping.select_prev_item({
+                    behavior = cmp.SelectBehavior.Select
+                }),
+                ['<C-j>'] = cmp.mapping.complete(),
+                ['<tab>'] = cmp.mapping.confirm()
+            }),
+            sources = cmp.config.sources({{
+                name = 'nvim_lsp'
+            }, {
+                name = 'buffer'
+            }, {
+                name = 'path'
+            }})
+        }
+    end
+}, { -- copilot
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
     cmd = 'Copilot',
@@ -47,12 +73,7 @@ return {{ -- colorscheme
             help = true
         }
     }
-}, {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'}
-}, -- --------------------------------- Coding --------------------------------- --
-{ -- autopair
+}, { -- autopair
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true
