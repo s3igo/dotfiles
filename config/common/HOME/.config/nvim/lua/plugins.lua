@@ -47,14 +47,14 @@ return {{ -- colorscheme
     config = function(_, opts)
         vim.g.loaded_netrw = 1
         vim.g.loaded_netrwPlugin = 1
-        vim.keymap.set('n', '<leader>j', '<cmd>NvimTreeToggle<cr>')
+        vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
         require('nvim-tree').setup(opts)
     end
 }, {
     'nvim-telescope/telescope.nvim',
     dependencies = {'nvim-lua/plenary.nvim'},
     cmd = 'Telescope',
-    keys = {{'<leader>f', '<cmd>Telescope find_files<cr>'}},
+    keys = {{'<leader>f', '<cmd>Telescope find_files<cr>', desc = 'Find Files'}},
     opts = {
         defaults = {
             file_ignore_patterns = {'.git', 'node_modules'}
@@ -97,7 +97,23 @@ return {{ -- colorscheme
         require("scrollbar").setup()
         require("scrollbar.handlers.gitsigns").setup()
     end
-}, { -- indent guides
+}, { -- buffer remove
+    "echasnovski/mini.bufremove",
+    keys = {{
+        "<leader>bd",
+        function()
+            require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete Buffer"
+    }, {
+        "<leader>bD",
+        function()
+            require("mini.bufremove").delete(0, true)
+        end,
+        desc = "Force Delete Buffer"
+    }}
+}, -- -------------------------------------------------------------------------- --
+{ -- indent guides
     'lukas-reineke/indent-blankline.nvim',
     config = function()
         require('indent_blankline').setup({

@@ -47,7 +47,6 @@ vim.g.mapleader = ' '
 
 -- disable
 vim.keymap.set('n', 's', '<nop>')
-vim.keymap.set('n', 't', '<nop>')
 
 -- buffer
 vim.keymap.set('n', '<C-w>n', '<cmd>bn<cr>')
