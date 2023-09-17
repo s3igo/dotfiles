@@ -6,8 +6,14 @@ return {{ -- colorscheme
         vim.g.nightflyTransparent = true
         vim.cmd('colorscheme nightfly')
     end
-}, -- ------------------------------- Common deps ------------------------------ --
-{
+}, -- ---------------------------------- Util ---------------------------------- --
+{ -- benchmark
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+        vim.g.startuptime_tries = 10
+    end
+}, { -- utility functions
     'nvim-lua/plenary.nvim',
     lazy = true
 }, -- --------------------------------- Coding --------------------------------- --
@@ -134,8 +140,7 @@ return {{ -- colorscheme
         end,
         desc = "Force Delete Buffer"
     }}
-},
--- { -- FIXME: Invalid sign text
+}, -- { -- FIXME: Invalid sign text
 --     'folke/todo-comments.nvim',
 --     cmd = {'TodoTrouble', 'TodoTelescope'},
 --     event = {"BufReadPost", "BufNewFile"},
@@ -162,7 +167,7 @@ return {{ -- colorscheme
 --         desc = "Todo"
 --     }}
 -- },
- -- -------------------------------------------------------------------------- --
+-- -------------------------------------------------------------------------- --
 { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
     config = function()
