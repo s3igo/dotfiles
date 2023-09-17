@@ -29,6 +29,18 @@ return {{ -- colorscheme
     'numToStr/Comment.nvim',
     config = true,
     lazy = false
+}, -- ------------------------------- Completion ------------------------------- --
+{
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+        filetypes = {
+            markdown = true,
+            help = true
+        }
+    }
 }, -- --------------------------------- Editor --------------------------------- --
 { -- filer
     'nvim-tree/nvim-tree.lua',
@@ -231,11 +243,6 @@ return {{ -- colorscheme
             -- }
         }
     }
-}, {
-    'hrsh7th/nvim-insx',
-    config = function()
-        require('insx.preset.standard').setup()
-    end
 }, { -- tree sitter
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
