@@ -285,6 +285,15 @@ return {{ -- colorscheme
 }, { -- tab bar
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
+    keys = {{
+        '[b',
+        '<cmd>BufferLineCyclePrev<cr>',
+        desc = 'Prev buffer'
+    }, {
+        ']b',
+        '<cmd>BufferLineCycleNext<cr>',
+        desc = 'Next buffer'
+    }},
     opts = {
         options = {
             numbers = 'ordinal',
@@ -299,47 +308,46 @@ return {{ -- colorscheme
                 text_align = 'left'
             }}
         }
-    },
-    { -- status bar
-        'nvim-lualine/lualine.nvim',
-        event = 'VeryLazy',
-        opts = {
-            options = {
-                icons_enabled = false,
-                globalstatus = true,
-                component_separators = {
-                    left = '',
-                    right = ''
-                },
-                section_separators = {
-                    left = '',
-                    right = ''
-                }
+    }
+}, { -- status bar
+    'nvim-lualine/lualine.nvim',
+    event = 'VeryLazy',
+    opts = {
+        options = {
+            icons_enabled = false,
+            globalstatus = true,
+            component_separators = {
+                left = '',
+                right = ''
             },
-            sections = {
-                lualine_x = {'location'},
-                lualine_y = {{
-                    'bo:expandtab',
-                    fmt = function(str)
-                        if str == 'true' then
-                            return 'spaces:'
-                        else
-                            return 'tab size:'
-                        end
-                    end
-                }, 'bo:tabstop'},
-                lualine_z = {'encoding', {
-                    'fileformat',
-                    fmt = function(str)
-                        local formats = {
-                            unix = 'LF',
-                            dos = 'CRLF',
-                            mac = 'CR'
-                        }
-                        return formats[str]
-                    end
-                }, 'filetype'}
+            section_separators = {
+                left = '',
+                right = ''
             }
+        },
+        sections = {
+            lualine_x = {'location'},
+            lualine_y = {{
+                'bo:expandtab',
+                fmt = function(str)
+                    if str == 'true' then
+                        return 'spaces:'
+                    else
+                        return 'tab size:'
+                    end
+                end
+            }, 'bo:tabstop'},
+            lualine_z = {'encoding', {
+                'fileformat',
+                fmt = function(str)
+                    local formats = {
+                        unix = 'LF',
+                        dos = 'CRLF',
+                        mac = 'CR'
+                    }
+                    return formats[str]
+                end
+            }, 'filetype'}
         }
     }
 }, { -- indent guides
@@ -350,7 +358,7 @@ return {{ -- colorscheme
         show_end_of_line = true,
         show_trailing_blankline_indent = false
     }
-}, { -- keymap help
+}, { -- keymaps helper
     'folke/which-key.nvim',
     event = 'VeryLazy',
     init = function()

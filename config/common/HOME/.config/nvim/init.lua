@@ -44,11 +44,11 @@ vim.g.mapleader = ' '
 -- disable
 vim.keymap.set('n', 's', '<nop>')
 
--- buffer
-vim.keymap.set('n', '<C-w>n', '<cmd>bn<cr>')
-vim.keymap.set('n', '<C-w><C-n>', '<cmd>bn<cr>')
-vim.keymap.set('n', '<C-w>p', '<cmd>bp<cr>')
-vim.keymap.set('n', '<C-w><C-p>', '<cmd>bp<cr>')
+-- buffers
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window', remap = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
 
 -- misc
 vim.keymap.set('n', 'Y', 'y$')
@@ -78,7 +78,7 @@ vim.keymap.set('c', '<C-h>', '<BS>')
 vim.keymap.set('n', 'gl', '$')
 vim.keymap.set('n', 'gh', '^')
 
--- register
+-- registers
 vim.keymap.set({'n', 'x'}, '<leader>y', '"+y')
 vim.keymap.set({'n', 'x'}, '<leader>d', '"+d')
 vim.keymap.set({'n', 'x'}, '<leader>x', '"+x')
