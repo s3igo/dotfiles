@@ -30,24 +30,25 @@ return {{ -- colorscheme
     }, {
         'williamboman/mason-lspconfig.nvim',
         cmd = {'LspInstall', 'LspUninstall'},
-        config = true
-    }, 'hrsh7th/cmp-nvim-lsp'},
-    config = true
-}, {
-    'jose-elias-alvarez/null-ls.nvim',
-    event = {'BufReadPre', 'BufNewFile'},
-    dependencies = {'mason.nvim'},
-    opts = function()
-        local null_ls = require('null-ls')
-        return {
-            root_dir = require('null-ls.utils').root_pattern('.git', '.neoconf.json')
-        }
+        opts = {}
+    }, {
+        'williamboman/mason.nvim',
+        cmd = {'Mason'},
+        build = ':MasonUpdate',
+        opts = {}
+    }},
+    config = function(_, _)
+        local lspconfig = require('lspconfig')
+        require('mason').setup({})
+        require('mason-lspconfig').setup_handlers({function(server)
+            lspconfig[server].setup({})
+        end})
+        vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(_)
+                vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+            end
+        })
     end
-}, {
-    'williamboman/mason.nvim',
-    cmd = {'Mason'},
-    build = ':MasonUpdate',
-    config = true
 }, -- --------------------------------- Coding --------------------------------- --
 { -- completion
     'hrsh7th/nvim-cmp',
@@ -78,7 +79,7 @@ return {{ -- colorscheme
 }, { -- copilot
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
-    cmd = 'Copilot',
+    -- cmd = 'Copilot',
     build = ':Copilot auth',
     opts = {
         filetypes = {
