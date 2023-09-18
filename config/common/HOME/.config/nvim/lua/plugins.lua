@@ -109,6 +109,11 @@ return {{ -- colorscheme
     opts = function()
         local cmp = require('cmp')
         return {
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_expand(args.body)
+                end
+            },
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item({
                     behavior = cmp.SelectBehavior.Select
