@@ -75,6 +75,8 @@ return {{ -- colorscheme
                 ['<tab>'] = cmp.mapping.confirm()
             }),
             sources = cmp.config.sources({{
+                name = 'copilot'
+            }, {
                 name = 'nvim_lsp'
             }, {
                 name = 'buffer'
@@ -86,12 +88,22 @@ return {{ -- colorscheme
 }, { -- copilot
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
-    -- cmd = 'Copilot',
+    dependencies = {{
+        'zbirenbaum/copilot-cmp',
+        config = true
+    }},
+    cmd = 'Copilot',
     build = ':Copilot auth',
     opts = {
         filetypes = {
             markdown = true,
             help = true
+        },
+        suggestion = {
+            enabled = false
+        },
+        panel = {
+            enabled = false
         }
     }
 }, { -- autopair
