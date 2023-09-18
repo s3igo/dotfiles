@@ -156,7 +156,7 @@ return {{ -- colorscheme
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     keys = {{
-        '<leader>f',
+        '<leader><space>',
         '<cmd>Telescope find_files<cr>',
         desc = 'Find Files'
     }},
@@ -192,7 +192,7 @@ return {{ -- colorscheme
                 scope_incremental = 'ss',
                 node_decremental = 'sa'
             }
-        },
+        }
     },
     config = function(_, opts)
         require('nvim-treesitter.configs').setup(opts)
@@ -274,7 +274,12 @@ return {{ -- colorscheme
 --     }}
 -- },
 -- -------------------------------------------------------------------------- --
-{ -- indent guides
+-- ----------------------------------- UI ----------------------------------- --
+{ -- notification
+    'rcarriga/nvim-notify',
+    keys = {{'<leader>fn', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification'}},
+    config = true
+}, { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
     config = function()
         require('indent_blankline').setup({
