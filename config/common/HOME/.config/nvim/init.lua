@@ -45,38 +45,22 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', 's', '<nop>')
 
 -- buffers
-vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window', remap = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
-
--- misc
-vim.keymap.set('n', 'Y', 'y$')
-vim.keymap.set('i', '<C-s>', '<C-d>')
-
--- bufferline
--- vim.keymap.set('n', 's.', '<cmd>BufferLineMoveNext<cr>')
--- vim.keymap.set('n', 's,', '<cmd>BufferLineMovePrev<cr>')
-
--- cursor
--- vim.keymap.set('n', '<leader>k', '10k')
--- vim.keymap.set('n', '<leader>j', '10j')
---
-
--- emacs like keybindings
-vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
-vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
-vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
-vim.keymap.set({'c', 'i'}, '<C-b>', '<Left>')
-vim.keymap.set({'c', 'i'}, '<C-f>', '<Right>')
-vim.keymap.set('i', '<C-p>', '<Up>')
-vim.keymap.set('i', '<C-n>', '<Down>')
-vim.keymap.set('i', '<C-k>', '<Esc>lDa')
-vim.keymap.set('c', '<C-h>', '<BS>')
-
--- helix like keybindings
-vim.keymap.set('n', 'gl', '$')
-vim.keymap.set('n', 'gh', '^')
+vim.keymap.set('n', '<C-h>', '<C-w>h', {
+    desc = 'Go to left window',
+    remap = true
+})
+vim.keymap.set('n', '<C-j>', '<C-w>j', {
+    desc = 'Go to lower window',
+    remap = true
+})
+vim.keymap.set('n', '<C-k>', '<C-w>k', {
+    desc = 'Go to upper window',
+    remap = true
+})
+vim.keymap.set('n', '<C-l>', '<C-w>l', {
+    desc = 'Go to right window',
+    remap = true
+})
 
 -- registers
 vim.keymap.set({'n', 'x'}, '<leader>y', '"+y')
@@ -87,6 +71,53 @@ vim.keymap.set({'n', 'x'}, '<leader>0', '"0p')
 vim.keymap.set({'n', 'x'}, 'sd', '"_d')
 vim.keymap.set({'n', 'x'}, 'sx', '"_x')
 vim.keymap.set({'n', 'x'}, 'sc', '"_c')
+
+-- retain visual selection
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
+-- add undo breakpoints
+vim.keymap.set('i', ',', ',<c-g>u')
+vim.keymap.set('i', '.', '.<c-g>u')
+vim.keymap.set('i', ';', ';<c-g>u')
+
+-- emacs like keybindings
+vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
+vim.keymap.set({'c', 'i'}, '<C-a>', '<Home>')
+vim.keymap.set({'c', 'i'}, '<C-e>', '<End>')
+vim.keymap.set({'c', 'i'}, '<C-b>', '<Left>')
+vim.keymap.set({'c', 'i'}, '<C-f>', '<Right>')
+vim.keymap.set('i', '<C-p>', '<Up>')
+vim.keymap.set('i', '<C-n>', '<Down>')
+vim.keymap.set('i', '<C-k>', '<esc>lDa')
+vim.keymap.set('c', '<C-h>', '<bs>')
+
+-- helix like keybindings
+vim.keymap.set({'n', 'x'}, 'gl', '$')
+vim.keymap.set({'n', 'x'}, 'gh', '^')
+
+-- misc
+vim.keymap.set({'x', 'n', 's'}, '<leader>w', '<cmd>w<cr><esc>', {
+    desc = 'Save file'
+})
+vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', {
+    desc = 'Quit all'
+})
+vim.keymap.set('n', 'Y', 'y$', {
+    desc = 'Yank to end of line'
+})
+vim.keymap.set('i', '<C-s>', '<C-d>', {
+    desc = 'Outdent'
+})
+vim.keymap.set({'i', 'n'}, '<esc>', '<cmd>noh<cr><esc>', {
+    desc = 'Escape and clear hlsearch'
+})
+vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', {
+    desc = 'Lazy'
+})
+vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', {
+    desc = 'Mason'
+})
 
 -- ------------------------------- appearance ------------------------------- --
 vim.opt.termguicolors = true
