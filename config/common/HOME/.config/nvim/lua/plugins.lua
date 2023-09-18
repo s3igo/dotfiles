@@ -339,20 +339,15 @@ return {{ -- colorscheme
                         return formats[str]
                     end
                 }, 'filetype'}
-            },
+            }
         }
     }
-    -- -------------------------------------------------------------------------- --
 }, { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
-    config = function()
-        require('indent_blankline').setup({
-            char = '|',
-            show_end_of_line = true,
-            show_trailing_blankline_indent = false
-            -- TODO: tree-sitterが必要
-            -- show_current_context = true,
-            -- show_current_context_start = true,
-        })
-    end
+    event = {'BufReadPost', 'BufNewFile'},
+    opts = {
+        char = '|',
+        show_end_of_line = true,
+        show_trailing_blankline_indent = false,
+    }
 }}
