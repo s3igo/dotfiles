@@ -51,7 +51,7 @@ return {{ -- colorscheme
             })
         end})
         vim.api.nvim_create_autocmd('LspAttach', {
-            desc = 'LSP actions',
+            desc = 'LSP Actions',
             callback = function(_)
                 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
             end
@@ -159,10 +159,36 @@ return {{ -- colorscheme
         '<leader><space>',
         '<cmd>Telescope find_files<cr>',
         desc = 'Find Files'
+    }, {
+        '<leader><tab>',
+        '<cmd>Telescope buffers<cr>',
+        desc = 'Switch Buffer'
+    }, {
+        '<leader>/',
+        '<cmd>Telescope live_grep<cr>',
+        desc = 'Live Grep'
+    }, {
+        '<leader>:',
+        '<cmd>Telescope command_history<cr>',
+        desc = 'Command History'
     }},
     opts = {
         defaults = {
-            file_ignore_patterns = {'.git', 'node_modules'}
+            file_ignore_patterns = {'.git', 'node_modules'},
+            mappings = {
+                i = {
+                    ['<C-u>'] = false,
+                    ['<C-k>'] = false,
+                    ['<C-a>'] = {
+                        '<Home>',
+                        type = 'command'
+                    },
+                    ['<C-e>'] = {
+                        '<End>',
+                        type = 'command'
+                    }
+                }
+            }
         },
         pickers = {
             find_files = {
@@ -288,11 +314,11 @@ return {{ -- colorscheme
     keys = {{
         '[b',
         '<cmd>BufferLineCyclePrev<cr>',
-        desc = 'Prev buffer'
+        desc = 'Prev Buffer'
     }, {
         ']b',
         '<cmd>BufferLineCycleNext<cr>',
-        desc = 'Next buffer'
+        desc = 'Next Buffer'
     }},
     opts = {
         options = {

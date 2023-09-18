@@ -77,9 +77,9 @@ vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
 -- add undo breakpoints
-vim.keymap.set('i', ',', ',<c-g>u')
-vim.keymap.set('i', '.', '.<c-g>u')
-vim.keymap.set('i', ';', ';<c-g>u')
+vim.keymap.set('i', ',', ',<C-g>u')
+vim.keymap.set('i', '.', '.<C-g>u')
+vim.keymap.set('i', ';', ';<C-g>u')
 
 -- emacs like keybindings
 vim.keymap.set({'c', 'i'}, '<C-d>', '<Del>')
@@ -109,7 +109,7 @@ vim.keymap.set('n', 'Y', 'y$', {
 vim.keymap.set('i', '<C-s>', '<C-d>', {
     desc = 'Outdent'
 })
-vim.keymap.set({'i', 'n'}, '<esc>', '<cmd>noh<cr><esc>', {
+vim.keymap.set({'i', 'n'}, '<C-[>', '<cmd>noh<cr><esc>', {
     desc = 'Escape and clear hlsearch'
 })
 vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', {
@@ -117,6 +117,9 @@ vim.keymap.set('n', '<leader>l', '<cmd>Lazy<cr>', {
 })
 vim.keymap.set('n', '<leader>m', '<cmd>Mason<cr>', {
     desc = 'Mason'
+})
+vim.keymap.set('n', '<leader>t', '<cmd>Telescope<cr>', {
+    desc = 'Telescope'
 })
 
 -- ------------------------------- appearance ------------------------------- --
