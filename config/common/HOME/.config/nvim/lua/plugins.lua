@@ -277,8 +277,30 @@ return {{ -- colorscheme
 -- ----------------------------------- UI ----------------------------------- --
 { -- notification
     'rcarriga/nvim-notify',
-    keys = {{'<leader>fn', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification'}},
+    keys = {{
+        '<leader>fn',
+        '<cmd>Telescope notify<cr>',
+        desc = 'Telescope Notification'
+    }},
     config = true
+}, { -- tab bar
+    'akinsho/bufferline.nvim',
+    event = 'VeryLazy',
+    opts = {
+        options = {
+            numbers = 'ordinal',
+            buffer_close_icon = '',
+            close_icon = '',
+            diagnostics = 'nvim_lsp',
+            separator_style = {'', ''},
+            offsets = {{
+                filetype = 'NvimTree',
+                text = 'NvimTree',
+                highlight = 'Directory',
+                text_align = 'left'
+            }}
+        }
+    }
 }, { -- indent guides
     'lukas-reineke/indent-blankline.nvim',
     config = function()
@@ -360,24 +382,4 @@ return {{ -- colorscheme
             extensions = {}
         })
     end
-}, { -- tab bar
-    'akinsho/bufferline.nvim',
-    event = 'VeryLazy',
-    opts = {
-        options = {
-            numbers = 'ordinal',
-            buffer_close_icon = '',
-            close_icon = '',
-            diagnostics = 'nvim_lsp',
-            separator_style = {'', ''}
-            -- offsets = {
-            --     {
-            --         filetype = 'NvimTree',
-            --         text = 'File Explorer',
-            --         highlight = 'Directory',
-            --         text_align = 'left',
-            --     }
-            -- }
-        }
-    }
 }}
