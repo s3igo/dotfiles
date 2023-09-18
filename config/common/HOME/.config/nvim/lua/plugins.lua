@@ -20,7 +20,16 @@ return {{ -- colorscheme
     'nvim-lua/plenary.nvim',
     lazy = true
 }, -- --------------------------------- Coding --------------------------------- --
-{ -- LSP
+{ -- snippets
+    'L3MON4D3/LuaSnip',
+    version = '2.*',
+    dependencies = {
+        'rafamadriz/friendly-snippets',
+        config = function()
+            require('luasnip.loaders.from_vscode').lazy_load()
+        end
+    }
+}, { -- LSP
     'neovim/nvim-lspconfig',
     event = {'BufReadPre', 'BufNewFile'},
     dependencies = {{
@@ -50,7 +59,8 @@ return {{ -- colorscheme
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
         mason_lspconfig.setup_handlers({function(server)
             lspconfig[server].setup({
-                capabilities = lsp_capabilities
+                capabilities = lsp_capabilities,
+                autoformat = true
             })
         end})
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -100,12 +110,14 @@ return {{ -- colorscheme
         local cmp = require('cmp')
         return {
             mapping = cmp.mapping.preset.insert({
-                ['<C-n>'] = cmp.mapping.select_next_item({
-                    behavior = cmp.SelectBehavior.Select
-                }),
                 ['<C-p>'] = cmp.mapping.select_prev_item({
                     behavior = cmp.SelectBehavior.Select
                 }),
+                ['<C-n>'] = cmp.mapping.select_next_item({
+                    behavior = cmp.SelectBehavior.Select
+                }),
+                ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-d>'] = cmp.mapping.scroll_docs(4),
                 ['<C-j>'] = cmp.mapping.complete(),
                 ['<tab>'] = cmp.mapping.confirm()
             }),
@@ -113,6 +125,8 @@ return {{ -- colorscheme
                 name = 'copilot'
             }, {
                 name = 'nvim_lsp'
+            }, {
+                name = 'luasnip'
             }, {
                 name = 'buffer'
             }, {
@@ -172,19 +186,19 @@ return {{ -- colorscheme
     keys = {{
         '<leader><space>',
         '<cmd>Telescope find_files<cr>',
-        desc = 'Find Files'
+        desc = 'Find files'
     }, {
         '<leader><tab>',
         '<cmd>Telescope buffers<cr>',
-        desc = 'Switch Buffer'
+        desc = 'Switch buffer'
     }, {
         '<leader>/',
         '<cmd>Telescope live_grep<cr>',
-        desc = 'Live Grep'
+        desc = 'Live grep'
     }, {
         '<leader>:',
         '<cmd>Telescope command_history<cr>',
-        desc = 'Command History'
+        desc = 'Command history'
     }},
     opts = {
         defaults = {
@@ -324,7 +338,26 @@ return {{ -- colorscheme
 --     }}
 -- },
 -- ----------------------------------- UI ----------------------------------- --
-{ -- notification
+{ -- LSP progress
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    event = 'LspAttach',
+    opts = {
+        window = {
+            blend = 0,
+            relative = 'editor'
+        }
+    },
+    config = function(_, opts)
+        require('fidget').setup(opts)
+        vim.api.nvim_set_hl(0, 'FidgetTitle', {
+            link = 'NormalFloat'
+        })
+        vim.api.nvim_set_hl(0, 'FidgetTask', {
+            link = 'NormalFloat'
+        })
+    end
+}, { -- notification
     'rcarriga/nvim-notify',
     keys = {{
         '<leader>fn',
