@@ -36,14 +36,22 @@ return {{ -- colorscheme
         cmd = {'Mason'},
         build = ':MasonUpdate',
         opts = {}
-    }},
+    }, 'hrsh7th/cmp-nvim-lsp'},
     config = function(_, _)
+        require('mason').setup()
+        local mason_lspconfig = require('mason-lspconfig')
+        mason_lspconfig.setup({
+            ensure_installed = {'rust_analyzer', 'tsserver'}
+        })
         local lspconfig = require('lspconfig')
-        require('mason').setup({})
-        require('mason-lspconfig').setup_handlers({function(server)
-            lspconfig[server].setup({})
+        local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+        mason_lspconfig.setup_handlers({function(server)
+            lspconfig[server].setup({
+                capabilities = lsp_capabilities
+            })
         end})
         vim.api.nvim_create_autocmd('LspAttach', {
+            desc = 'LSP actions',
             callback = function(_)
                 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
             end

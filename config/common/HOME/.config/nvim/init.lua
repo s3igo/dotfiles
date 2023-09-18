@@ -27,7 +27,6 @@ vim.opt.wrap = true
 vim.opt.breakindent = true
 
 -- config
--- vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
 vim.opt.visualbell = true
 vim.opt.emoji = true
@@ -38,9 +37,6 @@ vim.opt.shell = 'zsh'
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
--- insert
--- vim.opt.textwidth = 120
 
 -- --------------------------------- keymaps -------------------------------- --
 vim.g.mapleader = ' '
