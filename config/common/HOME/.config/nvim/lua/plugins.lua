@@ -16,8 +16,8 @@ return {{ -- colorscheme
 }, { -- utility functions
     'nvim-lua/plenary.nvim',
     lazy = true
-}, -- ----------------------------------- LSP ---------------------------------- --
-{
+}, -- --------------------------------- Coding --------------------------------- --
+{ -- LSP
     'neovim/nvim-lspconfig',
     event = {'BufReadPre', 'BufNewFile'},
     dependencies = {{
@@ -49,8 +49,7 @@ return {{ -- colorscheme
             end
         })
     end
-}, -- --------------------------------- Coding --------------------------------- --
-{ -- completion
+}, { -- completion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'},
