@@ -41,7 +41,7 @@ return {{ -- colorscheme
         require('mason').setup()
         local mason_lspconfig = require('mason-lspconfig')
         mason_lspconfig.setup({
-            ensure_installed = {'rust_analyzer', 'tsserver'}
+            -- ensure_installed = {'rust_analyzer', 'tsserver'}
         })
         local lspconfig = require('lspconfig')
         local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -60,10 +60,10 @@ return {{ -- colorscheme
 }, { -- copilot
     'zbirenbaum/copilot.lua',
     event = 'InsertEnter',
-    dependencies = {{
+    dependencies = {
         'zbirenbaum/copilot-cmp',
         config = true
-    }},
+    },
     cmd = 'Copilot',
     build = ':Copilot auth',
     opts = {
@@ -174,39 +174,32 @@ return {{ -- colorscheme
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     event = {'BufReadPost', 'BufNewFile'},
-    dependencies = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context',
-                    'nvim-treesitter/nvim-treesitter-textobjects', 'RRethy/nvim-treesitter-textsubjects',
-                    'RRethy/nvim-treesitter-endwise'},
+    dependencies = {'nvim-treesitter/nvim-treesitter-textobjects'},
     cmd = {'TSUpdateSync'},
-    config = function()
-        require('nvim-treesitter.configs').setup({
-            highlight = {
-                enable = true
-            },
-            indent = {
-                enable = true
-            },
-            ensure_installed = 'all',
-            autotag = {
-                enable = true
-            },
-            textsubjects = {
-                enable = true,
-                prev_selection = ',',
-                keymaps = {
-                    ['.'] = 'textsubjects-smart',
-                    [';'] = 'textsubjects-container-outer',
-                    ['i;'] = 'textsubjects-container-inner'
-                }
-            },
-            endwise = {
-                enable = true
+    opts = {
+        highlight = {
+            enable = true
+        },
+        indent = {
+            enable = true
+        },
+        auto_install = true,
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = 'se',
+                node_incremental = 'se',
+                scope_incremental = 'ss',
+                node_decremental = 'sa'
             }
-        })
+        },
+    },
+    config = function(_, opts)
+        require('nvim-treesitter.configs').setup(opts)
         local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
         parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
     end
-}, { -- gutter indicators
+}, { -- gutter indicator
     'lewis6991/gitsigns.nvim',
     event = {'BufReadPre', 'BufNewFile'},
     opts = {
