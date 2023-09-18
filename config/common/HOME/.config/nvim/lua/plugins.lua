@@ -57,6 +57,27 @@ return {{ -- colorscheme
             end
         })
     end
+}, { -- copilot
+    'zbirenbaum/copilot.lua',
+    event = 'InsertEnter',
+    dependencies = {{
+        'zbirenbaum/copilot-cmp',
+        config = true
+    }},
+    cmd = 'Copilot',
+    build = ':Copilot auth',
+    opts = {
+        filetypes = {
+            markdown = true,
+            help = true
+        },
+        suggestion = {
+            enabled = false
+        },
+        panel = {
+            enabled = false
+        }
+    }
 }, { -- completion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -85,27 +106,6 @@ return {{ -- colorscheme
             }})
         }
     end
-}, { -- copilot
-    'zbirenbaum/copilot.lua',
-    event = 'InsertEnter',
-    dependencies = {{
-        'zbirenbaum/copilot-cmp',
-        config = true
-    }},
-    cmd = 'Copilot',
-    build = ':Copilot auth',
-    opts = {
-        filetypes = {
-            markdown = true,
-            help = true
-        },
-        suggestion = {
-            enabled = false
-        },
-        panel = {
-            enabled = false
-        }
-    }
 }, { -- autopair
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -152,7 +152,7 @@ return {{ -- colorscheme
         vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
         require('nvim-tree').setup(opts)
     end
-}, {
+}, { -- fuzzy finder
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
     keys = {{
@@ -170,6 +170,42 @@ return {{ -- colorscheme
             }
         }
     }
+}, { -- treesitter
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    event = {'BufReadPost', 'BufNewFile'},
+    dependencies = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context',
+                    'nvim-treesitter/nvim-treesitter-textobjects', 'RRethy/nvim-treesitter-textsubjects',
+                    'RRethy/nvim-treesitter-endwise'},
+    cmd = {'TSUpdateSync'},
+    config = function()
+        require('nvim-treesitter.configs').setup({
+            highlight = {
+                enable = true
+            },
+            indent = {
+                enable = true
+            },
+            ensure_installed = 'all',
+            autotag = {
+                enable = true
+            },
+            textsubjects = {
+                enable = true,
+                prev_selection = ',',
+                keymaps = {
+                    ['.'] = 'textsubjects-smart',
+                    [';'] = 'textsubjects-container-outer',
+                    ['i;'] = 'textsubjects-container-inner'
+                }
+            },
+            endwise = {
+                enable = true
+            }
+        })
+        local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+        parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
+    end
 }, { -- gutter indicators
     'lewis6991/gitsigns.nvim',
     event = {'BufReadPre', 'BufNewFile'},
@@ -346,40 +382,4 @@ return {{ -- colorscheme
             -- }
         }
     }
-}, { -- tree sitter
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    event = {'BufReadPost', 'BufNewFile'},
-    dependencies = {'windwp/nvim-ts-autotag', 'nvim-treesitter/nvim-treesitter-context',
-                    'nvim-treesitter/nvim-treesitter-textobjects', 'RRethy/nvim-treesitter-textsubjects',
-                    'RRethy/nvim-treesitter-endwise'},
-    cmd = {'TSUpdateSync'},
-    config = function()
-        require('nvim-treesitter.configs').setup({
-            highlight = {
-                enable = true
-            },
-            indent = {
-                enable = true
-            },
-            ensure_installed = 'all',
-            autotag = {
-                enable = true
-            },
-            textsubjects = {
-                enable = true,
-                prev_selection = ',',
-                keymaps = {
-                    ['.'] = 'textsubjects-smart',
-                    [';'] = 'textsubjects-container-outer',
-                    ['i;'] = 'textsubjects-container-inner'
-                }
-            },
-            endwise = {
-                enable = true
-            }
-        })
-        local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
-        parser_config.tsx.filetype_to_parsername = {'javascript', 'typescript.tsx'}
-    end
 }}
