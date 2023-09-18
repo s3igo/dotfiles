@@ -3,7 +3,10 @@ return {{ -- colorscheme
     lazy = false,
     priority = 1000,
     config = function()
+        vim.g.nightflyNormalFloat = true
         vim.g.nightflyTransparent = true
+        vim.g.nightflyVirtualTextColor = true
+        vim.g.nightflyWinSeparator = 2
         vim.cmd('colorscheme nightfly')
     end
 }, -- ---------------------------------- Util ---------------------------------- --
@@ -55,6 +58,17 @@ return {{ -- colorscheme
             callback = function(_)
                 vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
             end
+        })
+        vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = "single"
+        })
+        vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
+            border = "single"
+        })
+        vim.diagnostic.config({
+            float = {
+                border = "single"
+            }
         })
     end
 }, { -- copilot
@@ -254,8 +268,18 @@ return {{ -- colorscheme
     'petertriho/nvim-scrollbar',
     event = {'BufReadPre', 'BufNewFile'},
     config = function()
-        require('scrollbar').setup()
+        require('scrollbar').setup({
+            handle = {
+                color = '#1d3b53'
+            }
+        })
         require('scrollbar.handlers.gitsigns').setup()
+    end
+}, {
+    'kevinhwang91/nvim-hlslens',
+    event = {'BufReadPre', 'BufNewFile'},
+    config = function()
+        require("scrollbar.handlers.search").setup()
     end
 }, { -- buffer remove
     'echasnovski/mini.bufremove',
