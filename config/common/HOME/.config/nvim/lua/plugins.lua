@@ -348,6 +348,14 @@ return {{ -- colorscheme
     opts = {
         char = '|',
         show_end_of_line = true,
-        show_trailing_blankline_indent = false,
+        show_trailing_blankline_indent = false
     }
+}, { -- keymap help
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    init = function()
+        vim.o.timeout = true
+        vim.o.timeoutlen = 300
+    end,
+    opts = {}
 }}
