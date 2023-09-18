@@ -70,14 +70,14 @@ return {{ -- colorscheme
             end
         })
         vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-            border = "single"
+            border = 'single'
         })
         vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
-            border = "single"
+            border = 'single'
         })
         vim.diagnostic.config({
             float = {
-                border = "single"
+                border = 'single'
             }
         })
     end
@@ -104,8 +104,8 @@ return {{ -- colorscheme
     }
 }, { -- completion
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path'},
+    event = {'InsertEnter', 'ModeChanged'},
+    dependencies = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline'},
     opts = function()
         local cmp = require('cmp')
         return {
@@ -138,8 +138,36 @@ return {{ -- colorscheme
                 name = 'path'
             }})
         }
+    end,
+    config = function(_, opts)
+        local cmp = require('cmp')
+        cmp.setup(opts)
+        cmp.setup.cmdline({'/', '?'}, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({{
+                name = 'nvim_lsp_document_symbol'
+            }, {
+                name = 'buffer'
+            }})
+        })
+        cmp.setup.cmdline(':', {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({{
+                name = 'path'
+            }}, {{
+                name = 'cmdline'
+            }})
+        })
     end
-}, { -- autopair
+}, -- { -- commandline completion
+--     'hrsh7th/cmp-cmdline',
+--     dependencies = 'hrsh7th/nvim-cmp',
+--     config = function(_, _)
+--         local cmp = require('cmp')
+--         cmp.setup(opts)
+--     end
+-- },
+{ -- autopair
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     config = true
@@ -155,16 +183,16 @@ return {{ -- colorscheme
     'chrisgrieser/nvim-spider',
     lazy = true,
     config = function()
-        vim.keymap.set({'n', 'o', 'x'}, 'sw', "<cmd>lua require('spider').motion('w')<cr>", {
+        vim.keymap.set({'n', 'o', 'x'}, 'sw', '<cmd>lua require("spider").motion("w")<cr>', {
             desc = 'Spider-w'
         })
-        vim.keymap.set({'n', 'o', 'x'}, 'se', "<cmd>lua require('spider').motion('e')<cr>", {
+        vim.keymap.set({'n', 'o', 'x'}, 'se', '<cmd>lua require("spider").motion("e")<cr>', {
             desc = 'Spider-e'
         })
-        vim.keymap.set({'n', 'o', 'x'}, 'sb', "<cmd>lua require('spider').motion('b')<cr>", {
+        vim.keymap.set({'n', 'o', 'x'}, 'sb', '<cmd>lua require("spider").motion("b")<cr>', {
             desc = 'Spider-b'
         })
-        vim.keymap.set({'n', 'o', 'x'}, 'sge', "<cmd>lua require('spider').motion('ge')<cr>", {
+        vim.keymap.set({'n', 'o', 'x'}, 'sge', '<cmd>lua require("spider").motion("ge")<cr>', {
             desc = 'Spider-ge'
         })
     end
@@ -299,6 +327,18 @@ return {{ -- colorscheme
     event = {'BufReadPre', 'BufNewFile'},
     config = function()
         require("scrollbar.handlers.search").setup()
+        vim.keymap.set('n', 'n', '<cmd>execute("normal! " . v:count1 . "n")<cr><cmd>lua require("hlslens").start()<cr>')
+        vim.keymap.set('n', 'N', '<cmd>execute("normal! " . v:count1 . "N")<cr><cmd>lua require("hlslens").start()<cr>')
+        vim.keymap.set('n', '*', '*<cmd>lua require("hlslens").start()<cr>')
+        vim.keymap.set('n', '#', '#<cmd>lua require("hlslens").start()<cr>')
+        vim.keymap.set('n', 'g*', 'g*<cmd>lua require("hlslens").start()<cr>')
+        vim.keymap.set('n', 'g#', 'g#<cmd>lua require("hlslens").start()<cr>')
+    end
+}, {
+    'norcalli/nvim-colorizer.lua',
+    event = 'BufEnter',
+    config = function()
+        require('colorizer').setup()
     end
 }, { -- buffer remove
     'echasnovski/mini.bufremove',
@@ -402,15 +442,15 @@ return {{ -- colorscheme
     event = 'VeryLazy',
     opts = function()
         local colors = {
-            darkgray = "#16161d",
-            gray = "#727169",
+            darkgray = '#16161d',
+            gray = '#727169',
             innerbg = nil,
-            outerbg = "#16161D",
-            normal = "#7e9cd8",
-            insert = "#98bb6c",
-            visual = "#ffa066",
-            replace = "#e46876",
-            command = "#e6c384"
+            outerbg = '#16161D',
+            normal = '#7e9cd8',
+            insert = '#98bb6c',
+            visual = '#ffa066',
+            replace = '#e46876',
+            command = '#e6c384'
         }
         return {
             options = {
@@ -419,7 +459,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.gray,
                             bg = colors.outerbg,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
@@ -434,7 +474,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.darkgray,
                             bg = colors.visual,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
@@ -449,7 +489,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.darkgray,
                             bg = colors.replace,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
@@ -464,7 +504,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.darkgray,
                             bg = colors.normal,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
@@ -479,7 +519,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.darkgray,
                             bg = colors.insert,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
@@ -494,7 +534,7 @@ return {{ -- colorscheme
                         a = {
                             fg = colors.darkgray,
                             bg = colors.command,
-                            gui = "bold"
+                            gui = 'bold'
                         },
                         b = {
                             fg = colors.gray,
