@@ -46,11 +46,12 @@ vim.g.mapleader = ' '
 -- disable
 vim.keymap.set('n', 's', '<nop>')
 
--- buffers
+-- windows
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window', remap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
+vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 
 -- registers
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
@@ -65,10 +66,11 @@ vim.keymap.set({ 'n', 'x' }, 'sc', '"_c')
 -- files
 vim.keymap.set({ 'n', 'x', 's' }, '<leader>w', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
+vim.keymap.set('n', '<leader>qw', '<cmd>wqa<cr>', { desc = 'Save and quit all' })
 
 -- cursor
-vim.keymap.set({'n', 'x'}, '<leader>k', '10k', { desc = 'Move 10 lines up' })
-vim.keymap.set({'n', 'x'}, '<leader>j', '10j', { desc = 'Move 10 lines down' })
+vim.keymap.set({ 'n', 'x' }, '<leader>k', '10k', { desc = 'Move 10 lines up' })
+vim.keymap.set({ 'n', 'x' }, '<leader>j', '10j', { desc = 'Move 10 lines down' })
 
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')
@@ -91,8 +93,8 @@ vim.keymap.set('i', '<C-k>', '<esc>lDa')
 vim.keymap.set('c', '<C-h>', '<bs>')
 
 -- helix style
-vim.keymap.set({ 'n', 'x' }, 'gl', '$')
-vim.keymap.set({ 'n', 'x' }, 'gh', '^')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^')
 
 -- plugins
 vim.keymap.set('n', '<leader>il', '<cmd>Lazy<cr>', { desc = 'Lazy' })
@@ -157,6 +159,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup(require('plugins'), {
+    defaults = {
+        lazy = true,
+    },
     ui = {
         border = 'single',
     },

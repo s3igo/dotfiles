@@ -1,7 +1,4 @@
-local function map(mode, l, r, opts)
-    opts = opts or {}
-    vim.keymap.set(mode, l, r, opts)
-end
+local map = vim.keymap.set
 return {
     { -- colorscheme
         'bluz71/vim-nightfly-guicolors',
@@ -19,11 +16,11 @@ return {
     { -- benchmark
         'dstein64/vim-startuptime',
         cmd = 'StartupTime',
-        config = function() vim.g.startuptime_tries = 10 end,
+        keys = { { '<leader>ib', '<cmd>StartupTime<cr>', desc = 'Benchmark' } },
+        init = function() vim.g.startuptime_tries = 10 end,
     },
     { -- utility functions
         'nvim-lua/plenary.nvim',
-        lazy = true,
     },
     -- --------------------------------- Coding --------------------------------- --
     { -- snippets
@@ -34,108 +31,6 @@ return {
             'rafamadriz/friendly-snippets',
             config = function() require('luasnip.loaders.from_vscode').lazy_load() end,
         },
-    },
-    { -- LSP
-        'neovim/nvim-lspconfig',
-        event = { 'BufReadPre', 'BufNewFile' },
-        dependencies = {
-            {
-                'folke/neoconf.nvim',
-                cmd = 'Neoconf',
-                config = true,
-            },
-            {
-                'williamboman/mason-lspconfig.nvim',
-                cmd = { 'LspInstall', 'LspUninstall' },
-                opts = {},
-            },
-            {
-                'williamboman/mason.nvim',
-                cmd = { 'Mason' },
-                build = ':MasonUpdate',
-                opts = { ui = { border = 'single' } },
-            },
-            'creativenull/efmls-configs-nvim',
-            'hrsh7th/cmp-nvim-lsp',
-        },
-        config = function()
-            require('mason').setup()
-            local mason_lspconfig = require('mason-lspconfig')
-            mason_lspconfig.setup({
-                -- ensure_installed = {'rust_analyzer', 'tsserver'}
-            })
-
-            local lspconfig = require('lspconfig')
-            local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-            mason_lspconfig.setup_handlers({
-                function(server)
-                    lspconfig[server].setup({
-                        capabilities = lsp_capabilities,
-                        -- autoformat = true
-                    })
-                end,
-            })
-
-            local languages = {
-                -- typescript = {eslint, prettier},
-                lua = { require('efmls-configs.formatters.stylua') },
-            }
-            lspconfig.efm.setup({
-                filetypes = vim.tbl_keys(languages),
-                settings = { rootMarkers = { '.git/' }, languages = languages },
-                init_options = { documentFormatting = true, documentRangeFormatting = true },
-            })
-
-            lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        runtime = { version = 'LuaJIT' },
-                        diagnostics = { globals = { 'vim' } },
-                    },
-                },
-            })
-
-            lspconfig.rust_analyzer.setup({
-                settings = {
-                    ['rust-analyzer'] = { checkOnSave = { command = 'clippy' } },
-                },
-            })
-            vim.api.nvim_create_autocmd('LspAttach', {
-                desc = 'LSP Actions',
-                callback = function()
-                    map('n', '<leader>li', '<cmd>LspInfo<cr>', { desc = 'Info' })
-                    map('n', '<leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Code action' })
-                    map('n', '<leader>lf', function() vim.lsp.buf.format() end, { desc = 'Format' })
-                    map('n', '<leader>lF', function()
-                        vim.lsp.buf.format()
-                        vim.cmd.write()
-                        vim.cmd.edit()
-                    end, { desc = 'Format and save' })
-                    map('n', 'K', function() vim.lsp.buf.hover() end, { desc = 'Hover' })
-                    map('n', 'gK', function() vim.lsp.buf.signature_help() end, { desc = 'Signature help' })
-                    map(
-                        'n',
-                        'gr',
-                        function() require('telescope.builtin').lsp_references() end,
-                        { desc = 'References' }
-                    )
-                    map(
-                        'n',
-                        'gd',
-                        function() require('telescope.builtin').lsp_definitions() end,
-                        { desc = 'Goto definition' }
-                    )
-                    map('n', 'gD', function() vim.lsp.buf.declaration() end, { desc = 'Goto declaration' })
-                    map('n', 'gI', function() vim.lsp.buf.implementation() end, { desc = 'Goto implementation' })
-                    map('n', 'gy', function() vim.lsp.buf.type_definition() end, { desc = 'Goto type definition' })
-                end,
-            })
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-            vim.lsp.handlers['textDocument/signatureHelp'] =
-                vim.lsp.with(vim.lsp.handlers.signatureHelp, { border = 'single' })
-            vim.diagnostic.config({ float = { border = 'single' } })
-            require('lspconfig.ui.windows').default_options.border = 'single'
-        end,
     },
     { -- copilot
         'zbirenbaum/copilot.lua',
@@ -157,8 +52,13 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-path',
+            'saadparwaiz1/cmp_luasnip',
             'hrsh7th/cmp-cmdline',
-            'onsails/lspkind.nvim',
+            { -- icons
+                'onsails/lspkind.nvim',
+                opts = { mode = 'symbol' },
+                config = function(_, opts) require('lspkind').init(opts) end,
+            },
         },
         opts = function()
             local cmp = require('cmp')
@@ -226,80 +126,100 @@ return {
             })
         end,
     },
-    {
-        -- autopair
+    { -- autopair
         'windwp/nvim-autopairs',
-        event = 'InsertEnter',
-        config = true,
+        event = 'VeryLazy',
+        opts = {},
     },
     { -- surround selection
         'kylechui/nvim-surround',
         event = 'VeryLazy',
-        config = true,
+        opts = {},
     },
     { -- comment
         'numToStr/Comment.nvim',
-        config = true,
-        lazy = false,
+        dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
+        event = 'VeryLazy',
+        opts = function()
+            -- local is_available, ts_integration = pcall(require, 'ts_context_commentstring.integrations.comment_nvim')
+            -- return is_available and { pre_hook = ts_integration.create_pre_hook() } or {}
+            return { pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook() }
+        end,
     },
     { -- subword motion
         'chrisgrieser/nvim-spider',
-        event = 'InsertEnter',
+        event = 'VeryLazy',
         config = function()
-            map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<cr>", { desc = 'Spider-w' })
-            map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<cr>", { desc = 'Spider-e' })
-            map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<cr>", { desc = 'Spider-b' })
-            map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider-ge' })
+            map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<cr>", { desc = 'Spider w' })
+            map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<cr>", { desc = 'Spider e' })
+            map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<cr>", { desc = 'Spider b' })
+            map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider ge' })
         end,
     },
-    -- --------------------------------- Editor --------------------------------- --
-    { -- explorer
-        'nvim-tree/nvim-tree.lua',
-        version = '*',
-        lazy = false,
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+    {
+        'monaqa/dial.nvim',
+        event = 'VeryLazy',
         keys = {
-            { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle explorer' },
-            { '<leader>r', '<cmd>NvimTreeRefresh<cr>', desc = 'Refresh explorer' },
-            { '<leader>o', '<cmd>NvimTreeFindFile<cr>', desc = 'Focus current file in explorer' },
-        },
-        opts = { filters = { custom = { '.git' } } },
-        config = function(_, opts)
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-            require('nvim-tree').setup(opts)
-        end,
-    },
-    { -- fuzzy finder
-        'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
-        keys = {
-            { '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
-            { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
-            { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
-            { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
-        },
-        opts = {
-            defaults = {
-                file_ignore_patterns = { '.git', 'node_modules' },
-                mappings = {
-                    i = {
-                        ['<C-u>'] = false,
-                        ['<C-k>'] = false,
-                        ['<C-a>'] = { '<Home>', type = 'command' },
-                        ['<C-e>'] = { '<End>', type = 'command' },
-                    },
-                },
+            { '<C-a>', function() require('dial.map').manipulate('increment', 'normal') end, desc = 'Dial <C-a>' },
+            { '<C-x>', function() require('dial.map').manipulate('decrement', 'normal') end, desc = 'Dial <C-x>' },
+            { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, desc = 'Dial g<C-a>' },
+            { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, desc = 'Dial g<C-x>' },
+            {
+                '<C-a>',
+                function() require('dial.map').manipulate('increment', 'visual') end,
+                mode = 'v',
+                desc = 'Dial in VISUAL <C-a>',
             },
-            pickers = { find_files = { hidden = true } },
+            {
+                '<C-x>',
+                function() require('dial.map').manipulate('decrement', 'visual') end,
+                mode = 'v',
+                desc = 'Dial in VISUAL <C-x>',
+            },
+            {
+                'g<C-a>',
+                function() require('dial.map').manipulate('increment', 'gvisual') end,
+                mode = 'v',
+                desc = 'Dial in VISUAL g<C-a>',
+            },
+            {
+                'g<C-x>',
+                function() require('dial.map').manipulate('decrement', 'gvisual') end,
+                mode = 'v',
+                desc = 'Dial in VISUAL g<C-x>',
+            },
         },
+        config = function()
+            local augend = require('dial.augend')
+            require('dial.config').augends:register_group({
+                default = {
+                    augend.integer.alias.decimal,
+                    augend.integer.alias.decimal_int,
+                    augend.integer.alias.binary,
+                    augend.integer.alias.hex,
+                    augend.date.alias['%Y/%m/%d'],
+                    augend.date.alias['%Y-%m-%d'],
+                    augend.date.alias['%m/%d'],
+                    augend.date.alias['%H:%M'],
+                    augend.constant.alias.ja_weekday,
+                    augend.constant.alias.ja_weekday_full,
+                    augend.constant.alias.bool,
+                    augend.constant.alias.alpha,
+                    augend.constant.alias.Alpha,
+                    augend.semver.alias.semver,
+                },
+            })
+        end,
     },
+    -- --- TreeSitter --- --
     { -- treesitter
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         event = { 'BufReadPost', 'BufNewFile' },
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            'RRethy/nvim-treesitter-endwise',
             'HiPhish/rainbow-delimiters.nvim',
         },
         cmd = { 'TSUpdateSync' },
@@ -373,6 +293,8 @@ return {
                     },
                 },
             },
+            context_commentstring = { enable = true },
+            endwise = { enable = true },
         },
         config = function(_, opts)
             require('nvim-treesitter.configs').setup(opts)
@@ -396,6 +318,217 @@ return {
                 },
             }
         end,
+    },
+    -- --- LSP --- --
+    { -- LSP
+        'neovim/nvim-lspconfig',
+        event = { 'BufReadPre', 'BufNewFile' },
+        dependencies = {
+            {
+                'folke/neoconf.nvim',
+                cmd = 'Neoconf',
+                opts = {},
+            },
+            {
+                'williamboman/mason-lspconfig.nvim',
+                cmd = { 'LspInstall', 'LspUninstall' },
+                opts = {},
+            },
+            {
+                'williamboman/mason.nvim',
+                cmd = { 'Mason' },
+                build = ':MasonUpdate',
+                opts = { ui = { border = 'single' } },
+            },
+            'creativenull/efmls-configs-nvim',
+            'hrsh7th/cmp-nvim-lsp',
+        },
+        config = function()
+            require('mason').setup()
+            local mason_lspconfig = require('mason-lspconfig')
+            mason_lspconfig.setup({
+                -- ensure_installed = {'rust_analyzer', 'tsserver'}
+            })
+            local lspconfig = require('lspconfig')
+            local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+            mason_lspconfig.setup_handlers({
+                function(server)
+                    lspconfig[server].setup({
+                        capabilities = lsp_capabilities,
+                        -- autoformat = true
+                    })
+                end,
+            })
+            local languages = {
+                -- typescript = {eslint, prettier},
+                lua = { require('efmls-configs.formatters.stylua') },
+            }
+            lspconfig.efm.setup({
+                filetypes = vim.tbl_keys(languages),
+                settings = { rootMarkers = { '.git/' }, languages = languages },
+                init_options = { documentFormatting = true, documentRangeFormatting = true },
+            })
+
+            lspconfig.lua_ls.setup({
+                settings = {
+                    Lua = {
+                        runtime = { version = 'LuaJIT' },
+                        diagnostics = { globals = { 'vim' } },
+                    },
+                },
+            })
+
+            lspconfig.rust_analyzer.setup({
+                settings = {
+                    ['rust-analyzer'] = { checkOnSave = { command = 'clippy' } },
+                },
+            })
+
+            vim.api.nvim_create_autocmd('LspAttach', {
+                desc = 'LSP Actions',
+                callback = function()
+                    map('n', '<leader>li', '<cmd>LspInfo<cr>', { desc = 'Info' })
+                    map({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action' })
+                    map(
+                        'n',
+                        '<leader>lA',
+                        function()
+                            vim.lsp.buf.code_action({
+                                context = {
+                                    only = {
+                                        'source',
+                                    },
+                                    diagnostics = {},
+                                },
+                            })
+                        end,
+                        { desc = 'Source action' }
+                    )
+                    map('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
+                    map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
+                    map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format' })
+                    map('v', '<leader>lf', function()
+                        local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '<'))
+                        local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '>'))
+                        vim.lsp.buf.format({
+                            range = {
+                                ['start'] = { start_row, 0 },
+                                ['end'] = { end_row, 0 },
+                            },
+                            async = true,
+                        })
+                    end, { desc = 'Range format' })
+                    map('n', '<leader>lF', function()
+                        vim.lsp.buf.format()
+                        vim.cmd.write()
+                        vim.cmd.edit()
+                    end, { desc = 'Format and save' })
+                    -- TODO: ls, lS -> aerial
+                    map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
+                    map('n', 'gK', vim.lsp.buf.signature_help, { desc = 'Signature help' })
+                    map(
+                        'n',
+                        'gr',
+                        function() require('telescope.builtin').lsp_references() end,
+                        { desc = 'References' }
+                    )
+                    map(
+                        'n',
+                        'gd',
+                        function() require('telescope.builtin').lsp_definitions() end,
+                        { desc = 'Goto definition' }
+                    )
+                    map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
+                    map('n', 'gI', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
+                    map('n', 'gy', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
+                    map('n', 'gs', vim.lsp.buf.workspace_symbol, { desc = 'Workspace symbol' })
+                    map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+                    map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
+                    map(
+                        'n',
+                        ']e',
+                        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
+                        { desc = 'Next error' }
+                    )
+                    map(
+                        'n',
+                        '[e',
+                        function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
+                        { desc = 'Previous error' }
+                    )
+                    map(
+                        'n',
+                        ']w',
+                        function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end,
+                        { desc = 'Next warning' }
+                    )
+                    map(
+                        'n',
+                        '[w',
+                        function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,
+                        { desc = 'Previous warning' }
+                    )
+                end,
+            })
+            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+            -- vim.lsp.handlers['textDocument/signatureHelp'] =
+            --     vim.lsp.with(vim.lsp.handlers.signatureHelp, { border = 'single' })
+            vim.diagnostic.config({ float = { border = 'single' } })
+            require('lspconfig.ui.windows').default_options.border = 'single'
+        end,
+    },
+    { -- progress indicator
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        event = 'LspAttach',
+        opts = { window = { blend = 0, relative = 'editor' } },
+        config = function(_, opts)
+            require('fidget').setup(opts)
+            vim.api.nvim_set_hl(0, 'FidgetTitle', { link = 'NormalFloat' })
+            vim.api.nvim_set_hl(0, 'FidgetTask', { link = 'NormalFloat' })
+        end,
+    },
+    -- --------------------------------- Editor --------------------------------- --
+    { -- explorer
+        'nvim-tree/nvim-tree.lua',
+        version = '*',
+        lazy = false,
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        keys = {
+            { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle explorer' },
+            { '<leader>r', '<cmd>NvimTreeRefresh<cr>', desc = 'Refresh explorer' },
+            { '<leader>o', '<cmd>NvimTreeFindFile<cr>', desc = 'Focus current file in explorer' },
+        },
+        opts = { filters = { custom = { '.git' } } },
+        config = function(_, opts)
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+            require('nvim-tree').setup(opts)
+        end,
+    },
+    { -- fuzzy finder
+        'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
+        keys = {
+            { '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
+            { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
+            { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
+            { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
+        },
+        opts = {
+            defaults = {
+                file_ignore_patterns = { '.git', 'node_modules' },
+                mappings = {
+                    i = {
+                        ['<C-u>'] = false,
+                        ['<C-k>'] = false,
+                        ['<C-a>'] = { '<Home>', type = 'command' },
+                        ['<C-e>'] = { '<End>', type = 'command' },
+                    },
+                },
+            },
+            pickers = { find_files = { hidden = true } },
+        },
     },
     { -- gutter indicator
         'lewis6991/gitsigns.nvim',
@@ -447,12 +580,22 @@ return {
         event = { 'BufReadPre', 'BufNewFile' },
         config = function()
             require('scrollbar.handlers.search').setup()
-            map('n', 'n', "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>")
-            map('n', 'N', "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>")
-            map('n', '*', "*<cmd>lua require('hlslens').start()<cr>")
-            map('n', '#', "#<cmd>lua require('hlslens').start()<cr>")
-            map('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>")
-            map('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>")
+            map(
+                'n',
+                'n',
+                "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>",
+                { desc = 'hlslens n' }
+            )
+            map(
+                'n',
+                'N',
+                "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>",
+                { desc = 'hlslens N' }
+            )
+            map('n', '*', "*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens *' })
+            map('n', '#', "#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens #' })
+            map('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g*' })
+            map('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g#' })
         end,
     },
     {
@@ -504,23 +647,21 @@ return {
     -- ----------------------------------- UI ----------------------------------- --
     { -- override components
         'stevearc/dressing.nvim',
-        opts = {},
-    },
-    { -- LSP progress
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
-        event = 'LspAttach',
-        opts = { window = { blend = 0, relative = 'editor' } },
-        config = function(_, opts)
-            require('fidget').setup(opts)
-            vim.api.nvim_set_hl(0, 'FidgetTitle', { link = 'NormalFloat' })
-            vim.api.nvim_set_hl(0, 'FidgetTask', { link = 'NormalFloat' })
+        opts = {
+            input = { border = 'single' },
+            select = { backend = { 'telescope', 'builtin' } },
+            builtin = { border = 'single' },
+        },
+        init = function()
+            vim.ui.select = function(...)
+                require('lazy').load({ plugins = { 'dressing.nvim' } })
+                return vim.ui.select(...)
+            end
+            vim.ui.input = function(...)
+                require('lazy').load({ plugins = { 'dressing.nvim' } })
+                return vim.ui.input(...)
+            end
         end,
-    },
-    { -- LSP icons
-        'onsails/lspkind.nvim',
-        opts = { mode = 'symbol' },
-        config = function(_, opts) require('lspkind').init(opts) end,
     },
     { -- notification
         'rcarriga/nvim-notify',
@@ -613,7 +754,7 @@ return {
                             'bo:expandtab',
                             fmt = function(str)
                                 if str == 'true' then
-                                    return 'spaces: ' .. vim.bo.softtabstop
+                                    return 'spaces: ' .. vim.bo.shiftwidth
                                 else
                                     return 'tab size: ' .. vim.bo.tabstop
                                 end
@@ -653,7 +794,22 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {},
+        opts = {
+            window = { border = 'single' },
+        },
+        config = function(_, opts)
+            local wk = require('which-key')
+            wk.setup(opts)
+            wk.register({
+                ['<leader>'] = {
+                    b = { name = 'Buffer' },
+                    g = { name = 'Git' },
+                    i = { name = 'Plugins' },
+                    l = { name = 'LSP' },
+                    q = { name = 'Quit' },
+                },
+            })
+        end,
     },
     { -- terminal
         'folke/edgy.nvim',
@@ -688,7 +844,7 @@ return {
             'nvim-telescope/telescope.nvim',
             { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' },
         },
-        keyskkkjj= {
+        keys = {
             { '<leader>ig', '<cmd>Neogit<cr>', desc = 'Neogit' },
             { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diffview' },
         },
