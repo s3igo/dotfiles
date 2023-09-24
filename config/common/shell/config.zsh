@@ -53,10 +53,10 @@ function __cdr-fzf {
     declare BUFFER="cd "$(cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf)""
     zle accept-line
 }
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
-zle -N __cdr-fzf
-bindkey '^J' __cdr-fzf
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
+# zle -N __cdr-fzf
+# bindkey '^J' __cdr-fzf
 
 ## command history
 function __history-fzf {

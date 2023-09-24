@@ -55,7 +55,7 @@
         {
             :des "ctrl+w -> opt+delete"
             :rules [
-                [:!Tw :!Odelete_or_backspace [:!terminal]]
+                [:!Tw :!Odelete_or_backspace [:!terminal :!editor]]
             ]
         }
         {

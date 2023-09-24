@@ -4,6 +4,7 @@ bottom
 broot
 daipeihust/tap/im-select
 direnv
+efm-langserver
 eza
 fd
 fnm
