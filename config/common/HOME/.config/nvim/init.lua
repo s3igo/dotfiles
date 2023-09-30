@@ -53,8 +53,11 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window', remap = tr
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = true })
 vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 
+-- ratain cursor position
+vim.keymap.set('v', 'y', 'ygv<esc>')
+
 -- registers
-vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { remap = true })
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"+d')
 vim.keymap.set({ 'n', 'x' }, '<leader>x', '"+x')
 vim.keymap.set('n', '<leader>p', '"+p')
@@ -123,15 +126,8 @@ end
 
 -- vscode
 if vim.g.vscode then
-    vim.keymap.set('n', ']g', "<cmd>call VSCodeNotify('workbench.action.editor.nextChange')<cr>")
-    vim.keymap.set('n', '[g', "<cmd>call VSCodeNotify('workbench.action.editor.previousChange')<cr>")
-    vim.keymap.set('n', ']d,', "<cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<cr>")
-    vim.keymap.set('n', '[d,', "<cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<cr>")
-    vim.keymap.set('n', ']b', "<cmd>call VSCodeNotify('workbench.action.nextEditor')<cr>")
-    vim.keymap.set('n', '[b', "<cmd>call VSCodeNotify('workbench.action.previousEditor')<cr>")
-    vim.keymap.set('n', '>b', "<cmd>call VSCodeNotify('workbench.action.moveEditorRightInGroup')<cr>")
-    vim.keymap.set('n', '<b', "<cmd>call VSCodeNotify('workbench.action.moveEditorLeftInGroup')<cr>")
     vim.keymap.set('n', '<leader>o', "<cmd>call VSCodeNotify('workbench.files.action.showActiveFileInExplorer')<cr>")
+    vim.keymap.set('n', '<leader>lf', "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
 end
 
 if not vim.g.vscode then
