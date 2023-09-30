@@ -121,7 +121,7 @@ vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank to end of line' })
 vim.keymap.set({ 'i', 'n' }, '<C-[>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
 
 if not vim.g.vscode then
-    vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal mode' })
+    vim.keymap.set('t', '<C-]>', '<C-\\><C-n>', { desc = 'Escape terminal mode' })
 end
 
 -- vscode
