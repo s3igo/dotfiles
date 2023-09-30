@@ -85,13 +85,19 @@ vim.keymap.set('i', ';', ';<C-g>u')
 
 -- emacs style
 if not vim.g.vscode then
+    vim.keymap.set('i', '<C-f>', '<C-g>U<Right>')
+    vim.keymap.set('i', '<C-b>', '<C-g>U<Left>')
+    vim.keymap.set('i', '<C-p>', '<C-g>U<Up>')
+    vim.keymap.set('i', '<C-n>', '<C-g>U<Down>')
+    vim.keymap.set('i', '<C-a>', '<C-g>U<Home>')
+    vim.keymap.set('i', '<C-e>', '<C-g>U<End>')
+
     vim.keymap.set({ 'c', 'i' }, '<C-d>', '<Del>')
-    vim.keymap.set({ 'c', 'i' }, '<C-a>', '<Home>')
-    vim.keymap.set({ 'c', 'i' }, '<C-e>', '<End>')
-    vim.keymap.set({ 'c', 'i' }, '<C-b>', '<Left>')
-    vim.keymap.set({ 'c', 'i' }, '<C-f>', '<Right>')
-    vim.keymap.set('i', '<C-p>', '<Up>')
-    vim.keymap.set('i', '<C-n>', '<Down>')
+    vim.keymap.set('c', '<C-f>', '<Right>')
+    vim.keymap.set('c', '<C-b>', '<Left>')
+    vim.keymap.set('c', '<C-a>', '<Home>')
+    vim.keymap.set('c', '<C-e>', '<End>')
+
     vim.keymap.set('i', '<C-k>', '<esc>lDa')
     vim.keymap.set('c', '<C-h>', '<bs>')
 end
