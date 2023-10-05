@@ -106,7 +106,7 @@ if not vim.g.vscode then
 end
 
 -- helix style
-vim.keymap.set({ 'n', 'x', 'o' }, 'gl', '$')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gl', 'g_')
 vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^')
 
 -- plugins
