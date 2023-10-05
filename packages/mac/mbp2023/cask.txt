@@ -12,6 +12,7 @@ google-chrome
 karabiner-elements
 logseq
 mochi-diffusion
+monitorcontrol
 obsidian
 orbstack
 raycast
