@@ -43,3 +43,4 @@ tmux
 tree
 yqrashawn/goku/goku
 zellij
+zk

@@ -39,6 +39,9 @@ declare -x EDITOR='hx'
 # helix
 declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 
+# zk
+declare -x ZK_NOTEBOOK_DIR="${HOME}/git/github.com/s3igo/notes"
+
 # alias
 alias b='brew'
 alias c='cargo'
@@ -122,7 +125,9 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 
         declare EXT="${1#*.}"
         declare HASH="$(shasum -a 256 "$1" | cut -d ' ' -f 1)"
-        command mv "$1" "${HASH}.${EXT}"
+        declare NAME="${HASH}.${EXT}"
+        mv "$1" "$NAME"
+        echo "$NAME"
     }
 
 fi
