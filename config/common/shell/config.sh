@@ -82,9 +82,9 @@ function timestamp {
     [[ $# == 0 ]] && date '+%Y%m%d%H%M%S' && return 0
     [[ $# > 1 ]] && echo 'error: too many arguments' && return 1
 
-    declare extention="${1##*.}"
+    declare ext="${1#*.}"
     declare now="$(date +%Y%m%d%H%M%S)"
-    command mv "$1" "${now}.${extention}"
+    command mv "$1" "${now}.${ext}"
 }
 
 function tmux-backup {
@@ -115,4 +115,14 @@ if [[ "$(uname)" == 'Darwin' ]]; then
             arch -x86_64 zsh -c "$*"
         }
     fi
+    
+    function hashmv {
+        [[ $# == 0 ]] && echo 'error: required arguments' && return 1
+        [[ $# > 1 ]] && echo 'error: too many arguments' && return 1
+
+        declare EXT="${1#*.}"
+        declare HASH="$(shasum -a 256 "$1" | cut -d ' ' -f 1)"
+        command mv "$1" "${HASH}.${EXT}"
+    }
+
 fi
