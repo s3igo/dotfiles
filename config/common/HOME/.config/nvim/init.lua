@@ -57,14 +57,12 @@ vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 vim.keymap.set('v', 'y', 'ygv<esc>')
 
 -- registers
-vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { remap = true })
-vim.keymap.set({ 'n', 'x' }, '<leader>d', '"+d')
-vim.keymap.set({ 'n', 'x' }, '<leader>x', '"+x')
-vim.keymap.set('n', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>0', '"0p')
-vim.keymap.set({ 'n', 'x' }, 'sd', '"_d')
-vim.keymap.set({ 'n', 'x' }, 'sx', '"_x')
-vim.keymap.set({ 'n', 'x' }, 'sc', '"_c')
+vim.keymap.set({ 'n', 'x' }, 'sy', '"+y', { remap = true })
+vim.keymap.set({ 'n', 'x' }, 'sd', '"+d')
+vim.keymap.set('n', 'sp', '"+p')
+vim.keymap.set('n', 's0', '"0p')
+vim.keymap.set({ 'n', 'x' }, 'x', '"_d')
+vim.keymap.set({ 'n', 'x' }, 'X', '"_c')
 
 -- files
 if not vim.g.vscode then
@@ -72,10 +70,6 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
     vim.keymap.set('n', '<leader>qw', '<cmd>wqa<cr>', { desc = 'Save and quit all' })
 end
-
--- cursor
-vim.keymap.set({ 'n', 'x' }, '<leader>k', '10k', { desc = 'Move 10 lines up' })
-vim.keymap.set({ 'n', 'x' }, '<leader>j', '10j', { desc = 'Move 10 lines down' })
 
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')
@@ -111,9 +105,9 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^')
 
 -- plugins
 if not vim.g.vscode then
-    vim.keymap.set('n', '<leader>il', '<cmd>Lazy<cr>', { desc = 'Lazy' })
-    vim.keymap.set('n', '<leader>im', '<cmd>Mason<cr>', { desc = 'Mason' })
-    vim.keymap.set('n', '<leader>it', '<cmd>Telescope<cr>', { desc = 'Telescope' })
+    vim.keymap.set('n', '<leader>pl', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+    vim.keymap.set('n', '<leader>pm', '<cmd>Mason<cr>', { desc = 'Mason' })
+    vim.keymap.set('n', '<leader>pt', '<cmd>Telescope<cr>', { desc = 'Telescope' })
 end
 
 -- misc
