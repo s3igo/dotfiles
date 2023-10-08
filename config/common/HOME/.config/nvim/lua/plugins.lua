@@ -494,6 +494,34 @@ return {
             require('lspconfig.ui.windows').default_options.border = 'single'
         end,
     },
+    {
+        'mickael-menu/zk-nvim',
+        cond = is_not_vscode,
+        event = 'VimEnter',
+        keys = {
+            {
+                '<leader>zn',
+                "<cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<cr>",
+                desc = 'New note',
+            },
+            {
+                '<leader>znt',
+                ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<cr>",
+                mode = 'v',
+                desc = 'New note with selection as title',
+            },
+            {
+                '<leader>znc',
+                ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<cr>",
+                mode = 'v',
+                desc = 'New note with selection as content',
+            },
+            { '<leader>zb', '<cmd>ZkBacklinks<cr>', desc = 'Show backlinks' },
+            { '<leader>zl', '<cmd>ZkLinks<cr>', desc = 'Show links' },
+        },
+        opts = {},
+        config = function(_, opts) require('zk').setup(opts) end,
+    },
     { -- progress indicator
         'j-hui/fidget.nvim',
         cond = is_not_vscode,
@@ -872,6 +900,7 @@ return {
     },
     { -- markdwon preview
         'iamcco/markdown-preview.nvim',
+        cond = is_not_vscode,
         ft = 'markdown',
         build = function() vim.fn['mkdp#util#install']() end,
         keys = { { '<leader>v', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' } },
