@@ -42,6 +42,7 @@ alias -g @d_image_ls='"$(docker images | tail -n +2 | fzf | read REPOSITORY TAG 
 if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @cp='| pbcopy'
     alias -g @pst='"$(pbpaste)"'
+    alias -g @icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
 fi
 
 # keybind
@@ -49,12 +50,12 @@ bindkey -e # explicit use emacs keybind
 bindkey '^U' backward-kill-line
 
 ## cdr
-function __cdr-fzf {
-    declare BUFFER="cd "$(cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf)""
-    zle accept-line
-}
-# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-# add-zsh-hook chpwd chpwd_recent_dirs
+# function __cdr-fzf {
+#     declare BUFFER="cd "$(cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf)""
+#     zle accept-line
+# }
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
 # zle -N __cdr-fzf
 # bindkey '^J' __cdr-fzf
 
