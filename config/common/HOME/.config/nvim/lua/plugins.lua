@@ -870,6 +870,18 @@ return {
             },
         },
     },
+    { -- markdwon preview
+        'iamcco/markdown-preview.nvim',
+        ft = 'markdown',
+        build = function() vim.fn['mkdp#util#install']() end,
+        keys = { { '<leader>v', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' } },
+    },
+    -- { -- markdown preview
+    --     'toppair/peek.nvim',
+    --     event = { 'BufRead', 'BufNewFile' },
+    --     build = 'deno task --quiet build:fast',
+    --     config = true,
+    -- },
     -- { -- terminal
     --     'akinsho/toggleterm.nvim',
     --     keys = { { '<leader>t', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' } },
