@@ -489,6 +489,8 @@ return {
                     )
                 end,
             })
+
+            -- appearance
             vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
             vim.diagnostic.config({ float = { border = 'single' } })
             require('lspconfig.ui.windows').default_options.border = 'single'
@@ -664,12 +666,12 @@ return {
         cond = is_not_vscode,
         keys = {
             {
-                '<leader>bd',
+                '<leader>w',
                 function() require('mini.bufremove').delete(0, false) end,
                 desc = 'Delete buffer',
             },
             {
-                '<leader>bD',
+                '<leader>W',
                 function() require('mini.bufremove').delete(0, true) end,
                 desc = 'Force delete buffer',
             },

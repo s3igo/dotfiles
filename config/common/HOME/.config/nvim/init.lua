@@ -66,7 +66,7 @@ vim.keymap.set({ 'n', 'x' }, 'X', '"_c')
 
 -- files
 if not vim.g.vscode then
-    vim.keymap.set({ 'n', 'x', 's' }, '<leader>w', '<cmd>w<cr><esc>', { desc = 'Save file' })
+    vim.keymap.set({ 'n', 'x', 's' }, '<leader>s', '<cmd>w<cr><esc>', { desc = 'Save file' })
     vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
     vim.keymap.set('n', '<leader>qw', '<cmd>wqa<cr>', { desc = 'Save and quit all' })
 end
