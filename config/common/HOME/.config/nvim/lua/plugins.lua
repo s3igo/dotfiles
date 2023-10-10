@@ -42,7 +42,7 @@ return {
         cmd = 'Copilot',
         build = ':Copilot auth',
         opts = {
-            filetypes = { markdown = true, yaml = true },
+            filetypes = { yaml = true },
             suggestion = {
                 auto_trigger = true,
                 keymap = { accept_word = '<C-y>', accept_line = '<C-l>' },
@@ -501,9 +501,23 @@ return {
         cond = is_not_vscode,
         event = 'VimEnter',
         keys = {
+            { '<leader>zi', '<cmd>ZkInsertLink<cr>', desc = 'Insert Link' },
+            { '<leader>zo', '<cmd>ZkNotes<cr>', desc = 'Open note picker' },
+            {
+                '<leader>zm',
+                ":'<,'>ZkMatch<cr>",
+                mode = 'v',
+                desc = 'Open note picker with selection as query',
+            },
             {
                 '<leader>zn',
-                "<cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<cr>",
+                -- "<cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<cr>", -- not working
+                function()
+                    require('zk.commands').get('ZkNew')({
+                        dir = vim.fn.expand('%:p:h'),
+                        title = vim.fn.input('Title: '),
+                    })
+                end,
                 desc = 'New note',
             },
             {
@@ -521,7 +535,7 @@ return {
             { '<leader>zb', '<cmd>ZkBacklinks<cr>', desc = 'Show backlinks' },
             { '<leader>zl', '<cmd>ZkLinks<cr>', desc = 'Show links' },
         },
-        opts = {},
+        opts = { picker = 'telescope' },
         config = function(_, opts) require('zk').setup(opts) end,
     },
     { -- progress indicator
