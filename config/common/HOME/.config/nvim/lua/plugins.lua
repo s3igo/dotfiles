@@ -165,8 +165,8 @@ return {
         'monaqa/dial.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
-            { '<C-a>', function() require('dial.map').manipulate('increment', 'normal') end, desc = 'Dial <C-a>' },
-            { '<C-x>', function() require('dial.map').manipulate('decrement', 'normal') end, desc = 'Dial <C-x>' },
+            { '<C-a>',  function() require('dial.map').manipulate('increment', 'normal') end,  desc = 'Dial <C-a>' },
+            { '<C-x>',  function() require('dial.map').manipulate('decrement', 'normal') end,  desc = 'Dial <C-x>' },
             { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, desc = 'Dial g<C-a>' },
             { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, desc = 'Dial g<C-x>' },
             {
@@ -502,7 +502,7 @@ return {
         event = 'VimEnter',
         keys = {
             { '<leader>zi', '<cmd>ZkInsertLink<cr>', desc = 'Insert Link' },
-            { '<leader>zo', '<cmd>ZkNotes<cr>', desc = 'Open note picker' },
+            { '<leader>zo', '<cmd>ZkNotes<cr>',      desc = 'Open note picker' },
             {
                 '<leader>zm',
                 ":'<,'>ZkMatch<cr>",
@@ -533,7 +533,7 @@ return {
                 desc = 'New note with selection as content',
             },
             { '<leader>zb', '<cmd>ZkBacklinks<cr>', desc = 'Show backlinks' },
-            { '<leader>zl', '<cmd>ZkLinks<cr>', desc = 'Show links' },
+            { '<leader>zl', '<cmd>ZkLinks<cr>',     desc = 'Show links' },
         },
         opts = { picker = 'telescope' },
         config = function(_, opts) require('zk').setup(opts) end,
@@ -558,8 +558,8 @@ return {
         lazy = false,
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         keys = {
-            { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle explorer' },
-            { '<leader>r', '<cmd>NvimTreeRefresh<cr>', desc = 'Refresh explorer' },
+            { '<leader>e', '<cmd>NvimTreeToggle<cr>',   desc = 'Toggle explorer' },
+            { '<leader>r', '<cmd>NvimTreeRefresh<cr>',  desc = 'Refresh explorer' },
             { '<leader>o', '<cmd>NvimTreeFindFile<cr>', desc = 'Focus current file in explorer' },
         },
         opts = { filters = { custom = { '.git' } } },
@@ -574,10 +574,10 @@ return {
         cond = is_not_vscode,
         cmd = 'Telescope',
         keys = {
-            { '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
-            { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
-            { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
-            { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
+            { '<leader><space>', '<cmd>Telescope find_files<cr>',      desc = 'Find files' },
+            { '<leader><tab>',   '<cmd>Telescope buffers<cr>',         desc = 'Switch buffer' },
+            { '<leader>/',       '<cmd>Telescope live_grep<cr>',       desc = 'Live grep' },
+            { '<leader>:',       '<cmd>Telescope command_history<cr>', desc = 'Command history' },
         },
         opts = {
             defaults = {
@@ -860,13 +860,13 @@ return {
         cond = is_not_vscode,
         event = { 'BufReadPost', 'BufNewFile' },
         opts = {
-            char = '|',
-            show_trailing_blankline_indent = false,
-            char_highlight_list = { 'Indent' },
+            indent = { char = '|', highlight = 'Indent' },
+            scope = { enabled = false },
         },
         config = function(_, opts)
             vim.api.nvim_set_hl(0, 'Indent', { fg = '#384B5A' })
-            require('indent_blankline').setup(opts)
+            require('ibl').setup(opts)
+
         end,
     },
     { -- keymaps helper
@@ -902,7 +902,7 @@ return {
         keys = {
             { '<leader>u', function() require('edgy').toggle() end, desc = 'Edgy Toggle' },
             { '<leader>U', function() require('edgy').select() end, desc = 'Edgy Select Window' },
-            { '<leader>t', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' },
+            { '<leader>t', '<cmd>ToggleTerm<cr>',                   desc = 'Toggle Terminal' },
         },
         opts = {
             bottom = {
@@ -920,6 +920,37 @@ return {
         ft = 'markdown',
         build = function() vim.fn['mkdp#util#install']() end,
         keys = { { '<leader>v', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' } },
+    },
+    {
+        'gaoDean/autolist.nvim',
+        ft = {
+            'markdown',
+            'text',
+            'tex',
+            'plaintex',
+            'norg',
+        },
+        config = function()
+            require('autolist').setup()
+
+            vim.keymap.set('i', '<tab>', '<cmd>AutolistTab<cr>')
+            vim.keymap.set('i', '<s-tab>', '<cmd>AutolistShiftTab<cr>')
+            vim.keymap.set('i', '<cr>', '<cr><cmd>AutolistNewBullet<cr>')
+            vim.keymap.set('n', 'o', 'o<cmd>AutolistNewBullet<cr>')
+            vim.keymap.set('n', 'O', 'O<cmd>AutolistNewBulletBefore<cr>')
+            vim.keymap.set('n', '<cr>', '<cmd>AutolistToggleCheckbox<cr><cr>')
+            vim.keymap.set('n', '<C-r>', '<cmd>AutolistRecalculate<cr>')
+
+            -- cycle list types with dot-repeat
+            vim.keymap.set('n', '<leader>cn', require('autolist').cycle_next_dr, { expr = true })
+            vim.keymap.set('n', '<leader>cp', require('autolist').cycle_prev_dr, { expr = true })
+
+            -- functions to recalculate list on edit
+            vim.keymap.set('n', '>>', '>><cmd>AutolistRecalculate<cr>')
+            vim.keymap.set('n', '<<', '<<<cmd>AutolistRecalculate<cr>')
+            vim.keymap.set('n', 'dd', 'dd<cmd>AutolistRecalculate<cr>')
+            vim.keymap.set('v', 'd', 'd<cmd>AutolistRecalculate<cr>')
+        end,
     },
     -- { -- markdown preview
     --     'toppair/peek.nvim',
@@ -943,7 +974,7 @@ return {
             { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' },
         },
         keys = {
-            { '<leader>ig', '<cmd>Neogit<cr>', desc = 'Neogit' },
+            { '<leader>ig', '<cmd>Neogit<cr>',       desc = 'Neogit' },
             { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diffview' },
         },
         config = true,
