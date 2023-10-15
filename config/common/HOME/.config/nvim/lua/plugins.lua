@@ -502,6 +502,12 @@ return {
         event = 'VimEnter',
         keys = {
             { '<leader>zi', '<cmd>ZkInsertLink<cr>', desc = 'Insert Link' },
+            {
+                '<leader>zi',
+                ":'<,'>ZkInsertLinkAtSelection { matchSelected = true }<cr>",
+                mode = 'v',
+                desc = 'Insert link with selection as query'
+            },
             { '<leader>zo', '<cmd>ZkNotes<cr>',      desc = 'Open note picker' },
             {
                 '<leader>zm',
@@ -866,7 +872,6 @@ return {
         config = function(_, opts)
             vim.api.nvim_set_hl(0, 'Indent', { fg = '#384B5A' })
             require('ibl').setup(opts)
-
         end,
     },
     { -- keymaps helper
