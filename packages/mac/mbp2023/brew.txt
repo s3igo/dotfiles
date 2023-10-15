@@ -15,12 +15,14 @@ git-delta
 git-lfs
 gitui
 glow
+grex
 helix
 hexyl
 idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 jq
+just
 knqyf263/pet/pet
 lazydocker
 lf
@@ -36,10 +38,12 @@ rename
 ripgrep
 rustup-init
 sheldon
+shellharden
 silicon
 starship
 tig
 tmux
+tokei
 tree
 yqrashawn/goku/goku
 zellij

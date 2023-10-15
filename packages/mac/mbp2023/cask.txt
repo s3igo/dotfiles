@@ -9,13 +9,16 @@ dropbox
 firefox
 font-udev-gothic-nf
 google-chrome
+google-japanese-ime
 karabiner-elements
 logseq
 mochi-diffusion
 monitorcontrol
+morgen
 obsidian
 orbstack
 raycast
+rio
 slack
 visual-studio-code
 zed
