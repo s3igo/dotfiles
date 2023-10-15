@@ -10,8 +10,9 @@
     }
     :applications {
         :terminal [
-            "^org\\.alacritty$"
             "^com\\.apple\\.Terminal$"
+            "^org\\.alacritty$"
+            "^com\\.raphaelamorim\\.rio$"
         ]
         :editor [
             "^com\\.microsoft\\.VSCode$"
