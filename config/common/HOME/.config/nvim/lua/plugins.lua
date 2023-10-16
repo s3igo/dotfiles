@@ -746,6 +746,7 @@ return {
     },
     { -- notification
         'rcarriga/nvim-notify',
+        enabled = false,
         cond = is_not_vscode,
         keys = { { '<leader>fn', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification' } },
         config = true,
