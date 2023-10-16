@@ -71,7 +71,7 @@ bindkey '^R' __history-fzf
 function __ghq-fzf {
     declare ROOT="$(ghq root)"
     declare BUFFER="cd "${ROOT}/$(ghq list \
-        | fzf --preview "command exa --tree --git-ignore -I 'node_modules|.git' ${ROOT}/{}")""
+        | fzf --preview "command eza --tree --git-ignore -I 'node_modules|.git' ${ROOT}/{}")""
     zle accept-line
 }
 zle -N __ghq-fzf
