@@ -425,8 +425,8 @@ return {
                     )
                     map('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
                     map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
-                    map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format' })
-                    map('v', '<leader>lf', function()
+                    map('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
+                    map('v', '<leader>f', function()
                         local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '<'))
                         local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '>'))
                         vim.lsp.buf.format({
@@ -437,7 +437,7 @@ return {
                             async = true,
                         })
                     end, { desc = 'Range format' })
-                    map('n', '<leader>lF', function()
+                    map('n', '<leader>F', function()
                         vim.lsp.buf.format()
                         vim.cmd.write()
                         vim.cmd.edit()
