@@ -65,8 +65,8 @@ vim.keymap.set('v', 'y', 'ygv<esc>')
 -- registers
 vim.keymap.set({ 'n', 'x' }, 'sy', '"+y', { remap = true })
 vim.keymap.set({ 'n', 'x' }, 'sd', '"+d')
-vim.keymap.set('n', 'sp', '"+p')
-vim.keymap.set('n', 's0', '"0p')
+vim.keymap.set({ 'n', 'x' }, 'sp', '"+p')
+vim.keymap.set({ 'n', 'x' }, 's0', '"0p')
 vim.keymap.set({ 'n', 'x' }, 'x', '"_d')
 vim.keymap.set({ 'n', 'x' }, 'X', '"_c')
 
@@ -130,8 +130,14 @@ if vim.g.vscode then
     vim.keymap.set('n', '<leader>lf', "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
 end
 
+
+-- -------------------------------- autocmds -------------------------------- --
+vim.api.nvim_create_autocmd('FileType', {
+    desc = 'Set formatoptions',
+    command = 'setlocal formatoptions-=ro',
+})
+
 if not vim.g.vscode then
-    -- -------------------------------- autocmds -------------------------------- --
     vim.api.nvim_create_autocmd('TermOpen', {
         desc = 'Enter terminal with insert mode',
         command = 'startinsert',
