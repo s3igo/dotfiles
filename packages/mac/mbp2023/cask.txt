@@ -4,9 +4,12 @@ alacritty
 arc
 arduino-ide
 cloudflare-warp
+cron
 discord
 dropbox
 firefox
+font-ipaexfont
+font-noto-sans-cjk-jp
 font-udev-gothic-nf
 google-chrome
 google-japanese-ime
@@ -19,6 +22,7 @@ obsidian
 orbstack
 raycast
 rio
+routine
 slack
 visual-studio-code
 zed
