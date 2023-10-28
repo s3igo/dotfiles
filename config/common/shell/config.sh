@@ -34,7 +34,7 @@ type broot > /dev/null 2>&1 && source "${XDG_CONFIG_HOME}/broot/launcher/bash/br
 declare -x LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # editor
-declare -x EDITOR='hx'
+declare -x EDITOR='nvim'
 
 # helix
 declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
