@@ -836,6 +836,31 @@ return {
                     section_separators = { left = '', right = '' },
                 },
                 sections = {
+                    lualine_c = {
+                        { 'filename', file_status = false },
+                        {
+                            function()
+                                local symbols = {
+                                    modified = '[+]',
+                                    readonly = '[-]',
+                                }
+                                if vim.bo.modified then
+                                    return symbols.modified
+                                elseif not vim.bo.modifiable or vim.bo.readonly then
+                                    return symbols.readonly
+                                elseif vim.bo.buftype == 'nofile' then
+                                    return symbols.unnamed
+                                elseif vim.bo.newfile then
+                                    return symbols.newfile
+                                else
+                                    return ''
+                                end
+                            end,
+                            color = function()
+                                return { fg = vim.bo.modified and '#ecc48d' or '#82aaff' }
+                            end
+                        },
+                    },
                     lualine_x = { 'location' },
                     lualine_y = {
                         {
