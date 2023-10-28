@@ -4,7 +4,11 @@ set icons
 # override default open command
 cmd open $qlmanage -p $f >& /dev/null
 map <enter> &$OPENER $f
-map a $open -a "Arc" $f
+
+# open
+map o $open -a "Arc" $f
+
+# delete
 map D ${{
     # DO NOT use the `$fx` variable to distinguish between files containing spaces and multiple files
     if [ -z "$fs" ]; then
