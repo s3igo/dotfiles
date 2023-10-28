@@ -8,6 +8,12 @@ if not vim.g.vscode then
     vim.opt.ambiwidth = 'double'
 end
 
+vim.filetype.add({
+    extension = {
+        typ = 'typst'
+    }
+})
+
 -- files
 vim.opt.fileformats = 'unix,dos,mac'
 
@@ -136,6 +142,11 @@ if not vim.g.vscode then
         command = 'wa',
     })
 
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'typst',
+        desc = 'Set typst filetype',
+        command = 'setlocal shiftwidth=4',
+    })
     -- ------------------------------- appearance ------------------------------- --
     vim.opt.termguicolors = true
     vim.opt.pumblend = 10
