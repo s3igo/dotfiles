@@ -1,4 +1,3 @@
-# Night Owl theme
 colors:
   primary:
     background: "#011627"
@@ -12,24 +11,24 @@ colors:
     background: "#1b90dd"
 
   normal:
-    black: "#011627"
-    red: "#ef5350"
-    green: "#22da6e"
-    yellow: "#c5e478"
-    blue: "#82aaff"
-    magenta: "#c792ea"
-    cyan: "#21c7a8"
-    white: "#ffffff"
+    black:   '#110f18'
+    red:     '#ff3270'
+    green:   '#56d364'
+    yellow:  '#f1fa8c'
+    blue:    '#00A3FF'
+    magenta:    '#bc8cff'
+    cyan:    '#00FFFF'
+    white:   '#edecee'
 
   bright:
-    black: "#575656"
-    red: "#ef5350"
-    green: "#22da6e"
-    yellow: "#ffeb95"
-    blue: "#82aaff"
-    magenta: "#c792ea"
-    cyan: "#7fdbca"
-    white: "#ffffff"
+    black:   '#4d4d4d'
+    red:     '#ff6767'
+    green:   '#28FE14'
+    yellow:  '#ffca85'
+    blue:    '#00B2FF'
+    magenta:    '#D2A8FF'
+    cyan:    '#61ffca'
+    white:   '#edecee'
 
 font:
   size: 16
