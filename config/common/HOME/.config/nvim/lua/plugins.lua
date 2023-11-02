@@ -3,6 +3,7 @@ local function is_not_vscode() return vim.g.vscode == nil or false end
 return {
     { -- colorscheme
         'bluz71/vim-nightfly-guicolors',
+        -- enabled = false,
         cond = is_not_vscode,
         lazy = false,
         priority = 1000,
@@ -165,8 +166,8 @@ return {
         'monaqa/dial.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
-            { '<C-a>',  function() require('dial.map').manipulate('increment', 'normal') end,  desc = 'Dial <C-a>' },
-            { '<C-x>',  function() require('dial.map').manipulate('decrement', 'normal') end,  desc = 'Dial <C-x>' },
+            { '<C-a>', function() require('dial.map').manipulate('increment', 'normal') end, desc = 'Dial <C-a>' },
+            { '<C-x>', function() require('dial.map').manipulate('decrement', 'normal') end, desc = 'Dial <C-x>' },
             { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, desc = 'Dial g<C-a>' },
             { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, desc = 'Dial g<C-x>' },
             {
@@ -506,9 +507,9 @@ return {
                 '<leader>zi',
                 ":'<,'>ZkInsertLinkAtSelection { matchSelected = true }<cr>",
                 mode = 'v',
-                desc = 'Insert link with selection as query'
+                desc = 'Insert link with selection as query',
             },
-            { '<leader>zo', '<cmd>ZkNotes<cr>',      desc = 'Open note picker' },
+            { '<leader>zo', '<cmd>ZkNotes<cr>', desc = 'Open note picker' },
             {
                 '<leader>zm',
                 ":'<,'>ZkMatch<cr>",
@@ -539,7 +540,7 @@ return {
                 desc = 'New note with selection as content',
             },
             { '<leader>zb', '<cmd>ZkBacklinks<cr>', desc = 'Show backlinks' },
-            { '<leader>zl', '<cmd>ZkLinks<cr>',     desc = 'Show links' },
+            { '<leader>zl', '<cmd>ZkLinks<cr>', desc = 'Show links' },
         },
         opts = { picker = 'telescope' },
         config = function(_, opts) require('zk').setup(opts) end,
@@ -564,8 +565,8 @@ return {
         lazy = false,
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         keys = {
-            { '<leader>e', '<cmd>NvimTreeToggle<cr>',   desc = 'Toggle explorer' },
-            { '<leader>r', '<cmd>NvimTreeRefresh<cr>',  desc = 'Refresh explorer' },
+            { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle explorer' },
+            { '<leader>r', '<cmd>NvimTreeRefresh<cr>', desc = 'Refresh explorer' },
             { '<leader>o', '<cmd>NvimTreeFindFile<cr>', desc = 'Focus current file in explorer' },
         },
         opts = { filters = { custom = { '.git' } } },
@@ -580,10 +581,10 @@ return {
         cond = is_not_vscode,
         cmd = 'Telescope',
         keys = {
-            { '<leader><space>', '<cmd>Telescope find_files<cr>',      desc = 'Find files' },
-            { '<leader><tab>',   '<cmd>Telescope buffers<cr>',         desc = 'Switch buffer' },
-            { '<leader>/',       '<cmd>Telescope live_grep<cr>',       desc = 'Live grep' },
-            { '<leader>:',       '<cmd>Telescope command_history<cr>', desc = 'Command history' },
+            { '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
+            { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
+            { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
+            { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
         },
         opts = {
             defaults = {
@@ -856,9 +857,7 @@ return {
                                     return ''
                                 end
                             end,
-                            color = function()
-                                return { fg = vim.bo.modified and '#ecc48d' or '#82aaff' }
-                            end
+                            color = function() return { fg = vim.bo.modified and '#ecc48d' or '#82aaff' } end,
                         },
                     },
                     lualine_x = { 'location' },
@@ -933,7 +932,7 @@ return {
         keys = {
             { '<leader>u', function() require('edgy').toggle() end, desc = 'Edgy Toggle' },
             { '<leader>U', function() require('edgy').select() end, desc = 'Edgy Select Window' },
-            { '<leader>t', '<cmd>ToggleTerm<cr>',                   desc = 'Toggle Terminal' },
+            { '<leader>t', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' },
         },
         opts = {
             bottom = {
@@ -1005,7 +1004,7 @@ return {
             { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' },
         },
         keys = {
-            { '<leader>ig', '<cmd>Neogit<cr>',       desc = 'Neogit' },
+            { '<leader>ig', '<cmd>Neogit<cr>', desc = 'Neogit' },
             { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diffview' },
         },
         config = true,
@@ -1013,5 +1012,5 @@ return {
     {
         'kaarmu/typst.vim',
         ft = 'typst',
-    }
+    },
 }
