@@ -2,15 +2,15 @@
 declare -x LANG=ja_JP.UTF-8
 
 # history
-declare -x HISTSIZE=10000
-declare -x SAVEHIST=10000
+# declare -x HISTSIZE=10000
+# declare -x SAVEHIST=10000
 
 # prohibit to overwrite
 set -o noclobber
 
 # terminfo
-declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
-declare -x TERMINFO_DIRS="${TERMINFO}:/usr/share/terminfo"
+# declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
+# declare -x TERMINFO_DIRS="${TERMINFO}:/usr/share/terminfo"
 
 # homebrew
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
@@ -43,6 +43,7 @@ declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 declare -x ZK_NOTEBOOK_DIR="${HOME}/git/github.com/s3igo/notes"
 
 # alias
+alias a='atuin'
 alias b='brew'
 alias c='cargo'
 alias d='docker'

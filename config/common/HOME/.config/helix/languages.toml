@@ -9,7 +9,7 @@ auto-format = true
 name = "yaml"
 file-types = ["yml", "yaml"]
 indent = { tab-width = 2, unit = "  " }
-config = { yaml = { format = { enable =  true } } }
+# config = { yaml = { format = { enable =  true } } }
 
 # [[language]]
 # name = "rust"

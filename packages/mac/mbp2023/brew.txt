@@ -1,4 +1,5 @@
 act
+atuin
 bat
 bottom
 broot
@@ -49,3 +50,4 @@ typst
 yqrashawn/goku/goku
 zellij
 zk
+zoxide

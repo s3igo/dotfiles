@@ -5,26 +5,37 @@ setopt correct
 unsetopt beep
 
 # history
-declare -x HISTFILE="${XDG_STATE_HOME}/zsh_history"
-setopt share_history
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt inc_append_history
+# declare -x HISTFILE="${XDG_STATE_HOME}/zsh_history"
+unset HISTFILE
+# setopt share_history
+# setopt hist_ignore_all_dups
+# setopt hist_ignore_space
+# setopt hist_reduce_blanks
+# setopt hist_save_no_dups
+# setopt inc_append_history
 
 # custom variables
-function __export_date {
-    declare -x DATE="$(date +%Y-%m-%d)"
-}
-
-precmd_functions+=(__export_date)
+# function __export_date {
+#     declare -x DATE="$(date +%Y-%m-%d)"
+# }
+#
+# precmd_functions+=(__export_date)
 
 # direnv
 type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # GitHub CLI
 type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
+
+# zoxide
+declare -x _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
+
+# atuin
+type atuin > /dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+# zle -N _atuin_search
+# bindkey -r '^R'
+# bindkey '^R' _atuin_search
 
 # alias
 ## shell
@@ -54,18 +65,18 @@ bindkey '^U' backward-kill-line
 #     declare BUFFER="cd "$(cdr -l | sed 's/^[^ ][^ ]*  *//' | fzf)""
 #     zle accept-line
 # }
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
+# autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+# add-zsh-hook chpwd chpwd_recent_dirs
 # zle -N __cdr-fzf
 # bindkey '^J' __cdr-fzf
 
 ## command history
-function __history-fzf {
-    declare BUFFER="$(history -n | uniq | fzf)"
-    zle accept-line
-}
-zle -N __history-fzf
-bindkey '^R' __history-fzf
+# function __history-fzf {
+#     declare BUFFER="$(history -n | uniq | fzf)"
+#     zle accept-line
+# }
+# zle -N __history-fzf
+# bindkey '^R' __history-fzf
 
 ## ghq
 function __ghq-fzf {
