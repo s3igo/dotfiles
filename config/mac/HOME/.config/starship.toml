@@ -16,11 +16,6 @@ symbol = '󰘬 '
 [git_metrics]
 disabled = false
 
-[memory_usage]
-disabled = false
-threshold = -1
-format = '$symbol[${ram} \[${ram_pct}\] ]($style)'
-
 [custom.arch]
 command = 'uname -m'
 when = true
