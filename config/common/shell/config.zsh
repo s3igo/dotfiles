@@ -81,12 +81,22 @@ bindkey '^U' backward-kill-line
 ## ghq
 function __ghq-fzf {
     declare ROOT="$(ghq root)"
-    declare BUFFER="cd "${ROOT}/$(ghq list \
-        | fzf --preview "command eza --tree --git-ignore -I 'node_modules|.git' ${ROOT}/{}")""
+    declare PREVIEW_CMD="eza --tree --git-ignore -I 'node_modules|.git' ${ROOT}/{}"
+    declare DEST="${ROOT}/$(ghq list | fzf --preview ${PREVIEW_CMD})"
+    declare BUFFER="cd ${DEST}"
     zle accept-line
+    echo "$DEST" | pbcopy
 }
 zle -N __ghq-fzf
 bindkey '^G' __ghq-fzf
+
+function __ghq-cd {
+    declare BUFFER="cd $(pbpaste)"
+    zle accept-line
+    pbcopy < /dev/null
+}
+zle -N __ghq-cd
+bindkey '^X^G' __ghq-cd
 
 # syntax highlight
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main line brackets cursor)

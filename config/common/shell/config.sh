@@ -8,6 +8,9 @@ declare -x LANG=ja_JP.UTF-8
 # prohibit to overwrite
 set -o noclobber
 
+# prohibit to silent quit
+set -o ignoreeof
+
 # terminfo
 # declare -x TERMINFO="${XDG_DATA_HOME}/terminfo"
 # declare -x TERMINFO_DIRS="${TERMINFO}:/usr/share/terminfo"
@@ -77,7 +80,9 @@ function la {
 alias al='la' # in case of typo
 
 ## others
-alias cdf='cd $_'
+alias cda='cd $_'
+alias cdl='cd "$(command cat ${XDG_DATA_HOME}/lf/lastdir)"'
+alias cdf='cd "$(fd --hidden --no-ignore --type=directory --exclude=.git | fzf)"'
 alias restart='exec $SHELL -l'
 alias mkdri='mkdir' # in case of typo
 
@@ -130,6 +135,10 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 
         mv "$1" "$NAME"
         echo "$NAME"
+    }
+
+    function arc {
+        open -a 'Arc.app' "$@"
     }
 fi
 
