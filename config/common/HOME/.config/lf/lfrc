@@ -17,3 +17,9 @@ map D ${{
         trash $fs
     fi
 }}
+
+cmd on-select &{{
+    lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f")\""
+}}
+
+cmd on-quit ${{ echo $PWD > ${XDG_DATA_HOME}/lf/lastdir }}
