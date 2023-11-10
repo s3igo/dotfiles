@@ -206,7 +206,7 @@ return {
             map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider ge' })
         end,
     },
-    {
+    { -- increment/decrement
         'monaqa/dial.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
@@ -260,6 +260,22 @@ return {
                 },
             })
         end,
+    },
+    { -- substitute operator
+        'gbprod/substitute.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        keys = {
+            { 's', function() require('substitute').operator() end, desc = 'Substitute operator' },
+            { 'ss', function() require('substitute').line() end, desc = 'Substitute line' },
+            { 'S', function() require('substitute').eol() end, desc = 'Substitute EOL' },
+            {
+                's',
+                function() require('substitute').visual() end,
+                mode = 'x',
+                desc = 'Substitute operator',
+            },
+        },
+        opts = {},
     },
     -- --- TreeSitter --- --
     { -- treesitter
