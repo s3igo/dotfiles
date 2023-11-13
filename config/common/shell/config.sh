@@ -45,6 +45,9 @@ declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 # zk
 declare -x ZK_NOTEBOOK_DIR="${HOME}/git/github.com/s3igo/notes"
 
+# ripgrep
+declare -x RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"
+
 # alias
 alias a='atuin'
 alias b='brew'
