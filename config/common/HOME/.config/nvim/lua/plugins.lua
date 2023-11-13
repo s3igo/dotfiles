@@ -457,6 +457,13 @@ return {
                 settings = {
                     ['rust-analyzer'] = { checkOnSave = { command = 'clippy' } },
                 },
+                capabilities = (function()
+                    local capabilities = lsp_capabilities
+                    capabilities.textDocument.completion.completionItem.resolveSupport = {
+                        properties = { 'documentation', 'detail', 'additionalTextEdits' },
+                    }
+                    return capabilities
+                end)(),
             })
 
             require('lsp_signature').setup({
@@ -616,6 +623,20 @@ return {
             vim.api.nvim_set_hl(0, 'FidgetTitle', { link = 'NormalFloat' })
             vim.api.nvim_set_hl(0, 'FidgetTask', { link = 'NormalFloat' })
         end,
+    },
+    {
+        'folke/trouble.nvim',
+        cond = is_not_vscode,
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        event = 'LspAttach',
+        keys = {
+            { '<leader>xx', function() require('trouble').toggle() end, desc = 'Trouble' },
+        },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        },
     },
     -- --------------------------------- Editor --------------------------------- --
     { -- explorer
