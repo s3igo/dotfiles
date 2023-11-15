@@ -22,17 +22,17 @@ unset HISTFILE
 # precmd_functions+=(__export_date)
 
 # direnv
-type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
+# type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
 
 # GitHub CLI
-type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
+# type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 
 # zoxide
-declare -x _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
-type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
+# declare -x _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+# type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
 
 # atuin
-type atuin > /dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+# type atuin > /dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 # zle -N _atuin_search
 # bindkey -r '^R'
 # bindkey '^R' _atuin_search
@@ -55,6 +55,12 @@ if [[ "$(uname)" == 'Darwin' ]]; then
     alias -g @pst='"$(pbpaste)"'
     alias -g @icloud='~/Library/Mobile\ Documents/com~apple~CloudDocs'
 fi
+
+# completion
+type brew > /dev/null 2>&1 && FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select interactive
+setopt menu_complete
 
 # keybind
 bindkey -e # explicit use emacs keybind
