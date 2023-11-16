@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+            -- local char_color = 'NightflyPickleBlue'
 local function is_not_vscode() return vim.g.vscode == nil or false end
 return {
     { -- colorscheme
@@ -8,7 +9,6 @@ return {
         lazy = false,
         priority = 1000,
         config = function()
-            vim.g.nightflyNormalFloat = true
             vim.g.nightflyTransparent = true
             vim.g.nightflyVirtualTextColor = true
             vim.g.nightflyWinSeparator = 2
@@ -120,16 +120,6 @@ return {
                         elipsis_char = '...',
                     }),
                 },
-                window = {
-                    completion = cmp.config.window.bordered({
-                        border = 'single',
-                        winhighlight = 'Normal:Pmenu',
-                    }),
-                    documentation = cmp.config.window.bordered({
-                        border = 'single',
-                        winhighlight = 'Normal:Pmenu',
-                    }),
-                },
                 snippet = {
                     expand = function(args) require('luasnip').lsp_expand(args.body) end,
                 },
@@ -174,6 +164,7 @@ return {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }),
             })
+            vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#7fdbca', fg = 'NONE' })
         end,
     },
     { -- autopair
@@ -972,10 +963,15 @@ return {
         event = { 'BufReadPost', 'BufNewFile' },
         opts = {
             indent = { char = '|', highlight = 'Indent' },
+            whitespace = { highlight = 'Whitespace' },
             scope = { enabled = false },
         },
         config = function(_, opts)
-            vim.api.nvim_set_hl(0, 'Indent', { fg = '#384B5A' })
+            local char_color = 'NightflyPickleBlue'
+            vim.api.nvim_set_hl(0, 'NonText', { link = char_color })
+            vim.api.nvim_set_hl(0, 'Whitespace', { link = char_color })
+            vim.api.nvim_set_hl(0, 'SpecialKey', { link = char_color })
+            vim.api.nvim_set_hl(0, 'Indent', { link = 'NightflyGreyBlue' })
             require('ibl').setup(opts)
         end,
     },
