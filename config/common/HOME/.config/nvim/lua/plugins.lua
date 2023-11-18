@@ -1,5 +1,4 @@
 local map = vim.keymap.set
-            -- local char_color = 'NightflyPickleBlue'
 local function is_not_vscode() return vim.g.vscode == nil or false end
 return {
     { -- colorscheme
@@ -79,6 +78,26 @@ return {
             'rafamadriz/friendly-snippets',
             config = function() require('luasnip.loaders.from_vscode').lazy_load() end,
         },
+        config = function()
+            local vscode_dir = vim.fs.find('.vscode', {
+                upward = true,
+                type = 'directory',
+                path = vim.fn.getcwd(),
+                stop = vim.env.HOME,
+            })[1]
+
+            if vscode_dir then
+                local snippets = vim.fs.find(function(name) return name:match('%.code%-snippets$') end, {
+                    limit = 10,
+                    type = 'file',
+                    path = vscode_dir,
+                })
+                local loader = require('luasnip.loaders.from_vscode')
+                for _, snippet in pairs(snippets) do
+                    loader.load_standalone({ path = snippet })
+                end
+            end
+        end,
     },
     { -- copilot
         'zbirenbaum/copilot.lua',
@@ -164,7 +183,7 @@ return {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }),
             })
-            vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#7fdbca', fg = 'NONE' })
+            vim.api.nvim_set_hl(0, 'PmenuSel', { link = 'NightflyTurquoiseMode' })
         end,
     },
     { -- autopair
