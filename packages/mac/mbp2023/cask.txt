@@ -6,6 +6,7 @@ arc
 arduino-ide
 cloudflare-warp
 cron
+cursor
 discord
 dropbox
 firefox
@@ -16,15 +17,16 @@ google-chrome
 google-japanese-ime
 karabiner-elements
 logseq
+microsoft-edge
 mochi-diffusion
 monitorcontrol
 morgen
-obsidian
 orbstack
 raycast
 rio
 routine
 slack
 visual-studio-code
+wezterm
 zed
 zoom
