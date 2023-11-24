@@ -155,7 +155,7 @@ if not vim.g.vscode then
     })
     -- ------------------------------- appearance ------------------------------- --
     vim.opt.termguicolors = true
-    vim.opt.pumblend = 10
+    vim.opt.pumblend = 25
     vim.opt.number = true
     vim.opt.list = true
     vim.opt.cursorline = true

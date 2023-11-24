@@ -287,6 +287,22 @@ return {
         },
         opts = {},
     },
+    {
+        'fangjunzhou/comment-divider.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        keys = {
+            {
+                '<leader>cl',
+                function() require('comment-divider').commentLine() end,
+                desc = 'Comment divider line',
+            },
+            {
+                '<leader>cb',
+                function() require('comment-divider').commentBox() end,
+                desc = 'Comment divider box',
+            },
+        },
+    },
     -- --- TreeSitter --- --
     { -- treesitter
         'nvim-treesitter/nvim-treesitter',
