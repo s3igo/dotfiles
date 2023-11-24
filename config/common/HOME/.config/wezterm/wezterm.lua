@@ -6,8 +6,8 @@ wezterm.on('update-right-status', function(window)
     local table = window:active_key_table()
     if table then
         str = table .. '  '
-    elseif window:leader_is_active() then
-        str = 'leader' .. '  '
+    -- elseif window:leader_is_active() then
+    --     str = 'leader' .. '  '
     end
     window:set_right_status(str)
 end)
@@ -30,36 +30,43 @@ return {
 
     -- keybind
     -- disable_default_key_bindings = true,
-    leader = { key = 's', mods = 'CTRL' },
+    -- NOTE: To use the key repeat by `one_shot = false`, the built-in leader key is not used.
     keys = {
-        { key = 'v', mods = 'LEADER', action = act.SplitHorizontal },
-        { key = 's', mods = 'LEADER', action = act.SplitVertical },
-        { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Left') },
-        { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Down') },
-        { key = 'k', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Up') },
-        { key = 'l', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection('Right') },
-        { key = '[', mods = 'LEADER', action = act.ActivateCopyMode },
-        { key = 'y', mods = 'LEADER|CTRL', action = act.QuickSelect },
-
         {
             key = 's',
             mods = 'CTRL',
             action = act.ActivateKeyTable({
-                name = 'navigation',
+                name = 'leader',
                 one_shot = false,
                 timeout_milliseconds = 1000,
             }),
         },
     },
     key_tables = {
-        navigation = {
-            { key = 'h', action = act.AdjustPaneSize({ 'Left', 3 }) },
-            { key = 'j', action = act.AdjustPaneSize({ 'Down', 3 }) },
-            { key = 'k', action = act.AdjustPaneSize({ 'Up', 3 }) },
-            { key = 'l', action = act.AdjustPaneSize({ 'Right', 3 }) },
-            { key = 'n', action = act.ActivateTabRelative(1) },
-            { key = 'p', action = act.ActivateTabRelative(-1) },
-            { key = 'q', action = 'PopKeyTable' },
+        leader = {
+            -- Split
+            { key = 'v', action = act.SplitHorizontal },
+            { key = 's', action = act.SplitVertical },
+
+            -- Focus
+            { key = 'h', mods = 'CTRL', action = act.ActivatePaneDirection('Left') },
+            { key = 'j', mods = 'CTRL', action = act.ActivatePaneDirection('Down') },
+            { key = 'k', mods = 'CTRL', action = act.ActivatePaneDirection('Up') },
+            { key = 'l', mods = 'CTRL', action = act.ActivatePaneDirection('Right') },
+            { key = 'n', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+            { key = 'p', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
+
+            -- Resize
+            { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },
+            { key = 'j', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Down', 3 }) },
+            { key = 'k', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Up', 3 }) },
+            { key = 'l', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 3 }) },
+
+            -- Copy
+            { key = '[', action = act.ActivateCopyMode },
+            { key = 'y', mods = 'CTRL', action = act.QuickSelect },
+
+            { key = 's', mods = 'CTRL', action = 'PopKeyTable' },
         },
     },
 
