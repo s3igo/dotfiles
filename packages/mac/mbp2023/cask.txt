@@ -23,7 +23,6 @@ monitorcontrol
 morgen
 orbstack
 raycast
-rio
 routine
 slack
 visual-studio-code
