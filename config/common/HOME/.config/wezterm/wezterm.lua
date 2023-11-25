@@ -6,21 +6,22 @@ wezterm.on('update-right-status', function(window)
     local table = window:active_key_table()
     if table then
         str = table .. '  '
-    -- elseif window:leader_is_active() then
-    --     str = 'leader' .. '  '
+        -- elseif window:leader_is_active() then
+        --     str = 'leader' .. '  '
     end
     window:set_right_status(str)
 end)
 
 return {
-    -- appearance
+    -- Appearance
     color_scheme = 'NightOwl (Gogh)',
-    -- color_scheme = 'Ayu Dark (Gogh)',
+    foreground_text_hsb = { saturation = 1.05, brightness = 1.1 },
+
     -- color_scheme = 'Argonaut (Gogh)',
+    -- foreground_text_hsb = { saturation = 0.95, brightness = 1.1 },
 
     window_decorations = 'INTEGRATED_BUTTONS|RESIZE',
     window_background_opacity = 0.7,
-    foreground_text_hsb = { brightness = 1.1 },
     inactive_pane_hsb = { saturation = 1, brightness = 1 },
 
     -- font
@@ -28,7 +29,7 @@ return {
     font_size = 16,
     line_height = 0.9,
 
-    -- keybind
+    -- Keybind
     -- disable_default_key_bindings = true,
     -- NOTE: To use the key repeat by `one_shot = false`, the built-in leader key is not used.
     keys = {
@@ -38,7 +39,7 @@ return {
             action = act.ActivateKeyTable({
                 name = 'leader',
                 one_shot = false,
-                timeout_milliseconds = 1000,
+                timeout_milliseconds = 800,
             }),
         },
     },
@@ -49,10 +50,27 @@ return {
             { key = 's', action = act.SplitVertical },
 
             -- Focus
-            { key = 'h', mods = 'CTRL', action = act.ActivatePaneDirection('Left') },
-            { key = 'j', mods = 'CTRL', action = act.ActivatePaneDirection('Down') },
-            { key = 'k', mods = 'CTRL', action = act.ActivatePaneDirection('Up') },
-            { key = 'l', mods = 'CTRL', action = act.ActivatePaneDirection('Right') },
+            {
+                key = 'h',
+                mods = 'CTRL',
+                action = act.Multiple({ act.ActivatePaneDirection('Left'), 'PopKeyTable' }),
+            },
+            {
+                key = 'j',
+                mods = 'CTRL',
+                action = act.Multiple({ act.ActivatePaneDirection('Down'), 'PopKeyTable' }),
+            },
+            {
+                key = 'k',
+                mods = 'CTRL',
+                action = act.Multiple({ act.ActivatePaneDirection('Up'), 'PopKeyTable' }),
+            },
+            {
+                key = 'l',
+                mods = 'CTRL',
+                action = act.Multiple({ act.ActivatePaneDirection('Right'), 'PopKeyTable' }),
+            },
+
             { key = 'n', mods = 'CTRL', action = act.ActivateTabRelative(1) },
             { key = 'p', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
@@ -70,7 +88,7 @@ return {
         },
     },
 
-    -- mousebind
+    -- Mousebind
     mouse_bindings = {
         {
             event = { Up = { streak = 1, button = 'Left' } },
