@@ -58,7 +58,7 @@ return {
             -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })
         end,
     },
-    -- ---------------------------------- Util ---------------------------------- --
+    -- -------------------------- Util -------------------------- --
     { -- benchmark
         'dstein64/vim-startuptime',
         cmd = 'StartupTime',
@@ -68,7 +68,7 @@ return {
     { -- utility functions
         'nvim-lua/plenary.nvim',
     },
-    -- --------------------------------- Coding --------------------------------- --
+    -- ------------------------- Coding ------------------------- --
     { -- snippets
         'L3MON4D3/LuaSnip',
         cond = is_not_vscode,
@@ -303,7 +303,7 @@ return {
             },
         },
     },
-    -- --- TreeSitter --- --
+    -- ----------------------- TreeSitter ----------------------- --
     { -- treesitter
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
@@ -418,7 +418,7 @@ return {
         cond = is_not_vscode,
         event = { 'BufReadPost', 'BufNewFile' },
     },
-    -- --- LSP --- --
+    -- -------------------------- LSP  -------------------------- --
     { -- LSP
         'neovim/nvim-lspconfig',
         cond = is_not_vscode,
@@ -664,7 +664,18 @@ return {
             -- refer to the configuration section below
         },
     },
-    -- --------------------------------- Editor --------------------------------- --
+    {
+        'folke/neodev.nvim',
+        opts = {
+            override = function(root_dir, library)
+                if root_dir:match('.dotfiles') then
+                    library.enable = true
+                    library.plugins = true
+                end
+            end,
+        },
+    },
+    -- ------------------------- Editor ------------------------- --
     { -- explorer
         'nvim-tree/nvim-tree.lua',
         cond = is_not_vscode,
@@ -675,7 +686,12 @@ return {
             { '<leader>e', '<cmd>NvimTreeToggle<cr>', desc = 'Toggle explorer' },
             { '<leader>o', '<cmd>NvimTreeFindFile<cr>', desc = 'Focus current file in explorer' },
         },
-        opts = { filters = { custom = { '.git' } } },
+        opts = {
+            filters = {
+                custom = { '^\\.git' },
+                git_ignored = false,
+            },
+        },
         config = function(_, opts)
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
@@ -830,7 +846,7 @@ return {
     --         desc = 'Todo'
     --     }}
     -- },
-    -- ----------------------------------- UI ----------------------------------- --
+    -- --------------------------- UI --------------------------- --
     { -- override components
         'stevearc/dressing.nvim',
         enabled = false,
@@ -1120,7 +1136,7 @@ return {
     --     keys = { { '<leader>t', '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' } },
     --     config = true,
     -- },
-    -- --- Git --- --
+    -- -------------------------- Git  -------------------------- --
     { -- git client
         'NeogitOrg/neogit',
         cond = is_not_vscode,

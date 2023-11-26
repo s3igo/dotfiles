@@ -1,5 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
+local utf8 = require('utf8')
 
 local glyph = {
     -- arrow
