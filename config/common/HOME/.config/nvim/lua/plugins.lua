@@ -385,7 +385,7 @@ return {
                     },
                 },
             },
-            context_commentstring = { enable = true },
+            -- context_commentstring = { enable = true },
             endwise = { enable = true },
         },
         config = function(_, opts)
@@ -865,6 +865,8 @@ return {
         keys = {
             { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
             { ']b', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
+            { '[B', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer left' },
+            { ']B', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer right' },
         },
         opts = {
             options = {
@@ -891,6 +893,10 @@ return {
         'nvim-lualine/lualine.nvim',
         cond = is_not_vscode,
         event = 'VimEnter',
+        -- keys =  {
+        --     { '[b', '<cmd>bprev<cr>', desc = 'Prev buffer' },
+        --     { ']b', '<cmd>bnext<cr>', desc = 'Next buffer' },
+        -- },
         opts = function()
             local colors = {
                 darkgray = '#16161d',
@@ -989,6 +995,16 @@ return {
                         'filetype',
                     },
                 },
+                -- tabline = {
+                --     lualine_a = {
+                --         {
+                --             'buffers',
+                --             show_filename_only = false,
+                --             mode = 2,
+                --             symbols = { modified = '[+]' },
+                --         },
+                --     },
+                -- },
             }
         end,
     },

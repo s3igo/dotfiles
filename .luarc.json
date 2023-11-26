@@ -1,7 +1,8 @@
 {
     "diagnostics": {
         "globals": [
-            "utf8"
+            "utf8",
+            "vim"
         ]
     }
 }
