@@ -50,9 +50,10 @@ wezterm.on('update-right-status', function(window)
     }))
 end)
 
-wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local function tab_title(tab_info)
         local title = tab_info.tab_title
+        wezterm.log_info('tab_title: ' .. title)
         return title and #title > 0 and title or tab_info.active_pane.title
     end
 
@@ -115,30 +116,25 @@ return {
     show_new_tab_button_in_tab_bar = false,
     tab_max_width = 24,
 
-    colors = { tab_bar = { background = transparent_bg } },
+    colors = {
+        tab_bar = (function()
+            local overwrites = {
+                bg_color = scheme.background,
+                fg_color = scheme.foreground,
+            }
+            return {
+                background = transparent_bg,
+                active_tab = overwrites,
+                inactive_tab = overwrites,
+                inactive_tab_hover = overwrites,
+            }
+        end)(),
+    },
 
-    -- overwrite defaults
-    -- colors = {
-    --     tab_bar = (function(bg, fg, background)
-    --         local elem = {
-    --             bg_color = bg,
-    --             fg_color = fg,
-    --         }
-    --         return {
-    --             background = background,
-    --             active_tab = elem,
-    --             inactive_tab = elem,
-    --             inactive_tab_hover = elem,
-    --         }
-    --     end)(scheme.background, scheme.foreground, transparent_bg),
-    -- },
-
-    -- font
+    -- Font
     font = wezterm.font(font_name),
     font_size = 16,
     line_height = 0.9,
-
-    window_padding = { top = 0, bottom = 0 },
 
     -- Keybind
     -- disable_default_key_bindings = true,
@@ -156,6 +152,21 @@ return {
     },
     key_tables = {
         leader = {
+            { key = 's', mods = 'CTRL', action = 'PopKeyTable' },
+
+            -- Rename tab
+            {
+                key = 'r',
+                action = act.PromptInputLine({
+                    description = 'Enter new name for tab',
+                    action = wezterm.action_callback(function(window, _, line)
+                        if line then
+                            window:active_tab():set_title(line)
+                        end
+                    end),
+                }),
+            },
+
             -- Split
             { key = 'v', action = act.SplitHorizontal },
             { key = 's', action = act.SplitVertical },
@@ -194,8 +205,6 @@ return {
             -- Copy
             { key = '[', action = act.ActivateCopyMode },
             { key = 'y', mods = 'CTRL', action = act.QuickSelect },
-
-            { key = 's', mods = 'CTRL', action = 'PopKeyTable' },
         },
     },
 
