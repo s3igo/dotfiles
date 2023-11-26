@@ -2,17 +2,21 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 
 local glyph = {
+    -- arrow
     solid_right_arrow = utf8.char(0xe0b0),
     right_arrow = utf8.char(0xe0b1),
     solid_left_arrow = utf8.char(0xe0b2),
     left_arrow = utf8.char(0xe0b3),
+    -- slant
+    solid_right_shoulder = utf8.char(0xe0b8),
+    right_shoulder = utf8.char(0xe0b9),
+    solid_left_shoulder = utf8.char(0xe0ba),
+    left_shoulder = utf8.char(0xe0bb),
 }
 
 local font_name = 'UDEV Gothic NFLG'
 local scheme_name = 'NightOwl (Gogh)'
 local scheme = wezterm.get_builtin_color_schemes()[scheme_name]
-
-local background = scheme.background
 
 local function alpha(color, a)
     local r, g, b = wezterm.color.parse(color):srgba_u8()
@@ -36,7 +40,7 @@ wezterm.on('update-right-status', function(window)
         { Text = glyph.solid_left_arrow },
         { Foreground = { Color = 'white' } },
         { Background = { Color = leader_bg } },
-        { Text = ' ' .. mode .. ' ' },
+        { Text = ' ' .. string.upper(mode) .. ' ' },
         -- name
         { Foreground = { Color = tab_bg } },
         { Text = glyph.solid_left_arrow },
@@ -46,10 +50,34 @@ wezterm.on('update-right-status', function(window)
     }))
 end)
 
-local function tab_title(tab_info)
-    local title = tab_info.tab_title
-    return title and #title > 0 and title or tab_info.active_pane.title
-end
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    local function tab_title(tab_info)
+        local title = tab_info.tab_title
+        return title and #title > 0 and title or tab_info.active_pane.title
+    end
+    local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
+    local title = wezterm.truncate_right(tab_title(tab), max_width - extra_chars)
+
+    local is_active = tab.is_active
+    -- local is_last = tab.tab_index == #tabs - 1
+
+    local bg = is_active and scheme.ansi[5] or leader_bg
+    local fg = is_active and scheme.background or 'white'
+
+    return {
+        { Foreground = { Color = bg } },
+        { Background = { Color = transparent_bg } },
+        { Text = glyph.solid_left_shoulder },
+        { Foreground = { Color = fg } },
+        { Background = { Color = bg } },
+        { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
+        { Attribute = { Italic = is_active } },
+        { Text = ' ' .. title .. ' ' },
+        { Foreground = { Color = bg } },
+        { Background = { Color = transparent_bg } },
+        { Text = glyph.solid_right_shoulder },
+    }
+end)
 
 return {
     term = 'wezterm',
@@ -74,6 +102,7 @@ return {
 
     use_fancy_tab_bar = false,
     show_new_tab_button_in_tab_bar = false,
+    tab_max_width = 20,
 
     colors = { tab_bar = { background = transparent_bg } },
 
