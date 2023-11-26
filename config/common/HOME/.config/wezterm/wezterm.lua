@@ -55,14 +55,25 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         local title = tab_info.tab_title
         return title and #title > 0 and title or tab_info.active_pane.title
     end
-    local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
-    local title = wezterm.truncate_right(tab_title(tab), max_width - extra_chars)
 
     local is_active = tab.is_active
-    -- local is_last = tab.tab_index == #tabs - 1
 
     local bg = is_active and scheme.ansi[5] or leader_bg
     local fg = is_active and scheme.background or 'white'
+
+    local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
+    local title = index .. tab_title(tab)
+
+    local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
+
+    local available_width = max_width - extra_chars
+    if #title < available_width then
+        local width = math.floor((available_width - #title) / 2)
+        local pad = string.rep(' ', width)
+        title = pad .. title .. pad
+    end
+
+    local content = wezterm.truncate_right(title, available_width)
 
     return {
         { Foreground = { Color = bg } },
@@ -72,7 +83,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         { Background = { Color = bg } },
         { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
         { Attribute = { Italic = is_active } },
-        { Text = ' ' .. title .. ' ' },
+        { Text = ' ' .. content .. ' ' },
         { Foreground = { Color = bg } },
         { Background = { Color = transparent_bg } },
         { Text = glyph.solid_right_shoulder },
@@ -102,7 +113,7 @@ return {
 
     use_fancy_tab_bar = false,
     show_new_tab_button_in_tab_bar = false,
-    tab_max_width = 20,
+    tab_max_width = 24,
 
     colors = { tab_bar = { background = transparent_bg } },
 
