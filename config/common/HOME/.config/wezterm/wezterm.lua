@@ -1,30 +1,6 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
 
-wezterm.on('update-right-status', function(window)
-    local _, user = wezterm.run_child_process({ 'whoami' })
-    local name = user:gsub('\n', '') .. '@' .. wezterm.hostname()
-
-    local mode = window:active_key_table() or ''
-
-    window:set_right_status(wezterm.format({
-        { Background = { Color = 'blue' } },
-        { Text = mode },
-        'ResetAttributes',
-        { Text = '  ' .. name },
-    }))
-end)
-
-local font_name = 'UDEV Gothic NFLG'
-local scheme_name = 'NightOwl (Gogh)'
-local scheme = wezterm.get_builtin_color_schemes()[scheme_name]
-
--- Set transparent tab bar by `text_background_opacity`, the fg and bg colors of the powerline glyph do not match.
-local transparent_bg = (function(theme)
-    local r, g, b = wezterm.color.parse(theme.background):srgba_u8()
-    return 'rgba(' .. r .. ', ' .. g .. ', ' .. b .. ', 0.7)'
-end)(scheme)
-
 local glyph = {
     solid_right_arrow = utf8.char(0xe0b0),
     right_arrow = utf8.char(0xe0b1),
@@ -32,15 +8,47 @@ local glyph = {
     left_arrow = utf8.char(0xe0b3),
 }
 
+local font_name = 'UDEV Gothic NFLG'
+local scheme_name = 'NightOwl (Gogh)'
+local scheme = wezterm.get_builtin_color_schemes()[scheme_name]
+
+local background = scheme.background
+
+local function alpha(color, a)
+    local r, g, b = wezterm.color.parse(color):srgba_u8()
+    return 'rgba(' .. r .. ', ' .. g .. ', ' .. b .. ', ' .. a .. ')'
+end
+
+-- Set transparent tab bar by `text_background_opacity`, the fg and bg colors of the powerline glyph do not match.
+local transparent_bg = alpha(scheme.background, 0.7)
+
+local tab_bg = '#011627'
+local leader_bg = '#1d3b53'
+
+wezterm.on('update-right-status', function(window)
+    local mode = window:active_key_table() or ''
+    local _, user = wezterm.run_child_process({ 'whoami' })
+    local name = user:gsub('\n', '') .. '@' .. wezterm.hostname()
+
+    window:set_right_status(wezterm.format({
+        -- mode
+        { Foreground = { Color = leader_bg } },
+        { Text = glyph.solid_left_arrow },
+        { Foreground = { Color = 'white' } },
+        { Background = { Color = leader_bg } },
+        { Text = ' ' .. mode .. ' ' },
+        -- name
+        { Foreground = { Color = tab_bg } },
+        { Text = glyph.solid_left_arrow },
+        { Foreground = { Color = 'white' } },
+        { Background = { Color = tab_bg } },
+        { Text = ' ' .. name .. ' ' },
+    }))
+end)
+
 local function tab_title(tab_info)
     local title = tab_info.tab_title
-    -- if the tab title is explicitly set, take that
-    if title and #title > 0 then
-        return title
-    end
-    -- Otherwise, use the title from the active pane
-    -- in that tab
-    return tab_info.active_pane.title
+    return title and #title > 0 and title or tab_info.active_pane.title
 end
 
 return {
@@ -67,10 +75,7 @@ return {
     use_fancy_tab_bar = false,
     show_new_tab_button_in_tab_bar = false,
 
-    -- colors = { tab_bar = { background = transparent_bg } },
-    -- or
-    text_background_opacity = 0.7,
-    colors = { tab_bar = { background = scheme.background } },
+    colors = { tab_bar = { background = transparent_bg } },
 
     -- overwrite defaults
     -- colors = {
