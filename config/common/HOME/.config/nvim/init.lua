@@ -10,8 +10,8 @@ end
 
 vim.filetype.add({
     extension = {
-        typ = 'typst'
-    }
+        typ = 'typst',
+    },
 })
 
 -- files
@@ -77,6 +77,10 @@ if not vim.g.vscode then
     vim.keymap.set('n', '<leader>q', '<cmd>qa<cr>', { desc = 'Quit all' })
 end
 
+-- move
+vim.keymap.set({ 'n', 'x', 'o' }, 'j', 'gj')
+vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'gk')
+
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
@@ -129,7 +133,6 @@ if vim.g.vscode then
     vim.keymap.set('n', '<leader>o', "<cmd>call VSCodeNotify('workbench.files.action.showActiveFileInExplorer')<cr>")
     vim.keymap.set('n', '<leader>lf', "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>")
 end
-
 
 -- -------------------------------- autocmds -------------------------------- --
 vim.api.nvim_create_autocmd('FileType', {

@@ -95,6 +95,7 @@ end)
 return {
     term = 'wezterm',
     scrollback_lines = 10000,
+    macos_forward_to_ime_modifier_mask = 'SHIFT | CTRL',
 
     -- Appearance
     color_scheme = scheme_name,
@@ -118,6 +119,7 @@ return {
     tab_max_width = 24,
 
     colors = {
+        cursor_fg = 'black',
         tab_bar = (function()
             local overwrites = {
                 bg_color = scheme.background,

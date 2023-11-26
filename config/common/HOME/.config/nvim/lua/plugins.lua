@@ -68,6 +68,16 @@ return {
     { -- utility functions
         'nvim-lua/plenary.nvim',
     },
+    { -- IME switcher
+        'keaising/im-select.nvim',
+        event = 'InsertEnter',
+        cond = is_not_vscode,
+        config = function()
+            require('im_select').setup({
+                set_previous_events = {},
+            })
+        end,
+    },
     -- ------------------------- Coding ------------------------- --
     { -- snippets
         'L3MON4D3/LuaSnip',
@@ -215,6 +225,11 @@ return {
             map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<cr>", { desc = 'Spider b' })
             map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider ge' })
         end,
+    },
+    { -- text objects
+        'chrisgrieser/nvim-various-textobjs',
+        event = 'VeryLazy',
+        opts = { useDefaultKeymaps = true },
     },
     { -- increment/decrement
         'monaqa/dial.nvim',
@@ -666,6 +681,7 @@ return {
     },
     {
         'folke/neodev.nvim',
+        event = 'LspAttach',
         opts = {
             override = function(root_dir, library)
                 if root_dir:match('.dotfiles') then
