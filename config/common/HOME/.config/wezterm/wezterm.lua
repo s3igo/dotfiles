@@ -64,7 +64,6 @@ end)
 wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local function tab_title(tab_info)
         local title = tab_info.tab_title
-        wezterm.log_info('tab_title: ' .. title)
         return title and #title > 0 and title or tab_info.active_pane.title
     end
 
