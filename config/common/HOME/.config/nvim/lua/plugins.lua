@@ -229,7 +229,10 @@ return {
     { -- text objects
         'chrisgrieser/nvim-various-textobjs',
         event = 'VeryLazy',
-        opts = { useDefaultKeymaps = true },
+        opts = {
+            useDefaultKeymaps = true,
+            disabledKeymaps = { 'gc' },
+        },
     },
     { -- increment/decrement
         'monaqa/dial.nvim',
@@ -897,8 +900,8 @@ return {
         keys = {
             { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
             { ']b', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
-            { '[B', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer left' },
-            { ']B', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer right' },
+            { '>b', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer left' },
+            { '<b', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer right' },
         },
         opts = {
             options = {
