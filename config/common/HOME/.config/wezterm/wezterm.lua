@@ -15,16 +15,17 @@ local glyph = {
     left_shoulder = utf8.char(0xe0bb),
 }
 
-local function alpha(color, a)
-    local r, g, b = wezterm.color.parse(color):srgba_u8()
-    return 'rgba(' .. r .. ', ' .. g .. ', ' .. b .. ', ' .. a .. ')'
+local function modify_alpha(color, a)
+    local h, s, l = wezterm.color.parse(color):hsla()
+    return wezterm.color.from_hsla(h, s, l, a)
 end
 
 local scheme = wezterm.get_builtin_color_schemes()['NightOwl (Gogh)']
 local font = wezterm.font('UDEV Gothic NFLG')
 
--- Set transparent tab bar by `text_background_opacity`, the fg and bg colors of the powerline glyph do not match.
-local transparent_bg = alpha(scheme.background, 0.7)
+-- NOTE: Set transparent tab bar by `text_background_opacity`,
+-- the fg and bg colors of the powerline glyph do not match.
+local transparent_bg = modify_alpha(scheme.background, 0.7)
 
 local colors = scheme
 colors.cursor_fg = 'black'
