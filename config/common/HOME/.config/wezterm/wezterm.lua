@@ -15,17 +15,26 @@ local glyph = {
     left_shoulder = utf8.char(0xe0bb),
 }
 
-local font_name = 'UDEV Gothic NFLG'
-local scheme_name = 'NightOwl (Gogh)'
-local scheme = wezterm.get_builtin_color_schemes()[scheme_name]
-
 local function alpha(color, a)
     local r, g, b = wezterm.color.parse(color):srgba_u8()
     return 'rgba(' .. r .. ', ' .. g .. ', ' .. b .. ', ' .. a .. ')'
 end
 
+local scheme = wezterm.get_builtin_color_schemes()['NightOwl (Gogh)']
+local font = wezterm.font('UDEV Gothic NFLG')
+
 -- Set transparent tab bar by `text_background_opacity`, the fg and bg colors of the powerline glyph do not match.
 local transparent_bg = alpha(scheme.background, 0.7)
+
+local colors = scheme
+colors.cursor_fg = 'black'
+colors.tab_bar = {
+    background = transparent_bg,
+    inactive_tab_hover = {
+        bg_color = scheme.background,
+        fg_color = scheme.foreground,
+    },
+}
 
 local tab_bg = '#011627'
 local leader_bg = '#1d3b53'
@@ -96,9 +105,10 @@ return {
     term = 'wezterm',
     scrollback_lines = 10000,
     macos_forward_to_ime_modifier_mask = 'SHIFT | CTRL',
+    send_composed_key_when_right_alt_is_pressed = false,
 
     -- Appearance
-    color_scheme = scheme_name,
+    colors = colors,
     foreground_text_hsb = { saturation = 1.05, brightness = 1.1 },
 
     -- color_scheme = 'Argonaut (Gogh)',
@@ -108,34 +118,13 @@ return {
 
     window_decorations = 'TITLE | RESIZE',
     window_background_opacity = 0.7,
-    window_frame = {
-        font = wezterm.font({ family = font_name, weight = 'Bold' }),
-        -- font_size = 14,
-        -- window_hide = false,
-    },
 
     use_fancy_tab_bar = false,
     show_new_tab_button_in_tab_bar = false,
     tab_max_width = 24,
 
-    colors = {
-        cursor_fg = 'black',
-        tab_bar = (function()
-            local overwrites = {
-                bg_color = scheme.background,
-                fg_color = scheme.foreground,
-            }
-            return {
-                background = transparent_bg,
-                active_tab = overwrites,
-                inactive_tab = overwrites,
-                inactive_tab_hover = overwrites,
-            }
-        end)(),
-    },
-
     -- Font
-    font = wezterm.font(font_name),
+    font = font,
     font_size = 16,
     line_height = 0.9,
 
