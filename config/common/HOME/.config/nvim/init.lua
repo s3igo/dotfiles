@@ -80,6 +80,8 @@ end
 -- move
 vim.keymap.set({ 'n', 'x', 'o' }, 'j', 'gj')
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'gk')
+vim.keymap.set({ 'i', 'c' }, '<A-f>', '<S-Right>')
+vim.keymap.set({ 'i', 'c' }, '<A-b>', '<S-Left>')
 
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')
@@ -92,6 +94,31 @@ vim.keymap.set('i', ';', ';<C-g>u')
 
 -- emacs style
 if not vim.g.vscode then
+    local function transpose_chars()
+        local line = vim.api.nvim_get_current_line()
+        local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+        -- is line end
+        if col == #line then
+            -- saturating sub to prevent negative values
+            col = col == 0 and 0 or col - 1
+            vim.api.nvim_win_set_cursor(0, { row, col })
+        end
+
+        -- is line start or line has only 1 char
+        if col == 0 then
+            return
+        end
+
+        local lhs_char = line:sub(col, col)
+        local rhs_char = line:sub(col + 1, col + 1)
+
+        vim.api.nvim_buf_set_text(0, row - 1, col - 1, row - 1, col + 1, { rhs_char .. lhs_char })
+        vim.api.nvim_win_set_cursor(0, { row, col + 1 })
+    end
+
+    vim.keymap.set('i', '<C-t>', transpose_chars)
+
     vim.keymap.set('i', '<C-f>', '<C-g>U<Right>')
     vim.keymap.set('i', '<C-b>', '<C-g>U<Left>')
     vim.keymap.set('i', '<C-p>', '<C-g>U<Up>')
