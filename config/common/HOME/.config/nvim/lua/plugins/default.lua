@@ -1,4 +1,3 @@
-local map = vim.keymap.set
 local function is_not_vscode() return vim.g.vscode == nil or false end
 return {
     { -- colorscheme
@@ -220,10 +219,10 @@ return {
         'chrisgrieser/nvim-spider',
         event = 'VeryLazy',
         config = function()
-            map({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<cr>", { desc = 'Spider w' })
-            map({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<cr>", { desc = 'Spider e' })
-            map({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<cr>", { desc = 'Spider b' })
-            map({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider ge' })
+            vim.keymap.set({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<cr>", { desc = 'Spider w' })
+            vim.keymap.set({ 'n', 'o', 'x' }, 'e', "<cmd>lua require('spider').motion('e')<cr>", { desc = 'Spider e' })
+            vim.keymap.set({ 'n', 'o', 'x' }, 'b', "<cmd>lua require('spider').motion('b')<cr>", { desc = 'Spider b' })
+            vim.keymap.set({ 'n', 'o', 'x' }, 'ge', "<cmd>lua require('spider').motion('ge')<cr>", { desc = 'Spider ge' })
         end,
     },
     { -- text objects
@@ -518,9 +517,9 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP Actions',
                 callback = function()
-                    map('n', '<leader>li', '<cmd>LspInfo<cr>', { desc = 'Info' })
-                    map({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action' })
-                    map(
+                    vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>', { desc = 'Info' })
+                    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action' })
+                    vim.keymap.set(
                         'n',
                         '<leader>lA',
                         function()
@@ -535,10 +534,10 @@ return {
                         end,
                         { desc = 'Source action' }
                     )
-                    map('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
-                    map('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
-                    map('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
-                    map('v', '<leader>f', function()
+                    vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
+                    vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
+                    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
+                    vim.keymap.set('v', '<leader>f', function()
                         local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '<'))
                         local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, '>'))
                         vim.lsp.buf.format({
@@ -549,51 +548,51 @@ return {
                             async = true,
                         })
                     end, { desc = 'Range format' })
-                    map('n', '<leader>F', function()
+                    vim.keymap.set('n', '<leader>F', function()
                         vim.lsp.buf.format()
                         vim.cmd.write()
                         vim.cmd.edit()
                     end, { desc = 'Format and save' })
                     -- TODO: ls, lS -> aerial
-                    map('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
-                    map('n', 'gK', vim.lsp.buf.signature_help, { desc = 'Signature help' })
-                    map(
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover' })
+                    vim.keymap.set('n', 'gK', vim.lsp.buf.signature_help, { desc = 'Signature help' })
+                    vim.keymap.set(
                         'n',
                         'gr',
                         function() require('telescope.builtin').lsp_references() end,
                         { desc = 'References' }
                     )
-                    map(
+                    vim.keymap.set(
                         'n',
                         'gd',
                         function() require('telescope.builtin').lsp_definitions() end,
                         { desc = 'Goto definition' }
                     )
-                    map('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
-                    map('n', 'gI', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
-                    map('n', 'gy', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
-                    map('n', 'gs', vim.lsp.buf.workspace_symbol, { desc = 'Workspace symbol' })
-                    map('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
-                    map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
-                    map(
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
+                    vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
+                    vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
+                    vim.keymap.set('n', 'gs', vim.lsp.buf.workspace_symbol, { desc = 'Workspace symbol' })
+                    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+                    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
+                    vim.keymap.set(
                         'n',
                         ']e',
                         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end,
                         { desc = 'Next error' }
                     )
-                    map(
+                    vim.keymap.set(
                         'n',
                         '[e',
                         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end,
                         { desc = 'Previous error' }
                     )
-                    map(
+                    vim.keymap.set(
                         'n',
                         ']w',
                         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end,
                         { desc = 'Next warning' }
                     )
-                    map(
+                    vim.keymap.set(
                         'n',
                         '[w',
                         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,
@@ -782,22 +781,22 @@ return {
         cond = is_not_vscode,
         event = { 'BufReadPre', 'BufNewFile' },
         config = function()
-            map(
+            vim.keymap.set(
                 'n',
                 'n',
                 "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>",
                 { desc = 'hlslens n' }
             )
-            map(
+            vim.keymap.set(
                 'n',
                 'N',
                 "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>",
                 { desc = 'hlslens N' }
             )
-            map('n', '*', "*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens *' })
-            map('n', '#', "#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens #' })
-            map('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g*' })
-            map('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g#' })
+            vim.keymap.set('n', '*', "*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens *' })
+            vim.keymap.set('n', '#', "#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens #' })
+            vim.keymap.set('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g*' })
+            vim.keymap.set('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>", { desc = 'hlslens g#' })
         end,
     },
     { -- scrollbar

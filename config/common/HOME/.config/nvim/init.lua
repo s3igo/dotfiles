@@ -80,8 +80,10 @@ end
 -- move
 vim.keymap.set({ 'n', 'x', 'o' }, 'j', 'gj')
 vim.keymap.set({ 'n', 'x', 'o' }, 'k', 'gk')
-vim.keymap.set({ 'i', 'c' }, '<A-f>', '<S-Right>')
-vim.keymap.set({ 'i', 'c' }, '<A-b>', '<S-Left>')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gj', 'j')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gk', 'k')
+vim.keymap.set({ 'i', 'c' }, '<A-f>', '<C-g>U<S-Right>')
+vim.keymap.set({ 'i', 'c' }, '<A-b>', '<C-g>U<S-Left>')
 
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')
@@ -222,7 +224,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup(require('plugins'), {
+require('lazy').setup('plugins', {
     defaults = { lazy = true },
     -- ui = { border = 'single' },
 })
