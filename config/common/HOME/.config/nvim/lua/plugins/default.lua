@@ -1,9 +1,8 @@
-local function is_not_vscode() return vim.g.vscode == nil or false end
 return {
     { -- colorscheme
         'bluz71/vim-nightfly-guicolors',
         -- enabled = false,
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         lazy = false,
         priority = 1000,
         config = function()
@@ -16,7 +15,7 @@ return {
     {
         'projekt0n/github-nvim-theme',
         enabled = false,
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         lazy = false,
         priority = 1000,
         opts = {
@@ -30,7 +29,7 @@ return {
     {
         'RRethy/nvim-base16',
         enabled = false,
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         lazy = false,
         priority = 1000,
         opts = {
@@ -70,7 +69,7 @@ return {
     { -- IME switcher
         'keaising/im-select.nvim',
         event = 'InsertEnter',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         config = function()
             require('im_select').setup({
                 set_previous_events = {},
@@ -80,7 +79,7 @@ return {
     -- ------------------------- Coding ------------------------- --
     { -- snippets
         'L3MON4D3/LuaSnip',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'InsertEnter',
         version = '2.*',
         dependencies = {
@@ -110,7 +109,7 @@ return {
     },
     { -- copilot
         'zbirenbaum/copilot.lua',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'InsertEnter',
         cmd = 'Copilot',
         build = ':Copilot auth',
@@ -124,7 +123,7 @@ return {
     },
     { -- completion
         'hrsh7th/nvim-cmp',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'InsertEnter', 'ModeChanged' },
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
@@ -329,11 +328,11 @@ return {
             'nvim-treesitter/nvim-treesitter-textobjects',
             'JoosepAlviste/nvim-ts-context-commentstring',
             'RRethy/nvim-treesitter-endwise',
-            { 'HiPhish/rainbow-delimiters.nvim', cond = is_not_vscode },
+            { 'HiPhish/rainbow-delimiters.nvim', cond = not vim.g.vscode },
         },
         cmd = { 'TSUpdateSync' },
         opts = {
-            highlight = { enable = is_not_vscode() },
+            highlight = { enable = not vim.g.vscode },
             indent = { enable = true },
             auto_install = true,
             incremental_selection = {
@@ -409,7 +408,7 @@ return {
             require('nvim-treesitter.configs').setup(opts)
             local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
             parser_config.tsx.filetype_to_parsername = { 'javascript', 'typescript.tsx' }
-            if is_not_vscode() then
+            if not vim.g.vscode then
                 local rainbow_delimiters = require('rainbow-delimiters')
                 vim.g.rainbow_delimiters = {
                     strategy = {
@@ -432,13 +431,13 @@ return {
     },
     { -- sticky scroll
         'nvim-treesitter/nvim-treesitter-context',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPost', 'BufNewFile' },
     },
     -- -------------------------- LSP  -------------------------- --
     { -- LSP
         'neovim/nvim-lspconfig',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             {
@@ -609,7 +608,7 @@ return {
     },
     {
         'mickael-menu/zk-nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'VimEnter',
         keys = {
             { '<leader>zi', '<cmd>ZkInsertLink<cr>', desc = 'Insert Link' },
@@ -657,7 +656,7 @@ return {
     },
     { -- progress indicator
         'j-hui/fidget.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         tag = 'legacy',
         event = 'LspAttach',
         opts = { window = { blend = 0, relative = 'editor' } },
@@ -669,7 +668,7 @@ return {
     },
     {
         'folke/trouble.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         event = 'LspAttach',
         keys = {
@@ -696,7 +695,7 @@ return {
     -- ------------------------- Editor ------------------------- --
     { -- explorer
         'nvim-tree/nvim-tree.lua',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         version = '*',
         lazy = false,
         dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -718,7 +717,7 @@ return {
     },
     { -- fuzzy finder
         'nvim-telescope/telescope.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         cmd = 'Telescope',
         keys = {
             { '<leader><space>', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
@@ -743,7 +742,7 @@ return {
     },
     { -- gutter indicator
         'lewis6991/gitsigns.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPre', 'BufNewFile' },
         opts = {
             signs = {
@@ -778,7 +777,7 @@ return {
     },
     { -- search highlight
         'kevinhwang91/nvim-hlslens',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPre', 'BufNewFile' },
         config = function()
             vim.keymap.set(
@@ -801,7 +800,7 @@ return {
     },
     { -- scrollbar
         'petertriho/nvim-scrollbar',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             'lewis6991/gitsigns.nvim',
@@ -818,13 +817,13 @@ return {
     },
     {
         'norcalli/nvim-colorizer.lua',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'BufEnter',
         config = function() require('colorizer').setup() end,
     },
     { -- buffer remove
         'echasnovski/mini.bufremove',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         keys = {
             {
                 '<leader>w',
@@ -868,7 +867,7 @@ return {
     { -- override components
         'stevearc/dressing.nvim',
         enabled = false,
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         opts = {
             input = { border = 'single' },
             select = { backend = { 'telescope', 'builtin' } },
@@ -888,13 +887,13 @@ return {
     { -- notification
         'rcarriga/nvim-notify',
         enabled = false,
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         keys = { { '<leader>fn', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification' } },
         config = true,
     },
     { -- tab bar
         'akinsho/bufferline.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'VimEnter',
         keys = {
             { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
@@ -925,7 +924,7 @@ return {
     },
     { -- status bar
         'nvim-lualine/lualine.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'VimEnter',
         -- keys =  {
         --     { '[b', '<cmd>bprev<cr>', desc = 'Prev buffer' },
@@ -1044,7 +1043,7 @@ return {
     },
     { -- indent guides
         'lukas-reineke/indent-blankline.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = { 'BufReadPost', 'BufNewFile' },
         opts = {
             indent = { char = '|', highlight = 'Indent' },
@@ -1062,7 +1061,7 @@ return {
     },
     { -- keymaps helper
         'folke/which-key.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'VimEnter',
         init = function()
             vim.o.timeout = true
@@ -1087,7 +1086,7 @@ return {
     },
     { -- terminal
         'folke/edgy.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         event = 'VimEnter',
         dependencies = { 'akinsho/toggleterm.nvim', config = true },
         keys = {
@@ -1107,7 +1106,7 @@ return {
     },
     { -- markdwon preview
         'iamcco/markdown-preview.nvim',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         ft = 'markdown',
         build = function() vim.fn['mkdp#util#install']() end,
         keys = { { '<leader>v', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' } },
@@ -1157,7 +1156,7 @@ return {
     -- -------------------------- Git  -------------------------- --
     { -- git client
         'NeogitOrg/neogit',
-        cond = is_not_vscode,
+        cond = not vim.g.vscode,
         cmd = 'Neogit',
         dependencies = {
             'nvim-lua/plenary.nvim',
