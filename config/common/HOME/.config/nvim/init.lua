@@ -46,28 +46,7 @@ end
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
--- -------------------------------- autocmds -------------------------------- --
-vim.api.nvim_create_autocmd('FileType', {
-    desc = 'Set formatoptions',
-    command = 'setlocal formatoptions-=ro',
-})
-
 if not vim.g.vscode then
-    vim.api.nvim_create_autocmd('TermOpen', {
-        desc = 'Enter terminal with insert mode',
-        command = 'startinsert',
-    })
-
-    vim.api.nvim_create_autocmd('FocusLost', {
-        desc = 'Save on focus lost',
-        command = 'wa',
-    })
-
-    vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'typst',
-        desc = 'Set typst filetype',
-        command = 'setlocal shiftwidth=4',
-    })
     -- ------------------------------- appearance ------------------------------- --
     vim.opt.termguicolors = true
     vim.opt.pumblend = 25
@@ -95,11 +74,13 @@ if not vim.g.vscode then
 end
 
 require('shared.keymaps')
+require('shared.autocmds')
 
 if vim.g.vscode then
     require('vscode.keymaps')
 else
     require('term.keymaps')
+    require('term.autocmds')
 end
 
 require('plugin')
