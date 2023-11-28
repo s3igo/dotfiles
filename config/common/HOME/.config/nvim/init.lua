@@ -3,7 +3,7 @@ require('shared.autocmds')
 require('shared.keymaps')
 
 if vim.g.vscode then
-    require('vscode.keymaps')
+    require('vscode')
 else
     require('term.options')
     require('term.autocmds')
