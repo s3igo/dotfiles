@@ -1,23 +1,11 @@
 return {
-    { -- override components
-        'stevearc/dressing.nvim',
-        enabled = false,
+    { -- code action preview
+        'aznhe21/actions-preview.nvim',
         cond = not vim.g.vscode,
-        opts = {
-            input = { border = 'single' },
-            select = { backend = { 'telescope', 'builtin' } },
-            builtin = { border = 'single' },
+        event = 'LspAttach',
+        keys = {
+            { '<leader>a', "<cmd>lua require('actions-preview').code_actions()<cr>", desc = 'Code Action Preview' },
         },
-        init = function()
-            vim.ui.select = function(...)
-                require('lazy').load({ plugins = { 'dressing.nvim' } })
-                return vim.ui.select(...)
-            end
-            vim.ui.input = function(...)
-                require('lazy').load({ plugins = { 'dressing.nvim' } })
-                return vim.ui.input(...)
-            end
-        end,
     },
     { -- notification
         'rcarriga/nvim-notify',
@@ -217,11 +205,13 @@ return {
                     q = { name = 'Quit' },
                 },
             })
+            vim.api.nvim_set_hl(0, 'WhichKeyFloat', { bg = 'NONE' })
         end,
     },
     { -- terminal
         'folke/edgy.nvim',
         cond = not vim.g.vscode,
+        enabled = false,
         event = 'VimEnter',
         dependencies = { 'akinsho/toggleterm.nvim', config = true },
         keys = {
