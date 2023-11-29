@@ -1,9 +1,8 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
 
--- NOTE: To use the key repeat by `one_shot = false`, the built-in leader key is not used.
-
 local keys = {
+    -- NOTE: To use the key repeat by `one_shot = false`, the built-in leader key is not used.
     {
         key = 's',
         mods = 'CTRL',
@@ -13,12 +12,22 @@ local keys = {
             timeout_milliseconds = 800,
         }),
     },
+
+    -- copy / paste
+    { key = 'c', mods = 'SUPER', action = act.CopyTo('Clipboard') },
+    { key = 'c', mods = 'CTRL | SHIFT', action = act.CopyTo('Clipboard') },
+    { key = 'v', mods = 'SUPER', action = act.PasteFrom('Clipboard') },
+    { key = 'v', mods = 'CTRL | SHIFT', action = act.PasteFrom('Clipboard') },
+
+    -- window
+    { key = 'h', mods = 'SUPER', action = act.HideApplication },
+    { key = 'm', mods = 'SUPER', action = act.Hide },
+    { key = 'w', mods = 'SUPER', action = act.CloseCurrentTab({ confirm = true }) },
+    { key = 'q', mods = 'SUPER', action = act.QuitApplication },
 }
 
 local key_tables = {
     leader = {
-        { key = 's', mods = 'CTRL', action = 'PopKeyTable' },
-
         -- rename tab
         {
             key = 'r',
@@ -32,9 +41,13 @@ local key_tables = {
             }),
         },
 
+        -- spawn
+        { key = 'n', mods = 'CTRL', action = act.SpawnWindow },
+        { key = 't', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
+
         -- split
-        { key = 'v', action = act.SplitHorizontal },
-        { key = 's', action = act.SplitVertical },
+        { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
+        { key = 's', mods = 'CTRL', action = act.SplitVertical },
 
         -- focus
         {
@@ -58,8 +71,8 @@ local key_tables = {
             action = act.Multiple({ act.ActivatePaneDirection('Right'), 'PopKeyTable' }),
         },
 
-        { key = 'n', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-        { key = 'p', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
+        { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+        { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
         -- resize
         { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },
@@ -67,8 +80,8 @@ local key_tables = {
         { key = 'k', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Up', 3 }) },
         { key = 'l', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 3 }) },
 
-        -- copy
-        { key = '[', action = act.ActivateCopyMode },
+        -- mode
+        { key = 'c', mods = 'CTRL', action = act.ActivateCopyMode },
         { key = 'y', mods = 'CTRL', action = act.QuickSelect },
     },
 }
@@ -76,7 +89,7 @@ local key_tables = {
 local mouse_bindings = {
     {
         event = { Up = { streak = 1, button = 'Left' } },
-        mods = 'SUPER',
+        -- mods = 'SUPER',
         action = act.OpenLinkAtMouseCursor,
     },
 }
