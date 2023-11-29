@@ -16,6 +16,8 @@ function inject-op {
         && op inject -f -i "$FILE" -o "$DEST" \
         && echo " -> ${FILE}" \
         && return 0
+
+    return 1
 }
 
 # make file-based symlink
@@ -33,10 +35,12 @@ done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
 # if macOS
 function karabiner {
-    [[ "$(basename "$FILE")" == karabiner.json ]] \
+    [[ "$FILENAME" == karabiner.json ]] \
         && echo -n 'cp: ' \
         && cp -fv "$FILE" "$DEST" \
         && return 0
+
+    return 1
 }
 
 if [[ "$(uname)" == 'Darwin' ]]; then
@@ -45,6 +49,8 @@ if [[ "$(uname)" == 'Darwin' ]]; then
     while read -r FILE; do
         declare DEST="${HOME}${FILE##"$LINK_DIR"}"
         mkdir -p "$(dirname "$DEST")"
+
+        declare FILENAME="$(basename "$FILE")"
 
         inject-op && continue
         karabiner && continue
