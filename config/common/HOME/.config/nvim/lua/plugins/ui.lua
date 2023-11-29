@@ -9,15 +9,23 @@ return {
     },
     { -- notification
         'rcarriga/nvim-notify',
-        enabled = false,
         cond = not vim.g.vscode,
-        keys = { { '<leader>fn', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification' } },
-        config = true,
+        keys = {
+            { '<leader>n', '<cmd>Telescope notify<cr>', desc = 'Telescope Notification' },
+            {
+                '<leader>u',
+                function() require('notify').dismiss({ silent = true, pending = true }) end,
+                desc = 'Dismiss all Notifications',
+            },
+        },
+        opts = { background_colour = 'NormalFloat' },
+        init = function() vim.notify = require('notify') end,
     },
     { -- tab bar
         'akinsho/bufferline.nvim',
         cond = not vim.g.vscode,
-        event = 'VimEnter',
+        -- event = 'VimEnter',
+        event = 'UIEnter',
         keys = {
             { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
             { ']b', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
@@ -45,8 +53,26 @@ return {
             },
         },
     },
+    { -- status / tab line
+        'rebelot/heirline.nvim',
+        enabled = false,
+        event = 'UIEnter',
+        config = function()
+            local conditions = require('heirline.conditions')
+            local utils = require('heirline.utils')
+            local bg = utils.get_highlight('NormalFloat').bg
+            require('heirline').setup({
+                statusline = {
+                    hl = { bg = 'NONE' },
+                    { provider = 'hoge' },
+                    { provider = function() return '%=' end },
+                },
+            })
+        end,
+    },
     { -- status bar
         'nvim-lualine/lualine.nvim',
+        -- enabled = false,
         cond = not vim.g.vscode,
         event = 'VimEnter',
         -- keys =  {

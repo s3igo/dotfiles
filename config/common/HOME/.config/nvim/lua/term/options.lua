@@ -25,3 +25,5 @@ vim.opt.matchtime = 1
 vim.opt.title = true
 vim.opt.scrolloff = 5
 vim.opt.relativenumber = true
+
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'NONE' })

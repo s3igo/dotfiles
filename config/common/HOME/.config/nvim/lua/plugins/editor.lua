@@ -30,7 +30,7 @@ return {
             { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
             { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
             { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
-            { '<leader>:', '<cmd>Telescope registers<cr>', desc = 'Registers' },
+            { "<leader>'", '<cmd>Telescope registers<cr>', desc = 'Registers' },
         },
         config = function()
             local config = require('telescope.config')
