@@ -30,21 +30,35 @@ return {
             { '<leader><tab>', '<cmd>Telescope buffers<cr>', desc = 'Switch buffer' },
             { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
             { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command history' },
+            { '<leader>:', '<cmd>Telescope registers<cr>', desc = 'Registers' },
         },
-        opts = {
-            defaults = {
-                file_ignore_patterns = { '.git', 'node_modules' },
-                mappings = {
-                    i = {
-                        ['<C-u>'] = false,
-                        ['<C-k>'] = false,
-                        ['<C-a>'] = { '<Home>', type = 'command' },
-                        ['<C-e>'] = { '<End>', type = 'command' },
+        config = function()
+            local config = require('telescope.config')
+            local vimgrep_arguments = { unpack(config.values.vimgrep_arguments) }
+
+            table.insert(vimgrep_arguments, '--hidden')
+            table.insert(vimgrep_arguments, '--glob')
+            table.insert(vimgrep_arguments, '!.git/*')
+
+            local action = require('telescope.actions')
+
+            require('telescope').setup({
+                defaults = {
+                    vimgrep_arguments = vimgrep_arguments,
+                    mappings = {
+                        i = {
+                            ['<C-u>'] = false,
+                            ['<C-k>'] = false,
+                            ['<C-a>'] = { '<Home>', type = 'command' },
+                            ['<C-e>'] = { '<End>', type = 'command' },
+                            ['<C-[>'] = action.close,
+                        },
                     },
+                    file_ignore_patterns = { '.git', 'node_modules' },
                 },
-            },
-            pickers = { find_files = { hidden = true } },
-        },
+                pickers = { find_files = { hidden = true } },
+            })
+        end,
     },
     { -- gutter indicator
         'lewis6991/gitsigns.nvim',
