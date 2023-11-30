@@ -27,7 +27,6 @@ lazydocker
 lf
 macos-trash
 mas
-neofetch
 neovim
 pam-reattach
 pastel
