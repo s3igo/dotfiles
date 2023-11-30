@@ -226,7 +226,7 @@ return {
         },
         opts = {},
     },
-    {
+    { -- empasized comments
         'fangjunzhou/comment-divider.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {

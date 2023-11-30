@@ -150,11 +150,6 @@ return {
                 function() require('mini.bufremove').delete(0, false) end,
                 desc = 'Delete buffer',
             },
-            {
-                '<leader>W',
-                function() require('mini.bufremove').delete(0, true) end,
-                desc = 'Force delete buffer',
-            },
         },
     }, -- { -- FIXME: Invalid sign text
     --     'folke/todo-comments.nvim',
