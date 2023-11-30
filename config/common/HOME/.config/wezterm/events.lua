@@ -17,9 +17,6 @@ local glyph = {
     cpu = utf8.char(0xf4bc),
 }
 
-local tab_bg = '#011627'
-local leader_bg = '#1d3b53'
-
 local function split(str, pat)
     local t = {}
     for s in string.gmatch(str, pat) do
@@ -48,27 +45,28 @@ wezterm.on('update-status', function(window, pane)
         return user:gsub('\n', '') .. '@' .. wezterm.hostname()
     end)()
 
-    local mode_color = colors.default.ansi[5]
-    local cpu_color = leader_bg
+    local mode_bg = colors.default.ansi[5]
+    local cpu_bg = colors.default.brights[1]
+    local name_bg = colors.default.background
 
     window:set_right_status(wezterm.format({
         -- mode
-        { Foreground = { Color = mode_color } },
+        { Foreground = { Color = mode_bg } },
         { Text = glyph.solid_left_arrow },
         { Foreground = { Color = 'black' } },
-        { Background = { Color = mode_color } },
+        { Background = { Color = mode_bg } },
         { Text = ' ' .. mode .. ' ' },
         -- cpu usage
-        { Foreground = { Color = cpu_color } },
+        { Foreground = { Color = cpu_bg } },
         { Text = glyph.solid_left_arrow },
         { Foreground = { Color = 'white' } },
-        { Background = { Color = cpu_color } },
+        { Background = { Color = cpu_bg } },
         { Text = ' ' .. cpu .. ' ' },
         -- name
-        { Foreground = { Color = tab_bg } },
+        { Foreground = { Color = name_bg } },
         { Text = glyph.solid_left_arrow },
         { Foreground = { Color = 'white' } },
-        { Background = { Color = tab_bg } },
+        { Background = { Color = name_bg } },
         { Text = ' ' .. name .. ' ' },
     }))
 end)
@@ -81,7 +79,7 @@ wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
 
     local is_active = tab.is_active
 
-    local bg = is_active and colors.default.ansi[5] or leader_bg
+    local bg = is_active and colors.default.ansi[5] or colors.default.brights[1]
     local fg = is_active and colors.default.background or 'white'
 
     local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
@@ -99,14 +97,17 @@ wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local content = wezterm.truncate_right(title, available_width)
 
     return {
+        -- left shoulder
         { Foreground = { Color = bg } },
         { Background = { Color = colors.bg } },
         { Text = glyph.solid_left_shoulder },
+        -- content
         { Foreground = { Color = fg } },
         { Background = { Color = bg } },
         { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
         { Attribute = { Italic = is_active } },
         { Text = ' ' .. content .. ' ' },
+        -- right shoulder
         { Foreground = { Color = bg } },
         { Background = { Color = colors.bg } },
         { Text = glyph.solid_right_shoulder },
