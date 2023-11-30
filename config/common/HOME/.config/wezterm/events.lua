@@ -13,23 +13,57 @@ local glyph = {
     right_shoulder = utf8.char(0xe0b9),
     solid_left_shoulder = utf8.char(0xe0ba),
     left_shoulder = utf8.char(0xe0bb),
+    -- icon
+    cpu = utf8.char(0xf4bc),
 }
 
 local tab_bg = '#011627'
 local leader_bg = '#1d3b53'
 
-wezterm.on('update-right-status', function(window)
-    local mode = window:active_key_table() or ''
-    local _, user = wezterm.run_child_process({ 'whoami' })
-    local name = user:gsub('\n', '') .. '@' .. wezterm.hostname()
+local function split(str, pat)
+    local t = {}
+    for s in string.gmatch(str, pat) do
+        table.insert(t, s)
+    end
+    return t
+end
+
+local function get_cpu_usage()
+    local _, result = wezterm.run_child_process({ 'iostat', '-c', '2' })
+    local line = split(result, '[^\r\n]+')[4]
+    local value = wezterm.pad_left(100 - split(line, '%S+')[6], 4)
+    return glyph.cpu .. value .. ' %'
+end
+
+-- update cpu usage every 1 second
+wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
+wezterm.on('update-status', function(window, pane)
+    local mode = string.upper(window:active_key_table() or '')
+
+    local cpu = wezterm.GLOBAL.cpu or 'undefined'
+    window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+
+    local name = (function()
+        local _, user = wezterm.run_child_process({ 'whoami' })
+        return user:gsub('\n', '') .. '@' .. wezterm.hostname()
+    end)()
+
+    local mode_color = colors.default.ansi[5]
+    local cpu_color = leader_bg
 
     window:set_right_status(wezterm.format({
         -- mode
-        { Foreground = { Color = leader_bg } },
+        { Foreground = { Color = mode_color } },
+        { Text = glyph.solid_left_arrow },
+        { Foreground = { Color = 'black' } },
+        { Background = { Color = mode_color } },
+        { Text = ' ' .. mode .. ' ' },
+        -- cpu usage
+        { Foreground = { Color = cpu_color } },
         { Text = glyph.solid_left_arrow },
         { Foreground = { Color = 'white' } },
-        { Background = { Color = leader_bg } },
-        { Text = ' ' .. string.upper(mode) .. ' ' },
+        { Background = { Color = cpu_color } },
+        { Text = ' ' .. cpu .. ' ' },
         -- name
         { Foreground = { Color = tab_bg } },
         { Text = glyph.solid_left_arrow },
