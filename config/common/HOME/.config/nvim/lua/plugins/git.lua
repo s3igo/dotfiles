@@ -9,7 +9,7 @@ return {
             { 'sindrets/diffview.nvim', cmd = 'DiffviewOpen' },
         },
         keys = {
-            { '<leader>ig', '<cmd>Neogit<cr>', desc = 'Neogit' },
+            { '<leader>;g', '<cmd>Neogit<cr>', desc = 'Neogit' },
             { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Diffview' },
         },
         config = true,

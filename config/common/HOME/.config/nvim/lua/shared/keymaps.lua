@@ -5,6 +5,7 @@ vim.keymap.set({ 'i', 'n' }, '<C-[>', '<cmd>noh<cr><esc>', { desc = 'Escape and 
 
 -- disable
 vim.keymap.set('n', 's', '<nop>')
+vim.keymap.set('n', 'x', '<nop>')
 
 -- windows
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Go to left window', remap = true })
@@ -17,10 +18,11 @@ vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 vim.keymap.set('v', 'y', 'ygv<esc>')
 
 -- registers
-vim.keymap.set({ 'n', 'x' }, 'sy', '"+y', { remap = true })
-vim.keymap.set({ 'n', 'x' }, 'sd', '"+d')
-vim.keymap.set({ 'n', 'x' }, 'sp', '"+p')
-vim.keymap.set({ 'n', 'x' }, 's0', '"0p')
+-- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { remap = true })
+vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'x' }, '<leader>d', '"+d')
+vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p')
+vim.keymap.set({ 'n', 'x' }, '<leader>0', '"0p')
 vim.keymap.set({ 'n', 'x' }, 'x', '"_d')
 vim.keymap.set({ 'n', 'x' }, 'X', '"_c')
 

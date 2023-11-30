@@ -17,10 +17,10 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = 'se',
-                    node_incremental = 'se',
-                    scope_incremental = 'ss',
-                    node_decremental = 'sa',
+                    init_selection = '<cr>',
+                    scope_incremental = '<cr>',
+                    node_incremental = '<tab>',
+                    node_decremental = '<S-tab>',
                 },
             },
             textobjects = {

@@ -45,9 +45,9 @@ vim.keymap.set('i', '<C-k>', '<esc>lDa')
 vim.keymap.set('c', '<C-h>', '<bs>')
 
 -- plugins
-vim.keymap.set('n', '<leader>pl', '<cmd>Lazy<cr>', { desc = 'Lazy' })
-vim.keymap.set('n', '<leader>pm', '<cmd>Mason<cr>', { desc = 'Mason' })
-vim.keymap.set('n', '<leader>pt', '<cmd>Telescope<cr>', { desc = 'Telescope' })
+vim.keymap.set('n', '<leader>;l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+vim.keymap.set('n', '<leader>;m', '<cmd>Mason<cr>', { desc = 'Mason' })
+vim.keymap.set('n', '<leader>;t', '<cmd>Telescope<cr>', { desc = 'Telescope' })
 
 -- terminal
 vim.keymap.set('t', '<C-]>', '<C-\\><C-n>', { desc = 'Escape terminal mode' })
