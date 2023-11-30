@@ -45,6 +45,5 @@ tokei
 tree
 typst
 yqrashawn/goku/goku
-zellij
 zk
 zoxide
