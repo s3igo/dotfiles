@@ -1,7 +1,9 @@
 local wezterm = require('wezterm')
 local act = wezterm.action
 
-local keys = {
+local M = {}
+
+M.keys = {
     -- NOTE: To use the key repeat by `one_shot = false`, the built-in leader key is not used.
     {
         key = 's',
@@ -26,7 +28,7 @@ local keys = {
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
 }
 
-local key_tables = {
+M.key_tables = {
     leader = {
         -- rename tab
         {
@@ -86,7 +88,7 @@ local key_tables = {
     },
 }
 
-local mouse_bindings = {
+M.mouse_bindings = {
     {
         event = { Up = { streak = 1, button = 'Left' } },
         -- mods = 'SUPER',
@@ -94,8 +96,4 @@ local mouse_bindings = {
     },
 }
 
-return {
-    keys = keys,
-    key_tables = key_tables,
-    mouse_bindings = mouse_bindings,
-}
+return M

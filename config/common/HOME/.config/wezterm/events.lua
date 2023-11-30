@@ -71,30 +71,33 @@ wezterm.on('update-status', function(window, pane)
     }))
 end)
 
-wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
-    local function tab_title(tab_info)
-        local title = tab_info.tab_title
-        return title and #title > 0 and title or tab_info.active_pane.title
-    end
+local function tab_title(tab_info)
+    local title = tab_info.tab_title
+    return title and #title > 0 and title or tab_info.active_pane.title
+end
 
+wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local is_active = tab.is_active
 
     local bg = is_active and colors.default.ansi[5] or colors.default.brights[1]
     local fg = is_active and colors.default.background or 'white'
 
-    local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-    local title = index .. tab_title(tab)
+    local content = (function()
+        local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
+        local title = index .. tab_title(tab)
 
-    local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
+        local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
 
-    local available_width = max_width - extra_chars
-    if #title < available_width then
-        local width = math.floor((available_width - #title) / 2)
-        local pad = string.rep(' ', width)
-        title = pad .. title .. pad
-    end
+        local available_width = max_width - extra_chars
 
-    local content = wezterm.truncate_right(title, available_width)
+        if #title < available_width then
+            local width = math.floor((available_width - #title) / 2)
+            local pad = string.rep(' ', width)
+            title = pad .. title .. pad
+        end
+
+        return wezterm.truncate_right(title, available_width)
+    end)()
 
     return {
         -- left shoulder
