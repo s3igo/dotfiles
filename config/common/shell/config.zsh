@@ -45,9 +45,9 @@ alias -g @s='search'
 alias -g @latest='"$(command ls -rt $1 | tail -n 1)"'
 
 ## docker
-alias -g @d_ps='"$(docker ps | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED STATUS PORTS NAMES && echo $ID)"'
-alias -g @d_ps-a='"$(docker ps -a | tail -n +2 | fzf | read ID IMAGE COMMAND CREATED STATUS PORTS NAMES && echo $ID)"'
-alias -g @d_image_ls='"$(docker images | tail -n +2 | fzf | read REPOSITORY TAG IMAGEID CREATED SIZE && echo $IMAGEID)"'
+alias -g @d_ps='"$(docker ps | tail -n +2 | fzf | awk '"'"'{print $1}'"'"')"'
+alias -g @d_ps-a='"$(docker ps -a | tail -n +2 | fzf | awk '"'"'{print $1}'"'"')"'
+alias -g @d_image_ls='"$(docker images | tail -n +2 | fzf | awk '"'"'{print $3}'"'"')"'
 
 ## mac
 if [[ "$(uname)" == 'Darwin' ]]; then
