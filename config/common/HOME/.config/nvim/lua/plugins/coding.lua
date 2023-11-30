@@ -59,9 +59,9 @@ return {
                 config = function(_, opts) require('lspkind').init(opts) end,
             },
         },
-        opts = function()
+        config = function()
             local cmp = require('cmp')
-            return {
+            cmp.setup({
                 formatting = {
                     format = require('lspkind').cmp_format({
                         mode = 'symbol',
@@ -97,11 +97,7 @@ return {
                     { name = 'buffer' },
                     { name = 'path' },
                 }),
-            }
-        end,
-        config = function(_, opts)
-            local cmp = require('cmp')
-            cmp.setup(opts)
+            })
             cmp.setup.cmdline({ '/', '?' }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
