@@ -9,6 +9,10 @@ return {
     term = 'wezterm',
     scrollback_lines = 10000,
 
+    -- multiplexing
+    unix_domains = { { name = 'unix' } },
+    default_gui_startup_args = { 'connect', 'unix' },
+
     -- appearance
     colors = colors.scheme,
     foreground_text_hsb = { saturation = 1.05, brightness = 1.1 },

@@ -47,9 +47,14 @@ M.key_tables = {
         { key = 'n', mods = 'CTRL', action = act.SpawnWindow },
         { key = 't', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
 
+        -- multiplexer
+        { key = 'n', action = act.SwitchWorkspaceRelative(1) },
+        { key = 'p', action = act.SwitchWorkspaceRelative(-1) },
+        { key = 'd', action = act.DetachDomain({ DomainName = 'unix' }) },
+
         -- split
-        { key = 'v', --[[ mods = 'CTRL', ]] action = act.SplitHorizontal },
-        { key = 's', --[[ mods = 'CTRL', ]] action = act.SplitVertical },
+        { key = 'v', action = act.SplitHorizontal },
+        { key = 's', action = act.SplitVertical },
 
         -- focus
         {

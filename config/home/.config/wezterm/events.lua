@@ -17,6 +17,43 @@ local glyph = {
     cpu = utf8.char(0xf4bc),
 }
 
+wezterm.on('mux-startup', function()
+    -- general workspace
+    local g_tab_1, _, g_window_1 = wezterm.mux.spawn_window({ workspace = 'general' })
+    g_tab_1:set_title('home')
+
+    local g_tab_2, _, g_window_2 = g_window_1:spawn_tab({ cwd = wezterm.home_dir .. '/Desktop' })
+    g_tab_2:set_title('desktop')
+
+    local g_tab_3, _, g_window_3 = g_window_2:spawn_tab({ cwd = wezterm.home_dir .. '/Downloads' })
+    g_tab_3:set_title('downloads')
+
+    local g_tab_4, _, g_window_4 = g_window_3:spawn_tab({ cwd = wezterm.home_dir .. '/Dropbox' })
+    g_tab_4:set_title('dropbox')
+
+    local g_tab_5 = g_window_4:spawn_tab({ cwd = wezterm.home_dir .. '/Dropbox/univ' })
+    g_tab_5:set_title('univ')
+
+    -- development workspace
+    local projects_root = wezterm.home_dir .. '/git/github.com/s3igo'
+    local d_tab_1, _, d_window_1 = wezterm.mux.spawn_window({
+        workspace = 'develop',
+        cwd = wezterm.home_dir .. '/.dotfiles',
+    })
+    d_tab_1:set_title('dotfiles')
+
+    local d_tab_2, _, d_window_2 = d_window_1:spawn_tab({ cwd = projects_root .. '/atcoder-rust' })
+    d_tab_2:set_title('atcoder')
+
+    local d_tab_3, _, d_window_3 = d_window_2:spawn_tab({ cwd = projects_root .. '/2023-second-semester' })
+    d_tab_3:set_title('univ')
+
+    local d_tab_4 = d_window_3:spawn_tab({ cwd = projects_root .. '/note' })
+    d_tab_4:set_title('note')
+
+    wezterm.mux.set_active_workspace('general')
+end)
+
 local function split(str, pat)
     local t = {}
     for s in string.gmatch(str, pat) do
@@ -38,7 +75,10 @@ wezterm.on('update-status', function(window, pane)
     local mode = string.upper(window:active_key_table() or '')
 
     local cpu = wezterm.GLOBAL.cpu or 'undefined'
-    window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+    -- is valid pane
+    if pane:pane_id() >= 1 then
+        window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+    end
 
     local name = (function()
         local _, user = wezterm.run_child_process({ 'whoami' })
@@ -69,6 +109,8 @@ wezterm.on('update-status', function(window, pane)
         { Background = { Color = name_bg } },
         { Text = ' ' .. name .. ' ' },
     }))
+
+    window:set_left_status(window:active_workspace())
 end)
 
 local function tab_title(tab_info)
