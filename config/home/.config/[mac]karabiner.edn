@@ -11,13 +11,10 @@
     :applications {
         :terminal [
             "^com\\.apple\\.Terminal$"
-            "^org\\.alacritty$"
-            "^com\\.raphaelamorim\\.rio$"
             "^com\\.github\\.wez\\.wezterm$"
         ]
         :editor [
             "^com\\.microsoft\\.VSCode$"
-            "^com\\.microsoft\\.VSCodeInsiders$"
             "^dev\\.zed\\.Zed$"
         ]
     }

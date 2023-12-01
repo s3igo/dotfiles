@@ -1,7 +1,6 @@
 1password
 1password-cli
 adobe-acrobat-pro
-alacritty
 arc
 chromium
 cloudflare-warp
