@@ -1,0 +1,35 @@
+[[language]]
+name = "c"
+file-types = ["c", "h"]
+indent = { tab-width = 4, unit = "    " }
+auto-format = true
+# config =
+
+[[language]]
+name = "yaml"
+file-types = ["yml", "yaml"]
+indent = { tab-width = 2, unit = "  " }
+# config = { yaml = { format = { enable =  true } } }
+
+# [[language]]
+# name = "rust"
+# scope = "source.rust"
+# injection-regex = "rust"
+# file-types = ["rs"]
+# roots = ["Cargo.toml", "Cargo.lock"]
+# comment-token = "//"
+# language-server = { command = "rust-analyzer" }
+# indent = { tab-width = 4, unit = "    " }
+
+# [language.config.check]
+# command = "clippy"
+
+[[language]]
+name = "dockerfile"
+file-types = ["Dockerfile", "dockerfile"]
+indent = { tab-width = 2, unit = "  " }
+comment-token = "#"
+
+[[language]]
+name = "lua"
+indent = { tab-width = 4, unit = "    " }
