@@ -24,11 +24,7 @@ init:
 
 .PHONY: link
 link:
-	bash ./scripts/link.sh
-
-.PHONY: link-beta
-link-beta:
-	./scripts/link_beta.sh
+	./scripts/link.sh
 
 .PHONY: update
 update:

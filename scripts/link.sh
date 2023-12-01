@@ -1,61 +1,38 @@
 #!/usr/bin/env bash
 
-function shell {
-    [[ "$(basename "$FILE")" == .bash* ]] && [[ "$SHELL" == *zsh ]] && return 0
-    [[ "$(basename "$FILE")" == .zsh* ]] && [[ "$SHELL" == *bash ]] && return 0
-
-    return 1
+function link {
+    mkdir -p "$(dirname "$2")"
+    ln -fnsv "$1" "$2"
 }
 
-function inject-op {
-    declare FILENAME="$(basename "$FILE")"
-    declare TARGET="$(basename "${FILE%/*}")/${FILENAME}"
-
-    [[ "$TARGET" == 'git/config' ]] \
-        && echo -n 'op inject: ' \
-        && op inject -f -i "$FILE" -o "$DEST" \
-        && echo " -> ${FILE}" \
-        && return 0
-
-    return 1
+# hooks
+function karabiner {
+    mkdir -p "$INIT"
+    echo -n 'cp: ' && cp -fv "$FILE" "${INIT}/karabiner.json"
 }
 
 # make file-based symlink
-echo '--- common config ---'
-declare LINK_DIR="${HOME}/.dotfiles/config/common/HOME"
+declare LINK_DIR="${HOME}/.dotfiles/config/home"
 while read -r FILE; do
-    declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-    mkdir -p "$(dirname "$DEST")"
+    # $TARGET can be used in a naive way; `ln -s $FILE $TARGET`
+    declare TARGET="${HOME}${FILE#"$LINK_DIR"}"
 
-    shell && continue
-    inject-op && continue
+    declare INIT="$(dirname "$TARGET")"
+    declare LAST="$(basename "$TARGET")"
 
-    ln -fnsv "$FILE" "$DEST"
+    if [[ "$LAST" == '[hook]'* ]]; then
+        # remove extension
+        declare FILENAME="${LAST%.*}"
+        # call hook
+        ${FILENAME#'[hook]'}
+        continue
+    fi
+
+    [[ "$(uname)" == 'Darwin' ]] && link "$FILE" "${INIT}/${LAST#'[mac]'}"
+    [[ "$(uname)" == 'Linux' ]] && link "$FILE" "${INIT}/${LAST#'[linux]'}"
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
-# if macOS
-function karabiner {
-    [[ "$FILENAME" == karabiner.json ]] \
-        && echo -n 'cp: ' \
-        && cp -fv "$FILE" "$DEST" \
-        && goku \
-        && return 0
+# post link process
+[[ "$(uname)" == 'Darwin' ]] && type goku > /dev/null 2>&1 && goku
 
-    return 1
-}
-
-if [[ "$(uname)" == 'Darwin' ]]; then
-    echo -e '\n--- MacOS specific config ---'
-    declare LINK_DIR="${HOME}/.dotfiles/config/mac/HOME"
-    while read -r FILE; do
-        declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-        mkdir -p "$(dirname "$DEST")"
-
-        declare FILENAME="$(basename "$FILE")"
-
-        inject-op && continue
-        karabiner && continue
-
-        ln -fnsv "$FILE" "$DEST"
-    done < <(find "$LINK_DIR" -mindepth 1 -type f)
-fi
+exit 0
