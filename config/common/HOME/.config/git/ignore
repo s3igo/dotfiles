@@ -1,7 +1,0 @@
-.DS_Store
-.dccache
-.env
-.envrc
-tmp/
-node_modules/
-~$*
