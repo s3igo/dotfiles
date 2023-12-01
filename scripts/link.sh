@@ -38,6 +38,7 @@ function karabiner {
     [[ "$FILENAME" == karabiner.json ]] \
         && echo -n 'cp: ' \
         && cp -fv "$FILE" "$DEST" \
+        && goku \
         && return 0
 
     return 1
@@ -57,5 +58,4 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 
         ln -fnsv "$FILE" "$DEST"
     done < <(find "$LINK_DIR" -mindepth 1 -type f)
-    type goku > /dev/null 2>&1 && goku
 fi
