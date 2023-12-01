@@ -18,7 +18,6 @@ return {
                 'williamboman/mason.nvim',
                 cmd = { 'Mason' },
                 build = ':MasonUpdate',
-                opts = { ui = { border = 'single' } },
             },
             'creativenull/efmls-configs-nvim',
             'hrsh7th/cmp-nvim-lsp',
@@ -80,11 +79,10 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP Actions',
                 callback = function()
-                    vim.keymap.set('n', '<leader>li', '<cmd>LspInfo<cr>', { desc = 'Info' })
-                    vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, { desc = 'Code action' })
+                    vim.keymap.set('n', '<leader>i', '<cmd>LspInfo<cr>', { desc = 'Lsp Info' })
                     vim.keymap.set(
                         'n',
-                        '<leader>lA',
+                        '<leader>A',
                         function()
                             vim.lsp.buf.code_action({
                                 context = {
@@ -97,7 +95,7 @@ return {
                         end,
                         { desc = 'Source action' }
                     )
-                    vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
+                    vim.keymap.set('n', '<leader>D', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
                     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
                     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
                     vim.keymap.set('v', '<leader>f', function()
@@ -165,9 +163,15 @@ return {
             })
 
             -- appearance
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
-            vim.diagnostic.config({ float = { border = 'single' } })
-            require('lspconfig.ui.windows').default_options.border = 'single'
+            -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' })
+            vim.lsp.handlers['textDocument/hover'] = function(...)
+                local _, winnr = vim.lsp.handlers.hover(...)
+                if winnr then
+                    vim.api.nvim_win_set_option(winnr, 'winblend', 25)
+                end
+            end
+            -- vim.diagnostic.config({ float = { border = 'single' } })
+            -- require('lspconfig.ui.windows').default_options.border = 'single'
         end,
     },
     {

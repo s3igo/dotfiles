@@ -226,8 +226,8 @@ return {
                 ['<leader>'] = {
                     b = { name = 'Buffer' },
                     g = { name = 'Git' },
-                    i = { name = 'Plugins' },
-                    l = { name = 'LSP' },
+                    -- i = { name = 'Plugins' },
+                    -- l = { name = 'LSP' },
                     q = { name = 'Quit' },
                 },
             })

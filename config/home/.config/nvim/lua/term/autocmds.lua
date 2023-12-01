@@ -14,12 +14,7 @@ vim.api.nvim_create_autocmd('FileType', {
     command = 'setlocal shiftwidth=4',
 })
 
--- not working
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'lazy',
---     command = 'setlocal winblend=25',
--- })
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'mason',
---     command = 'setlocal winblend=25',
--- })
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'lazy', 'mason', 'lspinfo' },
+    command = 'setlocal winblend=30',
+})
