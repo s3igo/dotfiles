@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-function inject-op {
-    declare FILENAME="$(basename "$FILE")"
-    declare TARGET="$(basename "${FILE%/*}")/${FILENAME}"
-
-    [[ "$TARGET" == 'git/config' ]] \
-        && echo -n 'op inject: ' \
-        && op inject -f -i "$FILE" -o "$DEST" \
-        && echo " -> ${FILE}" \
-        && return 0
-
-    return 1
-}
-
 # make file-based symlink
 echo '--- common config ---'
 declare LINK_DIR="${HOME}/.dotfiles/config/common/HOME"
@@ -20,7 +7,6 @@ while read -r FILE; do
     declare DEST="${HOME}${FILE##"$LINK_DIR"}"
     mkdir -p "$(dirname "$DEST")"
 
-    inject-op && continue
 
     ln -fnsv "$FILE" "$DEST"
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
@@ -45,7 +31,6 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 
         declare FILENAME="$(basename "$FILE")"
 
-        inject-op && continue
         karabiner && continue
 
         ln -fnsv "$FILE" "$DEST"
