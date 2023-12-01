@@ -32,14 +32,12 @@ pam-reattach
 pastel
 procs
 qpdf
-rename
 ripgrep
 rustup-init
 sheldon
 shellharden
 silicon
 starship
-tig
 tokei
 tree
 typst

@@ -3,7 +3,6 @@
 adobe-acrobat-pro
 alacritty
 arc
-arduino-ide
 chromium
 cloudflare-warp
 cron
