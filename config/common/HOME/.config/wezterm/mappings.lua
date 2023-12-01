@@ -48,8 +48,8 @@ M.key_tables = {
         { key = 't', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
 
         -- split
-        { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
-        { key = 's', mods = 'CTRL', action = act.SplitVertical },
+        { key = 'v', --[[ mods = 'CTRL', ]] action = act.SplitHorizontal },
+        { key = 's', --[[ mods = 'CTRL', ]] action = act.SplitVertical },
 
         -- focus
         {
