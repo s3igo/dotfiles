@@ -29,8 +29,8 @@ return {
         keys = {
             { '[b', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
             { ']b', '<cmd>BufferLineCycleNext<cr>', desc = 'Next buffer' },
-            { '>b', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer left' },
-            { '<b', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer right' },
+            { '<b', '<cmd>BufferLineMovePrev<cr>', desc = 'Move buffer left' },
+            { '>b', '<cmd>BufferLineMoveNext<cr>', desc = 'Move buffer right' },
         },
         opts = {
             options = {
