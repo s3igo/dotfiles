@@ -7,4 +7,4 @@ eval "$(curl -fsSL raw.githubusercontent.com/s3igo/dotfiles/main/scripts/init.sh
 git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
 
 # link dotfiles
-bash ~/.dotfiles/scripts/link.sh
+~/.dotfiles/scripts/link.sh

@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-function link {
-    mkdir -p "$(dirname "$2")"
-    ln -fnsv "$1" "$2"
-}
-
 # hooks
 function karabiner {
     mkdir -p "$INIT"
@@ -28,8 +23,13 @@ while read -r FILE; do
         continue
     fi
 
-    [[ "$(uname)" == 'Darwin' ]] && link "$FILE" "${INIT}/${LAST#'[mac]'}"
-    [[ "$(uname)" == 'Linux' ]] && link "$FILE" "${INIT}/${LAST#'[linux]'}"
+    if [[ "$(uname)" == 'Darwin' ]]; then
+        mkdir -p "$INIT"
+        ln -fnsv "$FILE" "${INIT}/${LAST#'[mac]'}"
+    elif [[ "$(uname)" == 'Linux' ]]; then
+        mkdir -p "$INIT"
+        ln -fnsv "$FILE" "${INIT}/${LAST#'[linux]'}"
+    fi
 done < <(find "$LINK_DIR" -mindepth 1 -type f)
 
 # post link process
