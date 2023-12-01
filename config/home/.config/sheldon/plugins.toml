@@ -46,6 +46,6 @@ type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
 '''
 
 [plugins.local]
-local = "~/.dotfiles/config/common/shell"
+local = "~/.dotfiles/config/shell"
 use = ["*.zsh", "*.sh"]
 apply = ["source"]
