@@ -54,12 +54,12 @@ window:
 
 live_config_reload: true
 
-shell:
-  program: /bin/zsh
-  args:
-    - -l
-    - -c
-    - 'tmux attach || tmux attach -t 0 || tmux'
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - -l
+#     - -c
+#     - 'tmux attach || tmux attach -t 0 || tmux'
 # shell:
 #   program: /bin/zsh
 #   args:

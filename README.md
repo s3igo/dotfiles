@@ -146,19 +146,6 @@ flowchart TB
     D -->|No| F
 ```
 
-## MEMO: Commands
-
-### tmux
-
-- `<C-q>r`: reload config
-- `<C-q><C-s>`: save tmux environment
-- `<C-q><C-r>`: restore tmux environment
-- `<C-q>I`: install plugins
-- `<C-q>U`: update plugins
-- `<C-q><M-u>`: uninstall plugins
-- `$ tmux list-keys`: list key bindings
-
-
 ## License
 
 [MIT](LICENSE)

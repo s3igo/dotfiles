@@ -40,7 +40,6 @@ shellharden
 silicon
 starship
 tig
-tmux
 tokei
 tree
 typst
