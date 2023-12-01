@@ -1,0 +1,99 @@
+{
+    :profiles {
+        :goku {
+            :default true
+            :sim 50
+            :delay 500
+            :alone 1000
+            :held 500
+        }
+    }
+    :applications {
+        :terminal [
+            "^com\\.apple\\.Terminal$"
+            "^org\\.alacritty$"
+            "^com\\.raphaelamorim\\.rio$"
+            "^com\\.github\\.wez\\.wezterm$"
+        ]
+        :editor [
+            "^com\\.microsoft\\.VSCode$"
+            "^com\\.microsoft\\.VSCodeInsiders$"
+            "^dev\\.zed\\.Zed$"
+        ]
+    }
+
+    :main [
+        {
+            :des "space -> shift (if not alone)"
+            :rules [
+                [:##spacebar :left_shift nil {:alone :spacebar}]
+            ]
+        }
+        {
+            :des "left/right_cmd -> eisuu/kana"
+            :rules [
+                [:##left_command :left_command nil {:alone :japanese_eisuu}]
+                [:##right_command :right_command nil {:alone :japanese_kana}]
+            ]
+        }
+        {
+            :des "ctrl+[ -> esc"
+            :rules [
+                [:!Topen_bracket :escape :!terminal]
+            ]
+        }
+        {
+            :des "ctrl+h -> delete"
+            :rules [
+                [:!Th :delete_or_backspace [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "ctrl+u -> cmd+delete"
+            :rules [
+                [:!Tu :!Cdelete_or_backspace [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "ctrl+w -> opt+delete"
+            :rules [
+                [:!Tw :!Odelete_or_backspace [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "ctrl+f/b/p/n -> arrows"
+            :rules [
+                [:!Tf :right_arrow [:!terminal :!editor]]
+                [:!Tb :left_arrow [:!terminal :!editor]]
+                [:!Tp :up_arrow [:!terminal :!editor]]
+                [:!Tn :down_arrow [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "right_opt+f/b -> opt+right/left"
+            :rules [
+                [:!Ef :!Eright_arrow [:!terminal :!editor]]
+                [:!Eb :!Eleft_arrow [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "right_opt+d -> fn+opt+delete (kill-word in emacs)"
+            :rules [
+                [:!Ed :!EFdelete_or_backspace [:!terminal :!editor]]
+            ]
+        }
+        {
+            :des "tab layer (originals of overwritten key bindings)"
+            :rules [
+                [:tab ["tab-mode" 1] nil {:afterup ["tab-mode" 0] :alone :tab}] ;; enter/escape tab mode
+                [:h :!Th ["tab-mode" 1]] ;; tab+h -> ctrl+h
+                [:u :!Tu ["tab-mode" 1]] ;; tab+u -> ctrl+u
+                [:w :!Tw ["tab-mode" 1]] ;; tab+w -> ctrl+w
+                [:f :!Tf ["tab-mode" 1]] ;; tab+f -> ctrl+f
+                [:b :!Tb ["tab-mode" 1]] ;; tab+b -> ctrl+b
+                [:p :!Tp ["tab-mode" 1]] ;; tab+p -> ctrl+p
+                [:n :!Tn ["tab-mode" 1]] ;; tab+n -> ctrl+n
+            ]
+        }
+    ]
+}

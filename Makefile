@@ -26,6 +26,10 @@ init:
 link:
 	bash ./scripts/link.sh
 
+.PHONY: link-beta
+link-beta:
+	./scripts/link_beta.sh
+
 .PHONY: update
 update:
 ifeq ($(shell uname),Darwin)

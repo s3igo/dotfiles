@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 
-# make file-based symlink
-echo '--- common config ---'
-declare LINK_DIR="${HOME}/.dotfiles/config/common/HOME"
-while read -r FILE; do
-    declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-    mkdir -p "$(dirname "$DEST")"
-
-
-    ln -fnsv "$FILE" "$DEST"
-done < <(find "$LINK_DIR" -mindepth 1 -type f)
-
-# if macOS
-function karabiner {
-    [[ "$FILENAME" == karabiner.json ]] \
-        && echo -n 'cp: ' \
-        && cp -fv "$FILE" "$DEST" \
-        && goku \
-        && return 0
-
-    return 1
+function link {
+    mkdir -p "$(dirname "$2")"
+    ln -fnsv "$1" "$2"
 }
 
-if [[ "$(uname)" == 'Darwin' ]]; then
-    echo -e '\n--- MacOS specific config ---'
-    declare LINK_DIR="${HOME}/.dotfiles/config/mac/HOME"
-    while read -r FILE; do
-        declare DEST="${HOME}${FILE##"$LINK_DIR"}"
-        mkdir -p "$(dirname "$DEST")"
+# hooks
+function karabiner {
+    mkdir -p "$INIT"
+    echo -n 'cp: ' && cp -fv "$FILE" "${INIT}/karabiner.json"
+}
 
-        declare FILENAME="$(basename "$FILE")"
+# make file-based symlink
+declare LINK_DIR="${HOME}/.dotfiles/config/home"
+while read -r FILE; do
+    # $TARGET can be used in a naive way; `ln -s $FILE $TARGET`
+    declare TARGET="${HOME}${FILE#"$LINK_DIR"}"
 
-        karabiner && continue
+    declare INIT="$(dirname "$TARGET")"
+    declare LAST="$(basename "$TARGET")"
 
-        ln -fnsv "$FILE" "$DEST"
-    done < <(find "$LINK_DIR" -mindepth 1 -type f)
-fi
+    if [[ "$LAST" == '[hook]'* ]]; then
+        # remove extension
+        declare FILENAME="${LAST%.*}"
+        # call hook
+        ${FILENAME#'[hook]'}
+        continue
+    fi
+
+    [[ "$(uname)" == 'Darwin' ]] && link "$FILE" "${INIT}/${LAST#'[mac]'}"
+    [[ "$(uname)" == 'Linux' ]] && link "$FILE" "${INIT}/${LAST#'[linux]'}"
+done < <(find "$LINK_DIR" -mindepth 1 -type f)
+
+# post link process
+[[ "$(uname)" == 'Darwin' ]] && type goku > /dev/null 2>&1 && goku
+
+exit 0
