@@ -11,7 +11,8 @@
     :applications {
         :terminal [
             "^com\\.apple\\.Terminal$"
-            "^com\\.github\\.wez\\.wezterm$"
+            "^com\\.github\\.mez\\.wezterm$"
+            :paths "^/opt/homebrew/bin/wezterm-gui"
         ]
         :editor [
             "^com\\.microsoft\\.VSCode$"
