@@ -64,22 +64,22 @@ local leader = {
     {
         key = 'h',
         mods = 'CTRL',
-        action = act.Multiple({ act.ActivatePaneDirection('Left'), 'PopKeyTable' }),
+        action = act.Multiple({ { ActivatePaneDirection = 'Left' }, 'PopKeyTable' }),
     },
     {
         key = 'j',
         mods = 'CTRL',
-        action = act.Multiple({ act.ActivatePaneDirection('Down'), 'PopKeyTable' }),
+        action = act.Multiple({ { ActivatePaneDirection = 'Down' }, 'PopKeyTable' }),
     },
     {
         key = 'k',
         mods = 'CTRL',
-        action = act.Multiple({ act.ActivatePaneDirection('Up'), 'PopKeyTable' }),
+        action = act.Multiple({ { ActivatePaneDirection = 'Up' }, 'PopKeyTable' }),
     },
     {
         key = 'l',
         mods = 'CTRL',
-        action = act.Multiple({ act.ActivatePaneDirection('Right'), 'PopKeyTable' }),
+        action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }),
     },
 
     { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
