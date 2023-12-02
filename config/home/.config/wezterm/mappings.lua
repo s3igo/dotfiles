@@ -26,6 +26,11 @@ M.keys = {
     { key = 'm', mods = 'SUPER', action = act.Hide },
     { key = 'w', mods = 'SUPER', action = act.CloseCurrentTab({ confirm = true }) },
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
+
+    -- font size
+    { key = '=', mods = 'SUPER', action = act.IncreaseFontSize },
+    { key = '-', mods = 'SUPER', action = act.DecreaseFontSize },
+    { key = '0', mods = 'SUPER', action = act.ResetFontAndWindowSize },
 }
 
 M.key_tables = {
@@ -91,14 +96,133 @@ M.key_tables = {
         { key = 'c', mods = 'CTRL', action = act.ActivateCopyMode },
         { key = 'y', mods = 'CTRL', action = act.QuickSelect },
     },
+
+    copy_mode = {
+        { key = 'q', action = act.CopyMode('Close') },
+
+        -- start / end selection
+        { key = 'v', action = act.CopyMode({ SetSelectionMode = 'Cell' }) },
+        {
+            key = 'v',
+            mods = 'SHIFT',
+            action = act.CopyMode({ SetSelectionMode = 'Line' }),
+        },
+        {
+            key = 'v',
+            mods = 'CTRL',
+            action = act.CopyMode({ SetSelectionMode = 'Block' }),
+        },
+        { key = '[', mods = 'CTRL', action = act.CopyMode('ClearSelectionMode') },
+        {
+            key = 'y',
+            action = act.Multiple({
+                { CopyTo = 'Clipboard' },
+                { CopyMode = 'ClearSelectionMode' },
+            }),
+        },
+        {
+            key = 'Enter',
+            action = act.Multiple({
+                { CopyTo = 'Clipboard' },
+                { CopyMode = 'Close' },
+            }),
+        },
+
+        -- move selection
+        { key = 'o', action = act.CopyMode('MoveToSelectionOtherEnd') },
+        {
+            key = 'o',
+            mods = 'SHIFT',
+            action = act.CopyMode('MoveToSelectionOtherEndHoriz'),
+        },
+
+        -- move cursor
+        { key = 'w', action = act.CopyMode('MoveForwardWord') },
+        { key = 'e', action = act.CopyMode('MoveForwardWordEnd') },
+        { key = 'b', action = act.CopyMode('MoveBackwardWord') },
+
+        { key = 'h', action = act.CopyMode('MoveLeft') },
+        { key = 'j', action = act.CopyMode('MoveDown') },
+        { key = 'k', action = act.CopyMode('MoveUp') },
+        { key = 'l', action = act.CopyMode('MoveRight') },
+
+        { key = '0', action = act.CopyMode('MoveToStartOfLine') },
+        {
+            key = 'h',
+            mods = 'CTRL',
+            action = act.CopyMode('MoveToStartOfLineContent'),
+        },
+        {
+            key = 'j',
+            mods = 'CTRL',
+            action = act.CopyMode('MoveToScrollbackBottom'),
+        },
+        {
+            key = 'k',
+            mods = 'CTRL',
+            action = act.CopyMode('MoveToScrollbackTop'),
+        },
+        {
+            key = 'l',
+            mods = 'CTRL',
+            action = act.CopyMode('MoveToEndOfLineContent'),
+        },
+
+        {
+            key = 'h',
+            mods = 'SHIFT',
+            action = act.CopyMode('MoveToViewportTop'),
+        },
+        {
+            key = 'l',
+            mods = 'SHIFT',
+            action = act.CopyMode('MoveToViewportBottom'),
+        },
+        {
+            key = 'm',
+            mods = 'SHIFT',
+            action = act.CopyMode('MoveToViewportMiddle'),
+        },
+
+        -- scroll
+        { key = 'f', mods = 'CTRL', action = act.CopyMode('PageDown') },
+        { key = 'b', mods = 'CTRL', action = act.CopyMode('PageUp') },
+
+        {
+            key = 'd',
+            mods = 'CTRL',
+            action = act.CopyMode({ MoveByPage = 0.5 }),
+        },
+        {
+            key = 'u',
+            mods = 'CTRL',
+            action = act.CopyMode({ MoveByPage = -0.5 }),
+        },
+
+        -- jump
+        { key = 'f', action = act.CopyMode({ JumpForward = { prev_char = false } }) },
+        {
+            key = 'f',
+            mods = 'SHIFT',
+            action = act.CopyMode({ JumpBackward = { prev_char = false } }),
+        },
+        { key = 't', action = act.CopyMode({ JumpForward = { prev_char = true } }) },
+        {
+            key = 't',
+            mods = 'SHIFT',
+            action = act.CopyMode({ JumpBackward = { prev_char = true } }),
+        },
+
+        { key = ',', action = act.CopyMode('JumpReverse') },
+        { key = ';', action = act.CopyMode('JumpAgain') },
+    },
 }
 
 M.mouse_bindings = {
     {
         event = { Up = { streak = 1, button = 'Left' } },
-        -- mods = 'SUPER',
         action = act.OpenLinkAtMouseCursor,
     },
 }
 
-return M
+return wezterm.gui and M or {}
