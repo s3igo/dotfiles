@@ -17,7 +17,7 @@ vim.opt.listchars = {
 }
 vim.opt.laststatus = 2
 vim.opt.signcolumn = 'yes'
-vim.opt.colorcolumn = '80,100,120'
+vim.opt.colorcolumn = { 80, 100, 120 }
 
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
