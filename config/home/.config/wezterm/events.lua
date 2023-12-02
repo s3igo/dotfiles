@@ -69,14 +69,33 @@ local function get_cpu_usage()
     return glyph.cpu .. value .. ' %'
 end
 
--- update cpu usage every 1 second
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
+
+local function valid_panes(window)
+    local panes = {}
+    for _, tab in ipairs(window:mux_window():tabs()) do
+        for _, pane in ipairs(tab:panes()) do
+            table.insert(panes, pane:pane_id())
+        end
+    end
+    return panes
+end
+
+local function contains(tbl, elem)
+    for _, e in ipairs(tbl) do
+        if e == elem then
+            return true
+        end
+    end
+    return false
+end
+
 wezterm.on('update-status', function(window, pane)
     local mode = string.upper(window:active_key_table() or '')
 
     local cpu = wezterm.GLOBAL.cpu or 'undefined'
     -- is valid pane
-    if pane:pane_id() >= 1 then
+    if contains(valid_panes(window), pane:pane_id()) then
         window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
     end
 
