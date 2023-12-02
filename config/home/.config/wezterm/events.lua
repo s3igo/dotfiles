@@ -71,31 +71,15 @@ end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
-local function valid_panes(window)
-    local panes = {}
-    for _, tab in ipairs(window:mux_window():tabs()) do
-        for _, pane in ipairs(tab:panes()) do
-            table.insert(panes, pane:pane_id())
-        end
-    end
-    return panes
-end
-
-local function contains(tbl, elem)
-    for _, e in ipairs(tbl) do
-        if e == elem then
-            return true
-        end
-    end
-    return false
-end
-
 wezterm.on('update-status', function(window, pane)
     local mode = string.upper(window:active_key_table() or '')
 
     local cpu = wezterm.GLOBAL.cpu or 'undefined'
+
+    local is_startup = pane:pane_id() == 0
+    local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane:pane_id()
     -- is valid pane
-    if contains(valid_panes(window), pane:pane_id()) then
+    if not is_startup and not is_operating_confirmation_prompt then
         window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
     end
 
