@@ -1,18 +1,24 @@
 # dotfiles
 
-This repository contains shell configurations, a list of tools and applications to be installed, and their settings. It is designed to provide a reproducible environment when migrating machines and to maintain a history of the machine's configuration.
+This repository contains shell configurations,
+a list of tools and applications to be installed, and their settings.
+It is designed to provide a reproducible environment when migrating machines
+and to maintain a history of the machine's configuration.
 
-> **Note**
-> By default it contains my configuration for [git](config/mac/HOME/.config/git/config.op), [ssh](config/mac/HOME/.ssh/config), etc., so please rewrite it accordingly.
+> [!Important]
+> By default it contains my configuration for
+> [git](config/home/.config/git/config),
+> [ssh](config/home/.ssh/[mac]config), etc.
+> If you want to use this repository, rewrite them accordingly.
 
-## Design philosophy
-
-This repository is organized according to the following principles.
+## Design principles
 
 - **Simple**  
-    This keeps the code base of the script small and provides an effective management with a simple functionality. This also helps to reduce maintenance costs.
+    This keeps the code base of the script small and provides an effective management with a simple functionality.
+    This also helps to reduce maintenance costs.
 - **Portable**  
-    The configuration is portable and can be used on any machine. In particular, the focus is on ease of use inside a Docker container.
+    The configuration is portable and can be used on any machine.
+    In particular, the focus is on ease of use inside a Docker container.
 - **Small**  
     To minimize dependencies, only carefully selected packages are used.
 
@@ -23,7 +29,7 @@ Intended for installation on Mac or Linux.
 - bash
 - git
 - zsh(Optional)  
-Required to use [configured zsh plugins](config/common/HOME/.config/sheldon/plugins.toml)
+Required to use [configured zsh plugins](config/home/.config/sheldon/plugins.toml)
 - curl(Optional)  
 Required to perform a [Quick install](#quick-installation) or to install [Homebrew ↗](https://brew.sh/) on a Mac.
 - GNU make(Optional)  
@@ -33,16 +39,17 @@ Required to run the [`make` commands](#usage) described below.
 
 Follow the [Quick install](#quick-installation) or [Manual install](#manual-installation) instructions.
 
-> **Warning**
-> During installation, files in the `config` directory will overwrite files in your home directory. Please keep files in a safe place if you do not want them to be overwritten.
+> [!Warning]
+> During installation, files in the `config` directory will overwrite files in your home directory.
+> Please keep files in a safe place if you do not want them to be overwritten.
 
-> **Note**
+> [!Tip]
 > [Manual installation](#manual-installation) is recommended if you want to customize and manage using git.
 
 ### Quick installation
 
 ```shell
-curl -L sh.s3igo.me | bash
+curl -sL sh.s3igo.me | bash
 ```
 
 ### Manual installation
@@ -61,7 +68,6 @@ $ make install
 
 ### Major commands
 
-
 ```shell
 # run `make init` and `make link`
 $ make install
@@ -74,7 +80,6 @@ $ make sync
 
 ```
 ### Minor commands
-
 
 ```shell
 # run `scripts/init.sh`
@@ -90,37 +95,12 @@ $ make cli
 # install apps with GUI based on `package` directory
 $ make gui
 
-# update every package/plugin manager and its packages/plugins
+# update every package/plugin manager and its packages / plugins
 $ make update
 
-# reflects the current state of packages/plugins in the `package` directory
+# reflects the current state of packages and plugins in the `package` directory
 $ make dump
 
-```
-
-### Internal command
-
-```shell
-# set current profile to `PROFILE` variable
-$ make profile
-```
-
-## Directory structure
-
-```shell
-$ tree -ad -L 2 -I '.git'
-.
-├── .github
-│   └── workflows # GitHub Actions
-├── config
-│   ├── common    # OS agnostic configs
-│   └── mac       # MacOS specific configs
-├── packages
-│   └── mac       # MacOS specific packages
-├── scripts       # Scripts required to manage dotfiles
-└── snippets      # Snippets for use in different editors
-
-10 directories
 ```
 
 ## Features
@@ -145,6 +125,12 @@ flowchart TB
     D -->|Yes| G([Use the profile that matches `$ hostname -s`])
     D -->|No| F
 ```
+
+### Link
+
+`make link` creates symbolic links according to the directory structure under `config/home`.
+Files with a `[mac]` prefix in their filename only expand on macOS.
+Similarly, files with a `[linux]` prefix only expand on Linux.
 
 ## License
 
