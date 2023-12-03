@@ -8,6 +8,7 @@ efm-langserver
 eza
 fd
 fnm
+fzf
 gh
 ghq
 git
@@ -22,7 +23,6 @@ itchyny/tap/mmv
 jesseduffield/lazygit/lazygit
 jq
 just
-knqyf263/pet/pet
 lazydocker
 lf
 macos-trash
@@ -31,7 +31,6 @@ neovim
 pam-reattach
 pastel
 procs
-qpdf
 ripgrep
 rustup-init
 sheldon

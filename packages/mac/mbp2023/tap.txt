@@ -6,5 +6,4 @@ homebrew/services
 idleberg/dbxcli
 itchyny/tap
 jesseduffield/lazygit
-knqyf263/pet
 yqrashawn/goku
