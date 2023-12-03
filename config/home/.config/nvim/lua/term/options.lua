@@ -1,5 +1,6 @@
 vim.opt.ambiwidth = 'double'
 vim.opt.shell = 'zsh'
+vim.opt.swapfile = false
 
 -- appearance
 vim.opt.termguicolors = true

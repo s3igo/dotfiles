@@ -17,9 +17,12 @@ local glyph = {
     cpu = utf8.char(0xf4bc),
 }
 
-wezterm.on('mux-startup', function()
+wezterm.on('gui-startup', function(cmd)
+    local home = cmd or {}
+    home.workspace = 'general'
+
     -- general workspace
-    local g_tab_1, _, g_window_1 = wezterm.mux.spawn_window({ workspace = 'general' })
+    local g_tab_1, _, g_window_1 = wezterm.mux.spawn_window(home)
     g_tab_1:set_title('home')
 
     local g_tab_2, _, g_window_2 = g_window_1:spawn_tab({ cwd = wezterm.home_dir .. '/Desktop' })

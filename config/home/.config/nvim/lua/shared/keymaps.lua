@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', 'Y', 'y$', { desc = 'Yank to end of line' })
 vim.keymap.set({ 'i', 'n' }, '<C-[>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })
+vim.keymap.set({ 'n', 'x', 'o' }, 'gm', '%', { desc = 'Go to matching bracket' })
 
 -- disable
 vim.keymap.set('n', 's', '<nop>')
@@ -45,4 +46,4 @@ vim.keymap.set('i', ';', ';<C-g>u')
 
 -- helix style
 vim.keymap.set({ 'n', 'x', 'o' }, 'gl', 'g_')
-vim.keymap.set({ 'n', 'x', 'o' }, 'gh', '^')
+vim.keymap.set({ 'n', 'x', 'o' }, 'gh', 'g^')
