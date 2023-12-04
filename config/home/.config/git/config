@@ -31,7 +31,6 @@
 [ghq]
     root = ~/git
 [core]
-    editor = hx
     ignorecase = false
     pager = delta
 [interactive]
