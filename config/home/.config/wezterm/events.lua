@@ -75,8 +75,6 @@ end
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
 wezterm.on('update-status', function(window, pane)
-    local mode = string.upper(window:active_key_table() or '')
-
     local cpu = wezterm.GLOBAL.cpu or 'undefined'
 
     local is_startup = pane:pane_id() == 0
@@ -91,9 +89,16 @@ wezterm.on('update-status', function(window, pane)
         return user:gsub('\n', '') .. '@' .. wezterm.hostname()
     end)()
 
-    local mode_bg = colors.default.ansi[5]
+    local current_mode = window:active_key_table()
+    local mode = string.upper(current_mode or '')
+    local mode_color_lookup = {
+        leader = colors.default.ansi[5],
+        copy_mode = '#F4E49D',
+    }
+    local mode_bg = mode_color_lookup[current_mode] or colors.default.ansi[8]
     local cpu_bg = colors.default.brights[1]
-    local name_bg = colors.default.background
+    local blue = '#384B5A'
+    local name_bg = blue
 
     window:set_right_status(wezterm.format({
         -- mode
@@ -116,7 +121,15 @@ wezterm.on('update-status', function(window, pane)
         { Text = ' ' .. name .. ' ' },
     }))
 
-    window:set_left_status(window:active_workspace())
+    local left_status_bg = blue
+    window:set_left_status(wezterm.format({
+        { Foreground = { Color = 'white' } },
+        { Background = { Color = left_status_bg } },
+        { Text = ' ' .. window:active_workspace() .. ' ' },
+        { Foreground = { Color = left_status_bg } },
+        { Background = { Color = colors.bg } },
+        { Text = glyph.solid_right_arrow },
+    }))
 end)
 
 local function tab_title(tab_info)
@@ -127,7 +140,7 @@ end
 wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local is_active = tab.is_active
 
-    local bg = is_active and colors.default.ansi[5] or colors.default.brights[1]
+    local bg = is_active and '#F4E49D' or colors.default.brights[1]
     local fg = is_active and colors.default.background or 'white'
 
     local content = (function()
@@ -148,19 +161,20 @@ wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     end)()
 
     return {
-        -- left shoulder
-        { Foreground = { Color = bg } },
-        { Background = { Color = colors.bg } },
-        { Text = glyph.solid_left_shoulder },
+        -- left separator
+        { Foreground = { Color = colors.bg } },
+        { Background = { Color = bg } },
+        { Text = glyph.solid_right_arrow },
         -- content
         { Foreground = { Color = fg } },
         { Background = { Color = bg } },
         { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
         { Attribute = { Italic = is_active } },
         { Text = ' ' .. content .. ' ' },
-        -- right shoulder
+        'ResetAttributes',
+        -- right separator
         { Foreground = { Color = bg } },
         { Background = { Color = colors.bg } },
-        { Text = glyph.solid_right_shoulder },
+        { Text = glyph.solid_right_arrow },
     }
 end)

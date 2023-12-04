@@ -24,6 +24,7 @@ M.keys = {
     -- window
     { key = 'h', mods = 'SUPER', action = act.HideApplication },
     { key = 'm', mods = 'SUPER', action = act.Hide },
+    { key = 'n', mods = 'SUPER', action = act.SpawnWindow },
     { key = 'w', mods = 'SUPER', action = act.CloseCurrentTab({ confirm = true }) },
     { key = 'q', mods = 'SUPER', action = act.QuitApplication },
 
@@ -48,13 +49,10 @@ local leader = {
     },
 
     -- spawn
-    { key = 'n', mods = 'CTRL', action = act.SpawnWindow },
-    { key = 't', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
+    { key = 'c', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
 
-    -- multiplexer
-    { key = 'n', action = act.SwitchWorkspaceRelative(1) },
-    { key = 'p', action = act.SwitchWorkspaceRelative(-1) },
-    { key = 'd', action = act.DetachDomain({ DomainName = 'unix' }) },
+    -- workspace
+    { key = 'n', mods = 'CTRL', action = act.SwitchWorkspaceRelative(1) },
 
     -- split
     { key = 'v', action = act.SplitHorizontal },
@@ -82,8 +80,8 @@ local leader = {
         action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }),
     },
 
-    { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-    { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
+    { key = 'n', action = act.ActivateTabRelative(1) },
+    { key = 'p', action = act.ActivateTabRelative(-1) },
 
     -- resize
     { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },
@@ -92,8 +90,11 @@ local leader = {
     { key = 'l', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 3 }) },
 
     -- mode
-    { key = 'c', mods = 'CTRL', action = act.ActivateCopyMode },
+    { key = 'v', mods = 'CTRL', action = act.ActivateCopyMode },
     { key = 'y', mods = 'CTRL', action = act.QuickSelect },
+
+    -- link
+    { key = 'o', mods = 'CTRL', action = act.OpenLinkAtMouseCursor },
 }
 
 local copy_mode = {

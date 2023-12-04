@@ -11,6 +11,7 @@ return {
 
     -- appearance
     colors = colors.scheme,
+    text_background_opacity = 0.7,
     foreground_text_hsb = { saturation = 1.05, brightness = 1.1 },
     inactive_pane_hsb = { saturation = 0.6, brightness = 0.3 },
 
