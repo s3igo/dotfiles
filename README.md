@@ -132,6 +132,10 @@ flowchart TB
 Files with a `[mac]` prefix in their filename only expand on macOS.
 Similarly, files with a `[linux]` prefix only expand on Linux.
 
+In addition, files for which the linking process needs customization are placed under `config/custom`
+and linked by hooks whose names have the extension removed from the file name.
+Refer to [link.sh](scripts/link.sh) for details.
+
 ## License
 
 [MIT](LICENSE)
