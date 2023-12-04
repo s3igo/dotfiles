@@ -2,7 +2,6 @@
 1password-cli
 adobe-acrobat-pro
 arc
-chromium
 cloudflare-warp
 cron
 cursor
@@ -15,8 +14,6 @@ font-udev-gothic-nf
 google-chrome
 google-japanese-ime
 karabiner-elements
-logseq
-microsoft-edge
 mochi-diffusion
 monitorcontrol
 morgen
