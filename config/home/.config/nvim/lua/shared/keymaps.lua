@@ -47,3 +47,8 @@ vim.keymap.set('i', ';', ';<C-g>u')
 -- helix style
 vim.keymap.set({ 'n', 'x', 'o' }, 'gl', 'g_')
 vim.keymap.set({ 'n', 'x', 'o' }, 'gh', 'g^')
+
+-- macros
+vim.fn.setreg('j', 'gccyypgcc')
+vim.fn.setreg('m', 'ypgvgc')
+vim.fn.setreg('n', '*Ncgn')
