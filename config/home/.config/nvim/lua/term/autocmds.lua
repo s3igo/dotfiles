@@ -22,6 +22,9 @@ vim.api.nvim_create_autocmd('FileType', {
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'gitcommit',
-    desc = 'Colorcolumn for gitcommit',
-    callback = function() vim.opt_local.colorcolumn = { 50, 72 } end,
+    desc = 'gitcommit specific settings',
+    callback = function()
+        vim.opt_local.colorcolumn = { 50, 72 }
+        vim.keymap.set('n', '<leader>w', '<cmd>wq<cr><esc>', { buffer = true })
+    end,
 })
