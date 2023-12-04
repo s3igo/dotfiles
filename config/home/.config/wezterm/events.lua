@@ -100,6 +100,8 @@ wezterm.on('update-status', function(window, pane)
     local blue = '#384B5A'
     local name_bg = blue
 
+    local workspace = window:active_workspace()
+
     window:set_right_status(wezterm.format({
         -- mode
         { Foreground = { Color = mode_bg } },
@@ -125,8 +127,7 @@ wezterm.on('update-status', function(window, pane)
     window:set_left_status(wezterm.format({
         { Foreground = { Color = 'white' } },
         { Background = { Color = left_status_bg } },
-        { Attribute = { Italic = true } },
-        { Text = ' ' .. window:active_workspace() .. ' ' },
+        { Text = ' [' .. workspace .. '] ' },
         { Foreground = { Color = left_status_bg } },
         { Background = { Color = colors.bg } },
         { Text = glyph.solid_right_arrow },
