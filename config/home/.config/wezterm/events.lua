@@ -125,6 +125,7 @@ wezterm.on('update-status', function(window, pane)
     window:set_left_status(wezterm.format({
         { Foreground = { Color = 'white' } },
         { Background = { Color = left_status_bg } },
+        { Attribute = { Italic = true } },
         { Text = ' ' .. window:active_workspace() .. ' ' },
         { Foreground = { Color = left_status_bg } },
         { Background = { Color = colors.bg } },
@@ -140,13 +141,11 @@ end
 wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local is_active = tab.is_active
 
-    local bg = is_active and '#F4E49D' or colors.default.brights[1]
+    local bg = is_active and '#FAB80D' or colors.default.brights[1]
     local fg = is_active and colors.default.background or 'white'
 
     local content = (function()
-        local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-        local title = index .. tab_title(tab)
-
+        local title = tab_title(tab)
         local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
 
         local available_width = max_width - extra_chars
