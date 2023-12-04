@@ -10,11 +10,18 @@ vim.api.nvim_create_autocmd('FocusLost', {
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'typst',
-    desc = 'Set typst filetype',
-    command = 'setlocal shiftwidth=4',
+    desc = 'shiftwidth = 4 for typst',
+    callback = function() vim.opt_local.shiftwidth = 4 end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'lazy', 'mason', 'lspinfo' },
-    command = 'setlocal winblend=30',
+    desc = 'Set window opacity',
+    callback = function() vim.opt_local.winblend = 30 end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'gitcommit',
+    desc = 'Colorcolumn for gitcommit',
+    callback = function() vim.opt_local.colorcolumn = { 50, 72 } end,
 })
