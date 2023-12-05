@@ -23,6 +23,7 @@ return {
     -- tab
     use_fancy_tab_bar = false,
     show_new_tab_button_in_tab_bar = false,
+    tab_max_width = 18,
 
     -- font
     font = wezterm.font('UDEV Gothic NFLG'),

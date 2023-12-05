@@ -128,9 +128,6 @@ wezterm.on('update-status', function(window, pane)
         { Foreground = { Color = 'white' } },
         { Background = { Color = left_status_bg } },
         { Text = ' [' .. workspace .. '] ' },
-        { Foreground = { Color = left_status_bg } },
-        { Background = { Color = colors.bg } },
-        { Text = glyph.solid_right_arrow },
     }))
 end)
 
@@ -139,43 +136,58 @@ local function tab_title(tab_info)
     return title and #title > 0 and title or tab_info.active_pane.title
 end
 
-wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
+wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
+    -- conditions
     local is_active = tab.is_active
+    local is_first_tab = tab.tab_index == 0
+    local is_last_tab = tab.tab_index == #tabs - 1
+    local prev_tab_is_active = not is_first_tab and tabs[tab.tab_index].is_active
 
-    local bg = is_active and '#FAB80D' or colors.default.brights[1]
-    local fg = is_active and colors.default.background or 'white'
+    -- color constants
+    local yellow = '#FAB80D'
+    local gray = colors.default.brights[1]
+    local black = colors.default.background
+
+    local title_fg = is_active and black or 'white'
+    local title_bg = is_active and yellow or gray
 
     local function left_separator()
+        local blue = '#384B5A'
+        local fg = is_first_tab and blue or prev_tab_is_active and yellow or gray
+        local bg = title_bg
         return wezterm.format({
-            { Foreground = { Color = colors.bg } },
+            { Foreground = { Color = fg } },
             { Background = { Color = bg } },
             { Text = glyph.solid_right_arrow },
         })
     end
 
     local function right_separator()
-        return wezterm.format({
-            { Foreground = { Color = bg } },
-            { Background = { Color = colors.bg } },
-            { Text = glyph.solid_right_arrow },
-        })
+        return not is_last_tab and ''
+            or wezterm.format({
+                { Foreground = { Color = title_bg } },
+                { Background = { Color = colors.bg } },
+                { Text = glyph.solid_right_arrow },
+            })
     end
 
     local function content()
-        local title = tab_title(tab)
-        local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
+        local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
+        local title = index .. tab_title(tab)
+        -- 2 or 1 for the shoulder, 2 for the padding
+        local extra_chars = is_last_tab and 4 or 3
 
         local available_width = max_width - extra_chars
 
         if #title < available_width then
             local width = math.floor((available_width - #title) / 2)
-            local pad = string.rep(' ', width)
-            title = pad .. title .. pad
+            local function pad(w) return string.rep(' ', w) end
+            title = pad(width - 1) .. title .. pad(width + 1)
         end
 
         return wezterm.format({
-            { Foreground = { Color = fg } },
-            { Background = { Color = bg } },
+            { Foreground = { Color = title_fg } },
+            { Background = { Color = title_bg } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
             { Text = ' ' .. wezterm.truncate_right(title, available_width) .. ' ' },
