@@ -1,14 +1,13 @@
 local wezterm = require('wezterm')
 local utf8 = require('utf8')
-local defined_colors = require('colors')
+local default_colors = require('colors').default
 
 local colors = {
-    white = defined_colors.default.foreground,
-    black = defined_colors.default.background,
-    gray = defined_colors.default.brights[1],
-    yellow = defined_colors.default.brights[4],
-    light_blue = defined_colors.default.ansi[5],
-    transparent = defined_colors.bg,
+    white = default_colors.foreground,
+    black = default_colors.background,
+    gray = default_colors.brights[1],
+    yellow = default_colors.brights[4],
+    light_blue = default_colors.ansi[5],
     blue = '#384B5A',
 }
 
@@ -97,7 +96,7 @@ wezterm.on('update-status', function(window, pane)
         return wezterm.format({
             { Foreground = { Color = bg } },
             { Text = glyph.solid_left_arrow },
-            { Foreground = { Color = 'black' } },
+            { Foreground = { Color = colors.black } },
             { Background = { Color = bg } },
             { Text = ' ' .. text .. ' ' },
             { Foreground = { Color = colors.gray } },
@@ -130,7 +129,6 @@ wezterm.on('update-status', function(window, pane)
         local text = user:gsub('\n', '') .. '@' .. wezterm.hostname()
 
         return wezterm.format({
-            -- { Attribute = { Intensity = 'Bold' } },
             { Foreground = { Color = colors.black } },
             { Background = { Color = colors.white } },
             { Text = ' ' .. text .. ' ' },
@@ -182,7 +180,7 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
         return not is_last_tab and ''
             or wezterm.format({
                 { Foreground = { Color = background } },
-                { Background = { Color = colors.transparent } },
+                { Background = { Color = colors.black } },
                 { Text = glyph.solid_right_arrow },
             })
     end
