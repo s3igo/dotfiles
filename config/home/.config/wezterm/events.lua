@@ -1,6 +1,16 @@
 local wezterm = require('wezterm')
 local utf8 = require('utf8')
-local colors = require('colors')
+local defined_colors = require('colors')
+
+local colors = {
+    white = defined_colors.default.foreground,
+    black = defined_colors.default.background,
+    gray = defined_colors.default.brights[1],
+    yellow = defined_colors.default.brights[4],
+    light_blue = defined_colors.default.ansi[5],
+    transparent = defined_colors.bg,
+    blue = '#384B5A',
+}
 
 local glyph = {
     -- arrow
@@ -9,10 +19,10 @@ local glyph = {
     solid_left_arrow = utf8.char(0xe0b2),
     left_arrow = utf8.char(0xe0b3),
     -- slant
-    solid_right_shoulder = utf8.char(0xe0b8),
-    right_shoulder = utf8.char(0xe0b9),
-    solid_left_shoulder = utf8.char(0xe0ba),
-    left_shoulder = utf8.char(0xe0bb),
+    -- solid_right_shoulder = utf8.char(0xe0b8),
+    -- right_shoulder = utf8.char(0xe0b9),
+    -- solid_left_shoulder = utf8.char(0xe0ba),
+    -- left_shoulder = utf8.char(0xe0bb),
     -- icon
     cpu = utf8.char(0xf4bc),
 }
@@ -75,25 +85,22 @@ end
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
 wezterm.on('update-status', function(window, pane)
-    local gray = colors.default.brights[1]
-    local blue = '#384B5A'
-
     local function mode()
         local current = window:active_key_table()
         local text = string.upper(current or '')
         local lookup = {
-            leader = colors.default.ansi[5],
-            copy_mode = '#F4E49D',
+            leader = colors.light_blue,
+            copy_mode = colors.yellow,
         }
-        local mode_bg = lookup[current] or colors.default.ansi[8]
+        local bg = lookup[current] or colors.blue
 
         return wezterm.format({
-            { Foreground = { Color = mode_bg } },
+            { Foreground = { Color = bg } },
             { Text = glyph.solid_left_arrow },
             { Foreground = { Color = 'black' } },
-            { Background = { Color = mode_bg } },
+            { Background = { Color = bg } },
             { Text = ' ' .. text .. ' ' },
-            { Foreground = { Color = gray } },
+            { Foreground = { Color = colors.gray } },
             { Text = glyph.solid_left_arrow },
         })
     end
@@ -103,16 +110,17 @@ wezterm.on('update-status', function(window, pane)
 
         local is_startup = pane:pane_id() == 0
         local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane:pane_id()
+
         -- is valid pane
         if not is_startup and not is_operating_confirmation_prompt then
             window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
         end
 
         return wezterm.format({
-            { Foreground = { Color = 'white' } },
-            { Background = { Color = gray } },
+            { Foreground = { Color = colors.white } },
+            { Background = { Color = colors.gray } },
             { Text = ' ' .. text .. ' ' },
-            { Foreground = { Color = blue } },
+            { Foreground = { Color = colors.white } },
             { Text = glyph.solid_left_arrow },
         })
     end
@@ -122,18 +130,22 @@ wezterm.on('update-status', function(window, pane)
         local text = user:gsub('\n', '') .. '@' .. wezterm.hostname()
 
         return wezterm.format({
-            { Foreground = { Color = 'white' } },
-            { Background = { Color = blue } },
+            -- { Attribute = { Intensity = 'Bold' } },
+            { Foreground = { Color = colors.black } },
+            { Background = { Color = colors.white } },
             { Text = ' ' .. text .. ' ' },
+            'ResetAttributes',
         })
     end
 
     local function workspace()
         local text = window:active_workspace()
         return wezterm.format({
-            { Foreground = { Color = 'white' } },
-            { Background = { Color = blue } },
+            { Foreground = { Color = colors.black } },
+            { Background = { Color = colors.white } },
+            { Attribute = { Intensity = 'Bold' } },
             { Text = ' [' .. text .. '] ' },
+            'ResetAttributes',
         })
     end
 
@@ -153,18 +165,12 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     local is_last_tab = tab.tab_index == #tabs - 1
     local prev_tab_is_active = not is_first_tab and tabs[tab.tab_index].is_active
 
-    -- color constants
-    local yellow = '#FAB80D'
-    local gray = colors.default.brights[1]
-    local black = colors.default.background
-
-    local title_fg = is_active and black or 'white'
-    local title_bg = is_active and yellow or gray
+    local frontground = is_active and colors.black or colors.white
+    local background = is_active and colors.yellow or colors.blue
 
     local function left_separator()
-        local blue = '#384B5A'
-        local fg = is_first_tab and blue or prev_tab_is_active and yellow or gray
-        local bg = title_bg
+        local fg = is_first_tab and colors.white or prev_tab_is_active and colors.yellow or colors.blue
+        local bg = background
         return wezterm.format({
             { Foreground = { Color = fg } },
             { Background = { Color = bg } },
@@ -175,8 +181,8 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     local function right_separator()
         return not is_last_tab and ''
             or wezterm.format({
-                { Foreground = { Color = title_bg } },
-                { Background = { Color = colors.bg } },
+                { Foreground = { Color = background } },
+                { Background = { Color = colors.transparent } },
                 { Text = glyph.solid_right_arrow },
             })
     end
@@ -189,6 +195,7 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
 
         local available_width = max_width - extra_chars
 
+        -- is too long
         if #text < available_width then
             local width = math.floor((available_width - #text) / 2)
             local function pad(w) return string.rep(' ', w) end
@@ -196,8 +203,8 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
         end
 
         return wezterm.format({
-            { Foreground = { Color = title_fg } },
-            { Background = { Color = title_bg } },
+            { Foreground = { Color = frontground } },
+            { Background = { Color = background } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
             { Text = ' ' .. wezterm.truncate_right(text, available_width) .. ' ' },
