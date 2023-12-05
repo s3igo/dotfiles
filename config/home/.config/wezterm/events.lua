@@ -145,7 +145,23 @@ wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
     local bg = is_active and '#FAB80D' or colors.default.brights[1]
     local fg = is_active and colors.default.background or 'white'
 
-    local content = (function()
+    local function left_separator()
+        return wezterm.format({
+            { Foreground = { Color = colors.bg } },
+            { Background = { Color = bg } },
+            { Text = glyph.solid_right_arrow },
+        })
+    end
+
+    local function right_separator()
+        return wezterm.format({
+            { Foreground = { Color = bg } },
+            { Background = { Color = colors.bg } },
+            { Text = glyph.solid_right_arrow },
+        })
+    end
+
+    local function content()
         local title = tab_title(tab)
         local extra_chars = 4 -- 2 for the shoulder, 2 for the padding
 
@@ -157,24 +173,15 @@ wezterm.on('format-tab-title', function(tab, _, _, _, _, max_width)
             title = pad .. title .. pad
         end
 
-        return wezterm.truncate_right(title, available_width)
-    end)()
+        return wezterm.format({
+            { Foreground = { Color = fg } },
+            { Background = { Color = bg } },
+            { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
+            { Attribute = { Italic = is_active } },
+            { Text = ' ' .. wezterm.truncate_right(title, available_width) .. ' ' },
+            'ResetAttributes',
+        })
+    end
 
-    return {
-        -- left separator
-        { Foreground = { Color = colors.bg } },
-        { Background = { Color = bg } },
-        { Text = glyph.solid_right_arrow },
-        -- content
-        { Foreground = { Color = fg } },
-        { Background = { Color = bg } },
-        { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
-        { Attribute = { Italic = is_active } },
-        { Text = ' ' .. content .. ' ' },
-        'ResetAttributes',
-        -- right separator
-        { Foreground = { Color = bg } },
-        { Background = { Color = colors.bg } },
-        { Text = glyph.solid_right_arrow },
-    }
+    return left_separator() .. content() .. right_separator()
 end)
