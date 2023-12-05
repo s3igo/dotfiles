@@ -80,8 +80,8 @@ local leader = {
         action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }),
     },
 
-    { key = 'n', action = act.ActivateTabRelative(1) },
-    { key = 'p', action = act.ActivateTabRelative(-1) },
+    { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+    { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
     -- resize
     { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },
