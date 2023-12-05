@@ -75,60 +75,70 @@ end
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
 wezterm.on('update-status', function(window, pane)
-    local cpu = wezterm.GLOBAL.cpu or 'undefined'
+    local gray = colors.default.brights[1]
+    local blue = '#384B5A'
 
-    local is_startup = pane:pane_id() == 0
-    local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane:pane_id()
-    -- is valid pane
-    if not is_startup and not is_operating_confirmation_prompt then
-        window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+    local function mode()
+        local current = window:active_key_table()
+        local text = string.upper(current or '')
+        local lookup = {
+            leader = colors.default.ansi[5],
+            copy_mode = '#F4E49D',
+        }
+        local mode_bg = lookup[current] or colors.default.ansi[8]
+
+        return wezterm.format({
+            { Foreground = { Color = mode_bg } },
+            { Text = glyph.solid_left_arrow },
+            { Foreground = { Color = 'black' } },
+            { Background = { Color = mode_bg } },
+            { Text = ' ' .. text .. ' ' },
+            { Foreground = { Color = gray } },
+            { Text = glyph.solid_left_arrow },
+        })
     end
 
-    local name = (function()
+    local function cpu_usage()
+        local text = wezterm.GLOBAL.cpu or 'undefined'
+
+        local is_startup = pane:pane_id() == 0
+        local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane:pane_id()
+        -- is valid pane
+        if not is_startup and not is_operating_confirmation_prompt then
+            window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+        end
+
+        return wezterm.format({
+            { Foreground = { Color = 'white' } },
+            { Background = { Color = gray } },
+            { Text = ' ' .. text .. ' ' },
+            { Foreground = { Color = blue } },
+            { Text = glyph.solid_left_arrow },
+        })
+    end
+
+    local function name()
         local _, user = wezterm.run_child_process({ 'whoami' })
-        return user:gsub('\n', '') .. '@' .. wezterm.hostname()
-    end)()
+        local text = user:gsub('\n', '') .. '@' .. wezterm.hostname()
 
-    local current_mode = window:active_key_table()
-    local mode = string.upper(current_mode or '')
-    local mode_color_lookup = {
-        leader = colors.default.ansi[5],
-        copy_mode = '#F4E49D',
-    }
-    local mode_bg = mode_color_lookup[current_mode] or colors.default.ansi[8]
-    local cpu_bg = colors.default.brights[1]
-    local blue = '#384B5A'
-    local name_bg = blue
+        return wezterm.format({
+            { Foreground = { Color = 'white' } },
+            { Background = { Color = blue } },
+            { Text = ' ' .. text .. ' ' },
+        })
+    end
 
-    local workspace = window:active_workspace()
+    local function workspace()
+        local text = window:active_workspace()
+        return wezterm.format({
+            { Foreground = { Color = 'white' } },
+            { Background = { Color = blue } },
+            { Text = ' [' .. text .. '] ' },
+        })
+    end
 
-    window:set_right_status(wezterm.format({
-        -- mode
-        { Foreground = { Color = mode_bg } },
-        { Text = glyph.solid_left_arrow },
-        { Foreground = { Color = 'black' } },
-        { Background = { Color = mode_bg } },
-        { Text = ' ' .. mode .. ' ' },
-        -- cpu usage
-        { Foreground = { Color = cpu_bg } },
-        { Text = glyph.solid_left_arrow },
-        { Foreground = { Color = 'white' } },
-        { Background = { Color = cpu_bg } },
-        { Text = ' ' .. cpu .. ' ' },
-        -- name
-        { Foreground = { Color = name_bg } },
-        { Text = glyph.solid_left_arrow },
-        { Foreground = { Color = 'white' } },
-        { Background = { Color = name_bg } },
-        { Text = ' ' .. name .. ' ' },
-    }))
-
-    local left_status_bg = blue
-    window:set_left_status(wezterm.format({
-        { Foreground = { Color = 'white' } },
-        { Background = { Color = left_status_bg } },
-        { Text = ' [' .. workspace .. '] ' },
-    }))
+    window:set_right_status(mode() .. cpu_usage() .. name())
+    window:set_left_status(workspace())
 end)
 
 local function tab_title(tab_info)
@@ -171,18 +181,18 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
             })
     end
 
-    local function content()
+    local function title()
         local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-        local title = index .. tab_title(tab)
+        local text = index .. tab_title(tab)
         -- 2 or 1 for the shoulder, 2 for the padding
         local extra_chars = is_last_tab and 4 or 3
 
         local available_width = max_width - extra_chars
 
-        if #title < available_width then
-            local width = math.floor((available_width - #title) / 2)
+        if #text < available_width then
+            local width = math.floor((available_width - #text) / 2)
             local function pad(w) return string.rep(' ', w) end
-            title = pad(width - 1) .. title .. pad(width + 1)
+            text = pad(width - 1) .. text .. pad(width + 1)
         end
 
         return wezterm.format({
@@ -190,10 +200,10 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
             { Background = { Color = title_bg } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
-            { Text = ' ' .. wezterm.truncate_right(title, available_width) .. ' ' },
+            { Text = ' ' .. wezterm.truncate_right(text, available_width) .. ' ' },
             'ResetAttributes',
         })
     end
 
-    return left_separator() .. content() .. right_separator()
+    return left_separator() .. title() .. right_separator()
 end)
