@@ -58,6 +58,11 @@ return {
                 },
             })
 
+            lspconfig.clangd.setup({
+                capabilities = lsp_capabilities,
+                cmd = { 'clangd', '--offset-encoding=utf-8' },
+            })
+
             lspconfig.rust_analyzer.setup({
                 settings = {
                     ['rust-analyzer'] = { checkOnSave = { command = 'clippy' } },
