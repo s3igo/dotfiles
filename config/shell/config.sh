@@ -80,7 +80,6 @@ function la {
 alias al='la' # in case of typo
 
 ## others
-alias cda='cd $_'
 alias cdl='cd "$(command cat ${XDG_DATA_HOME}/lf/lastdir)"'
 alias cdf='cd "$(fd --hidden --no-ignore --type=directory --exclude=.git | fzf --preview "eza -la --icons --git {}")"'
 alias restart='exec $SHELL -l'

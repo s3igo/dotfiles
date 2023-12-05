@@ -91,18 +91,13 @@ function __ghq-fzf {
     declare DEST="${ROOT}/$(ghq list | fzf --preview ${PREVIEW_CMD})"
     declare BUFFER="cd ${DEST}"
     zle accept-line
-    echo "$DEST" | pbcopy
+    mkdir -p "${XDG_STATE_HOME}/ghq"
+    echo "$DEST" > "${XDG_STATE_HOME}/ghq/lastdir"
 }
 zle -N __ghq-fzf
 bindkey '^G' __ghq-fzf
 
-function __ghq-cd {
-    declare BUFFER="cd $(pbpaste)"
-    zle accept-line
-    pbcopy < /dev/null
-}
-zle -N __ghq-cd
-bindkey '^X^G' __ghq-cd
+alias cdg='cd "$(command cat ${XDG_STATE_HOME}/ghq/lastdir)"'
 
 # syntax highlight
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main line brackets cursor)
