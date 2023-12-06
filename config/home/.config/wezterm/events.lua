@@ -154,7 +154,7 @@ local function tab_title(tab_info)
 end
 
 local function fix_width(text, width)
-    -- is too long
+    -- text is too short
     if #text < width then
         local pad_width = math.floor((width - #text) / 2)
         local pad = string.rep(' ', pad_width)
@@ -206,7 +206,7 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
             { Background = { Color = background } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
-            -- offset for the left separator is not exist
+            -- offset for left separator doesn't exist
             { Text = text .. '  ' },
             'ResetAttributes',
         })

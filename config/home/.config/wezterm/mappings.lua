@@ -143,6 +143,9 @@ local copy_mode = {
 
     { key = ',', action = act.CopyMode('JumpReverse') },
     { key = ';', action = act.CopyMode('JumpAgain') },
+
+    -- link
+    { key = 'o', mods = 'CTRL', action = act.OpenLinkAtMouseCursor },
 }
 
 M.key_tables = { leader = leader, copy_mode = copy_mode }
