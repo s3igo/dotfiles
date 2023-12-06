@@ -16,7 +16,7 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Go to right window', remap = tr
 vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 
 -- ratain cursor position
-vim.keymap.set('v', 'y', 'ygv<esc>')
+-- vim.keymap.set('v', 'y', 'ygv<esc>')
 
 -- registers
 -- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { remap = true })
@@ -34,6 +34,10 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'gj', 'j')
 vim.keymap.set({ 'n', 'x', 'o' }, 'gk', 'k')
 vim.keymap.set({ 'i', 'c' }, '<A-f>', '<C-g>U<S-Right>')
 vim.keymap.set({ 'i', 'c' }, '<A-b>', '<C-g>U<S-Left>')
+
+-- indent
+vim.keymap.set('i', '<tab>', '<C-t>')
+vim.keymap.set('i', '<s-tab>', '<C-d>')
 
 -- retain visual selection
 vim.keymap.set('v', '<', '<gv')

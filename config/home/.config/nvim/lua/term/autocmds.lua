@@ -28,3 +28,12 @@ vim.api.nvim_create_autocmd('FileType', {
         vim.keymap.set('n', '<leader>w', '<cmd>wq<cr><esc>', { buffer = true })
     end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'markdown',
+    desc = 'markdown specific settings',
+    callback = function ()
+        vim.opt_local.formatoptions:append('r')
+        vim.opt_local.comments = 'b:*,b:-,b:+,n:>'
+    end
+})

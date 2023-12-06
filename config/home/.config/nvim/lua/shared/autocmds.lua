@@ -1,4 +1,7 @@
 vim.api.nvim_create_autocmd('FileType', {
     desc = 'Disable automatic comment insertion',
-    command = 'setlocal formatoptions-=ro',
+    callback = function()
+        vim.opt_local.formatoptions:remove('r')
+        vim.opt_local.formatoptions:remove('o')
+    end,
 })
