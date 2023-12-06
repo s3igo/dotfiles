@@ -43,6 +43,12 @@ return {
                 -- typescript = {eslint, prettier},
                 lua = { require('efmls-configs.formatters.stylua') },
             }
+
+            -- local function disable_formatting(client)
+            --     client.resolved_capabilities.document_formatting = false
+            --     client.resolved_capabilities.document_range_formatting = false
+            -- end
+
             lspconfig.efm.setup({
                 filetypes = vim.tbl_keys(languages),
                 settings = { rootMarkers = { '.git/' }, languages = languages },
@@ -53,13 +59,16 @@ return {
                 settings = {
                     Lua = {
                         runtime = { version = 'LuaJIT' },
+                        -- diagnostics = { globals = { 'vim' } },
                         diagnostics = { globals = { 'vim' } },
                     },
                 },
+                -- on_attach = disable_formatting,
+                on_init = function(client) client.server_capabilities.documentFormattingProvider = false end,
             })
 
             lspconfig.clangd.setup({
-                capabilities = lsp_capabilities,
+                -- capabilities = lsp_capabilities,
                 cmd = { 'clangd', '--offset-encoding=utf-8' },
             })
 
@@ -76,10 +85,10 @@ return {
                 end)(),
             })
 
-            require('lsp_signature').setup({
-                bind = true,
-                handler_opts = { border = 'single' },
-            })
+            -- require('lsp_signature').setup({
+            --     bind = true,
+            --     handler_opts = { border = 'single' },
+            -- })
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP Actions',
