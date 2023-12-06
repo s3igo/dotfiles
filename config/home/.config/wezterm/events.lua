@@ -157,8 +157,8 @@ local function fix_width(text, width)
     -- is too long
     if #text < width then
         local pad_width = math.floor((width - #text) / 2)
-        local function pad(w) return string.rep(' ', w) end
-        text = pad(pad_width - 1) .. text .. pad(pad_width + 1)
+        local pad = string.rep(' ', pad_width)
+        text = pad .. text .. pad
     end
 
     return wezterm.truncate_right(text, width)
@@ -196,7 +196,7 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     local function title()
         -- to 1 origin
         local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-        -- 2 or 1 for the shoulder, 2 for the padding
+        -- 2 or 1 for the separator, 2 for the padding
         local extra_chars = is_last_tab and 4 or 3
         local available_width = max_width - extra_chars
         local text = fix_width(index .. tab_title(tab), available_width)
@@ -206,7 +206,8 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
             { Background = { Color = background } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
-            { Text = ' ' .. text .. ' ' },
+            -- offset for the left separator is not exist
+            { Text = text .. '  ' },
             'ResetAttributes',
         })
     end
