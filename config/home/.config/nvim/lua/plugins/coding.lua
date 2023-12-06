@@ -157,62 +157,6 @@ return {
             disabledKeymaps = { 'gc' },
         },
     },
-    { -- increment/decrement
-        'monaqa/dial.nvim',
-        enabled = false,
-        event = { 'BufReadPost', 'BufNewFile' },
-        keys = {
-            { '<C-a>', function() require('dial.map').manipulate('increment', 'normal') end, desc = 'Dial <C-a>' },
-            { '<C-x>', function() require('dial.map').manipulate('decrement', 'normal') end, desc = 'Dial <C-x>' },
-            { 'g<C-a>', function() require('dial.map').manipulate('increment', 'gnormal') end, desc = 'Dial g<C-a>' },
-            { 'g<C-x>', function() require('dial.map').manipulate('decrement', 'gnormal') end, desc = 'Dial g<C-x>' },
-            {
-                '<C-a>',
-                function() require('dial.map').manipulate('increment', 'visual') end,
-                mode = 'v',
-                desc = 'Dial in VISUAL <C-a>',
-            },
-            {
-                '<C-x>',
-                function() require('dial.map').manipulate('decrement', 'visual') end,
-                mode = 'v',
-                desc = 'Dial in VISUAL <C-x>',
-            },
-            {
-                'g<C-a>',
-                function() require('dial.map').manipulate('increment', 'gvisual') end,
-                mode = 'v',
-                desc = 'Dial in VISUAL g<C-a>',
-            },
-            {
-                'g<C-x>',
-                function() require('dial.map').manipulate('decrement', 'gvisual') end,
-                mode = 'v',
-                desc = 'Dial in VISUAL g<C-x>',
-            },
-        },
-        config = function()
-            local augend = require('dial.augend')
-            require('dial.config').augends:register_group({
-                default = {
-                    augend.integer.alias.decimal,
-                    augend.integer.alias.decimal_int,
-                    augend.integer.alias.binary,
-                    augend.integer.alias.hex,
-                    augend.date.alias['%Y/%m/%d'],
-                    augend.date.alias['%Y-%m-%d'],
-                    augend.date.alias['%m/%d'],
-                    augend.date.alias['%H:%M'],
-                    augend.constant.alias.ja_weekday,
-                    augend.constant.alias.ja_weekday_full,
-                    augend.constant.alias.bool,
-                    augend.constant.alias.alpha,
-                    augend.constant.alias.Alpha,
-                    augend.semver.alias.semver,
-                },
-            })
-        end,
-    },
     { -- substitute operator
         'gbprod/substitute.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
