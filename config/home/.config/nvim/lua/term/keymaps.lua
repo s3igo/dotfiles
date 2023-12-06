@@ -28,6 +28,20 @@ end
 
 vim.keymap.set('i', '<C-t>', transpose_chars)
 
+local function kill_line()
+    local line = vim.api.nvim_get_current_line()
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+    -- is line end
+    if col == #line then
+        return
+    end
+
+    vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, #line, { '' })
+end
+
+vim.keymap.set('i', '<C-k>', kill_line)
+
 vim.keymap.set('i', '<C-f>', '<C-g>U<Right>')
 vim.keymap.set('i', '<C-b>', '<C-g>U<Left>')
 vim.keymap.set('i', '<C-p>', '<C-g>U<Up>')
@@ -41,7 +55,6 @@ vim.keymap.set('c', '<C-b>', '<Left>')
 vim.keymap.set('c', '<C-a>', '<Home>')
 vim.keymap.set('c', '<C-e>', '<End>')
 
-vim.keymap.set('i', '<C-k>', '<esc>lDa')
 vim.keymap.set('c', '<C-h>', '<bs>')
 
 -- plugins
