@@ -135,6 +135,7 @@ return {
     },
     { -- subword motion
         'chrisgrieser/nvim-spider',
+        enabled = false,
         event = 'VeryLazy',
         config = function()
             vim.keymap.set({ 'n', 'o', 'x' }, 'w', "<cmd>lua require('spider').motion('w')<cr>", { desc = 'Spider w' })
@@ -158,6 +159,7 @@ return {
     },
     { -- increment/decrement
         'monaqa/dial.nvim',
+        enabled = false,
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
             { '<C-a>', function() require('dial.map').manipulate('increment', 'normal') end, desc = 'Dial <C-a>' },
@@ -242,5 +244,10 @@ return {
                 desc = 'Comment divider box',
             },
         },
+    },
+    { -- change case
+        'johmsalas/text-case.nvim',
+        event = { 'BufReadPost', 'BufNewFile' },
+        opts = {},
     },
 }
