@@ -81,8 +81,7 @@ return {
                         end
                     end),
                     ['<C-k>'] = cmp.mapping(function(fallback)
-                        -- if cmp.visible() and cmp.get_active_entry() then
-                        if cmp.visible() then
+                        if cmp.visible() and cmp.get_active_entry() then
                             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
                         else
                             fallback()

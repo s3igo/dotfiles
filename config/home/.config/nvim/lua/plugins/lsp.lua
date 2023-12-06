@@ -19,11 +19,23 @@ return {
                 cmd = { 'Mason' },
                 build = ':MasonUpdate',
             },
+            {
+                'folke/neodev.nvim',
+                event = 'LspAttach',
+            },
             'creativenull/efmls-configs-nvim',
             'hrsh7th/cmp-nvim-lsp',
             'ray-x/lsp_signature.nvim',
         },
         config = function()
+            require('neodev').setup({
+                override = function(root_dir, library)
+                    if root_dir:match('.dotfiles') then
+                        library.enable = true
+                        library.plugins = true
+                    end
+                end,
+            })
             require('mason').setup()
             local mason_lspconfig = require('mason-lspconfig')
             mason_lspconfig.setup({
@@ -56,13 +68,11 @@ return {
             })
 
             lspconfig.lua_ls.setup({
-                settings = {
-                    Lua = {
-                        runtime = { version = 'LuaJIT' },
-                        -- diagnostics = { globals = { 'vim' } },
-                        diagnostics = { globals = { 'vim' } },
-                    },
-                },
+                -- settings = {
+                --     Lua = {
+                --         runtime = { version = 'LuaJIT' },
+                --     },
+                -- },
                 -- on_attach = disable_formatting,
                 on_init = function(client) client.server_capabilities.documentFormattingProvider = false end,
             })
@@ -258,18 +268,6 @@ return {
             -- your configuration comes here
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
-        },
-    },
-    {
-        'folke/neodev.nvim',
-        event = 'LspAttach',
-        opts = {
-            override = function(root_dir, library)
-                if root_dir:match('.dotfiles') then
-                    library.enable = true
-                    library.plugins = true
-                end
-            end,
         },
     },
 }
