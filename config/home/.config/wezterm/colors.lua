@@ -1,10 +1,5 @@
 local wezterm = require('wezterm')
 
--- local function modify_alpha(color, a)
---     local h, s, l = wezterm.color.parse(color):hsla()
---     return wezterm.color.from_hsla(h, s, l, a)
--- end
-
 local M = {}
 
 M.default = wezterm.get_builtin_color_schemes()['NightOwl (Gogh)']

@@ -17,11 +17,6 @@ local glyph = {
     right_arrow = utf8.char(0xe0b1),
     solid_left_arrow = utf8.char(0xe0b2),
     left_arrow = utf8.char(0xe0b3),
-    -- slant
-    -- solid_right_shoulder = utf8.char(0xe0b8),
-    -- right_shoulder = utf8.char(0xe0b9),
-    -- solid_left_shoulder = utf8.char(0xe0ba),
-    -- left_shoulder = utf8.char(0xe0bb),
     -- icon
     cpu = utf8.char(0xf4bc),
 }
@@ -83,6 +78,12 @@ end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
+local function is_valid_pane(window, pane_info)
+    local is_startup = pane_info:pane_id() == 0
+    local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane_info:pane_id()
+    return not is_startup and not is_operating_confirmation_prompt
+end
+
 wezterm.on('update-status', function(window, pane)
     local function mode()
         local current = window:active_key_table()
@@ -107,11 +108,7 @@ wezterm.on('update-status', function(window, pane)
     local function cpu_usage()
         local text = wezterm.GLOBAL.cpu or 'undefined'
 
-        local is_startup = pane:pane_id() == 0
-        local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane:pane_id()
-
-        -- is valid pane
-        if not is_startup and not is_operating_confirmation_prompt then
+        if is_valid_pane(window, pane) then
             window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
         end
 
@@ -156,6 +153,17 @@ local function tab_title(tab_info)
     return title and #title > 0 and title or tab_info.active_pane.title
 end
 
+local function fix_width(text, width)
+    -- is too long
+    if #text < width then
+        local pad_width = math.floor((width - #text) / 2)
+        local function pad(w) return string.rep(' ', w) end
+        text = pad(pad_width - 1) .. text .. pad(pad_width + 1)
+    end
+
+    return wezterm.truncate_right(text, width)
+end
+
 wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     -- conditions
     local is_active = tab.is_active
@@ -186,26 +194,19 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     end
 
     local function title()
+        -- to 1 origin
         local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-        local text = index .. tab_title(tab)
         -- 2 or 1 for the shoulder, 2 for the padding
         local extra_chars = is_last_tab and 4 or 3
-
         local available_width = max_width - extra_chars
-
-        -- is too long
-        if #text < available_width then
-            local width = math.floor((available_width - #text) / 2)
-            local function pad(w) return string.rep(' ', w) end
-            text = pad(width - 1) .. text .. pad(width + 1)
-        end
+        local text = fix_width(index .. tab_title(tab), available_width)
 
         return wezterm.format({
             { Foreground = { Color = frontground } },
             { Background = { Color = background } },
             { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
             { Attribute = { Italic = is_active } },
-            { Text = ' ' .. wezterm.truncate_right(text, available_width) .. ' ' },
+            { Text = ' ' .. text .. ' ' },
             'ResetAttributes',
         })
     end

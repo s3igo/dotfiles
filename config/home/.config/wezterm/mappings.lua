@@ -59,26 +59,12 @@ local leader = {
     { key = 's', action = act.SplitVertical },
 
     -- focus
-    {
-        key = 'h',
-        mods = 'CTRL',
-        action = act.Multiple({ { ActivatePaneDirection = 'Left' }, 'PopKeyTable' }),
-    },
-    {
-        key = 'j',
-        mods = 'CTRL',
-        action = act.Multiple({ { ActivatePaneDirection = 'Down' }, 'PopKeyTable' }),
-    },
-    {
-        key = 'k',
-        mods = 'CTRL',
-        action = act.Multiple({ { ActivatePaneDirection = 'Up' }, 'PopKeyTable' }),
-    },
-    {
-        key = 'l',
-        mods = 'CTRL',
-        action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }),
-    },
+    -- stylua: ignore start
+    { key = 'h', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Left' }, 'PopKeyTable' }) },
+    { key = 'j', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Down' }, 'PopKeyTable' }) },
+    { key = 'k', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Up' }, 'PopKeyTable' }) },
+    { key = 'l', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }) },
+    -- stylua: ignore end
 
     { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
@@ -101,39 +87,20 @@ local copy_mode = {
     { key = 'q', action = act.CopyMode('Close') },
 
     -- start / end selection
+    -- stylua: ignore start
     { key = 'v', action = act.CopyMode({ SetSelectionMode = 'Cell' }) },
-    {
-        key = 'v',
-        mods = 'SHIFT',
-        action = act.CopyMode({ SetSelectionMode = 'Line' }),
-    },
-    {
-        key = 'v',
-        mods = 'CTRL',
-        action = act.CopyMode({ SetSelectionMode = 'Block' }),
-    },
-
-    {
-        key = '[',
-        mods = 'CTRL',
-        action = act.CopyMode('ClearSelectionMode'),
-    },
-    {
-        key = 'y',
-        action = act.Multiple({
-            { CopyTo = 'Clipboard' },
-            { CopyMode = 'ClearSelectionMode' },
-        }),
-    },
+    { key = 'v', mods = 'SHIFT', action = act.CopyMode({ SetSelectionMode = 'Line' }) },
+    { key = 'v', mods = 'CTRL', action = act.CopyMode({ SetSelectionMode = 'Block' }) },
+    { key = '[', mods = 'CTRL', action = act.CopyMode('ClearSelectionMode') },
+    { key = 'y', action = act.Multiple({ { CopyTo = 'Clipboard' }, { CopyMode = 'ClearSelectionMode' } }) },
     { key = 'Enter', action = act.Multiple({ { CopyTo = 'Clipboard' }, { CopyMode = 'Close' } }) },
+    -- stylua: ignore end
 
     -- move selection
+    -- stylua: ignore start
     { key = 'o', action = act.CopyMode('MoveToSelectionOtherEnd') },
-    {
-        key = 'o',
-        mods = 'SHIFT',
-        action = act.CopyMode('MoveToSelectionOtherEndHoriz'),
-    },
+    { key = 'o', mods = 'SHIFT', action = act.CopyMode('MoveToSelectionOtherEndHoriz') },
+    -- stylua: ignore end
 
     -- move cursor
     { key = 'w', action = act.CopyMode('MoveForwardWord') },
@@ -145,72 +112,34 @@ local copy_mode = {
     { key = 'k', action = act.CopyMode('MoveUp') },
     { key = 'l', action = act.CopyMode('MoveRight') },
 
+    -- stylua: ignore start
     { key = '0', action = act.CopyMode('MoveToStartOfLine') },
-    {
-        key = 'h',
-        mods = 'CTRL',
-        action = act.CopyMode('MoveToStartOfLineContent'),
-    },
-    {
-        key = 'j',
-        mods = 'CTRL',
-        action = act.CopyMode('MoveToScrollbackBottom'),
-    },
-    {
-        key = 'k',
-        mods = 'CTRL',
-        action = act.CopyMode('MoveToScrollbackTop'),
-    },
-    {
-        key = 'l',
-        mods = 'CTRL',
-        action = act.CopyMode('MoveToEndOfLineContent'),
-    },
+    { key = 'h', mods = 'CTRL', action = act.CopyMode('MoveToStartOfLineContent') },
+    { key = 'j', mods = 'CTRL', action = act.CopyMode('MoveToScrollbackBottom') },
+    { key = 'k', mods = 'CTRL', action = act.CopyMode('MoveToScrollbackTop') },
+    { key = 'l', mods = 'CTRL', action = act.CopyMode('MoveToEndOfLineContent') },
 
-    {
-        key = 'h',
-        mods = 'SHIFT',
-        action = act.CopyMode('MoveToViewportTop'),
-    },
-    {
-        key = 'l',
-        mods = 'SHIFT',
-        action = act.CopyMode('MoveToViewportBottom'),
-    },
-    {
-        key = 'm',
-        mods = 'SHIFT',
-        action = act.CopyMode('MoveToViewportMiddle'),
-    },
+    { key = 'h', mods = 'SHIFT', action = act.CopyMode('MoveToViewportTop') },
+    { key = 'l', mods = 'SHIFT', action = act.CopyMode('MoveToViewportBottom') },
+    { key = 'm', mods = 'SHIFT', action = act.CopyMode('MoveToViewportMiddle') },
+    -- stylua: ignore end
 
     -- scroll
     { key = 'f', mods = 'CTRL', action = act.CopyMode('PageDown') },
     { key = 'b', mods = 'CTRL', action = act.CopyMode('PageUp') },
 
-    {
-        key = 'd',
-        mods = 'CTRL',
-        action = act.CopyMode({ MoveByPage = 0.5 }),
-    },
-    {
-        key = 'u',
-        mods = 'CTRL',
-        action = act.CopyMode({ MoveByPage = -0.5 }),
-    },
+    -- stylua: ignore start
+    { key = 'd', mods = 'CTRL', action = act.CopyMode({ MoveByPage = 0.5 }) },
+    { key = 'u', mods = 'CTRL', action = act.CopyMode({ MoveByPage = -0.5 }) },
+    -- stylua: ignore end
 
     -- jump
+    -- stylua: ignore start
     { key = 'f', action = act.CopyMode({ JumpForward = { prev_char = false } }) },
-    {
-        key = 'f',
-        mods = 'SHIFT',
-        action = act.CopyMode({ JumpBackward = { prev_char = false } }),
-    },
+    { key = 'f', mods = 'SHIFT', action = act.CopyMode({ JumpBackward = { prev_char = false } }) },
     { key = 't', action = act.CopyMode({ JumpForward = { prev_char = true } }) },
-    {
-        key = 't',
-        mods = 'SHIFT',
-        action = act.CopyMode({ JumpBackward = { prev_char = true } }),
-    },
+    { key = 't', mods = 'SHIFT', action = act.CopyMode({ JumpBackward = { prev_char = true } }) },
+    -- stylua: ignore end
 
     { key = ',', action = act.CopyMode('JumpReverse') },
     { key = ';', action = act.CopyMode('JumpAgain') },
