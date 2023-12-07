@@ -32,8 +32,8 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'markdown',
     desc = 'markdown specific settings',
-    callback = function ()
+    callback = function()
         vim.opt_local.formatoptions:append('r')
-        vim.opt_local.comments = 'b:*,b:-,b:+,n:>'
-    end
+        vim.opt_local.comments = 'b:-,n:>'
+    end,
 })

@@ -25,7 +25,6 @@ jq
 just
 lazydocker
 lf
-macos-trash
 mas
 neovim
 pam-reattach
@@ -38,6 +37,7 @@ shellharden
 silicon
 starship
 tokei
+trash
 tree
 typst
 yqrashawn/goku/goku

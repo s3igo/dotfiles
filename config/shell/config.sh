@@ -102,6 +102,7 @@ if [[ "$(uname)" == 'Darwin' ]]; then
 
     ## alias
     alias ql='qlmanage -p "$1" >& /dev/null'
+    alias trash='trash -F'
 
     ## function
     if [[ "$(uname -m)" == 'arm64' ]]; then
