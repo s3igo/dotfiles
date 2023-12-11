@@ -8,6 +8,11 @@ apply = ["source"]
 [templates]
 defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 
+[plugins.local]
+local = "~/.dotfiles/config/shell"
+use = ["*.zsh", "*.sh"]
+apply = ["source"]
+
 [plugins.compinit]
 inline = "autoload -Uz compinit && compinit"
 
@@ -45,7 +50,3 @@ declare -x _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
 type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
 '''
 
-[plugins.local]
-local = "~/.dotfiles/config/shell"
-use = ["*.zsh", "*.sh"]
-apply = ["source"]

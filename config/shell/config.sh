@@ -17,6 +17,7 @@ set -o ignoreeof
 
 # homebrew
 [[ "$(uname -m)" == 'x86_64' ]] && declare -x PATH="${PATH}:/usr/local/sbin"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # docker
 declare -x DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
@@ -40,7 +41,7 @@ declare -x EDITOR='nvim'
 declare -x HELIX_RUNTIME="${XDG_CONFIG_HOME}/helix/runtime"
 
 # zk
-declare -x ZK_NOTEBOOK_DIR="${HOME}/git/github.com/s3igo/notes"
+declare -x ZK_NOTEBOOK_DIR="${HOME}/git/github.com/s3igo/note"
 
 # ripgrep
 declare -x RIPGREP_CONFIG_PATH="${XDG_CONFIG_HOME}/ripgrep/ripgreprc"

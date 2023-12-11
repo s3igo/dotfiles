@@ -31,6 +31,7 @@ update:
 ifeq ($(shell uname),Darwin)
 ifeq ($(shell type brew > /dev/null 2>&1 && echo $$?),0)
 	@# uname == Darwin && brew is installed
+	brew autoremove
 	brew update
 	-brew upgrade
 	brew cleanup

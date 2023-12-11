@@ -2,6 +2,7 @@
 1password-cli
 adobe-acrobat-pro
 arc
+brave-browser
 cloudflare-warp
 cron
 cursor
@@ -11,6 +12,7 @@ firefox
 font-ipaexfont
 font-noto-sans-cjk-jp
 font-udev-gothic-nf
+font-zen-kaku-gothic-new
 google-chrome
 google-japanese-ime
 karabiner-elements

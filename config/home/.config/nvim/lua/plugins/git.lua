@@ -14,8 +14,4 @@ return {
         },
         config = true,
     },
-    {
-        'kaarmu/typst.vim',
-        ft = 'typst',
-    },
 }

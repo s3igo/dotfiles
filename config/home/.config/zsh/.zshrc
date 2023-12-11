@@ -1,2 +1,1 @@
-type sheldon > /dev/null 2>&1 && eval "$(sheldon source)"
-
+eval "$(/opt/homebrew/bin/sheldon source)"
