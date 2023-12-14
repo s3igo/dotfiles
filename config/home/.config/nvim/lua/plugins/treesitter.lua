@@ -106,6 +106,10 @@ return {
                     },
                 }
             end
+            vim.api.nvim_set_hl(0, '@text.todo', { link = 'NightflyBlueMode' })
+            vim.api.nvim_set_hl(0, '@text.note', { link = 'NightflyPurpleMode' })
+            vim.api.nvim_set_hl(0, '@text.warning', { link = 'NightflyTanMode' })
+            vim.api.nvim_set_hl(0, '@text.danger', { link = 'NightflyWatermelonModeMode' })
         end,
     },
     { -- sticky scroll

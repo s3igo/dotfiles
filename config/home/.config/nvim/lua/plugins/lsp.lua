@@ -119,7 +119,7 @@ return {
                         end,
                         { desc = 'Source action' }
                     )
-                    vim.keymap.set('n', '<leader>D', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
+                    vim.keymap.set('n', '<leader>.', vim.diagnostic.open_float, { desc = 'Line diagnostics' })
                     vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, { desc = 'Rename' }) -- FIXME: dressing error
                     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
                     vim.keymap.set('v', '<leader>f', function()

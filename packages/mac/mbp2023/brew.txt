@@ -27,6 +27,7 @@ lazydocker
 lf
 mas
 neovim
+ollama
 pam-reattach
 pastel
 procs

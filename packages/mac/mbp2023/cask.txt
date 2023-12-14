@@ -1,6 +1,7 @@
 1password
 1password-cli
 adobe-acrobat-pro
+anytype
 arc
 brave-browser
 cloudflare-warp
@@ -16,6 +17,7 @@ font-zen-kaku-gothic-new
 google-chrome
 google-japanese-ime
 karabiner-elements
+keyboardcleantool
 mochi-diffusion
 monitorcontrol
 morgen

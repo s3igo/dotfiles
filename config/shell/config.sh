@@ -67,6 +67,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
+alias cdla='cd $_'
 
 ## ls
 function ls {
