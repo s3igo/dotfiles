@@ -43,6 +43,29 @@ return {
             },
         },
     },
+    { -- AI
+        'David-Kunz/gen.nvim',
+        cond = not vim.g.vscode,
+        event = { 'BufReadPost', 'BufNewFile' },
+        -- keys = {
+        --     { '<leader>]]', ':Gen<cr>', mode = { 'n', 'v' }, desc = 'Gen' },
+        --     { '<leader>]r', ':Gen review<cr>', desc = 'Gen review' },
+        -- },
+        opts = {
+            model = 'magicoder',
+            display_mode = 'split',
+            show_prompt = true,
+        },
+        config = function(_, opts)
+            local gen = require('gen')
+            gen.setup(opts)
+            gen.prompts['review'] = {
+                prompt = 'Review the following code and make concise suggestions:\n```$filetype\n$register\n```',
+            }
+            vim.keymap.set({ 'n', 'v' }, '<leader>]]', ':Gen<cr>', { desc = 'Gen' })
+            vim.keymap.set({ 'n', 'v' }, '<leader>]r', ':Gen review<cr>', { desc = 'Gen review' })
+        end,
+    },
     { -- completion
         'hrsh7th/nvim-cmp',
         cond = not vim.g.vscode,
@@ -61,7 +84,9 @@ return {
         },
         config = function()
             local cmp = require('cmp')
+            ---@diagnostic disable-next-line: missing-fields
             cmp.setup({
+                ---@diagnostic disable-next-line: missing-fields
                 formatting = {
                     format = require('lspkind').cmp_format({
                         mode = 'symbol',
@@ -98,6 +123,7 @@ return {
                     { name = 'path' },
                 }),
             })
+            ---@diagnostic disable-next-line: missing-fields
             cmp.setup.cmdline({ '/', '?' }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
@@ -105,6 +131,7 @@ return {
                     { name = 'buffer' },
                 }),
             })
+            ---@diagnostic disable-next-line: missing-fields
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }),
