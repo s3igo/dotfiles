@@ -62,7 +62,7 @@
       # mac
       "@cp" = "| pbcopy";
       "@pst" = ''"$(pbpaste)"'';
-      "@icloud" = "cd ~/Library/Mobile\ Documents/com~apple~CloudDocs";
+      "@icloud" = "cd ~/Library/Mobile\\ Documents/com~apple~CloudDocs";
     };
     syntaxHighlighting = {
       enable = true;

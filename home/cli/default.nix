@@ -1,5 +1,5 @@
 { ... }: {
-  imports = [ ./starship.nix ];
+  imports = [ ./starship.nix ./zsh ];
 
   programs = {
     ripgrep = {
@@ -7,6 +7,5 @@
       arguments = [ "--smart-case" ];
     };
     fzf.enable = true;
-    # zsh.enable = true;
   };
 }

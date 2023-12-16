@@ -19,7 +19,6 @@
         # system = "aarch64-darwin";
         modules = [
           ./modules/system.nix
-          ./home/cli/zsh
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
