@@ -101,6 +101,10 @@ ifeq ($(shell type apt > /dev/null 2>&1 && echo $$?),0)
 endif
 endif
 
+.PHONY: deploy
+deploy:
+	darwin-rebuild switch --flake .#$(PROFILE)
+
 .PHONY: install
 install:
 	@$(MAKE) init
