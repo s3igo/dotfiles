@@ -123,7 +123,8 @@ wezterm.on('update-status', function(window, pane)
 
     local function name()
         local _, user = wezterm.run_child_process({ 'whoami' })
-        local text = user:gsub('\n', '') .. '@' .. wezterm.hostname()
+        local _, host = wezterm.run_child_process({ 'scutil', '--get', 'LocalHostName' })
+        local text = user:gsub('\n', '') .. '@' .. host:gsub('\n', '')
 
         return wezterm.format({
             { Foreground = { Color = colors.black } },

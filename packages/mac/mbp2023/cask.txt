@@ -22,6 +22,7 @@ mochi-diffusion
 monitorcontrol
 morgen
 orbstack
+orion
 raycast
 routine
 slack

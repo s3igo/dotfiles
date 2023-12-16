@@ -8,10 +8,16 @@ vim.api.nvim_create_autocmd('TermOpen', {
 --     command = 'wa',
 -- })
 
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = 'typst',
+--     desc = 'shiftwidth = 4 for typst',
+--     callback = function() vim.opt_local.shiftwidth = 4 end,
+-- })
+
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'typst',
-    desc = 'shiftwidth = 4 for typst',
-    callback = function() vim.opt_local.shiftwidth = 4 end,
+    pattern = 'nix',
+    desc = 'shiftwidth = 2 for typst',
+    callback = function() vim.opt_local.shiftwidth = 2 end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {

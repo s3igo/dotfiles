@@ -44,6 +44,7 @@ return {
         },
     },
     { -- AI
+        enable = false,
         'David-Kunz/gen.nvim',
         cond = not vim.g.vscode,
         event = { 'BufReadPost', 'BufNewFile' },
@@ -152,7 +153,7 @@ return {
     { -- comment
         'numToStr/Comment.nvim',
         dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
-        event = 'VeryLazy',
+        event = 'VimEnter',
         opts = function()
             -- local is_available, ts_integration = pcall(require, 'ts_context_commentstring.integrations.comment_nvim')
             -- return is_available and { pre_hook = ts_integration.create_pre_hook() } or {}
@@ -200,6 +201,7 @@ return {
         opts = {},
     },
     { -- empasized comments
+        enabled = false,
         'fangjunzhou/comment-divider.nvim',
         event = { 'BufReadPost', 'BufNewFile' },
         keys = {
