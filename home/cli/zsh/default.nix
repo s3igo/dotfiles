@@ -19,8 +19,8 @@
     };
     historySubstringSearch = {
       enable = true;
-      # searchDownKey = [ "^N"];
-      # searchUpKey = [ "^P" ];
+      searchDownKey = [ "^N"];
+      searchUpKey = [ "^P" ];
     };
     shellAliases = {
       b = "brew";
@@ -80,13 +80,14 @@
       LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
       EDITOR = "nvim";
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      # FPATH = "$XDG_DATA_HOME/zsh/functions:$FPATH";
     };
     initExtraFirst = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     initExtra = ''
-      # initialize direnv, gh, zoxide
-      type direnv > /dev/null 2>&1 && eval "$(direnv hook zsh)"
-      type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
-      type zoxide > /dev/null 2>&1 && eval "$(zoxide init zsh)"
+      FPATH="$XDG_DATA_HOME/zsh/site-functions:$FPATH"
+
+      # initialize gh
+      # type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 
       # prohibit overwriting existing files
       set -o noclobber

@@ -9,6 +9,8 @@ in
   home = {
     username = user;
     homeDirectory = lib.mkForce "/Users/${user}";
+    # language.base = "en_US.UTF-8";
+    # language.messages = "en_US.UTF-8";
     stateVersion = "23.11";
   };
   xdg.enable = true;
