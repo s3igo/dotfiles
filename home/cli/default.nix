@@ -1,5 +1,5 @@
 { ... }: {
-  imports = [ ./starship.nix ./zsh];
+  imports = [ ./starship.nix ];
 
   programs = {
     ripgrep = {
