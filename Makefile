@@ -105,6 +105,10 @@ endif
 deploy:
 	darwin-rebuild switch --flake .#$(PROFILE)
 
+# .PHONY: deploy-without-cache
+# deploy-without-cache:
+# 	darwin-rebuild switch --option eval-cache false --flake .#$(PROFILE)
+
 .PHONY: install
 install:
 	@$(MAKE) init
