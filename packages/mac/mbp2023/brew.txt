@@ -28,15 +28,12 @@ lf
 mas
 neovim
 ollama
-pam-reattach
 pastel
 procs
-ripgrep
 rustup-init
 sheldon
 shellharden
 silicon
-starship
 tokei
 trash
 tree

@@ -4,7 +4,7 @@ let
 in
 {
   imports = [
-    ./starship.nix
+    ./cli
   ];
   home = {
     username = user;
