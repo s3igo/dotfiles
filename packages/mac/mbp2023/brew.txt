@@ -1,14 +1,8 @@
 act
 daipeihust/tap/im-select
 efm-langserver
-fd
 fnm
 gh
-ghq
-git
-git-delta
-git-lfs
-gitui
 grex
 helix
 hexyl
