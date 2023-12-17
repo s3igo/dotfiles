@@ -1,26 +1,29 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [ ./starship.nix ./zsh ];
 
   programs = {
-    ripgrep = {
-      enable = true;
-      arguments = [ "--smart-case" ];
-    };
+    bat.enable = true;
+    bottom.enable = true;
     fzf.enable = true;
+    jq.enable = true;
+    lazygit.enable = true;
     zoxide.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
-    eza ={
+    eza = {
       enable = true;
       enableAliases = true;
       git = true;
       icons = true;
     };
-    bat.enable = true;
-    bottom.enable = true;
-    jq.enable = true;
-    lazygit.enable = true;
+    ripgrep = {
+      enable = true;
+      arguments = [ "--smart-case" ];
+    };
   };
+  home.packages = with pkgs; [
+    fd
+  ];
 }
