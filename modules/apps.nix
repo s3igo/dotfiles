@@ -24,7 +24,6 @@
       "rustup-init"
       "sheldon"
       "typst"
-      "zk"
     ];
     casks = [
       "1password"

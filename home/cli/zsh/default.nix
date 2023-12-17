@@ -23,8 +23,6 @@
       searchUpKey = [ "^P" ];
     };
     shellAliases = {
-      b = "brew";
-      c = "cargo";
       g = "git";
       lzd = "lazydocker";
       lg = "lazygit";

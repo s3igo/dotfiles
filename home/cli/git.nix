@@ -23,6 +23,7 @@
     ignores = [
       ".DS_Store"
       ".env"
+      ".direnv/"
       "node_modules/"
     ];
     lfs.enable = true;
