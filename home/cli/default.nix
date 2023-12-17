@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./git.nix
+    ./lazygit.nix
     ./starship.nix
     ./zsh
   ];
@@ -10,7 +11,6 @@
     bottom.enable = true;
     fzf.enable = true;
     jq.enable = true;
-    lazygit.enable = true;
     zoxide.enable = true;
     direnv = {
       enable = true;

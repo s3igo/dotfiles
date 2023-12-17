@@ -24,7 +24,6 @@
       "idleberg/dbxcli/dbxcli"
       "just"
       "lf"
-      "mas"
       "neovim"
       "ollama"
       "pastel"
@@ -72,6 +71,14 @@
       "wezterm"
       "zed"
       "zoom"
+      {
+        name = "chromium";
+        args = { no_quarantine = true; };
+      }
     ];
+    masApps = {
+      Things = 904280696;
+      LINE = 539883307;
+    };
   };
 }
