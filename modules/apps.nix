@@ -11,7 +11,6 @@
       "homebrew/cask-fonts"
       "homebrew/services"
       "idleberg/dbxcli"
-      "yqrashawn/goku"
     ];
     brews = [
       "act"
@@ -34,7 +33,6 @@
       "tokei"
       "tree"
       "typst"
-      "yqrashawn/goku/goku"
       "zk"
     ];
     casks = [

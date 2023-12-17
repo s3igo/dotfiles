@@ -13,7 +13,15 @@
     };
   };
 
-  outputs = { nix-darwin, home-manager, ... }: {
+  outputs = { nixpkgs, nix-darwin, home-manager, ... }:
+  let
+    system = "aarch64-darwin";
+    pkgs = import nixpkgs { inherit system; };
+  in
+  {
+    devShells.aarch64-darwin.default = pkgs.mkShell {
+      buildInputs = [ pkgs.goku ];
+    };
     darwinConfigurations = {
       mbp2023 = nix-darwin.lib.darwinSystem {
         # system = "aarch64-darwin";

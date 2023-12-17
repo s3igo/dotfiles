@@ -1,3 +1,4 @@
 *.lock.json
 .vscode/settings.json
 .env
+.direnv/
