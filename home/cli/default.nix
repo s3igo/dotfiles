@@ -29,7 +29,11 @@
   };
 
   home.packages = with pkgs; [
+    efm-langserver
     fd
     ghq
+    lazydocker
+    darwin.trash
+    mmv-go
   ];
 }

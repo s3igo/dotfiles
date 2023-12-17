@@ -3,5 +3,4 @@ daipeihust/tap
 homebrew/cask-fonts
 homebrew/services
 idleberg/dbxcli
-itchyny/tap
 yqrashawn/goku

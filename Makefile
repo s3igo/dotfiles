@@ -111,6 +111,11 @@ deploy:
 # deploy-without-cache:
 # 	darwin-rebuild switch --option eval-cache false --flake .#$(PROFILE)
 
+.PHONY: update-nix
+update-nix:
+	nix flake update
+	$(MAKE) deploy
+
 .PHONY: install
 install:
 	@$(MAKE) init
