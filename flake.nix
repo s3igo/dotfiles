@@ -13,14 +13,17 @@
     };
   };
 
-  outputs = { nixpkgs, nix-darwin, home-manager, ... }:
-  let
+  outputs = {
+    nixpkgs,
+    nix-darwin,
+    home-manager,
+    ...
+  }: let
     system = "aarch64-darwin";
-    pkgs = import nixpkgs { inherit system; };
-  in
-  {
+    pkgs = import nixpkgs {inherit system;};
+  in {
     devShells.aarch64-darwin.default = pkgs.mkShell {
-      buildInputs = [ pkgs.goku ];
+      buildInputs = [pkgs.goku];
     };
     darwinConfigurations = {
       mbp2023 = nix-darwin.lib.darwinSystem {
@@ -42,7 +45,6 @@
     # darwinPackages = self.darwinConfigurations."mbp2023".pkgs;
 
     # formatter
-    # formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
+    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
   };
 }
-

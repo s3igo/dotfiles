@@ -1,4 +1,4 @@
-{ config, ... }: {
+{config, ...}: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -14,13 +14,13 @@
     dotDir = ".config/zsh";
     history = {
       ignoreAllDups = true;
-      ignorePatterns = [ "cd *" ];
+      ignorePatterns = ["cd *"];
       path = "${config.xdg.stateHome}/zsh/history";
     };
     historySubstringSearch = {
       enable = true;
-      searchDownKey = [ "^N"];
-      searchUpKey = [ "^P" ];
+      searchDownKey = ["^N"];
+      searchUpKey = ["^P"];
     };
     shellAliases = {
       g = "git";
@@ -62,7 +62,7 @@
     };
     syntaxHighlighting = {
       enable = true;
-      highlighters = [ "main" "line" "brackets" "cursor" ];
+      highlighters = ["main" "line" "brackets" "cursor"];
       styles = {
         alias = "fg=cyan,bold";
         path = "fg=yellow,bold";

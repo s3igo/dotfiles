@@ -1,8 +1,6 @@
-{ lib, ... }:
-let
+{lib, ...}: let
   user = "s3igo";
-in
-{
+in {
   imports = [
     ./cli
     ./gui

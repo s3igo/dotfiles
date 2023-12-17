@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -57,7 +57,7 @@
       "zoom"
       {
         name = "chromium";
-        args = { no_quarantine = true; };
+        args = {no_quarantine = true;};
       }
     ];
     masApps = {
