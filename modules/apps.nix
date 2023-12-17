@@ -23,7 +23,6 @@
       "hexyl"
       "idleberg/dbxcli/dbxcli"
       "just"
-      "lf"
       "neovim"
       "ollama"
       "pastel"

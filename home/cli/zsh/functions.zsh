@@ -28,3 +28,6 @@ function arc {
     open -a 'Arc.app' "$@"
 }
 
+function ql {
+    qlmanage -p "$1" >& /dev/null
+}

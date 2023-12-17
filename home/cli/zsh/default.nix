@@ -30,6 +30,7 @@
       lg = "lazygit";
       nv = "nvim";
       restart = "exec $SHELL -l";
+      trash = "trash -F";
       # -iv: interactive, verbose
       cp = "cp -iv";
       mv = "mv -iv";
@@ -48,9 +49,6 @@
       # typos
       al = "la";
       mkdri = "mkdir";
-      # mac
-      ql = "qlmanage -p";
-      trash = "trash -F";
     };
     shellGlobalAliases = {
       "@i" = "install";

@@ -2,6 +2,7 @@
   imports = [
     ./git.nix
     ./lazygit.nix
+    ./lf.nix
     ./starship.nix
     ./zsh
   ];
