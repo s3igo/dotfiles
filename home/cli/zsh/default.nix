@@ -74,20 +74,15 @@
       };
     };
     sessionVariables = {
-      LANG = "ja_JP.UTF-8";
       _ZO_DATA_DIR = "$XDG_DATA_HOME/zoxide";
       DOCKER_CONFIG = "$XDG_CONFIG_HOME/docker";
       LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
       EDITOR = "nvim";
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
-      # FPATH = "$XDG_DATA_HOME/zsh/functions:$FPATH";
     };
     initExtraFirst = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     initExtra = ''
       FPATH="$XDG_DATA_HOME/zsh/site-functions:$FPATH"
-
-      # initialize gh
-      # type gh > /dev/null 2>&1 && eval "$(gh completion -s zsh)"
 
       # prohibit overwriting existing files
       set -o noclobber
@@ -112,16 +107,6 @@
       type rustup-init > /dev/null 2>&1 && source "$CARGO_HOME/env"
 
       # functions
-      function ls {
-          eza --icons --git "$@" 2> /dev/null || command ls "$@"
-      }
-      function lt {
-          eza -T --icons "$@" 2> /dev/null || command tree "$@"
-      }
-      function la {
-          eza -la --icons --git "$@" 2> /dev/null || command ls -la "$@"
-      }
-
       function timestamp {
           [[ $# == 0 ]] && date '+%Y%m%d%H%M%S' && return 0
           [[ $# > 1 ]] && echo 'error: too many arguments' && return 1

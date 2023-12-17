@@ -4,5 +4,4 @@ homebrew/cask-fonts
 homebrew/services
 idleberg/dbxcli
 itchyny/tap
-jesseduffield/lazygit
 yqrashawn/goku

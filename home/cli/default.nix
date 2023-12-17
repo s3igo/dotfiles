@@ -12,5 +12,15 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    eza ={
+      enable = true;
+      enableAliases = true;
+      git = true;
+      icons = true;
+    };
+    bat.enable = true;
+    bottom.enable = true;
+    jq.enable = true;
+    lazygit.enable = true;
   };
 }

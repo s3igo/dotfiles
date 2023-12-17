@@ -1,14 +1,8 @@
 act
-atuin
-bat
-bottom
 daipeihust/tap/im-select
-direnv
 efm-langserver
-eza
 fd
 fnm
-fzf
 gh
 ghq
 git
@@ -20,8 +14,6 @@ helix
 hexyl
 idleberg/dbxcli/dbxcli
 itchyny/tap/mmv
-jesseduffield/lazygit/lazygit
-jq
 just
 lazydocker
 lf
@@ -40,4 +32,3 @@ tree
 typst
 yqrashawn/goku/goku
 zk
-zoxide
