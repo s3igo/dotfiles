@@ -116,6 +116,14 @@ update-nix:
 	nix flake update
 	$(MAKE) deploy
 
+.PHONY: history
+history:
+	darwin-rebuild --list-generations
+
+.PHONY: rollback
+rollback:
+	darwin-rebuild switch --rollback
+
 .PHONY: install
 install:
 	@$(MAKE) init

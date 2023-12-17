@@ -12,6 +12,7 @@
       character.success_symbol = "[❯](bold blue)";
       git_branch.symbol = "󰘬 ";
       git_metrics.disabled = false;
+      nix_shell.symbol = " ";
       custom.arch = {
         command = "uname -m";
         when = true;

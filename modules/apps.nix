@@ -36,7 +36,6 @@
       "cloudflare-warp"
       "cron"
       "cursor"
-      "discord"
       "dropbox"
       "firefox"
       "font-ipaexfont"
@@ -48,7 +47,6 @@
       "karabiner-elements"
       "keyboardcleantool"
       "mochi-diffusion"
-      "monitorcontrol"
       "morgen"
       "orbstack"
       "orion"
@@ -56,7 +54,6 @@
       "routine"
       "slack"
       "visual-studio-code"
-      "wezterm"
       "zed"
       "zoom"
       {

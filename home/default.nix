@@ -5,6 +5,7 @@ in
 {
   imports = [
     ./cli
+    ./gui
   ];
   home = {
     username = user;
