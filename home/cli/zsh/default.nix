@@ -46,9 +46,10 @@
       "......." = "cd ../../../../../..";
       cdla = "cd $_";
       cdl = ''cd "$(cat ${config.xdg.dataHome}/lf/lastdir)"'';
-      cdf = ''
-        cd "$(${pkgs.fd} --hidden --no-ignore --type=directory --exclude=.git | ${pkgs.fzf} --preview "${pkgs.eza} -la --icons --git {}")"
-      '';
+      cdf = pkgs.lib.concatStrings [
+        ''cd "$(${pkgs.fd}/bin/fd --hidden --no-ignore --type=directory --exclude=.git''
+        ''| ${pkgs.fzf}/bin/fzf --preview "${pkgs.eza}/bin/eza -la --icons --git {}")"''
+      ];
       cdg = ''cd "$(cat ${config.xdg.stateHome}/ghq/lastdir)"'';
       # typos
       al = "la";
@@ -58,9 +59,9 @@
       "@i" = "install";
       "@u" = "uninstall";
       "@s" = "search";
-      "@d_ps" = ''"$(docker ps | tail -n +2 | ${pkgs.fzf} | awk '{print $1}')"'';
-      "@d_ps-a" = ''"$(docker ps -a | tail -n +2 | ${pkgs.fzf} | awk '{print $1}')"'';
-      "@d_image_ls" = ''"$(docker image ls | tail -n +2 | ${pkgs.fzf} | awk '{print $3}')"'';
+      "@d_ps" = ''"$(docker ps | tail -n +2 | ${pkgs.fzf}/bin/fzf | awk '{print $1}')"'';
+      "@d_ps-a" = ''"$(docker ps -a | tail -n +2 | ${pkgs.fzf}/bin/fzf | awk '{print $1}')"'';
+      "@d_image_ls" = ''"$(docker image ls | tail -n +2 | ${pkgs.fzf}/bin/fzf | awk '{print $3}')"'';
       # mac
       "@cp" = "| pbcopy";
       "@pst" = ''"$(pbpaste)"'';
@@ -91,9 +92,9 @@
       bindkey '^U' backward-kill-line
 
       function __ghq-fzf {
-        declare ROOT="$(${pkgs.ghq} root)"
-        declare PREVIEW_CMD="${pkgs.eza} --tree --git-ignore -I 'node_modules|.git' $ROOT/{}"
-        declare DEST="$ROOT/$(${pkgs.ghq} list | ${pkgs.fzf} --preview $PREVIEW_CMD)"
+        declare ROOT="$(${pkgs.ghq}/bin/ghq root)"
+        declare PREVIEW_CMD="${pkgs.eza}/bin/eza --tree --git-ignore -I 'node_modules|.git' $ROOT/{}"
+        declare DEST="$ROOT/$(${pkgs.ghq}/bin/ghq list | ${pkgs.fzf}/bin/fzf --preview $PREVIEW_CMD)"
         declare BUFFER="cd $DEST"
         zle accept-line
         mkdir -p "${config.xdg.stateHome}/ghq"
