@@ -29,6 +29,13 @@
     };
   };
 
+  xdg.configFile."act/actrc".text = ''
+    -P ubuntu-latest=catthehacker/ubuntu:act-latest
+    -P ubuntu-22.04=catthehacker/ubuntu:act-22.04
+    -P ubuntu-20.04=catthehacker/ubuntu:act-20.04
+    -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
+  '';
+
   home.packages = with pkgs; [
     darwin.trash
     efm-langserver

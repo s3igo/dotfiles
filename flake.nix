@@ -23,7 +23,7 @@
     pkgs = import nixpkgs {inherit system;};
   in {
     devShells.aarch64-darwin.default = pkgs.mkShell {
-      buildInputs = [pkgs.goku];
+      buildInputs = with pkgs; [goku act];
     };
     darwinConfigurations = {
       mbp2023 = nix-darwin.lib.darwinSystem {

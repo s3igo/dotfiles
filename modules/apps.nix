@@ -10,19 +10,15 @@
       "daipeihust/tap"
       "homebrew/cask-fonts"
       "homebrew/services"
-      "idleberg/dbxcli"
     ];
     brews = [
-      "act"
       "daipeihust/tap/im-select"
       "fnm"
       "gh"
       "helix"
-      "idleberg/dbxcli/dbxcli"
       "neovim"
       "ollama"
       "rustup-init"
-      "sheldon"
       "typst"
     ];
     casks = [
