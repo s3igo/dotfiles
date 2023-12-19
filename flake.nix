@@ -41,7 +41,7 @@
             home-manager.darwinModules.home-manager
             {
               home-manager = {
-                useGlocalPkgs = true;
+                useGlobalPkgs = true;
                 useUserPackages = true;
                 users.s3igo = import ./home;
               };
