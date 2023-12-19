@@ -26,7 +26,7 @@
         pkgs = import nixpkgs {inherit system;};
       in {
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [goku act];
+          buildInputs = with pkgs; [act goku statix];
         };
 
         formatter = pkgs.alejandra;
