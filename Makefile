@@ -107,9 +107,9 @@ deploy:
 	mkdir -p ${XDG_DATA_HOME}/zsh/site-functions
 	gh completion -s zsh > ${XDG_DATA_HOME}/zsh/site-functions/_gh
 
-# .PHONY: deploy-without-cache
-# deploy-without-cache:
-# 	darwin-rebuild switch --option eval-cache false --flake .#$(PROFILE)
+.PHONY: deploy-without-cache
+deploy-without-cache:
+	darwin-rebuild switch --option eval-cache false --flake .#$(PROFILE)
 
 .PHONY: update-nix
 update-nix:

@@ -1,4 +1,7 @@
 _: {
+  imports = [
+    ./vim.nix
+  ];
   homebrew = {
     enable = true;
     onActivation = {
