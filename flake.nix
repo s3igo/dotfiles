@@ -40,9 +40,11 @@
             ./modules/apps.nix
             home-manager.darwinModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.s3igo = import ./home;
+              home-manager = {
+                useGlocalPkgs = true;
+                useUserPackages = true;
+                users.s3igo = import ./home;
+              };
             }
           ];
         };

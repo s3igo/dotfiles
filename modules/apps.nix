@@ -6,7 +6,6 @@ _: {
       cleanup = "zap";
     };
     taps = [
-      "candid82/brew"
       "daipeihust/tap"
       "homebrew/cask-fonts"
       "homebrew/services"
