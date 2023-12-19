@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,36 +16,33 @@
 
   outputs = {
     nixpkgs,
+    flake-utils,
     nix-darwin,
     home-manager,
     ...
-  }: let
-    system = "aarch64-darwin";
-    pkgs = import nixpkgs {inherit system;};
-  in {
-    devShells.aarch64-darwin.default = pkgs.mkShell {
-      buildInputs = with pkgs; [goku act];
-    };
-    darwinConfigurations = {
-      mbp2023 = nix-darwin.lib.darwinSystem {
-        # system = "aarch64-darwin";
-        modules = [
-          ./modules/system.nix
-          ./modules/apps.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.s3igo = import ./home;
-          }
-        ];
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      devShell = pkgs.mkShell {
+        buildInputs = with pkgs; [goku act];
       };
-    };
 
-    # Expose the package set, including overlays, for convenience.
-    # darwinPackages = self.darwinConfigurations."mbp2023".pkgs;
+      darwinConfigurations = {
+        mbp2023 = nix-darwin.lib.darwinSystem {
+          modules = [
+            ./modules/system.nix
+            ./modules/apps.nix
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.s3igo = import ./home;
+            }
+          ];
+        };
+      };
 
-    # formatter
-    formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.alejandra;
-  };
+      formatter = pkgs.alejandra;
+    });
 }
