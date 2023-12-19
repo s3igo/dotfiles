@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./git.nix
+    ./helix.nix
     ./lazygit.nix
     ./lf
     ./starship.nix

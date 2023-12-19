@@ -15,7 +15,6 @@ _: {
       "daipeihust/tap/im-select"
       "fnm"
       "gh"
-      "helix"
       "neovim"
       "ollama"
       "rustup-init"
