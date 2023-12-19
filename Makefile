@@ -120,9 +120,9 @@ update-nix:
 history:
 	darwin-rebuild --list-generations
 
-.PHONY: rollback
-rollback:
-	darwin-rebuild switch --rollback
+.PHONY: gc
+gc:
+	nix store gc --max 5G
 
 .PHONY: install
 install:

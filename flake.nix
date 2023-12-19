@@ -21,13 +21,18 @@
     home-manager,
     ...
   }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      devShell = pkgs.mkShell {
-        buildInputs = with pkgs; [goku act];
-      };
+    flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [goku act];
+        };
 
+        formatter = pkgs.alejandra;
+      }
+    )
+    // {
       darwinConfigurations = {
         mbp2023 = nix-darwin.lib.darwinSystem {
           modules = [
@@ -42,7 +47,5 @@
           ];
         };
       };
-
-      formatter = pkgs.alejandra;
-    });
+    };
 }

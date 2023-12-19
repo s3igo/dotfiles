@@ -41,7 +41,6 @@
       "google-japanese-ime"
       "karabiner-elements"
       "keyboardcleantool"
-      "mochi-diffusion"
       "morgen"
       "orbstack"
       "orion"
