@@ -71,7 +71,6 @@
     };
     sessionVariables = {
       DOCKER_CONFIG = "${config.xdg.configHome}/docker";
-      EDITOR = "nvim";
       LESSHISTFILE = "-";
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";

@@ -1,4 +1,9 @@
-{pkgs, lib, config, ...}: {
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
   imports = [
     ./git.nix
     ./helix.nix
@@ -18,6 +23,12 @@
       enable = true;
       nix-direnv.enable = true;
     };
+    eza = {
+      enable = true;
+      enableAliases = true;
+      git = true;
+      icons = true;
+    };
     gh = {
       enable = true;
       settings = {
@@ -27,11 +38,9 @@
         git_protocol = "ssh";
       };
     };
-    eza = {
+    neovim = {
       enable = true;
-      enableAliases = true;
-      git = true;
-      icons = true;
+      defaultEditor = true;
     };
     ripgrep = {
       enable = true;
@@ -58,6 +67,8 @@
     -P ubuntu-20.04=catthehacker/ubuntu:act-20.04
     -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
   '';
+
+  xdg.configFile.nvim.source = ../../config/home/.config/nvim;
 
   home.packages = with pkgs; [
     darwin.trash

@@ -16,7 +16,6 @@ _: {
     brews = [
       "daipeihust/tap/im-select"
       "fnm"
-      "neovim"
       "ollama"
       "rustup-init"
       "typst"
