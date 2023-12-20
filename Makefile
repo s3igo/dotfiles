@@ -104,8 +104,6 @@ endif
 .PHONY: deploy
 deploy:
 	darwin-rebuild switch --flake .#$(PROFILE)
-	mkdir -p ${XDG_DATA_HOME}/zsh/site-functions
-	gh completion -s zsh > ${XDG_DATA_HOME}/zsh/site-functions/_gh
 
 .PHONY: deploy-without-cache
 deploy-without-cache:
