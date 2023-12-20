@@ -30,6 +30,14 @@
     };
   };
 
+  home.file.".ssh/config".text = ''
+    Include ~/.orbstack/ssh/config
+
+    Host *
+      IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      ForWardAgent yes
+  '';
+
   xdg.configFile."act/actrc".text = ''
     -P ubuntu-latest=catthehacker/ubuntu:act-latest
     -P ubuntu-22.04=catthehacker/ubuntu:act-22.04
