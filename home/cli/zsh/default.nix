@@ -77,7 +77,7 @@
     };
     initExtraFirst = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     initExtra = ''
-      source ${pkgs.zsh-autopair}/share/zsh-autopair/zsh-autopair.zsh
+      source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
       source ${./options.zsh}
       source ${./functions.zsh}
 
