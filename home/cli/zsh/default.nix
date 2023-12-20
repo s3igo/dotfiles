@@ -8,13 +8,6 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     defaultKeymap = "emacs";
-    antidote = {
-      enable = true;
-      plugins = [
-        "hlissner/zsh-autopair"
-        "zpm-zsh/undollar"
-      ];
-    };
     dotDir = ".config/zsh";
     history = {
       ignoreAllDups = true;
@@ -85,6 +78,7 @@
     };
     initExtraFirst = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     initExtra = ''
+      source ${pkgs.zsh-autopair}/share/zsh-autopair/zsh-autopair.zsh
       source ${./options.zsh}
       source ${./functions.zsh}
 
