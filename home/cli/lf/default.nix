@@ -1,4 +1,8 @@
-_: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   xdg.configFile."lf/icons".source = ./icons;
   programs.lf = {
     enable = true;
@@ -8,8 +12,8 @@ _: {
     };
     commands = {
       open = "$qlmanage -p $f >& /dev/null";
-      on-select = ''&{{ lf -remote "send $id set statfmt \"$(eza -ld --color=always "$f")\"" }}'';
-      on-quit = ''''${{ echo $PWD > $XDG_DATA_HOME/lf/lastdir }}'';
+      on-select = ''&{{ ${pkgs.lf}/bin/lf -remote "send $id set statfmt \"$(${pkgs.eza}/bin/eza -ld --color=always "$f")\"" }}'';
+      on-quit = ''''${{ echo $PWD > ${config.xdg.dataHome}/lf/lastdir }}'';
     };
     keybindings = {
       "<enter>" = "&$OPENER $f";

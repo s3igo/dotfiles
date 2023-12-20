@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   programs.lazygit = {
     enable = true;
     settings = {
@@ -8,7 +8,7 @@ _: {
       };
       git.paging = {
         colorArg = "always";
-        pager = "delta --dark --paging=never";
+        pager = "${pkgs.delta}/bin/delta --dark --paging=never";
       };
     };
   };
