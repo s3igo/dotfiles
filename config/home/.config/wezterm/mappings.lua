@@ -146,13 +146,36 @@ local copy_mode = {
 
     -- link
     { key = 'o', mods = 'CTRL', action = act.OpenLinkAtMouseCursor },
+
+    -- search
+    { key = '/', action = act.Search({ CaseInSensitiveString = '' }) },
+    { key = '?', action = act.Search({ CaseSensitiveString = '' }) },
+    { key = 'n', action = act.CopyMode('NextMatch') },
+    { key = 'N', action = act.CopyMode('PriorMatch') },
 }
 
-M.key_tables = { leader = leader, copy_mode = copy_mode }
+local search_mode = {
+    { key = '[', mods = 'CTRL', action = act.CopyMode('Close') },
+    { key = 'Enter', action = 'ActivateCopyMode' },
+    {
+        key = 'h',
+        mods = 'CTRL',
+        action = wezterm.action_callback(
+            function(window, pane) window:perform_action(act.SendKey({ key = 'Backspace' }), pane) end
+        ),
+    },
+}
+
+M.key_tables = {
+    leader = leader,
+    copy_mode = copy_mode,
+    search_mode = search_mode,
+}
 
 M.mouse_bindings = {
     {
         event = { Up = { streak = 1, button = 'Left' } },
+        mods = 'SUPER',
         action = act.OpenLinkAtMouseCursor,
     },
 }

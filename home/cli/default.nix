@@ -81,5 +81,6 @@
     ghq
     lazydocker
     mmv-go
+    moar
   ];
 }

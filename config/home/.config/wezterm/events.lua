@@ -55,8 +55,8 @@ wezterm.on('gui-startup', function(cmd)
     local d_tab_3, _, d_window_3 = d_window_2:spawn_tab({ cwd = projects_root .. '/2023-second-semester' })
     d_tab_3:set_title('univ')
 
-    local d_tab_4 = d_window_3:spawn_tab({ cwd = projects_root .. '/note' })
-    d_tab_4:set_title('note')
+    local d_tab_4 = d_window_3:spawn_tab({ cwd = projects_root .. '/notes' })
+    d_tab_4:set_title('notes')
 
     wezterm.mux.set_active_workspace('general')
 end)

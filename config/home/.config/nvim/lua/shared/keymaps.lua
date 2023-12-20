@@ -21,6 +21,7 @@ vim.keymap.set('n', '<C-w>d', '<C-w>c', { desc = 'Close window', remap = true })
 -- registers
 -- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { remap = true })
 vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y')
+vim.keymap.set({ 'n', 'x' }, '<leader>Y', '"+yg_')
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"+d')
 vim.keymap.set({ 'n', 'x' }, '<leader>p', '"+p')
 vim.keymap.set({ 'n', 'x' }, '<leader>0', '"0p')
