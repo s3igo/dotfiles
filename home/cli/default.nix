@@ -48,27 +48,31 @@
     };
   };
 
-  home.activation.installGhCompletion = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p ${config.xdg.dataHome}/zsh/site-functions
-    ${pkgs.gh}/bin/gh completion -s zsh > ${config.xdg.dataHome}/zsh/site-functions/_gh
-  '';
+  home = {
+    activation.installGhCompletion = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p ${config.xdg.dataHome}/zsh/site-functions
+      ${pkgs.gh}/bin/gh completion -s zsh > ${config.xdg.dataHome}/zsh/site-functions/_gh
+    '';
 
-  home.file.".ssh/config".text = ''
-    Include ~/.orbstack/ssh/config
+    file.".ssh/config".text = ''
+      Include ~/.orbstack/ssh/config
 
-    Host *
-      IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-      ForWardAgent yes
-  '';
+      Host *
+        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+        ForWardAgent yes
+    '';
+  };
 
-  xdg.configFile."act/actrc".text = ''
-    -P ubuntu-latest=catthehacker/ubuntu:act-latest
-    -P ubuntu-22.04=catthehacker/ubuntu:act-22.04
-    -P ubuntu-20.04=catthehacker/ubuntu:act-20.04
-    -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
-  '';
+  xdg = {
+    configFile."act/actrc".text = ''
+      -P ubuntu-latest=catthehacker/ubuntu:act-latest
+      -P ubuntu-22.04=catthehacker/ubuntu:act-22.04
+      -P ubuntu-20.04=catthehacker/ubuntu:act-20.04
+      -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
+    '';
 
-  xdg.configFile.nvim.source = ../../config/home/.config/nvim;
+    configFile.nvim.source = ../../config/home/.config/nvim;
+  };
 
   home.packages = with pkgs; [
     darwin.trash
