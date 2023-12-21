@@ -45,7 +45,7 @@ _: {
         line-number = "relative";
         shell = ["zsh" "-c"];
         auto-save = true;
-        bufferline = "always";
+        # bufferline = "always";
         color-modes = true;
         text-width = 120;
         statusline = {

@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./vim.nix
+    ./vim
   ];
   homebrew = {
     enable = true;

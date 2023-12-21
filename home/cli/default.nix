@@ -21,6 +21,7 @@
     zoxide.enable = true;
     direnv = {
       enable = true;
+      config.global.warn_timeout = 0;
       nix-direnv.enable = true;
     };
     eza = {
