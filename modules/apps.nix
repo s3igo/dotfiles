@@ -16,17 +16,14 @@ _: {
     brews = [
       "daipeihust/tap/im-select"
       "fnm"
-      "ollama"
       "rustup-init"
       "typst"
     ];
     casks = [
       "1password"
       "1password-cli"
-      "adobe-acrobat-pro"
       "anytype"
       "arc"
-      "brave-browser"
       "cloudflare-warp"
       "cron"
       "cursor"

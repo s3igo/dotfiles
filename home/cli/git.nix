@@ -24,8 +24,6 @@
     ignores = [
       ".DS_Store"
       ".env"
-      ".direnv/"
-      "node_modules/"
     ];
     lfs.enable = true;
     userName = "s3igo";
