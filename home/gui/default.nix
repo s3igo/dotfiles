@@ -18,5 +18,6 @@
   home.packages = with pkgs; [
     monitorcontrol
     discord
+    udev-gothic-nf
   ];
 }

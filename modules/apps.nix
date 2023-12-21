@@ -10,13 +10,13 @@ _: {
     };
     taps = [
       "daipeihust/tap"
-      "homebrew/cask-fonts"
+      # "homebrew/cask-fonts"
       "homebrew/services"
     ];
     brews = [
       "daipeihust/tap/im-select"
       "fnm"
-      "rustup-init"
+      # "rustup-init"
       "typst"
     ];
     casks = [
@@ -29,10 +29,9 @@ _: {
       "cursor"
       "dropbox"
       "firefox"
-      "font-ipaexfont"
-      "font-noto-sans-cjk-jp"
-      "font-udev-gothic-nf"
-      "font-zen-kaku-gothic-new"
+      # "font-ipaexfont"
+      # "font-noto-sans-cjk-jp"
+      # "font-zen-kaku-gothic-new"
       "google-chrome"
       "google-japanese-ime"
       "karabiner-elements"
