@@ -34,20 +34,26 @@
     )
     // {
       darwinConfigurations = {
-        mbp2023 = nix-darwin.lib.darwinSystem {
-          modules = [
-            ./modules/system.nix
-            ./modules/apps.nix
-            home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.s3igo = import ./home;
-              };
-            }
-          ];
-        };
+        mbp2023 = let
+          user = "s3igo";
+        in
+          nix-darwin.lib.darwinSystem {
+            modules = [
+              ({pkgs, ...}: {
+                users.users.${user}.home = "/Users/${user}";
+              })
+              ./modules/system.nix
+              ./modules/apps.nix
+              home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${user} = import ./home;
+                };
+              }
+            ];
+          };
       };
     };
 }

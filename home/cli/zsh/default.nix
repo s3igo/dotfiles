@@ -75,11 +75,13 @@
       SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";
     };
-    initExtraFirst = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
     initExtra = ''
       source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
       source ${./options.zsh}
       source ${./functions.zsh}
+
+      # orbstack
+      export PATH="$PATH":${config.home.homeDirectory}/.orbstack/bin
 
       # bindkey
       bindkey '^U' backward-kill-line
