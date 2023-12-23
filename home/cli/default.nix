@@ -82,7 +82,6 @@
     ghq
     lazydocker
     mmv-go
-    moar
     ollama
   ];
 }

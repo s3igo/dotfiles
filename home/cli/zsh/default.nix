@@ -16,7 +16,6 @@
     };
     historySubstringSearch = {
       enable = true;
-      searchDownKey = ["^N"];
       searchUpKey = ["^P"];
     };
     shellAliases = {
