@@ -22,7 +22,7 @@
         level = {
           command = "echo $(($SHLVL - 1))";
           when = true;
-          style = "bold blue";
+          style = "bold green";
           format = "\\[[$output]($style)\\] ";
         };
       };
