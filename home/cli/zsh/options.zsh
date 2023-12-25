@@ -9,14 +9,13 @@ set -o noclobber
 set -o ignoreeof
 
 # completion
+# autoload -Uz compinit && compinit -u
 zstyle ':completion:*' menu select interactive
 setopt menu_complete
+zmodload -i zsh/complist
+bindkey -M menuselect '^N' down-line-or-history
+bindkey -M menuselect '^P' up-line-or-history
 
 # node
 declare -x NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
-
-# rust
-declare -x RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-declare -x CARGO_HOME="$XDG_DATA_HOME/cargo"
-type rustup-init > /dev/null 2>&1 && source "$CARGO_HOME/env"

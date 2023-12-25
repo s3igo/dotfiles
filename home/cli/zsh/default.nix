@@ -17,6 +17,7 @@
     historySubstringSearch = {
       enable = true;
       searchUpKey = ["^P"];
+      searchDownKey = ["^N"];
     };
     shellAliases = {
       g = "git";
