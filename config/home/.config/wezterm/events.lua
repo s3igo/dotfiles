@@ -128,6 +128,20 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
+    local function cpu_usage()
+        local text = wezterm.GLOBAL.cpu or 'undefined'
+
+        if is_valid_pane(window, pane) then
+            window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
+        end
+
+        return wezterm.format({
+            { Foreground = { Color = colors.white } },
+            { Background = { Color = colors.gray } },
+            { Text = ' ' .. text .. ' ' },
+        })
+    end
+
     local function co2()
         local value = wezterm.GLOBAL.co2 or 'undefined'
         if is_valid_pane(window, pane) then
@@ -167,25 +181,11 @@ wezterm.on('update-status', function(window, pane)
         end)()
 
         return wezterm.format({
+            { Foreground = { Color = bg } },
+            { Background = { Color = colors.gray } },
+            { Text = glyph.solid_left_arrow },
             { Foreground = { Color = colors.black } },
             { Background = { Color = bg } },
-            { Text = ' ' .. text .. ' ' },
-            { Foreground = { Color = colors.gray } },
-            { Text = glyph.solid_left_arrow },
-        }),
-            bg
-    end
-
-    local function cpu_usage()
-        local text = wezterm.GLOBAL.cpu or 'undefined'
-
-        if is_valid_pane(window, pane) then
-            window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
-        end
-
-        return wezterm.format({
-            { Foreground = { Color = colors.white } },
-            { Background = { Color = colors.gray } },
             { Text = ' ' .. text .. ' ' },
             { Foreground = { Color = colors.white } },
             { Text = glyph.solid_left_arrow },
@@ -216,9 +216,7 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
-    local co2_info, co2_bg = co2()
-
-    window:set_right_status(mode(co2_bg) .. co2_info .. cpu_usage() .. name())
+    window:set_right_status(mode() .. cpu_usage() .. co2() .. name())
     window:set_left_status(workspace())
 end)
 
