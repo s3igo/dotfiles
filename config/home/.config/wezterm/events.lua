@@ -9,9 +9,9 @@ local colors = {
     red = default_colors.brights[2],
     green = default_colors.ansi[4],
     yellow = default_colors.brights[4],
-    light_blue = default_colors.ansi[5],
+    blue = default_colors.ansi[5],
     purple = default_colors.ansi[6],
-    blue = '#384B5A',
+    navy = '#384B5A',
 }
 
 local glyph = {
@@ -112,10 +112,10 @@ wezterm.on('update-status', function(window, pane)
         local current = window:active_key_table()
         local text = string.upper(current or '')
         local lookup = {
-            leader = colors.light_blue,
+            leader = colors.blue,
             copy_mode = colors.yellow,
         }
-        local bg = lookup[current] or colors.blue
+        local bg = lookup[current] or colors.navy
 
         return wezterm.format({
             { Foreground = { Color = bg } },
@@ -149,7 +149,7 @@ wezterm.on('update-status', function(window, pane)
         end
 
         local lookup = {
-            good = colors.light_blue,
+            good = colors.blue,
             moderate = colors.green,
             bad = colors.yellow,
             very_bad = colors.red,
@@ -244,10 +244,10 @@ wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
     local prev_tab_is_active = not is_first_tab and tabs[tab.tab_index].is_active
 
     local frontground = is_active and colors.black or colors.white
-    local background = is_active and colors.yellow or colors.blue
+    local background = is_active and colors.yellow or colors.navy
 
     local function left_separator()
-        local fg = is_first_tab and colors.white or prev_tab_is_active and colors.yellow or colors.blue
+        local fg = is_first_tab and colors.white or prev_tab_is_active and colors.yellow or colors.navy
         local bg = background
         return wezterm.format({
             { Foreground = { Color = fg } },
