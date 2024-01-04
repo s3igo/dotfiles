@@ -6,8 +6,11 @@ local colors = {
     white = default_colors.foreground,
     black = default_colors.background,
     gray = default_colors.brights[1],
+    red = default_colors.brights[2],
+    green = default_colors.ansi[4],
     yellow = default_colors.brights[4],
     light_blue = default_colors.ansi[5],
+    purple = default_colors.ansi[6],
     blue = '#384B5A',
 }
 
@@ -19,6 +22,7 @@ local glyph = {
     left_arrow = utf8.char(0xe0b3),
     -- icon
     cpu = utf8.char(0xf4bc),
+    co2 = utf8.char(0xf05e3),
 }
 
 wezterm.on('gui-startup', function(cmd)
@@ -78,6 +82,25 @@ end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
+local function get_co2()
+    local _, json = wezterm.run_child_process({
+        '/etc/profiles/per-user/s3igo/bin/timeout',
+        '2',
+        '/etc/profiles/per-user/s3igo/bin/chissoku',
+        '--quiet',
+        '--stdout.interval=1',
+        '/dev/tty.usbmodem314201',
+    })
+    if not json then
+        return 'null'
+    end
+
+    -- matche any number of 2 or more digits
+    return json:match('(%d%d+)') or 'null'
+end
+
+wezterm.on('co2', function() wezterm.GLOBAL.co2 = get_co2() end)
+
 local function is_valid_pane(window, pane_info)
     local is_startup = pane_info:pane_id() == 0
     local is_operating_confirmation_prompt = window:active_pane():pane_id() ~= pane_info:pane_id()
@@ -85,7 +108,7 @@ local function is_valid_pane(window, pane_info)
 end
 
 wezterm.on('update-status', function(window, pane)
-    local function mode()
+    local function mode(end_fg)
         local current = window:active_key_table()
         local text = string.upper(current or '')
         local lookup = {
@@ -100,9 +123,57 @@ wezterm.on('update-status', function(window, pane)
             { Foreground = { Color = colors.black } },
             { Background = { Color = bg } },
             { Text = ' ' .. text .. ' ' },
-            { Foreground = { Color = colors.gray } },
+            { Foreground = { Color = end_fg or colors.gray } },
             { Text = glyph.solid_left_arrow },
         })
+    end
+
+    local function co2()
+        local value = wezterm.GLOBAL.co2 or 'undefined'
+        if is_valid_pane(window, pane) then
+            window:perform_action(wezterm.action.EmitEvent('co2'), pane)
+        end
+
+        local lookup = {
+            good = colors.light_blue,
+            moderate = colors.green,
+            bad = colors.yellow,
+            very_bad = colors.red,
+            extremely_bad = colors.purple,
+        }
+
+        local bg = not tonumber(value) and colors.white
+            or tonumber(value) <= 1000 and lookup.good
+            or tonumber(value) <= 1500 and lookup.moderate
+            or tonumber(value) <= 2500 and lookup.bad
+            or tonumber(value) <= 3500 and lookup.very_bad
+            or lookup.extremely_bad
+
+        local text = (function()
+            if not tonumber(value) then
+                return value
+            end
+
+            -- add comma
+            local str = ''
+            for i = 1, #value do
+                str = str .. value:sub(i, i)
+                if (#value - i) % 3 == 0 and i ~= #value then
+                    str = str .. ','
+                end
+            end
+
+            return glyph.co2 .. wezterm.pad_left(str, 6) .. ' ppm'
+        end)()
+
+        return wezterm.format({
+            { Foreground = { Color = colors.black } },
+            { Background = { Color = bg } },
+            { Text = ' ' .. text .. ' ' },
+            { Foreground = { Color = colors.gray } },
+            { Text = glyph.solid_left_arrow },
+        }),
+            bg
     end
 
     local function cpu_usage()
@@ -145,7 +216,9 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
-    window:set_right_status(mode() .. cpu_usage() .. name())
+    local co2_info, co2_bg = co2()
+
+    window:set_right_status(mode(co2_bg) .. co2_info .. cpu_usage() .. name())
     window:set_left_status(workspace())
 end)
 

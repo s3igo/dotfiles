@@ -83,5 +83,8 @@
     lazydocker
     mmv-go
     ollama
+    rclone
+    uutils-coreutils-noprefix
+    (import ./chissoku.nix {inherit pkgs;})
   ];
 }
