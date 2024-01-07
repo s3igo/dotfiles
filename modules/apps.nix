@@ -32,6 +32,7 @@ _: {
       # "font-ipaexfont"
       # "font-noto-sans-cjk-jp"
       # "font-zen-kaku-gothic-new"
+      "floorp"
       "google-chrome"
       "google-japanese-ime"
       "karabiner-elements"
