@@ -25,7 +25,9 @@
       system: let
         pkgs = import nixpkgs {inherit system;};
       in {
-        devShell = pkgs.mkShell {
+        packages.default = import ./packages/zsh {inherit pkgs;};
+
+        devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [act goku statix];
         };
 
