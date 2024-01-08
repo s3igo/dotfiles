@@ -40,7 +40,7 @@
     initExtraFirst = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
 
-      ${import ../../../packages/zsh/config.nix {inherit pkgs;} }
+      ${import ../../../packages/zsh/shell {inherit pkgs;} }
     '';
     initExtra = ''
       source ${./functions.zsh}
