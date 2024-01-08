@@ -8,8 +8,8 @@ pkgs.buildEnv {
         name = "zsh-config";
         src = ./starship;
         zshrc = pkgs.writeText "zshrc" ''
-          ${import ./shell {inherit pkgs;} }
-          ${import ./starship {inherit pkgs;} }
+          ${import ./shell {inherit pkgs;}}
+          ${import ./starship {inherit pkgs;}}
         '';
         installPhase = ''
           mkdir -p $out/{config,starship}
