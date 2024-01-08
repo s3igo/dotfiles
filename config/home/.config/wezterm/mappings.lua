@@ -115,9 +115,9 @@ local copy_mode = {
     -- stylua: ignore start
     { key = '0', action = act.CopyMode('MoveToStartOfLine') },
     { key = 'h', mods = 'CTRL', action = act.CopyMode('MoveToStartOfLineContent') },
-    { key = 'j', mods = 'CTRL', action = act.CopyMode('MoveToScrollbackBottom') },
-    { key = 'k', mods = 'CTRL', action = act.CopyMode('MoveToScrollbackTop') },
     { key = 'l', mods = 'CTRL', action = act.CopyMode('MoveToEndOfLineContent') },
+    { key = 'g', mods = 'CTRL', action = act.CopyMode('MoveToScrollbackTop') },
+    { key = 'g', mods = 'CTRL | SHIFT', action = act.CopyMode('MoveToScrollbackBottom') },
 
     { key = 'h', mods = 'SHIFT', action = act.CopyMode('MoveToViewportTop') },
     { key = 'l', mods = 'SHIFT', action = act.CopyMode('MoveToViewportBottom') },
