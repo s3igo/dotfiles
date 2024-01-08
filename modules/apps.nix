@@ -44,6 +44,7 @@ _: {
       "routine"
       "slack"
       "visual-studio-code"
+      "vivaldi"
       "zed"
       "zoom"
       {
