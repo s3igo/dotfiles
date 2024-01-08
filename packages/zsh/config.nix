@@ -1,7 +1,6 @@
 {pkgs}: ''
   source ${./config.zsh}
 
-  # plugins
   source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source ${pkgs.zsh-autopair}/share/zsh/zsh-autopair/autopair.zsh
 
@@ -14,6 +13,4 @@
   source ${pkgs.zsh-history-substring-search}/share/zsh-history-substring-search/zsh-history-substring-search.zsh
   bindkey "^P" history-substring-search-up
   bindkey "^N" history-substring-search-down
-
-  # eval "$(${pkgs.starship}/bin/starship init zsh)"
 ''

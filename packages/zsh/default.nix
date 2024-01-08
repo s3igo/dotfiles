@@ -6,11 +6,17 @@ pkgs.buildEnv {
       pkgs.stdenv.mkDerivation
       {
         name = "zsh-config";
-        src = ./.;
-        zshrc = pkgs.writeText "zshrc" import ./config.nix {inherit pkgs;};
+        src = ./starship;
+        zshrc = pkgs.writeText "zshrc" ''
+          ${import ./config.nix {inherit pkgs;} }
+          ${import ./starship {inherit pkgs;} }
+        '';
         installPhase = ''
-          mkdir -p $out/config
+          mkdir -p $out/{config,starship}
+          # ZDOTDIR=$out/config
           cp $zshrc $out/config/.zshrc
+          # STARSHIP_CONFIG=$out/starship/config.toml
+          cp $src/config.toml $out/starship/
         '';
       }
     )

@@ -1,0 +1,31 @@
+format = """
+$all\
+$line_break\
+${custom.arch}\
+${custom.level}\
+$character
+"""
+
+[character]
+success_symbol = "[❯](bold blue)"
+
+[custom.arch]
+command = "uname -m"
+style = "bold blue"
+when = true
+
+[custom.level]
+command = "echo $(($SHLVL - 1))"
+format = "\\[[$output]($style)\\] "
+style = "bold green"
+when = true
+
+[git_branch]
+symbol = "󰘬 "
+
+[git_metrics]
+disabled = false
+
+[nix_shell]
+symbol = " "
+

@@ -9,7 +9,6 @@
     ./helix.nix
     ./lazygit.nix
     ./lf
-    ./starship.nix
     ./zsh
   ];
 
@@ -18,6 +17,7 @@
     bottom.enable = true;
     fzf.enable = true;
     jq.enable = true;
+    starship.enable = true;
     zoxide.enable = true;
     direnv = {
       enable = true;
@@ -73,6 +73,7 @@
     '';
 
     configFile.nvim.source = ../../config/home/.config/nvim;
+    configFile."starship.toml".source = ../../packages/zsh/starship/config.toml;
   };
 
   home.packages = with pkgs; [
