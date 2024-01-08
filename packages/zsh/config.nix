@@ -15,5 +15,5 @@
   bindkey "^P" history-substring-search-up
   bindkey "^N" history-substring-search-down
 
-  eval "$(${pkgs.starship}/bin/starship init zsh)"
+  # eval "$(${pkgs.starship}/bin/starship init zsh)"
 ''

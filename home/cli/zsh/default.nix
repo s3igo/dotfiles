@@ -43,8 +43,13 @@
       ${import ../../../packages/zsh/config.nix {inherit pkgs;} }
     '';
     initExtra = ''
-      source ${./options.zsh}
       source ${./functions.zsh}
+
+      export FPATH="$XDG_DATA_HOME/zsh/site-functions:$FPATH"
+
+      # node
+      export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+      type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 
       # orbstack
       export PATH="$PATH":${config.home.homeDirectory}/.orbstack/bin
