@@ -16,7 +16,7 @@
       lg = "lazygit";
       trash = "trash -F";
       cdl = ''cd "$(cat ${config.xdg.dataHome}/lf/lastdir)"'';
-      cdf = pkgs.lib.concatStrings [
+      cdf = pkgs.lib.concatStringsSep " " [
         ''cd "$(${pkgs.fd}/bin/fd --hidden --no-ignore --type=directory --exclude=.git''
         ''| ${pkgs.fzf}/bin/fzf --preview "${pkgs.eza}/bin/eza -la --icons --git {}")"''
       ];
