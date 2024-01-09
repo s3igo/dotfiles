@@ -2,6 +2,7 @@ local wezterm = require('wezterm')
 
 ---@return integer | nil
 local function get_co2()
+    ---@type _, string | nil
     local _, json = wezterm.run_child_process({
         '/etc/profiles/per-user/s3igo/bin/chissoku',
         '--quiet',
@@ -14,6 +15,7 @@ local function get_co2()
         return nil
     end
 
+    -- wait for 1 second
     wezterm.run_child_process({ 'sleep', '1' })
 
     return wezterm.json_parse(json).co2

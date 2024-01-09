@@ -13,9 +13,13 @@ end
 
 ---@return string
 local function get_cpu_usage()
+    ---@type _, string
     local _, result = wezterm.run_child_process({ 'iostat', '-c', '2' })
+
     local line = split(result, '[^\r\n]+')[4]
-    return wezterm.pad_left(100 - split(line, '%S+')[6], 4)
+    local value = split(line, '%S+')[6]
+
+    return wezterm.pad_left(100 - value, 4)
 end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
