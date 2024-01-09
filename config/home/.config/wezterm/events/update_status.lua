@@ -9,10 +9,11 @@ local function is_valid_pane(window, pane_info)
     return not is_startup and not is_operating_confirmation_prompt
 end
 
----@param str string
+---@param int integer
 ---@return string
-local function add_comma(str)
+local function add_comma(int)
     local result = ''
+    local str = tostring(int)
     for i = 1, #str do
         result = result .. str:sub(i, i)
         if (#str - i) % 3 == 0 and i ~= #str then
@@ -89,7 +90,8 @@ return function(colors, glyphs)
 
             ---@type string
             local text = value == nil and 'null'
-                or glyphs.co2 .. wezterm.pad_left(add_comma(tostring(value)), 6) .. ' ppm'
+                or glyphs.co2 .. wezterm.pad_left(add_comma(value --[[@as integer]]), 6)
+                .. ' ppm'
 
             return wezterm.format({
                 { Foreground = { Color = bg } },
