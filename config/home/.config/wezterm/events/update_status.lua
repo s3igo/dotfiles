@@ -9,6 +9,19 @@ local function is_valid_pane(window, pane_info)
     return not is_startup and not is_operating_confirmation_prompt
 end
 
+---@param str string
+---@return string
+local function add_comma(str)
+    local result = ''
+    for i = 1, #str do
+        result = result .. str:sub(i, i)
+        if (#str - i) % 3 == 0 and i ~= #str then
+            result = result .. ','
+        end
+    end
+    return result
+end
+
 ---@param colors Colors
 ---@param glyphs Glyphs
 return function(colors, glyphs)
@@ -75,24 +88,8 @@ return function(colors, glyphs)
                 or lookup.extremely_bad
 
             ---@type string
-            local text = (function()
-                if type(value) == 'nil' then
-                    return 'null'
-                end
-
-                local value_str = tostring(value)
-
-                -- add comma
-                local str = ''
-                for i = 1, #value_str do
-                    str = str .. value_str:sub(i, i)
-                    if (#value_str - i) % 3 == 0 and i ~= #value_str then
-                        str = str .. ','
-                    end
-                end
-
-                return glyphs.co2 .. wezterm.pad_left(str, 6) .. ' ppm'
-            end)()
+            local text = value == nil and 'null'
+                or glyphs.co2 .. wezterm.pad_left(add_comma(tostring(value)), 6) .. ' ppm'
 
             return wezterm.format({
                 { Foreground = { Color = bg } },
