@@ -84,11 +84,10 @@ wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
 local function get_co2()
     local _, json = wezterm.run_child_process({
-        '/etc/profiles/per-user/s3igo/bin/timeout',
-        '2',
         '/etc/profiles/per-user/s3igo/bin/chissoku',
         '--quiet',
         '--stdout.interval=1',
+        '--stdout.iterations=1',
         '/dev/tty.usbmodem314201',
     })
     if not json then

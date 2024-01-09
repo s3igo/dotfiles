@@ -1,16 +1,19 @@
-{pkgs}:
-pkgs.buildGoModule rec {
-  pname = "chissoku";
-  version = "2.0.2";
+{pkgs}: let
+  repo = "chissoku";
+  rev = "2.1.0";
+  hash = "sha256-mgdLipWzzV8NEvdn4k0lGhxn8wsNCLc1BTqXe9wL9bA=";
+  system = "darwin-arm64";
+in
+  pkgs.stdenv.mkDerivation {
+    pname = repo;
+    version = "v${rev}";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "northeye";
-    repo = "chissoku";
-    rev = "v${version}";
-    hash = "sha256-h5fSbhk9J5VOdE8/tMlYA3efkItssDNhmwa+2isRuWs=";
-  };
+    src = pkgs.fetchurl {
+      url = "https://github.com/northeye/chissoku/releases/download/v${rev}/chissoku-v${rev}-${system}.tar.gz";
+      sha256 = hash;
+    };
 
-  vendorHash = "sha256-CmYv5AWRR+zllvxl4olBqfmB9B8X7QSgF9fHMnU6kaU=";
+    sourceRoot = ".";
 
-  ldflags = ["-s" "-w"];
-}
+    installPhase = "install -m 755 -D chissoku $out/bin/chissoku";
+  }
