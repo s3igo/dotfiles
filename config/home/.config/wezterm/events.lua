@@ -18,7 +18,7 @@ local colors = {
 
 ---@alias Glyphs table<string, string>
 ---@type Glyphs
-local glyph = {
+local glyphs = {
     -- arrow
     solid_right_arrow = utf8.char(0xe0b0),
     right_arrow = utf8.char(0xe0b1),
@@ -30,7 +30,7 @@ local glyph = {
 }
 
 require('events.gui_startup')
-require('events.format_tab_title')(colors, glyph)
+require('events.format_tab_title')(colors, glyphs)
 
 ---@param str string
 ---@param pat string
@@ -48,7 +48,7 @@ local function get_cpu_usage()
     local _, result = wezterm.run_child_process({ 'iostat', '-c', '2' })
     local line = split(result, '[^\r\n]+')[4]
     local value = wezterm.pad_left(100 - split(line, '%S+')[6], 4)
-    return glyph.cpu .. value .. ' %'
+    return glyphs.cpu .. value .. ' %'
 end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
@@ -96,12 +96,12 @@ wezterm.on('update-status', function(window, pane)
 
         return wezterm.format({
             { Foreground = { Color = bg } },
-            { Text = glyph.solid_left_arrow },
+            { Text = glyphs.solid_left_arrow },
             { Foreground = { Color = colors.black } },
             { Background = { Color = bg } },
             { Text = ' ' .. text .. ' ' },
             { Foreground = { Color = end_fg or colors.gray } },
-            { Text = glyph.solid_left_arrow },
+            { Text = glyphs.solid_left_arrow },
         })
     end
 
@@ -162,18 +162,18 @@ wezterm.on('update-status', function(window, pane)
                 end
             end
 
-            return glyph.co2 .. wezterm.pad_left(str, 6) .. ' ppm'
+            return glyphs.co2 .. wezterm.pad_left(str, 6) .. ' ppm'
         end)()
 
         return wezterm.format({
             { Foreground = { Color = bg } },
             { Background = { Color = colors.gray } },
-            { Text = glyph.solid_left_arrow },
+            { Text = glyphs.solid_left_arrow },
             { Foreground = { Color = colors.black } },
             { Background = { Color = bg } },
             { Text = ' ' .. text .. ' ' },
             { Foreground = { Color = colors.white } },
-            { Text = glyph.solid_left_arrow },
+            { Text = glyphs.solid_left_arrow },
         })
     end
 

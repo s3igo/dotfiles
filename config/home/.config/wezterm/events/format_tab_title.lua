@@ -23,8 +23,8 @@ local function fix_width(text, width)
 end
 
 ---@param colors Colors
----@param glyph Glyphs
-return function(colors, glyph)
+---@param glyphs Glyphs
+return function(colors, glyphs)
     ---@param tab { tab_index: integer, is_active: boolean }
     ---@param tabs { is_active: boolean }[]
     ---@param max_width integer
@@ -46,7 +46,7 @@ return function(colors, glyph)
             return wezterm.format({
                 { Foreground = { Color = fg } },
                 { Background = { Color = bg } },
-                { Text = glyph.solid_right_arrow },
+                { Text = glyphs.solid_right_arrow },
             })
         end
 
@@ -56,7 +56,7 @@ return function(colors, glyph)
                 or wezterm.format({
                     { Foreground = { Color = background } },
                     { Background = { Color = colors.black } },
-                    { Text = glyph.solid_right_arrow },
+                    { Text = glyphs.solid_right_arrow },
                 })
         end
 
