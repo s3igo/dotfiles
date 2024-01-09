@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 local colors = require('colors')
 local mappings = require('mappings')
 
-require('events')
+require('events')(colors.default)
 
 return {
     -- general
