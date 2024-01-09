@@ -73,6 +73,7 @@ local function split(str, pat)
     return t
 end
 
+---@return string
 local function get_cpu_usage()
     local _, result = wezterm.run_child_process({ 'iostat', '-c', '2' })
     local line = split(result, '[^\r\n]+')[4]
@@ -82,6 +83,7 @@ end
 
 wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
 
+---@return number | nil
 local function get_co2()
     local _, json = wezterm.run_child_process({
         '/etc/profiles/per-user/s3igo/bin/chissoku',
@@ -90,12 +92,14 @@ local function get_co2()
         '--stdout.iterations=1',
         '/dev/tty.usbmodem314201',
     })
-    if not json then
-        return 'null'
+
+    if json == nil or json == '' then
+        return nil
     end
 
-    -- matche any number of 2 or more digits
-    return json:match('(%d%d+)') or 'null'
+    wezterm.run_child_process({ 'sleep', '1' })
+
+    return wezterm.json_parse(json).co2
 end
 
 wezterm.on('co2', function() wezterm.GLOBAL.co2 = get_co2() end)
@@ -107,6 +111,7 @@ local function is_valid_pane(window, pane_info)
 end
 
 wezterm.on('update-status', function(window, pane)
+    ---@return string
     local function mode(end_fg)
         local current = window:active_key_table()
         local text = string.upper(current or '')
@@ -127,8 +132,11 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
+    ---@return string
     local function cpu_usage()
-        local text = wezterm.GLOBAL.cpu or 'undefined'
+        ---@type string | nil
+        local value = wezterm.GLOBAL.cpu
+        local text = value or 'null'
 
         if is_valid_pane(window, pane) then
             window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
@@ -141,8 +149,10 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
+    ---@return string
     local function co2()
-        local value = wezterm.GLOBAL.co2 or 'undefined'
+        ---@type number | nil
+        local value = wezterm.GLOBAL.co2
         if is_valid_pane(window, pane) then
             window:perform_action(wezterm.action.EmitEvent('co2'), pane)
         end
@@ -155,23 +165,26 @@ wezterm.on('update-status', function(window, pane)
             extremely_bad = colors.purple,
         }
 
-        local bg = not tonumber(value) and colors.white
-            or tonumber(value) <= 1000 and lookup.good
-            or tonumber(value) <= 1500 and lookup.moderate
-            or tonumber(value) <= 2500 and lookup.bad
-            or tonumber(value) <= 3500 and lookup.very_bad
+        local bg = value == nil and colors.white
+            or value <= 1000 and lookup.good
+            or value <= 1500 and lookup.moderate
+            or value <= 2500 and lookup.bad
+            or value <= 3500 and lookup.very_bad
             or lookup.extremely_bad
 
+        ---@type string
         local text = (function()
-            if not tonumber(value) then
-                return value
+            if type(value) == 'nil' then
+                return 'null'
             end
+
+            local value_str = tostring(value)
 
             -- add comma
             local str = ''
-            for i = 1, #value do
-                str = str .. value:sub(i, i)
-                if (#value - i) % 3 == 0 and i ~= #value then
+            for i = 1, #value_str do
+                str = str .. value_str:sub(i, i)
+                if (#value_str - i) % 3 == 0 and i ~= #value_str then
                     str = str .. ','
                 end
             end
@@ -191,6 +204,7 @@ wezterm.on('update-status', function(window, pane)
         })
     end
 
+    ---@return string
     local function name()
         local _, user = wezterm.run_child_process({ 'whoami' })
         local _, host = wezterm.run_child_process({ 'scutil', '--get', 'LocalHostName' })
