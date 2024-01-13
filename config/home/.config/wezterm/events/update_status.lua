@@ -26,9 +26,26 @@ end
 ---@param colors Colors
 ---@param glyphs Glyphs
 return function(colors, glyphs)
+    ---@param text string
+    ---@param fg string
+    ---@param bg string
+    ---@param edge string
+    ---@return string, string
+    local function left_arrow(text, fg, bg, edge)
+        return wezterm.format({
+            { Foreground = { Color = bg } },
+            { Background = { Color = edge } },
+            { Text = glyphs.solid_left_arrow },
+            { Foreground = { Color = fg } },
+            { Background = { Color = bg } },
+            { Text = ' ' .. text .. ' ' },
+        }),
+            bg
+    end
+
     wezterm.on('update-status', function(window, pane)
-        ---@return string
-        local function mode(end_fg)
+        ---@return string, string
+        local function mode()
             local current = window:active_key_table()
             local text = string.upper(current or '')
             local lookup = {
@@ -37,19 +54,12 @@ return function(colors, glyphs)
             }
             local bg = lookup[current] or colors.navy
 
-            return wezterm.format({
-                { Foreground = { Color = bg } },
-                { Text = glyphs.solid_left_arrow },
-                { Foreground = { Color = colors.black } },
-                { Background = { Color = bg } },
-                { Text = ' ' .. text .. ' ' },
-                { Foreground = { Color = end_fg or colors.gray } },
-                { Text = glyphs.solid_left_arrow },
-            })
+            return left_arrow(text, colors.black, bg, colors.black)
         end
 
-        ---@return string
-        local function cpu_usage()
+        ---@param edge string
+        ---@return string, string
+        local function cpu_usage(edge)
             ---@type string | nil
             local value = wezterm.GLOBAL.cpu
             local text = value == nil and 'null' or glyphs.cpu .. value .. ' %'
@@ -58,15 +68,12 @@ return function(colors, glyphs)
                 window:perform_action(wezterm.action.EmitEvent('cpu-usage'), pane)
             end
 
-            return wezterm.format({
-                { Foreground = { Color = colors.white } },
-                { Background = { Color = colors.gray } },
-                { Text = ' ' .. text .. ' ' },
-            })
+            return left_arrow(text, colors.white, colors.gray, edge)
         end
 
-        ---@return string
-        local function co2()
+        ---@param edge string
+        ---@return string, string
+        local function co2(edge)
             ---@type integer | nil
             local value = wezterm.GLOBAL.co2
             if is_valid_pane(window, pane) then
@@ -96,30 +103,17 @@ return function(colors, glyphs)
                 text = glyphs.co2 .. wezterm.pad_left(add_comma(value), 6) .. ' ppm'
             end
 
-            return wezterm.format({
-                { Foreground = { Color = bg } },
-                { Background = { Color = colors.gray } },
-                { Text = glyphs.solid_left_arrow },
-                { Foreground = { Color = colors.black } },
-                { Background = { Color = bg } },
-                { Text = ' ' .. text .. ' ' },
-                { Foreground = { Color = colors.white } },
-                { Text = glyphs.solid_left_arrow },
-            })
+            return left_arrow(text, colors.black, bg, edge)
         end
 
-        ---@return string
-        local function name()
+        ---@param edge string
+        ---@return string, string
+        local function name(edge)
             local _, user = wezterm.run_child_process({ 'whoami' })
             local _, host = wezterm.run_child_process({ 'scutil', '--get', 'LocalHostName' })
             local text = user:gsub('\n', '') .. '@' .. host:gsub('\n', '')
 
-            return wezterm.format({
-                { Foreground = { Color = colors.black } },
-                { Background = { Color = colors.white } },
-                { Text = ' ' .. text .. ' ' },
-                'ResetAttributes',
-            })
+            return left_arrow(text, colors.black, colors.white, edge)
         end
 
         local function workspace()
@@ -133,7 +127,12 @@ return function(colors, glyphs)
             })
         end
 
-        window:set_right_status(mode() .. cpu_usage() .. co2() .. name())
+        local mode_styled, mode_bg = mode()
+        local cpu_styled, cpu_bg = cpu_usage(mode_bg)
+        local co2_styled, co2_bg = co2(cpu_bg)
+        local name_styled = name(co2_bg)
+
+        window:set_right_status(mode_styled .. cpu_styled .. co2_styled .. name_styled)
         window:set_left_status(workspace())
     end)
 end
