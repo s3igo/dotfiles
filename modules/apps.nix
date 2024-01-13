@@ -28,6 +28,7 @@ _: {
       "cron"
       "cursor"
       "dropbox"
+      "discord"
       "firefox"
       # "font-ipaexfont"
       # "font-noto-sans-cjk-jp"
