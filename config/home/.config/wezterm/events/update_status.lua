@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local components = require('components')
 
 ---@param window table
 ---@param pane_info table
@@ -32,15 +33,7 @@ return function(colors, glyphs)
     ---@param edge string
     ---@return string, string
     local function left_arrow(text, fg, bg, edge)
-        return wezterm.format({
-            { Foreground = { Color = bg } },
-            { Background = { Color = edge } },
-            { Text = glyphs.solid_left_arrow },
-            { Foreground = { Color = fg } },
-            { Background = { Color = bg } },
-            { Text = ' ' .. text .. ' ' },
-        }),
-            bg
+        return components.separator_left(glyphs.solid_left_arrow, text, fg, bg, edge)
     end
 
     wezterm.on('update-status', function(window, pane)
