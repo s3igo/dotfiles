@@ -89,9 +89,12 @@ return function(colors, glyphs)
                 or lookup.extremely_bad
 
             ---@type string
-            local text = value == nil and 'null'
-                or glyphs.co2 .. wezterm.pad_left(add_comma(value --[[@as integer]]), 6)
-                .. ' ppm'
+            local text
+            if value == nil then
+                text = 'null'
+            else
+                text = glyphs.co2 .. wezterm.pad_left(add_comma(value), 6) .. ' ppm'
+            end
 
             return wezterm.format({
                 { Foreground = { Color = bg } },
