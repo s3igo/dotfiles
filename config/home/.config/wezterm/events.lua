@@ -1,3 +1,4 @@
+local wezterm = require('wezterm')
 local utf8 = require('utf8')
 
 ---@param default_colors table
@@ -29,9 +30,9 @@ return function(default_colors)
         co2 = utf8.char(0xf05e3),
     }
 
-    require('events.gui_startup')
-    require('events.format_tab_title')(colors, glyphs)
-    require('events.update_status')(colors, glyphs)
-    require('events.custom.cpu_usage')
-    require('events.custom.co2')
+    wezterm.on('gui-startup', require('events.gui_startup'))
+    wezterm.on('format-tab-title', require('events.format_tab_title')(colors, glyphs))
+    wezterm.on('update-status', require('events.update_status')(colors, glyphs))
+    wezterm.on('cpu-usage', require('events.custom.cpu_usage'))
+    wezterm.on('co2', require('events.custom.co2'))
 end

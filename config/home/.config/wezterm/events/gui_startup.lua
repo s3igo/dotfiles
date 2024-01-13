@@ -1,6 +1,7 @@
 local wezterm = require('wezterm')
 
-wezterm.on('gui-startup', function(cmd)
+---@param cmd table
+return function(cmd)
     local home = cmd or {}
     home.workspace = 'general'
 
@@ -38,4 +39,4 @@ wezterm.on('gui-startup', function(cmd)
     d_tab_4:set_title('notes')
 
     wezterm.mux.set_active_workspace('general')
-end)
+end

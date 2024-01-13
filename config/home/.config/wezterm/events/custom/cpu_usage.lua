@@ -22,4 +22,4 @@ local function get_cpu_usage()
     return wezterm.pad_left(100 - value, 4)
 end
 
-wezterm.on('cpu-usage', function() wezterm.GLOBAL.cpu = get_cpu_usage() end)
+return function() wezterm.GLOBAL.cpu = get_cpu_usage() end

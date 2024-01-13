@@ -21,5 +21,4 @@ local function get_co2()
     return wezterm.json_parse(json).co2
 end
 
-wezterm.on('co2', function() wezterm.GLOBAL.co2 = get_co2() end)
-
+return function() wezterm.GLOBAL.co2 = get_co2() end

@@ -28,7 +28,7 @@ return function(colors, glyphs)
     ---@param tab { tab_index: integer, is_active: boolean }
     ---@param tabs { is_active: boolean }[]
     ---@param max_width integer
-    wezterm.on('format-tab-title', function(tab, tabs, _, _, _, max_width)
+    return function(tab, tabs, _, _, _, max_width)
         -- conditions
         local is_active = tab.is_active
         local is_first_tab = tab.tab_index == 0
@@ -81,5 +81,5 @@ return function(colors, glyphs)
         end
 
         return left_separator() .. title() .. right_separator()
-    end)
+    end
 end
