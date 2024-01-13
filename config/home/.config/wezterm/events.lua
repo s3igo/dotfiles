@@ -2,17 +2,7 @@ local utf8 = require('utf8')
 
 ---@param default_colors table
 return function(default_colors)
-    ---@alias ColorKeys
-    ---| 'white'
-    ---| 'black'
-    ---| 'gray'
-    ---| 'red'
-    ---| 'green'
-    ---| 'yellow'
-    ---| 'blue'
-    ---| 'purple'
-    ---| 'navy'
-    ---@alias Colors table<ColorKeys, string>
+    ---@alias Colors table<string, string>
     ---@type Colors
     local colors = {
         white = default_colors.foreground,
@@ -26,14 +16,7 @@ return function(default_colors)
         navy = '#384B5A',
     }
 
-    ---@alias GlyphKeys
-    ---| 'solid_right_arrow'
-    ---| 'right_arrow'
-    ---| 'solid_left_arrow'
-    ---| 'left_arrow'
-    ---| 'cpu'
-    ---| 'co2'
-    ---@alias Glyphs table<GlyphKeys, string>
+    ---@alias Glyphs table<string, string>
     ---@type Glyphs
     local glyphs = {
         -- arrow
