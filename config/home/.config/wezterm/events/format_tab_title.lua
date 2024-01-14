@@ -28,6 +28,7 @@ return function(colors, glyphs)
     ---@param tab { tab_index: integer, is_active: boolean }
     ---@param tabs { is_active: boolean }[]
     ---@param max_width integer
+    ---@return string
     return function(tab, tabs, _, _, _, max_width)
         -- conditions
         local is_active = tab.is_active
