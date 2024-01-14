@@ -1,5 +1,4 @@
 local wezterm = require('wezterm')
-local components = require('components')
 
 ---@param tab_info table
 ---@return string
@@ -37,36 +36,24 @@ return function(colors, glyphs)
         local next_tab_is_active = not is_last_tab and tabs[tab.tab_index + 2].is_active
 
         ---@return string
-        local function title()
-            ---@return string
-            local function text()
-                ---@type string  to 1 origin
-                local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-                -- 2 or 1 for the separator, 2 for the padding
-                local extra_chars = is_last_tab and 4 or 3
-                local available_width = max_width - extra_chars
-                return fix_width(index .. tab_title(tab), available_width)
-            end
-
-            local fg = is_active and colors.black or colors.white
-            local bg = is_active and colors.yellow or colors.navy
-            -- stylua: ignore
-            local edge = is_last_tab and colors.black
-                or next_tab_is_active and colors.yellow
-                or colors.navy
-
-            return (
-                components.separator_right(
-                    glyphs.solid_right_arrow,
-                    text(),
-                    fg,
-                    bg,
-                    edge,
-                    { intensity = is_active and 'Bold' or 'Normal', italic = is_active }
-                )
-            )
+        local function text()
+            ---@type string  to 1 origin
+            local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
+            -- 2 or 1 for the separator, 2 for the padding
+            local extra_chars = is_last_tab and 4 or 3
+            local available_width = max_width - extra_chars
+            return fix_width(index .. tab_title(tab), available_width)
         end
 
-        return title()
+        return (
+            require('components').separator_right(
+                glyphs.solid_right_arrow,
+                text(),
+                is_active and colors.black or colors.white,
+                is_active and colors.yellow or colors.navy,
+                is_last_tab and colors.black or next_tab_is_active and colors.yellow or colors.navy,
+                { intensity = is_active and 'Bold' or 'Normal', italic = is_active }
+            )
+        )
     end
 end
