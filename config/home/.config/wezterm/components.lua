@@ -1,5 +1,3 @@
-local wezterm = require('wezterm')
-
 local M = {}
 
 ---@param text string
@@ -10,7 +8,7 @@ local M = {}
 ---@alias Attr { underline?: Underline, intensity?: Intensity, italic?: boolean }
 ---@param attr? Attr
 M.style = function(text, fg, bg, attr)
-    return wezterm.format({
+    return require('wezterm').format({
         { Foreground = { Color = fg } },
         { Background = { Color = bg } },
         { Attribute = { Underline = attr and attr.underline or 'None' } },
