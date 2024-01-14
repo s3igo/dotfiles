@@ -14,7 +14,8 @@ local function attr_table(key, value, default) return { Attribute = { [key] = va
 ---@param bg string
 ---@alias Underline 'None' | 'Single' | 'Double' | 'Curly' | 'Dotted' | 'Dashed'
 ---@alias Intensity 'Normal' | 'Bold' | 'Half'
----@param attr? { underline?: Underline, intensity?: Intensity, italic?: boolean }
+---@alias Attr { underline?: Underline, intensity?: Intensity, italic?: boolean }
+---@param attr? Attr
 M.style = function(text, fg, bg, attr)
     return wezterm.format({
         { Foreground = { Color = fg } },
@@ -34,15 +35,7 @@ end
 ---@param edge string
 ---@return string, string
 M.separator_left = function(icon, text, fg, bg, edge)
-    return wezterm.format({
-        { Foreground = { Color = bg } },
-        { Background = { Color = edge } },
-        { Text = icon },
-        { Foreground = { Color = fg } },
-        { Background = { Color = bg } },
-        { Text = ' ' .. text .. ' ' },
-    }),
-        bg
+    return M.style(icon, bg, edge) .. M.style(' ' .. text .. ' ', fg, bg), bg
 end
 
 ---@param icon string
@@ -50,22 +43,10 @@ end
 ---@param fg string
 ---@param bg string
 ---@param edge string
----@param attr? { underline?: Underline, intensity?: Intensity, italic?: boolean }
+---@param attr? Attr
 ---@return string, string
 M.separator_right = function(icon, text, fg, bg, edge, attr)
-    return wezterm.format({
-        { Foreground = { Color = fg } },
-        { Background = { Color = bg } },
-        attr_table('Underline', attr and attr.underline or nil, 'None'),
-        attr_table('Intensity', attr and attr.intensity or nil, 'Normal'),
-        attr_table('Italic', attr and attr.italic or nil, false),
-        { Text = ' ' .. text .. ' ' },
-        'ResetAttributes',
-        { Foreground = { Color = bg } },
-        { Background = { Color = edge } },
-        { Text = icon },
-    }),
-        bg
+    return M.style(' ' .. text .. ' ', fg, bg, attr) .. M.style(icon, bg, edge), bg
 end
 
 return M

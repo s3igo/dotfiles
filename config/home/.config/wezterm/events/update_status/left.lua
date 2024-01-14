@@ -1,4 +1,3 @@
-local wezterm = require('wezterm')
 local components = require('components')
 
 ---@param window table
@@ -8,13 +7,7 @@ return function(window, colors, glyphs)
     ---@return string
     local function workspace()
         local text = window:active_workspace()
-        return wezterm.format({
-            { Foreground = { Color = colors.black } },
-            { Background = { Color = colors.white } },
-            { Attribute = { Intensity = 'Bold' } },
-            { Text = ' [' .. text .. '] ' },
-            'ResetAttributes',
-        })
+        return components.style(' [' .. text .. '] ', colors.black, colors.white, { intensity = 'Bold' })
     end
 
     ---@return string
