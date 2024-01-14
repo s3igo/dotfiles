@@ -2,13 +2,6 @@ local wezterm = require('wezterm')
 
 local M = {}
 
----@generic T: string | boolean
----@param key string
----@param value T | nil
----@param default T
----@return table
-local function attr_table(key, value, default) return { Attribute = { [key] = value or default } } end
-
 ---@param text string
 ---@param fg string
 ---@param bg string
@@ -20,9 +13,9 @@ M.style = function(text, fg, bg, attr)
     return wezterm.format({
         { Foreground = { Color = fg } },
         { Background = { Color = bg } },
-        attr_table('Underline', attr and attr.underline or nil, 'None'),
-        attr_table('Intensity', attr and attr.intensity or nil, 'Normal'),
-        attr_table('Italic', attr and attr.italic or nil, false),
+        { Attribute = { Underline = attr and attr.underline or 'None' } },
+        { Attribute = { Intensity = attr and attr.intensity or 'Normal' } },
+        { Attribute = { Italic = not not (attr and attr.italic) } },
         { Text = text },
         'ResetAttributes',
     })
