@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local components = require('components')
 
 ---@param tab_info table
 ---@return string
@@ -31,55 +32,41 @@ return function(colors, glyphs)
     return function(tab, tabs, _, _, _, max_width)
         -- conditions
         local is_active = tab.is_active
-        local is_first_tab = tab.tab_index == 0
         local is_last_tab = tab.tab_index == #tabs - 1
         -- because `tab.tab_index` is 0 origin
-        local prev_tab_is_active = not is_first_tab and tabs[tab.tab_index].is_active
-
-        local frontground = is_active and colors.black or colors.white
-        local background = is_active and colors.yellow or colors.navy
-
-        ---@return string
-        local function left_separator()
-            local fg = is_first_tab and colors.white or prev_tab_is_active and colors.yellow or colors.navy
-            local bg = background
-            return wezterm.format({
-                { Foreground = { Color = fg } },
-                { Background = { Color = bg } },
-                { Text = glyphs.solid_right_arrow },
-            })
-        end
-
-        ---@return string
-        local function right_separator()
-            return not is_last_tab and ''
-                or wezterm.format({
-                    { Foreground = { Color = background } },
-                    { Background = { Color = colors.black } },
-                    { Text = glyphs.solid_right_arrow },
-                })
-        end
+        local next_tab_is_active = not is_last_tab and tabs[tab.tab_index + 2].is_active
 
         ---@return string
         local function title()
-            ---@type string  to 1 origin
-            local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
-            -- 2 or 1 for the separator, 2 for the padding
-            local extra_chars = is_last_tab and 4 or 3
-            local available_width = max_width - extra_chars
-            local text = fix_width(index .. tab_title(tab), available_width)
+            ---@return string
+            local function text()
+                ---@type string  to 1 origin
+                local index = wezterm.pad_left(tab.tab_index + 1, 2) .. '. '
+                -- 2 or 1 for the separator, 2 for the padding
+                local extra_chars = is_last_tab and 4 or 3
+                local available_width = max_width - extra_chars
+                return fix_width(index .. tab_title(tab), available_width)
+            end
 
-            return wezterm.format({
-                { Foreground = { Color = frontground } },
-                { Background = { Color = background } },
-                { Attribute = { Intensity = is_active and 'Bold' or 'Normal' } },
-                { Attribute = { Italic = is_active } },
-                -- offset for left separator doesn't exist
-                { Text = text .. '  ' },
-                'ResetAttributes',
-            })
+            local fg = is_active and colors.black or colors.white
+            local bg = is_active and colors.yellow or colors.navy
+            -- stylua: ignore
+            local edge = is_last_tab and colors.black
+                or next_tab_is_active and colors.yellow
+                or colors.navy
+
+            return (
+                components.separator_right(
+                    glyphs.solid_right_arrow,
+                    text(),
+                    fg,
+                    bg,
+                    edge,
+                    { intensity = is_active and 'Bold' or 'Normal', italic = is_active }
+                )
+            )
         end
 
-        return left_separator() .. title() .. right_separator()
+        return title()
     end
 end

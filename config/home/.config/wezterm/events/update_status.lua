@@ -5,6 +5,6 @@ return function(colors, glyphs)
     ---@param pane table
     return function(window, pane)
         require('events.update_status.right')(window, pane, colors, glyphs)
-        require('events.update_status.left')(window, colors)
+        require('events.update_status.left')(window, colors, glyphs)
     end
 end
