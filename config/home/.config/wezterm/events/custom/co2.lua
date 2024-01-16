@@ -11,11 +11,12 @@ local function get_co2()
         '/dev/tty.usbmodem314201',
     })
 
+    -- json is empty
     if json == nil or json == '' then
         return nil
     end
 
-    -- wait for 1 second
+    -- wait for 1 second due to avoid the "Serial port busy" error
     wezterm.run_child_process({ 'sleep', '1' })
 
     return wezterm.json_parse(json).co2
