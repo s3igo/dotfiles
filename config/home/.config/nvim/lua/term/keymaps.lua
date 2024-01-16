@@ -3,6 +3,20 @@ vim.keymap.set('n', '<leader>s', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>S', '<cmd>wa<cr><esc>', { desc = 'Save all files' })
 vim.keymap.set('n', '<leader>q', '<cmd>qa<cr>', { desc = 'Quit all' })
 
+-- comments
+local function line_comment()
+    local line = vim.api.nvim_get_current_line()
+    local row = unpack(vim.api.nvim_win_get_cursor(0))
+
+    -- fill to 80 columns
+    local available_width = 80 - #line
+    local comment = string.rep('-', available_width - 1)
+
+    vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
+end
+
+vim.keymap.set('n', '<leader>c', line_comment, { desc = 'Line comment' })
+
 -- emacs style
 local function transpose_chars()
     local line = vim.api.nvim_get_current_line()
