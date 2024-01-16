@@ -84,7 +84,10 @@ return {
 
             lspconfig.rust_analyzer.setup({
                 settings = {
-                    ['rust-analyzer'] = { checkOnSave = { command = 'clippy' } },
+                    ['rust-analyzer'] = {
+                        checkOnSave = { command = 'clippy' },
+                        files = { excludeDirs = { '.direnv' } },
+                    },
                 },
                 capabilities = (function()
                     local capabilities = lsp_capabilities
