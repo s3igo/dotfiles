@@ -52,6 +52,10 @@ _: {
         name = "chromium";
         args = {no_quarantine = true;};
       }
+      {
+        name = "librewolf";
+        args = {no_quarantine = true;};
+      }
     ];
     masApps = {
       Things = 904280696;
