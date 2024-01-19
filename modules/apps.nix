@@ -12,6 +12,7 @@ _: {
       "daipeihust/tap"
       # "homebrew/cask-fonts"
       "homebrew/services"
+      "macos-fuse-t/homebrew-cask"
     ];
     brews = [
       "daipeihust/tap/im-select"
@@ -25,7 +26,6 @@ _: {
       "anytype"
       "arc"
       "cloudflare-warp"
-      "cron"
       "cursor"
       "dropbox"
       "discord"
@@ -38,6 +38,7 @@ _: {
       "google-japanese-ime"
       "karabiner-elements"
       "keyboardcleantool"
+      "macos-fuse-t/homebrew-cask/fuse-t"
       "morgen"
       "orbstack"
       "orion"
