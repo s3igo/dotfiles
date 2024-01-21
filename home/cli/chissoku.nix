@@ -1,7 +1,7 @@
 {pkgs}: let
   repo = "chissoku";
-  rev = "2.1.0";
-  hash = "sha256-mgdLipWzzV8NEvdn4k0lGhxn8wsNCLc1BTqXe9wL9bA=";
+  rev = "2.1.1";
+  hash = "sha256-1K9LTnOl2NFJJdYIhzEPiSD5HCQr5YWjnNr5S2VNuLI=";
   system = "darwin-arm64";
 in
   pkgs.stdenv.mkDerivation {
