@@ -38,6 +38,7 @@ local leader = {
     -- rename tab
     {
         key = 'r',
+        mods = 'CTRL',
         action = act.PromptInputLine({
             description = 'Enter new name for tab',
             action = wezterm.action_callback(function(window, _, line)
@@ -49,14 +50,11 @@ local leader = {
     },
 
     -- spawn
-    { key = 'c', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
-
-    -- workspace
-    { key = 'n', mods = 'CTRL', action = act.SwitchWorkspaceRelative(1) },
+    { key = 'n', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
 
     -- split
-    { key = 'v', action = act.SplitHorizontal },
-    { key = 's', action = act.SplitVertical },
+    { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
+    { key = 's', mods = 'CTRL', action = act.SplitVertical },
 
     -- focus
     -- stylua: ignore start
@@ -69,6 +67,10 @@ local leader = {
     { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
+    -- workspace
+    { key = '>', action = act.SwitchWorkspaceRelative(1) },
+    { key = '<', action = act.SwitchWorkspaceRelative(-1) },
+
     -- resize
     { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },
     { key = 'j', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Down', 3 }) },
@@ -76,7 +78,7 @@ local leader = {
     { key = 'l', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 3 }) },
 
     -- mode
-    { key = 'v', mods = 'CTRL', action = act.ActivateCopyMode },
+    { key = 'c', mods = 'CTRL', action = act.ActivateCopyMode },
     { key = 'y', mods = 'CTRL', action = act.QuickSelect },
 
     -- link
