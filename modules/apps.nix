@@ -35,8 +35,6 @@ _: {
       # "font-zen-kaku-gothic-new"
       "google-chrome"
       "google-japanese-ime"
-      "karabiner-elements"
-      "keyboardcleantool"
       "macos-fuse-t/homebrew-cask/fuse-t"
       "orbstack"
       "raycast"

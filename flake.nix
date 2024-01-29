@@ -28,7 +28,7 @@
         packages.default = import ./packages/zsh {inherit pkgs;};
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [act goku statix];
+          buildInputs = with pkgs; [act statix];
         };
 
         formatter = pkgs.alejandra;
