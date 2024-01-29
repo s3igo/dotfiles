@@ -78,10 +78,12 @@
   home.packages = with pkgs; [
     darwin.trash
     efm-langserver
+    emacs-nox
     fd
     ghq
     lazydocker
     mmv-go
+    nodejs-slim
     ollama
     rclone
     (import ./chissoku.nix {inherit pkgs;})
