@@ -24,7 +24,6 @@ declare -x DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 
 # node
 declare -x NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-type fnm > /dev/null 2>&1 && eval "$(fnm env --use-on-cd)"
 
 # rust
 declare -x RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
