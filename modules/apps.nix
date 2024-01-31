@@ -16,7 +16,6 @@ _: {
     ];
     brews = [
       "daipeihust/tap/im-select"
-      # "rustup-init"
       "typst"
     ];
     casks = [
@@ -51,9 +50,5 @@ _: {
         args = {no_quarantine = true;};
       }
     ];
-    masApps = {
-      Things = 904280696;
-      LINE = 539883307;
-    };
   };
 }
