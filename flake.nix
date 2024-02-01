@@ -24,11 +24,27 @@
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {inherit system;};
+        tasks = let
+          deploy = pkgs.writeShellApplication {
+            name = "deploy";
+            runtimeInputs = [nix-darwin.packages.${system}.default];
+            text = ''
+              darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+            '';
+          };
+          update = pkgs.writeShellApplication {
+            name = "update";
+            runtimeInputs = [deploy];
+            text = ''
+              nix flake update && deploy
+            '';
+          };
+        in [deploy update];
       in {
         packages.default = import ./packages/zsh {inherit pkgs;};
 
         devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [act statix];
+          buildInputs = with pkgs; [act statix] ++ tasks;
         };
 
         formatter = pkgs.alejandra;
