@@ -8,6 +8,7 @@
     ./git.nix
     ./helix.nix
     ./lazygit.nix
+    ./fish.nix
     ./lf
     ./zsh
   ];
