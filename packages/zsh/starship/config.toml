@@ -1,12 +1,16 @@
 format = """
 $all\
 $line_break\
-${custom.arch}\
-[|](bold blue) \
-$shell\
-[|](bold blue) \
-$shlvl\
 $character
+"""
+
+right_format = """
+level \
+$shlvl
+at \
+$shell
+on \
+${custom.arch}
 """
 
 [character]
@@ -14,17 +18,16 @@ success_symbol = "[❯](bold blue)"
 
 [custom.arch]
 command = "uname -m"
-style = "bold white"
 when = true
 
 [shell]
 disabled = false
+style = "bold blue"
 
 [shlvl]
 disabled = false
 symbol = ""
 threshold = 1
-style = "bold white"
 
 [git_branch]
 symbol = "󰘬 "
