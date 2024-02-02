@@ -3,7 +3,10 @@
   lib,
   ...
 }: {
-  xdg.configFile.wezterm.source = ../../config/home/.config/wezterm;
+  xdg.configFile.wezterm = {
+    source = ../../config/home/.config/wezterm;
+    recursive = true;
+  };
   programs.wezterm.enable = true;
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter ["writeBoundary"] ''
     declare TEMPFILE=$(mktemp)
