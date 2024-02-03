@@ -2,7 +2,8 @@ local wezterm = require('wezterm')
 local utf8 = require('utf8')
 
 ---@param default_colors table
-return function(default_colors)
+---@param chissoku string
+return function(default_colors, chissoku)
     ---@alias Colors table<string, string>
     ---@type Colors
     local colors = {
@@ -34,5 +35,5 @@ return function(default_colors)
     wezterm.on('format-tab-title', require('events.format_tab_title')(colors, glyphs))
     wezterm.on('update-status', require('events.update_status')(colors, glyphs))
     wezterm.on('cpu-usage', require('events.custom.cpu_usage'))
-    wezterm.on('co2', require('events.custom.co2'))
+    wezterm.on('co2', require('events.custom.co2')(chissoku))
 end

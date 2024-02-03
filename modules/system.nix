@@ -17,6 +17,6 @@
   nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
 
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   security.pam.enableSudoTouchIdAuth = true;
 }

@@ -1,12 +1,14 @@
 ---@param colors table
 ---@param font any
 ---@param mappings table
+---@param fish string
 ---@return table
-return function(colors, font, mappings)
+return function(colors, font, mappings, fish)
     return {
         -- general
         term = 'wezterm',
         scrollback_lines = 10000,
+        default_prog = { fish },
 
         -- appearance
         colors = colors,
