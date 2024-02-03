@@ -14,27 +14,28 @@ ${custom.arch}
 """
 
 [character]
-success_symbol = "[❯](bold blue)"
+success_symbol = '[❯](bold blue)'
 
 [custom.arch]
-command = "uname -m"
+command = 'uname -m'
 when = true
 
 [shell]
 disabled = false
-style = "bold blue"
+fish_indicator = 'fish'
+style = 'bold blue'
 
 [shlvl]
 disabled = false
-symbol = ""
+symbol = ''
 threshold = 1
 
 [git_branch]
-symbol = "󰘬 "
+symbol = '󰘬 '
 
 [git_metrics]
 disabled = false
 
 [nix_shell]
-symbol = " "
+symbol = ' '
 
