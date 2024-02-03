@@ -25,12 +25,6 @@
       config.global.warn_timeout = 0;
       nix-direnv.enable = true;
     };
-    eza = {
-      enable = true;
-      enableAliases = true;
-      git = true;
-      icons = true;
-    };
     gh = {
       enable = true;
       settings = {
