@@ -2,8 +2,6 @@
   programs.git = {
     enable = true;
     aliases = {
-      co = "commit";
-      st = "status";
       edit = "commit --amend";
       append = "commit --amend --no-edit";
       push-force = "push --force-with-lease --force-if-includes";
@@ -12,7 +10,6 @@
       init-exist = "!git init && git add . && git commit -m 'first commit'";
       create = ''!f() { ${pkgs.gh}/bin/gh repo create "$1" --private && ${pkgs.ghq}/bin/ghq get -p "$1"; }; f'';
       pr = ''!f() { git fetch origin "pull/$1/head:PR-$1"; }; f'';
-      gh = "${pkgs.gh}/bin/gh";
     };
     delta = {
       enable = true;

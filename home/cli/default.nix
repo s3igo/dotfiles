@@ -81,6 +81,6 @@
     nodejs-slim
     ollama
     rclone
-    (import ./chissoku.nix {inherit pkgs;})
+    tree
   ];
 }
