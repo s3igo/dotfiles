@@ -8,7 +8,7 @@
     plugins = [
       {
         name = "autopair";
-        src = pkgs.fishPlugins.autopair.src;
+        inherit (pkgs.fishPlugins.autopair) src;
       }
     ];
     shellAbbrs = let
@@ -41,19 +41,21 @@
       cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
       cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
       # global
-      "@h" = global "--help";
-      "@i" = global "install";
-      "@s" = global "search";
-      "@p" = global "| less";
-      "@v" = global "--version";
+      ":f" = global "| fzf";
+      ":g" = global "| rg";
+      ":h" = global "--help";
+      ":i" = global "install";
+      ":s" = global "search";
+      ":p" = global "| less";
+      ":v" = global "--version";
       ## docker
-      "@dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
-      "@dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
-      "@di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
+      ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
+      ":dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
+      ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
       ## mac
-      "@cp" = global "| pbcopy";
-      "@pst" = global "(pbpaste | string escape)";
-      "@icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+      ":cp" = global "| pbcopy";
+      ":pst" = global "(pbpaste | string escape)";
+      ":icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
     };
     shellInit = ''
       # path
