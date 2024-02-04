@@ -45,11 +45,6 @@
   };
 
   home = {
-    activation.installGhCompletion = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      mkdir -p ${config.xdg.dataHome}/zsh/site-functions
-      ${pkgs.gh}/bin/gh completion -s zsh > ${config.xdg.dataHome}/zsh/site-functions/_gh
-    '';
-
     file.".ssh/config".text = ''
       Include ~/.orbstack/ssh/config
 
