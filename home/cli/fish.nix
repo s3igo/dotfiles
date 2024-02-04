@@ -20,10 +20,13 @@
       b = "brew";
       c = "clear";
       d = "docker";
+      e = "echo";
       h = "history";
+      m = "mkdir";
       n = "nix";
-      nv = "nvim";
       r = "rclone";
+      v = "nvim";
+      w = "which";
       # git
       g = "git";
       ga = "git add";
@@ -105,6 +108,7 @@
       bind \a __ghq-fzf
 
       # abbreviations
+      ## cursor
       abbr --add run --set-cursor "nix run nixpkgs#%"
       abbr --add ql --set-cursor "qlmanage -p % &> /dev/null"
 
@@ -113,6 +117,12 @@
         echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)
       end
       abbr --add dotdot --regex '^\.\.+$' --function __multicd
+
+      ## date
+      function __date
+        echo (date '+%Y-%m-%d')
+      end
+      abbr --add :d --position anywhere --function __date
     '';
   };
 }
