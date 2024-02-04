@@ -40,7 +40,7 @@
       rm = "rm -iv";
       # one-liner
       arc = "open -a 'Arc.app'";
-      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {} | string escape' )";
+      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {}' | string escape)";
       cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
       cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
       # global
