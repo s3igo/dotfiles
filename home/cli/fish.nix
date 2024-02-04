@@ -41,6 +41,7 @@
       # global
       "@i" = global "install";
       "@s" = global "search";
+      "@p" = global "| less";
       ## docker
       "@dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
       "@dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
@@ -67,6 +68,19 @@
       # keybindings
       ## disable exit with <C-d>
       bind \cD delete-char
+
+      ## autosuggestions
+      ### <C-l>
+      bind \f accept-autosuggestion
+      ### <C-f>
+      bind \cF forward-single-char
+
+      ## history
+      ### <C-h>
+      bind \b history-pager-delete or backward-delete-char
+      ### <A-p>, <A-n>
+      bind \ep history-token-search-backward
+      bind \en history-token-search-forward
 
       ## ghq
       function __ghq-fzf
