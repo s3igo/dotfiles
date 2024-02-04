@@ -18,7 +18,9 @@
       };
     in {
       b = "brew";
+      c = "clear";
       d = "docker";
+      h = "history";
       n = "nix";
       nv = "nvim";
       r = "rclone";
@@ -35,20 +37,22 @@
       rm = "rm -iv";
       # one-liner
       arc = "open -a 'Arc.app'";
-      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {}' )";
-      cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir)";
-      cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir)";
+      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {} | string escape' )";
+      cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
+      cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
       # global
+      "@h" = global "--help";
       "@i" = global "install";
       "@s" = global "search";
       "@p" = global "| less";
+      "@v" = global "--version";
       ## docker
       "@dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
       "@dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
       "@di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
       ## mac
       "@cp" = global "| pbcopy";
-      "@pst" = global "(pbpaste)";
+      "@pst" = global "(pbpaste | string escape)";
       "@icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
     };
     shellInit = ''
@@ -76,7 +80,7 @@
       bind \cF forward-single-char
 
       ## history
-      ### <C-h>
+      ### <C-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
       ### <A-p>, <A-n>
       bind \ep history-token-search-backward
@@ -84,7 +88,7 @@
 
       ## ghq
       function __ghq-fzf
-        set -l dest (ghq list --full-path | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}")
+        set -l dest (ghq list --full-path | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" | string escape)
 
         if test -z $dest
           return
