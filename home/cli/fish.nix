@@ -5,11 +5,14 @@
 }: {
   programs.fish = {
     enable = true;
-    plugins = [
-      {
-        name = "autopair";
-        inherit (pkgs.fishPlugins.autopair) src;
-      }
+    plugins = let
+      plugin = name: {
+        inherit name;
+        inherit (pkgs.fishPlugins.${name}) src;
+      };
+    in [
+      (plugin "autopair")
+      (plugin "sponge")
     ];
     shellAbbrs = let
       global = text: {
@@ -24,7 +27,7 @@
       h = "history";
       m = "mkdir";
       n = "nix";
-      p = "pbpaste";
+      p = "pbpaste |";
       r = "rclone";
       v = "nvim";
       w = "which";
@@ -79,13 +82,13 @@
 
       # keybindings
       ## disable exit with <C-d>
-      bind \cD delete-char
+      bind \cd delete-char
 
       ## autosuggestions
       ### <C-l>
       bind \f accept-autosuggestion
       ### <C-f>
-      bind \cF forward-single-char
+      bind \cf forward-single-char
 
       ## history
       ### <C-h> FIXME: `history-pager-delete` doesn't work
@@ -108,7 +111,8 @@
         mkdir -p ${config.xdg.stateHome}/ghq
         echo $dest > ${config.xdg.stateHome}/ghq/lastdir
       end
-      bind \a __ghq-fzf
+      ### <C-g>
+      bind \cg __ghq-fzf
 
       # abbreviations
       ## cursor
