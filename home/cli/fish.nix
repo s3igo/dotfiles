@@ -24,6 +24,7 @@
       h = "history";
       m = "mkdir";
       n = "nix";
+      p = "pbpaste";
       r = "rclone";
       v = "nvim";
       w = "which";
@@ -57,7 +58,6 @@
       ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
       ## mac
       ":cp" = global "| pbcopy";
-      ":pst" = global "(pbpaste | string escape)";
       ":icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
     };
     shellInit = ''
