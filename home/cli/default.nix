@@ -62,6 +62,7 @@
 
   home.packages = with pkgs; [
     darwin.trash
+    du-dust
     efm-langserver
     emacs-nox
     fd

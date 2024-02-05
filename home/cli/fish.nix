@@ -20,48 +20,48 @@
         expansion = text;
       };
     in {
+      ":cp" = global "| pbcopy";
+      # :d -> current date
+      ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
+      ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
+      ":dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
+      ":f" = global "| fzf";
+      ":g" = global "| rg";
+      ":h" = global "--help";
+      ":i" = global "install";
+      ":icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+      ":p" = global "| less";
+      ":s" = global "search";
+      ":v" = global "--version";
+      arc = "open -a 'Arc.app'";
       b = "brew";
       c = "clear";
+      ca = "cargo";
+      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {}' | string escape)";
+      cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
+      cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
+      cp = "cp -iv";
       d = "docker";
       e = "echo";
-      h = "history";
-      m = "mkdir";
-      n = "nix";
-      p = "pbpaste |";
-      r = "rclone";
-      v = "nvim";
-      w = "which";
-      # git
       g = "git";
       ga = "git add";
       gc = "git commit";
       gd = "git diff";
       gs = "git switch";
-      st = "git status";
-      # -i: interactive, -v: verbose
-      cp = "cp -iv";
+      h = "history";
+      m = "mkdir";
       mv = "mv -iv";
+      n = "nix";
+      p = "pbpaste |";
+      # ql -> quick look
+      r = "rclone";
+      # run -> run nixpkgs
       rm = "rm -iv";
-      # one-liner
-      arc = "open -a 'Arc.app'";
-      cdf = "cd (fd --hidden --no-ignore --type directory --exclude .git | fzf --preview 'ls -la {}' | string escape)";
-      cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
-      cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
-      # global
-      ":f" = global "| fzf";
-      ":g" = global "| rg";
-      ":h" = global "--help";
-      ":i" = global "install";
-      ":s" = global "search";
-      ":p" = global "| less";
-      ":v" = global "--version";
-      ## docker
-      ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
-      ":dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
-      ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
-      ## mac
-      ":cp" = global "| pbcopy";
-      ":icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+      st = "git status";
+      # t -> task
+      ty = "typst";
+      v = "nvim";
+      w = "which";
     };
     shellInit = ''
       # path
