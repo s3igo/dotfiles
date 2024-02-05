@@ -26,17 +26,17 @@
         pkgs = import nixpkgs {inherit system;};
         tasks = let
           deploy = pkgs.writeShellApplication {
-            name = "deploy";
+            name = "task_deploy";
             runtimeInputs = [nix-darwin.packages.${system}.default];
             text = ''
               darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
             '';
           };
           update = pkgs.writeShellApplication {
-            name = "update";
+            name = "task_update";
             runtimeInputs = [deploy];
             text = ''
-              nix flake update && deploy
+              nix flake update && task_deploy
             '';
           };
         in [deploy update];

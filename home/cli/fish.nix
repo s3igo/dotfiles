@@ -69,10 +69,13 @@
       set fish_greeting
 
       # variables
-      set -x DOCKER_CONFIG ${config.xdg.configHome}/docker
-      set -x LESSHISTFILE -
       set -x SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+      set -x DOCKER_CONFIG ${config.xdg.configHome}/docker
       set -x _ZO_DATA_DIR ${config.xdg.dataHome}/zoxide
+      ## for `echo $0` compatibility with posix shell
+      set -x 0 fish
+      ## avoid creating `.lesshst`
+      set -x LESSHISTFILE -
 
       # keybindings
       ## disable exit with <C-d>
@@ -109,8 +112,9 @@
 
       # abbreviations
       ## cursor
-      abbr --add run --set-cursor "nix run nixpkgs#%"
-      abbr --add ql --set-cursor "qlmanage -p % &> /dev/null"
+      abbr --add t --set-cursor 'task_%'
+      abbr --add run --set-cursor 'nix run nixpkgs#%'
+      abbr --add ql --set-cursor 'qlmanage -p % &> /dev/null'
 
       ## .. -> cd ../, ... -> cd ../../, and so on
       function __multicd
