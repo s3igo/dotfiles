@@ -7,9 +7,6 @@ on \
 ${custom.arch}
 """
 
-[character]
-success_symbol = '[❯](bold blue)'
-
 [custom.arch]
 command = 'uname -m'
 when = true
