@@ -9,6 +9,9 @@ return function(colors, font, mappings, fish)
         term = 'wezterm',
         scrollback_lines = 10000,
         default_prog = { fish },
+        quick_select_patterns = {
+            'sha256-[A-Za-z0-9+/]*={0,3}', -- sha256 encoded by base64 (e.g. nix hash)
+        },
 
         -- appearance
         colors = colors,
