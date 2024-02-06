@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./git.nix
     ./helix.nix
@@ -35,7 +36,7 @@
     };
     ripgrep = {
       enable = true;
-      arguments = ["--smart-case"];
+      arguments = [ "--smart-case" ];
     };
   };
 

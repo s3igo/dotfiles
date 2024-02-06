@@ -4,7 +4,10 @@ _: {
     languages.language = [
       {
         name = "c";
-        file-types = ["c" "h"];
+        file-types = [
+          "c"
+          "h"
+        ];
         indent = {
           tab-width = 4;
           unit = "    ";
@@ -13,7 +16,10 @@ _: {
       }
       {
         name = "yaml";
-        file-types = ["yaml" "yml"];
+        file-types = [
+          "yaml"
+          "yml"
+        ];
         indent = {
           tab-width = 2;
           unit = "  ";
@@ -21,7 +27,10 @@ _: {
       }
       {
         name = "dockerfile";
-        file-types = ["Dockerfile" "dockerfile"];
+        file-types = [
+          "Dockerfile"
+          "dockerfile"
+        ];
         indent = {
           tab-width = 4;
           unit = "  ";
@@ -40,17 +49,37 @@ _: {
       editor = {
         true-color = true;
         undercurl = true;
-        rulers = [80 100 120];
+        rulers = [
+          80
+          100
+          120
+        ];
         cursorline = true;
         line-number = "relative";
-        shell = ["zsh" "-c"];
+        shell = [
+          "zsh"
+          "-c"
+        ];
         auto-save = true;
         # bufferline = "always";
         color-modes = true;
         text-width = 120;
         statusline = {
-          left = ["mode" "spinner" "spacer" "version-control" "file-name"];
-          right = ["diagnostics" "selections" "position" "file-encoding" "file-line-ending" "file-type"];
+          left = [
+            "mode"
+            "spinner"
+            "spacer"
+            "version-control"
+            "file-name"
+          ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "file-encoding"
+            "file-line-ending"
+            "file-type"
+          ];
           mode = {
             normal = "NORMAL";
             insert = "INSERT";
@@ -96,7 +125,15 @@ _: {
           X = "extend_line_above";
           ";" = "repeat_last_motion";
           "C-;" = "collapse_selection";
-          C-k = ["goto_line_start" "select_mode" "goto_line_end" "yank" "goto_line_start" "kill_to_line_end" "delete_selection_noyank"];
+          C-k = [
+            "goto_line_start"
+            "select_mode"
+            "goto_line_end"
+            "yank"
+            "goto_line_start"
+            "kill_to_line_end"
+            "delete_selection_noyank"
+          ];
           space.q = ":buffer-close";
         };
       };

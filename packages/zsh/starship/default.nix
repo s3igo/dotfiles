@@ -1,1 +1,1 @@
-{pkgs}: ''eval "$(${pkgs.starship}/bin/starship init zsh)"''
+{ pkgs }: ''eval "$(${pkgs.starship}/bin/starship init zsh)"''

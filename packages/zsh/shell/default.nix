@@ -1,4 +1,5 @@
-{pkgs}: ''
+{ pkgs }:
+''
   source ${./config.zsh}
 
   source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh

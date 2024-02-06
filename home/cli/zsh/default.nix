@@ -1,14 +1,11 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}: {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
     history = {
       ignoreAllDups = true;
-      ignorePatterns = ["cd *"];
+      ignorePatterns = [ "cd *" ];
       path = "${config.xdg.stateHome}/zsh/history";
     };
     shellAliases = {
@@ -40,7 +37,7 @@
     initExtraFirst = ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
 
-      ${import ../../../packages/zsh/shell {inherit pkgs;}}
+      ${import ../../../packages/zsh/shell { inherit pkgs; }}
     '';
     initExtra = ''
       source ${./functions.zsh}
