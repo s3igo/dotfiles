@@ -1,6 +1,10 @@
-{ pkgs, config, ... }:
 {
-  xdg.configFile."lf/icons".source = ./icons;
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   programs.lf = {
     enable = true;
     settings = {
@@ -27,4 +31,12 @@
       '';
     };
   };
+  home.activation.installLfIcons = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    declare TEMPFILE=$(mktemp)
+    ${pkgs.curl}/bin/curl \
+      --cacert /etc/ssl/certs/ca-certificates.crt \
+      -o $TEMPFILE \
+      -s https://raw.githubusercontent.com/gokcehan/lf/master/etc/icons.example
+    mv $TEMPFILE ${config.xdg.configHome}/lf/icons
+  '';
 }
