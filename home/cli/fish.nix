@@ -53,6 +53,7 @@
         m = "mkdir";
         mv = "mv -iv";
         n = "nix";
+        nf = "nix flake";
         p = "pbpaste |";
         # ql -> quick look
         r = "rclone";

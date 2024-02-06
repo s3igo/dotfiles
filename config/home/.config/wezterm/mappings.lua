@@ -52,9 +52,10 @@ local leader = {
     -- spawn
     { key = 'n', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
 
-    -- split
+    -- pane
     { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
     { key = 's', mods = 'CTRL', action = act.SplitVertical },
+    { key = 'c', mods = 'CTRL', action = act.CloseCurrentPane({ confirm = true }) },
 
     -- focus
     -- stylua: ignore start
@@ -78,8 +79,8 @@ local leader = {
     { key = 'l', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Right', 3 }) },
 
     -- mode
-    { key = 'c', mods = 'CTRL', action = act.ActivateCopyMode },
-    { key = 'y', mods = 'CTRL', action = act.QuickSelect },
+    { key = 'y', mods = 'CTRL', action = act.ActivateCopyMode },
+    { key = 'q', mods = 'CTRL', action = act.QuickSelect },
 
     -- link
     { key = 'o', mods = 'CTRL', action = act.OpenLinkAtMouseCursor },
