@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   programs.fish = {
     enable = true;
@@ -86,6 +91,11 @@
       ## disable exit with <C-d>
       bind \cd delete-char
 
+      ## bigword
+      bind \el forward-bigword
+      bind \eh backward-bigword
+      bind \ew backward-kill-bigword
+
       ## autosuggestions
       ### <C-l>
       bind \f accept-autosuggestion
@@ -134,8 +144,12 @@
       end
       abbr --add :d --position anywhere --function __date
     '';
+    shellInitLast = ''
+      # disable fzf-file-widget keybind
+      bind --erase \ct 
+    '';
   };
-  home.activation.updateFishCompletions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.fish}/bin/fish -c 'fish_update_completions'
   '';
 }
