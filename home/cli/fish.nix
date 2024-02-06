@@ -22,7 +22,7 @@
         };
       in
       {
-        ":cp" = global "| pbcopy";
+        ":c" = global "| pbcopy";
         # :d -> current date
         ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
         ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";

@@ -22,7 +22,6 @@ _: {
       "anytype"
       "arc"
       "cursor"
-      "dropbox"
       "discord"
       "firefox"
       # "font-ipaexfont"
