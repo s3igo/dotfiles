@@ -11,7 +11,7 @@
   };
   xdg.configFile."wezterm/deps.lua".text =
     let
-      chissoku = import ../cli/chissoku.nix { inherit pkgs; };
+      chissoku = import ./chissoku.nix { inherit pkgs; };
     in
     ''
       return {
@@ -29,9 +29,4 @@
     tic -x -o ~/.terminfo $TEMPFILE
     rm $TEMPFILE
   '';
-
-  home.packages = with pkgs; [
-    monitorcontrol
-    udev-gothic-nf
-  ];
 }

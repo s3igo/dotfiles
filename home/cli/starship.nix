@@ -22,8 +22,8 @@
       git_metrics.disabled = false;
       nix_shell.symbol = " ";
       custom.arch = {
-          command = "uname -m";
-          when = true;
+        command = "uname -m";
+        when = true;
       };
     };
   };
