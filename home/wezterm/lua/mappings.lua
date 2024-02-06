@@ -54,7 +54,7 @@ local leader = {
 
     -- pane
     { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
-    { key = 's', mods = 'CTRL', action = act.SplitVertical },
+    { key = 'w', mods = 'CTRL', action = act.SplitVertical },
     { key = 'c', mods = 'CTRL', action = act.CloseCurrentPane({ confirm = true }) },
 
     -- focus
