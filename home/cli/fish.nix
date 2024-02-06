@@ -11,6 +11,8 @@
       in
       [
         (plugin "autopair")
+        (plugin "done")
+        (plugin "fishtape_3")
         (plugin "sponge")
       ];
     shellAbbrs =
