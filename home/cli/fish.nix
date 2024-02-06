@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 {
   programs.fish = {
     enable = true;
@@ -136,4 +136,7 @@
       abbr --add :d --position anywhere --function __date
     '';
   };
+  home.activation.updateFishCompletions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    ${pkgs.fish}/bin/fish -c 'fish_update_completions'
+  '';
 }
