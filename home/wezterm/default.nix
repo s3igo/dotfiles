@@ -5,21 +5,23 @@
   ...
 }:
 {
-  xdg.configFile.wezterm = {
-    source = ../../config/home/.config/wezterm;
-    recursive = true;
-  };
-  xdg.configFile."wezterm/deps.lua".text =
-    let
-      chissoku = import ./chissoku.nix { inherit pkgs; };
-    in
-    ''
-      return {
-        chissoku = "${chissoku}/bin/chissoku",
-        fish = "/etc/profiles/per-user/${user}/bin/fish",
-      }
-    '';
   programs.wezterm.enable = true;
+  xdg.configFile = {
+    wezterm = {
+      source = ./lua;
+      recursive = true;
+    };
+    "wezterm/deps.lua".text =
+      let
+        chissoku = import ./chissoku.nix { inherit pkgs; };
+      in
+      ''
+        return {
+          chissoku = "${chissoku}/bin/chissoku",
+          fish = "/etc/profiles/per-user/${user}/bin/fish",
+        }
+      '';
+  };
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     declare TEMPFILE=$(mktemp)
     ${pkgs.curl}/bin/curl \
