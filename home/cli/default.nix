@@ -5,7 +5,7 @@
     ./helix.nix
     ./lazygit.nix
     ./fish.nix
-    ./lf
+    ./lf.nix
     ./starship.nix
     ./zsh
   ];
