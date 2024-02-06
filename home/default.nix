@@ -9,7 +9,6 @@
     stateVersion = "23.11";
     packages = with pkgs; [
       monitorcontrol
-      terminal-notifier
       udev-gothic-nf
     ];
   };
