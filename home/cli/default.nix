@@ -13,7 +13,12 @@
   programs = {
     bat.enable = true;
     bottom.enable = true;
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      changeDirWidgetCommand = "fd --type directory --hidden --follow --exclude .git";
+      changeDirWidgetOptions = [ "--preview 'ls -la {}'" ];
+      defaultCommand = "fd --type file --hidden --follow --exclude .git";
+    };
     jq.enable = true;
     zoxide.enable = true;
     direnv = {
