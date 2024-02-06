@@ -6,6 +6,7 @@
     ./lazygit.nix
     ./fish.nix
     ./lf
+    ./starship.nix
     ./zsh
   ];
 
@@ -14,7 +15,6 @@
     bottom.enable = true;
     fzf.enable = true;
     jq.enable = true;
-    starship.enable = true;
     zoxide.enable = true;
     direnv = {
       enable = true;
@@ -58,7 +58,6 @@
       -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
     '';
     nvim.source = ../../config/home/.config/nvim;
-    "starship.toml".source = ../../packages/zsh/starship/config.toml;
   };
 
   home.packages = with pkgs; [
