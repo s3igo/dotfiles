@@ -71,12 +71,16 @@
         w = "which";
       };
     shellInit = ''
-      # path
-      /opt/homebrew/bin/brew shellenv | source
-      fish_add_path ${config.home.homeDirectory}/.orbstack/bin
-
       # disable greeting
       set fish_greeting
+
+      # path
+      if test -d /opt/homebrew
+        /opt/homebrew/bin/brew shellenv | source
+      end
+      if test -d ${config.home.homeDirectory}/.orbstack
+        fish_add_path ${config.home.homeDirectory}/.orbstack/bin
+      end
 
       # variables
       set -x SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
