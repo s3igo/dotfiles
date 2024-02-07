@@ -12,8 +12,7 @@
       icons = true;
     };
     commands = {
-      open = "$qlmanage -p $f >& /dev/null";
-      on-select = ''&{{ ${pkgs.lf}/bin/lf -remote "send $id set statfmt \"$(${pkgs.eza}/bin/eza -ld --color=always "$f")\"" }}'';
+      open = "$qlmanage -p $f &> /dev/null";
       on-quit = "\${{ echo $PWD > ${config.xdg.dataHome}/lf/lastdir }}";
     };
     keybindings = {
