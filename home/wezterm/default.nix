@@ -24,10 +24,12 @@
         )
       '';
   };
+
   xdg.configFile.wezterm = {
     source = ./lua;
     recursive = true;
   };
+
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     declare TEMPFILE=$(mktemp)
     ${pkgs.curl}/bin/curl \

@@ -45,16 +45,6 @@
     };
   };
 
-  home = {
-    file.".ssh/config".text = ''
-      Include ~/.orbstack/ssh/config
-
-      Host *
-        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-        ForWardAgent yes
-    '';
-  };
-
   xdg.configFile = {
     "act/actrc".text = ''
       -P ubuntu-latest=catthehacker/ubuntu:act-latest
@@ -65,18 +55,27 @@
     nvim.source = ../../config/home/.config/nvim;
   };
 
-  home.packages = with pkgs; [
-    darwin.trash
-    du-dust
-    efm-langserver
-    emacs-nox
-    fd
-    ghq
-    lazydocker
-    mmv-go
-    nodejs-slim
-    ollama
-    rclone
-    tree
-  ];
+  home = {
+    file.".ssh/config".text = ''
+      Include ~/.orbstack/ssh/config
+
+      Host *
+        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+        ForWardAgent yes
+    '';
+    packages = with pkgs; [
+      darwin.trash
+      du-dust
+      efm-langserver
+      emacs-nox
+      fd
+      ghq
+      lazydocker
+      mmv-go
+      nodejs-slim
+      ollama
+      rclone
+      tree
+    ];
+  };
 }

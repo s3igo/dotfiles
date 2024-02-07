@@ -4,6 +4,11 @@
     ./cli
     ./wezterm
   ];
+
+  programs.home-manager.enable = true;
+
+  xdg.enable = true;
+
   home = {
     language.base = "en_US.UTF-8";
     stateVersion = "23.11";
@@ -12,7 +17,4 @@
       udev-gothic-nf
     ];
   };
-
-  xdg.enable = true;
-  programs.home-manager.enable = true;
 }

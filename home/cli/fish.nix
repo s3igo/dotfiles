@@ -149,6 +149,7 @@
       bind --erase \ct 
     '';
   };
+
   home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.fish}/bin/fish -c 'fish_update_completions'
   '';
