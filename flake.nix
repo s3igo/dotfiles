@@ -32,7 +32,7 @@
               name = "task_deploy";
               runtimeInputs = [ nix-darwin.packages.${system}.default ];
               text = ''
-                darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+                sudo -v && darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
               '';
             };
             update = pkgs.writeShellApplication {
