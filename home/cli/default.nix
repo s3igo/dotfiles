@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, direnv, ... }:
 {
   imports = [
     ./git.nix
@@ -23,7 +23,11 @@
     zoxide.enable = true;
     direnv = {
       enable = true;
-      config.global.warn_timeout = 0;
+      package = direnv.packages.aarch64-darwin.default;
+      config.global = {
+        warn_timeout = 0;
+        hide_env_diff = true;
+      };
       nix-direnv.enable = true;
     };
     gh = {

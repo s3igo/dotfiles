@@ -3,13 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    direnv = {
+      url = "github:direnv/direnv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -20,6 +27,7 @@
       flake-utils,
       nix-darwin,
       home-manager,
+      direnv,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -86,7 +94,7 @@
                   useGlobalPkgs = true;
                   useUserPackages = true;
                   extraSpecialArgs = {
-                    inherit user;
+                    inherit user direnv;
                   };
                   users.${user} = import ./home;
                 };
