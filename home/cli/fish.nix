@@ -101,17 +101,14 @@
       bind \ew backward-kill-bigword
 
       ## autosuggestions
-      ### <C-l>
-      bind \f accept-autosuggestion
-      ### <C-f>
+      bind \cl accept-autosuggestion
       bind \cf forward-single-char
 
       ## history
-      ### <C-h> FIXME: `history-pager-delete` doesn't work
-      bind \b history-pager-delete or backward-delete-char
-      ### <A-p>, <A-n>
       bind \ep history-token-search-backward
       bind \en history-token-search-forward
+      ### <C-h> FIXME: `history-pager-delete` doesn't work
+      bind \b history-pager-delete or backward-delete-char
 
       ## ghq
       function __ghq-fzf
@@ -127,7 +124,6 @@
         mkdir -p ${config.xdg.stateHome}/ghq
         echo $dest > ${config.xdg.stateHome}/ghq/lastdir
       end
-      ### <C-g>
       bind \cg __ghq-fzf
 
       # abbreviations
@@ -149,7 +145,7 @@
       abbr --add :d --position anywhere --function __date
     '';
     shellInitLast = ''
-      # disable fzf-file-widget keybind
+      # disable `fzf-file-widget` keybind
       bind --erase \ct 
     '';
   };
