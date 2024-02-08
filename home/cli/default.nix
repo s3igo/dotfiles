@@ -23,7 +23,7 @@
     zoxide.enable = true;
     direnv = {
       enable = true;
-      package = direnv.packages.aarch64-darwin.default;
+      package = direnv.packages.${pkgs.system}.default;
       config.global = {
         warn_timeout = 0;
         hide_env_diff = true;
