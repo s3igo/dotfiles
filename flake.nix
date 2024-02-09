@@ -47,7 +47,7 @@
               name = "task_update";
               runtimeInputs = [ deploy ];
               text = ''
-                nix flake update && task_deploy
+                nix flake update --commit-lock-file && task_deploy
               '';
             };
             gc = pkgs.writeShellScriptBin "task_gc" ''

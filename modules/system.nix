@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+_: {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
 
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    extra-platforms = "x86_64-darwin aarch64-darwin";
+  };
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -14,9 +14,10 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
+    config.allowUnfree = true;
+  };
 
   programs.fish.enable = true;
   security.pam.enableSudoTouchIdAuth = true;
