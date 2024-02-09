@@ -16,11 +16,11 @@
     secrets =
       let
         # rootReadable = {
-        #   mode = "0500";
+        #   mode = "0400";
         #   owner = "root";
         # };
         userReadable = {
-          mode = "0500";
+          mode = "0400";
           owner = user;
         };
       in

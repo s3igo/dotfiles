@@ -42,10 +42,10 @@
         ":v" = global "--version";
         arc = "open -a 'Arc.app'";
         b = "brew";
-        c = "clear";
         ca = "cargo";
         cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
         cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
+        cl = "clear";
         cp = "cp -iv";
         d = "docker";
         e = "echo";
