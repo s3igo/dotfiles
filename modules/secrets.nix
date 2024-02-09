@@ -23,10 +23,15 @@
           mode = "0400";
           owner = user;
         };
+        configHome = if pkgs.system == "darwin" then "/Users/${user}/.config" else "/home/${user}/.config";
       in
       {
         github-nix-token = {
           file = "${secrets}/github/nix.age";
+        } // userReadable;
+        rclone-config = {
+          file = "${secrets}/config/rclone.age";
+          path = "${configHome}/rclone/rclone.conf";
         } // userReadable;
       };
   };
