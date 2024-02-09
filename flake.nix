@@ -50,10 +50,14 @@
                 nix flake update && task_deploy
               '';
             };
+            gc = pkgs.writeShellScriptBin "task_gc" ''
+              nix store gc --max 5G
+            '';
           in
           [
             deploy
             update
+            gc
           ];
       in
       {
