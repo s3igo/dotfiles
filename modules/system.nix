@@ -1,10 +1,16 @@
-_: {
+{ config, ... }:
+{
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    extra-platforms = "x86_64-darwin aarch64-darwin";
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      extra-platforms = "x86_64-darwin aarch64-darwin";
+    };
+    extraOptions = ''
+      !include ${config.age.secrets.github-nix-token.path}
+    '';
   };
 
   # Set Git commit hash for darwin-version.

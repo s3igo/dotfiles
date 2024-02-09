@@ -3,10 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,9 +12,20 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
     direnv = {
       url = "github:direnv/direnv";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    secrets = {
+      url = "github:s3igo/secrets";
+      flake = false;
     };
   };
 
@@ -27,7 +35,9 @@
       flake-utils,
       nix-darwin,
       home-manager,
+      agenix,
       direnv,
+      secrets,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -83,6 +93,9 @@
             user = "s3igo";
           in
           nix-darwin.lib.darwinSystem {
+            specialArgs = {
+              inherit agenix secrets user;
+            };
             modules = [
               (
                 { pkgs, ... }:
@@ -90,6 +103,7 @@
                   users.users.${user}.home = "/Users/${user}";
                 }
               )
+              ./modules/secrets.nix
               ./modules/system.nix
               ./modules/apps.nix
               home-manager.darwinModules.home-manager
