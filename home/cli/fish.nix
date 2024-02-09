@@ -70,6 +70,26 @@
         v = "nvim";
         w = "which";
       };
+    functions = {
+      # .. -> cd ../, ... -> cd ../../, and so on
+      __multicd = "echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)";
+      __date = "echo (date '+%Y-%m-%d')";
+      __ghq-fzf = ''
+        set -l dest (ghq list --full-path \
+          | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" \
+          | string escape)
+
+        if test -z $dest
+          return
+        end
+
+        cd $dest
+        commandline -f execute
+
+        mkdir -p ${config.xdg.stateHome}/ghq
+        echo $dest > ${config.xdg.stateHome}/ghq/lastdir
+      '';
+    };
     shellInit = ''
       # disable greeting
       set fish_greeting
@@ -110,42 +130,21 @@
       ### <C-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
 
-      ## ghq
-      function __ghq-fzf
-        set -l dest (ghq list --full-path | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" | string escape)
-
-        if test -z $dest
-          return
-        end
-
-        cd $dest
-        commandline -f execute
-
-        mkdir -p ${config.xdg.stateHome}/ghq
-        echo $dest > ${config.xdg.stateHome}/ghq/lastdir
-      end
-      bind \cg __ghq-fzf
-
       # abbreviations
       ## cursor
       abbr --add t --set-cursor 'task_%'
       abbr --add run --set-cursor 'nix run nixpkgs#%'
       abbr --add ql --set-cursor 'qlmanage -p % &> /dev/null'
-
-      ## .. -> cd ../, ... -> cd ../../, and so on
-      function __multicd
-        echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)
-      end
-      abbr --add dotdot --regex '^\.\.+$' --function __multicd
-
-      ## date
-      function __date
-        echo (date '+%Y-%m-%d')
-      end
-      abbr --add :d --position anywhere --function __date
     '';
     shellInitLast = ''
-      # disable `fzf-file-widget` keybind
+      # abbreviations
+      abbr --add :d --position anywhere --function __date
+      abbr --add dotdot --regex '^\.\.+$' --function __multicd
+
+      # keybindings
+      bind \cg __ghq-fzf
+
+      ## disable `fzf-file-widget` keybind
       bind --erase \ct 
     '';
   };
