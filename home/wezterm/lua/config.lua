@@ -8,7 +8,7 @@ return function(colors, font, mappings, fish)
         -- general
         term = 'wezterm',
         scrollback_lines = 10000,
-        default_prog = { fish },
+        default_prog = { fish, '--login' },
         quick_select_patterns = {
             'sha256-[A-Za-z0-9+/]*={0,3}', -- sha256 encoded by base64 (e.g. nix hash)
         },

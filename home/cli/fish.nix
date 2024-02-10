@@ -28,8 +28,15 @@
         };
       in
       {
+        _dotdot = {
+          regex = "^\\.\\.+$";
+          function = "__multicd";
+        };
         ":c" = global "| pbcopy";
-        # :d -> current date
+        ":d" =  {
+          position = "anywhere";
+          function = "__date";
+        };
         ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
         ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
         ":dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
@@ -61,12 +68,21 @@
         n = "nix";
         nf = "nix flake";
         p = "pbpaste |";
-        # ql -> quick look
+        ql = {
+          setCursor = true;
+          expansion =  "qlmanage -p % &> /dev/null";
+        };
         r = "rclone";
-        # run -> run nixpkgs
+        run = {
+          setCursor = true;
+          expansion = "nix run nixpkgs#%";
+        };
         rm = "rm -iv";
         st = "git status";
-        # t -> task
+        t = {
+          setCursor = true;
+          expansion = "task_%";
+        };
         ty = "typst";
         v = "nvim";
         w = "which";
@@ -131,26 +147,17 @@
       ### <C-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
 
-      # abbreviations
-      ## cursor
-      abbr --add t --set-cursor 'task_%'
-      abbr --add run --set-cursor 'nix run nixpkgs#%'
-      abbr --add ql --set-cursor 'qlmanage -p % &> /dev/null'
-    '';
-    shellInitLast = ''
-      # abbreviations
-      abbr --add :d --position anywhere --function __date
-      abbr --add dotdot --regex '^\.\.+$' --function __multicd
-
-      # keybindings
+      ## function
       bind \cg __ghq-fzf
 
-      ## disable `fzf-file-widget` keybind
+    '';
+    shellInitLast = ''
+      # disable `fzf-file-widget` keybind
       bind --erase \ct 
     '';
   };
 
-  home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ${pkgs.fish}/bin/fish -c 'fish_update_completions'
-  '';
+  # home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #   ${pkgs.fish}/bin/fish -c 'fish_update_completions'
+  # '';
 }
