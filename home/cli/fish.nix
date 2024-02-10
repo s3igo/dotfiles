@@ -5,6 +5,10 @@
   # lib,
   ...
 }:
+let
+  inherit (config.xdg) dataHome stateHome;
+  inherit (config.home) homeDirectory;
+in
 {
   programs.fish = {
     enable = true;
@@ -28,7 +32,7 @@
         cursor = {
           setCursor = true;
         };
-        regex = pat: { regex = pat; };
+        regex = str: { regex = str; };
         function = str: { function = str; };
         text = str: { expansion = str; };
       in
@@ -52,8 +56,8 @@
         arc = "open -a 'Arc.app'";
         b = "brew";
         ca = "cargo";
-        cdg = "cd (cat ${config.xdg.stateHome}/ghq/lastdir | string escape)";
-        cdl = "cd (cat ${config.xdg.dataHome}/lf/lastdir | string escape)";
+        cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
+        cdl = "cd (cat ${dataHome}/lf/lastdir | string escape)";
         cl = "clear";
         cp = "cp -iv";
         d = "docker";
@@ -96,21 +100,22 @@
         cd $dest
         commandline -f execute
 
-        mkdir -p ${config.xdg.stateHome}/ghq
-        echo $dest > ${config.xdg.stateHome}/ghq/lastdir
+        mkdir -p ${stateHome}/ghq
+        echo $dest > ${stateHome}/ghq/lastdir
       '';
     };
-    shellInit = ''
-      # disable greeting
-      set fish_greeting
-
-      # path
+    loginShellInit = ''
+      # PATH
       if test -d /opt/homebrew
         /opt/homebrew/bin/brew shellenv | source
       end
-      if test -d ${config.home.homeDirectory}/.orbstack
-        fish_add_path ${config.home.homeDirectory}/.orbstack/bin
+      if test -d ${homeDirectory}/.orbstack
+        fish_add_path ${homeDirectory}/.orbstack/bin
       end
+    '';
+    interactiveShellInit = ''
+      # disable greeting
+      set fish_greeting
 
       # keybindings
       ## disable exit with <c-d>
@@ -136,7 +141,9 @@
     '';
     shellInitLast = ''
       # disable the `fzf-file-widget` keybind and use <c-t> to `transpose-chars`
-      bind --erase \ct 
+      if status --is-interactive
+        bind --erase \c 
+      end
     '';
   };
 
