@@ -19,6 +19,10 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     direnv = {
       url = "github:direnv/direnv";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +40,7 @@
       nix-darwin,
       home-manager,
       agenix,
+      nixvim,
       direnv,
       secrets,
       ...
@@ -71,7 +76,16 @@
           ];
       in
       {
-        packages.default = import ./packages/zsh { inherit pkgs; };
+        packages = rec {
+          neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
+            inherit pkgs;
+            # extraSpecialArgs = { };
+            module = {
+              imports = [ ./packages/neovim/modules ];
+            };
+          };
+          default = neovim;
+        };
 
         devShells.default = pkgs.mkShell {
           buildInputs =
