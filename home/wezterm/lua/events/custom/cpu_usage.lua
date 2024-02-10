@@ -14,7 +14,7 @@ end
 ---@return string
 local function get_cpu_usage()
     ---@type _, string
-    local _, result = wezterm.run_child_process({ 'iostat', '-c', '2' })
+    local _, result = wezterm.run_child_process({ 'iostat', '-c', '2', 'disk0' })
 
     local line = split(result, '[^\r\n]+')[4]
     local value = split(line, '%S+')[6]
