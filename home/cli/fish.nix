@@ -142,7 +142,7 @@ in
     shellInitLast = ''
       # disable the `fzf-file-widget` keybind and use <c-t> to `transpose-chars`
       if status --is-interactive
-        bind --erase \c 
+        bind --erase \ct
       end
     '';
   };
