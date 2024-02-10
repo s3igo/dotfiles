@@ -1,4 +1,9 @@
-{ pkgs, direnv, ... }:
+{
+  pkgs,
+  config,
+  direnv,
+  ...
+}:
 {
   imports = [
     ./git.nix
@@ -68,6 +73,12 @@
   };
 
   home = {
+    sessionVariables = {
+      SSH_AUTH_SOCK = "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      DOCKER_CONFIG = "${config.xdg.configHome}/docker";
+      _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";
+      LESSHISTFILE = "-"; # avoid creating `.lesshst`
+    };
     packages = with pkgs; [
       darwin.trash
       du-dust

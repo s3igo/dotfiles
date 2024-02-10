@@ -33,7 +33,7 @@
           function = "__multicd";
         };
         ":c" = global "| pbcopy";
-        ":d" =  {
+        ":d" = {
           position = "anywhere";
           function = "__date";
         };
@@ -70,7 +70,7 @@
         p = "pbpaste |";
         ql = {
           setCursor = true;
-          expansion =  "qlmanage -p % &> /dev/null";
+          expansion = "qlmanage -p % &> /dev/null";
         };
         r = "rclone";
         run = {
@@ -118,15 +118,6 @@
       if test -d ${config.home.homeDirectory}/.orbstack
         fish_add_path ${config.home.homeDirectory}/.orbstack/bin
       end
-
-      # variables
-      set -x SSH_AUTH_SOCK $HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-      set -x DOCKER_CONFIG ${config.xdg.configHome}/docker
-      set -x _ZO_DATA_DIR ${config.xdg.dataHome}/zoxide
-      ## for `echo $0` compatibility with posix shell
-      set -x 0 fish
-      ## avoid creating `.lesshst`
-      set -x LESSHISTFILE -
 
       # keybindings
       ## disable exit with <C-d>
