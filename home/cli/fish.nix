@@ -2,7 +2,7 @@
   pkgs,
   config,
   # osConfig,
-  lib,
+  # lib,
   ...
 }:
 {
@@ -22,32 +22,33 @@
       ];
     shellAbbrs =
       let
-        global = text: {
+        global = {
           position = "anywhere";
-          expansion = text;
         };
+        cursor = {
+          setCursor = true;
+        };
+        regex = pat: { regex = pat; };
+        function = str: { function = str; };
+        text = str: { expansion = str; };
       in
       {
-        _dotdot = {
-          regex = "^\\.\\.+$";
-          function = "__multicd";
-        };
-        ":c" = global "| pbcopy";
-        ":d" = {
-          position = "anywhere";
-          function = "__date";
-        };
-        ":di" = global "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
-        ":dp" = global "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
-        ":dpa" = global "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
-        ":f" = global "| fzf";
-        ":g" = global "| rg";
-        ":h" = global "--help";
-        ":i" = global "install";
-        ":icloud" = global "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":p" = global "| less";
-        ":s" = global "search";
-        ":v" = global "--version";
+        _dotdot =
+          regex "^\\.\\.+$" # matches `..`, `...`, `....`, and so on
+          // function "__multicd";
+        ":c" = global // text "| pbcopy";
+        ":d" = global // function "__date";
+        ":di" = global // text "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
+        ":dp" = global // text "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
+        ":dpa" = global // text "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
+        ":f" = global // text "| fzf";
+        ":g" = global // text "| rg";
+        ":h" = global // text "--help";
+        ":i" = global // text "install";
+        ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+        ":p" = global // text "| less";
+        ":s" = global // text "search";
+        ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
         b = "brew";
         ca = "cargo";
@@ -68,28 +69,20 @@
         n = "nix";
         nf = "nix flake";
         p = "pbpaste |";
-        ql = {
-          setCursor = true;
-          expansion = "qlmanage -p % &> /dev/null";
-        };
+        ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
-        run = {
-          setCursor = true;
-          expansion = "nix run nixpkgs#%";
-        };
+        run = cursor // text "nix run nixpkgs#%";
         rm = "rm -iv";
         st = "git status";
-        t = {
-          setCursor = true;
-          expansion = "task_%";
-        };
+        t = cursor // text "task_%";
         ty = "typst";
         v = "nvim";
         w = "which";
       };
     functions = {
-      # .. -> cd ../, ... -> cd ../../, and so on
+      # $1 length is 2 -> `cd ../`, 3 -> `cd ../../`, and so on
       __multicd = "echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)";
+      # current date in ISO 8601 extended format
       __date = "echo (date '+%Y-%m-%d')";
       __ghq-fzf = ''
         set -l dest (ghq list --full-path \
@@ -120,7 +113,7 @@
       end
 
       # keybindings
-      ## disable exit with <C-d>
+      ## disable exit with <c-d>
       bind \cd delete-char
 
       ## bigword
@@ -135,15 +128,14 @@
       ## history
       bind \ep history-token-search-backward
       bind \en history-token-search-forward
-      ### <C-h> FIXME: `history-pager-delete` doesn't work
+      ### <c-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
 
       ## function
       bind \cg __ghq-fzf
-
     '';
     shellInitLast = ''
-      # disable `fzf-file-widget` keybind
+      # disable the `fzf-file-widget` keybind and use <c-t> to `transpose-chars`
       bind --erase \ct 
     '';
   };
