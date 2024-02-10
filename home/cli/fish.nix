@@ -24,6 +24,28 @@ in
         (plugin "fishtape_3")
         (plugin "sponge")
       ];
+    functions = {
+      # $1 length is 2 -> `cd ../`, 3 -> `cd ../../`, and so on
+      __multicd = "echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)";
+      # current date in ISO 8601 extended format
+      __date = "echo (date '+%Y-%m-%d')";
+      __ghq-fzf = ''
+        set -l dest (ghq list --full-path \
+          | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" \
+          | string escape)
+
+        # is not selected
+        if test -z $dest
+          return
+        end
+
+        cd $dest
+        commandline -f execute
+
+        mkdir -p ${stateHome}/ghq
+        echo $dest > ${stateHome}/ghq/lastdir
+      '';
+    };
     shellAbbrs =
       let
         global = {
@@ -83,27 +105,6 @@ in
         v = "nvim";
         w = "which";
       };
-    functions = {
-      # $1 length is 2 -> `cd ../`, 3 -> `cd ../../`, and so on
-      __multicd = "echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)";
-      # current date in ISO 8601 extended format
-      __date = "echo (date '+%Y-%m-%d')";
-      __ghq-fzf = ''
-        set -l dest (ghq list --full-path \
-          | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" \
-          | string escape)
-
-        if test -z $dest
-          return
-        end
-
-        cd $dest
-        commandline -f execute
-
-        mkdir -p ${stateHome}/ghq
-        echo $dest > ${stateHome}/ghq/lastdir
-      '';
-    };
     loginShellInit = ''
       # PATH
       if test -d /opt/homebrew
