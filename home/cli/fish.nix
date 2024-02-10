@@ -83,6 +83,7 @@ in
         cl = "clear";
         cp = "cp -iv";
         d = "docker";
+        dp = "diff -Naur";
         e = "echo";
         g = "git";
         ga = "git add";
