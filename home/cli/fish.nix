@@ -54,8 +54,8 @@ in
         cursor = {
           setCursor = true;
         };
-        regex = str: { regex = str; };
-        function = str: { function = str; };
+        regex = pat: { regex = pat; };
+        function = name: { function = name; };
         text = str: { expansion = str; };
       in
       {
@@ -97,8 +97,8 @@ in
         p = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
-        run = cursor // text "nix run nixpkgs#%";
         rm = "rm -iv";
+        run = cursor // text "nix run nixpkgs#%";
         st = "git status";
         t = cursor // text "task_%";
         ty = "typst";
