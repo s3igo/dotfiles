@@ -3,6 +3,7 @@
   agenix,
   secrets,
   user,
+  configHome,
   ...
 }:
 {
@@ -23,7 +24,6 @@
           mode = "0400";
           owner = user;
         };
-        configHome = if pkgs.system == "darwin" then "/Users/${user}/.config" else "/home/${user}/.config";
       in
       {
         github-nix-token = {

@@ -87,38 +87,43 @@
       }
     )
     // {
-      darwinConfigurations = {
-        mbp2023 =
-          let
-            user = "s3igo";
-          in
-          nix-darwin.lib.darwinSystem {
-            specialArgs = {
-              inherit agenix secrets user;
-            };
-            modules = [
-              (
-                { pkgs, ... }:
+      darwinConfigurations =
+        let
+          configPath = username: "/Users/${username}/.config";
+        in
+        {
+          mbp2023 =
+            let
+              user = "s3igo";
+            in
+            nix-darwin.lib.darwinSystem {
+              specialArgs = {
+                inherit agenix secrets user;
+                configHome = configPath user;
+              };
+              modules = [
+                (
+                  { pkgs, ... }:
+                  {
+                    users.users.${user}.home = "/Users/${user}";
+                  }
+                )
+                ./modules/secrets.nix
+                ./modules/system.nix
+                ./modules/apps.nix
+                home-manager.darwinModules.home-manager
                 {
-                  users.users.${user}.home = "/Users/${user}";
-                }
-              )
-              ./modules/secrets.nix
-              ./modules/system.nix
-              ./modules/apps.nix
-              home-manager.darwinModules.home-manager
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = {
-                    inherit user direnv;
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                      inherit user direnv;
+                    };
+                    users.${user} = import ./home;
                   };
-                  users.${user} = import ./home;
-                };
-              }
-            ];
-          };
-      };
+                }
+              ];
+            };
+        };
     };
 }
