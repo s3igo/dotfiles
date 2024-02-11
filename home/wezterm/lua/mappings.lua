@@ -56,6 +56,9 @@ local leader = {
     { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
     { key = 'w', mods = 'CTRL', action = act.SplitVertical },
     { key = 'c', mods = 'CTRL', action = act.CloseCurrentPane({ confirm = true }) },
+    { key = 'f', mods = 'CTRL', action = act.RotatePanes('Clockwise') },
+    { key = 'b', mods = 'CTRL', action = act.RotatePanes('CounterClockwise') },
+    { key = 'p', action = wezterm.action({ PaneSelect = { mode = 'SwapWithActive' } }) },
 
     -- focus
     -- stylua: ignore start
