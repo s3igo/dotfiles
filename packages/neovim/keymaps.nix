@@ -242,8 +242,8 @@ in
     ]
   )
   (map "<c-h>" "<bs>" // mode "c")
-  # plugins
-  (map "<leader>;t" "<cmd>Telescope<cr>" // options { desc = "Telescope"; })
   # terminal
   (map "<C-]" "<C-\\\\><C-n>" // mode "t" // options { desc = "Exit terminal mode"; })
+  # plugins
+  (map "<leader>;t" "<cmd>Telescope<cr>" // options { desc = "Telescope"; })
 ]

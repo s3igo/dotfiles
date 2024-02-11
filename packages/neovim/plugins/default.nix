@@ -1,9 +1,6 @@
-{ pkgs, ... }:
-{
-  imports = [ ./coding.nix ];
-
-  extraPackages = with pkgs; [
-    fd
-    ripgrep
+_: {
+  imports = [
+    ./coding.nix
+    ./editor.nix
   ];
 }
