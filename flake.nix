@@ -81,7 +81,7 @@
             inherit pkgs;
             # extraSpecialArgs = { };
             module = {
-              imports = [ ./packages/neovim/modules ];
+              imports = [ ./packages/neovim ];
             };
           };
           default = neovim;
