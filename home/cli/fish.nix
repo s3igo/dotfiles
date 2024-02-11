@@ -72,7 +72,7 @@ in
         ":h" = global // text "--help";
         ":i" = global // text "install";
         ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":p" = global // text "| less";
+        ":l" = global // text "| less";
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
@@ -95,11 +95,12 @@ in
         mv = "mv -iv";
         n = "nix";
         nf = "nix flake";
+        np = cursor // text "nix run nixpkgs#% --";
+        nr = cursor // text "nix run .#% --";
         p = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
         rm = "rm -iv";
-        run = cursor // text "nix run nixpkgs#%";
         st = "git status";
         t = cursor // text "task_%";
         ty = "typst";
