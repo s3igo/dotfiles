@@ -1,6 +1,19 @@
 { pkgs, ... }:
 {
   plugins = {
+    lsp = {
+      enable = true;
+      servers.nil_ls = {
+        enable = true;
+        cmd = [ "nil" ];
+        filetypes = [ "nix" ];
+        rootDir = ''
+          function()
+            return vim.fs.dirname(vim.fs.find({ 'flake.nix', '.git' }, { upward = true })[1])
+          end
+        '';
+      };
+    };
     fidget = {
       enable = true;
       notification.window.winblend = 0;
