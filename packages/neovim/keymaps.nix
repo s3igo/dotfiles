@@ -7,32 +7,54 @@ let
   options = options: { inherit options; };
 in
 [
-  (map "Y" "y$")
-  (map "<leader>q" "<cmd>qa<cr>" // options { desc = "Quit all"; })
-  (
-    map "<c-[>" "<cmd>noh<cr><esc>"
-    // mode [
-      "n"
-      "i"
-    ]
-  )
-  (
-    map "gm" "%"
-    // mode [
+  {
+    key = "Y";
+    action = "y$";
+    mode = "n";
+  }
+  {
+    key = "<leader>q";
+    action = "<cmd>qa<cr>";
+    mode = "n";
+    options.desc = "Quit all";
+  }
+  {
+    key = "<c-[>";
+    action = "<cmd>noh<cr><esc>";
+    mode = "n";
+  }
+  {
+    key = "gm";
+    action = "%";
+    mode = [
       "n"
       "x"
       "o"
-    ]
-    // options { desc = "Go to matching bracket"; }
-  )
+    ];
+    options.desc = "Go to matching bracket";
+  }
   # disable
-  (map "s" "<nop>")
-  (map "x" "<nop>")
   # window
-  (map "<c-h>" "<c-w>h" // options { remap = true; })
-  (map "<c-j>" "<c-w>j" // options { remap = true; })
-  (map "<c-k>" "<c-w>k" // options { remap = true; })
-  (map "<c-l>" "<c-w>l" // options { remap = true; })
+  {
+    key = "<c-h>";
+    action = "<c-w>h";
+    options.remap = true;
+  }
+  {
+    key = "<c-j>";
+    action = "<c-w>j";
+    options.remap = true;
+  }
+  {
+    key = "<c-k>";
+    action = "<c-w>k";
+    options.remap = true;
+  }
+  {
+    key = "<c-l>";
+    action = "<c-w>l";
+    options.remap = true;
+  }
   # register
   (
     map "<leader>y" ''"+y''

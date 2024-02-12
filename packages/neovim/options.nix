@@ -2,7 +2,7 @@
   encoding = "utf-8";
   fileencoding = "utf-8";
   fileformats = "unix,dos,mac";
-  cmdheight = 0;
+  # cmdheight = 0;
   showtabline = 2;
   shiftwidth = 4;
   softtabstop = 4;
