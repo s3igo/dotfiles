@@ -54,8 +54,6 @@ vim.keymap.set({ 'n', 'x', 'o' }, 'gl', 'g_')
 vim.keymap.set({ 'n', 'x', 'o' }, 'gh', 'g^')
 
 -- macros
-vim.fn.setreg('j', 'gccyypgcc')
-vim.fn.setreg('m', 'ypgvgc')
+vim.fn.setreg('c', 'gccyypgcc')
+vim.fn.setreg('v', 'ypgvgc')
 vim.fn.setreg('n', '*Ncgn')
-vim.fn.setreg('f', 'ciwfalse')
-vim.fn.setreg('t', 'ciwtrue')

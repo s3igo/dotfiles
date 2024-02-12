@@ -4,5 +4,6 @@ _: {
     ./editor.nix
     ./treesitter.nix
     ./utils
+    ./lsp.nix
   ];
 }
