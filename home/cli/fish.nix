@@ -97,6 +97,7 @@ in
         nf = "nix flake";
         np = cursor // text "nix run nixpkgs#% --";
         nr = cursor // text "nix run .#% --";
+        nv = cursor // text "nix run $HOME/.dotfiles#% --";
         p = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
