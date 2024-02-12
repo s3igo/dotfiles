@@ -5,5 +5,6 @@ _: {
     ./treesitter.nix
     ./utils
     ./lsp.nix
+    ./ui.nix
   ];
 }

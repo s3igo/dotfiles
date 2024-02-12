@@ -1,10 +1,13 @@
-_: {
+{ pkgs, ... }:
+{
   plugins = {
     fidget = {
       enable = true;
       notification.window.winblend = 0;
     };
   };
+
+  extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
 
   keymaps = [
     {
@@ -108,6 +111,13 @@ _: {
       action = "vim.diagnostic.goto_prev";
       mode = "n";
       options.desc = "Go to previous diagnostic";
+    }
+    # actions-preview.nvim
+    {
+      key = "<leader>a";
+      action = "<cmd>lua require('actions-preview').code_actions()<cr>";
+      mode = "n";
+      options.desc = "Code Actions Preview";
     }
   ];
 }
