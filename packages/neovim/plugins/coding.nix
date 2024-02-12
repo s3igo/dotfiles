@@ -71,13 +71,46 @@
     text-case-nvim
   ];
 
-  extraConfigLuaPost = ''
-    -- substiture.nvim
-    vim.keymap.set('n', 's', require('substitute').operator)
-    vim.keymap.set('n', 'ss', require('substitute').line)
-    vim.keymap.set('n', 'S', require('substitute').eol)
-    vim.keymap.set('x', 's', require('substitute').visual)
+  keymaps = [
+    {
+      key = "s";
+      action.__raw = ''
+        function()
+          require('substitute').operator()
+        end
+      '';
+      mode = "n";
+    }
+    {
+      key = "ss";
+      action.__raw = ''
+        function()
+          require('substitute').line()
+        end
+      '';
+      mode = "n";
+    }
+    {
+      key = "S";
+      action.__raw = ''
+        function()
+          require('substitute').eol()
+        end
+      '';
+      mode = "n";
+    }
+    {
+      key = "s";
+      action.__raw = ''
+        function()
+          require('substitute').visual()
+        end
+      '';
+      mode = "x";
+    }
+  ];
 
+  extraConfigLua = ''
     -- friendly-snippets
     require('luasnip.loaders.from_vscode').lazy_load()
 

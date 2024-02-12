@@ -98,6 +98,7 @@ in
         np = cursor // text "nix run nixpkgs#% --";
         nr = cursor // text "nix run .#% --";
         nv = cursor // text "nix run $HOME/.dotfiles#% --";
+        nvd = cursor // text "nix run github:s3igo/dotfiles#% -- --dry-run";
         p = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
