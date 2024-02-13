@@ -63,6 +63,10 @@
     };
     nvim-autopairs.enable = true;
     comment-nvim.enable = true;
+    leap = {
+      enable = true;
+      addDefaultMappings = false;
+    };
   };
 
   extraPlugins = with pkgs.vimPlugins; [
@@ -72,6 +76,31 @@
   ];
 
   keymaps = [
+    # leap
+    {
+      key = "<c-r>";
+      action = "r";
+      mode = "n";
+    }
+    {
+      key = "r";
+      action = "<plug>(leap-forward)";
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+    }
+    {
+      key = "R";
+      action = "<plug>(leap-backward)";
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+    }
+    # substitute-nvim
     {
       key = "s";
       action.__raw = ''
@@ -113,6 +142,7 @@
   extraConfigLua = ''
     -- nvim-surround
     require('nvim-surround').setup({})
+
     -- friendly-snippets
     require('luasnip.loaders.from_vscode').lazy_load()
 
