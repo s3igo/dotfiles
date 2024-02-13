@@ -112,5 +112,21 @@ _: {
       action = "<bs>";
       mode = "c";
     }
+    {
+      key = "<a-f>";
+      action = "<c-g>U<s-right>";
+      mode = [
+        "i"
+        "c"
+      ];
+    }
+    {
+      key = "<a-b>";
+      action = "<c-g>U<s-left>";
+      mode = [
+        "i"
+        "c"
+      ];
+    }
   ];
 }

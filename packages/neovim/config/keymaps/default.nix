@@ -1,5 +1,8 @@
 _: {
-  imports = [ ./emacs.nix ];
+  imports = [
+    ./emacs.nix
+    ./register.nix
+  ];
 
   keymaps = [
     {
@@ -49,79 +52,6 @@ _: {
       action = "<c-w>l";
       options.remap = true;
     }
-    # register
-    {
-      key = "<leader>y";
-      action = ''"+y'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "<leader>Y";
-      action = ''"+yg_'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "<leader>d";
-      action = ''"+d'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "<leader>p";
-      action = ''"+p'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "<leader>0";
-      action = ''"0p'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "x";
-      action = ''"_d'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "X";
-      action = ''"_c'';
-      mode = [
-        "n"
-        "x"
-      ];
-    }
-    {
-      key = "<a-f>";
-      action = "<c-g>U<s-right>";
-      mode = [
-        "i"
-        "c"
-      ];
-    }
-    {
-      key = "<a-b>";
-      action = "<c-g>U<s-left>";
-      mode = [
-        "i"
-        "c"
-      ];
-    }
     # helix keybindings
     {
       key = "gl";
@@ -140,6 +70,11 @@ _: {
         "x"
         "o"
       ];
+    }
+    {
+      key = "U";
+      action = "<c-r>";
+      mode = "n";
     }
     # indent
     {
@@ -218,7 +153,7 @@ _: {
     # terminal
     {
       key = "<c-]>";
-      action = "<c-\\\\><c-n>";
+      action = "<c-\\><c-n>";
       mode = "t";
       options.desc = "Exit terminal mode";
     }
