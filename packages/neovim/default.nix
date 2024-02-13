@@ -1,5 +1,8 @@
 _: {
-  imports = [ ./plugins ];
+  imports = [
+    ./plugins
+    ./keymaps
+  ];
 
   config = {
     filetype.extension.typ = "typst";
@@ -18,6 +21,5 @@ _: {
 
     options = import ./options.nix;
     autoCmd = import ./autocmd.nix;
-    keymaps = import ./keymaps.nix;
   };
 }
