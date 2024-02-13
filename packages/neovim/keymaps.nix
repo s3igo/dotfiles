@@ -33,7 +33,6 @@ in
     ];
     options.desc = "Go to matching bracket";
   }
-  # disable
   # window
   {
     key = "<c-h>";
@@ -56,127 +55,135 @@ in
     options.remap = true;
   }
   # register
-  (
-    map "<leader>y" ''"+y''
-    // mode [
+  {
+    key = "<leader>y";
+    action = ''"+y'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "<leader>Y" ''"+yg_''
-    // mode [
+    ];
+  }
+  {
+    key = "<leader>Y";
+    action = ''"+yg_'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "<leader>d" ''"+d''
-    // mode [
+    ];
+  }
+  {
+    key = "<leader>d";
+    action = ''"+d'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "<leader>p" ''"+p''
-    // mode [
+    ];
+  }
+  {
+    key = "<leader>p";
+    action = ''"+p'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "<leader>0" ''"0p''
-    // mode [
+    ];
+  }
+  {
+    key = "<leader>0";
+    action = ''"0p'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "x" ''"_d''
-    // mode [
+    ];
+  }
+  {
+    key = "x";
+    action = ''"_d'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "X" ''"_c''
-    // mode [
+    ];
+  }
+  {
+    key = "X";
+    action = ''"_c'';
+    mode = [
       "n"
       "x"
-    ]
-  )
-  (
-    map "j" "gj"
-    // mode [
-      "n"
-      "x"
-      "o"
-    ]
-  )
-  (
-    map "k" "gk"
-    // mode [
-      "n"
-      "x"
-      "o"
-    ]
-  )
-  (
-    map "gj" "j"
-    // mode [
-      "n"
-      "x"
-      "o"
-    ]
-  )
-  (
-    map "gk" "k"
-    // mode [
-      "n"
-      "x"
-      "o"
-    ]
-  )
-  (
-    map "<a-f>" "<c-g>U<s-right>"
-    // mode [
+    ];
+  }
+  {
+    key = "<a-f>";
+    action = "<c-g>U<s-right>";
+    mode = [
       "i"
       "c"
-    ]
-  )
-  (
-    map "<a-b>" "<c-g>U<s-left>"
-    // mode [
+    ];
+  }
+  {
+    key = "<a-b>";
+    action = "<c-g>U<s-left>"; 
+    mode = [
       "i"
       "c"
-    ]
-  )
-  (
-    map "gl" "g_"
-    // mode [
+    ];
+  }
+  # helix keybindings
+  {
+    key = "gl";
+    action = "g_";
+    mode = [
       "n"
       "x"
       "o"
-    ]
-  )
-  (
-    map "gh" "g^"
-    // mode [
+    ];
+  }
+  {
+    key = "gh";
+    action = "g^";
+    mode = [
       "n"
       "x"
       "o"
-    ]
-  )
+    ];
+  }
   # indent
-  (map "<tab>" "<c-t>" // mode "i")
-  (map "<s-tab>" "<c-d>" // mode "i")
+  {
+    key = "<tab>";
+    action = "<c-t>";
+    mode = "i";
+  }
+  {
+    key = "<s-tab>";
+    action = "<c-d>";
+    mode = "i";
+  }
   # retain visual selection
-  (map ">" ">gv" // mode "v")
-  (map "<" "<gv" // mode "v")
+  {
+    key = ">";
+    action = ">gv";
+    mode = "v";
+  }
+  {
+    key = "<";
+    action = "<gv";
+    mode = "v";
+  }
   # add undo breakpoints
-  (map "," ",<c-g>u" // mode "i")
-  (map "." ".<c-g>u" // mode "i")
-  (map ";" ";<c-g>u" // mode "i")
+  # {
+  #   key = ",";
+  #   action = ",<c-g>u";
+  #   mode = "i";
+  # }
+  # {
+  #   key = ".";
+  #   action = ".<c-g>u";
+  #   mode = "i";
+  # }
+  # {
+  #   key = ";";
+  #   action = ";<c-g>u";
+  #   mode = "i";
+  # }
   # files
   (map "<leader>s" "<cmd>w<cr><esc>" // options { desc = "Save"; })
   (map "<leader>S" "<cmd>wa<cr><esc>" // options { desc = "Save all"; })
