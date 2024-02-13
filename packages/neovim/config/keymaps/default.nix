@@ -1,13 +1,4 @@
-_:
-let
-  map = key: action: {
-    inherit key action;
-    mode = "n";
-  };
-  mode = mode: { inherit mode; };
-  options = options: { inherit options; };
-in
-{
+_: {
   imports = [ ./emacs.nix ];
 
   keymaps = [
@@ -189,30 +180,47 @@ in
     #   mode = "i";
     # }
     # files
-    (map "<leader>s" "<cmd>w<cr><esc>" // options { desc = "Save"; })
-    (map "<leader>S" "<cmd>wa<cr><esc>" // options { desc = "Save all"; })
-    (map "<leader>q" "<cmd>qa<cr>" // options { desc = "Quit all"; })
+    {
+      key = "<leader>s";
+      action = "<cmd>w<cr><esc>";
+      mode = "n";
+      options.desc = "Save";
+    }
+    {
+      key = "<leader>S";
+      action = "<cmd>wa<cr><esc>";
+      mode = "n";
+      options.desc = "Save all";
+    }
+    {
+      key = "<leader>q";
+      action = "<cmd>qa<cr>";
+      mode = "n";
+      options.desc = "Quit all";
+    }
     # comments
-    (
-      map "<leader>c" {
-        __raw = ''
-          function()
-              local line = vim.api.nvim_get_current_line()
-              local row = unpack(vim.api.nvim_win_get_cursor(0))
+    {
+      key = "<leader>c";
+      action.__raw = ''
+        function()
+          local line = vim.api.nvim_get_current_line()
+          local row = unpack(vim.api.nvim_win_get_cursor(0))
 
-              -- fill to 80 columns
-              local available_width = 80 - #line
-              local comment = string.rep('-', available_width - 1)
+          -- fill to 80 columns
+          local available_width = 80 - #line
+          local comment = string.rep('-', available_width - 1)
 
-              vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
-          end
-        '';
-      }
-      // options { desc = "Line comment"; }
-    )
+          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
+        end
+      '';
+      options.desc = "Line comment";
+    }
     # terminal
-    (map "<C-]" "<C-\\\\><C-n>" // mode "t" // options { desc = "Exit terminal mode"; })
-    # plugins
-    (map "<leader>;t" "<cmd>Telescope<cr>" // options { desc = "Telescope"; })
+    {
+      key = "<c-]>";
+      action = "<c-\\\\><c-n>";
+      mode = "t";
+      options.desc = "Exit terminal mode";
+    }
   ];
 }
