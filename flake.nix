@@ -13,10 +13,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
-      url = "github:yaxitech/ragenix";
+      url = "github:ryantm/agenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
       };
     };
     nixvim = {
