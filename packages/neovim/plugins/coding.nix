@@ -111,6 +111,8 @@
   ];
 
   extraConfigLua = ''
+    -- nvim-surround
+    require('nvim-surround').setup({})
     -- friendly-snippets
     require('luasnip.loaders.from_vscode').lazy_load()
 
