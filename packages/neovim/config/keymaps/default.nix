@@ -148,6 +148,7 @@ _: {
           vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
         end
       '';
+      mode = "n";
       options.desc = "Line comment";
     }
     # terminal

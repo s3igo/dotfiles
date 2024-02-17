@@ -138,5 +138,9 @@
               ];
             };
         };
+
+      nixosModules = {
+        neovim.imports = [ ./packages/neovim ];
+      };
     };
 }
