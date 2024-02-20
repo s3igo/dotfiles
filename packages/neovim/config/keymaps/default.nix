@@ -6,11 +6,6 @@ _: {
 
   keymaps = [
     {
-      key = "Y";
-      action = "y$";
-      mode = "n";
-    }
-    {
       key = "<leader>q";
       action = "<cmd>qa<cr>";
       mode = "n";
@@ -30,6 +25,36 @@ _: {
         "o"
       ];
       options.desc = "Go to matching bracket";
+    }
+    {
+      key = "<leader>c";
+      action.__raw = ''
+        function()
+          local line = vim.api.nvim_get_current_line()
+          local row = unpack(vim.api.nvim_win_get_cursor(0))
+
+          -- fill to 80 columns
+          local available_width = 80 - #line
+          local comment = string.rep('-', available_width - 1)
+
+          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
+        end
+      '';
+      mode = "n";
+      options.desc = "Line comment";
+    }
+    {
+      key = "<leader>;";
+      action.__raw = ''
+        function()
+          local line = vim.api.nvim_get_current_line()
+          local row = unpack(vim.api.nvim_win_get_cursor(0))
+
+          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ';' })
+        end
+      '';
+      mode = "n";
+      options.desc = "Insert semicolon";
     }
     # window
     {
@@ -132,24 +157,6 @@ _: {
       action = "<cmd>qa<cr>";
       mode = "n";
       options.desc = "Quit all";
-    }
-    # comments
-    {
-      key = "<leader>c";
-      action.__raw = ''
-        function()
-          local line = vim.api.nvim_get_current_line()
-          local row = unpack(vim.api.nvim_win_get_cursor(0))
-
-          -- fill to 80 columns
-          local available_width = 80 - #line
-          local comment = string.rep('-', available_width - 1)
-
-          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ' ' .. comment })
-        end
-      '';
-      mode = "n";
-      options.desc = "Line comment";
     }
     # terminal
     {
