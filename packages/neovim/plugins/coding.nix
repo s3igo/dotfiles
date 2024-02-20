@@ -78,13 +78,8 @@
   keymaps = [
     # leap
     {
-      key = "<c-r>";
-      action = "r";
-      mode = "n";
-    }
-    {
-      key = "r";
-      action = "<plug>(leap-forward)";
+      key = "gf";
+      action = "<plug>(leap-forward-to)";
       mode = [
         "n"
         "x"
@@ -92,8 +87,26 @@
       ];
     }
     {
-      key = "R";
-      action = "<plug>(leap-backward)";
+      key = "gF";
+      action = "<plug>(leap-backward-to)";
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+    }
+    {
+      key = "gt";
+      action = "<plug>(leap-forward-till)";
+      mode = [
+        "n"
+        "x"
+        "o"
+      ];
+    }
+    {
+      key = "gT";
+      action = "<plug>(leap-backward-till)";
       mode = [
         "n"
         "x"
