@@ -1,6 +1,4 @@
 {
-  description = "Darwin configuration";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -93,6 +91,7 @@
             [
               act
               statix
+              nixfmt-rfc-style
             ]
             ++ tasks;
         };

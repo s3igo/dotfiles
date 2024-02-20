@@ -12,6 +12,7 @@
             return vim.fs.dirname(vim.fs.find({ 'flake.nix', '.git' }, { upward = true })[1])
           end
         '';
+        settings.formatting.command = [ "nixfmt" ];
       };
     };
     fidget = {
@@ -22,6 +23,8 @@
 
   extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
 
+  extraPackages = with pkgs; [ nixfmt-rfc-style ];
+
   keymaps = [
     {
       key = "<leader>i";
@@ -31,19 +34,19 @@
     }
     {
       key = "<leader>.";
-      action = "vim.diagnostic.open_float";
+      action.__raw = "vim.diagnostic.open_float";
       mode = "n";
       options.desc = "Open diagnostic float";
     }
     {
       key = "<leader>r";
-      action = "vim.lsp.buf.rename";
+      action.__raw = "vim.lsp.buf.rename";
       mode = "n";
       options.desc = "Rename symbol";
     }
     {
       key = "<leader>f";
-      action = "vim.lsp.buf.format";
+      action.__raw = "vim.lsp.buf.format";
       mode = "n";
       options.desc = "Format buffer";
     }
@@ -67,61 +70,61 @@
     }
     {
       key = "K";
-      action = "vim.lsp.buf.hover";
+      action.__raw = "vim.lsp.buf.hover";
       mode = "n";
       options.desc = "Show hover information";
     }
     {
       key = "gK";
-      action = "vim.lsp.buf.signature_help";
+      action.__raw = "vim.lsp.buf.signature_help";
       mode = "n";
       options.desc = "Show signature help";
     }
     {
       key = "gr";
-      action = "vim.lsp.buf.references";
+      action.__raw = "vim.lsp.buf.references";
       mode = "n";
       options.desc = "Show references";
     }
     {
       key = "gd";
-      action = "vim.lsp.buf.definition";
+      action.__raw = "vim.lsp.buf.definition";
       mode = "n";
       options.desc = "Go to definition";
     }
     {
       key = "gD";
-      action = "vim.lsp.buf.declaration";
+      action.__raw = "vim.lsp.buf.declaration";
       mode = "n";
       options.desc = "Go to declaration";
     }
     {
       key = "gI";
-      action = "vim.lsp.buf.implementation";
+      action.__raw = "vim.lsp.buf.implementation";
       mode = "n";
       options.desc = "Go to implementation";
     }
     {
       key = "gy";
-      action = "vim.lsp.buf.type_definition";
+      action.__raw = "vim.lsp.buf.type_definition";
       mode = "n";
       options.desc = "Go to type definition";
     }
     {
       key = "gs";
-      action = "vim.lsp.buf.workspace_symbol";
+      action.__raw = "vim.lsp.buf.workspace_symbol";
       mode = "n";
       options.desc = "Search workspace symbols";
     }
     {
       key = "]d";
-      action = "vim.diagnostic.goto_next";
+      action.__raw = "vim.diagnostic.goto_next";
       mode = "n";
       options.desc = "Go to next diagnostic";
     }
     {
       key = "[d";
-      action = "vim.diagnostic.goto_prev";
+      action.__raw = "vim.diagnostic.goto_prev";
       mode = "n";
       options.desc = "Go to previous diagnostic";
     }
