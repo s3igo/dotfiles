@@ -85,6 +85,7 @@ in
         d = "docker";
         dp = "diff -Naur";
         e = "echo";
+        ef = "exec fish";
         g = "git";
         ga = "git add";
         gc = "git commit";
@@ -97,8 +98,9 @@ in
         nf = "nix flake";
         np = cursor // text "nix run nixpkgs#% --";
         nr = cursor // text "nix run .#% --";
-        nv = cursor // text "nix run $HOME/.dotfiles#% --";
-        nvd = cursor // text "nix run github:s3igo/dotfiles#% --";
+        nv = "nix run .#neovim --";
+        nvd = "nix run $HOME/.dotfiles --";
+        nvdr = "nix run github:s3igo/dotfiles --";
         p = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";

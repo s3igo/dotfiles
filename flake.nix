@@ -34,6 +34,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       flake-utils,
       nix-darwin,
@@ -80,7 +81,7 @@
             inherit pkgs;
             # extraSpecialArgs = { };
             module = {
-              imports = [ ./packages/neovim ];
+              imports = [ self.nixosModules.neovim ];
             };
           };
           default = neovim;
