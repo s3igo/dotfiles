@@ -62,7 +62,7 @@ in
         _dotdot =
           regex "^\\.\\.+$" # matches `..`, `...`, `....`, and so on
           // function "__multicd";
-        ":c" = global // text "| pbcopy";
+        ":cp" = global // text "| pbcopy";
         ":d" = global // function "__date";
         ":di" = global // text "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
         ":dp" = global // text "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
@@ -92,7 +92,7 @@ in
         gd = "git diff";
         gs = "git switch";
         h = "history";
-        m = "mkdir";
+        mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
         nf = "nix flake";
@@ -101,7 +101,7 @@ in
         nv = "nix run .#neovim --";
         nvd = "nix run $HOME/.dotfiles --";
         nvdr = "nix run github:s3igo/dotfiles --";
-        p = "pbpaste |";
+        pst = "pbpaste |";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
         rm = "rm -iv";
