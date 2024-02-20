@@ -91,7 +91,6 @@
             [
               act
               statix
-              nixfmt-rfc-style
             ]
             ++ tasks;
         };

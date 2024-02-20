@@ -40,6 +40,34 @@
       '';
     };
     nvim-colorizer.enable = true;
+    fzf-lua = {
+      enable = true;
+      profile = "fzf-native";
+      settings = {
+        keymap = {
+          fzf = {
+            ctrl-u = "half-page-up";
+            ctrl-d = "half-page-down";
+            ctrl-f = "forward-char";
+            ctrl-b = "backward-char";
+          };
+        };
+        files = {
+          rg_opts = pkgs.lib.concatStringsSep " " [
+            "--color never --files --hidden --follow --glob '!.git'" # default opts
+            "--glob '!node_modules'"
+            "--glob '!target'"
+            "--glob '!result'"
+          ];
+          fd_opts = pkgs.lib.concatStringsSep " " [
+            "--color never --type file --hidden --follow --exclude .git" # default opts
+            "--exclude node_modules"
+            "--exclude target"
+            "--exclude result"
+          ];
+        };
+      };
+    };
     mini = {
       enable = true;
       modules = {
@@ -49,7 +77,6 @@
   };
 
   extraPlugins = with pkgs.vimPlugins; [
-    fzf-lua
     nvim-hlslens
     nvim-scrollbar
   ];
@@ -61,9 +88,7 @@
     bat
   ];
 
-  extraConfigLuaPost = ''
-    -- fzf-lua
-    require('fzf-lua').setup({ 'fzf-native' })
+  extraConfigLua = ''
     -- nvim-hlslens
     require('hlslens').setup()
     vim.keymap.set(
