@@ -34,7 +34,7 @@
     precedes = "«";
     nbsp = "+";
   };
-  laststatus = 2;
+  laststatus = 3;
   signcolumn = "yes";
   colorcolumn = [
     80

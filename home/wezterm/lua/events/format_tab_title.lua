@@ -15,8 +15,7 @@ local function fix_width(text, width)
     -- text is too short
     if #text < width then
         local pad_width = math.floor((width - #text) / 2)
-        local pad = string.rep(' ', pad_width)
-        text = pad .. text .. pad
+        text = string.rep(' ', pad_width) .. text .. string.rep(' ', pad_width + 1)
     end
 
     return wezterm.truncate_right(text, width)
