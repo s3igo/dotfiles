@@ -6,6 +6,9 @@
   ];
 
   programs.home-manager.enable = true;
+  programs = {
+    rio.enable = true;
+  };
 
   xdg.enable = true;
 

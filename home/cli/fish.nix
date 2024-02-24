@@ -96,8 +96,8 @@ in
         mv = "mv -iv";
         n = "nix";
         nf = "nix flake";
-        np = cursor // text "nix run nixpkgs#% --";
         nr = cursor // text "nix run .#% --";
+        nrp = cursor // text "nix run nixpkgs#% --";
         nv = "nix run .#neovim --";
         nvd = "nix run $HOME/.dotfiles --";
         nvdr = "nix run github:s3igo/dotfiles --";
