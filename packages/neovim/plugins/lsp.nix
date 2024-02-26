@@ -2,17 +2,22 @@
 {
   plugins = {
     lsp = {
-      enable = true;
-      servers.nil_ls = {
-        enable = true;
-        cmd = [ "nil" ];
-        filetypes = [ "nix" ];
-        rootDir = ''
-          function()
-            return vim.fs.dirname(vim.fs.find({ 'flake.nix', '.git' }, { upward = true })[1])
-          end
-        '';
-        settings.formatting.command = [ "nixfmt" ];
+      # enable = true;
+      keymaps = {
+        diagnostic = {
+          "<leader>." = {
+            action = "open_float";
+            desc = "Open diagnostic float";
+          };
+          "]d" = {
+            action = "goto_next";
+            desc = "Go to next diagnostic";
+          };
+          "[d" = {
+            action = "goto_prev";
+            desc = "Go to previous diagnostic";
+          };
+        };
       };
     };
     fidget = {
@@ -23,20 +28,12 @@
 
   extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
 
-  extraPackages = with pkgs; [ nixfmt-rfc-style ];
-
   keymaps = [
     {
       key = "<leader>i";
       action = "<cmd>LspInfo<cr>";
       mode = "n";
       options.desc = "Show LSP info";
-    }
-    {
-      key = "<leader>.";
-      action.__raw = "vim.diagnostic.open_float";
-      mode = "n";
-      options.desc = "Open diagnostic float";
     }
     {
       key = "<leader>r";
@@ -115,18 +112,6 @@
       action.__raw = "vim.lsp.buf.workspace_symbol";
       mode = "n";
       options.desc = "Search workspace symbols";
-    }
-    {
-      key = "]d";
-      action.__raw = "vim.diagnostic.goto_next";
-      mode = "n";
-      options.desc = "Go to next diagnostic";
-    }
-    {
-      key = "[d";
-      action.__raw = "vim.diagnostic.goto_prev";
-      mode = "n";
-      options.desc = "Go to previous diagnostic";
     }
     # actions-preview.nvim
     {

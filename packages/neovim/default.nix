@@ -2,14 +2,11 @@ _: {
   imports = [
     ./plugins
     ./config/keymaps
+    ./modules/nix.nix
   ];
 
   config = {
     filetype.extension.typ = "typst";
-
-    globals = {
-      mapleader = " ";
-    };
 
     highlight = {
       NormalFloat.bg = "none";

@@ -4,6 +4,8 @@ _: {
     ./register.nix
   ];
 
+  globals.mapleader = " ";
+
   keymaps = [
     {
       key = "<leader>q";
