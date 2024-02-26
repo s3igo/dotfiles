@@ -7,13 +7,12 @@ on:
 
 jobs:
   build:
-    name: Dispatch
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         repo:
           - s3igo/docker-gcc
           - s3igo/docker-volta
-    runs-on: ubuntu-22.04
     steps:
       - name: Dispatch
         uses: peter-evans/repository-dispatch@v2

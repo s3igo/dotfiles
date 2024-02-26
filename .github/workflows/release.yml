@@ -1,0 +1,23 @@
+name: Create release
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # monthly
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set current date
+        run: |
+          echo "RELEASE_NAME=$(date +'%B %Y')" >> $GITHUB_ENV
+          echo "TAG_NAME=$(date +'%b.%Y')" >> $GITHUB_ENV
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.RELEASE_NAME }}
+          tag_name: ${{ env.TAG_NAME }}
+          body: |
+            monthly release

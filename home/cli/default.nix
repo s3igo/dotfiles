@@ -83,7 +83,7 @@
       darwin.trash
       du-dust
       efm-langserver
-      emacs-nox
+      # emacs-nox
       fd
       ghq
       lazydocker
