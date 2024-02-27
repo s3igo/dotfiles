@@ -169,13 +169,13 @@
 
     if vscode_dir then
       local snippets = vim.fs.find(function(name) return name:match('%.code%-snippets$') end, {
-          limit = 10,
-          type = 'file',
-          path = vscode_dir,
+        limit = 10,
+        type = 'file',
+        path = vscode_dir,
       })
       local loader = require('luasnip.loaders.from_vscode')
       for _, snippet in pairs(snippets) do
-          loader.load_standalone({ path = snippet })
+        loader.load_standalone({ path = snippet })
       end
     end
   '';

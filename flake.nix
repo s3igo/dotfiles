@@ -74,16 +74,25 @@
           ];
       in
       {
-        packages = rec {
-          neovim = nixvim.legacyPackages.${system}.makeNixvimWithModule {
-            inherit pkgs;
-            # extraSpecialArgs = { };
-            module = {
-              imports = [ self.nixosModules.neovim ];
-            };
+        packages =
+          let
+            makeNixvimWithModule =
+              imports:
+              nixvim.legacyPackages.${system}.makeNixvimWithModule {
+                inherit pkgs;
+                # extraSpecialArgs = { };
+                module = {
+                  inherit imports;
+                };
+              };
+          in
+          {
+            neovim = makeNixvimWithModule [
+              self.nixosModules.neovim
+              ./packages/neovim/modules/lua.nix
+            ];
+            default = makeNixvimWithModule [ self.nixosModules.neovim ];
           };
-          default = neovim;
-        };
 
         devShells.default = pkgs.mkShell {
           buildInputs =
