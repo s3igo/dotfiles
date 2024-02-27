@@ -60,7 +60,6 @@ local leader = {
     { key = 'b', mods = 'CTRL', action = act.RotatePanes('CounterClockwise') },
     { key = 'p', action = wezterm.action({ PaneSelect = { mode = 'SwapWithActive' } }) },
 
-    -- focus
     -- stylua: ignore start
     { key = 'h', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Left' }, 'PopKeyTable' }) },
     { key = 'j', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Down' }, 'PopKeyTable' }) },
@@ -68,12 +67,16 @@ local leader = {
     { key = 'l', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }) },
     -- stylua: ignore end
 
+    -- tab
     { key = '.', mods = 'CTRL', action = act.ActivateTabRelative(1) },
     { key = ',', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
 
+    { key = '>', action = act.MoveTabRelative(1) },
+    { key = '<', action = act.MoveTabRelative(-1) },
+
     -- workspace
-    { key = '>', action = act.SwitchWorkspaceRelative(1) },
-    { key = '<', action = act.SwitchWorkspaceRelative(-1) },
+    { key = '}', action = act.SwitchWorkspaceRelative(1) },
+    { key = '{', action = act.SwitchWorkspaceRelative(-1) },
 
     -- resize
     { key = 'h', mods = 'SHIFT', action = act.AdjustPaneSize({ 'Left', 3 }) },

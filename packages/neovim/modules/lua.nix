@@ -4,9 +4,9 @@ _: {
       enable = true;
       servers.lua-ls = {
         enable = true;
-        # onAttach.function = ''
-        #   client.server_capabilities.documentFormattingProvider = false
-        # '';
+        onAttach.function = ''
+          client.server_capabilities.documentFormattingProvider = false
+        '';
       };
     };
     none-ls = {
