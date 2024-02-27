@@ -133,7 +133,6 @@ _: {
       };
     };
     treesitter-context.enable = true;
-    ts-context-commentstring.enable = true;
     rainbow-delimiters.enable = true;
   };
 

@@ -18,7 +18,11 @@
     };
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nix-darwin.follows = "nix-darwin";
+        home-manager.follows = "home-manager";
+      };
     };
     direnv = {
       url = "github:direnv/direnv";
@@ -87,10 +91,12 @@
               };
           in
           {
-            neovim = makeNixvimWithModule [
-              self.nixosModules.neovim
-              ./packages/neovim/modules/lua.nix
-            ];
+            neovim =
+              with self.nixosModules;
+              makeNixvimWithModule [
+                neovim
+                lua
+              ];
             default = makeNixvimWithModule [ self.nixosModules.neovim ];
           };
 
@@ -149,6 +155,7 @@
 
       nixosModules = {
         neovim.imports = [ ./packages/neovim ];
+        lua.imports = [ ./packages/neovim/modules/lua.nix ];
       };
     };
 }
