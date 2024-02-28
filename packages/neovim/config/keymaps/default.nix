@@ -98,11 +98,6 @@ _: {
         "o"
       ];
     }
-    {
-      key = "U";
-      action = "<c-r>";
-      mode = "n";
-    }
     # indent
     {
       key = "<tab>";
@@ -147,12 +142,6 @@ _: {
       action = "<cmd>w<cr><esc>";
       mode = "n";
       options.desc = "Save";
-    }
-    {
-      key = "<leader>S";
-      action = "<cmd>wa<cr><esc>";
-      mode = "n";
-      options.desc = "Save all";
     }
     {
       key = "<leader>q";
