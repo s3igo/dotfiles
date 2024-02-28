@@ -61,8 +61,18 @@
         };
       };
     };
-    nvim-autopairs.enable = true;
+    nvim-autopairs = {
+      enable = true;
+      checkTs = true;
+      mapCH = true;
+    };
     comment-nvim.enable = true;
+    # mini = {
+    #   enable = true;
+    #   modules = {
+    #     surround = { };
+    #   };
+    # };
     # leap = {
     #   enable = true;
     #   addDefaultMappings = false;
@@ -153,6 +163,12 @@
   ];
 
   extraConfigLua = ''
+    -- make autopairs work with cmp
+    require('cmp').event:on(
+      'confirm_done',
+      require('nvim-autopairs.completion.cmp').on_confirm_done()
+    )
+
     -- nvim-surround
     require('nvim-surround').setup({})
 
@@ -178,5 +194,26 @@
         loader.load_standalone({ path = snippet })
       end
     end
+  '';
+
+  extraConfigLuaPost = ''
+    -- nvim-autopairs
+    local Rule = require('nvim-autopairs.rule')
+    local npairs = require('nvim-autopairs')
+    local cond = require('nvim-autopairs.conds')
+
+    npairs.add_rules(
+      {
+        Rule('{', '}', 'nix')
+          :use_key('<tab>')
+          :replace_endpair(function() return '<del>};<left><left>' end, true)
+      }
+      -- FIXME: this doesn't work
+      -- {
+      --   Rule("\'\'", "", "nix")
+      --     :use_key('<tab>')
+      --     :replace_endpair(function() return '<del>\'\'<left><left>' end)
+      -- }
+    )
   '';
 }

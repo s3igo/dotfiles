@@ -8,10 +8,10 @@ _: {
       incrementalSelection = {
         enable = true;
         keymaps = {
-          initSelection = "<cr>";
+          initSelection = "<tab>";
           scopeIncremental = "<cr>";
-          nodeDecremental = "<s-tab>";
           nodeIncremental = "<tab>";
+          nodeDecremental = "<s-tab>";
         };
       };
     };
