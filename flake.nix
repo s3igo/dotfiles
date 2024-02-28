@@ -156,6 +156,7 @@
       nixosModules = {
         neovim.imports = [ ./packages/neovim ];
         lua.imports = [ ./packages/neovim/modules/lua.nix ];
+        typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
       };
     };
 }
