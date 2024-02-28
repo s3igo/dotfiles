@@ -76,10 +76,10 @@
     };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    nvim-hlslens
-    nvim-scrollbar
-  ];
+  # extraPlugins = with pkgs.vimPlugins; [
+  #   nvim-hlslens
+  #   nvim-scrollbar
+  # ];
 
   extraPackages = with pkgs; [
     fd
@@ -90,38 +90,37 @@
 
   extraConfigLua = ''
     -- nvim-hlslens
-    require('hlslens').setup()
-    vim.keymap.set(
-      'n',
-      'n',
-      "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>"
-    )
-    vim.keymap.set(
-      'n',
-      'N',
-      "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>"
-    )
-    vim.keymap.set('n', '*', "*<cmd>lua require('hlslens').start()<cr>")
-    vim.keymap.set('n', '#', "#<cmd>lua require('hlslens').start()<cr>")
-    vim.keymap.set('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>")
-    vim.keymap.set('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>")
+    -- require('hlslens').setup()
+    -- vim.keymap.set(
+    --   'n',
+    --   'n',
+    --   "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>"
+    -- )
+    -- vim.keymap.set(
+    --   'n',
+    --   'N',
+    --   "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>"
+    -- )
+    -- vim.keymap.set('n', '*', "*<cmd>lua require('hlslens').start()<cr>")
+    -- vim.keymap.set('n', '#', "#<cmd>lua require('hlslens').start()<cr>")
+    -- vim.keymap.set('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>")
+    -- vim.keymap.set('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>")
     -- nvim-scrollbar
-    require('scrollbar').setup({
-      handle = { color = '#1d3b53' },
-      marks = { Search = { color = '#ecc48d' } },
-    })
-    require('scrollbar.handlers.gitsigns').setup()
-    require('scrollbar.handlers.search').setup()
-    -- mini.bufremove
-    vim.keymap.set(
-      'n',
-      '<leader>w',
-      function() require('mini.bufremove').delete(0, false) end,
-      { desc = 'Delete buffer' }
-    )
+    -- require('scrollbar').setup({
+    --   handle = { color = '#1d3b53' },
+    --   marks = { Search = { color = '#ecc48d' } },
+    -- })
+    -- require('scrollbar.handlers.gitsigns').setup()
+    -- require('scrollbar.handlers.search').setup()
   '';
 
   keymaps = [
+    {
+      key = "<leader>w";
+      action = "<cmd>lua require('mini.bufremove').delete()<cr>";
+      mode = "n";
+      options.desc = "Delete buffer";
+    }
     # nvim-tree
     {
       key = "<leader>e";

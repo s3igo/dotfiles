@@ -63,10 +63,10 @@
     };
     nvim-autopairs.enable = true;
     comment-nvim.enable = true;
-    leap = {
-      enable = true;
-      addDefaultMappings = false;
-    };
+    # leap = {
+    #   enable = true;
+    #   addDefaultMappings = false;
+    # };
   };
 
   extraPlugins = with pkgs.vimPlugins; [
@@ -77,42 +77,42 @@
 
   keymaps = [
     # leap
-    {
-      key = "gf";
-      action = "<plug>(leap-forward-to)";
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-    }
-    {
-      key = "gF";
-      action = "<plug>(leap-backward-to)";
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-    }
-    {
-      key = "gt";
-      action = "<plug>(leap-forward-till)";
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-    }
-    {
-      key = "gT";
-      action = "<plug>(leap-backward-till)";
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-    }
+    # {
+    #   key = "gf";
+    #   action = "<plug>(leap-forward-to)";
+    #   mode = [
+    #     "n"
+    #     "x"
+    #     "o"
+    #   ];
+    # }
+    # {
+    #   key = "gF";
+    #   action = "<plug>(leap-backward-to)";
+    #   mode = [
+    #     "n"
+    #     "x"
+    #     "o"
+    #   ];
+    # }
+    # {
+    #   key = "gt";
+    #   action = "<plug>(leap-forward-till)";
+    #   mode = [
+    #     "n"
+    #     "x"
+    #     "o"
+    #   ];
+    # }
+    # {
+    #   key = "gT";
+    #   action = "<plug>(leap-backward-till)";
+    #   mode = [
+    #     "n"
+    #     "x"
+    #     "o"
+    #   ];
+    # }
     # substitute-nvim
     {
       key = "s";

@@ -11,9 +11,7 @@ _: {
     };
     none-ls = {
       enable = true;
-      sources = {
-        formatting.stylua.enable = true;
-      };
+      sources.formatting.stylua.enable = true;
     };
   };
 }

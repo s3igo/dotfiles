@@ -8,12 +8,6 @@ _: {
 
   keymaps = [
     {
-      key = "<leader>q";
-      action = "<cmd>qa<cr>";
-      mode = "n";
-      options.desc = "Quit all";
-    }
-    {
       key = "<c-[>";
       action = "<cmd>noh<cr><esc>";
       mode = "n";
