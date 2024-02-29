@@ -43,4 +43,10 @@
       end
     '';
   }
+  {
+    event = "FileType";
+    pattern = "*";
+    command = "match TrailingSpace /\\s\\+$/";
+    desc = "Highlight trailing whitespace";
+  }
 ]

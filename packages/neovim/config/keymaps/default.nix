@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./emacs.nix
-    ./register.nix
+    # ./register.nix
   ];
 
   globals.mapleader = " ";

@@ -99,6 +99,7 @@ in
         nr = cursor // text "nix run .#% --";
         nrp = cursor // text "nix run nixpkgs#% --";
         nv = "nix run .#neovim --";
+        nvp = "nix run nixpkgs#neovim --";
         nvd = "nix run $HOME/.dotfiles --";
         nvdr = "nix run github:s3igo/dotfiles --";
         pst = "pbpaste |";

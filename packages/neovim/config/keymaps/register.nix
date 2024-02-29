@@ -33,6 +33,14 @@ _: {
       ];
     }
     {
+      key = "<leader>P";
+      action = ''"+P'';
+      mode = [
+        "n"
+        "x"
+      ];
+    }
+    {
       key = "<leader>0";
       action = ''"0p'';
       mode = [

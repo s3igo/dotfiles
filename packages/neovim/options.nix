@@ -2,7 +2,6 @@
   encoding = "utf-8";
   fileencoding = "utf-8";
   fileformats = "unix,dos,mac";
-  # cmdheight = 0;
   showtabline = 2;
   shiftwidth = 4;
   softtabstop = 4;
@@ -33,6 +32,7 @@
     extends = "»";
     precedes = "«";
     nbsp = "+";
+    trail = "~";
   };
   laststatus = 3;
   signcolumn = "yes";
