@@ -43,13 +43,11 @@
     fzf-lua = {
       enable = true;
       settings = {
-        keymap = {
-          fzf = {
-            ctrl-u = "half-page-up";
-            ctrl-d = "half-page-down";
-            ctrl-f = "forward-char";
-            ctrl-b = "backward-char";
-          };
+        keymap.fzf = {
+          ctrl-u = "half-page-up";
+          ctrl-d = "half-page-down";
+          ctrl-f = "forward-char";
+          ctrl-b = "backward-char";
         };
         files = {
           rg_opts = pkgs.lib.concatStringsSep " " [

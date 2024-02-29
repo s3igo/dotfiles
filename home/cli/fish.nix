@@ -76,6 +76,7 @@ in
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
+        attic = "nix run github:zhaofengli/attic --";
         b = "brew";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";

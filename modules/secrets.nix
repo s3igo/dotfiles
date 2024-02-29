@@ -16,10 +16,10 @@
 
     secrets =
       let
-        # rootReadable = {
-        #   mode = "0400";
-        #   owner = "root";
-        # };
+        rootReadable = {
+          mode = "0400";
+          owner = "root";
+        };
         userReadable = {
           mode = "0400";
           owner = user;
@@ -29,10 +29,15 @@
         github-nix-token = {
           file = "${secrets}/github/nix.age";
         } // userReadable;
+
         rclone-config = {
           file = "${secrets}/config/rclone.age";
           path = "${configHome}/rclone/rclone.conf";
         } // userReadable;
+
+        attic-token = {
+          file = "${secrets}/config/attic.age";
+        } // rootReadable;
       };
   };
 }
