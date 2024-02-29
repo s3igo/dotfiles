@@ -74,12 +74,56 @@
         bufremove = { };
       };
     };
+    bufferline = {
+      enable = true;
+      numbers = "ordinal";
+      indicator.icon = "|";
+      modifiedIcon = "[+]";
+      showBufferIcons = false;
+      showBufferCloseIcons = false;
+      showCloseIcon = false;
+      diagnostics = "nvim_lsp";
+      separatorStyle.__raw = "{ '', '' }";
+      alwaysShowBufferline = false;
+      offsets = [
+        {
+          filetype = "NvimTree";
+          text_align = "left";
+          separator = true;
+        }
+      ];
+    };
+    indent-blankline = {
+      enable = true;
+      indent = {
+        char = "|";
+        highlight = "Indent";
+      };
+      whitespace.highlight = "Whitespace";
+      scope.enabled = false;
+    };
+    which-key = {
+      enable = true;
+      window = {
+        border = "single";
+        winblend = 100;
+      };
+    };
   };
 
-  # extraPlugins = with pkgs.vimPlugins; [
-  #   nvim-hlslens
-  #   nvim-scrollbar
-  # ];
+  extraPlugins = with pkgs; [
+    (vimUtils.buildVimPlugin {
+      pname = "im-select-nvim";
+      version = "2024-01-28";
+      src = fetchFromGitHub {
+        owner = "keaising";
+        repo = "im-select.nvim";
+        rev = "ca1aebb8f5c8a0342ae99a0fcc8ebc49b5f2201e";
+        hash = "sha256-tyVGbfRoshuuUWkFlQa6YvoJJ4HMLmG5p8Y0EsP1Zig=";
+      };
+    })
+    vimPlugins.nightfly
+  ];
 
   extraPackages = with pkgs; [
     fd
@@ -88,7 +132,18 @@
     bat
   ];
 
+  extraConfigLuaPre = ''
+    -- nightfly
+    vim.g.nightflyTransparent = true
+    vim.g.nightflyVirtualTextColor = true
+    vim.g.nightflyWinSeparator = 2
+    vim.cmd('colorscheme nightfly')
+  '';
+
   extraConfigLua = ''
+    -- im-select
+    require('im_select').setup({ set_previous_events = {} })
+
     -- nvim-hlslens
     -- require('hlslens').setup()
     -- vim.keymap.set(
@@ -170,6 +225,31 @@
       action = "<cmd>lua require('fzf-lua').registers()<cr>";
       mode = "n";
       options.desc = "Fuzzy find registers";
+    }
+    # bufferline
+    {
+      key = "[b";
+      action = "<cmd>BufferLineCyclePrev<cr>";
+      mode = "n";
+      options.desc = "Previous buffer";
+    }
+    {
+      key = "]b";
+      action = "<cmd>BufferLineCycleNext<cr>";
+      mode = "n";
+      options.desc = "Next buffer";
+    }
+    {
+      key = "<b";
+      action = "<cmd>BufferLineMovePrev<cr>";
+      mode = "n";
+      options.desc = "Move buffer to previous position";
+    }
+    {
+      key = ">b";
+      action = "<cmd>BufferLineMoveNext<cr>";
+      mode = "n";
+      options.desc = "Move buffer to next position";
     }
   ];
 }
