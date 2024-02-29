@@ -46,7 +46,13 @@
   {
     event = "FileType";
     pattern = "*";
-    command = "match TrailingSpace /\\s\\+$/";
+    callback.__raw = ''
+      function()
+        if vim.bo.filetype ~= 'fzf' then
+          vim.cmd('match TrailingSpace /\\s\\+$/')
+        end
+      end
+    '';
     desc = "Highlight trailing whitespace";
   }
 ]

@@ -42,7 +42,6 @@
     nvim-colorizer.enable = true;
     fzf-lua = {
       enable = true;
-      profile = "fzf-native";
       settings = {
         keymap = {
           fzf = {

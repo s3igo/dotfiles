@@ -207,6 +207,11 @@
         Rule('{', '}', 'nix')
           :use_key('<tab>')
           :replace_endpair(function() return '<del>};<left><left>' end, true)
+      },
+      {
+        Rule('[', ']', 'nix')
+          :use_key('<tab>')
+          :replace_endpair(function() return '<del>];<left><left>' end, true)
       }
       -- FIXME: this doesn't work
       -- {
