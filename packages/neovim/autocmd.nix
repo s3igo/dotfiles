@@ -1,18 +1,5 @@
 [
   {
-    event = [
-      "BufReadPost"
-      "BufNewFile"
-    ];
-    callback.__raw = ''
-      function()
-        vim.opt_local.formatoptions:remove('r')
-        vim.opt_local.formatoptions:remove('o')
-      end
-    '';
-    desc = "Disable automatic comment insertion";
-  }
-  {
     event = "TermOpen";
     command = "startinsert";
     desc = "Enter insert mode when opening a terminal";
@@ -48,11 +35,15 @@
     pattern = "*";
     callback.__raw = ''
       function()
+        -- disable automatic comment insertion
+        vim.opt_local.formatoptions:remove('r')
+        vim.opt_local.formatoptions:remove('o')
+
+        -- highlight trailing whitespace
         if vim.bo.filetype ~= 'fzf' then
           vim.cmd('match TrailingSpace /\\s\\+$/')
         end
       end
     '';
-    desc = "Highlight trailing whitespace";
   }
 ]
