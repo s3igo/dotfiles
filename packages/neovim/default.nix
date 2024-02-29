@@ -1,7 +1,6 @@
 _: {
   imports = [
-    ./plugins
-    ./config/keymaps
+    ./config
     ./modules/nix.nix
   ];
 
@@ -16,8 +15,5 @@ _: {
       Indent.link = "NightflyGreyBlue";
       TrailingSpace.link = "NightflyTanMode";
     };
-
-    options = import ./options.nix;
-    autoCmd = import ./autocmd.nix;
   };
 }
