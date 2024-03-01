@@ -94,10 +94,16 @@
             neovim =
               with self.nixosModules;
               makeNixvimWithModule [
-                neovim
+                base
+                im-select
                 lua
               ];
-            default = makeNixvimWithModule [ self.nixosModules.neovim ];
+            default =
+              with self.nixosModules;
+              makeNixvimWithModule [
+                base
+                im-select
+              ];
           };
 
         devShells.default = pkgs.mkShell {
@@ -154,7 +160,8 @@
         };
 
       nixosModules = {
-        neovim.imports = [ ./packages/neovim ];
+        base.imports = [ ./packages/neovim ];
+        im-select.imports = [ ./packages/neovim/modules/im-select.nix ];
         lua.imports = [ ./packages/neovim/modules/lua.nix ];
         typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
       };
