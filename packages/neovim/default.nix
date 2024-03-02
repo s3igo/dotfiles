@@ -13,7 +13,7 @@ _: {
       Whitespace.link = "NightflyPickleBlue";
       SpecialKey.link = "NightflyPickleBlue";
       Indent.link = "NightflyGreyBlue";
-      TrailingSpace.link = "NightflyTanMode";
+      TrailingSpace.link = "NightflyPurpleMode";
     };
   };
 }

@@ -41,7 +41,12 @@ _: {
           vim.opt_local.formatoptions:remove('o')
 
           -- highlight trailing whitespace
-          if vim.bo.filetype ~= 'fzf' then
+          local disabled_filetypes = { 'fzf', 'lspinfo' }
+          local is_disabled = {}
+          for _, v in ipairs(disabled_filetypes) do
+            is_disabled[v] = true
+          end
+          if not is_disabled[vim.bo.filetype] then
             vim.cmd('match TrailingSpace /\\s\\+$/')
           end
         end
