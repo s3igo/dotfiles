@@ -12,7 +12,10 @@
       currentLineBlame = true;
       signs = {
         add.text = "|";
-        change.text = "|";
+        change = {
+          text = "|";
+          hl = "NightflyYellow";
+        };
         delete.text = "_";
         topdelete.text = "‾";
         changedelete.text = "~";

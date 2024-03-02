@@ -1,19 +1,18 @@
 _: {
   plugins = {
-    lsp.servers.tsserver = {
-      enable = true;
-      onAttach.function = ''
-        client.server_capabilities.documentFormattingProvider = false
-      '';
-    };
+    lsp.servers.tsserver.enable = true;
+
     none-ls = {
       enable = true;
       sources = {
-        code_actions.eslint_d.enable = true;
-        diagnostics.eslint_d.enable = true;
+        code_actions.eslint.enable = true;
+        diagnostics.eslint.enable = true;
         formatting = {
-          prettierd.enable = true;
-          eslint_d.enable = true;
+          prettier = {
+            enable = true;
+            disableTsServerFormatter = true;
+          };
+          eslint.enable = true;
         };
       };
     };
