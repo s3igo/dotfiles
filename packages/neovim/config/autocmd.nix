@@ -1,10 +1,10 @@
 _: {
   autoCmd = [
-    {
-      event = "TermOpen";
-      command = "startinsert";
-      desc = "Enter insert mode when opening a terminal";
-    }
+    # {
+    #   event = "TermOpen";
+    #   command = "startinsert";
+    #   desc = "Enter insert mode when opening a terminal";
+    # }
     {
       event = "FileType";
       pattern = "nix";
