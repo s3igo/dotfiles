@@ -3,6 +3,7 @@ _: {
     treesitter = {
       enable = true;
       ensureInstalled = [ ];
+      grammarPackages = [ ];
       nixvimInjections = true;
       # folding = true;
       indent = true;
