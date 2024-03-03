@@ -1,8 +1,5 @@
 _: {
-  imports = [
-    ./config
-    ./modules/nix.nix
-  ];
+  imports = [ ./config ];
 
   config = {
     filetype.extension.typ = "typst";

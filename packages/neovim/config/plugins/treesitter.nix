@@ -2,6 +2,7 @@ _: {
   plugins = {
     treesitter = {
       enable = true;
+      ensureInstalled = [ ];
       nixvimInjections = true;
       # folding = true;
       indent = true;

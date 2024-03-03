@@ -95,13 +95,16 @@
               with self.nixosModules;
               makeNixvimWithModule [
                 base
+                treesitterParsers
                 im-select
+                nix
                 lua
               ];
             default =
               with self.nixosModules;
               makeNixvimWithModule [
                 base
+                treesitterParsers
                 im-select
               ];
           };
@@ -161,7 +164,9 @@
 
       nixosModules = {
         base.imports = [ ./packages/neovim ];
+        treesitterParsers.imports = [ ./packages/neovim/modules/treesitter-parsers.nix ];
         im-select.imports = [ ./packages/neovim/modules/im-select.nix ];
+        nix.imports = [ ./packages/neovim/modules/nix.nix ];
         lua.imports = [ ./packages/neovim/modules/lua.nix ];
         typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
       };
