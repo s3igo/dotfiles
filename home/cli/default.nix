@@ -92,6 +92,7 @@
       ollama
       rclone
       tree
+      _1password
     ];
   };
 }

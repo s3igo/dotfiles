@@ -32,8 +32,10 @@ _: {
       '';
     }
     {
-      event = "FileType";
-      pattern = "*";
+      event = [
+        "BufReadPost"
+        "BufNewFile"
+      ];
       callback.__raw = ''
         function()
           -- disable automatic comment insertion

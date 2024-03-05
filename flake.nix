@@ -69,7 +69,8 @@
               '';
             };
             gc = writeShellScriptBin "task_gc" ''
-              nix store gc --max 5G
+              # sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
+              nix store gc
             '';
             versions = writeShellApplication {
               name = "task_versions";
