@@ -67,10 +67,15 @@
                 nix flake update --commit-lock-file && task_deploy
               '';
             };
-            gc = writeShellScriptBin "task_gc" ''
-              # sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
-              nix store gc
-            '';
+            gc = writeShellApplication {
+              name = "task_gc";
+              text = ''
+                sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
+                nix profile wipe-history --profile "$XDG_STATE_HOME/nix/profiles/home-manager"
+                nix store gc
+                nix store optimise
+              '';
+            };
             versions = writeShellApplication {
               name = "task_versions";
               runtimeInputs = [ gawk ];
@@ -177,8 +182,9 @@
       nixosModules = {
         treesitterAll.imports = [ ./packages/neovim/modules/treesitter-all.nix ];
         im-select.imports = [ ./packages/neovim/modules/im-select.nix ];
-        nix.imports = [ ./packages/neovim/modules/nix.nix ];
         lua.imports = [ ./packages/neovim/modules/lua.nix ];
+        nix.imports = [ ./packages/neovim/modules/nix.nix ];
+        rust.imports = [ ./packages/neovim/modules/rust.nix ];
         typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
       };
     };

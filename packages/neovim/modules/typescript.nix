@@ -8,6 +8,7 @@
       typescript
       tsx
       regex
+      json
     ];
     lsp.servers.tsserver.enable = true;
     none-ls = {
