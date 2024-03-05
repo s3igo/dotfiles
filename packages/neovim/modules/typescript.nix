@@ -1,7 +1,14 @@
-_: {
-  plugins = {
-    lsp.servers.tsserver.enable = true;
+{ pkgs, ... }:
 
+{
+  plugins = {
+    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      javascript
+      jsdoc
+      typescript
+      tsx
+    ];
+    lsp.servers.tsserver.enable = true;
     none-ls = {
       enable = true;
       sources = {

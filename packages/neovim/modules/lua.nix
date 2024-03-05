@@ -1,5 +1,12 @@
-_: {
+{ pkgs, ... }:
+
+{
   plugins = {
+    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      lua
+      luadoc
+      lua_patterns
+    ];
     lsp = {
       enable = true;
       servers.lua-ls = {
