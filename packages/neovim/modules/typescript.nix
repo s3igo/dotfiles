@@ -7,6 +7,7 @@
       jsdoc
       typescript
       tsx
+      regex
     ];
     lsp.servers.tsserver.enable = true;
     none-ls = {

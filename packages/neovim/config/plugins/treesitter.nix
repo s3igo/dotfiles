@@ -11,7 +11,6 @@
       grammarPackages =
         with pkgs.vimPlugins.nvim-treesitter;
         if grammars == "all" then allGrammars else map (name: builtGrammars.${name}) grammars;
-      nixvimInjections = true;
       # folding = true;
       indent = true;
       incrementalSelection = {

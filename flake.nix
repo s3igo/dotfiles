@@ -104,6 +104,8 @@
           };
       in
       {
+        inherit neovim;
+
         packages = {
           neovim = neovim {
             modules = with self.nixosModules; [
@@ -127,10 +129,6 @@
               statix
             ]
             ++ tasks;
-        };
-
-        lib = {
-          inherit neovim;
         };
 
         formatter = pkgs.nixfmt-rfc-style;
