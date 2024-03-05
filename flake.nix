@@ -45,7 +45,6 @@
       nixvim,
       direnv,
       secrets,
-      ...
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -87,38 +86,38 @@
             gc
             versions
           ];
-      in
-      {
-        packages =
+        neovim =
           let
-            makeNixvimWithModule =
-              imports:
-              nixvim.legacyPackages.${system}.makeNixvimWithModule {
-                inherit pkgs;
-                # extraSpecialArgs = { };
-                module = {
-                  inherit imports;
-                };
-              };
+            pkgs' = pkgs;
           in
           {
-            neovim =
-              with self.nixosModules;
-              makeNixvimWithModule [
-                base
-                treesitterAll
-                im-select
-                nix
-                lua
-              ];
-            default =
-              with self.nixosModules;
-              makeNixvimWithModule [
-                base
-                treesitterAll
-                im-select
-              ];
+            pkgs ? pkgs',
+            modules ? [ ],
+            grammars ? [ ],
+          }:
+          nixvim.legacyPackages.${system}.makeNixvimWithModule {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit grammars;
+            };
+            module.imports = [ ./packages/neovim ] ++ modules;
           };
+      in
+      {
+        packages = {
+          neovim = neovim {
+            modules = with self.nixosModules; [
+              im-select
+              nix
+              lua
+            ];
+            grammars = "all";
+          };
+          default = neovim {
+            modules = with self.nixosModules; [ im-select ];
+            grammars = "all";
+          };
+        };
 
         devShells.default = pkgs.mkShell {
           buildInputs =
@@ -128,6 +127,10 @@
               statix
             ]
             ++ tasks;
+        };
+
+        lib = {
+          inherit neovim;
         };
 
         formatter = pkgs.nixfmt-rfc-style;
@@ -174,7 +177,6 @@
         };
 
       nixosModules = {
-        base.imports = [ ./packages/neovim ];
         treesitterAll.imports = [ ./packages/neovim/modules/treesitter-all.nix ];
         im-select.imports = [ ./packages/neovim/modules/im-select.nix ];
         nix.imports = [ ./packages/neovim/modules/nix.nix ];
