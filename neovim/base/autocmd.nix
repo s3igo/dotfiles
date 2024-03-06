@@ -7,11 +7,6 @@ _: {
     # }
     {
       event = "FileType";
-      pattern = "nix";
-      command = "setlocal shiftwidth=2";
-    }
-    {
-      event = "FileType";
       pattern = "gitcommit";
       callback.__raw = ''
         function()

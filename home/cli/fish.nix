@@ -99,11 +99,11 @@ in
         nf = "nix flake";
         nr = cursor // text "nix run .#% --";
         nrp = cursor // text "nix run nixpkgs#% --";
+        nrd = cursor // text "nix run $HOME/.dotfiles#% --";
+        nrdr = cursor // text "nix run github:s3igo/dotfiles#% --";
         nv = "nix run .#neovim --";
         nvp = "nix run nixpkgs#neovim --";
-        nvd = "nix run $HOME/.dotfiles --";
-        nvdr = "nix run github:s3igo/dotfiles --";
-        pst = "pbpaste |";
+        pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";
         rm = "rm -iv";

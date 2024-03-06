@@ -1,6 +1,14 @@
 { pkgs, ... }:
 
 {
+  autoCmd = [
+    {
+      event = "FileType";
+      pattern = "nix";
+      command = "setlocal shiftwidth=2";
+    }
+  ];
+
   plugins = {
     treesitter = {
       grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
