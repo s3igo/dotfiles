@@ -73,10 +73,6 @@
     #     surround = { };
     #   };
     # };
-    # leap = {
-    #   enable = true;
-    #   addDefaultMappings = false;
-    # };
   };
 
   extraPlugins = with pkgs.vimPlugins; [
@@ -86,78 +82,25 @@
   ];
 
   keymaps = [
-    # leap
-    # {
-    #   key = "gf";
-    #   action = "<plug>(leap-forward-to)";
-    #   mode = [
-    #     "n"
-    #     "x"
-    #     "o"
-    #   ];
-    # }
-    # {
-    #   key = "gF";
-    #   action = "<plug>(leap-backward-to)";
-    #   mode = [
-    #     "n"
-    #     "x"
-    #     "o"
-    #   ];
-    # }
-    # {
-    #   key = "gt";
-    #   action = "<plug>(leap-forward-till)";
-    #   mode = [
-    #     "n"
-    #     "x"
-    #     "o"
-    #   ];
-    # }
-    # {
-    #   key = "gT";
-    #   action = "<plug>(leap-backward-till)";
-    #   mode = [
-    #     "n"
-    #     "x"
-    #     "o"
-    #   ];
-    # }
     # substitute-nvim
     {
       key = "s";
-      action.__raw = ''
-        function()
-          require('substitute').operator()
-        end
-      '';
+      action = "<cmd>lua require('substitute').operator()<cr>";
       mode = "n";
     }
     {
       key = "ss";
-      action.__raw = ''
-        function()
-          require('substitute').line()
-        end
-      '';
+      action = "<cmd>lua require('substitute').line()<cr>";
       mode = "n";
     }
     {
       key = "S";
-      action.__raw = ''
-        function()
-          require('substitute').eol()
-        end
-      '';
+      action = "<cmd>lua require('substitute').eol()<cr>";
       mode = "n";
     }
     {
       key = "s";
-      action.__raw = ''
-        function()
-          require('substitute').visual()
-        end
-      '';
+      action = "<cmd>lua require('substitute').visual()<cr>";
       mode = "x";
     }
   ];
@@ -168,9 +111,6 @@
       'confirm_done',
       require('nvim-autopairs.completion.cmp').on_confirm_done()
     )
-
-    -- nvim-surround
-    require('nvim-surround').setup({})
 
     -- friendly-snippets
     require('luasnip.loaders.from_vscode').lazy_load()
@@ -194,6 +134,12 @@
         loader.load_standalone({ path = snippet })
       end
     end
+
+    -- nvim-surround
+    require('nvim-surround').setup({})
+
+    -- substitute.nvim
+    require('substitute').setup({})
   '';
 
   extraConfigLuaPost = ''

@@ -49,12 +49,8 @@ _: {
     }
     {
       event = "TermOpen";
-      callback.__raw = ''
-        function()
-          vim.cmd('2match none')
-        end
-      '';
-      desc = "Clear trailing whitespace highlight when opening a terminal";
+      command = "2match none";
+      desc = "Clear trailing whitespace highlight in terminal";
     }
   ];
 }
