@@ -24,10 +24,6 @@
         home-manager.follows = "home-manager";
       };
     };
-    direnv = {
-      url = "github:direnv/direnv";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     secrets = {
       url = "github:s3igo/secrets";
       flake = false;
@@ -43,7 +39,6 @@
       home-manager,
       agenix,
       nixvim,
-      direnv,
       secrets,
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -166,7 +161,7 @@
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     extraSpecialArgs = {
-                      inherit user direnv;
+                      inherit user;
                     };
                     users.${user} = import ./home;
                   };
