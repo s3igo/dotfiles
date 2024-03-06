@@ -1,5 +1,6 @@
-*.lock.json
-.vscode/settings.json
-.env
+# nix
 .direnv/
 result
+
+# profile
+.env
