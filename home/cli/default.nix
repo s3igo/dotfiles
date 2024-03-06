@@ -1,8 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{ pkgs, config, ... }:
+
 {
   imports = [
     ./git.nix
@@ -60,15 +57,7 @@
     };
   };
 
-  xdg.configFile = {
-    "act/actrc".text = ''
-      -P ubuntu-latest=catthehacker/ubuntu:act-latest
-      -P ubuntu-22.04=catthehacker/ubuntu:act-22.04
-      -P ubuntu-20.04=catthehacker/ubuntu:act-20.04
-      -P ubuntu-18.04=catthehacker/ubuntu:act-18.04
-    '';
-    nvim.source = ../../config/home/.config/nvim;
-  };
+  xdg.configFile.nvim.source = ../../config/home/.config/nvim;
 
   home = {
     sessionVariables = {
@@ -79,12 +68,12 @@
     };
     packages = with pkgs; [
       darwin.trash
-      du-dust
-      efm-langserver
+      # du-dust
+      # efm-langserver
       # emacs-nox
       fd
       ghq
-      lazydocker
+      # lazydocker
       mmv-go
       nodejs-slim
       ollama
