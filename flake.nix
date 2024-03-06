@@ -100,7 +100,7 @@
             extraSpecialArgs = {
               inherit grammars;
             };
-            module.imports = [ ./neovim/package ] ++ modules;
+            module.imports = [ ./neovim/base ] ++ modules;
           };
       in
       {
@@ -171,11 +171,11 @@
         };
 
       nixosModules = {
-        im-select.imports = [ ./neovim/modules/im-select.nix ];
-        lua.imports = [ ./neovim/modules/lua.nix ];
-        nix.imports = [ ./neovim/modules/nix.nix ];
-        rust.imports = [ ./neovim/modules/rust.nix ];
-        typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
+        im-select.imports = [ ./neovim/im-select.nix ];
+        lua.imports = [ ./neovim/lua.nix ];
+        nix.imports = [ ./neovim/nix.nix ];
+        rust.imports = [ ./neovim/rust.nix ];
+        typescript.imports = [ ./packages/neovim/typescript.nix ];
       };
     };
 }
