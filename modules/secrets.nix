@@ -33,6 +33,7 @@
         rclone-config = {
           file = "${secrets}/config/rclone.age";
           path = "${configHome}/rclone/rclone.conf";
+          symlink = false;
         } // userReadable;
 
         attic-token = {

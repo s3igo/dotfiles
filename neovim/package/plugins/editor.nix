@@ -113,6 +113,14 @@
 
   extraPlugins = with pkgs.vimPlugins; [ nightfly ];
 
+  highlight = {
+    NonText.link = "NightflyPickleBlue";
+    Whitespace.link = "NightflyPickleBlue";
+    SpecialKey.link = "NightflyPickleBlue";
+    Indent.link = "NightflyGreyBlue";
+    TrailingSpace.link = "NightflyPurpleMode";
+  };
+
   extraPackages = with pkgs; [
     fd
     ripgrep
