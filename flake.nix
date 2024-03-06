@@ -118,12 +118,8 @@
               nix
               lua
             ];
-            grammars = "all";
           };
-          default = neovim {
-            modules = with self.nixosModules; [ im-select ];
-            grammars = "all";
-          };
+          default = neovim { grammars = "all"; };
         };
 
         devShells.default = pkgs.mkShell {
@@ -180,7 +176,6 @@
         };
 
       nixosModules = {
-        treesitterAll.imports = [ ./packages/neovim/modules/treesitter-all.nix ];
         im-select.imports = [ ./packages/neovim/modules/im-select.nix ];
         lua.imports = [ ./packages/neovim/modules/lua.nix ];
         nix.imports = [ ./packages/neovim/modules/nix.nix ];

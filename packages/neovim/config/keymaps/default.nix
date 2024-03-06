@@ -56,22 +56,22 @@ _: {
     {
       key = "<c-h>";
       action = "<c-w>h";
-      options.remap = true;
+      mode = "n";
     }
     {
       key = "<c-j>";
       action = "<c-w>j";
-      options.remap = true;
+      mode = "n";
     }
     {
       key = "<c-k>";
       action = "<c-w>k";
-      options.remap = true;
+      mode = "n";
     }
     {
       key = "<c-l>";
       action = "<c-w>l";
-      options.remap = true;
+      mode = "n";
     }
     # helix keybindings
     {

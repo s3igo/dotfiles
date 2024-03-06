@@ -43,16 +43,18 @@ _: {
           vim.opt_local.formatoptions:remove('o')
 
           -- highlight trailing whitespace
-          local disabled_filetypes = { 'fzf', 'lspinfo' }
-          local is_disabled = {}
-          for _, v in ipairs(disabled_filetypes) do
-            is_disabled[v] = true
-          end
-          if not is_disabled[vim.bo.filetype] then
-            vim.cmd('match TrailingSpace /\\s\\+$/')
-          end
+          vim.cmd('2match TrailingSpace /\\s\\+$/')
         end
       '';
+    }
+    {
+      event = "TermOpen";
+      callback.__raw = ''
+        function()
+          vim.cmd('2match none')
+        end
+      '';
+      desc = "Clear trailing whitespace highlight when opening a terminal";
     }
   ];
 }
