@@ -97,10 +97,11 @@ in
         mv = "mv -iv";
         n = "nix";
         nf = "nix flake";
+        nl = "rm -rf .direnv; and direnv allow";
         nr = cursor // text "nix run .#% --";
-        nrp = cursor // text "nix run nixpkgs#% --";
         nrd = cursor // text "nix run $HOME/.dotfiles#% --";
         nrdr = cursor // text "nix run github:s3igo/dotfiles#% --";
+        nrp = cursor // text "nix run nixpkgs#% --";
         nv = "nix run .#neovim --";
         nvp = "nix run nixpkgs#neovim --";
         pst = "pbpaste";
