@@ -45,7 +45,7 @@
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-        tasks = import ./tasks.nix { inherit pkgs nix-darwin; };
+        tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
         neovim = import ./neovim { inherit system pkgs nixvim; };
       in
       {

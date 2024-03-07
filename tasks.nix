@@ -1,4 +1,8 @@
-{ pkgs, nix-darwin }:
+{
+  system,
+  pkgs,
+  nix-darwin,
+}:
 
 with pkgs;
 let
