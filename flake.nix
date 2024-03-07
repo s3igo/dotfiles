@@ -118,13 +118,10 @@
         };
 
         devShells.default = pkgs.mkShell {
-          buildInputs =
-            with pkgs;
-            [
-              act
-              statix
-            ]
-            ++ tasks;
+          buildInputs = [
+            pkgs.statix
+            self.packages.${system}.neovim
+          ] ++ tasks;
         };
 
         formatter = pkgs.nixfmt-rfc-style;
