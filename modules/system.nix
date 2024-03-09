@@ -7,6 +7,7 @@
     settings = {
       experimental-features = "nix-command flakes";
       extra-platforms = "x86_64-darwin aarch64-darwin";
+      use-xdg-base-directories = true;
     };
     extraOptions = ''
       !include ${config.age.secrets.github-nix-token.path}

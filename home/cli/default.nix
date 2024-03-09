@@ -65,6 +65,9 @@
       DOCKER_CONFIG = "${config.xdg.configHome}/docker";
       _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";
       LESSHISTFILE = "-"; # avoid creating `.lesshst`
+      NODE_REPL_HISTORY = "";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+      FLY_CONFIG_DIR="${config.xdg.stateHome}/fly";
     };
     packages = with pkgs; [
       darwin.trash
