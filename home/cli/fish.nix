@@ -89,6 +89,7 @@ in
         ef = "exec fish";
         g = "git";
         ga = "git add";
+        gb = "git branch";
         gc = "git commit";
         gd = "git diff";
         gs = "git switch";
