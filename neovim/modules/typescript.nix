@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./json.nix ];
+
   plugins = {
     treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
       javascript
@@ -8,21 +10,13 @@
       typescript
       tsx
       regex
-      json
     ];
     lsp.servers.tsserver.enable = true;
     none-ls = {
       enable = true;
-      sources = {
-        code_actions.eslint.enable = true;
-        diagnostics.eslint.enable = true;
-        formatting = {
-          prettier = {
-            enable = true;
-            disableTsServerFormatter = true;
-          };
-          eslint.enable = true;
-        };
+      sources.formatting.prettier = {
+        enable = true;
+        disableTsServerFormatter = true;
       };
     };
     ts-autotag.enable = true;

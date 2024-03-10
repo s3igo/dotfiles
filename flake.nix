@@ -60,6 +60,10 @@
               lua
             ];
           };
+          full = neovim {
+            modules = [ self.nixosModules.full ];
+            grammars = "all";
+          };
         };
 
         devShells.default = pkgs.mkShell {
@@ -113,11 +117,16 @@
         };
 
       nixosModules = {
+        full.imports = [ ./neovim/modules/full.nix ];
         im-select.imports = [ ./neovim/modules/im-select.nix ];
         lua.imports = [ ./neovim/modules/lua.nix ];
         nix.imports = [ ./neovim/modules/nix.nix ];
         rust.imports = [ ./neovim/modules/rust.nix ];
         typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
+        json.imports = [ ./packages/neovim/modules/json.nix ];
+        markdown.imports = [ ./packages/neovim/modules/markdown.nix ];
+        prettier.imports = [ ./packages/neovim/modules/prettier.nix ];
+        yaml.imports = [ ./packages/neovim/modules/yaml.nix ];
       };
     };
 }
