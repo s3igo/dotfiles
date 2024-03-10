@@ -51,6 +51,7 @@
           ctrl-d = "half-page-down";
           ctrl-f = "forward-char";
           ctrl-b = "backward-char";
+          ctrl-k = "kill-line";
         };
         files = {
           rg_opts = pkgs.lib.concatStringsSep " " [

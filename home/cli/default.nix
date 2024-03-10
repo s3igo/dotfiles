@@ -78,7 +78,7 @@
       ghq
       # lazydocker
       mmv-go
-      nodejs-slim
+      # nodejs-slim
       ollama
       rclone
       tree
