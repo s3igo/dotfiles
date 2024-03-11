@@ -68,6 +68,10 @@
 
   extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
 
+  extraConfigLua = ''
+    require('actions-preview').setup({})
+  '';
+
   keymaps = [
     {
       key = "<leader>i";

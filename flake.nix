@@ -117,16 +117,16 @@
         };
 
       nixosModules = {
-        full.imports = [ ./neovim/modules/full.nix ];
-        im-select.imports = [ ./neovim/modules/im-select.nix ];
-        lua.imports = [ ./neovim/modules/lua.nix ];
-        nix.imports = [ ./neovim/modules/nix.nix ];
-        rust.imports = [ ./neovim/modules/rust.nix ];
-        typescript.imports = [ ./packages/neovim/modules/typescript.nix ];
-        json.imports = [ ./packages/neovim/modules/json.nix ];
-        markdown.imports = [ ./packages/neovim/modules/markdown.nix ];
-        prettier.imports = [ ./packages/neovim/modules/prettier.nix ];
-        yaml.imports = [ ./packages/neovim/modules/yaml.nix ];
+        full = ./neovim/modules/full.nix;
+        im-select = ./neovim/modules/im-select.nix;
+        lua = ./neovim/modules/lua.nix;
+        nix = ./neovim/modules/nix.nix;
+        rust = ./neovim/modules/rust.nix;
+        typescript = ./packages/neovim/modules/typescript.nix;
+        json = ./packages/neovim/modules/json.nix;
+        markdown = ./packages/neovim/modules/markdown.nix;
+        prettier = ./packages/neovim/modules/prettier.nix;
+        yaml = ./packages/neovim/modules/yaml.nix;
       };
     };
 }
