@@ -1,4 +1,5 @@
 { pkgs, ... }:
+
 {
   extraPlugins = with pkgs; [
     (vimUtils.buildVimPlugin {

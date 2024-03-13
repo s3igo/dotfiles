@@ -265,21 +265,25 @@
       key = "<leader>h";
       action = "<cmd>lua require('smart-splits').swap_buf_left()<cr>";
       mode = "n";
+      options.desc = "Swap buffer to the left";
     }
     {
       key = "<leader>j";
       action = "<cmd>lua require('smart-splits').swap_buf_down()<cr>";
       mode = "n";
+      options.desc = "Swap buffer down";
     }
     {
       key = "<leader>k";
       action = "<cmd>lua require('smart-splits').swap_buf_up()<cr>";
       mode = "n";
+      options.desc = "Swap buffer up";
     }
     {
       key = "<leader>l";
       action = "<cmd>lua require('smart-splits').swap_buf_right()<cr>";
       mode = "n";
+      options.desc = "Swap buffer to the right";
     }
   ];
 }

@@ -1,8 +1,5 @@
-_: {
-  imports = [
-    ./emacs.nix
-    # ./register.nix
-  ];
+{
+  imports = [ ./emacs.nix ];
 
   globals.mapleader = " ";
 
@@ -64,6 +61,25 @@ _: {
       '';
       mode = "n";
       options.desc = "Insert semicolon";
+    }
+    # registers
+    {
+      key = "<leader>p";
+      action = ''"+'';
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Clipboard register";
+    }
+    {
+      key = "<leader>u";
+      action = ''"_'';
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Blackhole register";
     }
     # helix keybindings
     {
