@@ -67,7 +67,7 @@
       LESSHISTFILE = "-"; # avoid creating `.lesshst`
       NODE_REPL_HISTORY = "";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
-      FLY_CONFIG_DIR="${config.xdg.stateHome}/fly";
+      FLY_CONFIG_DIR = "${config.xdg.stateHome}/fly";
     };
     packages = with pkgs; [
       darwin.trash

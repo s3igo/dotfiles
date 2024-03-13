@@ -1,7 +1,4 @@
-{
-  system,
-  nixvim,
-}:
+{ system, nixvim }:
 
 {
   pkgs,
