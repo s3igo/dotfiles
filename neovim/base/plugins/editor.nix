@@ -3,8 +3,7 @@
   plugins = {
     nvim-tree = {
       enable = true;
-      # FIXME: This is not working
-      # filters.cumsom = [ "^\\.git$" ];
+      filters.custom = [ "^\\.git$" ];
       git.ignore = false;
     };
     gitsigns = {
@@ -110,6 +109,7 @@
         winblend = 100;
       };
     };
+    smart-splits.enable = true;
   };
 
   extraPlugins = with pkgs.vimPlugins; [ nightfly ];
@@ -137,33 +137,8 @@
     vim.cmd('colorscheme nightfly')
   '';
 
-  extraConfigLua = ''
-    -- nvim-hlslens
-    -- require('hlslens').setup()
-    -- vim.keymap.set(
-    --   'n',
-    --   'n',
-    --   "<cmd>execute('normal! ' . v:count1 . 'n')<cr><cmd>lua require('hlslens').start()<cr>"
-    -- )
-    -- vim.keymap.set(
-    --   'n',
-    --   'N',
-    --   "<cmd>execute('normal! ' . v:count1 . 'N')<cr><cmd>lua require('hlslens').start()<cr>"
-    -- )
-    -- vim.keymap.set('n', '*', "*<cmd>lua require('hlslens').start()<cr>")
-    -- vim.keymap.set('n', '#', "#<cmd>lua require('hlslens').start()<cr>")
-    -- vim.keymap.set('n', 'g*', "g*<cmd>lua require('hlslens').start()<cr>")
-    -- vim.keymap.set('n', 'g#', "g#<cmd>lua require('hlslens').start()<cr>")
-    -- nvim-scrollbar
-    -- require('scrollbar').setup({
-    --   handle = { color = '#1d3b53' },
-    --   marks = { Search = { color = '#ecc48d' } },
-    -- })
-    -- require('scrollbar.handlers.gitsigns').setup()
-    -- require('scrollbar.handlers.search').setup()
-  '';
-
   keymaps = [
+    # mini.bufremove
     {
       key = "<leader>w";
       action = "<cmd>lua require('mini.bufremove').delete()<cr>";
@@ -244,6 +219,67 @@
       action = "<cmd>BufferLineMoveNext<cr>";
       mode = "n";
       options.desc = "Move buffer to next position";
+    }
+    # smart-splits
+    {
+      key = "<c-h>";
+      action = "<cmd>lua require('smart-splits').move_cursor_left()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<c-j>";
+      action = "<cmd>lua require('smart-splits').move_cursor_down()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<c-k>";
+      action = "<cmd>lua require('smart-splits').move_cursor_up()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<c-l>";
+      action = "<cmd>lua require('smart-splits').move_cursor_right()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<a-h>";
+      action = "<cmd>lua require('smart-splits').resize_left()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<a-j>";
+      action = "<cmd>lua require('smart-splits').resize_down()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<a-k>";
+      action = "<cmd>lua require('smart-splits').resize_up()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<a-l>";
+      action = "<cmd>lua require('smart-splits').resize_right()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<leader>h";
+      action = "<cmd>lua require('smart-splits').swap_buf_left()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<leader>j";
+      action = "<cmd>lua require('smart-splits').swap_buf_down()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<leader>k";
+      action = "<cmd>lua require('smart-splits').swap_buf_up()<cr>";
+      mode = "n";
+    }
+    {
+      key = "<leader>l";
+      action = "<cmd>lua require('smart-splits').swap_buf_right()<cr>";
+      mode = "n";
     }
   ];
 }

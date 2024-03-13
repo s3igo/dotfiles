@@ -84,6 +84,7 @@ in
         cl = "clear";
         cp = "cp -iv";
         d = "docker";
+        da = "direnv allow";
         dp = "diff -Naur";
         e = "echo";
         ef = "exec fish";

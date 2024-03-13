@@ -52,26 +52,18 @@ _: {
       mode = "n";
       options.desc = "Insert semicolon";
     }
-    # window
     {
-      key = "<c-h>";
-      action = "<c-w>h";
+      key = "<leader>,";
+      action.__raw = ''
+        function()
+          local line = vim.api.nvim_get_current_line()
+          local row = unpack(vim.api.nvim_win_get_cursor(0))
+
+          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ',' })
+        end
+      '';
       mode = "n";
-    }
-    {
-      key = "<c-j>";
-      action = "<c-w>j";
-      mode = "n";
-    }
-    {
-      key = "<c-k>";
-      action = "<c-w>k";
-      mode = "n";
-    }
-    {
-      key = "<c-l>";
-      action = "<c-w>l";
-      mode = "n";
+      options.desc = "Insert semicolon";
     }
     # helix keybindings
     {
