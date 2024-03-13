@@ -122,11 +122,11 @@
         lua = ./neovim/modules/lua.nix;
         nix = ./neovim/modules/nix.nix;
         rust = ./neovim/modules/rust.nix;
-        typescript = ./packages/neovim/modules/typescript.nix;
-        json = ./packages/neovim/modules/json.nix;
-        markdown = ./packages/neovim/modules/markdown.nix;
-        prettier = ./packages/neovim/modules/prettier.nix;
-        yaml = ./packages/neovim/modules/yaml.nix;
+        typescript = ./neovim/modules/typescript.nix;
+        json = ./neovim/modules/json.nix;
+        markdown = ./neovim/modules/markdown.nix;
+        prettier = ./neovim/modules/prettier.nix;
+        yaml = ./neovim/modules/yaml.nix;
       };
     };
 }
