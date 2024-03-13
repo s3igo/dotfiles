@@ -1,14 +1,10 @@
 {
   system,
-  pkgs,
   nixvim,
 }:
 
-let
-  pkgs' = pkgs;
-in
 {
-  pkgs ? pkgs',
+  pkgs,
   modules ? [ ],
   grammars ? [ ],
 }:

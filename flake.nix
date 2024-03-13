@@ -12,18 +12,9 @@
     };
     agenix = {
       url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nix-darwin.follows = "nix-darwin";
-        home-manager.follows = "home-manager";
-      };
-    };
+    neovim.url = "./neovim";
     secrets = {
       url = "github:s3igo/secrets";
       flake = false;
@@ -38,7 +29,7 @@
       nix-darwin,
       home-manager,
       agenix,
-      nixvim,
+      neovim,
       secrets,
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -46,22 +37,25 @@
       let
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
-        neovim = import ./neovim { inherit system pkgs nixvim; };
+        neovim' = neovim.withModules.${system};
       in
       {
-        inherit neovim;
-
         packages = {
-          default = neovim { grammars = "all"; };
-          neovim = neovim {
-            modules = with self.nixosModules; [
+          default = neovim' {
+            inherit pkgs;
+            grammars = "all";
+          };
+          neovim = neovim' {
+            inherit pkgs;
+            modules = with neovim.nixosModules; [
               im-select
               nix
               lua
             ];
           };
-          full = neovim {
-            modules = [ self.nixosModules.full ];
+          full = neovim' {
+            inherit pkgs;
+            modules = [ neovim.nixosModules.full ];
             grammars = "all";
           };
         };
@@ -115,18 +109,5 @@
               ];
             };
         };
-
-      nixosModules = {
-        full = ./neovim/modules/full.nix;
-        im-select = ./neovim/modules/im-select.nix;
-        lua = ./neovim/modules/lua.nix;
-        nix = ./neovim/modules/nix.nix;
-        rust = ./neovim/modules/rust.nix;
-        typescript = ./neovim/modules/typescript.nix;
-        json = ./neovim/modules/json.nix;
-        markdown = ./neovim/modules/markdown.nix;
-        prettier = ./neovim/modules/prettier.nix;
-        yaml = ./neovim/modules/yaml.nix;
-      };
     };
 }
