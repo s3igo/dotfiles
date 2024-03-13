@@ -66,7 +66,10 @@
     };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
+  extraPlugins = with pkgs.vimPlugins; [
+    nui-nvim # backends for actions-preview.
+    actions-preview-nvim
+  ];
 
   extraConfigLua = ''
     require('actions-preview').setup({})
