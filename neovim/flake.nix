@@ -1,15 +1,10 @@
 {
-  inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixvim.url = "github:nix-community/nixvim";
-  };
+  inputs.nixvim.url = "github:nix-community/nixvim";
 
   outputs =
-    { flake-utils, nixvim, ... }:
-    flake-utils.lib.eachDefaultSystem (system: {
-      withModules = import ./. { inherit system nixvim; };
-    })
-    // {
+    { nixvim, ... }:
+    {
+      withModules = import ./. { inherit nixvim; };
       nixosModules = {
         full = ./modules/full.nix;
         im-select = ./modules/im-select.nix;

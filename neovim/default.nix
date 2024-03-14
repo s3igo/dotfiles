@@ -1,7 +1,8 @@
-{ system, nixvim }:
+{ nixvim }:
 
 {
   pkgs,
+  system,
   modules ? [ ],
   grammars ? [ ],
 }:
@@ -11,5 +12,5 @@ nixvim.legacyPackages.${system}.makeNixvimWithModule {
   extraSpecialArgs = {
     inherit grammars;
   };
-  module.imports = [ ./base ] ++ modules;
+  module.imports = [ ./config ] ++ modules;
 }
