@@ -37,24 +37,23 @@
       let
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
-        neovim' = neovim.withModules.${system};
       in
       {
-        packages = {
-          default = neovim' {
-            inherit pkgs;
+        packages = with neovim; {
+          default = withModules {
+            inherit pkgs system;
             grammars = "all";
           };
-          neovim = neovim' {
-            inherit pkgs;
+          neovim = withModules {
+            inherit pkgs system;
             modules = with neovim.nixosModules; [
               im-select
               nix
               lua
             ];
           };
-          full = neovim' {
-            inherit pkgs;
+          full = withModules {
+            inherit pkgs system;
             modules = [ neovim.nixosModules.full ];
             grammars = "all";
           };
