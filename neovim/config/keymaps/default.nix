@@ -47,7 +47,7 @@
         end
       '';
       mode = "n";
-      options.desc = "Insert semicolon";
+      options.desc = "Insert trailing semicolon";
     }
     {
       key = "<leader>,";
@@ -60,7 +60,7 @@
         end
       '';
       mode = "n";
-      options.desc = "Insert semicolon";
+      options.desc = "Insert trailing comma";
     }
     # registers
     {

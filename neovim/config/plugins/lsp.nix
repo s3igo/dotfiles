@@ -86,7 +86,10 @@
     {
       key = "<leader>a";
       action = "<cmd>lua require('actions-preview').code_actions()<cr>";
-      mode = "n";
+      mode = [
+        "n"
+        "x"
+      ];
       options.desc = "Code Actions Preview";
     }
   ];
