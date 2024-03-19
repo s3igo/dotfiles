@@ -30,7 +30,12 @@
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUyMJEMvBM/6QpZ365T7Gwf6KqYVuXKeTgDlKsFoU27";
       signByDefault = true;
     };
+    attributes = [ "*.lockb binary diff=lockb" ];
     extraConfig = {
+      diff.lockb = {
+        textconv = "bun";
+        binary = true;
+      };
       gpg = {
         format = "ssh";
         ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
