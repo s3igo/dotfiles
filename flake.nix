@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    get-flake.url = "github:ursi/get-flake";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +15,6 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim.url = "./neovim";
     secrets = {
       url = "github:s3igo/secrets";
       flake = false;
@@ -26,10 +26,10 @@
       self,
       nixpkgs,
       flake-utils,
+      get-flake,
       nix-darwin,
       home-manager,
       agenix,
-      neovim,
       secrets,
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -37,6 +37,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
+        neovim = get-flake (toString ./. + "/neovim");
       in
       {
         packages = with neovim; {
