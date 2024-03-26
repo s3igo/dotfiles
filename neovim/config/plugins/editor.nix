@@ -68,6 +68,9 @@
         };
       };
     };
+    # telescope = {
+    #   enable = true;
+    # };
     mini = {
       enable = true;
       modules = {
@@ -95,12 +98,14 @@
     };
     indent-blankline = {
       enable = true;
-      indent = {
-        char = "|";
-        highlight = "Indent";
+      settings = {
+        indent = {
+          char = "|";
+          highlight = "Indent";
+        };
+        whitespace.highlight = "Whitespace";
+        scope.enabled = false;
       };
-      whitespace.highlight = "Whitespace";
-      scope.enabled = false;
     };
     which-key = {
       enable = true;

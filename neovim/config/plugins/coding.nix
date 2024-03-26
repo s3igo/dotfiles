@@ -72,13 +72,15 @@
       checkTs = true;
       mapCH = true;
     };
-    comment-nvim.enable = true;
-    # mini = {
-    #   enable = true;
-    #   modules = {
-    #     surround = { };
-    #   };
-    # };
+    comment.enable = true;
+    mini = {
+      enable = true;
+      modules = {
+        ai = {
+          n_lines = 500;
+        };
+      };
+    };
   };
 
   extraPlugins = with pkgs.vimPlugins; [
