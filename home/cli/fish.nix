@@ -77,7 +77,8 @@ in
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
         attic = "nix run github:zhaofengli/attic --";
-        b = "brew";
+        b = "bun";
+        br = "bun run";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
         cdl = "cd (cat ${dataHome}/lf/lastdir | string escape)";
