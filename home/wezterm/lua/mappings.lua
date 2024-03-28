@@ -65,6 +65,7 @@ local leader = {
     { key = 'j', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Down' }, 'PopKeyTable' }) },
     { key = 'k', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Up' }, 'PopKeyTable' }) },
     { key = 'l', mods = 'CTRL', action = act.Multiple({ { ActivatePaneDirection = 'Right' }, 'PopKeyTable' }) },
+    { key = ';', mods = 'CTRL', action = act.TogglePaneZoomState },
     -- stylua: ignore end
 
     -- tab

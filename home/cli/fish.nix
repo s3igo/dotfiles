@@ -79,6 +79,7 @@ in
         attic = "nix run github:zhaofengli/attic --";
         b = "bun";
         br = "bun run";
+        bd = "bun run dev";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
         cdl = "cd (cat ${dataHome}/lf/lastdir | string escape)";
