@@ -10,7 +10,7 @@
 nixvim.legacyPackages.${system}.makeNixvimWithModule {
   inherit pkgs;
   extraSpecialArgs = {
-    inherit grammars;
+    grammars = if grammars == "all" then "all" else grammars ++ [ "vimdoc" ];
   };
   module.imports = [ ./config ] ++ modules;
 }

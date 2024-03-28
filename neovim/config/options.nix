@@ -18,7 +18,6 @@ _: {
     backup = false;
     ignorecase = true;
     smartcase = true;
-    ambiwidth = "double";
     shell = "fish";
     swapfile = false;
     termguicolors = true;
