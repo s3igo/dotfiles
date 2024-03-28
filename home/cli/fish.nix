@@ -107,6 +107,8 @@ in
         nrdr = cursor // text "nix run github:s3igo/dotfiles#% --";
         nrp = cursor // text "nix run nixpkgs#% --";
         nv = "nix run .#neovim --";
+        nvd = "nix run $HOME/.dotfiles#neovim --";
+        nvdr = "nix run github:s3igo/dotfiles#neovim --";
         nvp = "nix run nixpkgs#neovim --";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
