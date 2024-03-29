@@ -193,7 +193,7 @@ local ruler = {
     },
     {
         hl = { fg = colors.white, bg = colors.navy },
-        provider = ' %02c ' .. glyphs.left_arrow .. ' %03l/%03L (%P) ',
+        provider = ' %c ' .. glyphs.left_arrow .. ' %l/%L (%P) ',
     },
 }
 
