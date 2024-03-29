@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./coding.nix
-    ./editor.nix
+    ./editor
     ./treesitter.nix
     ./lsp.nix
   ];
