@@ -220,45 +220,88 @@
       }
     }
 
-    local diagnostics = {
-      {
-        hl = { bg = colors.navy },
-        provider = ' ',
-      },
-      {
-        condition = conditions.has_diagnostics,
-        init = function(self)
-          self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-          self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-          self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-          self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    local lsp = {
+      init = function(self)
+        -- copilot
+        self.copilot = {}
+        local api = require('copilot.api')
+        api.register_status_notification_handler(function(data)
+          self.copilot.status = data.status
+        end)
+        -- diagnostics
+        self.diagnostics = {}
+        self.diagnostics.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+        self.diagnostics.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+        self.diagnostics.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+        self.diagnostics.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+      end,
+      { -- copilot
+        static = {
+          colors = {
+            Normal = colors.gray,
+            InProgress = colors.orange,
+            Error = colors.red,
+          },
+        },
+        hl = function(self)
+          return { fg = self.colors[self.copilot.status] or colors.white, bg = colors.navy }
         end,
+        provider = function(self)
+          local status = self.copilot.status
+
+          if not self.colors[status] then
+            return ' ' .. status .. ' '
+          end
+
+          return '   '
+        end,
+      },
+      { -- separator
+        condition = function(self)
+          local is_diagnostics_enabled = self.diagnostics.errors > 0
+            or self.diagnostics.warnings > 0
+            or self.diagnostics.hints > 0
+            or self.diagnostics.info > 0
+
+          local is_copilot_enabled = self.copilot.status ~= nil
+
+          return is_diagnostics_enabled and is_copilot_enabled
+        end,
+        hl = { fg = colors.white, bg = colors.navy },
+        provider = glyphs.right_arrow,
+      },
+      { -- diagnostics
+        condition = conditions.has_diagnostics,
         update = { 'DiagnosticChanged', 'BufEnter' },
+        {
+          hl = { bg = colors.navy },
+          provider = ' ',
+        },
         {
           hl = { fg = colors.red, bg = colors.navy },
           provider = function(self)
-            local cnt = self.errors
+            local cnt = self.diagnostics.errors
             return cnt > 0 and 'E:' .. cnt .. ' '
           end,
         },
         {
           hl = { fg = colors.orange, bg = colors.navy },
           provider = function(self)
-            local cnt = self.warnings
+            local cnt = self.diagnostics.warnings
             return cnt > 0 and 'W:' .. cnt .. ' '
           end,
         },
         {
           hl = { fg = colors.blue, bg = colors.navy },
           provider = function(self)
-            local cnt = self.hints
+            local cnt = self.diagnostics.hints
             return cnt > 0 and 'H:' .. cnt .. ' '
           end,
         },
         {
           hl = { fg = colors.gray, bg = colors.navy },
           provider = function(self)
-            local cnt = self.info
+            local cnt = self.diagnostics.info
             return cnt > 0 and 'I:' .. cnt .. ' '
           end,
         },
@@ -303,6 +346,7 @@
       },
     }
 
+
     local ruler = {
       {
         hl = { fg = colors.navy, bg = 'none' },
@@ -310,17 +354,40 @@
       },
       {
         hl = { fg = colors.white, bg = colors.navy },
-        provider = ' %02c ' .. glyphs.left_arrow .. ' %03l/%03L (%P) '
+        provider = ' %02c ' .. glyphs.left_arrow .. ' %03l/%03L (%P) ',
+      },
+    }
+
+    local info = {
+      {
+        hl = { fg = colors.bg, bg = colors.navy },
+        provider = glyphs.solid_left_arrow,
+      },
+      {
+        hl = { fg = colors.gray, bg = colors.bg },
+        provider = ' ' .. vim.bo.shiftwidth .. ' ' .. glyphs.left_arrow,
+      },
+      {
+        static = { unix = 'lf', dos = 'crlf', mac = 'cr' },
+        hl = { fg = colors.gray, bg = colors.bg },
+        provider = function(self)
+          return ' ' .. self[vim.bo.fileformat] .. ' ' .. glyphs.left_arrow
+        end,
+      },
+      {
+        hl = { fg = colors.gray, bg = colors.bg },
+        provider = ' ' .. vim.bo.fenc .. ' ',
       },
     }
 
     require('heirline').setup({
       statusline = {
         git,
-        diagnostics,
+        lsp,
         file,
         spacer,
         ruler,
+        info,
       },
     })
   '';
