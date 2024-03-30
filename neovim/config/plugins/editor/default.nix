@@ -9,38 +9,37 @@
     };
     gitsigns = {
       enable = true;
-      currentLineBlame = true;
-      signs = {
-        add.text = "|";
-        change = {
-          text = "|";
-          hl = "NightflyYellow";
+      settings = {
+        current_line_blame = true;
+        signs = {
+          add.text = "|";
+          change = {
+            text = "|";
+            hl = "NightflyYellow";
+          };
+          untracked.text = "?";
         };
-        delete.text = "_";
-        topdelete.text = "‾";
-        changedelete.text = "~";
-        untracked.text = "?";
-      };
-      onAttach.function = ''
-        function(bufnr)
-          local gs = package.loaded.gitsigns
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
+        on_attach = ''
+          function(bufnr)
+            local gs = package.loaded.gitsigns
+            local function map(mode, l, r, opts)
+              opts = opts or {}
+              opts.buffer = bufnr
+              vim.keymap.set(mode, l, r, opts)
+            end
+            map('n', ']g', gs.next_hunk, { desc = 'Next hunk' })
+            map('n', '[g', gs.prev_hunk, { desc = 'Previous hunk' })
+            map('n', '<leader>gp', gs.preview_hunk, { desc = 'Preview hunk' })
+            map('n', '<leader>gr', gs.reset_hunk, { desc = 'Reset hunk' })
+            map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
+            map('n', '<leader>gs', gs.stage_hunk, { desc = 'Stage hunk' })
+            map('n', '<leader>gS', gs.stage_buffer, { desc = 'Stage buffer' })
+            map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+            map('n', '<leader>gt', gs.toggle_deleted, { desc = 'Toggle deleted' })
+            map({ 'o', 'x' }, 'ih', ':<c-u>Gitsigns select_hunk<cr>', { desc = 'inside hunk' })
           end
-          map('n', ']g', gs.next_hunk, { desc = 'Next hunk' })
-          map('n', '[g', gs.prev_hunk, { desc = 'Previous hunk' })
-          map('n', '<leader>gp', gs.preview_hunk, { desc = 'Preview hunk' })
-          map('n', '<leader>gr', gs.reset_hunk, { desc = 'Reset hunk' })
-          map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
-          map('n', '<leader>gs', gs.stage_hunk, { desc = 'Stage hunk' })
-          map('n', '<leader>gS', gs.stage_buffer, { desc = 'Stage buffer' })
-          map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
-          map('n', '<leader>gt', gs.toggle_deleted, { desc = 'Toggle deleted' })
-          map({ 'o', 'x' }, 'ih', ':<c-u>Gitsigns select_hunk<cr>', { desc = 'inside hunk' })
-        end
-      '';
+        '';
+      };
     };
     nvim-colorizer.enable = true;
     fzf-lua = {

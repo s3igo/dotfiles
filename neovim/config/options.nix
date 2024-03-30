@@ -1,5 +1,5 @@
 _: {
-  config.options = {
+  opts = {
     encoding = "utf-8";
     fileencoding = "utf-8";
     fileformats = "unix,dos,mac";
