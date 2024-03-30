@@ -161,8 +161,8 @@ local file = {
         provider = function(self)
             local name = vim.fn.fnamemodify(self.filename, ':.')
 
-            if name == '' then
-                return '[No Name]'
+            if #name == 0 then
+                return ' [No Name] '
             end
 
             if not conditions.width_percent_below(#name, 0.25) then

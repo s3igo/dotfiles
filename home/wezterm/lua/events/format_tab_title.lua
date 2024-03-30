@@ -14,7 +14,7 @@ return function(colors)
     ---@return string
     return function(tab)
         local title = style(' ' .. tab_title(tab) .. ' ', tab.is_active and colors.blue or colors.light_gray, colors.black)
-        local zoomed = style(tab.active_pane.is_zoomed and '[Z] ' or '', colors.orange, colors.black)
+        local zoomed = style(tab.active_pane.is_zoomed and '[Z] ' or '', colors.purple, colors.black)
         return title .. zoomed
     end
 end

@@ -18,7 +18,6 @@ return function(default_colors, chissoku)
         light_gray = '#7c8f8f', -- NightflyGreyBlue
         navy = '#384b5a',
         dark = '#092236',
-        orange = '#ecc48d',
     }
 
     ---@alias Glyphs table<string, string>
