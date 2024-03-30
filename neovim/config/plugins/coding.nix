@@ -73,47 +73,36 @@
       mapCH = true;
     };
     comment.enable = true;
-    mini = {
-      enable = true;
-      modules = {
-        ai = {
-          n_lines = 500;
-        };
-      };
-    };
+    # mini = {
+    #   enable = true;
+    #   modules = {
+    #     ai = {
+    #       n_lines = 500;
+    #     };
+    #   };
+    # };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    nvim-surround
-    substitute-nvim
-    text-case-nvim
-  ];
-
-  keymaps = [
-    # substitute-nvim
-    {
-      key = "s";
-      action = "<cmd>lua require('substitute').operator()<cr>";
-      mode = "n";
-    }
-    {
-      key = "ss";
-      action = "<cmd>lua require('substitute').line()<cr>";
-      mode = "n";
-    }
-    {
-      key = "S";
-      action = "<cmd>lua require('substitute').eol()<cr>";
-      mode = "n";
-    }
-    {
-      key = "s";
-      action = "<cmd>lua require('substitute').visual()<cr>";
-      mode = "x";
-    }
+  extraPlugins = with pkgs; [
+    vimPlugins.nvim-surround
+    vimPlugins.substitute-nvim
+    vimPlugins.text-case-nvim
+    (vimUtils.buildVimPlugin {
+      pname = "nvim-various-textobjs";
+      version = "2024-03-12";
+      src = fetchFromGitHub {
+        owner = "chrisgrieser";
+        repo = "nvim-various-textobjs";
+        rev = "6cefba253d69306004a641a11c395381ae428903";
+        hash = "sha256-DwucX8UZLM1L/LTRLSmw3vQimKsZazs7J9/fw+Oe/oY=";
+      };
+    })
   ];
 
   extraConfigLua = ''
+    -- nvim-various-textobjs
+    require('various-textobjs').setup({})
+
     -- make autopairs work with cmp
     require('cmp').event:on(
       'confirm_done',
@@ -175,4 +164,65 @@
       -- }
     )
   '';
+
+  keymaps = [
+    # substitute-nvim
+    {
+      key = "s";
+      action = "<cmd>lua require('substitute').operator()<cr>";
+      mode = "n";
+    }
+    {
+      key = "ss";
+      action = "<cmd>lua require('substitute').line()<cr>";
+      mode = "n";
+    }
+    {
+      key = "S";
+      action = "<cmd>lua require('substitute').eol()<cr>";
+      mode = "n";
+    }
+    {
+      key = "s";
+      action = "<cmd>lua require('substitute').visual()<cr>";
+      mode = "x";
+    }
+    # nvim-various-textobjs
+    {
+      key = "ii";
+      action = "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<cr>";
+      mode = [
+        "o"
+        "x"
+      ];
+      options.desc = "Inside indentation";
+    }
+    {
+      key = "ai";
+      action = "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<cr>";
+      mode = [
+        "o"
+        "x"
+      ];
+      options.desc = "Around indentation";
+    }
+    {
+      key = "is";
+      action = "<cmd>lua require('various-textobjs').subword('inner')<cr>";
+      mode = [
+        "o"
+        "x"
+      ];
+      options.desc = "Inside subword";
+    }
+    {
+      key = "as";
+      action = "<cmd>lua require('various-textobjs').subword('outer')<cr>";
+      mode = [
+        "o"
+        "x"
+      ];
+      options.desc = "Around subword";
+    }
+  ];
 }
