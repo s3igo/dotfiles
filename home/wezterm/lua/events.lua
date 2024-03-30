@@ -15,7 +15,10 @@ return function(default_colors, chissoku)
         yellow = default_colors.brights[4],
         blue = default_colors.ansi[5],
         purple = default_colors.ansi[6],
-        navy = '#384B5A',
+        light_gray = '#7c8f8f', -- NightflyGreyBlue
+        navy = '#384b5a',
+        dark = '#092236',
+        orange = '#ecc48d',
     }
 
     ---@alias Glyphs table<string, string>
@@ -31,9 +34,9 @@ return function(default_colors, chissoku)
         co2 = utf8.char(0xf05e3),
     }
 
+    wezterm.on('format-tab-title', require('events.format_tab_title')(colors))
     wezterm.on('gui-startup', require('events.gui_startup'))
-    wezterm.on('format-tab-title', require('events.format_tab_title')(colors, glyphs))
     wezterm.on('update-status', require('events.update_status')(colors, glyphs))
-    wezterm.on('cpu-usage', require('events.custom.cpu_usage'))
     wezterm.on('co2', require('events.custom.co2')(chissoku))
+    wezterm.on('cpu-usage', require('events.custom.cpu_usage'))
 end

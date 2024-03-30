@@ -106,7 +106,7 @@ return function(window, pane, colors, glyphs)
         local _, host = wezterm.run_child_process({ 'scutil', '--get', 'LocalHostName' })
         local text = user:gsub('\n', '') .. '@' .. host:gsub('\n', '')
 
-        return left_arrow(text, colors.black, colors.white, edge)
+        return left_arrow(text, colors.white, colors.dark, edge)
     end
 
     local mode_styled, mode_bg = mode()

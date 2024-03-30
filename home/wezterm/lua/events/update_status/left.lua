@@ -4,22 +4,13 @@ local components = require('components')
 ---@param colors Colors
 ---@param glyphs Glyphs
 return function(window, colors, glyphs)
-    ---@return string
-    local function workspace()
-        local text = window:active_workspace()
-        return components.style(' [' .. text .. '] ', colors.black, colors.white, { intensity = 'Bold' })
-    end
-
-    ---@return string
-    local function edge()
-        ---@type boolean
-        local first_tab_is_active = window:mux_window():tabs_with_info()[1].is_active
-        return components.style(
+    window:set_left_status(
+        components.separator_right(
             glyphs.solid_right_arrow,
+            window:active_workspace(),
             colors.white,
-            first_tab_is_active and colors.yellow or colors.navy
+            colors.navy,
+            colors.black
         )
-    end
-
-    window:set_left_status(workspace() .. edge())
+    )
 end

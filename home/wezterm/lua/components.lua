@@ -7,6 +7,7 @@ local M = {}
 ---@alias Intensity 'Normal' | 'Bold' | 'Half'
 ---@alias Attr { underline?: Underline, intensity?: Intensity, italic?: boolean }
 ---@param attr? Attr
+---@return string
 M.style = function(text, fg, bg, attr)
     return require('wezterm').format({
         { Foreground = { Color = fg } },
