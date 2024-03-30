@@ -119,6 +119,7 @@ in
         t = cursor // text "task_%";
         ty = "typst";
         v = "nvim";
+        vf = "nvim flake.nix";
         w = "which";
       };
     loginShellInit = ''
