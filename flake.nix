@@ -102,6 +102,7 @@
                     useUserPackages = true;
                     extraSpecialArgs = {
                       inherit user;
+                      neovim = self.packages.aarch64-darwin.default;
                     };
                     users.${user} = import ./home;
                   };

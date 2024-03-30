@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  neovim,
+  ...
+}:
 
 {
   imports = [
@@ -47,25 +52,18 @@
         git_protocol = "ssh";
       };
     };
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-    };
     ripgrep = {
       enable = true;
       arguments = [ "--smart-case" ];
     };
   };
 
-  xdg.configFile = {
-    nvim.source = ../../config/home/.config/nvim;
-    "npm/npmrc".text = ''
-      prefix=''${XDG_DATA_HOME}/npm
-      logs-dir=''${XDG_DATA_HOME}/npm/log
-      cache=''${XDG_CACHE_HOME}/npm
-      update-notifier=false
-    '';
-  };
+  xdg.configFile."npm/npmrc".text = ''
+    prefix=''${XDG_DATA_HOME}/npm
+    logs-dir=''${XDG_DATA_HOME}/npm/log
+    cache=''${XDG_CACHE_HOME}/npm
+    update-notifier=false
+  '';
 
   home = {
     sessionVariables = {
@@ -77,21 +75,25 @@
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       FLY_CONFIG_DIR = "${config.xdg.stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+      EDITOR = "nvim";
     };
-    packages = with pkgs; [
-      darwin.trash
-      # du-dust
-      # efm-langserver
-      # emacs-nox
-      fd
-      ghq
-      # lazydocker
-      mmv-go
-      # nodejs-slim
-      ollama
-      rclone
-      tree
-      _1password
-    ];
+    packages =
+      with pkgs;
+      [
+        darwin.trash
+        # du-dust
+        # efm-langserver
+        # emacs-nox
+        fd
+        ghq
+        # lazydocker
+        mmv-go
+        # nodejs-slim
+        ollama
+        rclone
+        tree
+        _1password
+      ]
+      ++ [ neovim ];
   };
 }

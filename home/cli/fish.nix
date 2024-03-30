@@ -95,6 +95,7 @@ in
         gb = "git branch";
         gc = "git commit";
         gd = "git diff";
+        gl = "git log";
         gs = "git switch";
         h = "history";
         mk = "mkdir";
