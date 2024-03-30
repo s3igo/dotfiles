@@ -57,7 +57,15 @@
     };
   };
 
-  xdg.configFile.nvim.source = ../../config/home/.config/nvim;
+  xdg.configFile = {
+    nvim.source = ../../config/home/.config/nvim;
+    "npm/npmrc".text = ''
+      prefix=''${XDG_DATA_HOME}/npm
+      logs-dir=''${XDG_DATA_HOME}/npm/log
+      cache=''${XDG_CACHE_HOME}/npm
+      update-notifier=false
+    '';
+  };
 
   home = {
     sessionVariables = {
@@ -68,6 +76,7 @@
       NODE_REPL_HISTORY = "";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       FLY_CONFIG_DIR = "${config.xdg.stateHome}/fly";
+      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
     };
     packages = with pkgs; [
       darwin.trash

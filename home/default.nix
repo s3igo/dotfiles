@@ -10,15 +10,7 @@
     rio.enable = true;
   };
 
-  xdg = {
-    enable = true;
-    configFile."npm/npmrc".text = ''
-      prefix=''${XDG_DATA_HOME}/npm
-      logs-dir=''${XDG_DATA_HOME}/npm/log
-      cache=''${XDG_CACHE_HOME}/npm
-      update-notifier=false
-    '';
-  };
+  xdg.enable = true;
 
   home = {
     language.base = "en_US.UTF-8";
