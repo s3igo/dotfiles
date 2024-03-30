@@ -38,29 +38,15 @@
     }
     {
       key = "<leader>;";
-      action.__raw = ''
-        function()
-          local line = vim.api.nvim_get_current_line()
-          local row = unpack(vim.api.nvim_win_get_cursor(0))
-
-          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ';' })
-        end
-      '';
+      action.__raw = builtins.readFile ./semicolon.lua;
       mode = "n";
-      options.desc = "Insert trailing semicolon";
+      options.desc = "Toggle trailing semicolon";
     }
     {
       key = "<leader>,";
-      action.__raw = ''
-        function()
-          local line = vim.api.nvim_get_current_line()
-          local row = unpack(vim.api.nvim_win_get_cursor(0))
-
-          vim.api.nvim_buf_set_text(0, row - 1, #line, row - 1, #line, { ',' })
-        end
-      '';
+      action.__raw = builtins.readFile ./comma.lua;
       mode = "n";
-      options.desc = "Insert trailing comma";
+      options.desc = "Toggle trailing comma";
     }
     # registers
     {

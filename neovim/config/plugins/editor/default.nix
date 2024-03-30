@@ -110,10 +110,7 @@
     };
     which-key = {
       enable = true;
-      window = {
-        border = "single";
-        winblend = 100;
-      };
+      window.border = "single";
     };
     smart-splits.enable = true;
   };
@@ -129,6 +126,7 @@
     SpecialKey.link = "NightflyPickleBlue";
     Indent.link = "NightflyGreyBlue";
     TrailingSpace.link = "NightflyPurpleMode";
+    WhichKeyFloat.bg = "none";
     TabLineFill.bg = "none";
   };
 
