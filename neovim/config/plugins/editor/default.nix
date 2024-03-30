@@ -129,6 +129,7 @@
     SpecialKey.link = "NightflyPickleBlue";
     Indent.link = "NightflyGreyBlue";
     TrailingSpace.link = "NightflyPurpleMode";
+    TabLineFill.bg = "none";
   };
 
   extraPackages = with pkgs; [
@@ -177,7 +178,7 @@
       options.desc = "Fuzzy find files";
     }
     {
-      key = "<leader>m";
+      key = "<leader>g";
       action = "<cmd>lua require('fzf-lua').files({ cmd = 'git ls-files --modified' })<cr>";
       mode = "n";
       options.desc = "Fuzzy find modified files";

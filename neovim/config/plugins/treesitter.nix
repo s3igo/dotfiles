@@ -10,7 +10,10 @@
       enable = true;
       grammarPackages =
         with pkgs.vimPlugins.nvim-treesitter;
-        if grammars == "all" then allGrammars else map (name: builtGrammars.${name}) grammars;
+        if grammars == "all" then
+          allGrammars
+        else
+          map (name: builtGrammars.${name}) (grammars ++ [ "vimdoc" ]);
       # folding = true;
       indent = true;
       incrementalSelection = {
