@@ -262,7 +262,7 @@ local tabline = (function()
     local filename = {
         provider = function(self)
             local name = self.filename
-            return #name == 0 and '[No Name] ' or vim.fn.fnamemodify(name, ':t') .. ' '
+            return #name == 0 and ' [No Name] ' or ' ' .. vim.fn.fnamemodify(name, ':t') .. ' '
         end,
         hl = function(self) return { fg = (self.is_active or self.is_visible) and colors.blue or colors.dark_gray } end,
     }
@@ -270,7 +270,7 @@ local tabline = (function()
     local flag = {
         {
             condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
-            provider = '[+]',
+            provider = '[+] ',
             hl = { fg = colors.orange },
         },
         {
@@ -278,7 +278,7 @@ local tabline = (function()
                 return not vim.api.nvim_get_option_value('modifiable', { buf = self.bufnr })
                     or vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
             end,
-            provider = '[-]',
+            provider = '[-] ',
             hl = { fg = colors.blue },
         },
     }
@@ -289,9 +289,7 @@ local tabline = (function()
         flag,
     }
 
-    local separator = { provider = ' ' }
-
-    return utils.make_buflist(file, separator, separator, function() return buflist_cache end, false)
+    return utils.make_buflist(file, nil, nil, function() return buflist_cache end, false)
 end)()
 
 require('heirline').setup({
