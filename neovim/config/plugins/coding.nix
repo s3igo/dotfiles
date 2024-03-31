@@ -102,6 +102,7 @@
   extraConfigLua = ''
     -- text-case-nvim
     require('textcase').setup({ default_keymappings_enabled = false })
+    require('telescope').load_extension('textcase')
 
     -- nvim-various-textobjs
     require('various-textobjs').setup({})
@@ -169,6 +170,16 @@
   '';
 
   keymaps = [
+    # text-case.nvim
+    {
+      key = "ga";
+      action = "<cmd>TextCaseOpenTelescope<cr>";
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Change case";
+    }
     # substitute-nvim
     {
       key = "s";

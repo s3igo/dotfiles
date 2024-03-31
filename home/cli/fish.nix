@@ -96,6 +96,7 @@ in
         gc = "git commit";
         gd = "git diff";
         gl = "git log";
+        gr = "git restore";
         gs = "git switch";
         h = "history";
         mk = "mkdir";
