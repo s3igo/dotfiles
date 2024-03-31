@@ -51,6 +51,7 @@
               im-select
               nix
               lua
+              markdown
             ];
           };
           full = withModules {

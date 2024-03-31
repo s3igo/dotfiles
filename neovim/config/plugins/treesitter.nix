@@ -13,7 +13,13 @@
         if grammars == "all" then
           allGrammars
         else
-          map (name: builtGrammars.${name}) (grammars ++ [ "vimdoc" ]);
+          map (name: builtGrammars.${name}) (
+            [
+              "vimdoc"
+              "comment"
+            ]
+            ++ grammars
+          );
       # folding = true;
       indent = true;
       incrementalSelection = {
@@ -148,9 +154,9 @@
   };
 
   highlight = {
-    "@text.todo".link = "NightflyBlueMode";
-    "@text.note".link = "NightflyPurpleMode";
-    "@text.warning".link = "NightflyTanMode";
-    "@text.danger".link = "NightflyWatermelonMode";
+    "@comment.todo.comment".link = "NightflyBlueMode";
+    "@comment.note.comment".link = "NightflyPurpleMode";
+    "@comment.warning.comment".link = "NightflyTanMode";
+    "@comment.danger.comment".link = "NightflyWatermelonMode";
   };
 }
