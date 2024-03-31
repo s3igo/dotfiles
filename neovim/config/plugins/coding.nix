@@ -100,6 +100,9 @@
   ];
 
   extraConfigLua = ''
+    -- text-case-nvim
+    require('textcase').setup({ default_keymappings_enabled = false })
+
     -- nvim-various-textobjs
     require('various-textobjs').setup({})
 

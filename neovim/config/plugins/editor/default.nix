@@ -42,35 +42,62 @@
       };
     };
     nvim-colorizer.enable = true;
-    fzf-lua = {
+    telescope = {
       enable = true;
-      settings = {
-        keymap.fzf = {
-          ctrl-u = "half-page-up";
-          ctrl-d = "half-page-down";
-          ctrl-f = "forward-char";
-          ctrl-b = "backward-char";
-          ctrl-k = "kill-line";
-        };
-        files = {
-          rg_opts = pkgs.lib.concatStringsSep " " [
-            "--color never --files --hidden --follow --glob '!.git'" # default opts
-            "--glob '!node_modules'"
-            "--glob '!target'"
-            "--glob '!result'"
+      extraOptions = {
+        defaults = {
+          mappings.i = {
+            "<c-f>" = false;
+            "<c-u>" = false;
+            "<c-k>" = false;
+            "<c-d>" = false;
+            "<c-[>".__raw = "require('telescope.actions').close";
+          };
+          file_ignore_patterns = [
+            "^%.git/"
+            "^%.direnv/"
+            "^node_modules/"
+            "^target/"
+            "^result/"
           ];
-          fd_opts = pkgs.lib.concatStringsSep " " [
-            "--color never --type file --hidden --follow --exclude .git" # default opts
-            "--exclude node_modules"
-            "--exclude target"
-            "--exclude result"
+        };
+        pickers = {
+          find_files.hidden = true;
+          live_grep.additional_args = [ "--hidden" ];
+          git_files.git_command = [
+            "git"
+            "ls-files"
+            "--modified"
           ];
         };
       };
+      keymaps = {
+        "<leader><space>" = {
+          action = "find_files";
+          desc = "Fuzzy find files";
+        };
+        "<leader>/" = {
+          action = "live_grep";
+          desc = "Fuzzy find live grep";
+        };
+        "<leader>:" = {
+          action = "commands";
+          desc = "Fuzzy find commands";
+        };
+        "<leader>'" = {
+          action = "registers";
+          desc = "Fuzzy find registers";
+        };
+        "<leader><tab>" = {
+          action = "buffers";
+          desc = "Fuzzy find buffers";
+        };
+        "<leader>g" = {
+          action = "git_files";
+          desc = "Fuzzy find modified files";
+        };
+      };
     };
-    # telescope = {
-    #   enable = true;
-    # };
     mini = {
       enable = true;
       modules = {
@@ -132,8 +159,6 @@
   extraPackages = with pkgs; [
     fd
     ripgrep
-    fzf
-    bat
   ];
 
   extraConfigLuaPre = ''
@@ -166,43 +191,6 @@
       action = "<cmd>NvimTreeFindFile<cr>";
       mode = "n";
       options.desc = "Open the currently open file in NvimTree";
-    }
-    # fzf-lua
-    {
-      key = "<leader><space>";
-      action = "<cmd>lua require('fzf-lua').files()<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find files";
-    }
-    {
-      key = "<leader>g";
-      action = "<cmd>lua require('fzf-lua').files({ cmd = 'git ls-files --modified' })<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find modified files";
-    }
-    {
-      key = "<leader><tab>";
-      action = "<cmd>lua require('fzf-lua').buffers()<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find buffers";
-    }
-    {
-      key = "<leader>/";
-      action = "<cmd>lua require('fzf-lua').live_grep()<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find live grep";
-    }
-    {
-      key = "<leader>:";
-      action = "<cmd>lua require('fzf-lua').commands()<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find commands";
-    }
-    {
-      key = "<leader>'";
-      action = "<cmd>lua require('fzf-lua').registers()<cr>";
-      mode = "n";
-      options.desc = "Fuzzy find registers";
     }
     # bufferline
     {

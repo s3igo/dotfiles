@@ -67,7 +67,6 @@
   };
 
   extraPlugins = with pkgs.vimPlugins; [
-    nui-nvim # backends for actions-preview.
     actions-preview-nvim
   ];
 
