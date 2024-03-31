@@ -1,8 +1,8 @@
 { nixvim }:
 
 {
-  pkgs,
   system,
+  pkgs,
   modules ? [ ],
   grammars ? [ ],
 }:

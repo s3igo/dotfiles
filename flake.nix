@@ -42,7 +42,7 @@
       {
         packages = with neovim; {
           default = withModules {
-            inherit pkgs system;
+            inherit system pkgs;
             grammars = "all";
           };
           neovim = withModules {
@@ -55,7 +55,7 @@
             ];
           };
           full = withModules {
-            inherit pkgs system;
+            inherit system pkgs;
             modules = [ neovim.nixosModules.full ];
             grammars = "all";
           };

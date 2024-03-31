@@ -27,7 +27,7 @@ return function(colors, font, mappings, fish)
         -- tab
         use_fancy_tab_bar = false,
         show_new_tab_button_in_tab_bar = false,
-        tab_max_width = 18,
+        tab_max_width = 100,
 
         -- font
         font = font,
