@@ -4,6 +4,7 @@ local utils = require('heirline.utils')
 local colors = {
     purple = utils.get_highlight('NightflyPurple').fg,
     gray = utils.get_highlight('NightflyAshBlue').fg,
+    dark_gray = utils.get_highlight('NightflyGreyBlue').fg,
     white = utils.get_highlight('NightflyWhite').fg,
     orange = utils.get_highlight('NightflyTan').fg,
     blue = utils.get_highlight('NightflyBlue').fg,
@@ -228,6 +229,72 @@ local statusline = (function()
     }
 end)()
 
+local get_bufs = function()
+    return vim.tbl_filter(
+        function(bufnr) return vim.api.nvim_get_option_value('buflisted', { buf = bufnr }) end,
+        vim.api.nvim_list_bufs()
+    )
+end
+
+local buflist_cache = {}
+
+vim.api.nvim_create_autocmd({ 'VimEnter', 'UIEnter', 'BufAdd', 'BufDelete' }, {
+    callback = function()
+        vim.schedule(function()
+            local buffers = get_bufs()
+            for i, v in ipairs(buffers) do
+                buflist_cache[i] = v
+            end
+            for i = #buffers + 1, #buflist_cache do
+                buflist_cache[i] = nil
+            end
+
+            if #buflist_cache > 1 then
+                vim.o.showtabline = 2
+            elseif vim.o.showtabline ~= 1 then
+                vim.o.showtabline = 1
+            end
+        end)
+    end,
+})
+
+local tabline = (function()
+    local filename = {
+        provider = function(self)
+            local name = self.filename
+            return #name == 0 and '[No Name] ' or vim.fn.fnamemodify(name, ':t') .. ' '
+        end,
+        hl = function(self) return { fg = (self.is_active or self.is_visible) and colors.blue or colors.dark_gray } end,
+    }
+
+    local flag = {
+        {
+            condition = function(self) return vim.api.nvim_get_option_value('modified', { buf = self.bufnr }) end,
+            provider = '[+]',
+            hl = { fg = colors.orange },
+        },
+        {
+            condition = function(self)
+                return not vim.api.nvim_get_option_value('modifiable', { buf = self.bufnr })
+                    or vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
+            end,
+            provider = '[-]',
+            hl = { fg = colors.blue },
+        },
+    }
+
+    local file = {
+        init = function(self) self.filename = vim.api.nvim_buf_get_name(self.bufnr) end,
+        filename,
+        flag,
+    }
+
+    local separator = { provider = ' ' }
+
+    return utils.make_buflist(file, separator, separator, function() return buflist_cache end, false)
+end)()
+
 require('heirline').setup({
     statusline = statusline,
+    tabline = tabline,
 })

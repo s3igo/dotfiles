@@ -104,25 +104,6 @@
         bufremove = { };
       };
     };
-    bufferline = {
-      enable = true;
-      numbers = "ordinal";
-      indicator.icon = "|";
-      modifiedIcon = "[+]";
-      showBufferIcons = false;
-      showBufferCloseIcons = false;
-      showCloseIcon = false;
-      diagnostics = "nvim_lsp";
-      separatorStyle.__raw = "{ '', '' }";
-      alwaysShowBufferline = false;
-      offsets = [
-        {
-          filetype = "NvimTree";
-          text_align = "left";
-          separator = true;
-        }
-      ];
-    };
     indent-blankline = {
       enable = true;
       settings = {
@@ -172,6 +153,19 @@
   extraConfigLua = builtins.readFile ./heirline.lua;
 
   keymaps = [
+    # buffer
+    {
+      key = "[b";
+      action = "<cmd>bp<cr>";
+      mode = "n";
+      options.desc = "Previous buffer";
+    }
+    {
+      key = "]b";
+      action = "<cmd>bn<cr>";
+      mode = "n";
+      options.desc = "Next buffer";
+    }
     # mini.bufremove
     {
       key = "<leader>w";
@@ -191,31 +185,6 @@
       action = "<cmd>NvimTreeFindFile<cr>";
       mode = "n";
       options.desc = "Open the currently open file in NvimTree";
-    }
-    # bufferline
-    {
-      key = "[b";
-      action = "<cmd>BufferLineCyclePrev<cr>";
-      mode = "n";
-      options.desc = "Previous buffer";
-    }
-    {
-      key = "]b";
-      action = "<cmd>BufferLineCycleNext<cr>";
-      mode = "n";
-      options.desc = "Next buffer";
-    }
-    {
-      key = "<b";
-      action = "<cmd>BufferLineMovePrev<cr>";
-      mode = "n";
-      options.desc = "Move buffer to previous position";
-    }
-    {
-      key = ">b";
-      action = "<cmd>BufferLineMoveNext<cr>";
-      mode = "n";
-      options.desc = "Move buffer to next position";
     }
     # smart-splits
     {
