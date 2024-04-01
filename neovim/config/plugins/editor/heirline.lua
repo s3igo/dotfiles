@@ -31,7 +31,7 @@ local statusline = (function()
         condition = conditions.is_git_repo,
         init = function(self) self.status = vim.b.gitsigns_status_dict end,
         { -- branch
-            hl = { fg = colors.white, bg = colors.bg },
+            hl = { fg = colors.gray, bg = colors.bg },
             provider = function(self) return ' ' .. self.status.head .. ' ' end,
         },
         { -- separator
@@ -82,6 +82,7 @@ local statusline = (function()
             self.diagnostics.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
         end,
         { -- copilot
+            condition = function(self) return self.copilot.status ~= nil end,
             static = {
                 colors = {
                     Normal = colors.gray,
@@ -89,7 +90,7 @@ local statusline = (function()
                     Error = colors.red,
                 },
             },
-            hl = function(self) return { fg = self.colors[self.copilot.status] or colors.white, bg = colors.navy } end,
+            hl = function(self) return { fg = self.colors[self.copilot.status] or colors.red, bg = colors.navy } end,
             provider = function(self)
                 local status = self.copilot.status
 
@@ -111,7 +112,7 @@ local statusline = (function()
 
                 return is_diagnostics_enabled and is_copilot_enabled
             end,
-            hl = { fg = colors.white, bg = colors.navy },
+            hl = { fg = colors.gray, bg = colors.navy },
             provider = glyphs.right_arrow,
         },
         { -- diagnostics
@@ -194,7 +195,7 @@ local statusline = (function()
             provider = glyphs.solid_left_arrow,
         },
         {
-            hl = { fg = colors.white, bg = colors.navy },
+            hl = { fg = colors.gray, bg = colors.navy },
             provider = ' %c ' .. glyphs.left_arrow .. ' %l/%L (%P) ',
         },
     }
@@ -209,9 +210,9 @@ local statusline = (function()
             provider = ' ' .. vim.bo.shiftwidth .. ' ' .. glyphs.left_arrow,
         },
         {
-            static = { unix = 'lf', dos = 'crlf', mac = 'cr' },
+            static = { symbols =  { unix = 'lf', dos = 'crlf', mac = 'cr' } },
             hl = { fg = colors.gray, bg = colors.bg },
-            provider = function(self) return ' ' .. self[vim.bo.fileformat] .. ' ' .. glyphs.left_arrow end,
+            provider = function(self) return ' ' .. self.symbols[vim.bo.fileformat] .. ' ' .. glyphs.left_arrow end,
         },
         {
             hl = { fg = colors.gray, bg = colors.bg },
