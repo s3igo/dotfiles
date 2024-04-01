@@ -33,10 +33,10 @@
             action = "signature_help";
             desc = "Show signature help";
           };
-          gr = {
-            action = "references";
-            desc = "Show references";
-          };
+          # gr = {
+          #   action = "references";
+          #   desc = "Show references";
+          # };
           gd = {
             action = "definition";
             desc = "Go to definition";
@@ -53,10 +53,10 @@
             action = "type_definition";
             desc = "Go to type definition";
           };
-          gs = {
-            action = "workspace_symbol";
-            desc = "Search workspace symbols";
-          };
+          # gs = {
+          #   action = "workspace_symbol";
+          #   desc = "Search workspace symbols";
+          # };
         };
       };
     };

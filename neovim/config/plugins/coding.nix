@@ -73,19 +73,16 @@
       mapCH = true;
     };
     comment.enable = true;
-    # mini = {
-    #   enable = true;
-    #   modules = {
-    #     ai = {
-    #       n_lines = 500;
-    #     };
-    #   };
-    # };
+    mini = {
+      enable = true;
+      modules = {
+        operators.exchange.prefix = "gz";
+      };
+    };
   };
 
   extraPlugins = with pkgs; [
     vimPlugins.nvim-surround
-    vimPlugins.substitute-nvim
     vimPlugins.text-case-nvim
     (vimUtils.buildVimPlugin {
       pname = "nvim-various-textobjs";
@@ -138,9 +135,6 @@
 
     -- nvim-surround
     require('nvim-surround').setup({})
-
-    -- substitute.nvim
-    require('substitute').setup({})
   '';
 
   extraConfigLuaPost = ''
@@ -179,27 +173,6 @@
         "x"
       ];
       options.desc = "Change case";
-    }
-    # substitute-nvim
-    {
-      key = "s";
-      action = "<cmd>lua require('substitute').operator()<cr>";
-      mode = "n";
-    }
-    {
-      key = "ss";
-      action = "<cmd>lua require('substitute').line()<cr>";
-      mode = "n";
-    }
-    {
-      key = "S";
-      action = "<cmd>lua require('substitute').eol()<cr>";
-      mode = "n";
-    }
-    {
-      key = "s";
-      action = "<cmd>lua require('substitute').visual()<cr>";
-      mode = "x";
     }
     # nvim-various-textobjs
     {

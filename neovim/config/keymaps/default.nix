@@ -9,16 +9,16 @@
       action = "<cmd>noh<cr><esc>";
       mode = "n";
     }
-    {
-      key = "gm";
-      action = "%";
-      mode = [
-        "n"
-        "x"
-        "o"
-      ];
-      options.desc = "Go to matching bracket";
-    }
+    # {
+    #   key = "gm";
+    #   action = "%";
+    #   mode = [
+    #     "n"
+    #     "x"
+    #     "o"
+    #   ];
+    #   options.desc = "Go to matching bracket";
+    # }
     {
       key = "<leader>c";
       action.__raw = builtins.readFile ./comment.lua;
