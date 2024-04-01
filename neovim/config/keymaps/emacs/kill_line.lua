@@ -5,7 +5,7 @@ function()
 
     -- is line end
     if col == #line then
-    return
+        return
     end
 
     vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, #line, { '' })

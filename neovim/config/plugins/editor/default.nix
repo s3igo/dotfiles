@@ -153,19 +153,6 @@
   extraConfigLua = builtins.readFile ./heirline.lua;
 
   keymaps = [
-    # buffer
-    {
-      key = "[b";
-      action = "<cmd>bp<cr>";
-      mode = "n";
-      options.desc = "Previous buffer";
-    }
-    {
-      key = "]b";
-      action = "<cmd>bn<cr>";
-      mode = "n";
-      options.desc = "Next buffer";
-    }
     # mini.bufremove
     {
       key = "<leader>w";

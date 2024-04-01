@@ -37,6 +37,19 @@
       mode = "n";
       options.desc = "Toggle trailing comma";
     }
+    # buffers
+    {
+      key = "[b";
+      action = "<cmd>bp<cr>";
+      mode = "n";
+      options.desc = "Previous buffer";
+    }
+    {
+      key = "]b";
+      action = "<cmd>bn<cr>";
+      mode = "n";
+      options.desc = "Next buffer";
+    }
     # registers
     {
       key = "<leader>p";
@@ -48,7 +61,7 @@
       options.desc = "Clipboard register";
     }
     {
-      key = "<leader>u";
+      key = "<leader>d";
       action = ''"_'';
       mode = [
         "n"

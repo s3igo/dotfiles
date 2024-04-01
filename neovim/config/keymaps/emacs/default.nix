@@ -11,6 +11,11 @@
       mode = "i";
     }
     {
+      key = "<a-d>";
+      action = ''<c-o>"_de'';
+      mode = "i";
+    }
+    {
       key = "<c-p>";
       action = "<c-g>U<up>";
       mode = "i";

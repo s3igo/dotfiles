@@ -31,7 +31,7 @@
   };
 
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    declare TEMPFILE=$(mktemp)
+    TEMPFILE=$(mktemp)
     ${pkgs.curl}/bin/curl \
       --cacert /etc/ssl/certs/ca-certificates.crt \
       -o $TEMPFILE \
