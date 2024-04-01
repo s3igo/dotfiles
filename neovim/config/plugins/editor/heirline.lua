@@ -210,7 +210,7 @@ local statusline = (function()
             provider = ' ' .. vim.bo.shiftwidth .. ' ' .. glyphs.left_arrow,
         },
         {
-            static = { symbols =  { unix = 'lf', dos = 'crlf', mac = 'cr' } },
+            static = { symbols = { unix = 'lf', dos = 'crlf', mac = 'cr' } },
             hl = { fg = colors.gray, bg = colors.bg },
             provider = function(self) return ' ' .. self.symbols[vim.bo.fileformat] .. ' ' .. glyphs.left_arrow end,
         },
@@ -241,6 +241,21 @@ local buflist_cache = {}
 
 vim.api.nvim_create_autocmd({ 'VimEnter', 'UIEnter', 'BufAdd', 'BufDelete' }, {
     callback = function()
+        local counts = {}
+        local dupes = {}
+        local names = vim.tbl_map(
+            function(bufnr) return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t') end,
+            get_bufs()
+        )
+        for _, name in ipairs(names) do
+            counts[name] = (counts[name] or 0) + 1
+        end
+        for name, count in pairs(counts) do
+            if count > 1 then
+                dupes[name] = true
+            end
+        end
+
         vim.schedule(function()
             local buffers = get_bufs()
             for i, v in ipairs(buffers) do
@@ -256,14 +271,19 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'UIEnter', 'BufAdd', 'BufDelete' }, {
                 vim.o.showtabline = 1
             end
         end)
+
+        require('heirline').tabline.dupes = dupes
     end,
 })
 
 local tabline = (function()
     local filename = {
         provider = function(self)
-            local name = self.filename
-            return #name == 0 and ' [No Name] ' or ' ' .. vim.fn.fnamemodify(name, ':t') .. ' '
+            local name = vim.fn.fnamemodify(self.filename, ':t')
+            if self.dupes[name] then
+                name = vim.fn.fnamemodify(self.filename, ':h:t') .. '/' .. name
+            end
+            return #name == 0 and ' [No Name] ' or ' ' .. name .. ' '
         end,
         hl = function(self) return { fg = (self.is_active or self.is_visible) and colors.blue or colors.dark_gray } end,
     }

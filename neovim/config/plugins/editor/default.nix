@@ -92,7 +92,7 @@
           action = "buffers";
           desc = "Fuzzy find buffers";
         };
-        "<leader>g" = {
+        "<leader>m" = {
           action = "git_files";
           desc = "Fuzzy find modified files";
         };
