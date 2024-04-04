@@ -100,16 +100,16 @@
       mode = "i";
     }
     # retain visual selection
-    {
-      key = ">";
-      action = ">gv";
-      mode = "v";
-    }
-    {
-      key = "<";
-      action = "<gv";
-      mode = "v";
-    }
+    # {
+    #   key = ">";
+    #   action = ">gv";
+    #   mode = "v";
+    # }
+    # {
+    #   key = "<";
+    #   action = "<gv";
+    #   mode = "v";
+    # }
     # add undo breakpoints
     # {
     #   key = ",";
@@ -129,7 +129,7 @@
     # files
     {
       key = "<leader>s";
-      action = "<cmd>w<cr><esc>";
+      action = "<cmd>w<cr>";
       mode = "n";
       options.desc = "Save";
     }
