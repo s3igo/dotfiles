@@ -76,6 +76,7 @@
     mini = {
       enable = true;
       modules = {
+        ai = { };
         operators.exchange.prefix = "gz";
       };
     };

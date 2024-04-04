@@ -62,14 +62,14 @@
             query = "@conditional.inner";
             desc = "Inside conditional";
           };
-          af = {
-            query = "@function.outer";
-            desc = "Around function";
-          };
-          "if" = {
-            query = "@function.inner";
-            desc = "Inside function";
-          };
+          # af = {
+          #   query = "@function.outer";
+          #   desc = "Around function";
+          # };
+          # "if" = {
+          #   query = "@function.inner";
+          #   desc = "Inside function";
+          # };
           al = {
             query = "@loop.outer";
             desc = "Around loop";
@@ -78,14 +78,14 @@
             query = "@loop.inner";
             desc = "Inside loop";
           };
-          aa = {
-            query = "@parameter.outer";
-            desc = "Around argument";
-          };
-          ia = {
-            query = "@parameter.inner";
-            desc = "Inside argument";
-          };
+          # aa = {
+          #   query = "@parameter.outer";
+          #   desc = "Around argument";
+          # };
+          # ia = {
+          #   query = "@parameter.inner";
+          #   desc = "Inside argument";
+          # };
         };
       };
       move = {
