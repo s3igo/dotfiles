@@ -6,7 +6,7 @@
   keymaps = [
     {
       key = "<c-[>";
-      action = "<cmd>noh<cr><esc>";
+      action = "<cmd>noh<cr>";
       mode = "n";
     }
     # {
