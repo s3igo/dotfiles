@@ -61,6 +61,10 @@ in
         key = "<a-b>";
         action = "<c-g>U<s-left>";
       }
+      {
+        key = "<c-d>";
+        action = "<del>";
+      }
     ]
     ++ map cmap [
       {
@@ -80,20 +84,16 @@ in
         action = "<end>";
       }
       {
-        key = "<c-d>";
-        action = "<del>";
-      }
-      {
-        key = "<c-h>";
-        action = "<bs>";
-      }
-      {
         key = "<a-f>";
         action = "<s-right>";
       }
       {
         key = "<a-b>";
         action = "<s-left>";
+      }
+      {
+        key = "<c-d>";
+        action = "<del>";
       }
     ];
 }

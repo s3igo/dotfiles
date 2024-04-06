@@ -90,6 +90,7 @@ in
         dp = "diff -Naur";
         e = "echo";
         ef = "exec fish";
+        f = "fg";
         g = "git";
         ga = "git add";
         gb = "git branch";
