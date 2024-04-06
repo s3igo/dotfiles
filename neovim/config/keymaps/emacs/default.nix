@@ -1,24 +1,21 @@
 let
-  imap =
+  map' =
+    mode:
     {
       key,
       action,
-      options ? null,
+      options ? { },
     }:
     {
-      inherit key action options;
-      mode = "i";
+      inherit
+        mode
+        key
+        action
+        options
+        ;
     };
-  cmap =
-    {
-      key,
-      action,
-      options ? null,
-    }:
-    {
-      inherit key action options;
-      mode = "c";
-    };
+  imap = map' "i";
+  cmap = map' "c";
 in
 
 {
