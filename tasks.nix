@@ -15,9 +15,9 @@ let
   };
   update = writeShellApplication {
     name = "task_update";
-    runtimeInputs = [ deploy ];
     text = ''
-      nix flake update --commit-lock-file && task_deploy
+      nix flake update --commit-lock-file ./neovim
+      nix flake update --commit-lock-file
     '';
   };
   gc = writeShellApplication {

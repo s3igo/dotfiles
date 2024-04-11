@@ -44,7 +44,7 @@
     nvim-colorizer.enable = true;
     telescope = {
       enable = true;
-      extraOptions = {
+      settings = {
         defaults = {
           mappings.i = {
             "<c-f>" = false;
@@ -74,27 +74,27 @@
       keymaps = {
         "<leader><space>" = {
           action = "find_files";
-          desc = "Fuzzy find files";
+          options.desc = "Fuzzy find files";
         };
         "<leader>/" = {
           action = "live_grep";
-          desc = "Fuzzy find live grep";
+          options.desc = "Fuzzy find live grep";
         };
         "<leader>:" = {
           action = "commands";
-          desc = "Fuzzy find commands";
+          options.desc = "Fuzzy find commands";
         };
         "<leader>'" = {
           action = "registers";
-          desc = "Fuzzy find registers";
+          options.desc = "Fuzzy find registers";
         };
         "<leader><tab>" = {
           action = "buffers";
-          desc = "Fuzzy find buffers";
+          options.desc = "Fuzzy find buffers";
         };
         "<leader>m" = {
           action = "git_files";
-          desc = "Fuzzy find modified files";
+          options.desc = "Fuzzy find modified files";
         };
       };
     };
