@@ -69,8 +69,10 @@
     };
     nvim-autopairs = {
       enable = true;
-      checkTs = true;
-      mapCH = true;
+      settings = {
+        map_c_h = true;
+        check_ts = true;
+      };
     };
     comment.enable = true;
     mini = {
