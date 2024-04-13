@@ -87,7 +87,10 @@ in
         cp = "cp -iv";
         d = "docker";
         da = "direnv allow";
+        db = "docker build";
+        di = "docker image";
         dp = "diff -Naur";
+        dr = "docker run";
         e = "echo";
         ef = "exec fish";
         f = "fg";
