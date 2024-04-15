@@ -52,7 +52,7 @@
     }
     # registers
     {
-      key = "<leader>p";
+      key = "<leader>y";
       action = ''"+'';
       mode = [
         "n"
