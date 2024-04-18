@@ -76,7 +76,6 @@ in
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
-        attic = "nix run github:zhaofengli/attic --";
         b = "bun";
         br = "bun run";
         bd = "bun run dev";

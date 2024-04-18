@@ -91,6 +91,7 @@
         darwin.trash
         monitorcontrol
         udev-gothic-nf
+        attic-client
         # du-dust
         # efm-langserver
         # emacs-nox
