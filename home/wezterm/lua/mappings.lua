@@ -50,11 +50,13 @@ local leader = {
     },
 
     -- spawn
-    { key = 'n', mods = 'CTRL', action = act.SpawnTab('CurrentPaneDomain') },
+    { key = 'n', mods = 'CTRL', action = act.SpawnCommandInNewTab({ cwd = wezterm.home_dir }) },
 
     -- pane
     { key = 'v', mods = 'CTRL', action = act.SplitHorizontal },
+    { key = 'v', mods = 'CTRL | SHIFT', action = act.SplitHorizontal({ cwd = wezterm.home_dir }) },
     { key = 'w', mods = 'CTRL', action = act.SplitVertical },
+    { key = 'w', mods = 'CTRL | SHIFT', action = act.SplitVertical({ cwd = wezterm.home_dir }) },
     { key = 'c', mods = 'CTRL', action = act.CloseCurrentPane({ confirm = true }) },
     { key = 'f', mods = 'CTRL', action = act.RotatePanes('Clockwise') },
     { key = 'b', mods = 'CTRL', action = act.RotatePanes('CounterClockwise') },
