@@ -1,4 +1,4 @@
-_: {
+{
   autoCmd = [
     # {
     #   event = "TermOpen";

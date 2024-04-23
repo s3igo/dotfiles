@@ -5,6 +5,7 @@
     { nixvim, ... }:
     {
       withModules = import ./. { inherit nixvim; };
+      modules = import ./modules { inherit nixvim; };
       nixosModules = {
         full = ./modules/full.nix;
         im-select = ./modules/im-select.nix;

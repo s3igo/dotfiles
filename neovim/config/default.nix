@@ -6,5 +6,6 @@ _: {
     ./options.nix
   ];
 
+  enableMan = false;
   highlight.NormalFloat.bg = "none";
 }

@@ -47,7 +47,7 @@
           };
           neovim = withModules {
             inherit pkgs system;
-            modules = with neovim.nixosModules; [
+            modules = with modules; [
               im-select
               nix
               lua
@@ -56,7 +56,7 @@
           };
           full = withModules {
             inherit system pkgs;
-            modules = [ neovim.nixosModules.full ];
+            modules = [ modules.full ];
             grammars = "all";
           };
         };
