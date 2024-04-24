@@ -6,6 +6,7 @@
     {
       withModules = import ./. { inherit nixvim; };
       modules = import ./modules { inherit nixvim; };
+      # NOTE: `nixosModules` is deprecated
       nixosModules = {
         full = ./modules/full.nix;
         im-select = ./modules/im-select.nix;
