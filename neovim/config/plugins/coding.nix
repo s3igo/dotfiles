@@ -74,7 +74,6 @@
         check_ts = true;
       };
     };
-    comment.enable = true;
     mini = {
       enable = true;
       modules = {

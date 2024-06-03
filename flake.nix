@@ -41,10 +41,7 @@
       in
       {
         packages = with neovim; {
-          default = withModules {
-            inherit system pkgs;
-            grammars = "all";
-          };
+          default = withModules { inherit system pkgs; };
           neovim = withModules {
             inherit pkgs system;
             modules = with modules; [

@@ -10,14 +10,6 @@
             action = "open_float";
             desc = "Open diagnostic float";
           };
-          "]d" = {
-            action = "goto_next";
-            desc = "Go to next diagnostic";
-          };
-          "[d" = {
-            action = "goto_prev";
-            desc = "Go to previous diagnostic";
-          };
         };
         lspBuf = {
           "<leader>r" = {
@@ -28,7 +20,6 @@
             action = "format";
             desc = "Format buffer";
           };
-          K = "hover";
           gK = {
             action = "signature_help";
             desc = "Show signature help";
