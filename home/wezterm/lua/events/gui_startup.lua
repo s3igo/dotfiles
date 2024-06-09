@@ -23,7 +23,7 @@ return function(cmd)
     })
     d_tab_1:set_title('dotfiles')
 
-    local d_tab_2, _, d_window_2 = d_window_1:spawn_tab({ cwd = projects_root .. '/atcoder-rust' })
+    local d_tab_2, _, d_window_2 = d_window_1:spawn_tab({ cwd = projects_root .. '/atcoder-log' })
     d_tab_2:set_title('atcoder')
 
     local d_tab_3, _, d_window_3 = d_window_2:spawn_tab({ cwd = projects_root .. '/2023-second-semester' })
