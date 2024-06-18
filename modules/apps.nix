@@ -14,7 +14,7 @@ _: {
     ];
     brews = [
       "daipeihust/tap/im-select"
-      "typst"
+      # "typst"
     ];
     casks = [
       "1password"
