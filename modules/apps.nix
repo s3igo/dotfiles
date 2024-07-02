@@ -33,8 +33,11 @@ _: {
       "orbstack"
       "raycast"
       "slack"
+      "steam"
+      # "thorium"
       "visual-studio-code"
       "vivaldi"
+      "whisky"
       "zed"
       "zoom"
       {

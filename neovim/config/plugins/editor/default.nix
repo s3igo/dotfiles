@@ -13,10 +13,7 @@
         current_line_blame = true;
         signs = {
           add.text = "|";
-          change = {
-            text = "|";
-            hl = "NightflyYellow";
-          };
+          change.text = "|";
           untracked.text = "?";
         };
         on_attach = ''
@@ -135,6 +132,7 @@
     TrailingSpace.link = "NightflyPurpleMode";
     WhichKeyFloat.bg = "none";
     TabLineFill.bg = "none";
+    GitSignsChange.link = "NightflyYellow";
   };
 
   extraPackages = with pkgs; [
