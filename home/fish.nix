@@ -73,6 +73,7 @@ in
         ":i" = global // text "install";
         ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
         ":l" = global // text "| less";
+        ":n" = global // text "nixpkgs";
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
@@ -105,6 +106,7 @@ in
         mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
+        nb = cursor // text "nix build .#% --";
         nf = "nix flake";
         nl = "rm -rf .direnv; and direnv allow";
         nr = cursor // text "nix run .#% --";
@@ -139,6 +141,21 @@ in
       # disable greeting
       set fish_greeting
 
+      # # restricting abbrs
+      # ## git
+      # abbr add --command git s -- status
+
+      # ## nix
+      # abbr add --command nix --set-cursor b -- 'build .#% --'
+      # abbr add --command nix f -- flake
+      # abbr add --command nix --set-cursor r -- 'run .#% --'
+      # abbr add --command nix --set-cursor rd -- 'run $HOME/.dotfiles#% --'
+      # abbr add --command nix --set-cursor rdr -- 'run github:s3igo/dotfiles#% --'
+      # abbr add --command nix --set-cursor rp -- 'run nixpkgs#% --'
+      # abbr add --command nix v -- 'run .#neovim --'
+      # abbr add --command nix vd -- 'run $HOME/.dotfiles#neovim --'
+      # abbr add --command nix vdr -- 'run github:s3igo/dotfiles#neovim --'
+
       # keybindings
       ## disable exit with <c-d>
       bind \cd delete-char
@@ -158,7 +175,7 @@ in
       ### <c-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
 
-      ## function
+      ## functions
       bind \cg __ghq-fzf
     '';
     shellInitLast = ''
