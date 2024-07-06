@@ -13,7 +13,7 @@
     ./fish.nix
     ./starship.nix
     ./yazi.nix
-    ./zsh
+    ./zsh.nix
     ./wezterm
   ];
 
