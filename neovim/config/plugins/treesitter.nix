@@ -20,7 +20,7 @@
             ]
             ++ grammars
           );
-      # folding = true;
+      folding = false;
       settings = {
         indent.enable = true;
         incrementalSelection = {
