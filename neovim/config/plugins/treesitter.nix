@@ -21,14 +21,16 @@
             ++ grammars
           );
       # folding = true;
-      indent = true;
-      incrementalSelection = {
-        enable = true;
-        keymaps = {
-          initSelection = "<tab>";
-          scopeIncremental = "<cr>";
-          nodeIncremental = "<tab>";
-          nodeDecremental = "<s-tab>";
+      settings = {
+        indent.enable = true;
+        incrementalSelection = {
+          enable = true;
+          keymaps = {
+            initSelection = "<tab>";
+            scopeIncremental = "<cr>";
+            nodeIncremental = "<tab>";
+            nodeDecremental = "<s-tab>";
+          };
         };
       };
     };

@@ -19,7 +19,7 @@
 
   programs = {
     home-manager.enable = true;
-    rio.enable = true;
+    # rio.enable = true;
     ssh = {
       enable = true;
       includes = [ "~/.orbstack/ssh/config" ];
