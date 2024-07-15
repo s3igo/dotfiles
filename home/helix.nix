@@ -1,4 +1,6 @@
-_: {
+{ user, ... }:
+
+{
   programs.helix = {
     enable = true;
     languages.language = [
@@ -12,7 +14,6 @@ _: {
           tab-width = 4;
           unit = "    ";
         };
-        auto-format = true;
       }
       {
         name = "yaml";
@@ -46,9 +47,10 @@ _: {
       }
     ];
     settings = {
+      theme = "catppuccin_mocha_transparent";
       editor = {
-        true-color = true;
-        undercurl = true;
+        # true-color = true;
+        # undercurl = true;
         rulers = [
           80
           100
@@ -57,38 +59,38 @@ _: {
         cursorline = true;
         line-number = "relative";
         shell = [
-          "zsh"
+          "/etc/profiles/per-user/${user}/bin/fish"
           "-c"
         ];
-        auto-save = true;
-        # bufferline = "always";
+        bufferline = "multiple";
         color-modes = true;
         text-width = 120;
         statusline = {
           left = [
-            "mode"
             "spinner"
-            "spacer"
-            "version-control"
             "file-name"
+            "read-only-indicator"
+            "file-modification-indicator"
           ];
-          right = [
-            "diagnostics"
-            "selections"
-            "position"
-            "file-encoding"
-            "file-line-ending"
-            "file-type"
-          ];
-          mode = {
-            normal = "NORMAL";
-            insert = "INSERT";
-            select = "SELECT";
-          };
+          right =
+            let
+              default = [
+                "diagnostics"
+                "selections"
+                "register"
+                "position"
+                "file-encoding"
+              ];
+            in
+            default
+            ++ [
+              "file-line-ending"
+              "file-type"
+            ];
         };
-        lsp.display-inlay-hints = true;
         cursor-shape = {
           insert = "bar";
+          normal = "block";
           select = "underline";
         };
         file-picker.hidden = false;
@@ -120,30 +122,53 @@ _: {
           C-f = "move_char_right";
           C-a = "goto_line_start";
           C-e = "goto_line_end_newline";
+          S-tab = "move_parent_node_start";
         };
         normal = {
           X = "extend_line_above";
-          ";" = "repeat_last_motion";
-          "C-;" = "collapse_selection";
-          C-k = [
-            "goto_line_start"
-            "select_mode"
-            "goto_line_end"
-            "yank"
-            "goto_line_start"
-            "kill_to_line_end"
-            "delete_selection_noyank"
-          ];
-          space.q = ":buffer-close";
+          tab = "move_parent_node_end";
+          S-tab = "move_parent_node_start";
+          "{" = "goto_prev_paragraph";
+          "}" = "goto_next_paragraph";
+          space = {
+            q = ":quit";
+            w = ":buffer-close";
+            t = "symbol_picker";
+            T = "workspace_symbol_picker";
+            s = ":update";
+            S = "no_op";
+            f = ":format";
+            F = "no_op";
+            o = "file_picker_in_current_buffer_directory";
+            space = "file_picker";
+            ret = "file_picker_in_current_directory";
+          };
+        };
+        select = {
+          tab = "extend_parent_node_end";
+          S-tab = "extend_parent_node_start";
         };
       };
-      theme = "kanagawa_transparent";
     };
-    themes = {
-      kanagawa_transparent = {
-        inherits = "kanagawa";
-        "ui.background" = "none";
-      };
-    };
+    themes =
+      let
+        mkTransparentTheme = name: {
+          inherits = name;
+          "ui.background" = "none";
+        };
+        themes = [
+          "kanagawa"
+          "snazzy"
+          "jetbrains_dark"
+          "catppuccin_mocha"
+        ];
+        transparentThemes = builtins.listToAttrs (
+          map (theme: {
+            name = "${theme}_transparent";
+            value = mkTransparentTheme theme;
+          }) themes
+        );
+      in
+      transparentThemes;
   };
 }
