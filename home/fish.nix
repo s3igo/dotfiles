@@ -5,24 +5,26 @@
   # lib,
   ...
 }:
+
 let
   inherit (config.xdg) dataHome stateHome;
   inherit (config.home) homeDirectory;
 in
+
 {
   programs.fish = {
     enable = true;
     plugins =
       let
-        plugin = name: {
+        use = name: {
           inherit name;
           inherit (pkgs.fishPlugins.${name}) src;
         };
       in
       [
-        (plugin "autopair")
-        (plugin "fishtape_3")
-        (plugin "sponge")
+        (use "autopair")
+        (use "fishtape_3")
+        (use "sponge")
       ];
     functions = {
       # $1 length is 2 -> `cd ../`, 3 -> `cd ../../`, and so on
@@ -72,7 +74,7 @@ in
         ":h" = global // text "--help";
         ":i" = global // text "install";
         ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":l" = global // text "| less";
+        ":m" = global // text "| moar";
         ":n" = global // text "nixpkgs";
         ":s" = global // text "search";
         ":v" = global // text "--version";

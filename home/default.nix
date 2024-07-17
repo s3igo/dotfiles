@@ -2,6 +2,7 @@
   pkgs,
   config,
   neovim,
+  user,
   ...
 }:
 
@@ -78,7 +79,8 @@
       SSH_AUTH_SOCK = "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       DOCKER_CONFIG = "${config.xdg.configHome}/docker";
       _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";
-      LESSHISTFILE = "-"; # avoid creating `.lesshst`
+      # LESSHISTFILE = "-"; # avoid creating `.lesshst`
+      PAGER = "/etc/profiles/per-user/${user}/bin/moar";
       NODE_REPL_HISTORY = "";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       FLY_CONFIG_DIR = "${config.xdg.stateHome}/fly";
@@ -98,7 +100,8 @@
         fd
         ghq
         # lazydocker
-        mmv-go
+        # mmv-go
+        moar
         # nodejs-slim
         ollama
         rclone
