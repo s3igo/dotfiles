@@ -31,12 +31,6 @@
   };
 
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    TEMPFILE=$(mktemp)
-    ${pkgs.curl}/bin/curl \
-      --cacert /etc/ssl/certs/ca-certificates.crt \
-      -o $TEMPFILE \
-      -s https://raw.githubusercontent.com/wez/wezterm/main/termwiz/data/wezterm.terminfo
-    tic -x -o ~/.terminfo $TEMPFILE
-    rm $TEMPFILE
+    ln -fnsT ${pkgs.wezterm.passthru.terminfo}/share/terminfo ~/.terminfo
   '';
 }
