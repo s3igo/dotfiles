@@ -19,7 +19,6 @@ in
     ./lazygit.nix
     ./fish.nix
     ./starship.nix
-    ./yazi.nix
     ./zsh.nix
     ./wezterm
   ];
