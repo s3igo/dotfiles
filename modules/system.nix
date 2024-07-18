@@ -1,4 +1,5 @@
 { config, ... }:
+
 {
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -8,6 +9,7 @@
       experimental-features = "nix-command flakes";
       extra-platforms = "x86_64-darwin aarch64-darwin";
       use-xdg-base-directories = true;
+      auto-optimise-store = true;
       substituters = [
         "https://nix-community.cachix.org?priority=41"
         "https://numtide.cachix.org?priority=42"

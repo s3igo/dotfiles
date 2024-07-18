@@ -6,6 +6,11 @@
   ...
 }:
 
+let
+  inherit (config.xdg) configHome dataHome stateHome;
+  inherit (config.home) homeDirectory;
+in
+
 {
   imports = [
     ./git.nix
@@ -18,6 +23,8 @@
     ./zsh.nix
     ./wezterm
   ];
+
+  nix.nixPath = [ "${stateHome}/nix/defexpr/channels" ];
 
   programs = {
     home-manager.enable = true;
@@ -77,15 +84,15 @@
     language.base = "en_US.UTF-8";
     stateVersion = "23.11";
     sessionVariables = {
-      SSH_AUTH_SOCK = "${config.home.homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
-      DOCKER_CONFIG = "${config.xdg.configHome}/docker";
-      _ZO_DATA_DIR = "${config.xdg.dataHome}/zoxide";
+      SSH_AUTH_SOCK = "${homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+      DOCKER_CONFIG = "${configHome}/docker";
+      _ZO_DATA_DIR = "${dataHome}/zoxide";
       # LESSHISTFILE = "-"; # avoid creating `.lesshst`
       PAGER = "/etc/profiles/per-user/${user}/bin/moar";
       NODE_REPL_HISTORY = "";
-      CARGO_HOME = "${config.xdg.dataHome}/cargo";
-      FLY_CONFIG_DIR = "${config.xdg.stateHome}/fly";
-      NPM_CONFIG_USERCONFIG = "${config.xdg.configHome}/npm/npmrc";
+      CARGO_HOME = "${dataHome}/cargo";
+      FLY_CONFIG_DIR = "${stateHome}/fly";
+      NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
       EDITOR = "nvim";
     };
     packages =

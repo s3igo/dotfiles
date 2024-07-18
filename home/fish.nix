@@ -143,6 +143,9 @@ in
       # disable greeting
       set fish_greeting
 
+      # LS_COLORS
+      set --export LS_COLORS "$(${pkgs.vivid}/bin/vivid generate snazzy)"
+
       # # restricting abbrs
       # ## git
       # abbr add --command git s -- status
