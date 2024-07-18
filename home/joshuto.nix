@@ -26,7 +26,10 @@ in
         # };
       };
       settings = defaultSettings // {
-        display.show_hidden = true;
+        display = {
+          show_hidden = true;
+          show_icons = true;
+        };
       };
       keymap = defaultKeymap // {
         default_view.keymap = defaultKeymap.default_view.keymap ++ [
@@ -56,8 +59,8 @@ in
       set -l output_file "/tmp/$USER/joshuto-cwd-$fish_pid"
       ${package}/bin/joshuto --output-file "$output_file" $argv
 
-      # output contains current directory
       if test $status -eq 101
+        # output contains current directory
         set -l joshuto_cwd (cat "$output_file")
         cd "$joshuto_cwd"
       end
