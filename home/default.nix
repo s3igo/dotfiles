@@ -2,7 +2,6 @@
   pkgs,
   config,
   neovim,
-  user,
   ...
 }:
 
@@ -86,8 +85,7 @@ in
       SSH_AUTH_SOCK = "${homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       DOCKER_CONFIG = "${configHome}/docker";
       _ZO_DATA_DIR = "${dataHome}/zoxide";
-      # LESSHISTFILE = "-"; # avoid creating `.lesshst`
-      PAGER = "/etc/profiles/per-user/${user}/bin/moar";
+      LESSHISTFILE = "-"; # avoid creating `.lesshst`
       NODE_REPL_HISTORY = "";
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
