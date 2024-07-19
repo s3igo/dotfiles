@@ -53,7 +53,7 @@
     # registers
     {
       key = "<leader>y";
-      action = ''"+'';
+      action = ''"+y'';
       mode = [
         "n"
         "x"
@@ -61,8 +61,8 @@
       options.desc = "Clipboard register";
     }
     {
-      key = "<leader>d";
-      action = ''"_'';
+      key = "<leader>p";
+      action = ''"+p'';
       mode = [
         "n"
         "x"

@@ -45,9 +45,7 @@
         defaults = {
           mappings.i = {
             "<c-f>" = false;
-            "<c-u>" = false;
             "<c-k>" = false;
-            "<c-d>" = false;
             "<c-[>".__raw = "require('telescope.actions').close";
           };
           file_ignore_patterns = [
@@ -92,6 +90,10 @@
         "<leader>m" = {
           action = "git_files";
           options.desc = "Fuzzy find modified files";
+        };
+        "<leader>d" = {
+          action = "diagnostics";
+          options.desc = "Fuzzy find diagnostics";
         };
       };
     };
