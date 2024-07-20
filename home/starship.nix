@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       format = ''
-        \(''${custom.arch}$shell\) $shlvl$all
+        \[''${custom.arch}$shell\] $shlvl$all
       '';
       shell = {
         disabled = false;

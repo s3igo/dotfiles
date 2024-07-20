@@ -56,6 +56,7 @@
       filetypes = {
         txt = false;
         yaml = true;
+        gitcommit = true;
       };
       extraOptions = {
         suggestion = {

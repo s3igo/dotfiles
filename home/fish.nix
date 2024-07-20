@@ -119,6 +119,7 @@ in
         nvd = "nix run $HOME/.dotfiles#neovim --";
         nvdr = "nix run github:s3igo/dotfiles#neovim --";
         nvp = "nix run nixpkgs#neovim --";
+        o = "ollama";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         r = "rclone";

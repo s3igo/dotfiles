@@ -54,7 +54,7 @@ in
         ];
       };
     };
-    fish.functions.jo = ''
+    fish.functions.j = ''
       mkdir -p /tmp/$USER
       set -l output_file "/tmp/$USER/joshuto-cwd-$fish_pid"
       ${package}/bin/joshuto --output-file "$output_file" $argv
