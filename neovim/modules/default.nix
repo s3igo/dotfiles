@@ -9,15 +9,15 @@ let
   modules = [
     "full"
     "im-select"
+    "json"
     "lua"
+    "markdown"
     "nix"
+    "ocaml"
+    "prettier"
     "rust"
     "typescript"
-    "json"
-    "markdown"
-    "prettier"
     "yaml"
-    "ocaml"
   ];
 in
 
