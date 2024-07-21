@@ -38,23 +38,19 @@
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
         neovim = get-flake (toString ./. + "/neovim");
+        packages = import ./packages.nix { inherit system pkgs neovim; };
       in
       {
-        packages = with neovim; {
-          default = withModules { inherit system pkgs; };
-          neovim = withModules {
-            inherit pkgs system;
-            modules = with modules; [
+        packages = packages // {
+          default = neovim.withModules { inherit system pkgs; };
+          neovim = neovim.withModules {
+            inherit system pkgs;
+            modules = with neovim.modules; [
               im-select
               nix
               lua
               markdown
             ];
-          };
-          full = withModules {
-            inherit system pkgs;
-            modules = [ modules.full ];
-            grammars = "all";
           };
         };
 
