@@ -18,12 +18,9 @@
       ];
       nixvimInjections = true;
     };
-    lsp = {
+    lsp.servers.nil-ls = {
       enable = true;
-      servers.nil-ls = {
-        enable = true;
-        settings.formatting.command = [ "nixfmt" ];
-      };
+      settings.formatting.command = [ "nixfmt" ];
     };
     none-ls = {
       enable = true;

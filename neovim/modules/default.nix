@@ -17,6 +17,7 @@ let
     "markdown"
     "prettier"
     "yaml"
+    "ocaml"
   ];
 in
 
