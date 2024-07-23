@@ -1,10 +1,11 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./toml.nix ];
+
   plugins = {
     treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
       rust
-      toml
       regex
     ];
     lsp.servers.rust-analyzer = {

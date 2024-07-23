@@ -16,6 +16,7 @@ let
     "ocaml"
     "prettier"
     "rust"
+    "toml"
     "typescript"
     "yaml"
   ];
