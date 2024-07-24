@@ -114,6 +114,8 @@ in
         nr = cursor // text "nix run .#% --";
         nrd = cursor // text "nix run $HOME/.dotfiles#% --";
         nrdr = cursor // text "nix run github:s3igo/dotfiles#% --";
+        nrg = cursor // text "nix run github:% --";
+        nrgm = cursor // text "nix run github:s3igo/% --";
         nrp = cursor // text "nix run nixpkgs#% --";
         nv = "nix run .#neovim --";
         nvd = "nix run $HOME/.dotfiles#neovim --";
