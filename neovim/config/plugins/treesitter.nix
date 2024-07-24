@@ -22,6 +22,7 @@
           );
       folding = false;
       settings = {
+        highlight.enable = true;
         indent.enable = true;
         incrementalSelection = {
           enable = true;

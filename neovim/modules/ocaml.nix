@@ -13,7 +13,6 @@
     treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
       ocaml
       ocaml_interface
-      ocamllex
     ];
     lsp.servers.ocamllsp.enable = true;
   };
