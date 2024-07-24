@@ -171,4 +171,12 @@
       in
       transparentThemes;
   };
+
+  xdg.configFile = {
+    "helix/ignore".text = ''
+      # Nix
+      .direnv/
+      result
+    '';
+  };
 }
