@@ -7,7 +7,7 @@
 }:
 
 let
-  inherit (config.xdg) dataHome stateHome;
+  inherit (config.xdg) stateHome;
   inherit (config.home) homeDirectory;
 in
 
@@ -23,12 +23,10 @@ in
       in
       [
         (use "autopair")
-        (use "fishtape_3")
+        (use "puffer")
         (use "sponge")
       ];
     functions = {
-      # $1 length is 2 -> `cd ../`, 3 -> `cd ../../`, and so on
-      __multicd = "echo cd (string repeat --count (math (string length -- $argv[1]) - 1) ../)";
       # current date in ISO 8601 extended format
       __date = "echo (date '+%Y-%m-%d')";
       __ghq-fzf = ''
@@ -56,14 +54,10 @@ in
         cursor = {
           setCursor = true;
         };
-        regex = pat: { regex = pat; };
         function = name: { function = name; };
         text = str: { expansion = str; };
       in
       {
-        _dotdot =
-          regex "^\\.\\.+$" # matches `..`, `...`, `....`, and so on
-          // function "__multicd";
         ":cp" = global // text "| pbcopy";
         ":d" = global // function "__date";
         ":di" = global // text "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
@@ -84,7 +78,6 @@ in
         bd = "bun run dev";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
-        cdl = "cd (cat ${dataHome}/lf/lastdir | string escape)";
         cl = "clear";
         cp = "cp -iv";
         d = "docker";
@@ -165,8 +158,11 @@ in
       # abbr add --command nix vdr -- 'run github:s3igo/dotfiles#neovim --'
 
       # keybindings
-      ## disable exit with <c-d>
+      ## disable exit with <C-d>
       bind \cd delete-char
+
+      ## insert space without expanding abbrs with <A-space>
+      bind \e\x20 'commandline -i " "'
 
       ## bigword
       bind \el forward-bigword
@@ -180,14 +176,14 @@ in
       ## history
       bind \ep history-token-search-backward
       bind \en history-token-search-forward
-      ### <c-h> FIXME: `history-pager-delete` doesn't work
+      ### <C-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
 
       ## functions
       bind \cg __ghq-fzf
     '';
     shellInitLast = ''
-      # disable the `fzf-file-widget` keybind and use <c-t> to `transpose-chars`
+      # disable the `fzf-file-widget` keybind and use <C-t> to `transpose-chars`
       if status --is-interactive
         bind --erase \ct
       end
