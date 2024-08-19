@@ -42,15 +42,7 @@ _: {
       "zoom"
       {
         name = "chromium";
-        args = {
-          no_quarantine = true;
-        };
-      }
-      {
-        name = "librewolf";
-        args = {
-          no_quarantine = true;
-        };
+        args.no_quarantine = true;
       }
     ];
   };
