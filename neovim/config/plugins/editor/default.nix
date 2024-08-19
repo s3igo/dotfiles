@@ -116,7 +116,7 @@
     };
     which-key = {
       enable = true;
-      window.border = "single";
+      settings.win.border = "single";
     };
     smart-splits.enable = true;
   };
