@@ -7,6 +7,7 @@ let
     value = append ./. "./${name}.nix";
   };
   modules = [
+    "deno-script"
     "full"
     "im-select"
     "json"
