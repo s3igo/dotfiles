@@ -12,6 +12,10 @@ return function(colors, font, mappings, fish)
         quick_select_patterns = {
             'sha256-[A-Za-z0-9+/]*={0,3}', -- sha256 encoded with base64 (e.g. nix hash)
         },
+        -- Workaround for rendering issues
+        -- See: https://github.com/wez/wezterm/issues/5990
+        --      https://github.com/NixOS/nixpkgs/issues/336069
+        front_end = 'WebGpu',
 
         -- appearance
         colors = colors,
