@@ -1,10 +1,11 @@
-_: {
+{
   imports = [ ./vim ];
   homebrew = {
     enable = true;
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
+      upgrade = true;
     };
     taps = [
       "daipeihust/tap"
@@ -12,10 +13,7 @@ _: {
       "homebrew/services"
       "macos-fuse-t/homebrew-cask"
     ];
-    brews = [
-      "daipeihust/tap/im-select"
-      # "typst"
-    ];
+    brews = [ "daipeihust/tap/im-select" ];
     casks = [
       "1password"
       "anytype"
@@ -29,7 +27,9 @@ _: {
       "google-chrome"
       "google-japanese-ime"
       "macos-fuse-t/homebrew-cask/fuse-t"
+      "monitorcontrol"
       "mullvadvpn"
+      "ollama"
       "orbstack"
       "raycast"
       "slack"
@@ -45,5 +45,7 @@ _: {
         args.no_quarantine = true;
       }
     ];
+    # Install manually due to the error of `darwin-rebuild`
+    # masApps.Bitwarden = 1352778147;
   };
 }

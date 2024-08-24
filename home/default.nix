@@ -90,28 +90,25 @@ in
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
+      AICHAT_CONFIG_DIR = "${configHome}/aichat";
       EDITOR = "nvim";
     };
     packages =
       with pkgs;
       [
-        darwin.trash
-        monitorcontrol
-        udev-gothic-nf
-        attic-client
-        # du-dust
         # efm-langserver
         # emacs-nox
+        _1password
+        aichat
+        attic-client
+        darwin.trash
+        dust
         fd
         ghq
-        # lazydocker
-        # mmv-go
         moar
-        # nodejs-slim
-        ollama
         rclone
         tree
-        _1password
+        udev-gothic-nf
       ]
       ++ [ neovim ];
   };
