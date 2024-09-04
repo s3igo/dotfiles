@@ -12,6 +12,10 @@
       # "homebrew/cask-fonts"
       "homebrew/services"
       "macos-fuse-t/homebrew-cask"
+      {
+        name = "zen-browser/browser";
+        clone_target = "https://github.com/zen-browser/desktop.git";
+      }
     ];
     brews = [ "daipeihust/tap/im-select" ];
     casks = [
@@ -39,6 +43,7 @@
       "vivaldi"
       "whisky"
       "zed"
+      "zen-browser/browser/zen-browser"
       "zoom"
       {
         name = "chromium";
