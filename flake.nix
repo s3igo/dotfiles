@@ -46,7 +46,6 @@
           neovim = neovim.withModules {
             inherit system pkgs;
             modules = with neovim.modules; [
-              im-select
               nix
               lua
               markdown

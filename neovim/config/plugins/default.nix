@@ -1,4 +1,4 @@
-_: {
+{
   imports = [
     ./coding.nix
     ./editor

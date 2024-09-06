@@ -9,7 +9,6 @@ let
   modules = [
     "deno-script"
     "full"
-    "im-select"
     "json"
     "lua"
     "markdown"

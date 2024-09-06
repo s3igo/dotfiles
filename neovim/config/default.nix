@@ -1,8 +1,9 @@
-_: {
+{
   imports = [
     ./plugins
     ./keymaps
     ./autocmd.nix
+    ./input-method.nix
     ./options.nix
   ];
 

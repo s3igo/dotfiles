@@ -8,7 +8,6 @@
       upgrade = true;
     };
     taps = [
-      "daipeihust/tap"
       # "homebrew/cask-fonts"
       "homebrew/services"
       "macos-fuse-t/homebrew-cask"
@@ -17,7 +16,6 @@
         clone_target = "https://github.com/zen-browser/desktop.git";
       }
     ];
-    brews = [ "daipeihust/tap/im-select" ];
     casks = [
       "1password"
       "anytype"
