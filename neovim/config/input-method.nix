@@ -6,12 +6,12 @@
     lib.optional stdenv.isDarwin (
       vimUtils.buildVimPlugin {
         pname = "im-select-nvim";
-        version = "2024-01-28";
+        version = "2024-07-21";
         src = fetchFromGitHub {
           owner = "keaising";
           repo = "im-select.nvim";
-          rev = "ca1aebb8f5c8a0342ae99a0fcc8ebc49b5f2201e";
-          hash = "sha256-tyVGbfRoshuuUWkFlQa6YvoJJ4HMLmG5p8Y0EsP1Zig=";
+          rev = "6425bea7bbacbdde71538b6d9580c1f7b0a5a010";
+          hash = "sha256-sE3ybP3Y+NcdUQWjaqpWSDRacUVbRkeV/fGYdPIjIqg=";
         };
       }
     );
