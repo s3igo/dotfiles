@@ -1,12 +1,5 @@
-{ pkgs, ... }:
-
 {
   plugins = {
-    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-      lua
-      luadoc
-      luap
-    ];
     lsp.servers.lua-ls = {
       enable = true;
       onAttach.function = ''
