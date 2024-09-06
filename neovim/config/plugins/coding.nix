@@ -1,16 +1,9 @@
 { pkgs, ... }:
+
 {
   plugins = {
     luasnip.enable = true;
     friendly-snippets.enable = true;
-    lspkind = {
-      enable = true;
-      mode = "symbol";
-    };
-    cmp-nvim-lsp.enable = true;
-    cmp-buffer.enable = true;
-    cmp-path.enable = true;
-    cmp_luasnip.enable = true;
     cmp-cmdline.enable = true;
     cmp = {
       enable = true;
@@ -26,29 +19,52 @@
             require('luasnip').lsp_expand(args.body)
           end
         '';
-        mapping = {
-          "<c-j>" = ''
-            cmp.mapping(function()
-              if cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-              else
-                cmp.complete()
+        mapping.__raw = ''
+          (function()
+            local luasnip = require('luasnip')
+
+            return {
+              ['<a-i>'] = cmp.mapping(function()
+                if not cmp.visible() then cmp.complete() end
+              end),
+
+              ['<tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                elseif luasnip.locally_jumpable(1) then
+                  luasnip.jump(1)
+                else
+                  fallback()
                 end
-            end)
-          '';
-          "<c-k>" = ''
-            cmp.mapping(function(fallback)
-              if cmp.visible() and cmp.get_active_entry() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-              else
-                fallback()
-              end
-            end)
-          '';
-          "<c-d>" = "cmp.mapping.scroll_docs(4)";
-          "<c-u>" = "cmp.mapping.scroll_docs(-4)";
-          "<tab>" = "cmp.mapping.confirm()";
-        };
+              end),
+
+              ['<s-tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                  cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                elseif luasnip.locally_jumpable(-1) then
+                  luasnip.jump(-1)
+                else
+                  fallback()
+                end
+              end),
+
+              ['<cr>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                  if luasnip.expandable() then
+                    luasnip.expand()
+                  else
+                    cmp.confirm({ select = true })
+                  end
+                else
+                  fallback()
+                end
+              end),
+
+              ['<c-d>'] = cmp.mapping.scroll_docs(4),
+              ['<c-u>'] = cmp.mapping.scroll_docs(-4),
+            }
+          end)()
+        '';
       };
     };
     copilot-lua = {
