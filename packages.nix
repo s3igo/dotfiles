@@ -10,7 +10,6 @@ let
     value = neovim.withModules {
       inherit system pkgs;
       modules = [ neovim.modules.${name} ];
-      grammars = if name == "full" then "all" else [ ];
     };
   };
   moduleNames = builtins.attrNames neovim.modules;

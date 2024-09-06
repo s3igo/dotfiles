@@ -1,25 +1,7 @@
 {
-  pkgs,
-  grammars ? [ ],
-  ...
-}:
-
-{
   plugins = {
     treesitter = {
       enable = true;
-      grammarPackages =
-        with pkgs.vimPlugins.nvim-treesitter;
-        if grammars == "all" then
-          allGrammars
-        else
-          map (name: builtGrammars.${name}) (
-            [
-              "vimdoc"
-              "comment"
-            ]
-            ++ grammars
-          );
       folding = false;
       settings = {
         highlight.enable = true;

@@ -10,14 +10,7 @@
   ];
 
   plugins = {
-    treesitter = {
-      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-        nix
-        bash
-        regex
-      ];
-      nixvimInjections = true;
-    };
+    treesitter.nixvimInjections = true;
     lsp.servers.nil-ls = {
       enable = true;
       settings.formatting.command = [ "nixfmt" ];

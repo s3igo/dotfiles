@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   autoCmd = [
     {
@@ -9,11 +7,5 @@
     }
   ];
 
-  plugins = {
-    treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-      ocaml
-      ocaml_interface
-    ];
-    lsp.servers.ocamllsp.enable = true;
-  };
+  plugins.lsp.servers.ocamllsp.enable = true;
 }
