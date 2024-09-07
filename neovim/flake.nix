@@ -1,10 +1,25 @@
 {
-  inputs.nixvim.url = "github:nix-community/nixvim";
-
   outputs =
-    { nixvim, ... }:
+    _:
+    let
+      names = [
+        "deno-script"
+        "full"
+        "json"
+        "lua"
+        "markdown"
+        "nix"
+        "ocaml"
+        "prettier"
+        "rust"
+        "toml"
+        "typescript"
+        "yaml"
+      ];
+    in
     {
-      withModules = import ./. { inherit nixvim; };
-      modules = import ./modules { inherit nixvim; };
+      nixosModules = (import ./modules { inherit names; }) // {
+        default = ./config;
+      };
     };
 }

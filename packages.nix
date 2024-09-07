@@ -1,18 +1,20 @@
 {
   system,
-  pkgs,
-  neovim,
+  nixvim,
+  neovim-config,
 }:
 
 let
   toPackage = name: {
     inherit name;
-    value = neovim.withModules {
-      inherit system pkgs;
-      modules = [ neovim.modules.${name} ];
+    value = nixvim.legacyPackages.${system}.makeNixvim {
+      imports = with neovim-config; [
+        nixosModules.default
+        nixosModules.${name}
+      ];
     };
   };
-  moduleNames = builtins.attrNames neovim.modules;
+  moduleNames = builtins.attrNames neovim-config.nixosModules;
 in
 
 builtins.listToAttrs (map toPackage moduleNames)

@@ -2,7 +2,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    get-flake.url = "github:ursi/get-flake";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +29,7 @@
       self,
       nixpkgs,
       flake-utils,
-      get-flake,
+      nixvim,
       nix-darwin,
       home-manager,
       agenix,
@@ -35,17 +38,17 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
+        neovim-config = (import ./neovim/flake.nix).outputs { };
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
-        neovim = get-flake (toString ./. + "/neovim");
-        packages = import ./packages.nix { inherit system pkgs neovim; };
+        packages = import ./packages.nix { inherit system nixvim neovim-config; };
       in
       {
         packages = packages // {
-          default = neovim.withModules { inherit system pkgs; };
-          neovim = neovim.withModules {
-            inherit system pkgs;
-            modules = with neovim.modules; [
+          default = nixvim.legacyPackages.${system}.makeNixvim neovim-config.nixosModules.default;
+          neovim = nixvim.legacyPackages.${system}.makeNixvim {
+            imports = with neovim-config.nixosModules; [
+              default
               nix
               lua
               markdown
