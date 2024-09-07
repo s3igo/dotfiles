@@ -38,7 +38,7 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        neovim-config = (import ./neovim/flake.nix).outputs { };
+        neovim-config = (import ./neovim-config/flake.nix).outputs { };
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
         packages = import ./packages.nix { inherit system nixvim neovim-config; };

@@ -19,7 +19,7 @@
     in
     {
       nixosModules = (import ./modules { inherit names; }) // {
-        default = ./config;
+        default = ./core;
       };
     };
 }
