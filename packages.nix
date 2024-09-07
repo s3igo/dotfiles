@@ -1,13 +1,12 @@
 {
-  system,
-  nixvim,
+  makeNixvim,
   neovim-config,
 }:
 
 let
   toPackage = name: {
     inherit name;
-    value = nixvim.legacyPackages.${system}.makeNixvim {
+    value = makeNixvim {
       imports = with neovim-config; [
         nixosModules.default
         nixosModules.${name}

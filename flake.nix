@@ -41,12 +41,13 @@
         neovim-config = (import ./neovim-config/flake.nix).outputs { };
         pkgs = import nixpkgs { inherit system; };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
-        packages = import ./packages.nix { inherit system nixvim neovim-config; };
+        inherit (nixvim.legacyPackages.${system}) makeNixvim;
+        packages = import ./packages.nix { inherit makeNixvim neovim-config; };
       in
       {
         packages = packages // {
-          default = nixvim.legacyPackages.${system}.makeNixvim neovim-config.nixosModules.default;
-          neovim = nixvim.legacyPackages.${system}.makeNixvim {
+          default = makeNixvim neovim-config.nixosModules.default;
+          neovim = makeNixvim {
             imports = with neovim-config.nixosModules; [
               default
               nix
