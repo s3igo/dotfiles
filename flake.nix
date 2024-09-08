@@ -38,27 +38,18 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        neovim-config = (import ./neovim-config/flake.nix).outputs { };
         pkgs = import nixpkgs { inherit system; };
+        packages = import ./packages.nix {
+          neovim-config = (import ./neovim-config/flake.nix).outputs { };
+          inherit (nixvim.legacyPackages.${system}) makeNixvim;
+        };
         tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
-        inherit (nixvim.legacyPackages.${system}) makeNixvim;
-        packages = import ./packages.nix { inherit makeNixvim neovim-config; };
       in
       {
-        packages = packages // {
-          default = makeNixvim neovim-config.nixosModules.default;
-          neovim = makeNixvim {
-            imports = with neovim-config.nixosModules; [
-              default
-              nix
-              lua
-              markdown
-            ];
-          };
-        };
+        inherit packages;
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [
+          packages = [
             pkgs.statix
             self.packages.${system}.neovim
           ] ++ tasks;

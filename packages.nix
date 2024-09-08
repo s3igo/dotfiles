@@ -14,6 +14,17 @@ let
     };
   };
   moduleNames = builtins.attrNames neovim-config.nixosModules;
+  packages = builtins.listToAttrs (map toPackage moduleNames);
 in
 
-builtins.listToAttrs (map toPackage moduleNames)
+packages
+// {
+  neovim = makeNixvim {
+    imports = with neovim-config.nixosModules; [
+      default
+      nix
+      lua
+      markdown
+    ];
+  };
+}
