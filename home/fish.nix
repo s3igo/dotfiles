@@ -111,6 +111,7 @@ in
         nrg = cursor // text "nix run github:% --";
         nrgm = cursor // text "nix run github:s3igo/% --";
         nrp = cursor // text "nix run nixpkgs#% --";
+        ns = cursor // text "nix shell nixpkgs#%";
         nv = "nix run .#neovim --";
         nvd = "nix run $HOME/.dotfiles#neovim --";
         nvdr = "nix run github:s3igo/dotfiles#neovim --";
@@ -118,10 +119,9 @@ in
         o = "ollama";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
-        r = "rclone";
+        rc = "rclone";
         rm = "rm -iv";
         st = "git status";
-        t = cursor // text "task_%";
         ty = "typst";
         v = "nvim";
         vf = "nvim flake.nix";
