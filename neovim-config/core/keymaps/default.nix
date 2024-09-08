@@ -9,16 +9,6 @@
       action = "<cmd>noh<cr>";
       mode = "n";
     }
-    # {
-    #   key = "gm";
-    #   action = "%";
-    #   mode = [
-    #     "n"
-    #     "x"
-    #     "o"
-    #   ];
-    #   options.desc = "Go to matching bracket";
-    # }
     {
       key = "<leader>c";
       action.__raw = builtins.readFile ./comment.lua;
@@ -58,7 +48,16 @@
         "n"
         "x"
       ];
-      options.desc = "Clipboard register";
+      options.desc = "Yank to system clipboard";
+    }
+    {
+      key = "<leader>Y";
+      action = ''"+Y'';
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Yank to system clipboard (until end of line)";
     }
     {
       key = "<leader>p";
@@ -67,7 +66,16 @@
         "n"
         "x"
       ];
-      options.desc = "Blackhole register";
+      options.desc = "Paste from system clipboard";
+    }
+    {
+      key = "<leader>P";
+      action = ''"+P'';
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Paste from system clipboard (before)";
     }
     # helix keybindings
     {

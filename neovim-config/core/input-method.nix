@@ -1,49 +1,48 @@
 { pkgs, ... }:
 
+with pkgs;
 {
-  extraPlugins =
-    with pkgs;
-    lib.optional stdenv.isDarwin (
-      vimUtils.buildVimPlugin {
-        pname = "im-select-nvim";
-        version = "2024-07-21";
-        src = fetchFromGitHub {
-          owner = "keaising";
-          repo = "im-select.nvim";
-          rev = "6425bea7bbacbdde71538b6d9580c1f7b0a5a010";
-          hash = "sha256-sE3ybP3Y+NcdUQWjaqpWSDRacUVbRkeV/fGYdPIjIqg=";
-        };
-      }
-    );
+  extraPlugins = lib.optional stdenv.isDarwin (
+    vimUtils.buildVimPlugin {
+      pname = "im-select-nvim";
+      version = "2024-07-21";
+      src = fetchFromGitHub {
+        owner = "keaising";
+        repo = "im-select.nvim";
+        rev = "6425bea7bbacbdde71538b6d9580c1f7b0a5a010";
+        hash = "sha256-sE3ybP3Y+NcdUQWjaqpWSDRacUVbRkeV/fGYdPIjIqg=";
+      };
+    }
+  );
 
-  extraPackages =
-    with pkgs;
-    lib.optional stdenv.isDarwin (
-      stdenv.mkDerivation {
-        pname = "im-select";
-        version = "2023-07-10";
+  extraPackages = lib.optional stdenv.isDarwin (
+    stdenv.mkDerivation {
+      pname = "im-select";
+      version = "2023-07-10";
 
-        src = fetchFromGitHub {
-          owner = "daipeihust";
-          repo = "im-select";
-          rev = "9cd5278b185a9d6daa12ba35471ec2cc1a2e3012";
-          hash = "sha256-NQakn0Xa177Efx6G6eaKL+wHdNh+k30SN0618nV69b4=";
-        };
+      src = fetchFromGitHub {
+        owner = "daipeihust";
+        repo = "im-select";
+        rev = "9cd5278b185a9d6daa12ba35471ec2cc1a2e3012";
+        hash = "sha256-NQakn0Xa177Efx6G6eaKL+wHdNh+k30SN0618nV69b4=";
+      };
 
-        installPhase = ''
+      installPhase =
+        let
+          arch = if system == "aarch64-darwin" then "apple" else "intel";
+        in
+        ''
           mkdir -p $out/bin
-          cp $src/macOS/out/${if system == "aarch64-darwin" then "apple" else "intel"}/im-select $out/bin/
+          cp $src/macOS/out/${arch}/im-select $out/bin/
         '';
-      }
-    );
+    }
+  );
 
-  extraConfigLua =
-    with pkgs;
-    lib.strings.optionalString stdenv.isDarwin ''
-      -- im-select
-      require('im_select').setup({
-        default_im_select = "net.mtgto.inputmethod.macSKK.ascii",
-        -- set_previous_events = { },
-      })
-    '';
+  extraConfigLua = lib.strings.optionalString stdenv.isDarwin ''
+    -- im-select
+    require('im_select').setup({
+      default_im_select = "net.mtgto.inputmethod.macSKK.ascii",
+      -- set_previous_events = { },
+    })
+  '';
 }
