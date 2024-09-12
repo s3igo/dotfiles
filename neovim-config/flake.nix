@@ -4,7 +4,6 @@
     let
       names = [
         "deno-script"
-        "full"
         "json"
         "lua"
         "markdown"

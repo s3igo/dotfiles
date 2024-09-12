@@ -24,5 +24,5 @@
     };
   };
 
-  extraPackages = with pkgs; [ nixfmt-rfc-style ];
+  extraPackages = [ pkgs.nixfmt-rfc-style ];
 }
