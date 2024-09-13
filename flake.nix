@@ -35,10 +35,13 @@
       agenix,
       secrets,
     }:
+    let
+      overlays = import ./overlays.nix;
+    in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system overlays; };
         packages = import ./packages.nix {
           neovim-config = (import ./neovim-config/flake.nix).outputs { };
           inherit (nixvim.legacyPackages.${system}) makeNixvim;
@@ -78,15 +81,26 @@
                 configHome = configPath user;
               };
               modules = [
-                (
-                  { pkgs, ... }:
-                  {
-                    users.users.${user}.home = "/Users/${user}";
-                  }
-                )
+                { users.users.${user}.home = "/Users/${user}"; }
                 ./modules/secrets.nix
                 ./modules/system.nix
                 ./modules/apps.nix
+                (
+                  { pkgs, ... }:
+                  {
+                    nixpkgs.overlays = overlays;
+                    launchd.user.agents.yaskkserv2 = {
+                      path = [ pkgs.yaskkserv2 ];
+                      command = "yaskkserv2 --no-daemonize --midashi-utf8 --google-suggest -- ${pkgs.yaskkserv2-dict}/share/dictionary.yaskkserv2";
+                      serviceConfig = {
+                        KeepAlive = true;
+                        RunAtLoad = true;
+                        StandardOutPath = "/Users/${user}/.local/state/yaskkserv2/out.log";
+                        StandardErrorPath = "/Users/${user}/.local/state/yaskkserv2/err.log";
+                      };
+                    };
+                  }
+                )
                 home-manager.darwinModules.home-manager
                 {
                   home-manager = {
