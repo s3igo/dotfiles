@@ -101,7 +101,8 @@ in
         mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
-        nb = cursor // text "nix build .#% --";
+        nb = cursor // text "nix build .#%";
+        ne = cursor // text "nix eval .#%";
         nf = "nix flake";
         nl = "rm -rf .direnv; and direnv allow";
         nr = cursor // text "nix run .#% --";
