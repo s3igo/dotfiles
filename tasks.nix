@@ -1,46 +1,38 @@
 {
-  system,
   pkgs,
-  nix-darwin,
+  mkApp,
+  nix-darwin',
 }:
 
-with pkgs;
 let
-  deploy = writeShellApplication {
-    name = "task_deploy";
-    runtimeInputs = [ nix-darwin.packages.${system}.default ];
+  deploy = pkgs.writeShellApplication {
+    name = "deploy";
+    runtimeInputs = [ nix-darwin' ];
     text = ''
-      sudo -v && darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+      darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
     '';
   };
-  update = writeShellApplication {
-    name = "task_update";
-    text = ''
-      nix flake update --commit-lock-file ./neovim
-      nix flake update --commit-lock-file
-    '';
-  };
-  gc = writeShellApplication {
-    name = "task_gc";
+  wipe-history = pkgs.writeShellApplication {
+    name = "wipe-history";
     text = ''
       sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
       nix profile wipe-history --profile "$XDG_STATE_HOME/nix/profiles/home-manager"
-      nix store gc
-      nix store optimise
     '';
   };
-  versions = writeShellApplication {
-    name = "task_versions";
-    runtimeInputs = [ gawk ];
+  versions = pkgs.writeShellApplication {
+    name = "versions";
+    runtimeInputs = [ pkgs.gawk ];
     text = ''
       nix profile diff-closures --profile /nix/var/nix/profiles/system \
+        | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
+      nix profile diff-closures --profile "$XDG_STATE_HOME/nix/profiles/home-manager" \
         | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
     '';
   };
 in
-[
-  deploy
-  update
-  gc
-  versions
-]
+
+{
+  deploy = mkApp { drv = deploy; };
+  wipe-history = mkApp { drv = wipe-history; };
+  versions = mkApp { drv = versions; };
+}

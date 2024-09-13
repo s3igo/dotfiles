@@ -43,16 +43,20 @@
           neovim-config = (import ./neovim-config/flake.nix).outputs { };
           inherit (nixvim.legacyPackages.${system}) makeNixvim;
         };
-        tasks = import ./tasks.nix { inherit system pkgs nix-darwin; };
+        apps = import ./tasks.nix {
+          inherit pkgs;
+          inherit (flake-utils.lib) mkApp;
+          nix-darwin' = nix-darwin.packages.${system}.default;
+        };
       in
       {
-        inherit packages;
+        inherit apps packages;
 
         devShells.default = pkgs.mkShell {
           packages = [
             pkgs.statix
             self.packages.${system}.neovim
-          ] ++ tasks;
+          ];
         };
 
         formatter = pkgs.nixfmt-rfc-style;
