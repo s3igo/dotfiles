@@ -42,14 +42,15 @@
       system:
       let
         pkgs = import nixpkgs { inherit system overlays; };
-        packages = import ./packages.nix {
-          neovim-config = (import ./neovim-config/flake.nix).outputs { };
-          inherit (nixvim.legacyPackages.${system}) makeNixvim;
-        };
         apps = import ./tasks.nix {
           inherit pkgs;
           inherit (flake-utils.lib) mkApp;
           nix-darwin' = nix-darwin.packages.${system}.default;
+        };
+        packages = import ./packages {
+          inherit pkgs;
+          inherit (nixvim.legacyPackages.${system}) makeNixvim;
+          neovim-config = (import ./neovim-config/flake.nix).outputs { };
         };
       in
       {

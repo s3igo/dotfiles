@@ -16,6 +16,7 @@ stdenv.mkDerivation {
 
     mkdir -p $out/share/
     cp SKK-JISYO.* $out/share/
+    cp zipcode/SKK-JISYO.* $out/share/
 
     runHook postInstall
   '';

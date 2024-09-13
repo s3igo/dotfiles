@@ -1,8 +1,8 @@
 {
-  rustPlatform,
-  fetchurl,
   lib,
   stdenv,
+  rustPlatform,
+  fetchurl,
   darwin,
 }:
 
