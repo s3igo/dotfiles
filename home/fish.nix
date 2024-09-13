@@ -81,13 +81,12 @@ in
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
         cl = "clear";
         cp = "cp -iv";
-        d = "docker";
         da = "direnv allow";
         db = "docker build";
         di = "docker image";
+        do = "docker";
         dp = "diff -Naur";
         dr = "docker run";
-        e = "echo";
         ef = "exec fish";
         f = "fg";
         g = "git";
@@ -98,7 +97,7 @@ in
         gl = "git log";
         gr = "git restore";
         gs = "git switch";
-        h = "history";
+        hi = "history";
         mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
@@ -116,7 +115,6 @@ in
         nvd = "nix run $HOME/.dotfiles#neovim --";
         nvdr = "nix run github:s3igo/dotfiles#neovim --";
         nvp = "nix run nixpkgs#neovim --";
-        o = "ollama";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         rc = "rclone";
@@ -125,7 +123,7 @@ in
         ty = "typst";
         v = "nvim";
         vf = "nvim flake.nix";
-        w = "which";
+        wh = "which";
       };
     loginShellInit = ''
       # PATH
