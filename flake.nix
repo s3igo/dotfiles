@@ -92,7 +92,7 @@
                     nixpkgs.overlays = overlays;
                     launchd.user.agents.yaskkserv2 = {
                       path = [ pkgs.yaskkserv2 ];
-                      command = "yaskkserv2 --no-daemonize --midashi-utf8 --google-suggest -- ${pkgs.yaskkserv2-dict}/share/dictionary.yaskkserv2";
+                      command = "yaskkserv2 --no-daemonize --midashi-utf8 -- ${pkgs.yaskkserv2-dict}/share/dictionary.yaskkserv2";
                       serviceConfig = {
                         KeepAlive = true;
                         RunAtLoad = true;
