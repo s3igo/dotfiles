@@ -25,8 +25,6 @@ let
     text = ''
       nix profile diff-closures --profile /nix/var/nix/profiles/system \
         | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
-      nix profile diff-closures --profile "$XDG_STATE_HOME/nix/profiles/home-manager" \
-        | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
     '';
   };
 in
