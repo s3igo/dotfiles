@@ -42,7 +42,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       flake-utils,
@@ -50,12 +50,7 @@
       nix-darwin,
       home-manager,
       nix-homebrew,
-      agenix,
-      homebrew-core,
-      homebrew-cask,
-      homebrew-bundle,
-      macos-fuse-t-cask,
-      secrets,
+      ...
     }:
     let
       overlays = import ./overlays.nix;
@@ -89,70 +84,33 @@
       }
     )
     // {
-      darwinConfigurations =
-        let
-          configPath = username: "/Users/${username}/.config";
-        in
-        {
-          mbp2023 =
-            let
-              user = "s3igo";
-            in
-            nix-darwin.lib.darwinSystem {
-              specialArgs = {
-                inherit agenix secrets user;
-                configHome = configPath user;
-              };
-              modules = [
-                { users.users.${user}.home = "/Users/${user}"; }
-                ./modules/secrets.nix
-                ./modules/system.nix
-                ./modules/apps.nix
-                (
-                  { pkgs, ... }:
-                  {
-                    nixpkgs.overlays = overlays;
-                    launchd.user.agents.yaskkserv2 = {
-                      path = [ pkgs.yaskkserv2 ];
-                      command = "yaskkserv2 --no-daemonize --midashi-utf8 -- ${pkgs.yaskkserv2-dict}/share/dictionary.yaskkserv2";
-                      serviceConfig = {
-                        KeepAlive = true;
-                        RunAtLoad = true;
-                        StandardOutPath = "/Users/${user}/.local/state/yaskkserv2/out.log";
-                        StandardErrorPath = "/Users/${user}/.local/state/yaskkserv2/err.log";
-                      };
-                    };
-                  }
-                )
-                home-manager.darwinModules.home-manager
-                nix-homebrew.darwinModules.nix-homebrew
-                {
-                  nix-homebrew = {
-                    enable = true;
-                    enableRosetta = true;
-                    inherit user;
-                    taps = {
-                      "homebrew/homebrew-core" = homebrew-core;
-                      "homebrew/homebrew-cask" = homebrew-cask;
-                      "homebrew/homebrew-bundle" = homebrew-bundle;
-                      "macos-fuse-t/homebrew-cask" = macos-fuse-t-cask;
-                    };
-                    mutableTaps = false;
-                  };
-                }
-                {
-                  home-manager = {
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
-                    extraSpecialArgs = {
-                      inherit user;
-                      neovim = self.packages.aarch64-darwin.default;
-                    };
-                    users.${user} = import ./home;
-                  };
-                }
-              ];
+      darwinConfigurations = {
+        mbp2023 =
+          let
+            user = "s3igo";
+            specialArgs = inputs // {
+              inherit user;
             };
-        };
+          in
+          nix-darwin.lib.darwinSystem {
+            inherit specialArgs;
+            modules = [
+              home-manager.darwinModules.home-manager
+              nix-homebrew.darwinModules.nix-homebrew
+              ./modules/darwin/default.nix
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = {
+                    inherit user;
+                    neovim = self.packages.aarch64-darwin.default;
+                  };
+                  users.${user} = import ./home;
+                };
+              }
+            ];
+          };
+      };
     };
 }
