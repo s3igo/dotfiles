@@ -48,8 +48,6 @@
       flake-utils,
       nixvim,
       nix-darwin,
-      home-manager,
-      nix-homebrew,
       ...
     }:
     flake-utils.lib.eachDefaultSystem (
@@ -92,11 +90,7 @@
           in
           nix-darwin.lib.darwinSystem {
             inherit specialArgs;
-            modules = [
-              home-manager.darwinModules.home-manager
-              nix-homebrew.darwinModules.nix-homebrew
-              ./modules/darwin/default.nix
-            ];
+            modules = [ ./modules/darwin/default.nix ];
           };
       };
     };

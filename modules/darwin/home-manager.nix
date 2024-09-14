@@ -1,6 +1,13 @@
-{ self, user, ... }:
+{
+  self,
+  user,
+  home-manager,
+  ...
+}:
 
 {
+  imports = [ home-manager.darwinModules.home-manager ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

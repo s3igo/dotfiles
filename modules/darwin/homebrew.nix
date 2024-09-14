@@ -1,5 +1,6 @@
 {
   user,
+  nix-homebrew,
   homebrew-core,
   homebrew-cask,
   homebrew-bundle,
@@ -8,9 +9,10 @@
 }:
 
 {
+  imports = [ nix-homebrew.darwinModules.nix-homebrew ];
+
   nix-homebrew = {
     enable = true;
-    enableRosetta = true;
     inherit user;
     taps = {
       "homebrew/homebrew-core" = homebrew-core;
