@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  osConfig,
   neovim,
   ...
 }:
@@ -82,6 +83,7 @@ in
     language.base = "en_US.UTF-8";
     stateVersion = "23.11";
     sessionVariables = {
+      RCLONE_CONFIG = osConfig.age.secrets.rclone-config.path;
       SSH_AUTH_SOCK = "${homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       DOCKER_CONFIG = "${configHome}/docker";
       _ZO_DATA_DIR = "${dataHome}/zoxide";

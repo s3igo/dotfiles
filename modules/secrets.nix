@@ -3,9 +3,9 @@
   agenix,
   secrets,
   user,
-  configHome,
   ...
 }:
+
 {
   imports = [ agenix.darwinModules.default ];
 
@@ -32,8 +32,6 @@
 
         rclone-config = {
           file = "${secrets}/config/rclone.age";
-          path = "${configHome}/rclone/rclone.conf";
-          symlink = false;
         } // userReadable;
 
         attic-token = {
