@@ -14,9 +14,26 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    macos-fuse-t-cask = {
+      url = "github:macos-fuse-t/homebrew-cask";
+      flake = false;
     };
     secrets = {
       url = "github:s3igo/secrets";
@@ -32,7 +49,12 @@
       nixvim,
       nix-darwin,
       home-manager,
+      nix-homebrew,
       agenix,
+      homebrew-core,
+      homebrew-cask,
+      homebrew-bundle,
+      macos-fuse-t-cask,
       secrets,
     }:
     let
@@ -103,6 +125,21 @@
                   }
                 )
                 home-manager.darwinModules.home-manager
+                nix-homebrew.darwinModules.nix-homebrew
+                {
+                  nix-homebrew = {
+                    enable = true;
+                    enableRosetta = true;
+                    inherit user;
+                    taps = {
+                      "homebrew/homebrew-core" = homebrew-core;
+                      "homebrew/homebrew-cask" = homebrew-cask;
+                      "homebrew/homebrew-bundle" = homebrew-bundle;
+                      "macos-fuse-t/homebrew-cask" = macos-fuse-t-cask;
+                    };
+                    mutableTaps = false;
+                  };
+                }
                 {
                   home-manager = {
                     useGlobalPkgs = true;

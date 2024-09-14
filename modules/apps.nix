@@ -1,21 +1,15 @@
+{ config, ... }:
+
 {
   imports = [ ./vim ];
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
+      upgrade = false;
       cleanup = "zap";
-      upgrade = true;
     };
-    taps = [
-      # "homebrew/cask-fonts"
-      "homebrew/services"
-      "macos-fuse-t/homebrew-cask"
-      {
-        name = "zen-browser/browser";
-        clone_target = "https://github.com/zen-browser/desktop.git";
-      }
-    ];
+    taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
       "1password"
       "anytype"
@@ -41,7 +35,7 @@
       "vivaldi"
       "whisky"
       "zed"
-      "zen-browser/browser/zen-browser"
+      "zen-browser"
       "zoom"
       {
         name = "chromium";
