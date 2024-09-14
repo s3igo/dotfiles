@@ -6,6 +6,7 @@
     ../system.nix
     ../apps.nix
     ./homebrew.nix
+    ./home-manager.nix
     # (
     #   { pkgs, ... }:
     #   {

@@ -1,8 +1,8 @@
 {
+  self,
   pkgs,
   config,
   osConfig,
-  neovim,
   ...
 }:
 
@@ -112,6 +112,6 @@ in
         tree
         udev-gothic-nf
       ]
-      ++ [ neovim ];
+      ++ [ self.packages.${pkgs.system}.default ];
   };
 }

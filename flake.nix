@@ -52,12 +52,10 @@
       nix-homebrew,
       ...
     }:
-    let
-      overlays = import ./overlays.nix;
-    in
     flake-utils.lib.eachDefaultSystem (
       system:
       let
+        overlays = import ./overlays.nix;
         pkgs = import nixpkgs { inherit system overlays; };
         apps = import ./tasks.nix {
           inherit pkgs;
@@ -98,17 +96,6 @@
               home-manager.darwinModules.home-manager
               nix-homebrew.darwinModules.nix-homebrew
               ./modules/darwin/default.nix
-              {
-                home-manager = {
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  extraSpecialArgs = {
-                    inherit user;
-                    neovim = self.packages.aarch64-darwin.default;
-                  };
-                  users.${user} = import ./home;
-                };
-              }
             ];
           };
       };
