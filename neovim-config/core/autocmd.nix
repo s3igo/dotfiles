@@ -1,10 +1,5 @@
 {
   autoCmd = [
-    # {
-    #   event = "TermOpen";
-    #   command = "startinsert";
-    #   desc = "Enter insert mode when opening a terminal";
-    # }
     {
       event = "FileType";
       pattern = "gitcommit";
@@ -13,16 +8,6 @@
           vim.opt_local.colorcolumn = { 50, 72 }
           vim.keymap.set('n', '<leader>w', '<cmd>wq<cr>', { buffer = true })
           vim.keymap.set('i', '<C-]>', '<esc><cmd>wq<cr>', { buffer = true })
-        end
-      '';
-    }
-    {
-      event = "FileType";
-      pattern = "markdown";
-      callback.__raw = ''
-        function()
-          vim.opt_local.formatoptions:append('r')
-          vim.opt_local.comments = 'b:-,n:>'
         end
       '';
     }
