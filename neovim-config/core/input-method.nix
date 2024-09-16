@@ -1,6 +1,15 @@
 { pkgs, ... }:
 
-with pkgs;
+let
+  inherit (pkgs)
+    lib
+    stdenv
+    system
+    vimUtils
+    fetchFromGitHub
+    ;
+in
+
 {
   extraPlugins = lib.optional stdenv.isDarwin (
     vimUtils.buildVimPlugin {
