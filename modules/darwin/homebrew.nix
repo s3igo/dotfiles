@@ -1,20 +1,16 @@
 {
   user,
-  nix-homebrew,
-  homebrew-core,
-  homebrew-cask,
-  homebrew-bundle,
-  macos-fuse-t-cask,
+  inputs,
   ...
 }:
 
 {
-  imports = [ nix-homebrew.darwinModules.nix-homebrew ];
+  imports = [ inputs.nix-homebrew.darwinModules.nix-homebrew ];
 
   nix-homebrew = {
     enable = true;
     inherit user;
-    taps = {
+    taps = with inputs; {
       "homebrew/homebrew-core" = homebrew-core;
       "homebrew/homebrew-cask" = homebrew-cask;
       "homebrew/homebrew-bundle" = homebrew-bundle;

@@ -84,12 +84,12 @@
         mbp2023 =
           let
             user = "s3igo";
-            specialArgs = inputs // {
-              inherit user;
-            };
+            system = "aarch64-darwin";
           in
           nix-darwin.lib.darwinSystem {
-            inherit specialArgs;
+            specialArgs = {
+              inherit inputs user system;
+            };
             modules = [ ./modules/darwin/default.nix ];
           };
       };

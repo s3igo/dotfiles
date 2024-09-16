@@ -1,18 +1,18 @@
 {
-  self,
   user,
-  home-manager,
+  inputs,
   ...
 }:
 
 {
-  imports = [ home-manager.darwinModules.home-manager ];
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit self user;
+      inherit user;
+      inherit (inputs) self;
     };
     users.${user} = import ../../home;
   };

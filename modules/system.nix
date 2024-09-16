@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, system, ... }:
 
 {
   # Auto upgrade nix package and the daemon service.
@@ -32,7 +32,7 @@
   system.stateVersion = 4;
 
   nixpkgs = {
-    hostPlatform = "aarch64-darwin";
+    hostPlatform = system;
     config.allowUnfree = true;
   };
 

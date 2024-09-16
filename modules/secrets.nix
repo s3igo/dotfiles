@@ -1,15 +1,18 @@
 {
-  pkgs,
-  agenix,
-  secrets,
   user,
+  system,
+  inputs,
   ...
 }:
+
+let
+  inherit (inputs) agenix secrets;
+in
 
 {
   imports = [ agenix.darwinModules.default ];
 
-  environment.systemPackages = [ agenix.packages.${pkgs.system}.default ];
+  environment.systemPackages = [ agenix.packages.${system}.default ];
 
   age = {
     identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
