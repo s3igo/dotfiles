@@ -5,10 +5,6 @@
 }:
 
 let
-  skk-dict = pkgs.callPackage ./skk-dict.nix { };
-  yaskkserv2 = pkgs.callPackage ./yaskkserv2.nix { };
-  yaskkserv2-dict = pkgs.callPackage ./yaskkserv2-dict.nix { inherit skk-dict yaskkserv2; };
-
   toPackage = name: {
     inherit name;
     value = makeNixvim {
@@ -23,7 +19,7 @@ let
 in
 
 {
-  inherit skk-dict yaskkserv2 yaskkserv2-dict;
+  inherit (pkgs) skk-dict yaskkserv2 yaskkserv2-dict;
   neovim = makeNixvim {
     imports = with neovim-config.nixosModules; [
       default
