@@ -22,6 +22,10 @@
     extraOptions = ''
       !include ${config.age.secrets.github-nix-token.path}
     '';
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 1m";
+    };
   };
 
   # Set Git commit hash for darwin-version.
