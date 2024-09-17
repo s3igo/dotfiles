@@ -8,5 +8,8 @@
   ];
 
   enableMan = false;
-  highlight.NormalFloat.bg = "none";
+  highlight = {
+    NormalFloat.bg = "none";
+    StatusLine.bg = "none";
+  };
 }
