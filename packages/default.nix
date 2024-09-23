@@ -20,6 +20,7 @@ in
 
 {
   inherit (pkgs) skk-dict yaskkserv2 yaskkserv2-dict;
+  chissoku = pkgs.callPackage ./chissoku.nix { };
   neovim = makeNixvim {
     imports = with neovim-config.nixosModules; [
       default
