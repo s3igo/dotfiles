@@ -1,4 +1,9 @@
-{ config, system, ... }:
+{
+  config,
+  system,
+  inputs,
+  ...
+}:
 
 {
   # Auto upgrade nix package and the daemon service.
@@ -27,6 +32,13 @@
       options = "--delete-older-than 1m";
     };
   };
+
+  # Match `NIX_PATH` with this flake.
+  nix.channel.enable = false;
+  # `nixpkgs` used in `nix run nixpkgs#hello` etc.
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  # `nixpkgs` used in `nix repl '<nixpkgs>'` etc.
+  # environment.etc."nix/inputs/nixpkgs".source = inputs.nixpkgs;
 
   # Set Git commit hash for darwin-version.
   # system.configurationRevision = self.rev or self.dirtyRev or null;

@@ -23,8 +23,6 @@ in
     ./wezterm
   ];
 
-  nix.nixPath = [ "${stateHome}/nix/defexpr/channels" ];
-
   programs = {
     home-manager.enable = true;
     # rio.enable = true;
