@@ -7,6 +7,7 @@
     ../apps.nix
     ./homebrew.nix
     ./home-manager.nix
+    ./system.nix
     # (
     #   { pkgs, ... }:
     #   {
@@ -25,10 +26,19 @@
     # )
   ];
 
+  # system.activationScripts.mnt.text = ''
+  #   echo "Mounting ramdisk..." >&2
+  #   mkdir -p /Users/${user}/mnt/ramdisk
+  # '';
+
+  # environment.extraSetup = ''
+  #   echo "Mounting ramdisk..."
+  #   mkdir -p /Users/${user}/mnt/ramdisk
+  # '';
+
   users.users.${user} = {
     name = user;
     home = "/Users/${user}";
     # shell = pkgs.zsh;
   };
-
 }
