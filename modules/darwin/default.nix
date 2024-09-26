@@ -4,7 +4,7 @@
   imports = [
     ../secrets.nix
     ../system.nix
-    ../apps.nix
+    ../vim
     ./homebrew.nix
     ./home-manager.nix
     ./system.nix
