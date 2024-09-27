@@ -100,6 +100,7 @@ in
         # emacs-nox
         _1password
         aichat
+        aider-chat
         attic-client
         darwin.trash
         dust
