@@ -4,6 +4,7 @@ let
   inherit (pkgs)
     lib
     stdenv
+    stdenvNoCC
     system
     vimUtils
     fetchFromGitHub
@@ -25,7 +26,7 @@ in
   );
 
   extraPackages = lib.optional stdenv.isDarwin (
-    stdenv.mkDerivation {
+    stdenvNoCC.mkDerivation {
       pname = "im-select";
       version = "2023-07-10";
 

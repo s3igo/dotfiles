@@ -1,6 +1,6 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenvNoCC, fetchFromGitHub }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "skk-dict";
   version = "2024-08-29";
 
