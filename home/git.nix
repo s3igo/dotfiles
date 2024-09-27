@@ -1,10 +1,9 @@
 { pkgs, ... }:
+
 {
   programs.git = {
     enable = true;
     aliases = {
-      edit = "commit --amend";
-      append = "commit --amend --no-edit";
       push-force = "push --force-with-lease --force-if-includes";
       sync = "pull --rebase --autostash";
       init-empty = "!git init && git commit --allow-empty -m 'initial commit'";
