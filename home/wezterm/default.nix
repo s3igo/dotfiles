@@ -32,6 +32,6 @@ in
   };
 
   home.activation.installWeztermProfile = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ln -fnsT ${pkgs.wezterm.passthru.terminfo}/share/terminfo ~/.terminfo
+    ln -fns ${pkgs.wezterm.passthru.terminfo}/share/terminfo ~/.terminfo
   '';
 }
