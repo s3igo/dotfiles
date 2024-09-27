@@ -131,7 +131,7 @@ in
 
       # Workaruond for https://github.com/LnL7/nix-darwin/issues/122
       # See: https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1266049484
-      for p in (string split ' ' $NIX_PROFILES); fish_add_path --prepend --move -- $p/bin; end
+      for p in (string split ' ' $NIX_PROFILES); fish_add_path --prepend -- $p/bin; end
 
       if test -d /opt/homebrew
         /opt/homebrew/bin/brew shellenv | source
