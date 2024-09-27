@@ -1,4 +1,9 @@
-{ config, user, ... }:
+{
+  config,
+  pkgs,
+  user,
+  ...
+}:
 
 let
   home = "/Users/${user}";
@@ -63,6 +68,8 @@ in
   #   echo "Mounting ramdisk..."
   #   mkdir -p /Users/${user}/mnt/ramdisk
   # '';
+
+  fonts.packages = [ pkgs.udev-gothic-nf ];
 
   users.users.${user} = {
     name = user;

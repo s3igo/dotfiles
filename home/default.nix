@@ -108,7 +108,6 @@ in
         moar
         rclone
         tree
-        udev-gothic-nf
       ]
       ++ [ self.packages.${pkgs.system}.default ];
   };
