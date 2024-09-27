@@ -69,7 +69,7 @@
       {
         inherit apps packages;
 
-        devShells.default = pkgs.mkShell {
+        devShells.default = pkgs.mkShellNoCC {
           packages = [
             pkgs.statix
             self.packages.${system}.neovim
