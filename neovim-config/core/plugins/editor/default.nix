@@ -11,15 +11,9 @@
     gitsigns = {
       enable = true;
       settings = {
-        current_line_blame = true;
-        signs = {
-          add.text = "|";
-          change.text = "|";
-          untracked.text = "?";
-        };
         on_attach = ''
           function(bufnr)
-            local gs = package.loaded.gitsigns
+            local gs = require('gitsigns')
             local function map(mode, l, r, opts)
               opts = opts or {}
               opts.buffer = bufnr
@@ -27,13 +21,19 @@
             end
             map('n', ']g', gs.next_hunk, { desc = 'Next hunk' })
             map('n', '[g', gs.prev_hunk, { desc = 'Previous hunk' })
-            map('n', '<leader>gp', gs.preview_hunk, { desc = 'Preview hunk' })
-            map('n', '<leader>gr', gs.reset_hunk, { desc = 'Reset hunk' })
-            map('n', '<leader>gR', gs.reset_buffer, { desc = 'Reset buffer' })
-            map('n', '<leader>gs', gs.stage_hunk, { desc = 'Stage hunk' })
-            map('n', '<leader>gS', gs.stage_buffer, { desc = 'Stage buffer' })
-            map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
-            map('n', '<leader>gt', gs.toggle_deleted, { desc = 'Toggle deleted' })
+            map('n', '<leader>hp', gs.preview_hunk, { desc = 'Preview hunk' })
+            map('n', '<leader>hr', gs.reset_hunk, { desc = 'Reset hunk' })
+            map('v', '<leader>hr', function() gitsigns.reset_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, { desc = 'Reset hunk' })
+            map('n', '<leader>hR', gs.reset_buffer, { desc = 'Reset buffer' })
+            map('n', '<leader>hs', gs.stage_hunk, { desc = 'Stage hunk' })
+            map('v', '<leader>hs', function() gs.stage_hunk({vim.fn.line('.'), vim.fn.line('v')}) end, { desc = 'Stage hunk' })
+            map('n', '<leader>hS', gs.stage_buffer, { desc = 'Stage buffer' })
+            map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Undo stage hunk' })
+            map('n', '<leader>ht', gs.toggle_deleted, { desc = 'Toggle deleted' })
+            map('n', '<leader>hT', gs.toggle_current_line_blame, { desc = 'Toggle current line blame' })
+            map('n', '<leader>hb', function() gs.blame_line({ full = true }) end, { desc = 'Blame line' })
+            map('n', '<leader>hd', gs.diffthis, { desc = 'Diff this' })
+            map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = 'Diff this' })
             map({ 'o', 'x' }, 'ih', ':<c-u>Gitsigns select_hunk<cr>', { desc = 'inside hunk' })
           end
         '';
@@ -88,13 +88,21 @@
           action = "buffers";
           options.desc = "Fuzzy find buffers";
         };
-        "<leader>m" = {
+        "<leader>g" = {
           action = "git_files";
           options.desc = "Fuzzy find modified files";
         };
         "<leader>d" = {
           action = "diagnostics";
           options.desc = "Fuzzy find diagnostics";
+        };
+        "<leader>t" = {
+          action = "lsp_document_symbols";
+          options.desc = "Fuzzy find LSP document symbols";
+        };
+        "<leader>T" = {
+          action = "lsp_workspace_symbols";
+          options.desc = "Fuzzy find LSP workspace symbols";
         };
       };
     };
@@ -176,26 +184,6 @@
     }
     # smart-splits
     {
-      key = "<c-h>";
-      action = "<cmd>lua require('smart-splits').move_cursor_left()<cr>";
-      mode = "n";
-    }
-    {
-      key = "<c-j>";
-      action = "<cmd>lua require('smart-splits').move_cursor_down()<cr>";
-      mode = "n";
-    }
-    {
-      key = "<c-k>";
-      action = "<cmd>lua require('smart-splits').move_cursor_up()<cr>";
-      mode = "n";
-    }
-    {
-      key = "<c-l>";
-      action = "<cmd>lua require('smart-splits').move_cursor_right()<cr>";
-      mode = "n";
-    }
-    {
       key = "<a-h>";
       action = "<cmd>lua require('smart-splits').resize_left()<cr>";
       mode = "n";
@@ -216,25 +204,25 @@
       mode = "n";
     }
     {
-      key = "<leader>h";
+      key = "<c-w>H";
       action = "<cmd>lua require('smart-splits').swap_buf_left()<cr>";
       mode = "n";
       options.desc = "Swap buffer to the left";
     }
     {
-      key = "<leader>j";
+      key = "<c-w>J";
       action = "<cmd>lua require('smart-splits').swap_buf_down()<cr>";
       mode = "n";
       options.desc = "Swap buffer down";
     }
     {
-      key = "<leader>k";
+      key = "<c-w>K";
       action = "<cmd>lua require('smart-splits').swap_buf_up()<cr>";
       mode = "n";
       options.desc = "Swap buffer up";
     }
     {
-      key = "<leader>l";
+      key = "<c-w>L";
       action = "<cmd>lua require('smart-splits').swap_buf_right()<cr>";
       mode = "n";
       options.desc = "Swap buffer to the right";
