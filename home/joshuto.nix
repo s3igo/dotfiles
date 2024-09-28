@@ -1,10 +1,23 @@
 { pkgs, ... }:
 
 let
-  package = pkgs.joshuto.overrideAttrs (oldAttrs: {
+  package = pkgs.joshuto.overrideAttrs (oldAttrs: rec {
+    version = "0.9.8-unstable-2024-09-28";
+    src = pkgs.fetchFromGitHub {
+      owner = "kamiyaa";
+      repo = "joshuto";
+      rev = "7712c07077975ce63038d61afff42c262a17fd21";
+      hash = "sha256-H0sknoaeiomAPP8DMyg1duV37lDsHd2xYnEWMyLUQCs=";
+    };
+    cargoDeps = pkgs.rustPlatform.fetchCargoTarball {
+      inherit src;
+      name = "joshuto-${version}-cargo-deps";
+      hash = "sha256-xkECaxyXSQtUr1b3Xnv061sCaGVgUxAbQ8y32VZXQe0=";
+    };
     passthru.config = pkgs.runCommand "joshuto-config" { } ''
       mkdir -p $out/share
-      cp -r ${oldAttrs.src}/config $out/share/
+      # cp -r ${oldAttrs.src}/config $out/share/
+      cp -r ${src}/config $out/share/
     '';
   });
   config = "${package.passthru.config}/share/config";
