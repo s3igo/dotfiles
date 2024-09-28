@@ -2,7 +2,7 @@
   pkgs,
   config,
   # osConfig,
-  # lib,
+  lib,
   ...
 }:
 
@@ -145,7 +145,7 @@ in
       set fish_greeting
 
       # LS_COLORS
-      set --export LS_COLORS "$(${pkgs.vivid}/bin/vivid generate snazzy)"
+      set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate snazzy)"
 
       # # restricting abbrs
       # ## git
@@ -196,6 +196,6 @@ in
   };
 
   # home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #   ${pkgs.fish}/bin/fish -c 'fish_update_completions'
+  #   ${lib.getExe pkgs.fish} -c 'fish_update_completions'
   # '';
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   package = pkgs.joshuto.overrideAttrs (oldAttrs: rec {
@@ -70,7 +70,7 @@ in
     fish.functions.jo = ''
       mkdir -p /tmp/$USER
       set -l output_file "/tmp/$USER/joshuto-cwd-$fish_pid"
-      ${package}/bin/joshuto --output-file "$output_file" $argv
+      ${lib.getExe package} --output-file "$output_file" $argv
 
       # Whether the output contains the current directory
       if test $status -eq 101

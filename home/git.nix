@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.git = {
@@ -8,7 +8,7 @@
       sync = "pull --rebase --autostash";
       init-empty = "!git init && git commit --allow-empty -m 'initial commit'";
       init-exist = "!git init && git add . && git commit -m 'first commit'";
-      create = ''!f() { ${pkgs.gh}/bin/gh repo create "$1" --private && ${pkgs.ghq}/bin/ghq get -p "$1"; }; f'';
+      create = ''!f() { ${lib.getExe pkgs.gh} repo create "$1" --private && ${lib.getExe pkgs.ghq} get -p "$1"; }; f'';
       pr = ''!f() { git fetch origin "pull/$1/head:PR-$1"; }; f'';
     };
     delta = {
