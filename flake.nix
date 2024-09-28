@@ -53,8 +53,7 @@
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        overlays = import ./overlays.nix;
-        pkgs = import nixpkgs { inherit system overlays; };
+        pkgs = import nixpkgs { inherit system; };
         apps = import ./tasks.nix {
           inherit pkgs;
           inherit (flake-utils.lib) mkApp;

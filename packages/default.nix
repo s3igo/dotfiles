@@ -18,8 +18,9 @@ let
   neovimPackages = builtins.listToAttrs (map toPackage moduleNames);
 in
 
-{
-  inherit (pkgs) skk-dict yaskkserv2 yaskkserv2-dict;
+neovimPackages
+// {
+  skk-dict = pkgs.callPackage ./skk-dict.nix { };
   chissoku = pkgs.callPackage ./chissoku.nix { };
   neovim = makeNixvim {
     imports = with neovim-config.nixosModules; [
@@ -30,4 +31,3 @@ in
     ];
   };
 }
-// neovimPackages
