@@ -1,16 +1,33 @@
 {
+  lib,
   buildGoModule,
-  fetchurl,
+  fetchFromGitHub,
 }:
 
 buildGoModule rec {
   pname = "chissoku";
-  version = "v2.1.1";
+  version = "2.1.1";
 
-  src = fetchurl {
-    url = "https://github.com/northeye/chissoku/archive/refs/tags/${version}.tar.gz";
-    sha256 = "sha256-O2QZZJLBqKrY5ctcIW7RX6ZIgMg3jL6pp7vLhhfMv1k=";
+  src = fetchFromGitHub {
+    owner = "northeye";
+    repo = "chissoku";
+    rev = "v${version}";
+    hash = "sha256-47/5PkEBj/hfEVjKWRcIKKrQLVEAygA1DYRsJB11IGk=";
   };
 
   vendorHash = "sha256-CmYv5AWRR+zllvxl4olBqfmB9B8X7QSgF9fHMnU6kaU=";
+
+  ldflags = [
+    "-s"
+    "-w"
+  ];
+
+  meta = {
+    description = "A CO2 Sensor (IO-DATA UD-CO2S) Reader using USB serial";
+    homepage = "https://github.com/northeye/chissoku";
+    changelog = "https://github.com/northeye/chissoku/blob/${src.rev}/CHANGELOG.md";
+    license = lib.licenses.mit;
+    maintainers = [ ];
+    mainProgram = "chissoku";
+  };
 }
