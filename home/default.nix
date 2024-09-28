@@ -16,7 +16,6 @@ in
     ./git.nix
     ./helix.nix
     ./joshuto.nix
-    ./lazygit.nix
     ./fish.nix
     ./starship.nix
     ./zsh.nix
