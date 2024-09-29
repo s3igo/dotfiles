@@ -1,5 +1,9 @@
 { pkgs, ... }:
 
+let
+  inherit (import ../../utils.nix) mapMode;
+in
+
 {
   plugins = {
     luasnip.enable = true;
@@ -182,53 +186,45 @@
     )
   '';
 
-  keymaps = [
-    # text-case.nvim
-    {
-      key = "ga";
-      action = "<cmd>TextCaseOpenTelescope<cr>";
-      mode = [
-        "n"
-        "x"
-      ];
-      options.desc = "Change case";
-    }
-    # nvim-various-textobjs
-    {
-      key = "ii";
-      action = "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<cr>";
-      mode = [
+  keymaps =
+    [
+      # text-case.nvim
+      {
+        key = "ga";
+        action = "<cmd>TextCaseOpenTelescope<cr>";
+        mode = [
+          "n"
+          "x"
+        ];
+        options.desc = "Change case";
+      }
+    ]
+    ++ map
+      (mapMode [
         "o"
         "x"
+      ])
+      [
+        # nvim-various-textobjs
+        {
+          key = "ii";
+          action = "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<cr>";
+          options.desc = "Inside indentation";
+        }
+        {
+          key = "ai";
+          action = "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<cr>";
+          options.desc = "Around indentation";
+        }
+        {
+          key = "is";
+          action = "<cmd>lua require('various-textobjs').subword('inner')<cr>";
+          options.desc = "Inside subword";
+        }
+        {
+          key = "as";
+          action = "<cmd>lua require('various-textobjs').subword('outer')<cr>";
+          options.desc = "Around subword";
+        }
       ];
-      options.desc = "Inside indentation";
-    }
-    {
-      key = "ai";
-      action = "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<cr>";
-      mode = [
-        "o"
-        "x"
-      ];
-      options.desc = "Around indentation";
-    }
-    {
-      key = "is";
-      action = "<cmd>lua require('various-textobjs').subword('inner')<cr>";
-      mode = [
-        "o"
-        "x"
-      ];
-      options.desc = "Inside subword";
-    }
-    {
-      key = "as";
-      action = "<cmd>lua require('various-textobjs').subword('outer')<cr>";
-      mode = [
-        "o"
-        "x"
-      ];
-      options.desc = "Around subword";
-    }
-  ];
 }

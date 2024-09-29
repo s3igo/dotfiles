@@ -1,5 +1,9 @@
 { pkgs, ... }:
 
+let
+  inherit (import ../../../utils.nix) mapMode;
+in
+
 {
   plugins = {
     web-devicons.enable = true;
@@ -161,70 +165,59 @@
 
   # extraConfigLua = builtins.readFile ./heirline.lua;
 
-  keymaps = [
+  keymaps = map (mapMode "n") [
     # mini.bufremove
     {
       key = "<leader>w";
       action = "<cmd>lua require('mini.bufremove').delete()<cr>";
-      mode = "n";
       options.desc = "Delete buffer";
     }
     # nvim-tree
     {
       key = "<leader>e";
       action = "<cmd>NvimTreeToggle<cr>";
-      mode = "n";
       options.desc = "Toggle NvimTree";
     }
     {
       key = "<leader>o";
       action = "<cmd>NvimTreeFindFile<cr>";
-      mode = "n";
       options.desc = "Open the currently open file in NvimTree";
     }
     # smart-splits
     {
       key = "<a-h>";
       action = "<cmd>lua require('smart-splits').resize_left()<cr>";
-      mode = "n";
     }
     {
       key = "<a-j>";
       action = "<cmd>lua require('smart-splits').resize_down()<cr>";
-      mode = "n";
     }
     {
       key = "<a-k>";
       action = "<cmd>lua require('smart-splits').resize_up()<cr>";
-      mode = "n";
     }
     {
       key = "<a-l>";
       action = "<cmd>lua require('smart-splits').resize_right()<cr>";
-      mode = "n";
     }
     {
       key = "<c-w>H";
       action = "<cmd>lua require('smart-splits').swap_buf_left()<cr>";
-      mode = "n";
       options.desc = "Swap buffer to the left";
     }
     {
       key = "<c-w>J";
       action = "<cmd>lua require('smart-splits').swap_buf_down()<cr>";
-      mode = "n";
       options.desc = "Swap buffer down";
     }
     {
       key = "<c-w>K";
       action = "<cmd>lua require('smart-splits').swap_buf_up()<cr>";
-      mode = "n";
       options.desc = "Swap buffer up";
     }
     {
       key = "<c-w>L";
       action = "<cmd>lua require('smart-splits').swap_buf_right()<cr>";
-      mode = "n";
       options.desc = "Swap buffer to the right";
     }
   ];

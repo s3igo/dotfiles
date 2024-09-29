@@ -1,26 +1,10 @@
 let
-  map' =
-    mode:
-    {
-      key,
-      action,
-      options ? { },
-    }:
-    {
-      inherit
-        mode
-        key
-        action
-        options
-        ;
-    };
-  imap = map' "i";
-  cmap = map' "c";
+  inherit (import ../../../utils.nix) mapMode;
 in
 
 {
   keymaps =
-    map imap [
+    map (mapMode "i") [
       {
         key = "<c-t>";
         action.__raw = builtins.readFile ./transpose.lua;
@@ -66,7 +50,7 @@ in
         action = "<del>";
       }
     ]
-    ++ map cmap [
+    ++ map (mapMode "c") [
       {
         key = "<c-f>";
         action = "<right>";
