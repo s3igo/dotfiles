@@ -51,15 +51,6 @@ in
       };
       nix-direnv.enable = true;
     };
-    gh = {
-      enable = true;
-      settings = {
-        # workaround for https://github.com/nix-community/home-manager/issues/4744
-        # see: https://github.com/cli/cli/issues/8462
-        version = 1;
-        git_protocol = "ssh";
-      };
-    };
     ripgrep = {
       enable = true;
       arguments = [ "--smart-case" ];
