@@ -93,9 +93,9 @@ in
         aider-chat
         attic-client
         darwin.trash
-        dust
         fd
         ghq
+        lsp-ai
         moar
         rclone
         tree
