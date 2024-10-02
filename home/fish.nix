@@ -1,8 +1,7 @@
 {
   pkgs,
-  config,
-  # osConfig,
   lib,
+  config,
   ...
 }:
 
@@ -45,6 +44,7 @@ in
         mkdir -p ${stateHome}/ghq
         echo $dest > ${stateHome}/ghq/lastdir
       '';
+      gg = "__ghq-fzf";
     };
     shellAbbrs =
       let
@@ -185,7 +185,7 @@ in
       bind \b history-pager-delete or backward-delete-char
 
       ## functions
-      bind \cg __ghq-fzf
+      # bind \cg __ghq-fzf
     '';
     shellInitLast = ''
       # disable the `fzf-file-widget` keybind and use <C-t> to `transpose-chars`
@@ -194,8 +194,4 @@ in
       end
     '';
   };
-
-  # home.activation.updateFishCompletions = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-  #   ${lib.getExe pkgs.fish} -c 'fish_update_completions'
-  # '';
 }
