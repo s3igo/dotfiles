@@ -1,51 +1,100 @@
 { user, ... }:
 
+let
+  defineModel =
+    name:
+    {
+      model,
+      completion ? { },
+    }:
+    {
+      model.${name} = model;
+      completion = completion // {
+        model = name;
+      };
+    };
+  model1 = defineModel "model1" {
+    model = {
+      type = "ollama";
+      model = "qwen2.5-coder:1.5b";
+    };
+    completion = {
+      parameters = {
+        max_context = 2048;
+        options.num_predict = 32;
+        fim = {
+          start = "<|fim_prefix|>";
+          middle = "<|fim_suffix|>";
+          end = "<|fim_middle|>";
+        };
+      };
+    };
+  };
+in
+
 {
   programs.helix = {
     enable = true;
-    languages.language = [
-      {
-        name = "c";
-        file-types = [
-          "c"
-          "h"
-        ];
-        indent = {
-          tab-width = 4;
-          unit = "    ";
+    languages = {
+      language-server = {
+        lsp-ai = {
+          command = "lsp-ai";
+          config = {
+            memory.file_store = { };
+            models = model1.model;
+            inherit (model1) completion;
+          };
         };
-      }
-      {
-        name = "yaml";
-        file-types = [
-          "yaml"
-          "yml"
-        ];
-        indent = {
-          tab-width = 2;
-          unit = "  ";
-        };
-      }
-      {
-        name = "dockerfile";
-        file-types = [
-          "Dockerfile"
-          "dockerfile"
-        ];
-        indent = {
-          tab-width = 4;
-          unit = "  ";
-        };
-        comment-token = "#";
-      }
-      {
-        name = "lua";
-        indent = {
-          tab-width = 4;
-          unit = "    ";
-        };
-      }
-    ];
+      };
+      language = [
+        {
+          name = "c";
+          file-types = [
+            "c"
+            "h"
+          ];
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+        }
+        {
+          name = "nix";
+          file-types = [ "nix" ];
+          language-servers = [ "lsp-ai" ];
+        }
+        {
+          name = "yaml";
+          file-types = [
+            "yaml"
+            "yml"
+          ];
+          indent = {
+            tab-width = 2;
+            unit = "  ";
+          };
+        }
+        {
+          name = "dockerfile";
+          file-types = [
+            "Dockerfile"
+            "dockerfile"
+          ];
+          indent = {
+            tab-width = 4;
+            unit = "  ";
+          };
+          comment-token = "#";
+        }
+        {
+          name = "lua";
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+        }
+      ];
+    };
     settings = {
       theme = "catppuccin_mocha_transparent";
       editor = {
@@ -170,13 +219,9 @@
         );
       in
       transparentThemes;
-  };
-
-  xdg.configFile = {
-    "helix/ignore".text = ''
-      # Nix
-      .direnv/
-      result
-    '';
+    ignores = [
+      ".direnv/"
+      "result"
+    ];
   };
 }
