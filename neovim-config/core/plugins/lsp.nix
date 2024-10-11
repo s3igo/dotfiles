@@ -3,7 +3,7 @@
   plugins = {
     lsp = {
       enable = true;
-      servers.typos-lsp.enable = true;
+      servers.typos_lsp.enable = true;
       keymaps = {
         diagnostic = {
           "<leader>." = {
@@ -57,7 +57,7 @@
     };
   };
 
-  extraPlugins = with pkgs.vimPlugins; [ actions-preview-nvim ];
+  extraPlugins = [ pkgs.vimPlugins.actions-preview-nvim ];
 
   extraConfigLua = ''
     require('actions-preview').setup({})

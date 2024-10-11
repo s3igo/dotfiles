@@ -11,7 +11,7 @@
 
   plugins = {
     treesitter.nixvimInjections = true;
-    lsp.servers.nil-ls = {
+    lsp.servers.nil_ls = {
       enable = true;
       settings.formatting.command = [ "nixfmt" ];
     };

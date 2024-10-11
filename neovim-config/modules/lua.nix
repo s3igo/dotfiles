@@ -1,6 +1,6 @@
 {
   plugins = {
-    lsp.servers.lua-ls = {
+    lsp.servers.lua_ls = {
       enable = true;
       onAttach.function = ''
         client.server_capabilities.documentFormattingProvider = false
