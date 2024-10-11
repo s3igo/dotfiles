@@ -17,6 +17,7 @@ in
     ./helix.nix
     ./joshuto.nix
     ./fish.nix
+    ./fzf-patch.nix
     ./starship.nix
     ./zsh.nix
     ./wezterm
@@ -38,7 +39,8 @@ in
     fzf = {
       enable = true;
       changeDirWidgetCommand = "fd --type directory --hidden --follow --exclude .git";
-      changeDirWidgetOptions = [ "--preview 'ls -la {}'" ];
+      changeDirWidgetOptions = [ "--preview 'ls -la --color=always {}'" ];
+      fileWidgetCommand = ""; # To disable ctrl-t
       defaultCommand = "fd --type file --hidden --follow --exclude .git";
     };
     jq.enable = true;

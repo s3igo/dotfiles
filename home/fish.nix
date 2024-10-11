@@ -187,11 +187,5 @@ in
       ## functions
       # bind \cg __ghq-fzf
     '';
-    shellInitLast = ''
-      # disable the `fzf-file-widget` keybind and use <C-t> to `transpose-chars`
-      if status --is-interactive
-        bind --erase \ct
-      end
-    '';
   };
 }
