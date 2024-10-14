@@ -33,6 +33,7 @@
       "anytype"
       "arc"
       "cursor"
+      "deskpad"
       "discord"
       "firefox"
       # "font-ipaexfont"
