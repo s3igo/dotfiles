@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 let
-  package = pkgs.joshuto.overrideAttrs (oldAttrs: rec {
+  package = pkgs.joshuto.overrideAttrs rec {
     version = "0.9.8-unstable-2024-09-28";
     src = pkgs.fetchFromGitHub {
       owner = "kamiyaa";
@@ -14,12 +14,11 @@ let
       name = "joshuto-${version}-cargo-deps";
       hash = "sha256-xkECaxyXSQtUr1b3Xnv061sCaGVgUxAbQ8y32VZXQe0=";
     };
-    passthru.config = pkgs.runCommand "joshuto-config" { } ''
+    passthru.config = pkgs.runCommandLocal "joshuto-config" { } ''
       mkdir -p $out/share
-      # cp -r ${oldAttrs.src}/config $out/share/
       cp -r ${src}/config $out/share/
     '';
-  });
+  };
   config = "${package.passthru.config}/share/config";
   tomlToAttrSet = name: with builtins; fromTOML (readFile "${config}/${name}.toml");
   defaultKeymap = tomlToAttrSet "keymap";
