@@ -48,11 +48,11 @@ let
     "SKK-JISYO.itaiji.JIS3_4"
     "SKK-JISYO.mazegaki"
   ];
+  skk-dict = pkgs.callPackage ./packages/skk-dict.nix { };
   install-skk-dicts = writeShellApplication {
     name = "install-skk-dicts";
     text =
       let
-        skk-dict = pkgs.callPackage ./packages/skk-dict.nix { };
         cmd = jisyo: "cp ${skk-dict}/share/${jisyo} ${target}/${jisyo}";
         cmds = map cmd jisyoList;
         script = lib.concatStringsSep "\n" cmds;
@@ -62,12 +62,14 @@ let
   cleanup-skk-dicts = writeShellApplication {
     name = "cleanup-skk-dicts";
     text =
-      let
-        cmd = jisyo: "rm -f ${target}/${jisyo}";
-        cmds = map cmd jisyoList;
-        script = lib.concatStringsSep "\n" cmds;
-      in
-      if pkgs.stdenv.isDarwin then script else null;
+      if pkgs.stdenv.isDarwin then
+        ''
+          while read -r jisyo; do
+            rm -f ${target}/"$jisyo"
+          done < ${skk-dict.passthru.list}/share/dicts.txt
+        ''
+      else
+        null;
   };
 in
 

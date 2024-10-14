@@ -1,6 +1,10 @@
-{ stdenvNoCC, fetchFromGitHub }:
+{
+  stdenvNoCC,
+  fetchFromGitHub,
+  runCommandLocal,
+}:
 
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation rec {
   pname = "skk-dict";
   version = "2024-08-29";
 
@@ -19,5 +23,10 @@ stdenvNoCC.mkDerivation {
     cp zipcode/SKK-JISYO.* $out/share/
 
     runHook postInstall
+  '';
+
+  passthru.list = runCommandLocal "skk-dict-list" { } ''
+    mkdir -p $out/share
+    find ${src} ${src}/zipcode -maxdepth 1 -name 'SKK-JISYO.*' -exec basename {} \; | sort > $out/share/dicts.txt
   '';
 }
