@@ -59,14 +59,18 @@
           inherit (flake-utils.lib) mkApp;
           nix-darwin' = nix-darwin.packages.${system}.default;
         };
-        packages = import ./packages {
-          inherit pkgs;
-          inherit (nixvim.legacyPackages.${system}) makeNixvim;
-          neovim-config = (import ./neovim-config/flake.nix).outputs { };
+
+        inherit (nixvim.legacyPackages.${system}) makeNixvim;
+        neovim-config = (import ./neovim-config/flake.nix).outputs { };
+
+        packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
+        checks = import ./checks.nix {
+          inherit makeNixvim neovim-config;
+          inherit (nixvim.lib.${system}.check) mkTestDerivationFromNvim;
         };
       in
       {
-        inherit apps packages;
+        inherit apps packages checks;
 
         devShells.default = pkgs.mkShellNoCC {
           packages = [
