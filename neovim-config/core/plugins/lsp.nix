@@ -1,4 +1,7 @@
+_:
+
 { pkgs, ... }:
+
 {
   plugins = {
     lsp = {

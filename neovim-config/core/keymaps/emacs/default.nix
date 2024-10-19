@@ -1,6 +1,4 @@
-let
-  inherit (import ../../../utils.nix) mapMode;
-in
+{ mapMode, ... }:
 
 {
   keymaps =

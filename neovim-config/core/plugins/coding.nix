@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ mapMode, ... }:
 
-let
-  inherit (import ../../utils.nix) mapMode;
-in
+{ pkgs, ... }:
 
 {
   plugins = {

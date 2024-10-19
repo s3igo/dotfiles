@@ -1,5 +1,7 @@
+utils@{ withUtils, ... }:
+
 {
-  imports = [
+  imports = withUtils utils [
     ./coding.nix
     ./editor
     ./treesitter.nix

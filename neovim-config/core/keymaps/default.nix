@@ -1,9 +1,7 @@
-let
-  inherit (import ../../utils.nix) mapMode;
-in
+utils@{ mapMode, withUtils, ... }:
 
 {
-  imports = [ ./emacs ];
+  imports = withUtils utils [ ./emacs ];
 
   globals.mapleader = " ";
 

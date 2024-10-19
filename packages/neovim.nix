@@ -12,7 +12,7 @@ let
         nixosModules.${name}
       ];
     };
- };
+  };
   moduleNames = builtins.attrNames neovim-config.nixosModules;
   derivedPackages = builtins.listToAttrs (map toPackage moduleNames);
 in
