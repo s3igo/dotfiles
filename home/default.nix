@@ -57,6 +57,12 @@ in
       enable = true;
       arguments = [ "--smart-case" ];
     };
+    zellij = {
+      enable = true;
+      settings = {
+        pane_frames = false;
+      };
+    };
   };
 
   xdg = {
