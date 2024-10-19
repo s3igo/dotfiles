@@ -6,6 +6,13 @@
 
 let
   inherit (pkgs) lib writeShellApplication;
+  clone = writeShellApplication {
+    name = "clone";
+    runtimeInputs = [ pkgs.git ];
+    text = ''
+      git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
+    '';
+  };
   deploy = writeShellApplication {
     name = "deploy";
     runtimeInputs = [ nix-darwin' ];
@@ -74,6 +81,7 @@ let
 in
 
 {
+  clone = mkApp { drv = clone; };
   deploy = mkApp { drv = deploy; };
   wipe-history = mkApp { drv = wipe-history; };
   versions = mkApp { drv = versions; };
