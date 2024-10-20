@@ -4,7 +4,21 @@ let
   withUtils = attrs: map (path: lib.modules.importApply path attrs);
   utils = {
     inherit withUtils;
-    inherit (import ../utils.nix) mapMode;
+    mapMode =
+      mode:
+      {
+        key,
+        action,
+        options ? { },
+      }:
+      {
+        inherit
+          mode
+          key
+          action
+          options
+          ;
+      };
   };
 in
 
