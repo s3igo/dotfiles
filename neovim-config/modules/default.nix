@@ -1,11 +1,9 @@
-{ names }:
-
 let
-  nameToPath = name: ./. + "/${name}.nix";
-  toPathAttrs = name: {
-    inherit name;
-    value = nameToPath name;
+  files = with builtins; filter (name: name != "default.nix") (attrNames (readDir ./.));
+  toPathAttrs = file: {
+    name = builtins.replaceStrings [ ".nix" ] [ "" ] file;
+    value = ./${file};
   };
 in
 
-builtins.listToAttrs (map toPathAttrs names) // { full.imports = map nameToPath names; }
+builtins.listToAttrs (map toPathAttrs files) // { full.imports = map (file: ./${file}) files; }
