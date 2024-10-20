@@ -75,7 +75,10 @@
         devShells.default = pkgs.mkShellNoCC {
           packages = [
             pkgs.statix
-            self.packages.${system}.neovim
+            (neovim-config.lib.customName {
+              inherit pkgs;
+              nvim = packages.neovim;
+            })
           ];
         };
 

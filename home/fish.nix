@@ -111,11 +111,11 @@ in
         nrg = cursor // text "nix run github:% --";
         nrgm = cursor // text "nix run github:s3igo/% --";
         nrp = cursor // text "nix run nixpkgs#% --";
+        nrv = "nix run .#neovim --";
+        nrvd = "nix run $HOME/.dotfiles#neovim --";
         ns = cursor // text "nix shell nixpkgs#%";
-        nv = "nix run .#neovim --";
-        nvd = "nix run $HOME/.dotfiles#neovim --";
-        nvdr = "nix run github:s3igo/dotfiles#neovim --";
-        nvp = "nix run nixpkgs#neovim --";
+        nv = "neovim";
+        nvf = "neovim flake.nix";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         rc = "rclone";
