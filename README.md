@@ -77,7 +77,7 @@ nix run .#cleanup-skk-dicts
 - `home/`: Contains configuration files for various tools and applications
 - `modules/`: Nix modules for system configuration
 - `packages/`: Custom Nix packages
-- `neovim-config/`: Neovim configuration files
+- `neovim-config/`: Neovim configuration files (independent flake, can be referenced as `github:s3igo/dotfiles?dir=neovim-config`)
 
 ## 📄 License
 
