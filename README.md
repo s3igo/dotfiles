@@ -56,6 +56,9 @@ nix run github:lnl7/nix-darwin -- switch --flake github:s3igo/dotfiles#<host_nam
 Here are some common commands you can use:
 
 ```shell
+# Update flake inputs and commit the lock file
+nix flake update --commit-lock-file
+
 # Delete previous configurations
 nix run .#wipe-history
 
