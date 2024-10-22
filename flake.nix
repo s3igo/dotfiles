@@ -49,56 +49,78 @@
 
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { withSystem, ... }:
+      {
+        systems = import inputs.systems;
 
-      perSystem =
-        {
-          pkgs,
-          inputs',
-          self',
-          ...
-        }:
-        let
-          inherit (inputs'.nixvim.legacyPackages) makeNixvim;
-          neovim-config = (import ./neovim-config/flake.nix).outputs { };
-        in
-        {
-          apps = import ./tasks.nix {
-            inherit pkgs;
-            nix-darwin' = inputs'.nix-darwin.packages.default;
-          };
-          packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
-          checks = import ./checks.nix {
-            inherit makeNixvim neovim-config;
-            inherit (inputs'.nixvim.lib.check) mkTestDerivationFromNvim;
-          };
-          devShells.default = pkgs.mkShellNoCC {
-            packages = [
-              pkgs.statix
-              (neovim-config.lib.customName {
-                inherit pkgs;
-                nvim = self'.packages.neovim;
-              })
-            ];
-          };
-          formatter = pkgs.nixfmt-rfc-style;
-        };
-
-      flake = {
-        darwinConfigurations = {
-          mbp2023 =
-            let
-              user = "s3igo";
-              system = "aarch64-darwin";
-            in
-            inputs.nix-darwin.lib.darwinSystem {
-              specialArgs = {
-                inherit inputs user system;
-              };
-              modules = [ ./modules/darwin/default.nix ];
+        perSystem =
+          {
+            pkgs,
+            inputs',
+            self',
+            ...
+          }:
+          let
+            inherit (inputs'.nixvim.legacyPackages) makeNixvim;
+            neovim-config = (import ./neovim-config/flake.nix).outputs { };
+          in
+          {
+            apps = import ./tasks.nix {
+              inherit pkgs;
+              nix-darwin' = inputs'.nix-darwin.packages.default;
             };
+            packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
+            checks = import ./checks.nix {
+              inherit makeNixvim neovim-config;
+              inherit (inputs'.nixvim.lib.check) mkTestDerivationFromNvim;
+            };
+            devShells.default = pkgs.mkShellNoCC {
+              packages = [
+                pkgs.statix
+                (neovim-config.lib.customName {
+                  inherit pkgs;
+                  nvim = self'.packages.neovim;
+                })
+              ];
+            };
+            formatter = pkgs.nixfmt-rfc-style;
+          };
+
+        flake = {
+          darwinConfigurations = {
+            mbp2023 =
+              let
+                user = "s3igo";
+                system = "aarch64-darwin";
+              in
+              withSystem system (
+                _:
+                inputs.nix-darwin.lib.darwinSystem {
+                  specialArgs = {
+                    inherit
+                      inputs
+                      user
+                      system
+                      ;
+                  };
+                  modules = [
+                    (
+                      { pkgs, ... }:
+                      {
+                        users.users.${user} = {
+                          name = user;
+                          home = "/Users/${user}";
+                          # shell = pkgs.zsh;
+                        };
+                      }
+                    )
+                    ./modules/darwin/default.nix
+                  ];
+                }
+              );
+          };
         };
-      };
-    };
+      }
+    );
 }

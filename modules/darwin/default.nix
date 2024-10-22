@@ -6,7 +6,7 @@
 }:
 
 let
-  home = "/Users/${user}";
+  inherit (config.users.users.${user}) home;
 in
 
 {
@@ -44,10 +44,4 @@ in
   ];
 
   fonts.packages = [ pkgs.udev-gothic-nf ];
-
-  users.users.${user} = {
-    name = user;
-    inherit home;
-    # shell = pkgs.zsh;
-  };
 }
