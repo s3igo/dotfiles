@@ -1,6 +1,5 @@
 {
   pkgs,
-  mkApp,
   nix-darwin',
 }:
 
@@ -81,10 +80,28 @@ let
 in
 
 {
-  clone = mkApp { drv = clone; };
-  deploy = mkApp { drv = deploy; };
-  wipe-history = mkApp { drv = wipe-history; };
-  versions = mkApp { drv = versions; };
-  install-skk-dicts = mkApp { drv = install-skk-dicts; };
-  cleanup-skk-dicts = mkApp { drv = cleanup-skk-dicts; };
+  clone = {
+    type = "app";
+    program = "${clone}/bin/clone";
+  };
+  deploy = {
+    type = "app";
+    program = "${deploy}/bin/deploy";
+  };
+  wipe-history = {
+    type = "app";
+    program = "${wipe-history}/bin/wipe-history";
+  };
+  versions = {
+    type = "app";
+    program = "${versions}/bin/versions";
+  };
+  install-skk-dicts = {
+    type = "app";
+    program = "${install-skk-dicts}/bin/install-skk-dicts";
+  };
+  cleanup-skk-dicts = {
+    type = "app";
+    program = "${cleanup-skk-dicts}/bin/cleanup-skk-dicts";
+  };
 }
