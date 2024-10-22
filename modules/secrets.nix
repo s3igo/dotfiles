@@ -40,6 +40,10 @@ in
         attic-token = {
           file = "${secrets}/config/attic.age";
         } // rootReadable;
+
+        aider-anthropic = {
+          file = "${secrets}/config/aider-anthropic.age";
+        } // userReadable;
       };
   };
 }

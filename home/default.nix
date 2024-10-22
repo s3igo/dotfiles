@@ -13,6 +13,7 @@ in
 
 {
   imports = [
+    ./aider.nix
     ./git.nix
     ./helix.nix
     ./joshuto.nix
@@ -98,7 +99,6 @@ in
         # emacs-nox
         _1password
         aichat
-        aider-chat
         attic-client
         darwin.trash
         fd
@@ -108,6 +108,6 @@ in
         rclone
         tree
       ]
-      ++ [ self.packages.${pkgs.system}.default ];
+      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   };
 }
