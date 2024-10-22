@@ -20,9 +20,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     agenix = {
       url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     homebrew-core = {
