@@ -1,8 +1,14 @@
 {
   outputs = _: {
-    nixosModules = (import ./modules) // {
-      default = ./core;
-    };
+    nixosModules =
+      let
+        paths = with builtins; attrNames (readDir ./modules);
+        toPathAttrs = path: {
+          name = builtins.replaceStrings [ ".nix" ] [ "" ] path;
+          value = ./modules/${path};
+        };
+      in
+      builtins.listToAttrs (map toPathAttrs paths);
 
     lib.customName =
       {

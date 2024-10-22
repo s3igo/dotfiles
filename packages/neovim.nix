@@ -19,6 +19,7 @@ in
 
 derivedPackages
 // {
+  full = makeNixvim { imports = builtins.attrValues neovim-config.nixosModules; };
   neovim = makeNixvim {
     imports = with neovim-config.nixosModules; [
       default
