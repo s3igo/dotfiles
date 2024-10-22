@@ -11,6 +11,7 @@ let
     auto-commits = false;
     attribute-author = false;
     attribute-committer = false;
+    dark-mode = true;
   };
 in
 
