@@ -1,4 +1,6 @@
 {
+  description = "Personal dotfiles for reproducible environment setup using Nix";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
