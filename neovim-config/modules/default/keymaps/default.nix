@@ -7,19 +7,6 @@ utils@{ mapMode, withUtils, ... }:
 
   keymaps =
     [
-      # files
-      {
-        key = "<leader>s";
-        action = "<cmd>w<cr>";
-        mode = "n";
-        options.desc = "Save";
-      }
-      {
-        key = "<leader>q";
-        action = "<cmd>qa<cr>";
-        mode = "n";
-        options.desc = "Quit all";
-      }
       # terminal
       {
         key = "<c-]>";
@@ -58,6 +45,17 @@ utils@{ mapMode, withUtils, ... }:
         key = "]b";
         action = "<cmd>bn<cr>";
         options.desc = "Next buffer";
+      }
+      # files
+      {
+        key = "<leader>s";
+        action = "<cmd>w<cr>";
+        options.desc = "Save";
+      }
+      {
+        key = "<leader>q";
+        action = "<cmd>qa<cr>";
+        options.desc = "Quit all";
       }
     ]
     ++
