@@ -4,6 +4,7 @@
       pkgs,
       lib,
       inputs',
+      self',
       ...
     }:
 
@@ -58,7 +59,7 @@
         "SKK-JISYO.itaiji.JIS3_4"
         "SKK-JISYO.mazegaki"
       ];
-      skk-dict = pkgs.callPackage ./packages/skk-dict.nix { };
+      inherit (self'.packages) skk-dict;
       install-skk-dicts = writeShellApplication {
         name = "install-skk-dicts";
         text =
@@ -72,14 +73,12 @@
       cleanup-skk-dicts = writeShellApplication {
         name = "cleanup-skk-dicts";
         text =
-          if pkgs.stdenv.isDarwin then
-            ''
-              while read -r jisyo; do
-                rm -f ${target}/"$jisyo"
-              done < ${skk-dict.passthru.list}/share/dicts.txt
-            ''
-          else
-            null;
+          let
+            cmd = jisyo: "rm -f ${target}/${jisyo}";
+            cmds = map cmd skk-dict.passthru.list;
+            script = lib.concatStringsSep "\n" cmds;
+          in
+          if pkgs.stdenv.isDarwin then script else null;
       };
     in
 

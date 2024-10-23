@@ -1,4 +1,5 @@
 {
+  lib,
   stdenvNoCC,
   fetchFromGitHub,
   runCommandLocal,
@@ -25,8 +26,13 @@ stdenvNoCC.mkDerivation rec {
     runHook postInstall
   '';
 
-  passthru.list = runCommandLocal "skk-dict-list" { } ''
-    mkdir -p $out/share
-    find ${src} ${src}/zipcode -maxdepth 1 -name 'SKK-JISYO.*' -exec basename {} \; | sort > $out/share/dicts.txt
-  '';
+  passthru.list =
+    let
+      sources = [
+        src
+        (src + "/zipcode")
+      ];
+      paths = with builtins; concatMap (path: attrNames (readDir path)) sources;
+    in
+    builtins.filter (lib.strings.hasPrefix "SKK-JISYO.") paths;
 }
