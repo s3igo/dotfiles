@@ -2,8 +2,10 @@
   description = "Personal dotfiles for reproducible environment setup using Nix";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
+    flake-root.url = "github:srid/flake-root";
+    mission-control.url = "github:Platonic-Systems/mission-control";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
@@ -13,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
-      url = "github:lnl7/nix-darwin";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -29,15 +31,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     homebrew-core = {
-      url = "github:homebrew/homebrew-core";
+      url = "github:Homebrew/homebrew-core";
       flake = false;
     };
     homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
+      url = "github:Homebrew/homebrew-cask";
       flake = false;
     };
     homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
+      url = "github:Homebrew/homebrew-bundle";
       flake = false;
     };
     macos-fuse-t-cask = {
@@ -63,6 +65,7 @@
           {
             pkgs,
             lib,
+            config,
             self',
             neovim-config,
             ...
@@ -74,6 +77,7 @@
               directory = ./packages;
             };
             devShells.default = pkgs.mkShellNoCC {
+              inputsFrom = [ config.mission-control.devShell ];
               packages = [
                 pkgs.statix
                 (neovim-config.lib.customName {

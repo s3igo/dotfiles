@@ -1,113 +1,138 @@
+{ inputs, ... }:
+
 {
+  imports = [
+    inputs.mission-control.flakeModule
+    inputs.flake-root.flakeModule
+  ];
+
   perSystem =
     {
       pkgs,
       lib,
+      config,
       inputs',
       self',
       ...
     }:
 
     let
-      inherit (pkgs) writeShellApplication;
-      clone = writeShellApplication {
-        name = "clone";
-        runtimeInputs = [ pkgs.git ];
-        text = ''
-          git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
-        '';
-      };
-      deploy = writeShellApplication {
-        name = "deploy";
-        runtimeInputs = [ inputs'.nix-darwin.packages.default ];
-        text = ''
-          darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
-        '';
-      };
-      wipe-history = writeShellApplication {
-        name = "wipe-history";
-        text = ''
-          sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
-          nix profile wipe-history --profile "$XDG_STATE_HOME/nix/profiles/home-manager"
-        '';
-      };
-      versions = writeShellApplication {
-        name = "versions";
-        runtimeInputs = [ pkgs.gawk ];
-        text = ''
-          nix profile diff-closures --profile /nix/var/nix/profiles/system \
-            | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
-        '';
-      };
       target = "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries";
-      jisyoList = [
-        "SKK-JISYO.L"
-        "SKK-JISYO.jinmei"
-        "SKK-JISYO.fullname"
-        "SKK-JISYO.geo"
-        "SKK-JISYO.propernoun"
-        "SKK-JISYO.station"
-        "SKK-JISYO.assoc"
-        "SKK-JISYO.edict"
-        # "SKK-JISYO.edict2" # occurs error
-        "SKK-JISYO.zipcode"
-        "SKK-JISYO.office.zipcode"
-        "SKK-JISYO.JIS2"
-        # "SKK-JISYO.JIS3_4" # occurs error
-        "SKK-JISYO.JIS2004"
-        "SKK-JISYO.itaiji"
-        "SKK-JISYO.itaiji.JIS3_4"
-        "SKK-JISYO.mazegaki"
-      ];
       inherit (self'.packages) skk-dict;
-      install-skk-dicts = writeShellApplication {
-        name = "install-skk-dicts";
-        text =
-          let
-            cmd = jisyo: "cp ${skk-dict}/share/${jisyo} ${target}/${jisyo}";
-            cmds = map cmd jisyoList;
-            script = lib.concatStringsSep "\n" cmds;
-          in
-          if pkgs.stdenv.isDarwin then script else null;
-      };
-      cleanup-skk-dicts = writeShellApplication {
-        name = "cleanup-skk-dicts";
-        text =
-          let
-            cmd = jisyo: "rm -f ${target}/${jisyo}";
-            cmds = map cmd skk-dict.passthru.list;
-            script = lib.concatStringsSep "\n" cmds;
-          in
-          if pkgs.stdenv.isDarwin then script else null;
-      };
+      inherit (pkgs) writeShellApplication;
     in
 
     {
-      apps = {
-        clone = {
-          type = "app";
-          program = "${clone}/bin/clone";
-        };
+      flake-root.projectRootFile = "flake.lock"; # Because of `neovim-config` diredtory also has `flake.nix`
+
+      mission-control.scripts = {
         deploy = {
-          type = "app";
-          program = "${deploy}/bin/deploy";
+          description = "Deploy system configuration using nix-darwin";
+          category = "System";
+          exec = writeShellApplication {
+            name = "deploy";
+            runtimeInputs = [ inputs'.nix-darwin.packages.default ];
+            text = ''
+              darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+            '';
+          };
         };
+
         wipe-history = {
-          type = "app";
-          program = "${wipe-history}/bin/wipe-history";
+          description = "Clear profile history for system and home-manager";
+          category = "Maintenance";
+          exec = ''
+            sudo nix profile wipe-history --profile /nix/var/nix/profiles/system
+            nix profile wipe-history --profile "$XDG_STATE_HOME/nix/profiles/home-manager"
+          '';
         };
+
         versions = {
-          type = "app";
-          program = "${versions}/bin/versions";
+          description = "Show system profile version differences";
+          category = "System";
+          exec = writeShellApplication {
+            name = "versions";
+            runtimeInputs = [ pkgs.gawk ];
+            text = ''
+              nix profile diff-closures --profile /nix/var/nix/profiles/system \
+                | awk 'BEGIN { RS="" } { par=$0 } END { print par }'
+            '';
+          };
         };
+
         install-skk-dicts = {
-          type = "app";
-          program = "${install-skk-dicts}/bin/install-skk-dicts";
+          description = "Install SKK dictionaries";
+          category = "IME";
+          exec =
+            let
+              jisyoList = [
+                "SKK-JISYO.L"
+                "SKK-JISYO.jinmei"
+                "SKK-JISYO.fullname"
+                "SKK-JISYO.geo"
+                "SKK-JISYO.propernoun"
+                "SKK-JISYO.station"
+                "SKK-JISYO.assoc"
+                "SKK-JISYO.edict"
+                # "SKK-JISYO.edict2" # occurs error
+                "SKK-JISYO.zipcode"
+                "SKK-JISYO.office.zipcode"
+                "SKK-JISYO.JIS2"
+                # "SKK-JISYO.JIS3_4" # occurs error
+                "SKK-JISYO.JIS2004"
+                "SKK-JISYO.itaiji"
+                "SKK-JISYO.itaiji.JIS3_4"
+                "SKK-JISYO.mazegaki"
+              ];
+              cmd = jisyo: "cp ${skk-dict}/share/${jisyo} ${target}/${jisyo}";
+              cmds = map cmd jisyoList;
+              script = lib.concatStringsSep "\n" cmds;
+            in
+            if pkgs.stdenv.isDarwin then script else null;
         };
+
         cleanup-skk-dicts = {
-          type = "app";
-          program = "${cleanup-skk-dicts}/bin/cleanup-skk-dicts";
+          description = "Remove installed SKK dictionaries";
+          category = "IME";
+          exec =
+            let
+              cmd = jisyo: "rm -f ${target}/${jisyo}";
+              cmds = map cmd skk-dict.passthru.list;
+              script = lib.concatStringsSep "\n" cmds;
+            in
+            if pkgs.stdenv.isDarwin then script else null;
         };
+      };
+
+      apps = {
+        clone =
+          let
+            drv = writeShellApplication {
+              name = "clone";
+              runtimeInputs = [ pkgs.git ];
+              text = ''
+                git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
+              '';
+            };
+          in
+          {
+            type = "app";
+            program = "${drv}/bin/clone";
+          };
+        deploy =
+          let
+            drv = writeShellApplication {
+              name = "deploy";
+              runtimeInputs = [ inputs'.nix-darwin.packages.default ];
+              text = ''
+                darwin-rebuild switch --flake github:s3igo/dotfiles#"$1"
+              '';
+            };
+          in
+          {
+            type = "app";
+            program = "${drv}/bin/deploy";
+          };
       };
     };
 }

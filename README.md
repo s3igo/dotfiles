@@ -31,7 +31,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 ### Deploy Without Installation (MacOS)
 
 ```shell
-nix run github:lnl7/nix-darwin -- switch --flake github:s3igo/dotfiles#<host_name>
+nix run github:s3igo/dotfiles#deploy <host_name>
 ```
 
 ### Full Installation
@@ -48,7 +48,7 @@ nix run github:lnl7/nix-darwin -- switch --flake github:s3igo/dotfiles#<host_nam
 
 3. Deploy the configuration:
    ```shell
-   nix run .#deploy
+   nix develop --command ', deploy'
    ```
 
 ## 🛠 Usage
@@ -60,16 +60,16 @@ Here are some common commands you can use:
 nix flake update --commit-lock-file
 
 # Delete previous configurations
-nix run .#wipe-history
+, wipe-history
 
 # Show differences from the previous version
-nix run .#versions
+, #versions
 
 # Install SKK dictionaries
-nix run .#install-skk-dicts
+, install-skk-dicts
 
 # Clean up SKK dictionaries
-nix run .#cleanup-skk-dicts
+, cleanup-skk-dicts
 ```
 
 ## 📁 Repository Structure
