@@ -62,17 +62,17 @@
         perSystem =
           {
             pkgs,
-            inputs',
+            lib,
             self',
-            system,
+            neovim-config,
             ...
           }:
-          let
-            inherit (inputs'.nixvim.legacyPackages) makeNixvim;
-            neovim-config = (import ./neovim-config/flake.nix).outputs { };
-          in
           {
-            packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
+            _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
+            packages = lib.filesystem.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./packages;
+            };
             devShells.default = pkgs.mkShellNoCC {
               packages = [
                 pkgs.statix
