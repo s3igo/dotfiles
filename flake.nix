@@ -62,6 +62,7 @@
             pkgs,
             inputs',
             self',
+            system,
             ...
           }:
           let
@@ -76,7 +77,7 @@
             packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
             checks = import ./checks.nix {
               inherit makeNixvim neovim-config;
-              inherit (inputs'.nixvim.lib.check) mkTestDerivationFromNvim;
+              inherit (inputs.nixvim.lib.${system}.check) mkTestDerivationFromNvim;
             };
             devShells.default = pkgs.mkShellNoCC {
               packages = [
