@@ -55,6 +55,8 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { withSystem, ... }:
       {
+        imports = [ ./modules/flake/tasks.nix ];
+
         systems = import inputs.systems;
 
         perSystem =
@@ -70,10 +72,6 @@
             neovim-config = (import ./neovim-config/flake.nix).outputs { };
           in
           {
-            apps = import ./tasks.nix {
-              inherit pkgs;
-              nix-darwin' = inputs'.nix-darwin.packages.default;
-            };
             packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
             checks = import ./checks.nix {
               inherit makeNixvim neovim-config;
