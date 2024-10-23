@@ -20,6 +20,10 @@
       target = "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries";
       inherit (self'.packages) skk-dict;
       inherit (pkgs) writeShellApplication;
+      mkApp = drv: {
+        type = "app";
+        program = lib.getExe drv;
+      };
     in
 
     {
@@ -104,31 +108,22 @@
         };
       };
 
-      apps =
-        let
-          mkApp = drv: {
-            type = "app";
-            program = lib.getExe drv;
-          };
-          default = writeShellApplication {
-            name = "default";
-            runtimeInputs = [ inputs'.nix-darwin.packages.default ];
-            text = ''
-              darwin-rebuild switch --flake github:s3igo/dotfiles#"''${1:-$(scutil --get LocalHostName)}"
-            '';
-          };
-          clone = writeShellApplication {
-            name = "clone";
-            runtimeInputs = [ pkgs.git ];
-            text = ''
-              git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
-            '';
-          };
-        in
-        {
-          default = mkApp default;
-          clone = mkApp clone;
-          deploy = mkApp config.mission-control.scripts.deploy.exec;
-        };
+      apps = {
+        default = mkApp (writeShellApplication {
+          name = "default";
+          runtimeInputs = [ inputs'.nix-darwin.packages.default ];
+          text = ''
+            darwin-rebuild switch --flake github:s3igo/dotfiles#"''${1:-$(scutil --get LocalHostName)}"
+          '';
+        });
+        clone = mkApp (writeShellApplication {
+          name = "clone";
+          runtimeInputs = [ pkgs.git ];
+          text = ''
+            git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
+          '';
+        });
+        deploy = mkApp config.mission-control.scripts.deploy.exec;
+      };
     };
 }
