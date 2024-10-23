@@ -369,15 +369,16 @@
     },
     "mission-control": {
       "locked": {
-        "lastModified": 1727581548,
-        "narHash": "sha256-LDAHv2KECDaf9hf6oFV2dMCqPzEaYFcmeQCOnA+/eh8=",
+        "lastModified": 1711396293,
+        "narHash": "sha256-437q+e+IVJnVPeAvSpb75senAjtXNDv0glLo+yeuVoM=",
         "owner": "Platonic-Systems",
         "repo": "mission-control",
-        "rev": "781a209a8cdeb9e63a26d19b2e3b75565266db97",
+        "rev": "c9689dd2c6cb2b3f766583ee391fb9b4abe5bb18",
         "type": "github"
       },
       "original": {
         "owner": "Platonic-Systems",
+        "ref": "pull/38/head",
         "repo": "mission-control",
         "type": "github"
       }

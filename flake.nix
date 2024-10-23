@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
-    mission-control.url = "github:Platonic-Systems/mission-control";
+    mission-control.url = "github:Platonic-Systems/mission-control?ref=pull/38/head";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
