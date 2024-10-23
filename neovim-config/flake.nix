@@ -16,7 +16,7 @@
         nvim,
         name ? "neovim",
       }:
-      pkgs.runCommand "nixvim"
+      pkgs.runCommandLocal "nixvim"
         {
           meta = nvim.meta // {
             mainProgram = name;
