@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains my personal dotfiles - a collection of shell configurations, tools, applications, and their settings. It's designed to provide a reproducible environment when migrating between machines and to maintain a history of my machine's configuration.
+This repository contains my personal dotfiles - a collection of shell configurations, tools, applications, and their settings. It's designed to provide a reproducible environment when moving between machines and to maintain a history of my machine's configuration.
 
 ## 🌟 Features
 
@@ -16,7 +16,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 
 - **Simplicity**: The codebase is kept small to ensure effective management and maintainability, reducing maintenance costs.
 - **Portability**: The configuration is portable and can be used across different machines, with special attention given to ease of use in Docker containers.
-- **Minimalism**: Dependencies are kept to a minimum, using only carefully selected packages.
+- **Minimalism**: Only carefully selected packages are used to minimize dependencies.
 
 ## 🔧 Requirements
 
@@ -26,7 +26,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 ## 🚀 Quick Start
 
 > [!Warning]
-> When deploying, files in the `$HOME` and `~/.config` directories will be overwritten. Make sure to back up any important files to avoid data loss.
+> When deploying, files in the `$HOME` and `~/.config` directories will be overwritten. Please back up your important files before proceeding to prevent data loss.
 
 ### Deploy Without Installation (macOS)
 
