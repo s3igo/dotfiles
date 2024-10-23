@@ -108,6 +108,6 @@ in
         rclone
         tree
       ]
-      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-default ];
   };
 }

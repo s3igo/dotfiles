@@ -27,13 +27,13 @@
 
       mission-control.scripts = {
         deploy = {
-          description = "Deploy system configuration using nix-darwin";
+          description = "Deploy system configuration";
           category = "System";
           exec = writeShellApplication {
             name = "deploy";
             runtimeInputs = [ inputs'.nix-darwin.packages.default ];
             text = ''
-              darwin-rebuild switch --flake ".#$(scutil --get LocalHostName)"
+              darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(scutil --get LocalHostName)"
             '';
           };
         };
@@ -104,35 +104,31 @@
         };
       };
 
-      apps = {
-        clone =
-          let
-            drv = writeShellApplication {
-              name = "clone";
-              runtimeInputs = [ pkgs.git ];
-              text = ''
-                git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
-              '';
-            };
-          in
-          {
+      apps =
+        let
+          mkApp = drv: {
             type = "app";
-            program = "${drv}/bin/clone";
+            program = lib.getExe drv;
           };
-        deploy =
-          let
-            drv = writeShellApplication {
-              name = "deploy";
-              runtimeInputs = [ inputs'.nix-darwin.packages.default ];
-              text = ''
-                darwin-rebuild switch --flake github:s3igo/dotfiles#"$1"
-              '';
-            };
-          in
-          {
-            type = "app";
-            program = "${drv}/bin/deploy";
+          default = writeShellApplication {
+            name = "default";
+            runtimeInputs = [ inputs'.nix-darwin.packages.default ];
+            text = ''
+              darwin-rebuild switch --flake github:s3igo/dotfiles#"''${1:-$(scutil --get LocalHostName)}"
+            '';
           };
-      };
+          clone = writeShellApplication {
+            name = "clone";
+            runtimeInputs = [ pkgs.git ];
+            text = ''
+              git clone https://github.com/s3igo/dotfiles.git ~/.dotfiles
+            '';
+          };
+        in
+        {
+          default = mkApp default;
+          clone = mkApp clone;
+          deploy = mkApp config.mission-control.scripts.deploy.exec;
+        };
     };
 }

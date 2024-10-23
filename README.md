@@ -9,7 +9,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 - Shell configurations (Fish, Zsh)
 - Nix-based package management
 - Reproducible environment setup
-- MacOS and Linux support
+- macOS and Linux support
 - SKK (Simple Kana to Kanji conversion) dictionary management
 
 ## 🎯 Design Principles
@@ -20,18 +20,18 @@ This repository contains my personal dotfiles - a collection of shell configurat
 
 ## 🔧 Requirements
 
-- [Nix](https://nixos.org/download.html)
-- [MacSKK](https://github.com/mtgto/macSKK) (MacOS only)
+- [Nix](https://nixos.org) (requires `extra-experimental-features = nix-command flakes` to be enabled)
+- [MacSKK](https://github.com/mtgto/macSKK) (macOS only)
 
 ## 🚀 Quick Start
 
 > [!Warning]
 > When deploying, files in the `$HOME` and `~/.config` directories will be overwritten. Make sure to back up any important files to avoid data loss.
 
-### Deploy Without Installation (MacOS)
+### Deploy Without Installation (macOS)
 
 ```shell
-nix run github:s3igo/dotfiles#deploy <host_name>
+nix run github:s3igo/dotfiles <host_name>
 ```
 
 ### Full Installation
@@ -41,14 +41,9 @@ nix run github:s3igo/dotfiles#deploy <host_name>
    nix run github:s3igo/dotfiles#clone
    ```
 
-2. Navigate to the dotfiles directory:
+2. Deploy the configuration:
    ```shell
-   cd ~/.dotfiles
-   ```
-
-3. Deploy the configuration:
-   ```shell
-   nix develop --command ', deploy'
+   nix run ~/.dotfiles#deploy
    ```
 
 ## 🛠 Usage
@@ -59,11 +54,14 @@ Here are some common commands you can use:
 # Update flake inputs and commit the lock file
 nix flake update --commit-lock-file
 
+# Deploy system configuration (equivalent to `nix run .#deploy`)
+, deploy
+
 # Delete previous configurations
 , wipe-history
 
 # Show differences from the previous version
-, #versions
+, versions
 
 # Install SKK dictionaries
 , install-skk-dicts
