@@ -66,7 +66,6 @@
             pkgs,
             lib,
             config,
-            self',
             neovim-config,
             ...
           }:
@@ -82,7 +81,7 @@
                 pkgs.statix
                 (neovim-config.lib.customName {
                   inherit pkgs;
-                  nvim = self'.packages.neovim;
+                  nvim = config.packages.neovim;
                 })
               ];
             };
