@@ -5,7 +5,7 @@
 
 let
   toPackage = name: {
-    inherit name;
+    name = "neovim-${name}";
     value = makeNixvim {
       imports = with neovim-config; [
         nixosModules.default
@@ -19,7 +19,7 @@ in
 
 derivedPackages
 // {
-  full = makeNixvim { imports = builtins.attrValues neovim-config.nixosModules; };
+  neovim-full = makeNixvim { imports = builtins.attrValues neovim-config.nixosModules; };
   neovim = makeNixvim {
     imports = with neovim-config.nixosModules; [
       default

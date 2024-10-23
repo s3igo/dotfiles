@@ -55,7 +55,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { withSystem, ... }:
       {
-        imports = [ ./modules/flake/tasks.nix ];
+        imports = map (path: ./modules/flake/${path}) (with builtins; attrNames (readDir ./modules/flake));
 
         systems = import inputs.systems;
 
@@ -73,10 +73,6 @@
           in
           {
             packages = import ./packages { inherit pkgs makeNixvim neovim-config; };
-            checks = import ./checks.nix {
-              inherit makeNixvim neovim-config;
-              inherit (inputs.nixvim.lib.${system}.check) mkTestDerivationFromNvim;
-            };
             devShells.default = pkgs.mkShellNoCC {
               packages = [
                 pkgs.statix
