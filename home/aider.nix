@@ -20,12 +20,20 @@ let
     attribute-committer = false;
     check-update = false;
     dark-mode = true;
+    cache-prompts = true;
+    # Required due to prompt caching limitations
+    # See: https://aider.chat/docs/usage/caching.html#usage
+    stream = false;
   };
 in
 
 {
   home = {
-    packages = [ package ];
+    packages = [
+      package
+      pkgs.python311Packages.playwright
+    ];
+    sessionVariables.PLAYWRIGHT_BROWSERS_PATH = pkgs.playwright-driver.browsers;
     file.".aider.conf.yml".source = yamlFormat.generate "aider-conf" settings;
   };
   programs.git.ignores = [ ".aider*" ];
