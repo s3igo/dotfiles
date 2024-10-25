@@ -63,27 +63,17 @@
         {
           pkgs,
           lib,
-          config,
-          neovim-config,
           ...
         }:
 
         {
           _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
+
           packages = lib.filesystem.packagesFromDirectoryRecursive {
             inherit (pkgs) callPackage;
             directory = ./packages;
           };
-          devShells.default = pkgs.mkShellNoCC {
-            inputsFrom = [ config.mission-control.devShell ];
-            packages = [
-              pkgs.statix
-              (neovim-config.lib.customName {
-                inherit pkgs;
-                nvim = config.packages.neovim;
-              })
-            ];
-          };
+
           formatter = pkgs.nixfmt-rfc-style;
         };
     };
