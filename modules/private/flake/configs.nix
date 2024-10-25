@@ -1,39 +1,22 @@
-{ inputs, withSystem, ... }:
+{ inputs, ... }:
 
 {
+  imports = [ ../../flake/config-manager.nix ];
 
-  flake = {
-    darwinConfigurations = {
-      mbp2023 =
-        let
-          user = "s3igo";
-          system = "aarch64-darwin";
-        in
-        withSystem system (
-          _:
-          inputs.nix-darwin.lib.darwinSystem {
-            specialArgs = {
-              inherit
-                inputs
-                user
-                system
-                ;
-            };
-            modules = [
-              (
-                { pkgs, ... }:
-                {
-                  users.users.${user} = {
-                    name = user;
-                    home = "/Users/${user}";
-                    # shell = pkgs.zsh;
-                  };
-                }
-              )
-              ../../darwin
-            ];
-          }
-        );
+  config-manager = {
+    base = {
+      darwin = ../darwin/configs;
+      home = ../home/configs;
+    };
+    globalArgs = {
+      inherit inputs;
+    };
+    targets = {
+      "s3igo@mbp2023" = {
+        system = "aarch64-darwin";
+        host = "mbp2023";
+        user = "s3igo";
+      };
     };
   };
 }

@@ -31,7 +31,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 ### Deploy Without Installation (macOS)
 
 ```shell
-nix run github:s3igo/dotfiles <host_name>
+nix run github:s3igo/dotfiles <host_name> <user_name>
 ```
 
 ### Full Installation

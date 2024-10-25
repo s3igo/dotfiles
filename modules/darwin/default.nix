@@ -15,7 +15,6 @@ in
     ../system.nix
     ../vim.nix
     ./homebrew.nix
-    ./home-manager.nix
     ./system.nix
     (
       { pkgs, ... }:

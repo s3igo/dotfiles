@@ -37,7 +37,7 @@
             name = "deploy";
             runtimeInputs = [ inputs'.nix-darwin.packages.default ];
             text = ''
-              darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(scutil --get LocalHostName)"
+              darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(whoami)@$(hostname -s)"
             '';
           };
         };
@@ -113,7 +113,7 @@
           name = "default";
           runtimeInputs = [ inputs'.nix-darwin.packages.default ];
           text = ''
-            darwin-rebuild switch --flake github:s3igo/dotfiles#"''${1:-$(scutil --get LocalHostName)}"
+            darwin-rebuild switch --flake github:s3igo/dotfiles#"''${2:-$(whoami)}@''${1:-$(hostname -s)}"
           '';
         });
         clone = mkApp (writeShellApplication {
