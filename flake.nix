@@ -57,7 +57,7 @@
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       { withSystem, ... }:
       {
-        imports = map (path: ./modules/flake/${path}) (with builtins; attrNames (readDir ./modules/flake));
+        imports = [ ./modules/flake ];
 
         systems = import inputs.systems;
 
