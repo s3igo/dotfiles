@@ -54,74 +54,37 @@
 
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
-      { withSystem, ... }:
-      {
-        imports = [ ./modules/flake ];
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./modules/flake ];
 
-        systems = import inputs.systems;
+      systems = import inputs.systems;
 
-        perSystem =
-          {
-            pkgs,
-            lib,
-            config,
-            neovim-config,
-            ...
-          }:
-          {
-            _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
-            packages = lib.filesystem.packagesFromDirectoryRecursive {
-              inherit (pkgs) callPackage;
-              directory = ./packages;
-            };
-            devShells.default = pkgs.mkShellNoCC {
-              inputsFrom = [ config.mission-control.devShell ];
-              packages = [
-                pkgs.statix
-                (neovim-config.lib.customName {
-                  inherit pkgs;
-                  nvim = config.packages.neovim;
-                })
-              ];
-            };
-            formatter = pkgs.nixfmt-rfc-style;
+      perSystem =
+        {
+          pkgs,
+          lib,
+          config,
+          neovim-config,
+          ...
+        }:
+
+        {
+          _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
+          packages = lib.filesystem.packagesFromDirectoryRecursive {
+            inherit (pkgs) callPackage;
+            directory = ./packages;
           };
-
-        flake = {
-          darwinConfigurations = {
-            mbp2023 =
-              let
-                user = "s3igo";
-                system = "aarch64-darwin";
-              in
-              withSystem system (
-                _:
-                inputs.nix-darwin.lib.darwinSystem {
-                  specialArgs = {
-                    inherit
-                      inputs
-                      user
-                      system
-                      ;
-                  };
-                  modules = [
-                    (
-                      { pkgs, ... }:
-                      {
-                        users.users.${user} = {
-                          name = user;
-                          home = "/Users/${user}";
-                          # shell = pkgs.zsh;
-                        };
-                      }
-                    )
-                    ./modules/darwin/default.nix
-                  ];
-                }
-              );
+          devShells.default = pkgs.mkShellNoCC {
+            inputsFrom = [ config.mission-control.devShell ];
+            packages = [
+              pkgs.statix
+              (neovim-config.lib.customName {
+                inherit pkgs;
+                nvim = config.packages.neovim;
+              })
+            ];
           };
+          formatter = pkgs.nixfmt-rfc-style;
         };
-      }
-    );
+    };
 }
