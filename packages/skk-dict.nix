@@ -34,5 +34,5 @@ stdenvNoCC.mkDerivation rec {
       ];
       paths = with builtins; concatMap (path: attrNames (readDir path)) sources;
     in
-    builtins.filter (lib.strings.hasPrefix "SKK-JISYO.") paths;
+    builtins.filter (lib.hasPrefix "SKK-JISYO.") paths;
 }

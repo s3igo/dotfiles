@@ -21,7 +21,7 @@ let
   prev = import (inputs.home-manager + "/modules/programs/fzf.nix") args;
 in
 
-lib.attrsets.recursiveUpdate prev {
+lib.recursiveUpdate prev {
   disabledModules = [ "${modulesPath}/programs/fzf.nix" ];
 
   options.programs.fzf.package.default = pkgs.fzf.overrideAttrs {

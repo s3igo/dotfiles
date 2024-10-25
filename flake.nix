@@ -69,7 +69,7 @@
         {
           _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
 
-          packages = lib.filesystem.packagesFromDirectoryRecursive {
+          packages = lib.packagesFromDirectoryRecursive {
             inherit (pkgs) callPackage;
             directory = ./packages;
           };

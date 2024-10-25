@@ -50,7 +50,7 @@ in
     }
   );
 
-  extraConfigLua = lib.strings.optionalString stdenv.isDarwin ''
+  extraConfigLua = lib.optionalString stdenv.isDarwin ''
     -- im-select
     require('im_select').setup({ default_im_select = "net.mtgto.inputmethod.macSKK.ascii" })
   '';
