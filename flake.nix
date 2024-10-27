@@ -11,7 +11,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     treefmt-nix = {
-      url = "github:numtide/treefmt-nix?ref=pull/252/head";
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -65,7 +65,6 @@
 
       perSystem =
         { pkgs, lib, ... }:
-
         {
           _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
 
