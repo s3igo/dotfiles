@@ -27,7 +27,9 @@
     in
 
     {
-      flake-root.projectRootFile = "flake.lock"; # Because of `neovim-config` diredtory also has `flake.nix`
+      # Use flake.lock instead of the default flake.nix
+      # since both the project root and neovim-config directory contain flake.nix
+      flake-root.projectRootFile = "flake.lock";
 
       mission-control.scripts = {
         deploy = {
@@ -40,6 +42,12 @@
               darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(whoami)@$(hostname -s)"
             '';
           };
+        };
+
+        fmt = {
+          description = "Format code with treefmt";
+          category = "Development";
+          exec = config.treefmt.build.wrapper;
         };
 
         wipe-history = {
