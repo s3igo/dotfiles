@@ -10,6 +10,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix?ref=pull/252/head";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,11 +64,7 @@
       systems = import inputs.systems;
 
       perSystem =
-        {
-          pkgs,
-          lib,
-          ...
-        }:
+        { pkgs, lib, ... }:
 
         {
           _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
@@ -73,8 +73,6 @@
             inherit (pkgs) callPackage;
             directory = ./packages;
           };
-
-          formatter = pkgs.nixfmt-rfc-style;
         };
     };
 }

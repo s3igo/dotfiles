@@ -589,7 +589,8 @@
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "secrets": "secrets",
-        "systems": "systems_4"
+        "systems": "systems_4",
+        "treefmt-nix": "treefmt-nix_2"
       }
     },
     "secrets": {
@@ -685,6 +686,27 @@
       },
       "original": {
         "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729800221,
+        "narHash": "sha256-4rUtArbAxsSj3Brb0Fp1HgGuSK1fgYamBkB3QO8NDdI=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "ac47719a2c37bb6fe863299e42a0cd2f887b7983",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "pull/252/head",
         "repo": "treefmt-nix",
         "type": "github"
       }

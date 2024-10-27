@@ -17,13 +17,7 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@v7
       - name: Check flake
         run: nix flake check
-      - name: Check formatting
-        run: |
-          # nix run nixpkgs#nixfmt-rfc-style -- --check .
-          nix run nixpkgs#stylua --inputs-from . -- --check --glob '**/*.lua' --glob '!neovim-config/**/*.lua' .
-      - name: Lint
-        run: nix run nixpkgs#statix --inputs-from . -- check .
-      - name: Check for dead code
-        run: nix run nixpkgs#deadnix --inputs-from . -- --fail .
+      - name: Check formatting and Linting
+        run: nix fmt -- --ci
       - name: Build flake
         run: nix build .#darwinConfigurations."s3igo@mbp2023".system
