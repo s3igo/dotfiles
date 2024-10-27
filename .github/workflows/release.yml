@@ -1,9 +1,7 @@
 name: Create release
-
 on:
   schedule:
     - cron: '0 0 1 * *' # monthly
-
 jobs:
   build:
     runs-on: ubuntu-22.04
