@@ -1,7 +1,7 @@
-utils@{ mapMode, withUtils, ... }:
+utils@{ mapMode, ... }:
 
 {
-  imports = withUtils utils [ ./emacs ];
+  imports = utils [ ./emacs ];
 
   globals.mapleader = " ";
 

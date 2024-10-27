@@ -1,9 +1,8 @@
 { lib, ... }:
 
 let
-  withUtils = attrs: map (path: lib.modules.importApply path attrs);
   utils = {
-    inherit withUtils;
+    __functor = self: map (path: lib.modules.importApply path self);
     mapMode =
       mode:
       {
@@ -23,7 +22,7 @@ let
 in
 
 {
-  imports = withUtils utils [
+  imports = utils [
     ./plugins
     ./keymaps
     ./autocmd.nix
