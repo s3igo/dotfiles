@@ -22,6 +22,7 @@
       ignores = [
         ".DS_Store"
         ".env"
+        "*.ignore.md"
       ];
       lfs.enable = true;
       userName = "s3igo";
