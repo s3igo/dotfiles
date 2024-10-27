@@ -57,6 +57,9 @@ nix flake update --commit-lock-file
 # Deploy system configuration (equivalent to `nix run .#deploy`)
 , deploy
 
+# Format code with treefmt
+, fmt
+
 # Delete previous configurations
 , wipe-history
 
