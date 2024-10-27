@@ -78,6 +78,9 @@ in
 
   home = {
     language.base = "en_US.UTF-8";
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
     stateVersion = "23.11";
     sessionVariables = {
       RCLONE_CONFIG = osConfig.age.secrets.rclone-config.path;
