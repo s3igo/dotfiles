@@ -2,7 +2,6 @@
   lib,
   stdenvNoCC,
   fetchFromGitHub,
-  runCommandLocal,
 }:
 
 stdenvNoCC.mkDerivation rec {

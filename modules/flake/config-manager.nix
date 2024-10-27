@@ -106,7 +106,7 @@ in
         };
         modules = [
           (
-            { pkgs, user, ... }:
+            { user, ... }:
             {
               users.users.${user} = {
                 name = user;
