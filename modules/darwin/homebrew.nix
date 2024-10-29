@@ -41,6 +41,7 @@
       # "font-zen-kaku-gothic-new"
       "google-chrome"
       "google-japanese-ime"
+      "inkscape"
       "macos-fuse-t/homebrew-cask/fuse-t"
       "monitorcontrol"
       "mullvadvpn"
