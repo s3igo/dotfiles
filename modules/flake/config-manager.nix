@@ -124,6 +124,7 @@ in
               ...
             }:
             {
+              nixpkgs.overlays = [ config.flake.overlays.joshuto ];
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;

@@ -74,8 +74,6 @@ in
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
         b = "bun";
-        br = "bun run";
-        bd = "bun run dev";
         c = "cd";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
