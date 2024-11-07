@@ -15,17 +15,15 @@ let
     dark-mode = true;
     cache-prompts = true;
     # Required due to prompt caching limitations
-    # See: https://aider.chat/docs/usage/caching.html#usage
+    # see: https://aider.chat/docs/usage/caching.html#usage
     stream = false;
   };
 in
 
 {
   home = {
-    packages = [
-      package
-      pkgs.python311Packages.playwright
-    ];
+    packages = [ package ] ++ package.optional-dependencies.playwright;
+    # see: https://nixos.wiki/wiki/Playwright
     sessionVariables.PLAYWRIGHT_BROWSERS_PATH = pkgs.playwright-driver.browsers;
     file.".aider.conf.yml".source = yamlFormat.generate "aider-conf" settings;
   };
