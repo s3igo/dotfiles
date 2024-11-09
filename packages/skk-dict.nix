@@ -18,7 +18,7 @@ stdenvNoCC.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/share/
+    mkdir -p $out/share
     cp SKK-JISYO.* $out/share/
     cp zipcode/SKK-JISYO.* $out/share/
 
