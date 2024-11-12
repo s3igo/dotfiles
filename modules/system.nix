@@ -14,7 +14,6 @@
       experimental-features = "nix-command flakes";
       extra-platforms = "x86_64-darwin aarch64-darwin";
       use-xdg-base-directories = true;
-      auto-optimise-store = true;
       substituters = [
         "https://nix-community.cachix.org?priority=41"
         "https://numtide.cachix.org?priority=42"
@@ -24,6 +23,7 @@
         "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
       ];
     };
+    optimise.automatic = true;
     extraOptions = ''
       !include ${config.age.secrets.github-nix-token.path}
     '';
