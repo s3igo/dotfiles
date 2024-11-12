@@ -10,7 +10,9 @@ return function(colors, font, mappings, fish)
         scrollback_lines = 10000,
         default_prog = { fish, '--login' },
         quick_select_patterns = {
-            'sha256-[A-Za-z0-9+/]*={0,3}', -- sha256 encoded with base64 (e.g. nix hash)
+            -- sha256 encoded with base64 (e.g. nix hash)
+            'sha256-[A-Za-z0-9+/]*={0,3}',
+            'sha256:[A-Za-z0-9+/]*={0,3}',
         },
         -- Workaround for rendering issues
         -- See: https://github.com/wez/wezterm/issues/5990
