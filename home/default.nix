@@ -109,6 +109,7 @@ in
         lsp-ai
         moar
         rclone
+        tdf
         tree
       ]
       ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-default ];

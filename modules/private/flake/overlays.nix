@@ -1,6 +1,6 @@
 {
   flake.overlays = {
-    joshuto = final: prev: {
+    joshuto = _final: prev: {
       joshuto = prev.joshuto.overrideAttrs rec {
         version = "0.9.8-unstable-2024-09-28";
         src = prev.fetchFromGitHub {
@@ -18,6 +18,11 @@
           mkdir -p $out/share
           cp -r ${src}/config $out/share/
         '';
+      };
+    };
+    tdf = _final: prev: {
+      tdf = prev.tdf.overrideAttrs {
+        meta.platforms = with prev.lib.platforms; linux ++ darwin;
       };
     };
   };
