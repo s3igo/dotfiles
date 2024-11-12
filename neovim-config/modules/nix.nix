@@ -11,10 +11,17 @@
 
   plugins = {
     treesitter.nixvimInjections = true;
-    lsp.servers.nil_ls = {
+    lsp.servers.nixd = {
       enable = true;
-      settings.formatting.command = [ "nixfmt" ];
+      settings = {
+        nixpkgs.expr = "import <nixpkgs> { }";
+        formatting.command = [ "nixfmt" ];
+      };
     };
+    # lsp.servers.nil_ls = {
+    #   enable = true;
+    #   settings.formatting.command = [ "nixfmt" ];
+    # };
     none-ls = {
       enable = true;
       sources = {
