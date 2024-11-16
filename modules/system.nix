@@ -29,7 +29,7 @@
     '';
     gc = {
       automatic = true;
-      options = "--delete-older-than 1m";
+      options = "--delete-older-than 30d";
     };
   };
 
