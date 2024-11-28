@@ -114,6 +114,63 @@
             in
             if pkgs.stdenv.isDarwin then script else null;
         };
+
+        "preview:rio" = {
+          description = "Preview rio config";
+          category = "Development";
+          exec = writeShellApplication {
+            name = "preview-rio";
+            runtimeInputs = with pkgs; [
+              nix
+              remarshal
+              watchexec
+            ];
+            text = ''
+              SOURCE="$(${lib.getExe config.flake-root.package})/home/rio.nix"
+              TARGET="$XDG_CONFIG_HOME/rio/config.toml"
+
+              if [ -e "$TARGET" ]; then
+                mv "$TARGET" "$TARGET.tmp"
+              fi
+
+              trap 'rm "$TARGET"; [ -e "$TARGET.tmp" ] && mv "$TARGET.tmp" "$TARGET"' SIGINT
+
+              watchexec --watch "$SOURCE" -- "nix eval -f $SOURCE --arg pkgs 'import <nixpkgs> { }' programs.rio.settings --json \
+                | json2toml \
+                | tee $TARGET"
+            '';
+          };
+        };
+
+        "preview:zellij" = {
+          description = "Preview zellij config";
+          category = "Development";
+          exec = writeShellApplication {
+            name = "preview-rio";
+            runtimeInputs = with pkgs; [
+              nix
+              watchexec
+            ];
+            # FIXME: File content is not automatically updated
+            text = ''
+              SOURCE="$(${lib.getExe config.flake-root.package})/home/zellij.nix"
+              TARGET="$XDG_CONFIG_HOME/zellij/config.kdl"
+
+              if [ -e "$TARGET" ]; then
+                mv "$TARGET" "$TARGET.tmp"
+              fi
+
+              trap 'rm "$TARGET"; [ -e "$TARGET.tmp" ] && mv "$TARGET.tmp" "$TARGET"' SIGINT
+
+              # shellcheck disable=SC2046
+              watchexec --restart --watch "$SOURCE" -- printf $(nix eval \
+                -f "$SOURCE" \
+                --arg pkgs 'import <nixpkgs> { }' \
+                'xdg.configFile."zellij/config.kdl".text') \
+                  | tee "$TARGET"
+            '';
+          };
+        };
       };
 
       apps = {
