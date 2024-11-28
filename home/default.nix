@@ -17,6 +17,7 @@ in
     ./git.nix
     ./helix.nix
     ./joshuto.nix
+    ./rio.nix
     ./fish.nix
     ./fzf-patch.nix
     ./starship.nix
@@ -26,7 +27,6 @@ in
 
   programs = {
     home-manager.enable = true;
-    # rio.enable = true;
     ssh = {
       enable = true;
       includes = [ "~/.orbstack/ssh/config" ];
