@@ -4,9 +4,17 @@
   imports = [ ./module.nix ];
 
   configurations = {
-    base = {
-      darwin = ../../private/darwin/configs;
-      home = ../../private/home/configs;
+    profiles = {
+      darwin = {
+        mbp2023.imports = [
+          ../../darwin
+        ];
+      };
+      home = {
+        s3igo.imports = [
+          ../../../home
+        ];
+      };
     };
     globalArgs = {
       inherit inputs;
