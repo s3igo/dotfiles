@@ -130,6 +130,7 @@
       settings.win.border = "single";
     };
     smart-splits.enable = true;
+    hardtime.enable = true;
   };
 
   extraPlugins = with pkgs.vimPlugins; [
