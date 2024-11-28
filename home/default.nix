@@ -21,6 +21,7 @@ in
     ./fish.nix
     ./fzf-patch.nix
     ./starship.nix
+    ./zellij.nix
     ./zsh.nix
     ./wezterm
   ];
@@ -57,12 +58,6 @@ in
     ripgrep = {
       enable = true;
       arguments = [ "--smart-case" ];
-    };
-    zellij = {
-      enable = true;
-      settings = {
-        pane_frames = false;
-      };
     };
   };
 
