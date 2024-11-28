@@ -108,6 +108,6 @@ in
         tdf
         tree
       ]
-      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-default ];
+      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra ];
   };
 }
