@@ -95,9 +95,10 @@ in
       [
         # efm-langserver
         # emacs-nox
-        _1password
+        _1password-cli
         aichat
         attic-client
+        # bitwarden-cli # Fails to build
         darwin.trash
         fd
         ghq
