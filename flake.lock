@@ -596,11 +596,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1729567699,
-        "narHash": "sha256-14qx+bo9vLHQ/6Mzl4n8QCtpkb5sjl3F0YsttqFhPbc=",
+        "lastModified": 1732804953,
+        "narHash": "sha256-io/RWsdVW7edIsmD9AP72xcjIngCly2+qaZyGvkUz9M=",
         "owner": "s3igo",
         "repo": "secrets",
-        "rev": "fac367a19efbb91293016e8dc19aac5ed9d646df",
+        "rev": "7f93eb4ed3c367adcea3bf34740e35b9b566e6df",
         "type": "github"
       },
       "original": {
