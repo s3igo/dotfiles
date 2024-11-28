@@ -1,12 +1,12 @@
 { inputs, ... }:
 
 {
-  imports = [ ../../flake/config-manager.nix ];
+  imports = [ ./config-manager.nix ];
 
   config-manager = {
     base = {
-      darwin = ../darwin/configs;
-      home = ../home/configs;
+      darwin = ../private/darwin/configs;
+      home = ../private/home/configs;
     };
     globalArgs = {
       inherit inputs;

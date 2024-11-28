@@ -59,7 +59,7 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./modules/private/flake ];
+      imports = [ ./modules/flake ];
 
       systems = import inputs.systems;
 
