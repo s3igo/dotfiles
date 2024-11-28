@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.config-manager;
+  cfg = config.configurations;
 
   inherit (lib) mkOption types;
 
@@ -48,7 +48,7 @@ let
 in
 
 {
-  options.config-manager = {
+  options.configurations = {
     base = mkOption {
       type = types.attrsOf types.path;
       description = "Base configuration paths for different environments";

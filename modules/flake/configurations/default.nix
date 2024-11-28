@@ -1,12 +1,12 @@
 { inputs, ... }:
 
 {
-  imports = [ ./config-manager.nix ];
+  imports = [ ./module.nix ];
 
-  config-manager = {
+  configurations = {
     base = {
-      darwin = ../private/darwin/configs;
-      home = ../private/home/configs;
+      darwin = ../../private/darwin/configs;
+      home = ../../private/home/configs;
     };
     globalArgs = {
       inherit inputs;
