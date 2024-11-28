@@ -151,7 +151,6 @@
               nix
               watchexec
             ];
-            # FIXME: File content is not automatically updated
             text = ''
               SOURCE="$(${lib.getExe config.flake-root.package})/home/zellij.nix"
               TARGET="$XDG_CONFIG_HOME/zellij/config.kdl"
@@ -162,12 +161,13 @@
 
               trap 'rm "$TARGET"; [ -e "$TARGET.tmp" ] && mv "$TARGET.tmp" "$TARGET"' SIGINT
 
-              # shellcheck disable=SC2046
-              watchexec --restart --watch "$SOURCE" -- printf $(nix eval \
-                -f "$SOURCE" \
+              watchexec --watch "$SOURCE" -- "nix eval \
+                -f $SOURCE \
                 --arg pkgs 'import <nixpkgs> { }' \
-                'xdg.configFile."zellij/config.kdl".text') \
-                  | tee "$TARGET"
+                'xdg.configFile.\"zellij/config.kdl\".text' \
+                  | xargs -0 printf \
+                  | sed 's/^\"//' \
+                  | tee $TARGET"
             '';
           };
         };
