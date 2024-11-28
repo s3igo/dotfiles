@@ -76,13 +76,11 @@
         yaml = true;
         gitcommit = true;
       };
-      extraOptions = {
-        suggestion = {
-          auto_trigger = true;
-          keymap = {
-            accept_word = "<c-y>";
-            accept_line = "<c-l>";
-          };
+      extraOptions.suggestion = {
+        auto_trigger = true;
+        keymap = {
+          accept_word = "<c-y>";
+          accept_line = "<c-l>";
         };
       };
     };

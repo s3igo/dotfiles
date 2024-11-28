@@ -1,6 +1,4 @@
-utils:
-
-{
+utils: {
   imports = utils [
     ./coding.nix
     ./editor
