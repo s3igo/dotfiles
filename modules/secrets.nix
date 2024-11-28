@@ -44,6 +44,10 @@ in
         aider-anthropic = {
           file = "${secrets}/config/aider-anthropic.age";
         } // userReadable;
+
+        avante-anthropic = {
+          file = "${secrets}/config/avante-anthropic.age";
+        } // userReadable;
       };
   };
 }

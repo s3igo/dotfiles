@@ -27,6 +27,7 @@
         neovim = makeNixvim {
           imports = with neovim-config.nixosModules; [
             default
+            extra
             nix
             lua
             markdown

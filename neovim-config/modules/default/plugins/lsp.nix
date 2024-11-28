@@ -75,7 +75,7 @@ _:
     }
     # actions-preview.nvim
     {
-      key = "<leader>a";
+      key = "<leader>A";
       action = "<cmd>lua require('actions-preview').code_actions()<cr>";
       mode = [
         "n"
