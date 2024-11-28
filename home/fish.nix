@@ -123,6 +123,7 @@ in
         v = "nvim";
         vf = "nvim flake.nix";
         wh = "which";
+        zj = "zellij";
       };
     loginShellInit = ''
       # PATH
