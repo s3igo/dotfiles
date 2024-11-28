@@ -10,9 +10,11 @@
     }:
 
     let
-      packageNames = builtins.filter (lib.hasPrefix "neovim") (builtins.attrNames self'.packages);
+      isValidName =
+        name: lib.hasPrefix "neovim" name && !lib.hasPrefix "neovim-extra" name && name != "neovim";
+      packageNames = builtins.filter isValidName (builtins.attrNames self'.packages);
       toTestDerivation = name: {
-        inherit name;
+        name = "check-${name}";
         value = inputs.nixvim.lib.${system}.check.mkTestDerivationFromNvim {
           inherit name;
           nvim = self'.packages.${name};
