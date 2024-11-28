@@ -42,5 +42,8 @@ in
     )
   ];
 
-  fonts.packages = [ pkgs.udev-gothic-nf ];
+  fonts.packages = with pkgs; [
+    udev-gothic-nf
+    (callPackage ../../packages/pending-mono-hwnf.nix { })
+  ];
 }
