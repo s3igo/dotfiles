@@ -10,6 +10,8 @@
     }:
 
     let
+      # Exclude packages containing 'extra' in their names from testing as they
+      # have machine-specific configurations
       isValidName =
         name: lib.hasPrefix "neovim" name && !lib.hasPrefix "neovim-extra" name && name != "neovim";
       packageNames = builtins.filter isValidName (builtins.attrNames self'.packages);

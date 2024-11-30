@@ -83,7 +83,6 @@ in
         db = "docker build";
         di = "docker image";
         do = "docker";
-        dp = "diff -Naur";
         dr = "docker run";
         ef = "exec fish";
         f = "fg";

@@ -100,19 +100,10 @@
     };
   };
 
-  extraPlugins = with pkgs; [
-    vimPlugins.nvim-surround
-    vimPlugins.text-case-nvim
-    (vimUtils.buildVimPlugin {
-      pname = "nvim-various-textobjs";
-      version = "2024-03-12";
-      src = fetchFromGitHub {
-        owner = "chrisgrieser";
-        repo = "nvim-various-textobjs";
-        rev = "6cefba253d69306004a641a11c395381ae428903";
-        hash = "sha256-DwucX8UZLM1L/LTRLSmw3vQimKsZazs7J9/fw+Oe/oY=";
-      };
-    })
+  extraPlugins = with pkgs.vimPlugins; [
+    nvim-surround
+    text-case-nvim
+    nvim-various-textobjs
   ];
 
   extraConfigLua = ''

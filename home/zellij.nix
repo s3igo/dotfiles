@@ -7,6 +7,8 @@
         bind "Ctrl g" { SwitchToMode "normal"; }
       }
       normal {
+        bind "[" { PreviousSwapLayout; SwitchToMode "locked"; }
+        bind "]" { NextSwapLayout; SwitchToMode "locked"; }
         bind "Ctrl h" { MoveFocus "left"; SwitchToMode "locked"; }
         bind "Ctrl j" { MoveFocus "down"; SwitchToMode "locked"; }
         bind "Ctrl k" { MoveFocus "up"; SwitchToMode "locked"; }
@@ -14,7 +16,7 @@
         bind "Ctrl n" { GoToNextTab; SwitchToMode "locked"; }
         bind "Ctrl p" { GoToPreviousTab; SwitchToMode "locked"; }
         // Write "Ctrl g" (ASCII 7)
-        // See: https://en.wiktionary.org/wiki/Appendix:Control_characters
+        // Ref: https://en.wiktionary.org/wiki/Appendix:Control_characters
         bind "g" { Write 7; SwitchToMode "locked"; }
         bind "o" { SwitchToMode "session"; }
         bind "p" { SwitchToMode "pane"; }
@@ -49,7 +51,6 @@
         bind "v" { NewPane "right"; SwitchToMode "locked"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "locked"; }
         bind "x" { CloseFocus; SwitchToMode "locked"; }
-        bind "z" { TogglePaneFrames; SwitchToMode "locked"; }
         bind "tab" { SwitchFocus; }
       }
       tab {
@@ -106,10 +107,6 @@
           SwitchToMode "locked"
         }
       }
-      shared_among "normal" "locked" {
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
-      }
       shared_except "locked" "renametab" "renamepane" {
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Ctrl q" { Quit; }
@@ -157,6 +154,8 @@
       }
     }
 
+    // theme "iceberg-dark"
+    theme "night-owl"
     default_mode "locked"
     default_shell "/etc/profiles/per-user/s3igo/bin/fish"
     pane_frames false

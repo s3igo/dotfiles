@@ -23,7 +23,7 @@
 
     tdf = _final: prev: {
       tdf = prev.tdf.overrideAttrs {
-        meta.platforms = with prev.lib.platforms; linux ++ darwin;
+        meta.platforms = prev.lib.platforms.unix;
       };
     };
   };

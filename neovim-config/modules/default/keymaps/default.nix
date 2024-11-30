@@ -87,24 +87,24 @@ utils@{ mapMode, ... }:
             options.desc = "Paste from system clipboard (before)";
           }
         ]
-    ++
-      map
-        (mapMode [
-          "n"
-          "x"
-          "o"
-        ])
-        [
-          # helix keybindings
-          {
-            key = "gl";
-            action = "g_";
-          }
-          {
-            key = "gh";
-            action = "g^";
-          }
-        ]
+    # ++
+    #   map
+    #     (mapMode [
+    #       "n"
+    #       "x"
+    #       "o"
+    #     ])
+    #     [
+    #       # helix keybindings
+    #       {
+    #         key = "gl";
+    #         action = "g_";
+    #       }
+    #       {
+    #         key = "gh";
+    #         action = "g^";
+    #       }
+    #     ]
     ++ map (mapMode "i") [
       # indent
       {
