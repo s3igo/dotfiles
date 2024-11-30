@@ -17,6 +17,7 @@ in
     ./git.nix
     ./helix.nix
     ./joshuto.nix
+    ./pager.nix
     ./rio.nix
     ./fish.nix
     ./fzf-patch.nix
@@ -103,7 +104,6 @@ in
         fd
         ghq
         lsp-ai
-        moar
         rclone
         tdf
         tree

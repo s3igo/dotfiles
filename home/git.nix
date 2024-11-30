@@ -12,13 +12,6 @@
         create = ''!f() { ${lib.getExe pkgs.gh} repo create "$1" --private && ${lib.getExe pkgs.ghq} get -p "$1"; }; f'';
         pr = ''!f() { git fetch origin "pull/$1/head:PR-$1"; }; f'';
       };
-      delta = {
-        enable = true;
-        options = {
-          navigate = true;
-          side-by-side = true;
-        };
-      };
       ignores = [
         ".DS_Store"
         ".env"

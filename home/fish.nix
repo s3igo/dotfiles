@@ -68,8 +68,8 @@ in
         ":h" = global // text "--help";
         ":i" = global // text "install";
         ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":m" = global // text "| moar";
         ":n" = global // text "nixpkgs";
+        ":o" = global // text "| ov";
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";

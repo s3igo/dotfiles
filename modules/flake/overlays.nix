@@ -26,5 +26,11 @@
         meta.platforms = prev.lib.platforms.unix;
       };
     };
+
+    ov = _final: prev: {
+      ov = prev.ov.overrideAttrs {
+        meta.mainProgram = "ov";
+      };
+    };
   };
 }

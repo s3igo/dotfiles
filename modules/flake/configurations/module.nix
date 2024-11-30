@@ -108,6 +108,7 @@ in
               nixpkgs.overlays = [
                 config.flake.overlays.joshuto
                 config.flake.overlays.tdf
+                config.flake.overlays.ov
               ];
               home-manager = {
                 useGlobalPkgs = true;
