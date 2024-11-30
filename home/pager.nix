@@ -6,18 +6,24 @@ let
 in
 
 {
-  programs.git.extraConfig = {
-    core.pager = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen'";
-    pager = {
-      diff = "${deltaCommand} --features ov-diff";
-      log = "${deltaCommand} --features ov-log";
+  programs = {
+    git.extraConfig = {
+      core.pager = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen'";
+      pager = {
+        diff = "${deltaCommand} --features ov-diff";
+        log = "${deltaCommand} --features ov-log";
+      };
+      delta = {
+        navigate = true;
+        side-by-side = true;
+        ov-diff.pager = "${ovCommand} --quit-if-one-screen --section-delimiter '^(commit|added:|removed:|renamed:|Δ)' --section-header --pattern '•'";
+        ov-log.pager = "${ovCommand} --quit-if-one-screen --section-delimiter '^commit' --section-header-num 3";
+      };
     };
-    delta = {
-      navigate = true;
-      side-by-side = true;
-      ov-diff.pager = "${ovCommand} --quit-if-one-screen --section-delimiter '^(commit|added:|removed:|renamed:|Δ)' --section-header --pattern '•'";
-      ov-log.pager = "${ovCommand} --quit-if-one-screen --section-delimiter '^commit' --section-header-num 3";
-    };
+    # Override the builtin `__fish_anypager` function to customize the behavior of `__fish_paginate`
+    fish.functions.__fish_anypager = ''
+      echo ${pkgs.ov.meta.mainProgram}
+    '';
   };
 
   home = {

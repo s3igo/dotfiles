@@ -69,7 +69,6 @@ in
         ":i" = global // text "install";
         ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
         ":n" = global // text "nixpkgs";
-        ":o" = global // text "| ov";
         ":s" = global // text "search";
         ":v" = global // text "--version";
         arc = "open -a 'Arc.app'";
@@ -176,6 +175,9 @@ in
       bind \en history-token-search-forward
       ### <C-h> FIXME: `history-pager-delete` doesn't work
       bind \b history-pager-delete or backward-delete-char
+
+      ## pager
+      bind \co __fish_paginate
 
       ## functions
       # bind \cg __ghq-fzf
