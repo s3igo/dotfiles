@@ -99,7 +99,7 @@ in
         _1password-cli
         aichat
         attic-client
-        # bitwarden-cli # Fails to build
+        # bitwarden-cli # Fails to build https://github.com/NixOS/nixpkgs/pull/350601 https://github.com/NixOS/nixpkgs/issues/339576
         darwin.trash
         fd
         ghq
