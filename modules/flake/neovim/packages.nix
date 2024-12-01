@@ -1,6 +1,7 @@
 {
   perSystem =
     {
+      lib,
       inputs',
       neovim-config,
       ...
@@ -9,10 +10,9 @@
     let
       inherit (inputs'.nixvim.legacyPackages) makeNixvim;
       inherit (neovim-config) nixosModules;
-      inherit (builtins) attrNames attrValues removeAttrs;
       neovimPackages =
         let
-          toPackage = name: {
+          moduleToPackage = name: {
             name = "neovim-${name}";
             value = makeNixvim {
               imports = [
@@ -21,12 +21,11 @@
               ];
             };
           };
-          moduleNames = attrNames (removeAttrs nixosModules [ "default" ]);
         in
-        builtins.listToAttrs (map toPackage moduleNames);
+        lib.mapAttrs' (name: _: moduleToPackage name) (builtins.removeAttrs nixosModules [ "default" ]);
       neovimExtraPackages =
         let
-          toPackageWithExtra = name: {
+          moduleToPackageWithExtra = name: {
             name = "neovim-extra-${name}";
             value = makeNixvim {
               imports = [
@@ -36,14 +35,13 @@
               ];
             };
           };
-          moduleNames = attrNames (
-            removeAttrs nixosModules [
-              "default"
-              "extra"
-            ]
-          );
         in
-        builtins.listToAttrs (map toPackageWithExtra moduleNames);
+        lib.mapAttrs' (name: _: moduleToPackageWithExtra name) (
+          builtins.removeAttrs nixosModules [
+            "default"
+            "extra"
+          ]
+        );
     in
 
     {
@@ -53,9 +51,9 @@
         // {
           neovim-default = makeNixvim { imports = [ nixosModules.default ]; };
           neovim-full = makeNixvim {
-            imports = attrValues (removeAttrs nixosModules [ "extra" ]);
+            imports = builtins.attrValues (builtins.removeAttrs nixosModules [ "extra" ]);
           };
-          neovim-extra-full = makeNixvim { imports = attrValues nixosModules; };
+          neovim-extra-full = makeNixvim { imports = builtins.attrValues nixosModules; };
           neovim = makeNixvim {
             imports = with nixosModules; [
               default
