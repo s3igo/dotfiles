@@ -16,6 +16,8 @@
         ".DS_Store"
         ".env"
         "*.local.md"
+        "*.local.nix"
+        "npins.local/"
       ];
       lfs.enable = true;
       userName = "s3igo";

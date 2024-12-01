@@ -55,6 +55,13 @@ in
         hide_env_diff = true;
       };
       nix-direnv.enable = true;
+      stdlib = ''
+        if [ -f shell.local.nix ]; then
+          use_nix shell.local.nix
+          watch_file shell.local.nix
+          watch_dir npins.local
+        fi
+      '';
     };
     ripgrep = {
       enable = true;
