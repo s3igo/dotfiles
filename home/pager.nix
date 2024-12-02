@@ -8,6 +8,9 @@ in
 {
   programs = {
     git.extraConfig = {
+      # NOTE: `--quit-if-one-screen` sometimes doesn't work correctly
+      # The conditions that trigger this issue are unclear
+      # Ref: https://github.com/dandavison/delta/issues/1684
       core.pager = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen'";
       pager = {
         diff = "${deltaCommand} --features ov-diff";
@@ -31,7 +34,8 @@ in
         ];
       };
     };
-    # Override the builtin `__fish_anypager` function to customize the behavior of `__fish_paginate`
+    # Override the builtin `__fish_anypager` function to customize the behavior
+    # of `__fish_paginate`
     fish.functions.__fish_anypager = ''
       echo ${pkgs.ov.meta.mainProgram}
     '';

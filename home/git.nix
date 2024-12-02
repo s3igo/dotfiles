@@ -15,6 +15,7 @@
       ignores = [
         ".DS_Store"
         ".env"
+        "*.local.txt"
         "*.local.md"
         "*.local.nix"
         "npins.local/"
@@ -42,14 +43,13 @@
         pull.ff = "only";
       };
     };
+
     gh = {
       enable = true;
-      settings = {
-        # workaround for https://github.com/nix-community/home-manager/issues/4744
-        # see: https://github.com/cli/cli/issues/8462
-        version = 1;
-        git_protocol = "ssh";
-      };
+      settings.git_protocol = "ssh";
+      extensions = [ pkgs.gh-copilot ];
     };
+
+    gh-dash.enable = true;
   };
 }

@@ -8,14 +8,15 @@ let
   };
   yamlFormat = pkgs.formats.yaml { };
   settings = {
-    auto-commits = false;
     attribute-author = false;
     attribute-committer = false;
+    auto-commits = false;
+    cache-prompts = true;
+    chat-language = "Japanese";
     check-update = false;
     dark-mode = true;
-    cache-prompts = true;
     # Required due to prompt caching limitations
-    # see: https://aider.chat/docs/usage/caching.html#usage
+    # Ref: https://aider.chat/docs/usage/caching.html#usage
     stream = false;
   };
 in
