@@ -2,7 +2,6 @@
   perSystem =
     {
       pkgs,
-      lib,
       self',
       ...
     }:
@@ -40,7 +39,7 @@
               ];
               cmd = jisyo: "cp ${skk-dict}/share/${jisyo} ${target}/${jisyo}";
               cmds = map cmd jisyoList;
-              script = lib.concatStringsSep "\n" cmds;
+              script = builtins.concatStringsSep "\n" cmds;
             in
             if pkgs.stdenv.isDarwin then script else null;
         };
@@ -52,7 +51,7 @@
             let
               cmd = jisyo: "rm -f ${target}/${jisyo}";
               cmds = map cmd skk-dict.passthru.list;
-              script = lib.concatStringsSep "\n" cmds;
+              script = builtins.concatStringsSep "\n" cmds;
             in
             if pkgs.stdenv.isDarwin then script else null;
         };
