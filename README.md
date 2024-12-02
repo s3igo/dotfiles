@@ -28,13 +28,13 @@ This repository contains my personal dotfiles - a collection of shell configurat
 > [!Warning]
 > When deploying, files in the `$HOME` and `~/.config` directories will be overwritten. Please back up your important files before proceeding to prevent data loss.
 
-### Deploy Without Installation (macOS)
+### Quick Deploy for macOS
 
 ```shell
 nix run github:s3igo/dotfiles <host_name> <user_name>
 ```
 
-### Full Installation
+### Standard Installation
 
 1. Clone the repository:
    ```shell
@@ -48,38 +48,44 @@ nix run github:s3igo/dotfiles <host_name> <user_name>
 
 ## 🛠 Usage
 
-Here are some common commands you can use:
+To update and upgrade flake inputs, run:
 
 ```shell
-# Update flake inputs and commit the lock file
 nix flake update --commit-lock-file
+```
 
-# Deploy system configuration (equivalent to `nix run .#deploy`)
-, deploy
+### Available Commands
 
-# Format code with treefmt
-, fmt
+The following commands are provided in the default devShell to help manage your environment:
 
-# Delete previous configurations
-, wipe-history
+```shell
+Available commands:
 
-# Show differences from the previous version
-, versions
+## Development
 
-# Install SKK dictionaries
-, install-skk-dicts
+  , fmt             : Format code with treefmt
+  , preview:rio     : Preview rio config
+  , preview:zellij  : Preview zellij config
 
-# Clean up SKK dictionaries
-, cleanup-skk-dicts
+## IME
+
+  , cleanup-skk-dicts  : Remove installed SKK dictionaries
+  , install-skk-dicts  : Install SKK dictionaries
+
+## System
+
+  , deploy        : Deploy system configuration
+  , versions      : Show system profile version differences
+  , wipe-history  : Clear profile history for system and home-manager
 ```
 
 ## 📁 Repository Structure
 
-- `home/`: Contains configuration files for various tools and applications
-- `modules/`: Nix modules for system configuration
-- `packages/`: Custom Nix packages
-- `neovim-config/`: Neovim configuration files (independent flake, can be referenced as `github:s3igo/dotfiles?dir=neovim-config`)
+- `home/`: Houses configuration files for various tools and applications
+- `modules/`: Contains Nix modules that define system-wide configurations
+- `packages/`: Hosts custom Nix packages specific to this setup
+- `neovim-config/`: Standalone Neovim configuration (available as a separate flake at `github:s3igo/dotfiles?dir=neovim-config`)
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) for details.
