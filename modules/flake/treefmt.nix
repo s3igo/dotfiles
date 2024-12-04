@@ -12,6 +12,7 @@
           nixfmt.enable = true;
           statix.enable = true;
           deadnix.enable = true;
+          typos.enable = true;
           stylua = {
             enable = true;
             settings = {
@@ -24,7 +25,6 @@
           yamlfmt.enable = true;
         };
         settings.global.excludes = [
-          "README.md"
           "LICENSE"
           ".envrc"
         ];
