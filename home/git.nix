@@ -47,7 +47,10 @@
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
-      extensions = [ pkgs.gh-copilot ];
+      extensions = with pkgs; [
+        gh-copilot
+        gh-markdown-preview
+      ];
     };
 
     gh-dash.enable = true;

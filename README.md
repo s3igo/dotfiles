@@ -21,7 +21,7 @@ This repository contains my personal dotfiles - a collection of shell configurat
 ## 🔧 Requirements
 
 - [Nix](https://nixos.org) (requires `extra-experimental-features = nix-command flakes` to be enabled)
-- [MacSKK](https://github.com/mtgto/macSKK) (macOS only)
+- [macSKK](https://github.com/mtgto/macSKK) (macOS only)
 
 ## 🚀 Quick Start
 
@@ -58,7 +58,7 @@ nix flake update --commit-lock-file
 
 The following commands are provided in the default devShell to help manage your environment:
 
-```shell
+```
 Available commands:
 
 ## Development
