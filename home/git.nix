@@ -1,5 +1,10 @@
 { pkgs, lib, ... }:
 
+let
+  userEmail = "85787242+s3igo@users.noreply.github.com";
+  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUyMJEMvBM/6QpZ365T7Gwf6KqYVuXKeTgDlKsFoU27";
+in
+
 {
   programs = {
     git = {
@@ -15,16 +20,14 @@
       ignores = [
         ".DS_Store"
         ".env"
-        "*.local.txt"
-        "*.local.md"
-        "*.local.nix"
-        "npins.local/"
+        "*.local.*"
+        "*.local/"
       ];
       lfs.enable = true;
       userName = "s3igo";
-      userEmail = "85787242+s3igo@users.noreply.github.com";
+      inherit userEmail;
       signing = {
-        key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUyMJEMvBM/6QpZ365T7Gwf6KqYVuXKeTgDlKsFoU27";
+        inherit key;
         signByDefault = true;
       };
       attributes = [ "*.lockb binary diff=lockb" ];
@@ -35,7 +38,10 @@
         };
         gpg = {
           format = "ssh";
-          ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          ssh = {
+            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+            allowedSignersFile = "~/.ssh/allowed_signers";
+          };
         };
         ghq.root = "~/git";
         core.ignorecase = "false";
@@ -55,4 +61,10 @@
 
     gh-dash.enable = true;
   };
+
+  home.file.".ssh/allowed_signers".text = builtins.concatStringsSep " " [
+    userEmail
+    ''namespaces="git"''
+    key
+  ];
 }
