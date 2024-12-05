@@ -9,7 +9,7 @@
     };
     systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
-    mission-control.url = "github:Platonic-Systems/mission-control?ref=pull/38/head";
+    mission-control.url = "github:Platonic-Systems/mission-control";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
