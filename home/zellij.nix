@@ -113,6 +113,9 @@
           bind "Ctrl g" { SwitchToMode "locked"; }
           bind "Ctrl q" { Quit; }
         }
+        shared_except "locked" "entersearch" {
+          bind "enter" { SwitchToMode "locked"; }
+        }
         shared_except "locked" "entersearch" "renametab" "renamepane" {
           bind "esc" { SwitchToMode "locked"; }
         }

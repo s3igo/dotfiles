@@ -29,6 +29,7 @@ let
     attribute-committer = false;
     auto-commits = false;
     cache-prompts = true;
+    cache-keepalive-pings = 12;
     chat-language = "Japanese";
     dark-mode = true;
     # Required due to prompt caching limitations

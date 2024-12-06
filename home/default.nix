@@ -95,7 +95,6 @@ in
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
-      AICHAT_CONFIG_DIR = "${configHome}/aichat";
       EDITOR = "nvim";
     };
     packages =

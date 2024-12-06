@@ -28,7 +28,7 @@ in
     functions = {
       # current date in ISO 8601 extended format
       __date = "echo (date '+%Y-%m-%d')";
-      __ghq-fzf = ''
+      gg = ''
         set -l dest (ghq list --full-path \
           | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" \
           | string escape)
@@ -44,7 +44,6 @@ in
         mkdir -p ${stateHome}/ghq
         echo $dest > ${stateHome}/ghq/lastdir
       '';
-      gg = "__ghq-fzf";
     };
     shellAbbrs =
       let
@@ -71,8 +70,7 @@ in
         ":n" = global // text "nixpkgs";
         ":s" = global // text "search";
         ":v" = global // text "--version";
-        arc = "open -a 'Arc.app'";
-        b = "bun";
+        ai = "aichat";
         c = "cd";
         ca = "cargo";
         cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
@@ -102,16 +100,13 @@ in
         nf = "nix flake";
         nl = "rm -rf .direnv; and direnv allow";
         nr = cursor // text "nix run .#% --";
-        nrd = cursor // text "nix run $HOME/.dotfiles#% --";
-        nrdr = cursor // text "nix run github:s3igo/dotfiles#% --";
+        nrd = cursor // text "nix run github:s3igo/dotfiles#% --";
         nrg = cursor // text "nix run github:% --";
-        nrgm = cursor // text "nix run github:s3igo/% --";
         nrp = cursor // text "nix run nixpkgs#% --";
         nrv = "nix run .#neovim --";
         nrvd = "nix run $HOME/.dotfiles#neovim --";
-        ns = cursor // text "nix shell nixpkgs#%";
+        ns = cursor // text "nix shell nixpkgs#% --command";
         nv = "neovim";
-        nvf = "neovim flake.nix";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         rc = "rclone";
@@ -119,15 +114,11 @@ in
         st = "git status";
         ty = "typst";
         v = "nvim";
-        vf = "nvim flake.nix";
         wh = "which";
         zj = "zellij";
       };
     loginShellInit = ''
       # PATH
-      if test -d /opt/homebrew
-        /opt/homebrew/bin/brew shellenv | source
-      end
       if test -d ${homeDirectory}/.orbstack
         fish_add_path ${homeDirectory}/.orbstack/bin
       end
@@ -178,9 +169,6 @@ in
 
       ## pager
       bind \co __fish_paginate
-
-      ## functions
-      # bind \cg __ghq-fzf
     '';
   };
 }

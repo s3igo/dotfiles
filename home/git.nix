@@ -45,7 +45,10 @@ in
           };
         };
         ghq.root = "~/git";
-        core.ignorecase = "false";
+        core = {
+          abbrev = 12;
+          ignorecase = "false";
+        };
         push.default = "current";
         pull.ff = "only";
       };
