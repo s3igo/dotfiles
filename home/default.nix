@@ -108,6 +108,7 @@ in
         attic-client
         # bitwarden-cli # Fails to build https://github.com/NixOS/nixpkgs/pull/350601 https://github.com/NixOS/nixpkgs/issues/339576
         darwin.trash
+        (callPackage ../packages/devai/package.nix { })
         fd
         ghq
         lsp-ai
