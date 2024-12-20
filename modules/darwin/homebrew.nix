@@ -32,6 +32,7 @@
       "1password"
       "anytype"
       "arc"
+      "bitwarden"
       "cursor"
       "deskpad"
       "discord"
@@ -40,8 +41,8 @@
       # "font-noto-sans-cjk-jp"
       # "font-zen-kaku-gothic-new"
       "google-chrome"
-      "google-japanese-ime"
       "inkscape"
+      "keycastr"
       "macos-fuse-t/homebrew-cask/fuse-t"
       "monitorcontrol"
       "mullvadvpn"
@@ -62,7 +63,5 @@
         args.no_quarantine = true;
       }
     ];
-    # Install manually due to the error of `darwin-rebuild`
-    # masApps.Bitwarden = 1352778147;
   };
 }
