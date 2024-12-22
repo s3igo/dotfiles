@@ -13,6 +13,8 @@ in
 
 {
   imports = [
+    ./fzf
+    ./wezterm
     ./aider.nix
     ./git.nix
     ./helix.nix
@@ -20,11 +22,9 @@ in
     ./pager.nix
     ./rio.nix
     ./fish.nix
-    ./fzf-patch.nix
     ./starship.nix
     ./zellij.nix
     ./zsh.nix
-    ./wezterm
   ];
 
   programs = {
