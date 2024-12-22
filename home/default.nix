@@ -39,13 +39,6 @@ in
     };
     bat.enable = true;
     bottom.enable = true;
-    fzf = {
-      enable = true;
-      changeDirWidgetCommand = "fd --type directory --hidden --follow --exclude .git";
-      changeDirWidgetOptions = [ "--preview 'ls -la --color=always {}'" ];
-      fileWidgetCommand = ""; # To disable ctrl-t
-      defaultCommand = "fd --type file --hidden --follow --exclude .git";
-    };
     jq.enable = true;
     zoxide.enable = true;
     direnv = {
