@@ -107,9 +107,7 @@ in
             {
               nixpkgs.overlays = [
                 config.flake.overlays.joshuto
-                config.flake.overlays.tdf
                 config.flake.overlays.ov
-                config.flake.overlays.gh-copilot
               ];
               home-manager = {
                 useGlobalPkgs = true;
