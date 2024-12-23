@@ -55,6 +55,7 @@
             "^%.git/"
             "^%.direnv/"
             "^node_modules/"
+            "^dist/"
             "^target/"
             "^result/"
           ];
