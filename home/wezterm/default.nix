@@ -13,16 +13,26 @@ in
   programs.wezterm = {
     enable = true;
     extraConfig = ''
-      ---@type { default: table, scheme: table }
-      local colors = require('colors')
+      local zellij = true
 
-      require('events')(colors.default, '${lib.getExe chissoku}')
-      return require('config')(
-        colors.scheme,
-        require('wezterm').font('UDEV Gothic NFLG'),
-        require('mappings'),
-        '/etc/profiles/per-user/${user}/bin/fish'
-      )
+      if zellij then
+        return require('config').zellij(
+         '/etc/profiles/per-user/${user}/bin/fish',
+         '${lib.getExe chissoku}'
+        )
+      else
+        ---@type { default: table, scheme: table }
+        local colors = require('colors')
+
+        require('events')(colors.default, '${lib.getExe chissoku}')
+
+        return require('config').default(
+          colors.scheme,
+          require('wezterm').font('UDEV Gothic NFLG'),
+          require('mappings'),
+          '/etc/profiles/per-user/${user}/bin/fish'
+        )
+      end
     '';
   };
 
