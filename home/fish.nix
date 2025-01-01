@@ -1,12 +1,11 @@
 {
+  config,
   pkgs,
   lib,
-  config,
   ...
 }:
 
 let
-  inherit (config.xdg) stateHome;
   inherit (config.home) homeDirectory;
 in
 
@@ -22,28 +21,35 @@ in
       in
       [
         (use "autopair")
-        (use "puffer")
         (use "sponge")
       ];
     functions = {
-      # current date in ISO 8601 extended format
-      __date = "echo (date '+%Y-%m-%d')";
-      gg = ''
-        set -l dest (ghq list --full-path \
-          | fzf --preview "tree -C --gitignore -I 'node_modules|target|.git' {}" \
-          | string escape)
+      # Current date in ISO 8601 extended format
+      __date-impl = "echo (date '+%Y-%m-%d')";
+      # $1 length is 2 -> `../`, 3 -> `../../`, 4 -> `../../../`, and so on
+      __dots-impl = "echo (string repeat --count (math (string length -- $argv[1]) - 1) -- ../)";
+      # $1 length is 1 -> `@`, 2 -> `@~`, 3 -> `@~~`, 4 -> `@~~~`, and so on
+      __git-h-impl = ''
+        set --local len (math (string length -- $argv[1]) - 1)
+        if test $len -eq 0
+          echo @
+        else
+          echo @(string repeat --count $len -- '~')
+        end
+      '';
+      # https://fishshell.com/docs/current/cmds/fish_should_add_to_history.html
+      fish_should_add_to_history = ''
+        # Don't add commands that start with whitespace to history
+        string match --quiet --regex '^\s+' -- $argv; and return 1
 
-        # is not selected
-        if test -z $dest
-          return
+        set --local cmds cd ls
+        for cmd in $cmds
+          string match --quiet --regex "^$cmd" -- $argv; and return 1
         end
 
-        cd $dest
-        commandline -f execute
-
-        mkdir -p ${stateHome}/ghq
-        echo $dest > ${stateHome}/ghq/lastdir
+        return 0
       '';
+      last-history-item = "echo $history[1]";
     };
     shellAbbrs =
       let
@@ -53,68 +59,112 @@ in
         cursor = {
           setCursor = true;
         };
-        function = name: { function = name; };
-        text = str: { expansion = str; };
+        command = command: { inherit command; };
+        function = function: { inherit function; };
+        regex = regex: { inherit regex; };
+        text = expansion: { inherit expansion; };
       in
       {
-        ":cp" = global // text "| pbcopy";
-        ":d" = global // function "__date";
-        ":di" = global // text "(docker image ls | tail -n +2 | fzf | awk '{print $3}')";
-        ":dp" = global // text "(docker ps | tail -n +2 | fzf | awk '{print $1}')";
-        ":dpa" = global // text "(docker ps -a | tail -n +2 | fzf | awk '{print $1}')";
-        ":f" = global // text "| fzf";
-        ":g" = global // text "| rg";
-        ":h" = global // text "--help";
-        ":i" = global // text "install";
-        ":icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":n" = global // text "nixpkgs";
-        ":s" = global // text "search";
-        ":v" = global // text "--version";
+        # https://fishshell.com/docs/current/interactive.html#abbreviations
+        __dots =
+          global
+          // regex "\\.{2,}" # matches `..`, `...`, `....`, and so on
+          // function "__dots-impl";
+        # https://fishshell.com/docs/current/cmds/abbr.html#examples
+        "!!" = global // function "last-history-item";
+        # https://fishshell.com/docs/current/cmds/abbr.html#add-subcommand
+        # Using `--regex` to expand the same word differently for multiple
+        # commands.
+        # > Even with different COMMANDS, the NAME of the abbreviation needs to
+        # > be unique. Consider using --regex if you want to expand the same
+        # > word differently for multiple commands.
+        __cd-g =
+          command "cd"
+          // regex "g"
+          // text "(${
+            builtins.concatStringsSep " | " [
+              "ghq list --full-path"
+              "fzf --preview 'tree -C --gitignore {}'"
+              "string escape"
+            ]
+          })";
+        __fzf-a = command "fzf" // regex "a" // text "--accept-nth";
+        __fzf-h = command "fzf" // regex "h" // text "--header-lines";
+        __git-a = command "git" // regex "a" // text "add";
+        __git-b = command "git" // regex "b" // text "branch";
+        __git-c = command "git" // regex "c" // text "commit";
+        __git-d = command "git" // regex "d" // text "diff";
+        __git-f =
+          command "git"
+          // regex "f"
+          // cursor
+          // text (
+            builtins.concatStringsSep " | " [
+              "log % --oneline --color=always"
+              "fzf --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
+              "tee /dev/tty"
+              "pbcopy"
+            ]
+          );
+        __git-h = command "git" // regex "h+" // function "__git-h-impl";
+        __git-l = command "git" // regex "l" // text "log";
+        __git-m = command "git" // regex "m" // text "main";
+        __git-o = command "git" // regex "o" // text "origin";
+        __git-om = command "git" // regex "om" // cursor // text "origin/main%";
+        __git-r = command "git" // regex "r" // text "restore";
+        __git-s = command "git" // regex "s" // text "status";
+        __nix-b = command "nix" // regex "b" // text "build";
+        __nix-c = command "nix" // regex "c" // cursor // text ".#% --";
+        __nix-d = command "nix" // regex "d" // cursor // text "~/.dotfiles#% --";
+        __nix-dv = command "nix" // regex "dv" // cursor // text "~/.dotfiles#neovim% --";
+        __nix-f = command "nix" // regex "f" // text "flake";
+        __nix-g = command "nix" // regex "g" // cursor // text "github:%# --";
+        __nix-gd = command "nix" // regex "gd" // cursor // text "github:s3igo/dotfiles#% --";
+        __nix-gdv = command "nix" // regex "gdv" // cursor // text "github:s3igo/dotfiles#neovim% --";
+        __nix-i = command "nix" // regex "i" // text "--inputs-from .";
+        __nix-n = command "nix" // regex "n" // cursor // text "nixpkgs#% --";
+        __nix-r = command "nix" // regex "r" // text "run";
+        __rm-d = command "rm" // regex "d" // text "-rf .direnv; and direnv allow";
+        ",cp" = global // text "| pbcopy";
+        ",date" = global // function "__date-impl";
+        ",f" = global // text "| fzf";
+        ",g" = global // text "| rg";
+        ",h" = global // text "--help";
+        ",i" = global // text "install";
+        # http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml
+        # Hiragana: 0x3040 - 0x309f
+        # Katakana: 0x30a0 - 0x30ff
+        # CJK unified ideographs Extension A - Rare kanji: 0x3400 - 0x4dbf
+        # CJK unified ideographs - Common and uncommon kanji: 0x4e00 - 0x9faf
+        # Full-width roman characters and half-width katakana: 0xff00 - 0xffef
+        ",ja" =
+          global
+          // text "'[\\x{3040}-\\x{30ff}\\x{3400}-\\x{4dbf}\\x{4e00}-\\x{9faf}\\x{ff00}-\\x{ffef}]'";
+        ",icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+        ",n" = global // text "/dev/null";
+        ",o" = global // text "/dev/stdout";
+        ",t" = global // text "| tee /dev/tty";
+        ",s" = global // text "search";
+        ",v" = global // text "--version";
         ai = "aichat";
         c = "cd";
-        ca = "cargo";
-        cdg = "cd (cat ${stateHome}/ghq/lastdir | string escape)";
         cl = "clear";
+        cmd = "commandline";
         cp = "cp -iv";
-        da = "direnv allow";
-        db = "docker build";
-        di = "docker image";
+        di = "direnv";
         do = "docker";
-        dr = "docker run";
         ef = "exec fish";
         f = "fg";
         g = "git";
-        ga = "git add";
-        gb = "git branch";
-        gc = "git commit";
-        gd = "git diff";
-        gl = "git log";
-        gr = "git restore";
-        gs = "git switch";
         hi = "history";
         mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
-        nb = cursor // text "nix build .#%";
-        ne = cursor // text "nix eval .#%";
-        nf = "nix flake";
-        nl = "rm -rf .direnv; and direnv allow";
-        nr = cursor // text "nix run .#% --";
-        nrd = cursor // text "nix run github:s3igo/dotfiles#% --";
-        nrg = cursor // text "nix run github:% --";
-        nrp = cursor // text "nix run nixpkgs#% --";
-        nrv = "nix run .#neovim --";
-        nrvd = "nix run $HOME/.dotfiles#neovim --";
-        ns = cursor // text "nix shell nixpkgs#% --command";
         nv = "neovim";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
-        rc = "rclone";
         rm = "rm -iv";
-        st = "git status";
-        ty = "typst";
         v = "nvim";
-        wh = "which";
         zj = "zellij";
       };
     loginShellInit = ''
@@ -124,51 +174,41 @@ in
       end
     '';
     interactiveShellInit = ''
-      # disable greeting
-      set fish_greeting
+      # Disable greeting
+      set --global fish_greeting
 
       # LS_COLORS
-      set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate snazzy)"
+      set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
 
-      # # restricting abbrs
-      # ## git
-      # abbr add --command git s -- status
+      # Keybindings
+      ## Disable exit with ctrl-d
+      bind ctrl-d delete-char
 
-      # ## nix
-      # abbr add --command nix --set-cursor b -- 'build .#% --'
-      # abbr add --command nix f -- flake
-      # abbr add --command nix --set-cursor r -- 'run .#% --'
-      # abbr add --command nix --set-cursor rd -- 'run $HOME/.dotfiles#% --'
-      # abbr add --command nix --set-cursor rdr -- 'run github:s3igo/dotfiles#% --'
-      # abbr add --command nix --set-cursor rp -- 'run nixpkgs#% --'
-      # abbr add --command nix v -- 'run .#neovim --'
-      # abbr add --command nix vd -- 'run $HOME/.dotfiles#neovim --'
-      # abbr add --command nix vdr -- 'run github:s3igo/dotfiles#neovim --'
+      ## Insert space without expanding abbreviation
+      bind alt-space "commandline --insert ' '"
 
-      # keybindings
-      ## disable exit with <C-d>
-      bind \cd delete-char
+      ## Bigword
+      bind alt-F forward-bigword
+      bind alt-B backward-bigword
+      bind ctrl-W backward-kill-bigword
 
-      ## insert space without expanding abbrs with <A-space>
-      bind \e\x20 'commandline -i " "'
+      ## Autosuggestions
+      bind ctrl-l accept-autosuggestion
+      bind ctrl-f forward-single-char
 
-      ## bigword
-      bind \el forward-bigword
-      bind \eh backward-bigword
-      bind \ew backward-kill-bigword
+      ## History
+      bind alt-p history-token-search-backward
+      bind alt-n history-token-search-forward
+      bind alt-r history-pager
+      bind ctrl-backspace history-pager-delete
 
-      ## autosuggestions
-      bind \cl accept-autosuggestion
-      bind \cf forward-single-char
+      ## Pager
+      bind ctrl-o __fish_paginate
 
-      ## history
-      bind \ep history-token-search-backward
-      bind \en history-token-search-forward
-      ### <C-h> FIXME: `history-pager-delete` doesn't work
-      bind \b history-pager-delete or backward-delete-char
-
-      ## pager
-      bind \co __fish_paginate
+      # Tab completion for `zellij delete-session`
+      # https://github.com/zellij-org/zellij/issues/3055
+      complete -c zellij -n "__fish_seen_subcommand_from delete-session" -f -a "(__fish_complete_sessions)" -d "Session"
+      complete -c zellij -n "__fish_seen_subcommand_from d" -f -a "(__fish_complete_sessions)" -d "Session"
     '';
   };
 }
