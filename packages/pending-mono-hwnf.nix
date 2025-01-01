@@ -15,7 +15,9 @@ stdenvNoCC.mkDerivation rec {
 
   installPhase = ''
     runHook preInstall
+
     install -Dm644 *.ttf -t $out/share/fonts/pending-mono-hwnf
+
     runHook postInstall
   '';
 
