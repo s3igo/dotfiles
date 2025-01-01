@@ -7,28 +7,60 @@
         locked {
           bind "Ctrl g" { SwitchToMode "normal"; }
         }
+
         normal {
           bind "[" { PreviousSwapLayout; SwitchToMode "locked"; }
           bind "]" { NextSwapLayout; SwitchToMode "locked"; }
+
           bind "Ctrl h" { MoveFocus "left"; SwitchToMode "locked"; }
           bind "Ctrl j" { MoveFocus "down"; SwitchToMode "locked"; }
           bind "Ctrl k" { MoveFocus "up"; SwitchToMode "locked"; }
           bind "Ctrl l" { MoveFocus "right"; SwitchToMode "locked"; }
-          bind "Ctrl n" { GoToNextTab; SwitchToMode "locked"; }
-          bind "Ctrl p" { GoToPreviousTab; SwitchToMode "locked"; }
+
+          bind "Ctrl o" { GoToNextTab; SwitchToMode "locked"; }
+          // "Ctrl i" is the same as Tab
+          bind "Ctrl i" { GoToPreviousTab; SwitchToMode "locked"; } // for Ghostty
+          bind "Tab" { GoToPreviousTab; SwitchToMode "locked"; } // for Wezterm
+
           // Write "Ctrl g" (ASCII 7)
           // Ref: https://en.wiktionary.org/wiki/Appendix:Control_characters
           bind "g" { Write 7; SwitchToMode "locked"; }
-          bind "o" { SwitchToMode "session"; }
+
+          bind "Ctrl p" { SwitchToMode "pane"; }
+          bind "Ctrl s" { SwitchToMode "scroll"; }
+          bind "Ctrl t" { SwitchToMode "tab"; }
           bind "p" { SwitchToMode "pane"; }
           bind "s" { SwitchToMode "scroll"; }
           bind "t" { SwitchToMode "tab"; }
+
+          bind "Ctrl e" { TogglePaneEmbedOrFloating; SwitchToMode "locked"; }
+          bind "Ctrl f" { ToggleFocusFullscreen; SwitchToMode "locked"; }
+          bind "Ctrl w" { ToggleFloatingPanes; SwitchToMode "locked"; }
+          bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "locked"; }
+          bind "f" { ToggleFocusFullscreen; SwitchToMode "locked"; }
+          bind "w" { ToggleFloatingPanes; SwitchToMode "locked"; }
+
+          bind "d" { Detach; }
+
+          bind "P" {
+            LaunchOrFocusPlugin "zellij:plugin-manager" {
+              floating true
+              move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+          }
+          bind "S" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+              floating true
+              move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+          }
         }
+
         pane {
           bind "-" { Resize "Decrease"; }
           bind "=" { Resize "Increase"; }
-          bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "locked"; }
-          bind "f" { ToggleFocusFullscreen; SwitchToMode "locked"; }
           bind "Ctrl h" { MovePane "left"; }
           bind "Ctrl j" { MovePane "down"; }
           bind "Ctrl k" { MovePane "up"; }
@@ -44,13 +76,12 @@
           bind "Ctrl n" { MovePane; }
           bind "Ctrl p" { MovePaneBackwards; }
           bind "n" { NewPane; SwitchToMode "locked"; }
-          bind "p" { SwitchToMode "normal"; }
           bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
           bind "S" { NewPane "up"; SwitchToMode "locked"; }
           bind "s" { NewPane "down"; SwitchToMode "locked"; }
           bind "V" { NewPane "left"; SwitchToMode "locked"; }
           bind "v" { NewPane "right"; SwitchToMode "locked"; }
-          bind "w" { ToggleFloatingPanes; SwitchToMode "locked"; }
+          bind "p" { SwitchToMode "normal"; }
           bind "x" { CloseFocus; SwitchToMode "locked"; }
           bind "z" { TogglePaneFrames; SwitchToMode "locked"; }
           bind "tab" { SwitchFocus; }
@@ -91,24 +122,6 @@
           bind "p" { Search "up"; }
           bind "w" { SearchToggleOption "Wrap"; }
         }
-        session {
-          bind "d" { Detach; }
-          bind "o" { SwitchToMode "normal"; }
-          bind "p" {
-            LaunchOrFocusPlugin "zellij:plugin-manager" {
-              floating true
-              move_to_focused_tab true
-            }
-            SwitchToMode "locked"
-          }
-          bind "w" {
-            LaunchOrFocusPlugin "zellij:session-manager" {
-              floating true
-              move_to_focused_tab true
-            }
-            SwitchToMode "locked"
-          }
-        }
         shared_except "locked" "renametab" "renamepane" {
           bind "Ctrl g" { SwitchToMode "locked"; }
           bind "Ctrl q" { Quit; }
@@ -144,13 +157,13 @@
         }
       }
 
-      // theme "iceberg-dark"
-      theme "night-owl"
+      theme "iceberg-dark"
+      // theme "night-owl"
       default_mode "locked"
       default_shell "/etc/profiles/per-user/s3igo/bin/fish"
       default_layout "simple"
       pane_frames false
-      selialize_pane_viewport true
+      pane_viewport_serialization true
     '';
 
     "zellij/layouts/simple.kdl".text = ''
