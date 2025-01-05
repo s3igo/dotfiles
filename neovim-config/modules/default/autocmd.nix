@@ -4,7 +4,12 @@ _: {
       event = "FileType";
       pattern = "gitcommit";
       callback.__raw = ''
-        function() vim.opt_local.colorcolumn = { 50, 72 } end
+        function()
+          vim.opt_local.shiftwidth = 2
+          vim.opt_local.colorcolumn = { 50, 72 }
+          vim.opt_local.formatoptions:remove('t')
+          vim.opt_local.formatoptions:remove('c')
+        end
       '';
     }
     {
@@ -12,16 +17,8 @@ _: {
         "BufReadPost"
         "BufNewFile"
       ];
-      callback.__raw = ''
-        function()
-          -- disable automatic comment insertion
-          vim.opt_local.formatoptions:remove('r')
-          vim.opt_local.formatoptions:remove('o')
-
-          -- highlight trailing whitespace
-          vim.cmd('2match TrailingSpace /\\s\\+$/')
-        end
-      '';
+      command = "2match TrailingSpace /\\s\\+$/";
+      desc = "Highlight trailing whitespace";
     }
     {
       event = "TermOpen";
