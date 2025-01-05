@@ -6,23 +6,32 @@
 }:
 
 let
-  playwright =
+  package =
     let
-      pred = drv: drv.pname == "playwright";
-      drv = lib.findSingle pred "none" "multiple" pkgs.aider-chat.optional-dependencies.playwright;
+      aider-chat = pkgs.aider-chat.withPlaywright;
+      playwright =
+        let
+          pred = drv: drv.pname == "playwright";
+          drv = lib.findSingle pred "none" "multiple" aider-chat.dependencies;
+        in
+        assert drv != "none" && drv != "multiple";
+        drv;
     in
-    assert drv != "none" && drv != "multiple";
-    drv;
-  package = pkgs.aider-chat.withPlaywright.overrideAttrs (oldAttrs: {
-    makeWrapperArgs = (oldAttrs.makeWrapperArgs or [ ]) ++ [
+    pkgs.runCommand "${aider-chat.name}-wrapped"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+      }
       # Ref: https://nixos.wiki/wiki/Playwright
-      # Related: https://github.com/Aider-AI/aider/issues/2192
-      ''--set PLAYWRIGHT_BROWSERS_PATH "${playwright.driver.browsers}"''
-      "--set PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS true"
-      # Use `--add-flags` instead of `--set` to configure API key at runtime
-      "--add-flags '--anthropic-api-key $(cat ${osConfig.age.secrets.aider-anthropic.path})'"
-    ];
-  });
+      # PLAYWRIGHT_BROWSERS_PATH: Related to https://github.com/Aider-AI/aider/issues/2192
+      # PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS: https://wiki.nixos.org/wiki/Playwright
+      # --add-flags: Used instead of `--set` to specify API key at runtime
+      ''
+        mkdir -p $out/bin
+        makeWrapper ${lib.getExe aider-chat} $out/bin/${aider-chat.meta.mainProgram} \
+          --set PLAYWRIGHT_BROWSERS_PATH "${playwright.driver.browsers}" \
+          --set PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS true \
+          --add-flags '--anthropic-api-key $(cat ${osConfig.age.secrets.aider-anthropic.path})'
+      '';
   yamlFormat = pkgs.formats.yaml { };
   settings = {
     attribute-author = false;
@@ -40,7 +49,7 @@ in
 
 {
   home = {
-    packages = [ package ] ++ package.optional-dependencies.playwright;
+    packages = [ package ];
     file.".aider.conf.yml".source = yamlFormat.generate "aider-conf" settings;
   };
   programs.git.ignores = [ ".aider*" ];
