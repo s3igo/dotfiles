@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   user,
   ...
 }:
@@ -36,6 +37,15 @@ in
             RunAtLoad = true;
             StandardOutPath = "${home}/.local/state/mnt/r2_crypt/out.log";
             StandardErrorPath = "${home}/.local/state/mnt/r2_crypt/err.log";
+          };
+        };
+        launchd.user.agents.yarr = {
+          command = lib.getExe pkgs.yarr;
+          serviceConfig = {
+            KeepAlive = true;
+            RunAtLoad = true;
+            StandardOutPath = "${home}/.local/state/yarr/out.log";
+            StandardErrorPath = "${home}/.local/state/yarr/err.log";
           };
         };
       }
