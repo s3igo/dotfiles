@@ -103,7 +103,6 @@ in
         (callPackage ../packages/devai/package.nix { })
         fd
         ghq
-        lsp-ai
         rclone
         tdf
         tree

@@ -1,4 +1,4 @@
-{ user, ... }:
+{ pkgs, user, ... }:
 
 let
   defineModel =
@@ -33,6 +33,8 @@ let
 in
 
 {
+  home.packages = [ pkgs.lsp-ai ];
+
   programs.helix = {
     enable = true;
     languages = {
@@ -96,8 +98,10 @@ in
       ];
     };
     settings = {
-      theme = "catppuccin_mocha_transparent";
+      theme = "iceberg-custom";
       editor = {
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics.cursor-line = "error";
         # true-color = true;
         # undercurl = true;
         rulers = [
@@ -210,6 +214,7 @@ in
           "snazzy"
           "jetbrains_dark"
           "catppuccin_mocha"
+          "iceberg-dark"
         ];
         transparentThemes = builtins.listToAttrs (
           map (theme: {
@@ -218,7 +223,22 @@ in
           }) themes
         );
       in
-      transparentThemes;
+      transparentThemes
+      // {
+        iceberg-custom = transparentThemes.iceberg-dark_transparent // {
+          "ui.cursorline.primary" = {
+            bg = "linenr_bg";
+          };
+          "ui.gutter" = {
+            fg = "linenr_fg";
+            bg = "none";
+          };
+          "ui.linenr" = {
+            fg = "linenr_fg";
+            bg = "none";
+          };
+        };
+      };
     ignores = [
       ".direnv/"
       "result"
