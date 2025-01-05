@@ -70,11 +70,6 @@ M.zellij = (function()
         'sha256:[A-Za-z0-9+/]*={0,3}',
     }
 
-    -- Workaround for rendering issues
-    -- See: https://github.com/wez/wezterm/issues/5990
-    --      https://github.com/NixOS/nixpkgs/issues/336069
-    config.front_end = 'WebGpu'
-
     -- appearance
     config.color_scheme = 'iceberg-dark'
     config.text_background_opacity = 0.7
@@ -167,10 +162,6 @@ M.default = function(colors, font, mappings, fish)
             'sha256-[A-Za-z0-9+/]*={0,3}',
             'sha256:[A-Za-z0-9+/]*={0,3}',
         },
-        -- Workaround for rendering issues
-        -- See: https://github.com/wez/wezterm/issues/5990
-        --      https://github.com/NixOS/nixpkgs/issues/336069
-        front_end = 'WebGpu',
 
         -- appearance
         colors = colors,
