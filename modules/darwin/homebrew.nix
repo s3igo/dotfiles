@@ -40,6 +40,7 @@
       # "font-ipaexfont"
       # "font-noto-sans-cjk-jp"
       # "font-zen-kaku-gothic-new"
+      "ghostty"
       "google-chrome"
       "inkscape"
       "keycastr"

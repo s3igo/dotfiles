@@ -16,6 +16,7 @@ in
     ./fzf
     ./wezterm
     ./aider.nix
+    ./ghostty.nix
     ./git.nix
     ./helix.nix
     ./joshuto.nix
