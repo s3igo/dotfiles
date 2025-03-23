@@ -13,16 +13,16 @@ in
 
 {
   imports = [
-    ./fzf
     ./wezterm
     ./aider.nix
+    ./fish.nix
+    ./fzf.nix
     ./ghostty.nix
     ./git.nix
     ./helix.nix
     ./joshuto.nix
     ./pager.nix
     ./rio.nix
-    ./fish.nix
     ./starship.nix
     ./zellij.nix
     ./zsh.nix

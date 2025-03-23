@@ -1,6 +1,4 @@
 {
-  imports = [ ./module.nix ];
-
   programs.fzf = {
     enable = true;
     changeDirWidgetCommand = "fd --type directory --hidden --follow --exclude .git";
