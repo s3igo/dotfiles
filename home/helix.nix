@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, lib, ... }:
 
 let
   defineModel =
@@ -112,7 +112,7 @@ in
         cursorline = true;
         line-number = "relative";
         shell = [
-          "/etc/profiles/per-user/${user}/bin/fish"
+          (lib.getExe pkgs.fish)
           "-c"
         ];
         bufferline = "multiple";
@@ -169,10 +169,10 @@ in
       };
       keys = {
         insert = {
+          C-f = "move_char_right";
+          C-b = "move_char_left";
           C-p = "move_line_up";
           C-n = "move_line_down";
-          C-b = "move_char_left";
-          C-f = "move_char_right";
           C-a = "goto_line_start";
           C-e = "goto_line_end_newline";
           S-tab = "move_parent_node_start";

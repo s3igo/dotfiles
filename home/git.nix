@@ -20,6 +20,7 @@ in
       ignores = [
         ".DS_Store"
         ".env"
+        ".direnv/" # nix-direnv
         "*.local.*"
         "*.local/"
       ];

@@ -67,8 +67,8 @@ in
     enable = true;
     configFile."npm/npmrc".text = ''
       prefix=''${XDG_DATA_HOME}/npm
-      logs-dir=''${XDG_DATA_HOME}/npm/log
       cache=''${XDG_CACHE_HOME}/npm
+      tmp=''${TMPDIR}npm
       update-notifier=false
     '';
   };
