@@ -22,7 +22,6 @@ in
         ".env"
         "*.local.*"
         "*.local/"
-        ".devai/"
       ];
       lfs.enable = true;
       userName = "s3igo";
