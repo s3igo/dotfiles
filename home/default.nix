@@ -100,10 +100,13 @@ in
         aichat
         attic-client
         # bitwarden-cli # Fails to build https://github.com/NixOS/nixpkgs/pull/350601 https://github.com/NixOS/nixpkgs/issues/339576
+        coreutils-prefixed
         darwin.trash
+        dust
         fd
         ghq
         rclone
+        smartcat
         tdf
         tree
       ]
