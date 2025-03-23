@@ -6,9 +6,6 @@
 }:
 
 {
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
@@ -52,6 +49,5 @@
     config.allowUnfree = true;
   };
 
-  programs.fish.enable = true;
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
