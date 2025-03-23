@@ -3,7 +3,6 @@ args@{
   lib,
   pkgs,
   modulesPath,
-  inputs,
   ...
 }:
 
@@ -17,11 +16,11 @@ let
     in
     builtins.concatStringsSep " " (ctrl-t ++ alt-c);
 
-  prev = import (inputs.home-manager + "/modules/programs/fzf.nix") args;
+  defaultModule = "${modulesPath}/programs/fzf.nix";
 in
 
-lib.recursiveUpdate prev {
-  disabledModules = [ "${modulesPath}/programs/fzf.nix" ];
+lib.recursiveUpdate (import defaultModule args) {
+  disabledModules = [ defaultModule ];
 
   options.programs.fzf.package.default = pkgs.fzf.overrideAttrs {
     # Prevent shell integrations from installing automatically
@@ -30,6 +29,7 @@ lib.recursiveUpdate prev {
     '';
   };
 
+  # https://github.com/junegunn/fzf/blob/master/README.md#setting-up-shell-integration
   config.content.programs.fish.interactiveShellInit.content = ''
     ${lib.getExe cfg.package} --fish | ${variablesToDisableKeyBindings} source
   '';
