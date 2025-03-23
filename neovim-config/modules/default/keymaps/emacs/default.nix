@@ -3,10 +3,10 @@
 {
   keymaps =
     map (mapMode "i") [
-      {
-        key = "<c-t>";
-        action.__raw = builtins.readFile ./transpose.lua;
-      }
+      # {
+      #   key = "<c-t>";
+      #   action.__raw = builtins.readFile ./transpose.lua;
+      # }
       {
         key = "<c-k>";
         action.__raw = builtins.readFile ./kill_line.lua;
@@ -43,10 +43,10 @@
         key = "<a-b>";
         action = "<c-g>U<s-left>";
       }
-      {
-        key = "<c-d>";
-        action = "<del>";
-      }
+      # {
+      #   key = "<c-d>";
+      #   action = "<del>";
+      # }
     ]
     ++ map (mapMode "c") [
       {

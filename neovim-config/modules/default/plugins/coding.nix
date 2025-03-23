@@ -26,6 +26,7 @@
             local luasnip = require('luasnip')
 
             return {
+              -- Trigger suggest
               ['<a-i>'] = cmp.mapping(function()
                 if not cmp.visible() then cmp.complete() end
               end),
@@ -71,16 +72,18 @@
     };
     copilot-lua = {
       enable = true;
-      filetypes = {
-        txt = false;
-        yaml = true;
-        gitcommit = true;
-      };
-      extraOptions.suggestion = {
-        auto_trigger = true;
-        keymap = {
-          accept_word = "<c-y>";
-          accept_line = "<c-l>";
+      settings = {
+        filetypes = {
+          txt = false;
+          yaml = true;
+          gitcommit = true;
+        };
+        extraOptions.suggestion = {
+          auto_trigger = true;
+          keymap = {
+            accept_word = "<c-y>";
+            accept_line = "<c-l>";
+          };
         };
       };
     };
@@ -91,6 +94,7 @@
         check_ts = true;
       };
     };
+    nvim-surround.enable = true;
     mini = {
       enable = true;
       modules = {
@@ -101,7 +105,6 @@
   };
 
   extraPlugins = with pkgs.vimPlugins; [
-    nvim-surround
     text-case-nvim
     nvim-various-textobjs
   ];
@@ -142,9 +145,6 @@
         loader.load_standalone({ path = snippet })
       end
     end
-
-    -- nvim-surround
-    require('nvim-surround').setup({})
   '';
 
   extraConfigLuaPost = ''

@@ -116,6 +116,7 @@
       enable = true;
       modules = {
         bufremove = { };
+        tabline = { };
       };
     };
     indent-blankline = {
