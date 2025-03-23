@@ -1,5 +1,12 @@
 {
-  programs.zellij.enable = true;
+  programs.zellij = {
+    enable = true;
+    # https://github.com/nix-community/home-manager/commit/5af1b9a0f193ab6138b89a8e0af8763c21bbf491
+    # https://github.com/nix-community/home-manager/pull/6037
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = false;
+  };
 
   xdg.configFile = {
     "zellij/config.kdl".text = ''
@@ -86,6 +93,7 @@
           bind "z" { TogglePaneFrames; SwitchToMode "locked"; }
           bind "tab" { SwitchFocus; }
         }
+
         tab {
           bind "1" { GoToTab 1; SwitchToMode "locked"; }
           bind "2" { GoToTab 2; SwitchToMode "locked"; }
@@ -110,11 +118,13 @@
           bind "x" { CloseTab; SwitchToMode "locked"; }
           bind "tab" { ToggleTab; }
         }
+
         scroll {
           bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
           bind "e" { EditScrollback; SwitchToMode "locked"; }
           bind "s" { SwitchToMode "normal"; }
         }
+
         search {
           bind "c" { SearchToggleOption "CaseSensitivity"; }
           bind "n" { Search "down"; }
@@ -122,16 +132,20 @@
           bind "p" { Search "up"; }
           bind "w" { SearchToggleOption "Wrap"; }
         }
+
         shared_except "locked" "renametab" "renamepane" {
           bind "Ctrl g" { SwitchToMode "locked"; }
           bind "Ctrl q" { Quit; }
         }
+
         shared_except "locked" "entersearch" {
           bind "enter" { SwitchToMode "locked"; }
         }
+
         shared_except "locked" "entersearch" "renametab" "renamepane" {
           bind "esc" { SwitchToMode "locked"; }
         }
+
         shared_among "scroll" "search" {
           bind "Ctrl b" { PageScrollUp; }
           bind "Ctrl c" { ScrollToBottom; SwitchToMode "locked"; }
@@ -141,17 +155,21 @@
           bind "k" { ScrollUp; }
           bind "Ctrl u" { HalfPageScrollUp; }
         }
+
         entersearch {
           bind "Ctrl c" { SwitchToMode "scroll"; }
           bind "esc" { SwitchToMode "scroll"; }
           bind "enter" { SwitchToMode "search"; }
         }
+
         renametab {
           bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
         }
+
         shared_among "renametab" "renamepane" {
           bind "Ctrl c" { SwitchToMode "locked"; }
         }
+
         renamepane {
           bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
         }
