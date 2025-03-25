@@ -1,12 +1,5 @@
 {
-  programs.zellij = {
-    enable = true;
-    # https://github.com/nix-community/home-manager/commit/5af1b9a0f193ab6138b89a8e0af8763c21bbf491
-    # https://github.com/nix-community/home-manager/pull/6037
-    enableBashIntegration = false;
-    enableFishIntegration = false;
-    enableZshIntegration = false;
-  };
+  programs.zellij.enable = true;
 
   xdg.configFile = {
     "zellij/config.kdl".text = ''
