@@ -7,12 +7,14 @@ in
 
 {
   programs = {
+    # https://noborus.github.io/ov/delta/index.html
+    # Manually configuring instead of using `programs.git.delta` to integrate
+    # delta and ov.
     git.extraConfig = {
-      # NOTE: `--quit-if-one-screen` sometimes doesn't work correctly
-      # The conditions that trigger this issue are unclear
-      # Ref: https://github.com/dandavison/delta/issues/1684
       core.pager = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen'";
+      interactive.diffFilter = "${deltaCommand} --color-only";
       pager = {
+        show = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen --header 3'";
         diff = "${deltaCommand} --features ov-diff";
         log = "${deltaCommand} --features ov-log";
       };
@@ -36,9 +38,7 @@ in
     };
     # Override the builtin `__fish_anypager` function to customize the behavior
     # of `__fish_paginate`
-    fish.functions.__fish_anypager = ''
-      echo ${pkgs.ov.meta.mainProgram}
-    '';
+    fish.functions.__fish_anypager = "echo ${pkgs.ov.meta.mainProgram}";
   };
 
   home = {
