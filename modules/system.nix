@@ -49,5 +49,10 @@
     config.allowUnfree = true;
   };
 
+  programs.fish.enable = true; # Don't delete this!
+  # It will still work if deleted, but system information won't be available
+  # from fish, and you might encounter git errors like:
+  # SSL certificate problem: unable to get local issuer certificate
+
   security.pam.services.sudo_local.touchIdAuth = true;
 }
