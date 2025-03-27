@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   userEmail = "85787242+s3igo@users.noreply.github.com";
@@ -9,14 +9,6 @@ in
   programs = {
     git = {
       enable = true;
-      aliases = {
-        push-force = "push --force-with-lease --force-if-includes";
-        sync = "pull --rebase --autostash";
-        init-empty = "!git init && git commit --allow-empty -m 'initial commit'";
-        init-exist = "!git init && git add . && git commit -m 'first commit'";
-        create = ''!f() { ${lib.getExe pkgs.gh} repo create "$1" --private && ${lib.getExe pkgs.ghq} get -p "$1"; }; f'';
-        pr = ''!f() { git fetch origin "pull/$1/head:PR-$1"; }; f'';
-      };
       ignores = [
         ".DS_Store"
         ".env"
@@ -31,11 +23,14 @@ in
         inherit key;
         signByDefault = true;
       };
-      attributes = [ "*.lockb binary diff=lockb" ];
       extraConfig = {
-        diff.lockb = {
-          textconv = "bun";
-          binary = true;
+        column.ui = "auto";
+        branch.sort = "-committerdate";
+        tag.sort = "-version:refname";
+        diff = {
+          algorithm = "histogram";
+          colorMoved = true;
+          mnemonicPrefix = true;
         };
         gpg = {
           format = "ssh";
@@ -49,8 +44,29 @@ in
           abbrev = 12;
           ignorecase = "false";
         };
-        push.default = "current";
+        push = {
+          autoSetupRemote = true;
+          followTags = true;
+        };
+        fetch = {
+          prune = true;
+          pruneTags = true;
+          all = true;
+        };
+        help.autocorrect = "prompt";
+        commit.verbose = true;
+        rerere = {
+          enabled = true;
+          autoupdate = true;
+        };
+        rebase = {
+          autoSquash = true;
+          autoStash = true;
+          updateRefs = true;
+        };
+        merge.conflictstyle = "zdiff3";
         pull.ff = "only";
+        grep.patternType = "perl";
       };
     };
 
