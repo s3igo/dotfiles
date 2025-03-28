@@ -6,7 +6,7 @@ _: {
       callback.__raw = ''
         function()
           vim.opt_local.shiftwidth = 2
-          vim.opt_local.colorcolumn = { 50, 72 }
+          vim.opt_local.colorcolumn = { 50, 70, 72 }
           vim.opt_local.formatoptions:remove('t')
           vim.opt_local.formatoptions:remove('c')
         end

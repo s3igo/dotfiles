@@ -31,6 +31,10 @@ in
   ];
 
   enableMan = false;
+  performance.byteCompileLua = {
+    enable = true;
+    plugins = true;
+  };
   highlight = {
     NormalFloat.bg = "none";
     StatusLine.bg = "none";
