@@ -24,6 +24,14 @@ in
         (use "sponge")
       ];
     functions = {
+      # https://fishshell.com/docs/current/cmds/abbr.html#examples
+      __last-history-item = "echo $history[1]";
+      __last-token = ''
+        set --local tokens (commandline --tokens-raw)
+        if test (count $tokens) -gt 1
+          echo $tokens[-2]
+        end
+      '';
       # Current date in ISO 8601 extended format
       __date-impl = "echo (date '+%Y-%m-%d')";
       # $1 length is 2 -> `../`, 3 -> `../../`, 4 -> `../../../`, and so on
@@ -39,17 +47,34 @@ in
       '';
       # https://fishshell.com/docs/current/cmds/fish_should_add_to_history.html
       fish_should_add_to_history = ''
-        # Don't add commands that start with whitespace to history
-        string match --quiet --regex '^\s+' -- $argv; and return 1
+        # Skip adding commands that begin with whitespace to history
+        string match --quiet --regex '^\s+' -- $argv[1]; and return 1
 
-        set --local cmds cd ls
+        set --local cmds cd mkdir touch trash 'history\s+delete\s+'
         for cmd in $cmds
-          string match --quiet --regex "^$cmd" -- $argv; and return 1
+          string match --quiet --regex "^$cmd" -- "$argv"; and return 1
+        end
+
+        set --local git_subs add branch checkout commit restore diff reset stash switch rebase revert merge
+        if test (count $argv) -gt 1; and test $argv[1] = git
+          for git_sub in $git_subs
+            test $argv[2] = $git_sub; and return 1
+          end
+
+          if test $argv[2] = log
+            # Matches 12-character or 40-character commit hashes
+            string match --quiet --regex '^([0-9a-f]{12}|[0-9a-f]{40})$' -- $argv; and return 1
+            # Matches "^<commit>"
+            string match --quiet --regex '^\^([0-9a-f]{12}|[0-9a-f]{40})$' -- $argv; and return 1
+            # Matches "<commit1>..<commit2>"
+            string match --quiet \
+              --regex '^([0-9a-f]{12}|[0-9a-f]{40})?\.{2,3}([0-9a-f]{12}|[0-9a-f]{40})?$' \
+              -- $argv; and return 1
+          end
         end
 
         return 0
       '';
-      last-history-item = "echo $history[1]";
     };
     shellAbbrs =
       let
@@ -65,13 +90,6 @@ in
         text = expansion: { inherit expansion; };
       in
       {
-        # https://fishshell.com/docs/current/interactive.html#abbreviations
-        __dots =
-          global
-          // regex "\\.{2,}" # matches `..`, `...`, `....`, and so on
-          // function "__dots-impl";
-        # https://fishshell.com/docs/current/cmds/abbr.html#examples
-        "!!" = global // function "last-history-item";
         # https://fishshell.com/docs/current/cmds/abbr.html#add-subcommand
         # Using `--regex` to expand the same word differently for multiple
         # commands.
@@ -125,6 +143,13 @@ in
         __nix-n = command "nix" // regex "n" // cursor // text "nixpkgs#% --";
         __nix-r = command "nix" // regex "r" // text "run";
         __rm-d = command "rm" // regex "d" // text "-rf .direnv; and direnv allow";
+        # https://fishshell.com/docs/current/interactive.html#abbreviations
+        __dots =
+          global
+          // regex "\\.{2,}" # matches `..`, `...`, `....`, and so on
+          // function "__dots-impl";
+        "!!" = global // function "__last-history-item";
+        "!?" = global // function "__last-token";
         ",cp" = global // text "| pbcopy";
         ",date" = global // function "__date-impl";
         ",f" = global // text "| fzf";
