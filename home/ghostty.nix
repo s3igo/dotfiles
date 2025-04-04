@@ -13,11 +13,17 @@
       mouse-hide-while-typing = true;
       background-opacity = 0.7;
       command = "${lib.getExe pkgs.fish} --login";
-      initial-command = "${lib.getExe pkgs.zellij} --layout welcome";
       link-url = true;
-      keybind = [ "global:super+grave_accent=toggle_quick_terminal" ];
+      working-directory = "home";
+      keybind = [
+        "global:super+grave_accent=toggle_quick_terminal"
+        "super+s=new_split:left"
+        "super+shift+s=new_split:up"
+        "shift+space=ignore" # Avoid conflict with IME keybindings
+      ];
       window-padding-x = 5;
       window-padding-balance = true;
+      window-inherit-working-directory = false;
       shell-integration-features = "no-cursor";
       # -- macOS only --
       window-title-font-family = "UDEV Gothic NFLG";
