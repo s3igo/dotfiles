@@ -8,7 +8,7 @@
 let
   package =
     let
-      aider-chat = pkgs.aider-chat.withPlaywright;
+      aider-chat = pkgs.aider-chat-with-playwright;
     in
     pkgs.runCommand "${aider-chat.name}-wrapped" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
       # --add-flags: Used instead of `--set` to specify API key at runtime
