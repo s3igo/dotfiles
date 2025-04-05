@@ -1,6 +1,4 @@
-{ mapMode, ... }:
-
-{ pkgs, ... }:
+_:
 
 {
   plugins = {
@@ -87,42 +85,11 @@
         };
       };
     };
-    nvim-autopairs = {
-      enable = true;
-      settings = {
-        map_c_h = true;
-        check_ts = true;
-      };
-    };
     nvim-surround.enable = true;
-    mini = {
-      enable = true;
-      modules = {
-        ai = { };
-        operators.exchange.prefix = "gz";
-      };
-    };
+    autoclose.enable = true;
   };
 
-  extraPlugins = with pkgs.vimPlugins; [
-    text-case-nvim
-    nvim-various-textobjs
-  ];
-
   extraConfigLua = ''
-    -- text-case-nvim
-    require('textcase').setup({ default_keymappings_enabled = false })
-    require('telescope').load_extension('textcase')
-
-    -- nvim-various-textobjs
-    require('various-textobjs').setup({})
-
-    -- make autopairs work with cmp
-    require('cmp').event:on(
-      'confirm_done',
-      require('nvim-autopairs.completion.cmp').on_confirm_done()
-    )
-
     -- friendly-snippets
     require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -146,72 +113,4 @@
       end
     end
   '';
-
-  extraConfigLuaPost = ''
-    -- nvim-autopairs
-    local Rule = require('nvim-autopairs.rule')
-    local npairs = require('nvim-autopairs')
-    local cond = require('nvim-autopairs.conds')
-
-    npairs.add_rules(
-      {
-        Rule('{', '}', 'nix')
-          :use_key('<tab>')
-          :replace_endpair(function() return '<del>};<left><left>' end, true)
-      },
-      {
-        Rule('[', ']', 'nix')
-          :use_key('<tab>')
-          :replace_endpair(function() return '<del>];<left><left>' end, true)
-      }
-      -- FIXME: this doesn't work
-      -- {
-      --   Rule("\'\'", "", "nix")
-      --     :use_key('<tab>')
-      --     :replace_endpair(function() return '<del>\'\'<left><left>' end)
-      -- }
-    )
-  '';
-
-  keymaps =
-    [
-      # text-case.nvim
-      {
-        key = "ga";
-        action = "<cmd>TextCaseOpenTelescope<cr>";
-        mode = [
-          "n"
-          "x"
-        ];
-        options.desc = "Change case";
-      }
-    ]
-    ++ map
-      (mapMode [
-        "o"
-        "x"
-      ])
-      [
-        # nvim-various-textobjs
-        {
-          key = "ii";
-          action = "<cmd>lua require('various-textobjs').indentation('inner', 'inner')<cr>";
-          options.desc = "Inside indentation";
-        }
-        {
-          key = "ai";
-          action = "<cmd>lua require('various-textobjs').indentation('outer', 'inner')<cr>";
-          options.desc = "Around indentation";
-        }
-        {
-          key = "is";
-          action = "<cmd>lua require('various-textobjs').subword('inner')<cr>";
-          options.desc = "Inside subword";
-        }
-        {
-          key = "as";
-          action = "<cmd>lua require('various-textobjs').subword('outer')<cr>";
-          options.desc = "Around subword";
-        }
-      ];
 }

@@ -35,17 +35,6 @@ utils@{ mapMode, ... }:
         action.__raw = builtins.readFile ./comma.lua;
         options.desc = "Toggle trailing comma";
       }
-      # buffers
-      {
-        key = "[b";
-        action = "<cmd>bp<cr>";
-        options.desc = "Previous buffer";
-      }
-      {
-        key = "]b";
-        action = "<cmd>bn<cr>";
-        options.desc = "Next buffer";
-      }
       # files
       # {
       #   key = "<leader>s";
