@@ -1,21 +1,11 @@
 _: {
   opts = {
-    encoding = "utf-8";
-    fileencoding = "utf-8";
-    fileformats = "unix,dos,mac";
-    showtabline = 2;
     shiftwidth = 4;
     softtabstop = 4;
-    tabstop = 8;
     expandtab = true;
-    smarttab = true;
-    autoindent = true;
     smartindent = true;
     breakindent = true;
-    mouse = "a";
     visualbell = true;
-    emoji = true;
-    backup = false;
     ignorecase = true;
     smartcase = true;
     shell = "fish";
