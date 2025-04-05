@@ -140,7 +140,6 @@
 
   extraPlugins = with pkgs.vimPlugins; [
     nightfly
-    # heirline-nvim
   ];
 
   highlight = {
@@ -166,8 +165,6 @@
     vim.g.nightflyWinSeparator = 2
     vim.cmd('colorscheme nightfly')
   '';
-
-  # extraConfigLua = builtins.readFile ./heirline.lua;
 
   keymaps = map (mapMode "n") [
     # mini.bufremove
