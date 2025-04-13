@@ -175,6 +175,8 @@
       default_layout "simple"
       pane_frames false
       pane_viewport_serialization true
+      show_startup_tips false
+      show_release_notes false
     '';
 
     "zellij/layouts/simple.kdl".text = ''
