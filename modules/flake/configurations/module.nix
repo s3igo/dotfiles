@@ -107,7 +107,7 @@ in
             {
               nixpkgs.overlays = [
                 config.flake.overlays.joshuto
-                config.flake.overlays.ov
+                config.flake.overlays.bitwarden-cli
               ];
               home-manager = {
                 useGlobalPkgs = true;

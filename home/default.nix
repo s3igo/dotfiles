@@ -94,19 +94,15 @@ in
     packages =
       with pkgs;
       [
-        # efm-langserver
-        # emacs-nox
         _1password-cli
         aichat
         attic-client
-        # bitwarden-cli # Fails to build https://github.com/NixOS/nixpkgs/pull/350601 https://github.com/NixOS/nixpkgs/issues/339576
-        coreutils-prefixed
+        bitwarden-cli
         darwin.trash
         dust
         ghq
         rclone
         smartcat
-        tdf
         tree
       ]
       ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra ];
