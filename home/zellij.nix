@@ -19,8 +19,7 @@
 
           bind "Ctrl o" { GoToNextTab; SwitchToMode "locked"; }
           // "Ctrl i" is the same as Tab
-          bind "Ctrl i" { GoToPreviousTab; SwitchToMode "locked"; } // for Ghostty
-          bind "Tab" { GoToPreviousTab; SwitchToMode "locked"; } // for Wezterm
+          bind "Ctrl i" { GoToPreviousTab; SwitchToMode "locked"; }
 
           // Write "Ctrl g" (ASCII 7)
           // Ref: https://en.wiktionary.org/wiki/Appendix:Control_characters

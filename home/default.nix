@@ -13,7 +13,6 @@ in
 
 {
   imports = [
-    ./wezterm
     ./aider.nix
     ./fish.nix
     ./fzf.nix
