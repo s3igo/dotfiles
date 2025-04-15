@@ -1,6 +1,5 @@
 {
-  plugins.lsp.servers.denols = {
-    enable = true;
-    rootDir = "function() return '' end";
-  };
+  imports = [ ./deno.nix ];
+
+  plugins.lsp.servers.denols.rootDir = "function() return '' end";
 }

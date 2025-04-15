@@ -18,10 +18,7 @@
         formatting.command = [ "nixfmt" ];
       };
     };
-    # lsp.servers.nil_ls = {
-    #   enable = true;
-    #   settings.formatting.command = [ "nixfmt" ];
-    # };
+    lsp.servers.nil_ls.enable = true;
     none-ls = {
       enable = true;
       sources = {
