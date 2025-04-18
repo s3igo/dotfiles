@@ -60,6 +60,16 @@ in
       enable = true;
       arguments = [ "--smart-case" ];
     };
+    pet = {
+      enable = true;
+      settings = {
+        General = {
+          Color = true;
+          Editor = "nvim";
+          SelectCmd = "fzf --ansi --reverse";
+        };
+      };
+    };
   };
 
   xdg = {
