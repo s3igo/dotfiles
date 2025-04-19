@@ -12,17 +12,12 @@ in
 {
   programs.fish = {
     enable = true;
-    plugins =
-      let
-        use = name: {
-          inherit name;
-          inherit (pkgs.fishPlugins.${name}) src;
-        };
-      in
-      [
-        (use "autopair")
-        (use "sponge")
-      ];
+    plugins = [
+      rec {
+        name = "autopair";
+        inherit (pkgs.fishPlugins.${name}) src;
+      }
+    ];
     functions = {
       # https://fishshell.com/docs/current/cmds/abbr.html#examples
       __last-history-item = "echo $history[1]";
