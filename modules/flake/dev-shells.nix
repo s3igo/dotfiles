@@ -11,8 +11,9 @@
       devShells.default = pkgs.mkShellNoCC {
         inputsFrom = [ config.mission-control.devShell ];
         packages = [
-          pkgs.nixd
           pkgs.nil
+          pkgs.nixd
+          pkgs.nixfmt-rfc-style
           (neovim-config.lib.customName {
             inherit pkgs;
             nvim = config.packages.neovim;
