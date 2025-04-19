@@ -9,6 +9,27 @@ in
   programs = {
     git = {
       enable = true;
+      aliases = rec {
+        fzf-add = builtins.concatStringsSep " | " [
+          fzf-status
+          "xargs git add"
+        ];
+        fzf-log = "!f() { ${
+          builtins.concatStringsSep " | " [
+            ''git log "''${1:-HEAD}" --oneline --color=always''
+            "fzf --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
+          ]
+        }; }; f";
+        fzf-status = builtins.concatStringsSep " | " [
+          "!git status --short"
+          "fzf --multi --preview 'git diff --color=always {-1}' --accept-nth 2"
+        ];
+        ghq = builtins.concatStringsSep " | " [
+          "!ghq list --full-path"
+          "fzf --preview 'tree -C --gitignore {}'"
+          ''while IFS= read -r l; do printf '%q\n' "$l"; done'' # Escape strings
+        ];
+      };
       ignores = [
         ".DS_Store"
         ".env"
