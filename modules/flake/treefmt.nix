@@ -9,25 +9,13 @@
       treefmt = {
         inherit (config.flake-root) projectRootFile;
         programs = {
+          deadnix.enable = true;
           nixfmt.enable = true;
           statix.enable = true;
-          deadnix.enable = true;
           typos.enable = true;
-          stylua = {
-            enable = true;
-            settings = {
-              indent_type = "Spaces";
-              quote_style = "AutoPreferSingle";
-              collapse_simple_statement = "FunctionOnly";
-            };
-            excludes = [ "neovim-config/*" ];
-          };
           yamlfmt.enable = true;
         };
-        settings.global.excludes = [
-          "LICENSE"
-          ".envrc"
-        ];
+        settings.global.excludes = [ "LICENSE" ];
       };
 
       formatter = config.treefmt.build.wrapper;
