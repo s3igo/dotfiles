@@ -110,6 +110,7 @@
     WhichKeyFloat.bg = "none";
     TabLineFill.bg = "none";
     GitSignsChange.link = "NightflyYellow";
+    LineNr.link = "NightflyGreyBlue";
   };
 
   extraPackages = with pkgs; [
