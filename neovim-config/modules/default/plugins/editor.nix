@@ -4,11 +4,6 @@
 
 {
   plugins = {
-    nvim-tree = {
-      enable = true;
-      filters.custom = [ "^\\.git$" ];
-      git.ignore = false;
-    };
     gitsigns = {
       enable = true;
       settings = {
@@ -41,94 +36,12 @@
       };
     };
     colorizer.enable = true;
-    telescope = {
-      enable = true;
-      settings = {
-        defaults = {
-          mappings.i = {
-            "<c-f>" = false;
-            "<c-k>" = false;
-            "<c-[>".__raw = "require('telescope.actions').close";
-          };
-          file_ignore_patterns = [
-            "^%.git/"
-            "^%.direnv/"
-            "^node_modules/"
-            "^dist/"
-            "^target/"
-            "^result/"
-          ];
-        };
-        pickers = {
-          find_files = {
-            hidden = true;
-            no_ignore = true;
-          };
-          live_grep.additional_args = [ "--hidden" ];
-          git_files.git_command = [
-            "git"
-            "ls-files"
-            "--modified"
-          ];
-        };
-      };
-      keymaps = {
-        "<leader><space>" = {
-          action = "find_files";
-          options.desc = "Fuzzy find files";
-        };
-        "<leader>/" = {
-          action = "live_grep";
-          options.desc = "Fuzzy find live grep";
-        };
-        "<leader>:" = {
-          action = "commands";
-          options.desc = "Fuzzy find commands";
-        };
-        "<leader>'" = {
-          action = "registers";
-          options.desc = "Fuzzy find registers";
-        };
-        "<leader><tab>" = {
-          action = "buffers";
-          options.desc = "Fuzzy find buffers";
-        };
-        "<leader>g" = {
-          action = "git_files";
-          options.desc = "Fuzzy find modified files";
-        };
-        "<leader>d" = {
-          action = "diagnostics";
-          options.desc = "Fuzzy find diagnostics";
-        };
-        "<leader>t" = {
-          action = "lsp_document_symbols";
-          options.desc = "Fuzzy find LSP document symbols";
-        };
-        "<leader>T" = {
-          action = "lsp_workspace_symbols";
-          options.desc = "Fuzzy find LSP workspace symbols";
-        };
-      };
-    };
     mini = {
       enable = true;
       mockDevIcons = true;
       modules = {
-        bufremove = { };
         icons = { };
         tabline = { };
-      };
-    };
-    indent-blankline = {
-      enable = true;
-      settings = {
-        indent = {
-          char = "|";
-          highlight = "Indent";
-        };
-        whitespace.highlight = "Whitespace";
-        scope.enabled = false;
       };
     };
     which-key = {
@@ -137,17 +50,59 @@
     };
     smart-splits.enable = true;
     hardtime.enable = true;
+    snacks = {
+      enable = true;
+      settings = {
+        indent = {
+          animate.enabled = false;
+          scope.enabled = false;
+        };
+        picker = {
+          sources.explorer.ignored = true;
+          actions = {
+            smart_scroll_up.__raw = ''
+              function(picker)
+                local mode = vim.fn.mode()
+                if mode == 'n' then
+                  picker:action('list_scroll_up')
+                elseif mode == 'i' then
+                  picker:action('preview_scroll_up')
+                end
+              end
+            '';
+            smart_scroll_down.__raw = ''
+              function(picker)
+                local mode = vim.fn.mode()
+                if mode == 'n' then
+                  picker:action('list_scroll_down')
+                elseif mode == 'i' then
+                  picker:action('preview_scroll_down')
+                end
+              end
+            '';
+          };
+          win.input.keys = {
+            "<c-k>" = "list_up"; # To inherit the behavior of <c-k> in insert mode: kill_line
+            "<c-a>" = "select_all"; # To inherit the behavior of <c-a> in insert mode: <home>
+            "<c-b>" = "preview_scroll_up"; # To inherit the behavior of <c-b> in insert mode: <left>
+            "<c-f>" = "preview_scroll_down"; # To inherit the behavior of <c-f> in insert mode: <right>
+            "<c-u>".__raw = "{ 'smart_scroll_up', mode = { 'i', 'n' } }";
+            "<c-d>".__raw = "{ 'smart_scroll_down', mode = { 'i', 'n' } }";
+          };
+        };
+      };
+    };
   };
 
   extraPlugins = with pkgs.vimPlugins; [
     nightfly
   ];
 
-  highlight = {
+  highlight = rec {
     NonText.link = "NightflyPickleBlue";
-    Whitespace.link = "NightflyPickleBlue";
-    SpecialKey.link = "NightflyPickleBlue";
-    Indent.link = "NightflyGreyBlue";
+    Whitespace.link = NonText.link;
+    SpecialKey.link = NonText.link;
+    SnacksIndent.link = NonText.link;
     TrailingSpace.link = "NightflyPurpleMode";
     WhichKeyFloat.bg = "none";
     TabLineFill.bg = "none";
@@ -168,22 +123,86 @@
   '';
 
   keymaps = map (mapMode "n") [
-    # mini.bufremove
+    # snacks
     {
       key = "<leader>w";
-      action = "<cmd>lua require('mini.bufremove').delete()<cr>";
+      action = "<cmd>lua Snacks.bufdelete()<cr>";
       options.desc = "Delete buffer";
     }
-    # nvim-tree
+    {
+      key = "<leader><space>";
+      action = "<cmd>lua Snacks.picker.files({ hidden = true })<cr>";
+      options.desc = "Find files";
+    }
+    {
+      key = "<leader>?";
+      action = "<cmd>lua Snacks.picker.files({ hidden = true, ignored = true })<cr>";
+      options.desc = "Find including ignored files";
+    }
+    {
+      key = "<leader><tab>";
+      action = "<cmd>lua Snacks.picker.buffers()<cr>";
+      options.desc = "Buffers";
+    }
+    {
+      key = "<leader>/";
+      action = "<cmd>lua Snacks.picker.grep({ hidden = true })<cr>";
+      options.desc = "Grep";
+    }
+    {
+      key = "<leader>'";
+      action = "<cmd>lua Snacks.picker.registers()<cr>";
+      options.desc = "Registers";
+    }
+    {
+      key = "<leader>:";
+      action = "<cmd>lua Snacks.picker.command_history()<cr>";
+      options.desc = "Command history";
+    }
+    {
+      key = "<leader>p";
+      action = "<cmd>lua Snacks.picker.commands()<cr>";
+      options.desc = "Commands";
+    }
+    {
+      key = "<leader>d";
+      action = "<cmd>lua Snacks.picker.diagnostics_buffer()<cr>";
+      options.desc = "Buffer diagnostics";
+    }
+    {
+      key = "<leader>D";
+      action = "<cmd>lua Snacks.picker.diagnostics()<cr>";
+      options.desc = "Diagnostics";
+    }
+    {
+      key = "<leader>s";
+      action = "<cmd>lua Snacks.picker.lsp_symbols()<cr>";
+      options.desc = "LSP symbols";
+    }
+    {
+      key = "<leader>S";
+      action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<cr>";
+      options.desc = "LSP workspace symbols";
+    }
+    {
+      key = "<leader>g";
+      action = "<cmd>lua Snacks.picker.git_status()<cr>";
+      options.desc = "Git status";
+    }
+    {
+      key = "<leader>u";
+      action = "<cmd>lua Snacks.picker.undo()<cr>";
+      options.desc = "Undo history";
+    }
     {
       key = "<leader>e";
-      action = "<cmd>NvimTreeToggle<cr>";
-      options.desc = "Toggle NvimTree";
+      action = "<cmd>lua Snacks.explorer()<cr>";
+      options.desc = "Toggle explorer";
     }
     {
       key = "<leader>o";
-      action = "<cmd>NvimTreeFindFile<cr>";
-      options.desc = "Open the currently open file in NvimTree";
+      action = "<cmd>lua Snacks.explorer.reveal()<cr>";
+      options.desc = "Open current buffer in explorer";
     }
     # smart-splits
     {
