@@ -35,7 +35,10 @@
         '';
       };
     };
-    colorizer.enable = true;
+    highlight-colors = {
+      enable = true;
+      cmpIntegration = true;
+    };
     mini = {
       enable = true;
       mockDevIcons = true;
