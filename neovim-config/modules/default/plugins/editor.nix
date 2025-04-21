@@ -4,7 +4,6 @@
 
 {
   plugins = {
-    web-devicons.enable = true;
     nvim-tree = {
       enable = true;
       filters.custom = [ "^\\.git$" ];
@@ -114,8 +113,10 @@
     };
     mini = {
       enable = true;
+      mockDevIcons = true;
       modules = {
         bufremove = { };
+        icons = { };
         tabline = { };
       };
     };
