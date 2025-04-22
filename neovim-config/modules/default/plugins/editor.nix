@@ -37,7 +37,6 @@
     };
     highlight-colors = {
       enable = true;
-      cmpIntegration = true;
     };
     mini = {
       enable = true;

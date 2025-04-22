@@ -2,70 +2,84 @@ _:
 
 {
   plugins = {
-    luasnip.enable = true;
     friendly-snippets.enable = true;
-    cmp-cmdline.enable = true;
-    cmp = {
+    blink-cmp = {
       enable = true;
       settings = {
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "buffer"; }
-          { name = "path"; }
-        ];
-        snippet.expand = ''
-          function(args)
-            require('luasnip').lsp_expand(args.body)
-          end
-        '';
-        mapping.__raw = ''
-          (function()
-            local luasnip = require('luasnip')
-
-            return {
-              -- Trigger suggest
-              ['<a-i>'] = cmp.mapping(function()
-                if not cmp.visible() then cmp.complete() end
-              end),
-
-              ['<tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                elseif luasnip.locally_jumpable(1) then
-                  luasnip.jump(1)
-                else
-                  fallback()
-                end
-              end),
-
-              ['<s-tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                elseif luasnip.locally_jumpable(-1) then
-                  luasnip.jump(-1)
-                else
-                  fallback()
-                end
-              end),
-
-              ['<cr>'] = cmp.mapping(function(fallback)
-                if cmp.visible() and cmp.get_selected_entry() then
-                  if luasnip.expandable() then
-                    luasnip.expand()
-                  else
-                    cmp.confirm()
+        completion = {
+          list.selection = {
+            auto_insert = false;
+            preselect = false;
+          };
+          documentation.auto_show = true;
+          # nvim-highlight-colors
+          # https://github.com/brenoprata10/nvim-highlight-colors?tab=readme-ov-file#blinkcmp-integration
+          menu.draw.components.kind_icon = {
+            text.__raw = ''
+              function(ctx)
+                local icon = ctx.kind_icon
+                if ctx.item.source_name == "LSP" then
+                  local color_item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                  if color_item and color_item.abbr ~= "" then
+                    icon = color_item.abbr
                   end
-                else
-                  fallback()
                 end
-              end),
-
-              ['<c-d>'] = cmp.mapping.scroll_docs(4),
-              ['<c-u>'] = cmp.mapping.scroll_docs(-4),
-            }
-          end)()
-        '';
+                return icon .. ctx.icon_gap
+              end
+            '';
+            highlight.__raw = ''
+              function(ctx)
+                local highlight = "BlinkCmpKind" .. ctx.kind
+                if ctx.item.source_name == "LSP" then
+                  local color_item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                  if color_item and color_item.abbr_hl_group then
+                    highlight = color_item.abbr_hl_group
+                  end
+                end
+                return highlight
+              end
+            '';
+          };
+        };
+        signature.enabled = true;
+        keymap = {
+          preset = "none";
+          "<a-i>" = [
+            "show"
+            "show_documentation"
+            "hide_documentation"
+          ];
+          "<a-I>" = [
+            "show_signature"
+            "hide_signature"
+          ];
+          "<c-s>" = [
+            "hide"
+            "fallback_to_mappings"
+          ];
+          "<tab>" = [
+            "snippet_forward"
+            "select_next"
+            "fallback_to_mappings"
+          ];
+          "<s-tab>" = [
+            "snippet_backward"
+            "select_prev"
+            "fallback_to_mappings"
+          ];
+          "<cr>" = [
+            "accept"
+            "fallback"
+          ];
+          "<c-u>" = [
+            "scroll_documentation_up"
+            "fallback"
+          ];
+          "<c-d>" = [
+            "scroll_documentation_down"
+            "fallback"
+          ];
+        };
       };
     };
     copilot-lua = {
@@ -88,29 +102,4 @@ _:
     nvim-surround.enable = true;
     autoclose.enable = true;
   };
-
-  extraConfigLua = ''
-    -- friendly-snippets
-    require('luasnip.loaders.from_vscode').lazy_load()
-
-    -- LuaSnip
-    local vscode_dir = vim.fs.find('.vscode', {
-      upward = true,
-      type = 'directory',
-      path = vim.fn.getcwd(),
-      stop = vim.env.HOME,
-    })[1]
-
-    if vscode_dir then
-      local snippets = vim.fs.find(function(name) return name:match('%.code%-snippets$') end, {
-        limit = 10,
-        type = 'file',
-        path = vscode_dir,
-      })
-      local loader = require('luasnip.loaders.from_vscode')
-      for _, snippet in pairs(snippets) do
-        loader.load_standalone({ path = snippet })
-      end
-    end
-  '';
 }
