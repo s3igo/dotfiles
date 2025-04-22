@@ -15,6 +15,11 @@ _: {
     number = true;
     list = true;
     cursorline = true;
+    guicursor = [
+      "n-v-sm-t:block"
+      "c-i-ci-ve:ver25"
+      "r-cr-o:hor20"
+    ];
     listchars = {
       space = "･";
       tab = ">-";
