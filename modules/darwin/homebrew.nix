@@ -30,16 +30,11 @@
     taps = builtins.attrNames config.nix-homebrew.taps;
     casks = [
       "1password"
-      "anytype"
       "arc"
       "bitwarden"
-      "cursor"
       "deskpad"
       "discord"
       "firefox"
-      # "font-ipaexfont"
-      # "font-noto-sans-cjk-jp"
-      # "font-zen-kaku-gothic-new"
       "ghostty"
       "google-chrome"
       "inkscape"
@@ -52,12 +47,9 @@
       "raycast"
       "slack"
       "steam"
-      # "thorium"
       "visual-studio-code"
-      "vivaldi"
       "whisky"
       "zed"
-      "zen-browser"
       "zoom"
       {
         name = "chromium";
