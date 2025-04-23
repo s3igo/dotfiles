@@ -49,11 +49,7 @@ _:
             "show_documentation"
             "hide_documentation"
           ];
-          "<a-I>" = [
-            "show_signature"
-            "hide_signature"
-          ];
-          "<c-s>" = [
+          "<c-x><c-e>" = [
             "hide"
             "fallback_to_mappings"
           ];
@@ -78,6 +74,10 @@ _:
           "<c-d>" = [
             "scroll_documentation_down"
             "fallback"
+          ];
+          "<c-x><c-s>" = [
+            "show_signature"
+            "hide_signature"
           ];
         };
       };

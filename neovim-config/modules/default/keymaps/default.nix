@@ -70,11 +70,11 @@ utils@{ mapMode, ... }:
     ++ map (mapMode "i") [
       # indent
       {
-        key = "<tab>";
+        key = "<c-x><c-t>";
         action = "<c-t>";
       }
       {
-        key = "<s-tab>";
+        key = "<c-x><c-d>";
         action = "<c-d>";
       }
     ];
