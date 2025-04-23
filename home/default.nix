@@ -21,7 +21,6 @@ in
     ./helix.nix
     ./joshuto.nix
     ./pager.nix
-    ./rio.nix
     ./starship.nix
     ./zellij.nix
     ./zsh.nix

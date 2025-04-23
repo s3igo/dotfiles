@@ -62,7 +62,6 @@ Available commands:
 ## Development
 
   , fmt             : Format code with treefmt
-  , preview:rio     : Preview rio config
   , preview:zellij  : Preview zellij config
 
 ## IME
