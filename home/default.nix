@@ -38,6 +38,7 @@ in
     };
     bat.enable = true;
     bottom.enable = true;
+    fd.enable = true;
     jq.enable = true;
     zoxide.enable = true;
     direnv = {
@@ -81,8 +82,9 @@ in
       RCLONE_CONFIG = osConfig.age.secrets.rclone-config.path;
       SSH_AUTH_SOCK = "${homeDirectory}/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
       DOCKER_CONFIG = "${configHome}/docker";
-      _ZO_DATA_DIR = "${dataHome}/zoxide";
-      LESSHISTFILE = "-"; # avoid creating `.lesshst`
+      # https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#environment-variables
+      _ZO_DATA_DIR = if pkgs.stdenv.isDarwin then "${dataHome}/zoxide" else null;
+      LESSHISTFILE = "-"; # To prevent creation of the `.lesshst` file
       NODE_REPL_HISTORY = "";
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
@@ -101,7 +103,6 @@ in
         coreutils-prefixed
         darwin.trash
         dust
-        fd
         ghq
         rclone
         smartcat
