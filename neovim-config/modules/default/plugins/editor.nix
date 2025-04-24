@@ -60,7 +60,10 @@
           scope.enabled = false;
         };
         picker = {
-          sources.explorer.ignored = true;
+          sources.explorer = {
+            hidden = true;
+            ignored = true;
+          };
           actions = {
             smart_scroll_up.__raw = ''
               function(picker)
