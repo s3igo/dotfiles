@@ -1,8 +1,8 @@
-{ mapMode, ... }:
+utils:
 
 {
   keymaps =
-    map (mapMode "i") [
+    map (utils.mapMode "i") [
       {
         key = "<c-t>";
         action.__raw = ''
@@ -78,7 +78,7 @@
         action = "<del>";
       }
     ]
-    ++ map (mapMode "c") [
+    ++ map (utils.mapMode "c") [
       {
         key = "<c-f>";
         action = "<right>";

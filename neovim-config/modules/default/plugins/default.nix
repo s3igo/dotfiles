@@ -1,5 +1,5 @@
 utils: {
-  imports = utils [
+  imports = map utils [
     ./coding.nix
     ./editor.nix
     ./lsp.nix

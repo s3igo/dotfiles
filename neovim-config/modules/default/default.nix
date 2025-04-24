@@ -2,7 +2,7 @@
 
 let
   utils = {
-    __functor = self: map (path: lib.modules.importApply path self);
+    __functor = lib.flip lib.modules.importApply;
     mapMode =
       mode:
       {
@@ -22,7 +22,7 @@ let
 in
 
 {
-  imports = utils [
+  imports = map utils [
     ./plugins
     ./keymaps
     ./autocmd.nix

@@ -1,7 +1,7 @@
-utils@{ mapMode, ... }:
+utils:
 
 {
-  imports = utils [ ./emacs.nix ];
+  imports = map utils [ ./emacs.nix ];
 
   globals.mapleader = " ";
 
@@ -15,7 +15,7 @@ utils@{ mapMode, ... }:
         options.desc = "Exit terminal mode";
       }
     ]
-    ++ map (mapMode "n") [
+    ++ map (utils.mapMode "n") [
       # {
       #   key = "<c-[>";
       #   action = "<cmd>noh<cr>";
@@ -67,7 +67,7 @@ utils@{ mapMode, ... }:
         options.desc = "Toggle trailing comma";
       }
     ]
-    ++ map (mapMode "i") [
+    ++ map (utils.mapMode "i") [
       # indent
       {
         key = "<c-x><c-t>";

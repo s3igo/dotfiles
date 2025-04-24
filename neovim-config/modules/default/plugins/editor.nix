@@ -1,4 +1,4 @@
-{ mapMode, ... }:
+utils:
 
 { pkgs, ... }:
 
@@ -128,7 +128,7 @@
     vim.cmd('colorscheme nightfly')
   '';
 
-  keymaps = map (mapMode "n") [
+  keymaps = map (utils.mapMode "n") [
     # snacks
     {
       key = "<leader>w";
