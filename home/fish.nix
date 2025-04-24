@@ -12,12 +12,10 @@ in
 {
   programs.fish = {
     enable = true;
-    plugins = [
-      rec {
-        name = "autopair";
-        inherit (pkgs.fishPlugins.${name}) src;
-      }
-    ];
+    plugins = map (name: {
+      inherit name;
+      inherit (pkgs.fishPlugins.${name}) src;
+    }) [ "autopair" ];
     functions =
       let
         handleFzfPrefix = abbr: expansion: ''
@@ -36,7 +34,7 @@ in
         # https://fishshell.com/docs/current/cmds/abbr.html#examples
         __last-history-item = "echo $history[1]";
         __last-token = ''
-          set --local tokens (commandline --tokens-raw)
+          set -l tokens (commandline --tokens-raw)
           if test (count $tokens) -gt 1
             echo $tokens[-2]
           end
@@ -45,7 +43,7 @@ in
         __date-impl = "echo (date '+%Y-%m-%d')";
         # $1 length is 2 -> `../`, 3 -> `../../`, 4 -> `../../../`, and so on
         __dots-impl = ''
-          set --local len (math (string length -- $argv[1]) - 1)
+          set -l len (math (string length -- $argv[1]) - 1)
           echo (string repeat --count $len -- ../)
         '';
         __f-impl = ''
@@ -72,12 +70,12 @@ in
           # Skip adding commands that begin with whitespace to history
           string match --quiet --regex '^\s+' -- $argv[1]; and return 1
 
-          set --local cmds cd mkdir touch trash 'history\s+delete\s+'
+          set -l cmds cd mkdir touch trash 'history\s+delete\s+'
           for cmd in $cmds
             string match --quiet --regex "^$cmd" -- "$argv"; and return 1
           end
 
-          set --local git_subs add branch checkout commit restore diff reset stash switch rebase revert merge
+          set -l git_subs add branch checkout commit restore diff reset stash switch rebase revert merge
           if test (count $argv) -gt 1; and test $argv[1] = git
             for git_sub in $git_subs
               test $argv[2] = $git_sub; and return 1
@@ -201,7 +199,7 @@ in
     '';
     interactiveShellInit = ''
       # Disable greeting
-      set --global fish_greeting
+      set -g fish_greeting
 
       # LS_COLORS
       set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
