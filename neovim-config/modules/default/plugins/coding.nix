@@ -53,19 +53,25 @@ _:
             "hide"
             "fallback_to_mappings"
           ];
+          "<cr>" = [
+            "accept"
+            "fallback"
+          ];
           "<tab>" = [
             "snippet_forward"
-            "select_next"
             "fallback_to_mappings"
           ];
           "<s-tab>" = [
             "snippet_backward"
-            "select_prev"
             "fallback_to_mappings"
           ];
-          "<cr>" = [
-            "accept"
-            "fallback"
+          "<c-n>" = [
+            "select_next"
+            "fallback_to_mappings"
+          ];
+          "<c-p>" = [
+            "select_prev"
+            "fallback_to_mappings"
           ];
           "<c-u>" = [
             "scroll_documentation_up"

@@ -39,5 +39,6 @@ _: {
     showmatch = true;
     scrolloff = 5;
     relativenumber = true;
+    winborder = "single";
   };
 }
