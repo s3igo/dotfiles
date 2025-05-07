@@ -146,6 +146,7 @@ in
         "!!" = global // function "__last-history-item";
         "!?" = global // function "__last-token";
         ",c" = global // text "| pbcopy";
+        ",C" = global // text "&| pbcopy";
         ",cp" = global // text "| tee /dev/tty | tr -d '\\n' | pbcopy";
         ",date" = global // function "__date-impl";
         ",f" = global // text "| fzf";
@@ -181,6 +182,7 @@ in
         f = regex "f(\\d?|f)" // function "__f-impl";
         g = "git";
         hi = "history";
+        j = "just";
         mk = "mkdir";
         mv = "mv -iv";
         n = "nix";
