@@ -12,10 +12,16 @@ in
 {
   programs.fish = {
     enable = true;
-    plugins = map (name: {
-      inherit name;
-      inherit (pkgs.fishPlugins.${name}) src;
-    }) [ "autopair" ];
+    plugins =
+      map
+        (name: {
+          inherit name;
+          inherit (pkgs.fishPlugins.${name}) src;
+        })
+        [
+          "autopair"
+          "hydro"
+        ];
     functions =
       let
         handleFzfPrefix = abbr: expansion: ''
@@ -205,6 +211,18 @@ in
 
       # LS_COLORS
       set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
+
+      # Prompt
+      # https://github.com/jorgebucaran/hydro?tab=readme-ov-file#configuration
+      set -g hydro_symbol_start '\n'
+      set -g hydro_symbol_git_dirty '*'
+
+      set -g hydro_color_pwd green
+      set -g hydro_color_git magenta
+      set -g hydro_color_prompt cyan
+      set -g hydro_color_duration yellow
+
+      set -g hydro_multiline true
 
       # Keybindings
       ## Disable exit with ctrl-d
