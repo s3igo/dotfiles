@@ -1,52 +1,58 @@
-{ pkgs, lib, ... }:
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
 
-let
-  defineModel =
-    name:
-    {
-      model,
-      completion ? { },
-    }:
-    {
-      model.${name} = model;
-      completion = completion // {
-        model = name;
-      };
-    };
-  model1 = defineModel "model1" {
-    model = {
-      type = "ollama";
-      model = "qwen2.5-coder:1.5b";
-    };
-    completion = {
-      parameters = {
-        max_context = 2048;
-        options.num_predict = 32;
-        fim = {
-          start = "<|fim_prefix|>";
-          middle = "<|fim_suffix|>";
-          end = "<|fim_middle|>";
-        };
-      };
-    };
-  };
-in
+# let
+#   defineModel =
+#     name:
+#     {
+#       model,
+#       completion ? { },
+#     }:
+#     {
+#       model.${name} = model;
+#       completion = completion // {
+#         model = name;
+#       };
+#     };
+#   model1 = defineModel "model1" {
+#     model = {
+#       type = "ollama";
+#       model = "qwen2.5-coder:1.5b";
+#     };
+#     completion = {
+#       parameters = {
+#         max_context = 2048;
+#         options.num_predict = 32;
+#         fim = {
+#           start = "<|fim_prefix|>";
+#           middle = "<|fim_suffix|>";
+#           end = "<|fim_middle|>";
+#         };
+#       };
+#     };
+#   };
+# in
 
 {
-  home.packages = [ pkgs.lsp-ai ];
+  # home.packages = [ pkgs.lsp-ai ];
 
   programs.helix = {
     enable = true;
+    package = inputs.helix.packages.${pkgs.system}.default;
     languages = {
       language-server = {
-        lsp-ai = {
-          command = "lsp-ai";
-          config = {
-            memory.file_store = { };
-            models = model1.model;
-            inherit (model1) completion;
-          };
-        };
+        # lsp-ai = {
+        #   command = "lsp-ai";
+        #   config = {
+        #     memory.file_store = { };
+        #     models = model1.model;
+        #     inherit (model1) completion;
+        #   };
+        # };
       };
       language = [
         {
@@ -62,8 +68,7 @@ in
         }
         {
           name = "nix";
-          file-types = [ "nix" ];
-          language-servers = [ "lsp-ai" ];
+          formatter.command = "nixfmt";
         }
         {
           name = "yaml";
@@ -98,7 +103,7 @@ in
       ];
     };
     settings = {
-      theme = "iceberg-custom";
+      theme = "catppuccin_mocha_transparent";
       editor = {
         end-of-line-diagnostics = "hint";
         inline-diagnostics.cursor-line = "error";
@@ -176,6 +181,7 @@ in
           C-a = "goto_line_start";
           C-e = "goto_line_end_newline";
           S-tab = "move_parent_node_start";
+          "C-[" = "normal_mode";
         };
         normal = {
           X = "extend_line_above";
@@ -184,14 +190,14 @@ in
           "{" = "goto_prev_paragraph";
           "}" = "goto_next_paragraph";
           space = {
-            q = ":quit";
-            w = ":buffer-close";
+            # q = ":quit";
+            # w = ":buffer-close";
             t = "symbol_picker";
             T = "workspace_symbol_picker";
-            s = ":update";
-            S = "no_op";
-            f = ":format";
-            F = "no_op";
+            # s = ":update";
+            # S = "no_op";
+            # f = ":format";
+            # F = "no_op";
             o = "file_picker_in_current_buffer_directory";
             space = "file_picker";
             ret = "file_picker_in_current_directory";
@@ -201,6 +207,7 @@ in
           tab = "extend_parent_node_end";
           S-tab = "extend_parent_node_start";
         };
+        # picker."C-[" = "normal_mode";
       };
     };
     themes =
@@ -210,8 +217,6 @@ in
           "ui.background" = "none";
         };
         themes = [
-          "kanagawa"
-          "snazzy"
           "jetbrains_dark"
           "catppuccin_mocha"
           "iceberg-dark"
@@ -226,14 +231,14 @@ in
       transparentThemes
       // {
         iceberg-custom = transparentThemes.iceberg-dark_transparent // {
-          "ui.cursorline.primary" = {
-            bg = "linenr_bg";
-          };
           "ui.gutter" = {
             fg = "linenr_fg";
             bg = "none";
           };
           "ui.linenr" = {
+            bg = "none";
+          };
+          "ui.linenr.selected" = {
             fg = "linenr_fg";
             bg = "none";
           };
