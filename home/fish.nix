@@ -71,6 +71,77 @@ in
         __git-om-impl = "git symbolic-ref --short refs/remotes/origin/HEAD";
         __git-s-impl = handleFzfPrefix "s" "status";
         __snippet = "${lib.getExe pkgs.pet} search";
+        __forward-pipe = ''
+          set -l pos (commandline --cursor)
+          set -l offset (commandline \
+            | string sub --start (math $pos + 2) \
+            | string match --index --regex '\|' \
+            | string split ' ')
+          set offset $offset[1]
+
+          if test -n "$offset"
+            commandline --cursor (math $pos + $offset)
+          end
+        '';
+        __backward-pipe = ''
+          set -l pos (commandline --cursor)
+          set -l pipe_positions (commandline | string match --all --index --regex '\|')
+
+          set -l target_pipe ""
+          for pipe_pos in $pipe_positions
+            set pipe_pos (string split ' ' -- $pipe_pos)
+            set pipe_pos $pipe_pos[1]
+            if test $pipe_pos -le $pos
+              set target_pipe (math $pipe_pos - 1)
+            else
+              break
+            end
+          end
+
+          if test -n "$target_pipe"
+            commandline --cursor $target_pipe
+          end
+        '';
+        __delete-to-next-pipe = ''
+          set -l cmdline (commandline)
+          set -l pos (commandline --cursor)
+          set -l offset (echo $cmdline \
+            | string sub --start (math $pos + 2) \
+            | string match --index --regex '\|' \
+            | string split ' ')
+          set offset $offset[1]
+
+          if test -n "$offset"
+            set -l before_deletion (string sub --end $pos -- $cmdline)
+            set -l after_deletion (string sub --start (math $pos + $offset) -- $cmdline)
+            commandline --replace "$before_deletion$after_deletion"
+            commandline --cursor $pos
+          end
+        '';
+        __delete-to-prev-pipe = ''
+          set -l cmdline (commandline)
+          set -l pos (commandline --cursor)
+          set -l pipe_positions (commandline | string match --all --index --regex '\|')
+
+          set -l last_pipe_pos ""
+          for pipe_pos in $pipe_positions
+            set pipe_pos (string split ' ' -- $pipe_pos)
+            set pipe_pos $pipe_pos[1]
+            if test $pipe_pos -le $pos
+              set last_pipe_pos (math $pipe_pos - 1)
+            else
+              break
+            end
+          end
+
+          if test -n "$last_pipe_pos"
+            set -l target_pos (math $last_pipe_pos + 2)
+            set -l before_deletion (string sub --end $target_pos -- $cmdline)
+            set -l after_deletion (string sub --start (math $pos + 1) -- $cmdline)
+            commandline --replace "$before_deletion$after_deletion"
+            commandline --cursor $target_pos
+          end
+        '';
         # https://fishshell.com/docs/current/cmds/fish_should_add_to_history.html
         fish_should_add_to_history = ''
           # Skip adding commands that begin with whitespace to history
@@ -235,6 +306,11 @@ in
       bind alt-F forward-bigword
       bind alt-B backward-bigword
       bind ctrl-W backward-kill-bigword
+
+      bind ctrl-alt-f __forward-pipe
+      bind ctrl-alt-b __backward-pipe
+      bind ctrl-alt-d __delete-to-next-pipe
+      bind ctrl-alt-w __delete-to-prev-pipe
 
       ## Autosuggestions
       bind ctrl-l accept-autosuggestion
