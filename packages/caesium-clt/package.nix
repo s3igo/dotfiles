@@ -2,32 +2,27 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  pkg-config,
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "caesium-clt";
-  version = "1.0.0-beta.0";
+  version = "1.0.0-beta.2";
 
   src = fetchFromGitHub {
     owner = "Lymphatus";
     repo = "caesium-clt";
-    rev = "v${version}";
-    hash = "sha256-wdmlUpTL6UFGEDbmE/Ck1PAtB3xKP9hoLvxXk+2Q6pQ=";
+    tag = "v${finalAttrs.version}";
+    hash = "sha256-bmW2pXaSK98rdDm30CKlG046dD8R11Cric4ZBmjuKn8=";
   };
 
-  cargoHash = "sha256-D0rTkIktRSrCX4MtUZWOFCZkxM9McyWJnQyO3R7/cqo=";
-
-  nativeBuildInputs = [
-    pkg-config
-  ];
+  cargoHash = "sha256-4heQvb434ePSpQDLq9GFzD8R3j3E90PDTzz0GVNtM2U=";
 
   meta = {
     description = "Caesium Command Line Tools - Lossy/lossless image compression tool";
     homepage = "https://github.com/Lymphatus/caesium-clt";
-    changelog = "https://github.com/Lymphatus/caesium-clt/blob/${src.rev}/CHANGELOG.md";
+    changelog = "https://github.com/Lymphatus/caesium-clt/blob/v${finalAttrs.version}/CHANGELOG.md";
     license = lib.licenses.asl20;
     maintainers = [ ];
     mainProgram = "caesiumclt";
   };
-}
+})

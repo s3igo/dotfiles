@@ -1,6 +1,6 @@
 { lib, swift }:
 
-swift.stdenv.mkDerivation rec {
+swift.stdenv.mkDerivation (finalAttrs: {
   pname = "im-select-swift";
   version = "0.1.0";
 
@@ -58,7 +58,7 @@ swift.stdenv.mkDerivation rec {
   buildPhase = ''
     runHook preBuild
 
-    swiftc -O -Xlinker -dead_strip $src -o ${pname}
+    swiftc -O -Xlinker -dead_strip $src -o ${finalAttrs.pname}
 
     runHook postBuild
   '';
@@ -67,7 +67,7 @@ swift.stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/bin
-    cp ${pname} $out/bin
+    cp ${finalAttrs.pname} $out/bin
 
     runHook postInstall
   '';
@@ -76,4 +76,4 @@ swift.stdenv.mkDerivation rec {
     mainProgram = "im-select-swift";
     platforms = lib.platforms.darwin;
   };
-}
+})

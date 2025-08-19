@@ -60,18 +60,15 @@
   outputs =
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./modules/flake ];
+      imports = [
+        ./packages
+        ./modules/flake
+      ];
 
       systems = import inputs.systems;
 
-      perSystem =
-        { pkgs, lib, ... }:
-        {
-          _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
-          packages = lib.packagesFromDirectoryRecursive {
-            inherit (pkgs) callPackage;
-            directory = ./packages;
-          };
-        };
+      perSystem = _: {
+        _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
+      };
     };
 }

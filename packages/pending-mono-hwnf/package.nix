@@ -4,12 +4,12 @@
   fetchzip,
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "pending-mono-hwnf";
   version = "0.0.3";
 
   src = fetchzip {
-    url = "https://github.com/yuru7/pending-mono/releases/download/v${version}/PendingMonoHWNF_v${version}.zip";
+    url = "https://github.com/yuru7/pending-mono/releases/download/v${finalAttrs.version}/PendingMonoHWNF_v${finalAttrs.version}.zip";
     hash = "sha256-GgT+qXMhK+FmMKAlTtNB2nWkGIe/JpBlX898MDSISHg=";
   };
 
@@ -28,4 +28,4 @@ stdenvNoCC.mkDerivation rec {
     maintainers = [ ];
     platforms = platforms.all;
   };
-}
+})

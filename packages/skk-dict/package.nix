@@ -4,7 +4,7 @@
   fetchFromGitHub,
 }:
 
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "skk-dict";
   version = "2024-08-29";
 
@@ -28,10 +28,10 @@ stdenvNoCC.mkDerivation rec {
   passthru.list =
     let
       sources = [
-        src
-        (src + "/zipcode")
+        finalAttrs.src
+        (finalAttrs.src + "/zipcode")
       ];
       paths = with builtins; concatMap (path: attrNames (readDir path)) sources;
     in
     builtins.filter (lib.hasPrefix "SKK-JISYO.") paths;
-}
+})
