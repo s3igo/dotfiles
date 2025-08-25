@@ -6,16 +6,16 @@
 
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "caesium-clt";
-  version = "1.0.0-beta.2";
+  version = "1.0.0";
 
   src = fetchFromGitHub {
     owner = "Lymphatus";
     repo = "caesium-clt";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-bmW2pXaSK98rdDm30CKlG046dD8R11Cric4ZBmjuKn8=";
+    hash = "sha256-xpxYlWax83A2VflCK30zZlCLSK2axt6DNs+jb/8T97A=";
   };
 
-  cargoHash = "sha256-4heQvb434ePSpQDLq9GFzD8R3j3E90PDTzz0GVNtM2U=";
+  cargoHash = "sha256-TDJfc1wjRzwETdBL+mpnTWDgbr1IFPvQYPTAyN8QZTs=";
 
   meta = {
     description = "Caesium Command Line Tools - Lossy/lossless image compression tool";
