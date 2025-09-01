@@ -6,6 +6,11 @@
     package = null;
     settings = {
       font-family = "UDEV Gothic NFLG";
+      # リガチャを抑制
+      font-feature = [
+        "-calt"
+        "-dlig"
+      ];
       font-size = 16;
       theme = "iceberg-dark";
       minimum-contrast = 1.1;
@@ -20,6 +25,9 @@
         "super+s=new_split:left"
         "super+shift+s=new_split:up"
         "shift+space=ignore" # Avoid conflict with IME keybindings
+        # Helixエディタで<C-[>をマップできないケースがあるため
+        # https://github.com/helix-editor/helix/issues/6551
+        "ctrl+[=text:\\x1b"
       ];
       window-padding-x = 5;
       window-padding-balance = true;
