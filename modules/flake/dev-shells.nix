@@ -13,7 +13,7 @@
         packages = [
           pkgs.nil
           pkgs.nixd
-          pkgs.nixfmt-rfc-style
+          pkgs.nixfmt
           (neovim-config.lib.customName {
             inherit pkgs;
             nvim = config.packages.neovim;
