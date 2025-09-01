@@ -49,6 +49,7 @@ in
     };
     packages = with pkgs; [
       delta
+      difftastic
       ov
     ];
   };

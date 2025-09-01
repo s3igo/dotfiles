@@ -1,48 +1,10 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  ...
-}:
-
-# let
-#   defineModel =
-#     name:
-#     {
-#       model,
-#       completion ? { },
-#     }:
-#     {
-#       model.${name} = model;
-#       completion = completion // {
-#         model = name;
-#       };
-#     };
-#   model1 = defineModel "model1" {
-#     model = {
-#       type = "ollama";
-#       model = "qwen2.5-coder:1.5b";
-#     };
-#     completion = {
-#       parameters = {
-#         max_context = 2048;
-#         options.num_predict = 32;
-#         fim = {
-#           start = "<|fim_prefix|>";
-#           middle = "<|fim_suffix|>";
-#           end = "<|fim_middle|>";
-#         };
-#       };
-#     };
-#   };
-# in
+{ pkgs, lib, ... }:
 
 {
-  # home.packages = [ pkgs.lsp-ai ];
-
   programs.helix = {
     enable = true;
-    package = inputs.helix.packages.${pkgs.system}.default;
+    # package = inputs.helix.packages.${pkgs.system}.default;
+    extraPackages = [ pkgs.svelte-language-server ];
     languages = {
       language-server = {
         # lsp-ai = {
@@ -53,57 +15,35 @@
         #     inherit (model1) completion;
         #   };
         # };
+        nixd.command = lib.getExe pkgs.nixd;
+        nil.command = lib.getExe pkgs.nil;
+        taplo.command = lib.getExe pkgs.taplo;
+        typos.command = lib.getExe pkgs.typos-lsp;
+        typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
+        vtsls = {
+          command = lib.getExe pkgs.vtsls;
+          args = [ "--stdio" ];
+        };
       };
       language = [
         {
-          name = "c";
-          file-types = [
-            "c"
-            "h"
-          ];
-          indent = {
-            tab-width = 4;
-            unit = "    ";
-          };
+          name = "markdown";
+          language-servers = [ "typos" ];
         }
         {
           name = "nix";
-          formatter.command = "nixfmt";
+          language-servers = [ "typos" ];
+          formatter.command = lib.getExe pkgs.nixfmt;
+          auto-format = true;
         }
-        {
-          name = "yaml";
-          file-types = [
-            "yaml"
-            "yml"
-          ];
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
-        }
-        {
-          name = "dockerfile";
-          file-types = [
-            "Dockerfile"
-            "dockerfile"
-          ];
-          indent = {
-            tab-width = 4;
-            unit = "  ";
-          };
-          comment-token = "#";
-        }
-        {
-          name = "lua";
-          indent = {
-            tab-width = 4;
-            unit = "    ";
-          };
-        }
+        # {
+        #   name = "typescript";
+        #   language-servers = [ "vtsls" ];
+        # }
       ];
     };
     settings = {
-      theme = "catppuccin_mocha_transparent";
+      theme = "catppuccin-custom";
       editor = {
         end-of-line-diagnostics = "hint";
         inline-diagnostics.cursor-line = "error";
@@ -118,43 +58,20 @@
         line-number = "relative";
         shell = [
           (lib.getExe pkgs.fish)
-          "-c"
+          "--command"
         ];
         bufferline = "multiple";
         color-modes = true;
         text-width = 120;
-        statusline = {
-          left = [
-            "spinner"
-            "file-name"
-            "read-only-indicator"
-            "file-modification-indicator"
-          ];
-          right =
-            let
-              default = [
-                "diagnostics"
-                "selections"
-                "register"
-                "position"
-                "file-encoding"
-              ];
-            in
-            default
-            ++ [
-              "file-line-ending"
-              "file-type"
-            ];
-        };
         cursor-shape = {
-          insert = "bar";
           normal = "block";
+          insert = "bar";
           select = "underline";
         };
-        file-picker.hidden = false;
+        # file-picker.hidden = false;
         indent-guides = {
           render = true;
-          character = "|";
+          # character = "|";
         };
         whitespace = {
           render = "all";
@@ -185,27 +102,23 @@
         };
         normal = {
           X = "extend_line_above";
-          tab = "move_parent_node_end";
-          S-tab = "move_parent_node_start";
           "{" = "goto_prev_paragraph";
           "}" = "goto_next_paragraph";
-          space = {
-            # q = ":quit";
-            # w = ":buffer-close";
-            t = "symbol_picker";
-            T = "workspace_symbol_picker";
-            # s = ":update";
-            # S = "no_op";
-            # f = ":format";
-            # F = "no_op";
-            o = "file_picker_in_current_buffer_directory";
-            space = "file_picker";
-            ret = "file_picker_in_current_directory";
-          };
+          w = "move_next_sub_word_start";
+          b = "move_prev_sub_word_start";
+          e = "move_next_sub_word_end";
+          W = "move_next_word_start";
+          B = "move_prev_word_start";
+          E = "move_next_word_end";
         };
         select = {
-          tab = "extend_parent_node_end";
-          S-tab = "extend_parent_node_start";
+          X = "extend_line_above";
+          w = "extend_next_sub_word_start";
+          b = "extend_prev_sub_word_start";
+          e = "extend_next_sub_word_end";
+          W = "extend_next_word_start";
+          B = "extend_prev_word_start";
+          E = "extend_next_word_end";
         };
         # picker."C-[" = "normal_mode";
       };
@@ -243,10 +156,19 @@
             bg = "none";
           };
         };
+        catppuccin-custom = transparentThemes.catppuccin_mocha_transparent // {
+          "ui.linenr" = "overlay2";
+        };
       };
     ignores = [
       ".direnv/"
       "result"
+      "!.helix/"
+      "!.github/"
+      "!.gitignore"
+      "!.gitattributes"
+      "!*.local.*"
+      "!*.local/"
     ];
   };
 }

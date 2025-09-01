@@ -1,20 +1,36 @@
 {
   lib,
-  formats,
   runCommand,
   makeBinaryWrapper,
+
   helix,
+  formats,
 
   nixd,
   nil,
   taplo,
   typos-lsp,
+  vtsls,
 
   settings ? {
     editor.rulers = [
       80
       100
       120
+    ];
+  },
+  languages ? {
+    language-server = {
+      vtsls = {
+        command = lib.getExe vtsls;
+        args = [ "--stdio" ];
+      };
+    };
+    language = [
+      {
+        name = "typescript";
+        language-servers = [ "vtsls" ];
+      }
     ];
   },
 }:

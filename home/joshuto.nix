@@ -47,17 +47,17 @@ in
         ];
       };
     };
-    fish.functions.jo = ''
-      mkdir -p /tmp/$USER
-      set -l output_file "/tmp/$USER/joshuto-cwd-$fish_pid"
-      ${lib.getExe pkgs.joshuto} --output-file "$output_file" $argv
-
-      # Whether the output contains the current directory
-      if test $status -eq 101
-        set -l joshuto_cwd (cat "$output_file")
-        cd "$joshuto_cwd"
-      end
-    '';
+    # fish.functions.jo = ''
+    #   mkdir -p /tmp/$USER
+    #   set -l output_file "/tmp/$USER/joshuto-cwd-$fish_pid"
+    #   ${lib.getExe pkgs.joshuto} --output-file "$output_file" $argv
+    #
+    #   # Whether the output contains the current directory
+    #   if test $status -eq 101
+    #     set -l joshuto_cwd (cat "$output_file")
+    #     cd "$joshuto_cwd"
+    #   end
+    # '';
   };
 
   xdg.configFile = {

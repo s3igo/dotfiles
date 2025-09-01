@@ -15,7 +15,7 @@ in
     ../secrets.nix
     ../system.nix
     ../vim.nix
-    ./homebrew.nix
+    # ./homebrew.nix
     ./system.nix
     (
       { pkgs, ... }:
@@ -54,6 +54,6 @@ in
 
   fonts.packages = with pkgs; [
     udev-gothic-nf
-    (callPackage ../../packages/pending-mono-hwnf.nix { })
+    (callPackage ../../packages/pending-mono-hwnf/package.nix { })
   ];
 }

@@ -17,7 +17,7 @@
             name = "deploy";
             runtimeInputs = [ inputs'.nix-darwin.packages.default ];
             text = ''
-              darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(whoami)@$(hostname -s)"
+              sudo darwin-rebuild switch --flake "$(${lib.getExe config.flake-root.package})#$(whoami)@$(hostname -s)"
             '';
           };
         };
