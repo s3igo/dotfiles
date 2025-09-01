@@ -16,7 +16,7 @@ in
         ];
         fzf-log = "!f() { ${
           builtins.concatStringsSep " | " [
-            ''git log "''${1:-HEAD}" --oneline --color=always''
+            ''git log --oneline --color=always "''${1:-HEAD}"''
             "fzf --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
           ]
         }; }; f";
@@ -26,7 +26,7 @@ in
         ];
         ghq = builtins.concatStringsSep " | " [
           "!ghq list --full-path"
-          "fzf --preview 'tree -C --gitignore {}'"
+          "fzf --preview 'tree -C --gitignore {}' || pwd"
           ''while IFS= read -r l; do printf '%q\n' "$l"; done'' # Escape strings
         ];
       };
@@ -60,7 +60,7 @@ in
             allowedSignersFile = "~/.ssh/allowed_signers";
           };
         };
-        ghq.root = "~/git";
+        ghq.root = "~/repos";
         core = {
           abbrev = 12;
           ignorecase = "false";
@@ -97,6 +97,7 @@ in
       extensions = with pkgs; [
         gh-copilot
         gh-markdown-preview
+        (callPackage ../packages/gh-license/package.nix { })
       ];
     };
 
