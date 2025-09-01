@@ -48,6 +48,8 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
+  system.primaryUser = "s3igo";
+
   nixpkgs = {
     hostPlatform = system;
     config.allowUnfree = true;

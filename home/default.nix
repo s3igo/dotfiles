@@ -13,7 +13,7 @@ in
 
 {
   imports = [
-    ./aider.nix
+    # ./aider.nix
     ./fish.nix
     ./fzf.nix
     ./ghostty.nix
@@ -29,8 +29,9 @@ in
     home-manager.enable = true;
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
       includes = [ "~/.orbstack/ssh/config" ];
-      forwardAgent = true;
+      matchBlocks."*".forwardAgent = true;
       extraConfig = ''
         IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       '';
@@ -106,13 +107,16 @@ in
         _1password-cli
         aichat
         attic-client
-        bitwarden-cli
+        # bitwarden-cli
+        claude-code
         darwin.trash
         dust
+        gemini-cli
         ghq
         rclone
         smartcat
         tree
+        xc
       ]
       ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra ];
   };
