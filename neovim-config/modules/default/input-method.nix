@@ -4,11 +4,11 @@ _:
 
 {
   extraPlugins = lib.optional pkgs.stdenv.isDarwin (
-    pkgs.callPackage ../../../packages/im-select-nvim.nix { }
+    pkgs.callPackage ../../../packages/im-select-nvim/package.nix { }
   );
 
   extraPackages = lib.optional pkgs.stdenv.isDarwin (
-    pkgs.callPackage ../../../packages/im-select-swift.nix { }
+    pkgs.callPackage ../../../packages/im-select-swift/package.nix { }
   );
 
   extraConfigLua = lib.optionalString pkgs.stdenv.isDarwin ''
