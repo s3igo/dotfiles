@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   userEmail = "85787242+s3igo@users.noreply.github.com";
   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUyMJEMvBM/6QpZ365T7Gwf6KqYVuXKeTgDlKsFoU27";
+  difftCommand = lib.getExe pkgs.difftastic;
 in
 
 {
@@ -10,6 +11,10 @@ in
     git = {
       enable = true;
       aliases = rec {
+        # https://difftastic.wilfred.me.uk/git.html#regular-usage
+        dlog = "-c diff.external=${difftCommand} log --ext-diff";
+        dshow = "-c diff.external=${difftCommand} show --ext-diff";
+        ddiff = "-c diff.external=${difftCommand} diff";
         fzf-add = builtins.concatStringsSep " | " [
           fzf-status
           "xargs git add"
