@@ -32,7 +32,11 @@
         }
         {
           name = "nix";
-          language-servers = [ "typos" ];
+          language-servers = [
+            "typos"
+            "nil"
+            "nixd"
+          ];
           formatter.command = lib.getExe pkgs.nixfmt;
           auto-format = true;
         }

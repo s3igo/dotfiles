@@ -47,13 +47,13 @@ in
           }:
           prefix:
           let
-            queryStringIndex = toString (builtins.stringLength prefix + 1);
+            indexAfterPrefix = offset: toString (builtins.stringLength prefix + offset + 1);
           in
           ''
 
             switch "$argv[1]"
             case '${prefix}'
-              complete -C '${cmdline}' | fzf --tiebreak begin --nth 1 --accept-nth 1
+              # do nothing
 
             ${lib.pipe shortcuts [
               (lib.mapAttrsToList (
@@ -64,8 +64,16 @@ in
               ))
               (builtins.concatStringsSep "\n")
             ]}
+            case '${prefix},'
+              complete -C '${cmdline}' | fzf --tiebreak begin --nth 1 --accept-nth 1
+
+            case "${prefix},*"
+              set -l query (string sub --start ${indexAfterPrefix 1} -- "$argv[1]")
+              complete -C '${cmdline}' \
+                | fzf --tiebreak begin --nth 1 --accept-nth 1 --query "$query"
+
             case '*'
-              set -l query (string sub --start ${queryStringIndex} -- "$argv[1]")
+              set -l query (string sub --start ${indexAfterPrefix 0} -- "$argv[1]")
               complete -C '${cmdline}' \
                 | fzf --tiebreak begin --nth 1 --filter "$query" \
                 | head -n1 \
@@ -124,7 +132,8 @@ in
         __git-subcmd-impl = gitFzfPatterns ",";
         __comma-g-impl = "echo git (${gitFzfPatterns ",g"})";
         __nix-subcmd-impl = nixFzfPatterns ",";
-        # __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
+        __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
+        __nix-system-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
         __snippet = "${lib.getExe pkgs.pet} search";
         __forward-pipe = ''
           set -l pos (commandline --cursor)
@@ -248,8 +257,8 @@ in
         # > Even with different COMMANDS, the NAME of the abbreviation needs to
         # > be unique. Consider using --regex if you want to expand the same
         # > word differently for multiple commands.
-        __fzf-a = command "fzf" // regex ",a" // text "--accept-nth";
-        __fzf-h = command "fzf" // regex ",h" // text "--header-lines";
+        __fzf-a = command "fzf" // regex "@a" // text "--accept-nth";
+        __fzf-h = command "fzf" // regex "@h" // text "--header-lines";
         # https://fishshell.com/docs/current/interactive.html#abbreviations
         # matches `..`, `...`, `....`, and so on
         __dots = global // regex "\\.{2,}" // function "__dots-impl";
@@ -284,15 +293,16 @@ in
         do = "docker";
         ef = "exec fish";
         f = regex "f(\\d?|f)" // function "__f-impl";
-        g = "git";
         __comma-g = regex ",g.*" // function "__comma-g-impl";
         __git-subcmd = command "git" // regex ",.*" // function "__git-subcmd-impl";
         hi = "history";
         jo = "jobs";
         mk = "mkdir";
         mv = "mv -iv";
-        n = "nix";
+        __comma-n = regex ",n.*" // function "__comma-n-impl";
         __nix-subcmd = command "nix" // regex ",.*" // function "__nix-subcmd-impl";
+        "@system" = global // function "__nix-system-impl";
+        # __nix-system = command "nix" // regex "@system" // function "__nix-system-impl";
         nv = "neovim";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
