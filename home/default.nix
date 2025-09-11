@@ -106,7 +106,7 @@ in
       [
         _1password-cli
         aichat
-        attic-client
+        # attic-client
         # bitwarden-cli
         claude-code
         darwin.trash
