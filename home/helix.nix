@@ -4,7 +4,7 @@
   programs.helix = {
     enable = true;
     # package = inputs.helix.packages.${pkgs.system}.default;
-    extraPackages = [ pkgs.svelte-language-server ];
+    # extraPackages = [ pkgs.svelte-language-server ];
     languages = {
       language-server = {
         # lsp-ai = {
@@ -24,18 +24,27 @@
           command = lib.getExe pkgs.vtsls;
           args = [ "--stdio" ];
         };
+        efm.command = lib.getExe (pkgs.callPackage ../packages/personal/efm-langserver/package.nix { });
+        codebook = {
+          command = lib.getExe pkgs.codebook;
+          args = [ "serve" ];
+        };
       };
       language = [
         {
           name = "markdown";
-          language-servers = [ "typos" ];
+          language-servers = [
+            "codebook"
+            "typos"
+          ];
         }
         {
           name = "nix";
           language-servers = [
-            "typos"
             "nil"
             "nixd"
+            "efm"
+            "typos"
           ];
           formatter.command = lib.getExe pkgs.nixfmt;
           auto-format = true;
