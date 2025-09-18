@@ -5,14 +5,9 @@
     enable = true;
     package = null;
     settings = {
-      font-family = "UDEV Gothic NFLG";
-      # リガチャを抑制
-      font-feature = [
-        "-calt"
-        "-dlig"
-      ];
+      font-family = "UDEV Gothic NF";
       font-size = 16;
-      theme = "iceberg-dark";
+      theme = "Iceberg Dark";
       minimum-contrast = 1.1;
       cursor-style-blink = false;
       mouse-hide-while-typing = true;
