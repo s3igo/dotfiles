@@ -104,15 +104,17 @@ in
     packages =
       with pkgs;
       [
-        _1password-cli
-        aichat
         # attic-client
         # bitwarden-cli
+        _1password-cli
+        aichat
         claude-code
         darwin.trash
         dust
         gemini-cli
         ghq
+        lima
+        nh
         rclone
         smartcat
         tree

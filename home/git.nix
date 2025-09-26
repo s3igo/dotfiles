@@ -46,7 +46,7 @@ in
       userName = "s3igo";
       inherit userEmail;
       signing = {
-        inherit key;
+        key = "key::${key}";
         signByDefault = true;
       };
       extraConfig = {
@@ -93,6 +93,7 @@ in
         merge.conflictstyle = "zdiff3";
         pull.ff = "only";
         grep.patternType = "perl";
+        log.showSignature = true;
       };
     };
 

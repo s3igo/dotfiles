@@ -31,23 +31,28 @@ in
       {
         github-nix-token = {
           file = "${secrets}/github/nix.age";
-        } // userReadable;
+        }
+        // userReadable;
 
         rclone-config = {
           file = "${secrets}/config/rclone.age";
-        } // userReadable;
+        }
+        // userReadable;
 
         attic-token = {
           file = "${secrets}/config/attic.age";
-        } // rootReadable;
+        }
+        // rootReadable;
 
         aider-anthropic = {
           file = "${secrets}/config/aider-anthropic.age";
-        } // userReadable;
+        }
+        // userReadable;
 
         avante-anthropic = {
           file = "${secrets}/config/avante-anthropic.age";
-        } // userReadable;
+        }
+        // userReadable;
       };
   };
 }

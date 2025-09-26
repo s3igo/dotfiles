@@ -7,11 +7,12 @@
   fish,
   helix,
 
-  # LSP, フォーマッター
   codebook,
+  efm-langserver,
   nil,
   nixd,
   nixfmt,
+  statix,
   taplo,
   typescript-language-server,
   typos-lsp,
@@ -22,7 +23,29 @@
         command = lib.getExe codebook;
         args = [ "serve" ];
       };
-      # TODO: efm
+      # WIP: なんか動かない
+      efm-nix = {
+        command = lib.getExe efm-langserver;
+        # args = [
+        #   "-logfile"
+        #   "/Users/s3igo/.dotfiles/efm.local.log"
+        # ];
+        config = {
+          languages.nix = [
+            {
+              lintCommand = "${lib.getExe statix} check --format errfmt \${INPUT}";
+              # lintCommand = "${lib.getExe statix} check --format errfmt";
+              # lintWorkspace = true;
+              lintIgnoreExitCode = true;
+              lintStdin = false;
+              rootMarkers = [ "flake.nix" ];
+              # https://vimhelp.org/quickfix.txt.html#errorformat
+              # https://github.com/oppiliappan/statix/blob/v0.5.8/vim-plugin/ftplugin/nix.vim#L2
+              lintFormats = [ "%f>%l:%c:%t:%n:%m" ];
+            }
+          ];
+        };
+      };
       nil.command = lib.getExe nil;
       nixd.command = lib.getExe nixd;
       taplo.command = lib.getExe taplo;
@@ -37,9 +60,13 @@
       {
         name = "nix";
         language-servers = [
+          "efm-nix"
+          # {
+          #   name = "efm-nix";
+          #   only-features = [ "diagnostics" ];
+          # }
           "nil"
           "nixd"
-          "efm"
           "typos"
         ];
         formatter.command = lib.getExe nixfmt;

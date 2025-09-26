@@ -133,7 +133,7 @@ in
         __comma-g-impl = "echo git (${gitFzfPatterns ",g"})";
         __nix-subcmd-impl = nixFzfPatterns ",";
         __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
-        __nix-system-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
+        __nix-s-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
         __snippet = "${lib.getExe pkgs.pet} search";
         __forward-pipe = ''
           set -l pos (commandline --cursor)
@@ -301,8 +301,9 @@ in
         mv = "mv -iv";
         __comma-n = regex ",n.*" // function "__comma-n-impl";
         __nix-subcmd = command "nix" // regex ",.*" // function "__nix-subcmd-impl";
-        "@system" = global // function "__nix-system-impl";
-        # __nix-system = command "nix" // regex "@system" // function "__nix-system-impl";
+        __nix-s = command "nix" // regex "@s" // function "__nix-s-impl";
+        __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#% --";
+        __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
         nv = "neovim";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";

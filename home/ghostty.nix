@@ -20,8 +20,10 @@
         "super+s=new_split:left"
         "super+shift+s=new_split:up"
         "shift+space=ignore" # Avoid conflict with IME keybindings
-        # Helixエディタで<C-[>をマップできないケースがあるため
-        # https://github.com/helix-editor/helix/issues/6551
+        # 現状Helixのコンポジターコンポーネント（ピッカーやプロンプト）はキーリマップ非対応なので、
+        # そこで`<C-[>`を機能させるため
+        # https://github.com/helix-editor/helix/issues/5505
+        # https://github.com/helix-editor/helix/issues/6551#issuecomment-1929283622
         "ctrl+[=text:\\x1b"
       ];
       window-padding-x = 5;
@@ -29,7 +31,7 @@
       window-inherit-working-directory = false;
       shell-integration-features = "no-cursor";
       # -- macOS only --
-      window-title-font-family = "UDEV Gothic NFLG";
+      window-title-font-family = "UDEV Gothic NF";
       window-colorspace = "display-p3";
       quick-terminal-position = "bottom";
       macos-option-as-alt = true;
