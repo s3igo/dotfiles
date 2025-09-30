@@ -18,7 +18,7 @@ in
     ./fzf.nix
     ./ghostty.nix
     ./git.nix
-    ./helix.nix
+    # ./helix.nix
     ./joshuto.nix
     ./pager.nix
     ./zellij.nix
@@ -120,6 +120,9 @@ in
         tree
         xc
       ]
-      ++ [ self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra ];
+      ++ [
+        self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra
+        (pkgs.callPackage ../packages/personal/helix/package.nix { })
+      ];
   };
 }

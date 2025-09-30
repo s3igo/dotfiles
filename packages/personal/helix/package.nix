@@ -194,27 +194,31 @@
 
 let
   tomlFormat = formats.toml { };
+  configFiles = runCommandNoCC "helix-configs" { } ''
+    mkdir -p $out/share
+    cp ${tomlFormat.generate "config.toml" helixSettings} $out/share/config.toml
+    cp ${tomlFormat.generate "languages.toml" helixLanguages} $out/share/languages.toml
+    echo -n '${lib.concatLines helixIgnores}' > $out/share/ignore
+
+    mkdir -p $out/share/themes
+    ${lib.pipe helixThemes [
+      (lib.mapAttrsToList (
+        name: value: "cp ${tomlFormat.generate "${name}.toml" value} $out/share/themes/${name}.toml"
+      ))
+      lib.concatLines
+    ]}
+  '';
 in
 
 runCommandNoCC "helix-personal"
   {
     nativeBuildInputs = [ makeBinaryWrapper ];
     meta = helix.meta;
+    passthru = { inherit configFiles; };
   }
   ''
     mkdir -p $out/share/config/helix
-    cp ${tomlFormat.generate "config.toml" helixSettings} $out/share/config/helix/config.toml
-    cp ${tomlFormat.generate "languages.toml" helixLanguages} $out/share/config/helix/languages.toml
-    echo -n '${lib.concatLines helixIgnores}' > $out/share/config/helix/ignore
-
-    mkdir -p $out/share/config/helix/themes
-    ${lib.pipe helixThemes [
-      (lib.mapAttrsToList (
-        name: value:
-        "cp ${tomlFormat.generate "${name}.toml" value} $out/share/config/helix/themes/${name}.toml"
-      ))
-      (lib.concatLines)
-    ]}
+    cp -r ${configFiles}/share/* $out/share/config/helix/
 
     mkdir -p $out/bin
     makeBinaryWrapper ${lib.getExe helix} $out/bin/${helix.meta.mainProgram} \
