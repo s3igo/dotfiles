@@ -302,7 +302,7 @@ in
         __comma-n = regex ",n.*" // function "__comma-n-impl";
         __nix-subcmd = command "nix" // regex ",.*" // function "__nix-subcmd-impl";
         __nix-s = command "nix" // regex "@s" // function "__nix-s-impl";
-        __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#% --";
+        __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#%";
         __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
         nv = "neovim";
         pst = "pbpaste";
