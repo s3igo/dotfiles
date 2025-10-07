@@ -14,7 +14,8 @@
           statix.enable = true;
           typos.enable = true;
           yamlfmt.enable = true;
-          actionlint.enable = true;
+          # FIXME: occurs error
+          # actionlint.enable = true;
           dprint.enable = true;
         };
         settings.global.excludes = [ "LICENSE" ];
