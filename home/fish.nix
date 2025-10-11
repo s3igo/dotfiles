@@ -24,7 +24,7 @@ in
         ];
     functions =
       let
-        genericFzfPatterns = prefix: ''
+        genericFzfPatterns = prefix: /* fish */ ''
 
           set -l tokens (commandline --tokens-expanded --current-job)
           set -l cmdline (string replace --regex '${prefix}.*$' "" -- "$tokens" )
@@ -49,7 +49,7 @@ in
           let
             indexAfterPrefix = offset: toString (builtins.stringLength prefix + offset + 1);
           in
-          ''
+          /* fish */ ''
 
             switch "$argv[1]"
             case '${prefix}'
@@ -104,7 +104,7 @@ in
       {
         # https://fishshell.com/docs/current/cmds/abbr.html#examples
         __last-history-item = "echo $history[1]";
-        __last-token = ''
+        __last-token = /* fish */ ''
           set -l tokens (commandline --tokens-raw)
           if test (count $tokens) -gt 1
             echo "$tokens[-2]"
@@ -113,11 +113,11 @@ in
         # Current date in ISO 8601 extended format
         __date-impl = "echo (date '+%Y-%m-%d')";
         # $1 length is 2 -> `../`, 3 -> `../../`, 4 -> `../../../`, and so on
-        __dots-impl = ''
+        __dots-impl = /* fish */ ''
           set -l len (math (string length -- $argv[1]) - 1)
           echo (string repeat --count $len -- ../)
         '';
-        __f-impl = ''
+        __f-impl = /* fish */ ''
           if test "$argv[1]" = f
             echo fg
           else if test "$argv[1]" = ff
@@ -135,7 +135,7 @@ in
         __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
         __nix-s-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
         __snippet = "${lib.getExe pkgs.pet} search";
-        __forward-pipe = ''
+        __forward-pipe = /* fish */ ''
           set -l pos (commandline --cursor)
           set -l offset (commandline \
             | string sub --start (math $pos + 2) \
@@ -147,7 +147,7 @@ in
             commandline --cursor (math $pos + $offset)
           end
         '';
-        __backward-pipe = ''
+        __backward-pipe = /* fish */ ''
           set -l pos (commandline --cursor)
           set -l pipe_positions (commandline | string match --all --index --regex '\|')
 
@@ -166,7 +166,7 @@ in
             commandline --cursor $target_pipe
           end
         '';
-        __delete-to-next-pipe = ''
+        __delete-to-next-pipe = /* fish */ ''
           set -l cmdline (commandline)
           set -l pos (commandline --cursor)
           set -l offset (echo $cmdline \
@@ -182,7 +182,7 @@ in
             commandline --cursor $pos
           end
         '';
-        __delete-to-prev-pipe = ''
+        __delete-to-prev-pipe = /* fish */ ''
           set -l cmdline (commandline)
           set -l pos (commandline --cursor)
           set -l pipe_positions (commandline | string match --all --index --regex '\|')
@@ -207,7 +207,7 @@ in
           end
         '';
         # https://fishshell.com/docs/current/cmds/fish_should_add_to_history.html
-        fish_should_add_to_history = ''
+        fish_should_add_to_history = /* fish */ ''
           # Skip adding commands that begin with whitespace to history
           string match --quiet --regex '^\s+' -- "$argv[1]"; and return 1
 
@@ -311,13 +311,13 @@ in
         v = "nvim";
         zj = "zellij";
       };
-    loginShellInit = ''
+    loginShellInit = /* fish */ ''
       # PATH
       if test -d ${homeDirectory}/.orbstack
         fish_add_path ${homeDirectory}/.orbstack/bin
       end
     '';
-    interactiveShellInit = ''
+    interactiveShellInit = /* fish */ ''
       # Disable greeting
       set -g fish_greeting
 
@@ -381,7 +381,7 @@ in
     # fzfのfish-integrationのctrl-tキーバインドを削除。
     # このシェル統合のインストール処理はnixpkgsのfzfのパッケージ定義のpostInstallにハードコードされているため、
     # 再ビルドをトリガーせずに「そもそもインストールしない」ことはできない。
-    shellInitLast = ''
+    shellInitLast = /* fish */ ''
       status is-interactive; and begin
         bind --erase ctrl-t
         bind --erase ctrl-t --mode insert
