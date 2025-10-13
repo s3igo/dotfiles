@@ -101,6 +101,9 @@ in
       FLY_CONFIG_DIR = "${stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
       EDITOR = "nvim";
+      # https://consoledonottrack.com/
+      # https://bun.sh/docs/runtime/bunfig#telemetry
+      DO_NOT_TRACK = 1;
     };
     packages =
       with pkgs;

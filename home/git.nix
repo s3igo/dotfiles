@@ -21,7 +21,7 @@ in
         ];
         fzf-log = "!f() { ${
           builtins.concatStringsSep " | " [
-            ''git log --oneline --color=always "''${1:-HEAD}"''
+            ''git -c log.showSignature=false log --oneline --color=always "''${1:-HEAD}"''
             "fzf --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
           ]
         }; }; f";

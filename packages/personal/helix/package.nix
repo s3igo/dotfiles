@@ -7,18 +7,28 @@
   fish,
   helix,
 
+  astro-language-server,
+  biome,
   codebook,
   efm-langserver,
   nil,
   nixd,
   nixfmt,
   statix,
+  tailwindcss-language-server,
   taplo,
   typescript-language-server,
   typos-lsp,
+  vscode-json-languageserver,
 
   helixLanguages ? {
     language-server = {
+      astro-ls.command = lib.getExe astro-language-server;
+      # https://biomejs.dev/guides/editors/third-party-extensions/#helix
+      biome = {
+        command = lib.getExe biome;
+        args = [ "lsp-proxy" ];
+      };
       codebook = {
         command = lib.getExe codebook;
         args = [ "serve" ];
@@ -48,11 +58,32 @@
       };
       nil.command = lib.getExe nil;
       nixd.command = lib.getExe nixd;
+      tailwindcss-ls = {
+        command = lib.getExe tailwindcss-language-server;
+        config.tailwindCSS.classAttributes =
+          let
+            default = [
+              "class"
+              "className"
+              "ngClass"
+              "class:list"
+            ];
+          in
+          default ++ [ ".*Classes" ];
+      };
       taplo.command = lib.getExe taplo;
       typescript-language-server.command = lib.getExe typescript-language-server;
       typos.command = lib.getExe typos-lsp;
+      vscode-json-language-server.command = lib.getExe vscode-json-languageserver;
     };
     language = [
+      {
+        name = "astro";
+        language-servers = [
+          "astro-ls"
+          "typos"
+        ];
+      }
       {
         name = "markdown";
         language-servers = [ "typos" ];

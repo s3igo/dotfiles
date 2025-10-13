@@ -377,6 +377,20 @@ in
       # https://github.com/zellij-org/zellij/issues/3055
       complete -c zellij -n "__fish_seen_subcommand_from delete-session" -f -a "(__fish_complete_sessions)" -d "Session"
       complete -c zellij -n "__fish_seen_subcommand_from d" -f -a "(__fish_complete_sessions)" -d "Session"
+
+      # `$ task`のタブ補完
+      # エイリアスが候補に表示されるようにするため`task --completion fish`で提供される補完をオーバーライド
+      # See: https://github.com/fish-shell/fish-shell/blob/d72adc0124b596122ace9c0c449363584c701fc7/share/completions/just.fish
+      function _taskfile_targets
+        task --list --json | ${lib.getExe pkgs.jq} --raw-output '${
+          builtins.concatStringsSep " | " [
+            ".tasks[]"
+            ". as $task"
+            ''"\(.name)\t\(.desc)", (.aliases[] | "\(.)\t\($task.desc) (alias: \($task.name))")''
+          ]
+        }'
+      end
+      complete -c task -f -a '(_taskfile_targets)'
     '';
     # fzfのfish-integrationのctrl-tキーバインドを削除。
     # このシェル統合のインストール処理はnixpkgsのfzfのパッケージ定義のpostInstallにハードコードされているため、
