@@ -391,6 +391,33 @@ in
         }'
       end
       complete -c task -f -a '(_taskfile_targets)'
+
+      # `$ bun run`の補完
+      function _find_up --description 'Find file by walking up directories'
+        set -l filename $argv[1]
+        set -l dir (pwd)
+        while true
+          if test -f "$dir/$filename"
+            echo "$dir/$filename"
+            return 0
+          end
+          set -l parent (dirname $dir)
+          if test "$parent" = "$dir"
+            return 1
+          end
+          set dir $parent
+        end
+      end
+
+      function _npm_scripts --description 'Read script names from nearest package.json'
+        set -l package_json (_find_up package.json)
+        if test -z "$package_json"
+          return 1
+        end
+        ${lib.getExe pkgs.jq} --raw-output \
+          '.scripts // {} | to_entries[] | "\(.key)\t\(.value)"' "$package_json"
+      end
+      complete -c bun -n '__fish_seen_subcommand_from run' -f -a '(_npm_scripts)'
     '';
     # fzfのfish-integrationのctrl-tキーバインドを削除。
     # このシェル統合のインストール処理はnixpkgsのfzfのパッケージ定義のpostInstallにハードコードされているため、
