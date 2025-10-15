@@ -71,7 +71,10 @@
           in
           default ++ [ ".*Classes" ];
       };
-      taplo.command = lib.getExe taplo;
+      taplo = {
+        command = lib.getExe taplo;
+        config.formatter.arrayAutoCollapse = false;
+      };
       typescript-language-server.command = lib.getExe typescript-language-server;
       typos.command = lib.getExe typos-lsp;
       vscode-json-language-server.command = lib.getExe vscode-json-languageserver;
@@ -101,6 +104,15 @@
           "typos"
         ];
         formatter.command = lib.getExe nixfmt;
+        auto-format = true;
+      }
+      {
+        name = "toml";
+        language-servers = [
+          "taplo"
+          "codebook"
+          "typos"
+        ];
         auto-format = true;
       }
     ];
