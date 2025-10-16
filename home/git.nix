@@ -22,7 +22,7 @@ in
         fzf-log = "!f() { ${
           builtins.concatStringsSep " | " [
             ''git -c log.showSignature=false log --oneline --color=always "''${1:-HEAD}"''
-            "fzf --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
+            "fzf --raw --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
           ]
         }; }; f";
         fzf-status = builtins.concatStringsSep " | " [
@@ -56,7 +56,6 @@ in
         diff = {
           algorithm = "histogram";
           colorMoved = true;
-          mnemonicPrefix = true;
         };
         gpg = {
           format = "ssh";
@@ -66,10 +65,7 @@ in
           };
         };
         ghq.root = "~/repos";
-        core = {
-          abbrev = 12;
-          ignorecase = "false";
-        };
+        core.ignorecase = "false";
         push = {
           autoSetupRemote = true;
           followTags = true;

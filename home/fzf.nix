@@ -11,6 +11,11 @@
           "ctrl-d:preview-half-page-down"
           "ctrl-j:accept"
           "ctrl-k:kill-line"
+          "ctrl-n:down"
+          "ctrl-p:up"
+          "alt-n:down-match"
+          "alt-p:up-match"
+          "alt-r:toggle-raw"
         ]
       }"
     ];

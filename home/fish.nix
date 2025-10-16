@@ -36,8 +36,8 @@ in
               set -l query (string replace --regex '^${prefix}' "" "$argv[1]")
               complete -C "$cmdline" \
                 | fzf --tiebreak begin --nth 1 --filter "$query" \
-                | head -n1 \
-                | cut -f1
+                | head -n 1 \
+                | cut -f 1
           end
         '';
         mkFzfPatterns =
@@ -52,8 +52,7 @@ in
           /* fish */ ''
 
             switch "$argv[1]"
-            case '${prefix}'
-              # do nothing
+            case '${prefix}' # Do nothing
 
             ${lib.pipe shortcuts [
               (lib.mapAttrsToList (
@@ -76,8 +75,8 @@ in
               set -l query (string sub --start ${indexAfterPrefix 0} -- "$argv[1]")
               complete -C '${cmdline}' \
                 | fzf --tiebreak begin --nth 1 --filter "$query" \
-                | head -n1 \
-                | cut -f1
+                | head -n 1 \
+                | cut -f 1
             end
           '';
         nixFzfPatterns = mkFzfPatterns {
@@ -129,7 +128,6 @@ in
             exit 1
           end
         '';
-        __git-subcmd-impl = gitFzfPatterns ",";
         __comma-g-impl = "echo git (${gitFzfPatterns ",g"})";
         __nix-subcmd-impl = nixFzfPatterns ",";
         __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
@@ -295,6 +293,8 @@ in
         f = regex "f(\\d?|f)" // function "__f-impl";
         __comma-g = regex ",g.*" // function "__comma-g-impl";
         __git-subcmd = command "git" // regex ",.*" // function "__git-subcmd-impl";
+        __git-m = command "git" // regex "@m" // function "__git-m-impl";
+        __git-om = command "git" // regex "@om" // function "__git-om-impl";
         hi = "history";
         jo = "jobs";
         mk = "mkdir";
