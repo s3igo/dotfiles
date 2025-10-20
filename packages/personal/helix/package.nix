@@ -73,7 +73,10 @@
       };
       taplo = {
         command = lib.getExe taplo;
-        config.formatter.arrayAutoCollapse = false;
+        config.formatter = {
+          alignComments = false;
+          arrayAutoCollapse = false;
+        };
       };
       typescript-language-server.command = lib.getExe typescript-language-server;
       typos.command = lib.getExe typos-lsp;
