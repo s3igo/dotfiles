@@ -20,6 +20,7 @@
   typescript-language-server,
   typos-lsp,
   vscode-json-languageserver,
+  yaml-language-server,
 
   helixLanguages ? {
     language-server = {
@@ -117,6 +118,13 @@
           "typos"
         ];
         auto-format = true;
+      }
+      {
+        name = "yaml";
+        language-servers = [
+          "yaml-language-server"
+          "typos"
+        ];
       }
     ];
   },
@@ -269,5 +277,6 @@ runCommandNoCC "helix-personal"
     mkdir -p $out/bin
     makeBinaryWrapper ${lib.getExe helix} $out/bin/${helix.meta.mainProgram} \
       --inherit-argv0 \
-      --set XDG_CONFIG_HOME "$out/share/config"
+      --set XDG_CONFIG_HOME "$out/share/config" \
+      --suffix PATH : ${lib.makeBinPath [ yaml-language-server ]}
   ''
