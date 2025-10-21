@@ -14,6 +14,7 @@
   nil,
   nixd,
   nixfmt,
+  rust-analyzer,
   statix,
   tailwindcss-language-server,
   taplo,
@@ -111,6 +112,14 @@
         auto-format = true;
       }
       {
+        name = "rust";
+        language-servers = [
+          "rust-analyzer"
+          "codebook"
+          "typos"
+        ];
+      }
+      {
         name = "toml";
         language-servers = [
           "taplo"
@@ -173,6 +182,7 @@
         C-e = "goto_line_end_newline";
         S-tab = "move_parent_node_start";
         "C-[" = "normal_mode";
+        A-i = "completion";
       };
       normal = {
         X = "extend_line_above";
@@ -278,5 +288,10 @@ runCommandNoCC "helix-personal"
     makeBinaryWrapper ${lib.getExe helix} $out/bin/${helix.meta.mainProgram} \
       --inherit-argv0 \
       --set XDG_CONFIG_HOME "$out/share/config" \
-      --suffix PATH : ${lib.makeBinPath [ yaml-language-server ]}
+      --suffix PATH : ${
+        lib.makeBinPath [
+          rust-analyzer
+          yaml-language-server
+        ]
+      }
   ''
