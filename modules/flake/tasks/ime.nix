@@ -7,7 +7,7 @@
     }:
 
     let
-      target = "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Documents/Dictionaries";
+      target = "~/Library/Containers/net.mtgto.inputmethod.macSKK/Data/Library/Preferences";
       inherit (self'.packages) skk-dict;
     in
 
