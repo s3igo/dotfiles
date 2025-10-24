@@ -1,3 +1,5 @@
+{ inputs, ... }:
+
 {
   perSystem =
     { lib, pkgs, ... }:
@@ -12,8 +14,11 @@
         let
           defaultPath = directory + "/package.nix";
         in
+        # TODO: Neovim v0.12がリリースされたら削除
+        if lib.hasSuffix "neovim-0_12" directory then
+          pkgs.callPackage defaultPath { inherit (inputs) neovim-nightly-overlay; }
         # package.nixがあればそれを返して終了
-        if builtins.pathExists defaultPath then
+        else if builtins.pathExists defaultPath then
           pkgs.callPackage defaultPath { }
         else
           # なければディレクトリ内容を処理
