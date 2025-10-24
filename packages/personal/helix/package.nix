@@ -27,14 +27,14 @@
 
   helixLanguages ? {
     language-server = {
-      astro-ls.command = lib.getExe astro-language-server;
       # https://biomejs.dev/guides/editors/third-party-extensions/#helix
       biome = {
         command = "biome";
         args = [ "lsp-proxy" ];
       };
+      # https://github.com/blopker/codebook#helix
       codebook = {
-        command = lib.getExe codebook;
+        command = "codebook-lsp";
         args = [ "serve" ];
       };
       # WIP: なんか動かない
@@ -60,34 +60,27 @@
           ];
         };
       };
-      nil.command = lib.getExe nil;
-      nixd.command = lib.getExe nixd;
       stylua = {
         command = "stylua";
         args = [ "--lsp" ];
       };
-      tailwindcss-ls = {
-        command = lib.getExe tailwindcss-language-server;
-        config.tailwindCSS.classAttributes =
-          let
-            default = [
-              "class"
-              "className"
-              "ngClass"
-              "class:list"
-            ];
-          in
-          default ++ [ ".*Classes" ];
+      tailwindcss-ls.config.tailwindCSS.classAttributes =
+        let
+          default = [
+            "class"
+            "className"
+            "ngClass"
+            "class:list"
+          ];
+        in
+        default ++ [ ".*Classes" ];
+      taplo.config.formatter = {
+        alignComments = false;
+        arrayAutoExpand = false;
+        arrayAutoCollapse = false;
       };
-      taplo = {
-        command = lib.getExe taplo;
-        config.formatter = {
-          alignComments = false;
-          arrayAutoExpand = false;
-          arrayAutoCollapse = false;
-        };
-      };
-      typescript-language-server.command = lib.getExe typescript-language-server;
+      # https://github.com/tekumara/typos-lsp/blob/main/docs/helix-config.md
+      typos.command = "typos-lsp";
     };
     language = [
       {
@@ -327,10 +320,17 @@ runCommandNoCC "helix-personal"
       --set XDG_CONFIG_HOME "$out/share/config" \
       --suffix PATH : ${
         lib.makeBinPath [
+          astro-language-server
           biome
+          codebook
           lua-language-server
+          nil
+          nixd
           rust-analyzer
           stylua
+          tailwindcss-language-server
+          taplo
+          typescript-language-server
           typos-lsp
           vscode-json-languageserver
           yaml-language-server
