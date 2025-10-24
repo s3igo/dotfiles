@@ -11,11 +11,13 @@
   biome,
   codebook,
   efm-langserver,
+  lua-language-server,
   nil,
   nixd,
   nixfmt,
   rust-analyzer,
   statix,
+  stylua,
   tailwindcss-language-server,
   taplo,
   typescript-language-server,
@@ -28,7 +30,7 @@
       astro-ls.command = lib.getExe astro-language-server;
       # https://biomejs.dev/guides/editors/third-party-extensions/#helix
       biome = {
-        command = lib.getExe biome;
+        command = "biome";
         args = [ "lsp-proxy" ];
       };
       codebook = {
@@ -60,6 +62,10 @@
       };
       nil.command = lib.getExe nil;
       nixd.command = lib.getExe nixd;
+      stylua = {
+        command = "stylua";
+        args = [ "--lsp" ];
+      };
       tailwindcss-ls = {
         command = lib.getExe tailwindcss-language-server;
         config.tailwindCSS.classAttributes =
@@ -77,18 +83,49 @@
         command = lib.getExe taplo;
         config.formatter = {
           alignComments = false;
+          arrayAutoExpand = false;
           arrayAutoCollapse = false;
         };
       };
       typescript-language-server.command = lib.getExe typescript-language-server;
-      typos.command = lib.getExe typos-lsp;
-      vscode-json-language-server.command = lib.getExe vscode-json-languageserver;
     };
     language = [
       {
         name = "astro";
         language-servers = [
           "astro-ls"
+          "typos"
+        ];
+      }
+      {
+        name = "json";
+        language-servers = [
+          "vscode-json-language-server"
+          "typos"
+        ];
+        # なぜかvscode-json-language-serverのformat機能はtrailing newlineを消してしまう
+        # .editorconfigで`insert_final_newline = true`にしていても消える
+        auto-format = false;
+      }
+      {
+        name = "jsonc";
+        language-servers = [
+          "vscode-json-language-server"
+          "typos"
+        ];
+        # なぜかvscode-json-language-serverのformat機能はtrailing newlineを消してしまう
+        # .editorconfigで`insert_final_newline = true`にしていても消える
+        auto-format = false;
+      }
+      {
+        name = "lua";
+        language-servers = [
+          {
+            name = "lua-language-server";
+            except-features = [ "format" ];
+          }
+          "stylua"
+          "codebook"
           "typos"
         ];
       }
@@ -290,7 +327,12 @@ runCommandNoCC "helix-personal"
       --set XDG_CONFIG_HOME "$out/share/config" \
       --suffix PATH : ${
         lib.makeBinPath [
+          biome
+          lua-language-server
           rust-analyzer
+          stylua
+          typos-lsp
+          vscode-json-languageserver
           yaml-language-server
         ]
       }
