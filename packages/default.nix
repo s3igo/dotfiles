@@ -33,13 +33,21 @@
               { }
           ) entries;
 
-      isNested = _: v: builtins.isAttrs v && !lib.isDerivation v;
+      isNested = v: builtins.isAttrs v && !lib.isDerivation v;
       allPackages = packagesFromDirs ./.;
+      partitioned = lib.foldlAttrs (
+        acc: name: value:
+        lib.recursiveUpdate acc (
+          lib.setAttrByPath [
+            (if isNested value then "legacyPackages" else "packages")
+            name
+          ] value
+        )
+      ) { } allPackages;
     in
 
-    rec {
-      legacyPackages = lib.filterAttrs isNested allPackages;
-      packages = builtins.removeAttrs allPackages (builtins.attrNames legacyPackages);
+    {
+      inherit (partitioned) legacyPackages packages;
     };
 
 }
