@@ -124,30 +124,16 @@ in
         smartcat
         tree
         xc
+        statix
       ]
       ++ [
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra
-        (pkgs.callPackage ../packages/personal/helix/package.nix { })
-        (pkgs.callPackage (
-          {
-            lib,
-            runCommandNoCC,
-            makeBinaryWrapper,
-            neovim-nightly-overlay,
-            system,
-          }:
-          runCommandNoCC "neovim-0_12"
-            {
-              nativeBuildInputs = [ makeBinaryWrapper ];
-              meta.mainProgram = "nvim12";
-            }
-            ''
-              mkdir -p $out/bin
-              makeBinaryWrapper ${lib.getExe neovim-nightly-overlay.packages.${system}.default} $out/bin/nvim12 \
-                --inherit-argv0 \
-                --set NVIM_APPNAME nvim-0.12
-            ''
-        ) { neovim-nightly-overlay = inputs.neovim-nightly-overlay; })
+        (pkgs.callPackage ../packages/personal/helix/package.nix {
+          efm-langserver = pkgs.callPackage ../packages/personal/efm-langserver/package.nix { };
+        })
+        (pkgs.callPackage ../packages/personal/neovim-0_12/package.nix {
+          neovim-nightly-overlay = inputs.neovim-nightly-overlay;
+        })
       ];
   };
 }

@@ -44,21 +44,21 @@
         #   "-logfile"
         #   "/Users/s3igo/.dotfiles/efm.local.log"
         # ];
-        config = {
-          languages.nix = [
-            {
-              lintCommand = "${lib.getExe statix} check --format errfmt \${INPUT}";
-              # lintCommand = "${lib.getExe statix} check --format errfmt";
-              # lintWorkspace = true;
-              lintIgnoreExitCode = true;
-              lintStdin = false;
-              rootMarkers = [ "flake.nix" ];
-              # https://vimhelp.org/quickfix.txt.html#errorformat
-              # https://github.com/oppiliappan/statix/blob/v0.5.8/vim-plugin/ftplugin/nix.vim#L2
-              lintFormats = [ "%f>%l:%c:%t:%n:%m" ];
-            }
-          ];
-        };
+        # config = {
+        #   efm-langserver.languages.nix = [
+        #     {
+        #       lintCommand = "${lib.getExe statix} check --stdin --format errfmt";
+        #       # lintCommand = "${lib.getExe statix} check --format errfmt";
+        #       # lintWorkspace = true;
+        #       lintIgnoreExitCode = true;
+        #       # lintStdin = false;
+        #       # rootMarkers = [ "flake.nix" ];
+        #       # https://vimhelp.org/quickfix.txt.html#errorformat
+        #       # https://github.com/oppiliappan/statix/blob/v0.5.8/vim-plugin/ftplugin/nix.vim#L2
+        #       lintFormats = [ "%f>%l:%c:%t:%n:%m" ];
+        #     }
+        #   ];
+        # };
       };
       stylua = {
         command = "stylua";
@@ -121,6 +121,7 @@
           "codebook"
           "typos"
         ];
+        auto-format = true;
       }
       {
         name = "markdown";
