@@ -10,7 +10,7 @@ in
     # https://noborus.github.io/ov/delta/index.html
     # Manually configuring instead of using `programs.git.delta` to integrate
     # delta and ov.
-    git.extraConfig = {
+    git.settings = {
       core.pager = "${deltaCommand} --pager '${ovCommand} --quit-if-one-screen'";
       interactive.diffFilter = "${deltaCommand} --color-only";
       pager = {
