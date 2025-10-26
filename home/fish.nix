@@ -41,7 +41,7 @@ in
               ${getHead}
             end
           '';
-        genericFzfPatterns = prefix: /* fish */ ''
+        _genericFzfPatterns = prefix: /* fish */ ''
 
           set -l tokens (commandline --tokens-expanded --current-job)
           set -l cmdline (string replace --regex '${prefix}.*$' "" -- "$tokens" )
@@ -57,67 +57,47 @@ in
                 | cut -f 1
           end
         '';
-        mkFzfPatterns =
+        mkFzfCompletionTrigger =
           {
             cmdline,
             shortcuts ? { },
+            trigger,
           }:
-          prefix:
           let
-            indexAfterPrefix = offset: toString (builtins.stringLength prefix + offset + 1);
+            indexAfterTrigger = offset: toString (builtins.stringLength trigger + offset + 1);
           in
           /* fish */ ''
 
             switch "$argv[1]"
-            case '${prefix}' # Do nothing
+            case '${trigger}' # Do nothing
 
             ${lib.pipe shortcuts [
               (lib.mapAttrsToList (
                 name: value: ''
-                  case '${prefix}${name}'
+                  case '${trigger}${name}'
                     ${value}
                 ''
               ))
               (builtins.concatStringsSep "\n")
             ]}
-            case '${prefix},'
+            case '${trigger},'
               complete -C '${cmdline}' | fzf --tiebreak begin --nth 1 --accept-nth 1
 
-            case "${prefix},*"
-              set -l query (string sub --start ${indexAfterPrefix 1} -- "$argv[1]")
+            case "${trigger},*"
+              set -l query (string sub --start ${indexAfterTrigger 1} -- "$argv[1]")
               complete -C '${cmdline}' \
                 | fzf --tiebreak begin --nth 1 --accept-nth 1 --query "$query"
 
             case '*'
-              set -l query (string sub --start ${indexAfterPrefix 0} -- "$argv[1]")
+              set -l query (string sub --start ${indexAfterTrigger 0} -- "$argv[1]")
               complete -C '${cmdline}' \
                 | fzf --tiebreak begin --nth 1 --filter "$query" \
                 | head -n 1 \
                 | cut -f 1
             end
           '';
-        nixFzfPatterns = mkFzfPatterns {
-          cmdline = "nix ";
-          shortcuts = {
-            d = "echo develop";
-            df = "echo develop -c fish";
-            r = "echo run";
-          };
-        };
-        gitFzfPatterns = mkFzfPatterns {
-          cmdline = "git ";
-          shortcuts = {
-            b = "echo branch";
-            c = "echo commit";
-            d = "echo diff";
-            ds = "echo diff --staged";
-            l = "echo log";
-            ll = "echo log (__git-origin-head-impl)..";
-            s = "echo status";
-          };
-        };
       in
-      {
+      rec {
         # https://fishshell.com/docs/current/cmds/abbr.html#examples
         __last-history-item = "echo $history[1]";
         __last-token = /* fish */ ''
@@ -145,12 +125,35 @@ in
             exit 1
           end
         '';
-        __comma-g-impl = "echo git (${gitFzfPatterns ",g"})";
+        __comma-g-impl = "echo git (${
+          mkFzfCompletionTrigger {
+            cmdline = "git ";
+            trigger = ",g";
+            shortcuts = {
+              b = "echo branch";
+              c = "echo commit";
+              d = "echo diff";
+              ds = "echo diff --staged";
+              l = "echo log";
+              ll = "echo log (${__git-origin-head-impl})..";
+              s = "echo status";
+            };
+          }
+        })";
         __git-origin-head-impl = mkGitOriginHead { };
         __git-origin-head-basename-impl = mkGitOriginHead { withOrigin = false; };
-        __nix-subcmd-impl = nixFzfPatterns ",";
-        __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
-        __nix-s-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
+        __comma-n-impl = "echo nix (${
+          mkFzfCompletionTrigger {
+            cmdline = "nix ";
+            trigger = ",n";
+            shortcuts = {
+              d = "echo develop";
+              df = "echo develop -c fish";
+              r = "echo run";
+            };
+          }
+        })";
+        __nix-system-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
         __snippet = "${lib.getExe pkgs.pet} search";
         __forward-pipe = /* fish */ ''
           set -l pos (commandline --cursor)
@@ -311,7 +314,6 @@ in
         ef = "exec fish";
         f = regex "f(\\d?|f)" // function "__f-impl";
         __comma-g = regex ",g.*" // function "__comma-g-impl";
-        __git-subcmd = command "git" // regex ",.*" // function "__git-subcmd-impl";
         __git-m = command "git" // regex "@m" // function "__git-origin-head-basename-impl";
         __git-oh = command "git" // regex "@oh" // function "__git-origin-head-impl";
         hi = "history";
@@ -319,8 +321,7 @@ in
         mk = "mkdir";
         mv = "mv -iv";
         __comma-n = regex ",n.*" // function "__comma-n-impl";
-        __nix-subcmd = command "nix" // regex ",.*" // function "__nix-subcmd-impl";
-        __nix-s = command "nix" // regex "@s" // function "__nix-s-impl";
+        __nix-s = command "nix" // regex "@s" // function "__nix-system-impl";
         __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#%";
         __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
         nv = "neovim";
