@@ -24,6 +24,23 @@ in
         ];
     functions =
       let
+        mkGitOriginHead =
+          {
+            withOrigin ? true,
+          }:
+          let
+            baseCommand = /* fish */ "git symbolic-ref --short refs/remotes/origin/HEAD 2> /dev/null";
+            getHead = if withOrigin then baseCommand else /* fish */ "${baseCommand} | path basename";
+          in
+          /* fish */ ''
+            if ${getHead}
+              # HEAD exists, do nothing (already output by the command above)
+            else if git rev-parse --git-dir &> /dev/null
+              # In a git repo but HEAD doesn't exist, set it automatically
+              git remote set-head origin -a 2> /dev/null
+              ${getHead}
+            end
+          '';
         genericFzfPatterns = prefix: /* fish */ ''
 
           set -l tokens (commandline --tokens-expanded --current-job)
@@ -95,7 +112,7 @@ in
             d = "echo diff";
             ds = "echo diff --staged";
             l = "echo log";
-            ll = "echo log (git symbolic-ref --short refs/remotes/origin/HEAD)..";
+            ll = "echo log (__git-origin-head-impl)..";
             s = "echo status";
           };
         };
@@ -129,6 +146,8 @@ in
           end
         '';
         __comma-g-impl = "echo git (${gitFzfPatterns ",g"})";
+        __git-origin-head-impl = mkGitOriginHead { };
+        __git-origin-head-basename-impl = mkGitOriginHead { withOrigin = false; };
         __nix-subcmd-impl = nixFzfPatterns ",";
         __comma-n-impl = "echo nix (${nixFzfPatterns ",n"})";
         __nix-s-impl = "nix eval --impure --raw --expr 'builtins.currentSystem'";
@@ -293,8 +312,8 @@ in
         f = regex "f(\\d?|f)" // function "__f-impl";
         __comma-g = regex ",g.*" // function "__comma-g-impl";
         __git-subcmd = command "git" // regex ",.*" // function "__git-subcmd-impl";
-        __git-m = command "git" // regex "@m" // function "__git-m-impl";
-        __git-om = command "git" // regex "@om" // function "__git-om-impl";
+        __git-m = command "git" // regex "@m" // function "__git-origin-head-basename-impl";
+        __git-oh = command "git" // regex "@oh" // function "__git-origin-head-impl";
         hi = "history";
         jo = "jobs";
         mk = "mkdir";
