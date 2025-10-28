@@ -32,13 +32,12 @@
         # https://github.com/ghostty-org/ghostty/issues/8681
         shell-integration-features = "no-cursor";
       }
-      # macOS only
-      {
+      (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
         window-title-font-family = "UDEV Gothic NF";
         window-colorspace = "display-p3";
         quick-terminal-position = "bottom";
         macos-option-as-alt = true;
-      }
+      })
     ];
   };
 }
