@@ -324,7 +324,7 @@ in
         __nix-s = command "nix" // regex "@s" // function "__nix-system-impl";
         __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#%";
         __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
-        nv = "neovim";
+        nv = "nvim12";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         rm = "rm -iv";
