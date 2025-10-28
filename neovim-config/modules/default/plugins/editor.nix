@@ -51,7 +51,7 @@ utils:
       settings.win.border = "single";
     };
     smart-splits.enable = true;
-    hardtime.enable = true;
+    # hardtime.enable = true;
     snacks = {
       enable = true;
       settings = {

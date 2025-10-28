@@ -26,7 +26,7 @@ in
     ./plugins
     ./keymaps
     ./autocmd.nix
-    ./input-method.nix
+    # ./input-method.nix
     ./options.nix
   ];
 
