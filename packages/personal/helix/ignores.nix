@@ -1,0 +1,10 @@
+[
+  ".direnv/"
+  "result"
+  "!.helix/"
+  "!.github/"
+  "!.gitignore"
+  "!.gitattributes"
+  "!*.local.*"
+  "!*.local/"
+]
