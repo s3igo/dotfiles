@@ -1,6 +1,6 @@
 {
   lib,
-  runCommandNoCC,
+  runCommand,
   makeBinaryWrapper,
   formats,
 
@@ -33,7 +33,7 @@
 
 let
   tomlFormat = formats.toml { };
-  configFiles = runCommandNoCC "helix-configs" { } ''
+  configFiles = runCommand "helix-configs" { } ''
     mkdir -p $out/share
     cp ${tomlFormat.generate "config.toml" helixSettings} $out/share/config.toml
     cp ${tomlFormat.generate "languages.toml" helixLanguages} $out/share/languages.toml
@@ -49,7 +49,7 @@ let
   '';
 in
 
-runCommandNoCC "helix-personal"
+runCommand "helix-personal"
   {
     nativeBuildInputs = [ makeBinaryWrapper ];
     meta = helix.meta;

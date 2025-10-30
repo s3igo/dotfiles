@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = [
-    (pkgs.vim_configurable.customize {
+    (pkgs.vim-full.customize {
       name = "vim";
       vimrcConfig.customRC = ''
         " 24bit-color

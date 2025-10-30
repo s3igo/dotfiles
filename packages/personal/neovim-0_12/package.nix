@@ -1,7 +1,7 @@
 {
   lib,
   stdenv,
-  runCommandNoCC,
+  runCommand,
   makeBinaryWrapper,
   neovim-nightly-overlay,
   system,
@@ -16,7 +16,7 @@
   stylua,
 }:
 
-runCommandNoCC "neovim-0_12"
+runCommand "neovim-0_12"
   {
     nativeBuildInputs = [ makeBinaryWrapper ];
     meta.mainProgram = "nvim12";
