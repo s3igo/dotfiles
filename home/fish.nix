@@ -19,8 +19,9 @@ in
           inherit (pkgs.fishPlugins.${name}) src;
         })
         [
+          "async-prompt"
           "autopair"
-          "hydro"
+          "pure"
         ];
     functions =
       let
@@ -344,17 +345,18 @@ in
       # LS_COLORS
       set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
 
+
       # Prompt
-      # https://github.com/jorgebucaran/hydro#configuration
-      set -g hydro_symbol_start '\n'
-      set -g hydro_symbol_git_dirty '*'
-
-      set -g hydro_color_pwd green
-      set -g hydro_color_git magenta
-      set -g hydro_color_prompt cyan
-      set -g hydro_color_duration yellow
-
-      set -g hydro_multiline true
+      # https://pure-fish.github.io/pure/
+      set -gx pure_show_numbered_git_indicator true
+      set -gx pure_show_jobs true
+      set -gx pure_enable_nixdevshell true
+      set -gx pure_show_prefix_root_prompt true
+      set -gx pure_color_mute magenta
+      set -gx pure_color_normal brblack
+      set -gx pure_color_primary green
+      set -gx pure_color_success cyan
+      set -g async_prompt_functions _pure_prompt_git
 
       # Keybindings
       ## Disable exit with ctrl-d
