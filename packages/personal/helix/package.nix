@@ -52,7 +52,7 @@ in
 runCommand "helix-personal"
   {
     nativeBuildInputs = [ makeBinaryWrapper ];
-    meta = helix.meta;
+    meta.mainProgram = helix.meta.mainProgram;
     passthru = { inherit configFiles; };
   }
   ''
