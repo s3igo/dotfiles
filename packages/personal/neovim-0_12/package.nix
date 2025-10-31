@@ -26,17 +26,15 @@ runCommand "neovim-0_12"
     makeBinaryWrapper ${lib.getExe neovim-nightly-overlay.packages.${system}.default} $out/bin/nvim12 \
       --inherit-argv0 \
       --set NVIM_APPNAME nvim-0.12 \
-      --prefix PATH : ${
+      --suffix PATH : ${
         lib.makeBinPath [
+          # Tree-sitter
           gnutar
           curl
           tree-sitter
           stdenv.cc
           nodejs-slim_24
-        ]
-      } \
-      --suffix PATH : ${
-        lib.makeBinPath [
+
           lua-language-server
           stylua
         ]
