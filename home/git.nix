@@ -99,7 +99,6 @@ in
       enable = true;
       settings.git_protocol = "ssh";
       extensions = with pkgs; [
-        gh-copilot
         gh-markdown-preview
         (callPackage ../packages/gh-license/package.nix { })
       ];
