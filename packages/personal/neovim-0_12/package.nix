@@ -10,7 +10,6 @@
   gnutar,
   curl,
   tree-sitter,
-  nodejs-slim_24,
 
   lua-language-server,
   stylua,
@@ -33,7 +32,6 @@ runCommand "neovim-0_12"
           curl
           tree-sitter
           stdenv.cc
-          nodejs-slim_24
 
           lua-language-server
           stylua
