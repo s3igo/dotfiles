@@ -115,8 +115,7 @@ in
         claude-code
         darwin.trash
         dust
-        # FIXME: occurs error
-        # gemini-cli
+        gemini-cli
         ghq
         lima
         nh

@@ -12,7 +12,12 @@
   tree-sitter,
 
   lua-language-server,
+  nil,
+  nixd,
+  nixfmt,
+  statix,
   stylua,
+  typos-lsp,
 }:
 
 runCommand "neovim-0_12"
@@ -34,7 +39,12 @@ runCommand "neovim-0_12"
           stdenv.cc
 
           lua-language-server
+          nil
+          nixd
+          nixfmt
+          statix
           stylua
+          typos-lsp
         ]
       }
   ''
