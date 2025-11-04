@@ -11,13 +11,19 @@
   curl,
   tree-sitter,
 
+  biome,
+  codebook,
+  copilot-language-server,
   lua-language-server,
   nil,
   nixd,
   nixfmt,
   statix,
   stylua,
+  taplo,
   typos-lsp,
+  vscode-langservers-extracted,
+  yaml-language-server,
 }:
 
 runCommand "neovim-0_12"
@@ -38,13 +44,19 @@ runCommand "neovim-0_12"
           tree-sitter
           stdenv.cc
 
+          biome
+          codebook
+          copilot-language-server
           lua-language-server
           nil
           nixd
           nixfmt
           statix
           stylua
+          taplo
           typos-lsp
+          vscode-langservers-extracted
+          yaml-language-server
         ]
       }
   ''
