@@ -280,6 +280,7 @@ in
         # > word differently for multiple commands.
         __fzf-a = command "fzf" // regex "@a" // text "--accept-nth";
         __fzf-h = command "fzf" // regex "@h" // text "--header-lines";
+        __fzf-p = command "fzf" // regex "@p" // text "--preview 'bat --plain --color always {}'";
         # https://fishshell.com/docs/current/interactive.html#abbreviations
         # matches `..`, `...`, `....`, and so on
         __dots = global // regex "\\.{2,}" // function "__dots-impl";
@@ -404,6 +405,9 @@ in
       # エイリアスが候補に表示されるようにするため`task --completion fish`で提供される補完をオーバーライド
       # See: https://github.com/fish-shell/fish-shell/blob/d72adc0124b596122ace9c0c449363584c701fc7/share/completions/just.fish
       function _taskfile_targets
+        # taskコマンドが存在しない場合は何もしない
+        command --query task; or return
+
         task --list --json | ${lib.getExe pkgs.jq} --raw-output '${
           builtins.concatStringsSep " | " [
             ".tasks[]"

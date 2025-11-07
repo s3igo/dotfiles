@@ -51,6 +51,7 @@ in
             "fzf --preview 'tree -C --gitignore {}' || pwd"
             ''while IFS= read -r l; do printf '%q\n' "$l"; done'' # Escape strings
           ];
+          new = ''!f() { gh repo new --private "$1" && gh api "/repos/s3igo/$1" --jq '.clone_url' | ghq get; }; f'';
         };
         column.ui = "auto";
         branch.sort = "-committerdate";

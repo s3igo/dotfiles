@@ -121,9 +121,10 @@ in
         nh
         rclone
         smartcat
+        sops
+        statix
         tree
         xc
-        statix
       ]
       ++ [
         self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra
