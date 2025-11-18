@@ -39,18 +39,25 @@ in
           fzf-log = "!f() { ${
             builtins.concatStringsSep " | " [
               ''git -c log.showSignature=false log --oneline --color=always "''${1:-HEAD}"''
-              "fzf --raw --ansi --reverse --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
+              "fzf --raw --ansi --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
             ]
           }; }; f";
           fzf-status = builtins.concatStringsSep " | " [
             "!git status --short"
             "fzf --multi --preview 'git diff --color=always {-1}' --accept-nth 2"
           ];
+          fzf-type = builtins.concatStringsSep " | " [
+            "!git log --no-show-signature --format=%s"
+            "rg --only-matching '^[a-zA-Z]+(\\([^)]+\\))?(!)?'"
+            "awk '!seen[$0]++ {order[++i]=$0} {count[$0]++} END {for (j=1; j<=i; j++) print order[j] \"\\t\" count[order[j]]}'"
+            "fzf --accept-nth 1"
+          ];
           ghq = builtins.concatStringsSep " | " [
             "!ghq list --full-path"
             "fzf --preview 'tree -C --gitignore {}' || pwd"
             ''while IFS= read -r l; do printf '%q\n' "$l"; done'' # Escape strings
           ];
+          msg = "show --no-show-signature --no-patch --format=%B";
           new = ''!f() { gh repo new --private "$1" && gh api "/repos/s3igo/$1" --jq '.clone_url' | ghq get; }; f'';
         };
         column.ui = "auto";

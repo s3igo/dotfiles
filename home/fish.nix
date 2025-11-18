@@ -134,7 +134,6 @@ in
               b = "echo branch";
               c = "echo commit";
               d = "echo diff";
-              ds = "echo diff --staged";
               l = "echo log";
               ll = "echo log (${__git-origin-head-impl})..";
               s = "echo status";
@@ -327,6 +326,7 @@ in
         __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#%";
         __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
         nv = "nvim12";
+        nvc = "nvim12 +Copilot";
         pst = "pbpaste";
         ql = cursor // text "qlmanage -p % &> /dev/null";
         rm = "rm -iv";
@@ -345,7 +345,6 @@ in
 
       # LS_COLORS
       set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
-
 
       # Prompt
       # https://pure-fish.github.io/pure/
