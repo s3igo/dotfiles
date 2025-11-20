@@ -18,6 +18,7 @@
   nil,
   nixd,
   nixfmt,
+  selene,
   statix,
   stylua,
   taplo,
@@ -51,6 +52,7 @@ runCommand "neovim-0_12"
           nil
           nixd
           nixfmt
+          selene
           statix
           stylua
           taplo
