@@ -2,7 +2,8 @@
   description = "Personal dotfiles for reproducible environment setup using Nix";
 
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    # nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=2ce537dd2383f4f6ff6fa77b4fe358f0eed51494";
     systems.url = "github:nix-systems/default";
     flake-root.url = "github:srid/flake-root";
     mission-control.url = "github:Platonic-Systems/mission-control";
