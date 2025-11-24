@@ -14,10 +14,6 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,9 +46,5 @@
       ];
 
       systems = import inputs.systems;
-
-      perSystem = _: {
-        _module.args.neovim-config = (import ./neovim-config/flake.nix).outputs { };
-      };
     };
 }

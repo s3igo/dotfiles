@@ -100,7 +100,7 @@ in
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
-      EDITOR = "nvim";
+      EDITOR = "nvim12";
       # https://consoledonottrack.com/
       # https://bun.sh/docs/runtime/bunfig#telemetry
       DO_NOT_TRACK = 1;
@@ -127,7 +127,6 @@ in
         xc
       ]
       ++ [
-        self.packages.${pkgs.stdenv.hostPlatform.system}.neovim-extra
         (pkgs.callPackage ../packages/personal/helix/package.nix {
           efm-langserver = pkgs.callPackage ../packages/personal/efm-langserver/package.nix { };
         })

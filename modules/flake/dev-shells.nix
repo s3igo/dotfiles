@@ -3,7 +3,6 @@
     {
       pkgs,
       config,
-      neovim-config,
       ...
     }:
 
@@ -14,10 +13,6 @@
           pkgs.nil
           pkgs.nixd
           pkgs.nixfmt
-          (neovim-config.lib.customName {
-            inherit pkgs;
-            nvim = config.packages.neovim;
-          })
         ];
       };
     };
