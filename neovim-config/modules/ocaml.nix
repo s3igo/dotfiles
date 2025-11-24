@@ -7,7 +7,7 @@
     }
   ];
 
-  plugins.lsp.servers.ocamlls = {
+  plugins.lsp.servers.ocamllsp = {
     enable = true;
     package = null;
   };
