@@ -1,5 +1,4 @@
 {
-  self,
   pkgs,
   config,
   osConfig,
@@ -131,7 +130,7 @@ in
           efm-langserver = pkgs.callPackage ../packages/personal/efm-langserver/package.nix { };
         })
         (pkgs.callPackage ../packages/personal/neovim-0_12/package.nix {
-          neovim-nightly-overlay = inputs.neovim-nightly-overlay;
+          inherit (inputs) neovim-nightly-overlay;
         })
       ];
   };
