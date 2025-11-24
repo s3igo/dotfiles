@@ -15,7 +15,6 @@ in
     ../secrets.nix
     ../system.nix
     ../vim.nix
-    # ./homebrew.nix
     ./system.nix
     (
       { pkgs, ... }:
