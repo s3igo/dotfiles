@@ -25,6 +25,7 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
     };
     # helix = {
     #   url = "github:helix-editor/helix";
