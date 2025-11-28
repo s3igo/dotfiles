@@ -443,8 +443,6 @@ in
           '.scripts // {} | to_entries[] | "\(.key)\t\(.value)"' "$package_json"
       end
       complete -c bun -n '__fish_seen_subcommand_from run' -f -a '(_npm_scripts)'
-
-      set --prepend fish_complete_path ${config.programs.fish.package}/share/fish/completions
     '';
     # fzfのfish-integrationのctrl-tキーバインドを削除。
     # このシェル統合のインストール処理はnixpkgsのfzfのパッケージ定義のpostInstallにハードコードされているため、
