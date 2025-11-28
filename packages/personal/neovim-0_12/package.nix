@@ -22,6 +22,7 @@
   statix,
   stylua,
   taplo,
+  typescript-language-server,
   typos-lsp,
   vscode-langservers-extracted,
   yaml-language-server,
@@ -56,6 +57,7 @@ runCommand "neovim-0_12"
           statix
           stylua
           taplo
+          typescript-language-server
           typos-lsp
           vscode-langservers-extracted
           yaml-language-server
