@@ -38,7 +38,7 @@ in
           ];
           fzf-log = "!f() { ${
             builtins.concatStringsSep " | " [
-              ''git -c log.showSignature=false log --oneline --color=always "''${1:-HEAD}"''
+              ''git log --no-show-signature --no-abbrev --oneline --color=always "''${1:-HEAD}"''
               "fzf --raw --ansi --accept-nth 1 --preview 'git show --stat --patch --color=always {1}'"
             ]
           }; }; f";
@@ -105,10 +105,13 @@ in
 
     gh = {
       enable = true;
-      settings.git_protocol = "ssh";
-      extensions = with pkgs; [
-        gh-markdown-preview
-        (callPackage ../packages/gh-license/package.nix { })
+      settings.aliases = {
+        md = "markdown-preview";
+      };
+      extensions = [
+        pkgs.gh-markdown-preview
+        pkgs.gh-poi
+        (pkgs.callPackage ../packages/gh-license/package.nix { })
       ];
     };
 
