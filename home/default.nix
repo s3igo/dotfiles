@@ -112,6 +112,7 @@ in
         _1password-cli
         aichat
         claude-code
+        codex
         darwin.trash
         dust
         gemini-cli
