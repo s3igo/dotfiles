@@ -289,6 +289,7 @@ in
         ":cp" = global // text "| tee /dev/tty | tr -d '\\n' | pbcopy";
         ":date" = global // function "__date-impl";
         ":f" = global // text "| fzf";
+        ":g" = global // text "| rg";
         ":h" = global // text "--help";
         # http://www.rikai.com/library/kanjitables/kanji_codes.unicode.shtml
         # Hiragana: 0x3040 - 0x309f
@@ -299,7 +300,7 @@ in
         # ",ja" =
         #   global // text "'[\\x{3040}-\\x{30ff}\\x{3400}-\\x{4dbf}\\x{4e00}-\\x{9faf}\\x{ff00}-\\x{ffef}]'";
         # ",icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
-        ":g" = global // text "| rg";
+        ":r" = global // text "README.md";
         ":sn" = global // function "__snippet";
         ":t" = global // text "| tee /dev/tty";
         ":tr" = global // text "| tr -d \\n";
