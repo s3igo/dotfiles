@@ -342,22 +342,62 @@ in
     '';
     interactiveShellInit = /* fish */ ''
       # Disable greeting
-      set -g fish_greeting
+      set --global fish_greeting
+
+      # fish_frozen_theme.sh -------------------------------
+      # This file was created by fish when upgrading to version 4.3, to migrate
+      # theme variables from universal to global scope.
+      # Don't edit this file, as it will be written by the web-config tool (`fish_config`).
+      # To customize your theme, delete this file and see
+      #     help interactive#syntax-highlighting
+      # or
+      #     man fish-interactive | less +/^SYNTAX.HIGHLIGHTING
+      # for appropriate commands to add to ~/.config/fish/config.fish instead.
+      # See also the release notes for fish 4.3.0 (run `help relnotes`).
+
+      # set --global fish_color_autosuggestion brblack
+      # set --global fish_color_cancel -r
+      set --global fish_color_command blue
+      # set --global fish_color_comment red
+      # set --global fish_color_cwd green
+      # set --global fish_color_cwd_root red
+      # set --global fish_color_end green
+      # set --global fish_color_error brred
+      # set --global fish_color_escape brcyan
+      # set --global fish_color_history_current --bold
+      # set --global fish_color_host normal
+      # set --global fish_color_host_remote yellow
+      # set --global fish_color_normal normal
+      # set --global fish_color_operator brcyan
+      # set --global fish_color_param cyan
+      # set --global fish_color_quote yellow
+      # set --global fish_color_redirection cyan --bold
+      # set --global fish_color_search_match white --background=brblack
+      # set --global fish_color_selection white --bold --background=brblack
+      # set --global fish_color_status red
+      # set --global fish_color_user brgreen
+      # set --global fish_color_valid_path --underline
+      # set --global fish_pager_color_completion normal
+      # set --global fish_pager_color_description yellow -i
+      # set --global fish_pager_color_prefix normal --bold --underline
+      # set --global fish_pager_color_progress brwhite --background=cyan
+      # set --global fish_pager_color_selected_background -r
+      #  ---------------------------------------------------
 
       # LS_COLORS
       set --export LS_COLORS "$(${lib.getExe pkgs.vivid} generate iceberg-dark)"
 
       # Prompt
       # https://pure-fish.github.io/pure/
-      set -gx pure_show_numbered_git_indicator true
-      set -gx pure_show_jobs true
-      set -gx pure_enable_nixdevshell true
-      set -gx pure_show_prefix_root_prompt true
-      set -gx pure_color_mute magenta
-      set -gx pure_color_normal brblack
-      set -gx pure_color_primary green
-      set -gx pure_color_success cyan
-      set -g async_prompt_functions _pure_prompt_git
+      set --global --export pure_show_numbered_git_indicator true
+      set --global --export pure_show_jobs true
+      set --global --export pure_enable_nixdevshell true
+      set --global --export pure_show_prefix_root_prompt true
+      set --global --export pure_color_mute magenta
+      set --global --export pure_color_normal brblack
+      set --global --export pure_color_primary green
+      set --global --export pure_color_success cyan
+      set --global async_prompt_functions _pure_prompt_git
 
       # Keybindings
       ## Disable exit with ctrl-d
