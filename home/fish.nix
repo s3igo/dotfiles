@@ -149,6 +149,7 @@ in
             shortcuts = {
               d = "echo develop";
               df = "echo develop -c fish";
+              dt = "echo develop -c task";
               r = "echo run";
             };
           }
@@ -265,8 +266,8 @@ in
       };
     loginShellInit = /* fish */ ''
       # PATH
-      if test -d ${homeDirectory}/.orbstack
-        fish_add_path ${homeDirectory}/.orbstack/bin
+      if test -d ${homeDirectory}/.local/bin
+        fish_add_path ${homeDirectory}/.local/bin
       end
     '';
     interactiveShellInit = /* fish */ ''
@@ -423,7 +424,7 @@ in
     # このシェル統合のインストール処理はnixpkgsのfzfのパッケージ定義のpostInstallにハードコードされているため、
     # 再ビルドをトリガーせずに「そもそもインストールしない」ことはできない。
     shellInitLast = /* fish */ ''
-      status is-interactive; and begin
+      if status is-interactive
         bind --erase ctrl-t
         bind --erase ctrl-t --mode insert
       end

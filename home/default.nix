@@ -111,7 +111,6 @@ in
         # bitwarden-cli
         _1password-cli
         aichat
-        claude-code
         codex
         darwin.trash
         dust

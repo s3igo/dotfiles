@@ -59,6 +59,7 @@ in
           ];
           msg = "show --no-show-signature --no-patch --format=%B";
           new = ''!f() { gh repo new --private "$1" && gh api "/repos/s3igo/$1" --jq '.clone_url' | ghq get; }; f'';
+          untracked = "ls-files -o --exclude-standard";
         };
         column.ui = "auto";
         branch.sort = "-committerdate";
