@@ -118,6 +118,7 @@ in
         ghq
         lima
         nh
+        opencode
         rclone
         smartcat
         sops
