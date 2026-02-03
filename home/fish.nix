@@ -250,12 +250,14 @@ in
         __git-oh = command "git" // regex "@oh" // function "__git-origin-head-impl";
         hi = "history";
         jo = "jobs";
+        ",lc" = "limactl";
         mk = "mkdir";
         mv = "mv -iv";
         __comma-n = regex ",n.*" // function "__comma-n-impl";
         __nix-s = command "nix" // regex "@s" // function "__nix-system-impl";
         __nix-p = command "nix" // regex "@p" // cursor // text "nixpkgs#%";
         __nix-g = command "nix" // regex "@g" // cursor // text "github:%";
+        ",ncl" = "nerdctl.lima";
         nv = "nvim12";
         nvc = "nvim12 +Copilot";
         pst = "pbpaste";

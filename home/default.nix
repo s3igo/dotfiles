@@ -118,7 +118,6 @@ in
         ghq
         lima
         nh
-        opencode
         rclone
         smartcat
         sops
@@ -127,6 +126,7 @@ in
         xc
       ]
       ++ [
+        (pkgs.callPackage ../packages/gogcli/package.nix { })
         (pkgs.callPackage ../packages/personal/helix/package.nix {
           efm-langserver = pkgs.callPackage ../packages/personal/efm-langserver/package.nix { };
         })
