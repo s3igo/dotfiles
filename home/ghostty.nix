@@ -29,8 +29,12 @@
         window-padding-x = 5;
         window-padding-balance = true;
         window-inherit-working-directory = false;
-        # https://github.com/ghostty-org/ghostty/issues/8681
-        shell-integration-features = "no-cursor";
+        shell-integration-features = builtins.concatStringsSep "," [
+          # https://github.com/ghostty-org/ghostty/issues/8681
+          "no-cursor"
+          # https://ghostty.org/docs/help/terminfo#ssh
+          "ssh-terminfo,ssh-env"
+        ];
       }
       (lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
         window-title-font-family = "UDEV Gothic NF";
