@@ -113,7 +113,6 @@ in
       extensions = [
         pkgs.gh-markdown-preview
         pkgs.gh-poi
-        (pkgs.callPackage ../packages/gh-license/package.nix { })
       ];
     };
 

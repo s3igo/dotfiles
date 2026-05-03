@@ -230,6 +230,7 @@ in
         # ",ja" =
         #   global // text "'[\\x{3040}-\\x{30ff}\\x{3400}-\\x{4dbf}\\x{4e00}-\\x{9faf}\\x{ff00}-\\x{ffef}]'";
         # ",icloud" = global // text "~/Library/Mobile\\ Documents/com~apple~CloudDocs";
+        ":l" = global // text "LICENSE";
         ":r" = global // text "README.md";
         ":sn" = global // function "__snippet";
         ":t" = global // text "| tee /dev/tty";

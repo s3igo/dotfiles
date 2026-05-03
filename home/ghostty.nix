@@ -13,13 +13,15 @@
         cursor-style-blink = false;
         mouse-hide-while-typing = true;
         background-opacity = 0.7;
-        command = "${lib.getExe pkgs.fish} --login";
+        # command = "${lib.getExe pkgs.fish} --login";
+        command = "/etc/profiles/per-user/s3igo/bin/fish --login";
         link-url = true;
         working-directory = "home";
         keybind = [
           "global:super+grave_accent=toggle_quick_terminal"
           "super+s=new_split:left"
           "super+shift+s=new_split:up"
+          "super+shift+u=copy_url_to_clipboard"
           # 現状Helixのコンポジターコンポーネント（ピッカーやプロンプト）はキーリマップ非対応なので、
           # そこで`<C-[>`を機能させるため、ターミナルで<C-[>を<Esc>に割り当てちゃうことにする
           # https://github.com/helix-editor/helix/issues/5505
