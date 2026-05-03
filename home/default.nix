@@ -42,7 +42,7 @@ in
     jq.enable = true;
     zoxide.enable = true;
     direnv = {
-      enable = true;
+      enable = false;
       config.global = {
         warn_timeout = 0;
         hide_env_diff = true;
@@ -99,7 +99,7 @@ in
       CARGO_HOME = "${dataHome}/cargo";
       FLY_CONFIG_DIR = "${stateHome}/fly";
       NPM_CONFIG_USERCONFIG = "${configHome}/npm/npmrc";
-      EDITOR = "nvim12";
+      EDITOR = "nvim";
       # https://consoledonottrack.com/
       # https://bun.sh/docs/runtime/bunfig#telemetry
       DO_NOT_TRACK = 1;
@@ -117,6 +117,7 @@ in
         gemini-cli
         ghq
         lima
+        neovim
         nh
         rclone
         smartcat
@@ -130,9 +131,9 @@ in
         (pkgs.callPackage ../packages/personal/helix/package.nix {
           efm-langserver = pkgs.callPackage ../packages/personal/efm-langserver/package.nix { };
         })
-        (pkgs.callPackage ../packages/personal/neovim-0_12/package.nix {
-          inherit (inputs) neovim-nightly-overlay;
-        })
+        # (pkgs.callPackage ../packages/personal/neovim-0_12/package.nix {
+        #   inherit (inputs) neovim-nightly-overlay;
+        # })
       ];
   };
 }

@@ -35,7 +35,6 @@
       url = "github:s3igo/secrets";
       flake = false;
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs =
