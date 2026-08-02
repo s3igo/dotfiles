@@ -18,7 +18,7 @@
       });
     };
 
-    dotfiles = final: prev: {
+    dotfiles = _final: _prev: {
       dotfiles = {
       };
     };

@@ -42,22 +42,6 @@ in
               ${getHead}
             end
           '';
-        _genericFzfPatterns = prefix: /* fish */ ''
-
-          set -l tokens (commandline --tokens-expanded --current-job)
-          set -l cmdline (string replace --regex '${prefix}.*$' "" -- "$tokens" )
-
-          switch "$argv[1]"
-            case '${prefix}'
-              complete -C "$cmdline" | fzf --tiebreak begin --nth 1 --accept-nth 1
-            case '*'
-              set -l query (string replace --regex '^${prefix}' "" "$argv[1]")
-              complete -C "$cmdline" \
-                | fzf --tiebreak begin --nth 1 --filter "$query" \
-                | head -n 1 \
-                | cut -f 1
-          end
-        '';
         mkFzfCompletionTrigger =
           {
             cmdline,

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   config = "${pkgs.joshuto.passthru.config}/share/config";

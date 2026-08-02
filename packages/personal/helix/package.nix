@@ -16,7 +16,6 @@
   nixd,
   nixfmt,
   rust-analyzer,
-  statix,
   stylua,
   tailwindcss-language-server,
   taplo,

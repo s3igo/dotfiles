@@ -16,7 +16,6 @@
           yamlfmt.enable = true;
           # FIXME: occurs error
           # actionlint.enable = true;
-          dprint.enable = true;
         };
         settings.global.excludes = [ "LICENSE" ];
       };

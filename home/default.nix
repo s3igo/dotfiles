@@ -2,7 +2,6 @@
   pkgs,
   config,
   osConfig,
-  inputs,
   ...
 }:
 
@@ -30,7 +29,10 @@ in
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      includes = [ "~/.orbstack/ssh/config" ];
+      includes = [
+        "~/.orbstack/ssh/config"
+        "~/.lima/*/ssh.config"
+      ];
       matchBlocks."*".forwardAgent = true;
       extraConfig = ''
         IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
